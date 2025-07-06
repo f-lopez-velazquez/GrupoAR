@@ -13,6 +13,7 @@
       min-height: 100vh;
       margin: 0;
       padding: 0;
+      overscroll-behavior: none;
     }
     .container {
       max-width: 700px;
@@ -80,29 +81,50 @@
     .details-btn {
       display: block;
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       background: #0a6ec8;
       color: #fff;
       border: none;
       border-radius: 0 0 6px 6px;
-      margin-top: -6px;
-      font-size: 1em;
+      font-size: 1.08em;
       cursor: pointer;
       font-weight: bold;
+      transition: background 0.15s;
+      margin-top: -6px;
     }
+    .details-btn:active { background: #095bb1; }
+    /* BACKDROP oscuro para sidebar */
+    .backdrop {
+      display: none;
+      position: fixed;
+      top:0; left:0; width:100vw; height:100vh;
+      background: rgba(16,32,56,0.25);
+      z-index: 998;
+      transition: opacity 0.3s;
+      opacity: 0;
+    }
+    .backdrop.active {
+      display: block;
+      opacity: 1;
+    }
+    /* SIDEBAR detalles */
     .sidebar {
       position: fixed;
       top: 0;
-      right: -320px;
-      width: 290px;
+      right: -350px;
+      width: 320px;
       height: 100vh;
       background: #fff;
-      box-shadow: -2px 0 10px rgba(0,0,0,0.11);
+      box-shadow: -2px 0 16px rgba(0,0,0,0.17);
       z-index: 999;
-      transition: right 0.3s;
+      transition: right 0.32s cubic-bezier(.44,0,.2,1);
       padding: 22px 20px 10px 16px;
       overflow-y: auto;
-      border-radius: 8px 0 0 8px;
+      border-radius: 10px 0 0 10px;
+      max-width: 95vw;
+      display: flex;
+      flex-direction: column;
+      min-width: 200px;
     }
     .sidebar.open { right: 0; }
     .sidebar h4 { color: #0a6ec8; margin-bottom: 10px;}
@@ -125,7 +147,7 @@
     @media (max-width: 760px) {
       .container { max-width: 100vw; padding: 2vw; }
       .flex > * { min-width: 110px; }
-      .sidebar { width: 96vw; min-width: 180px; }
+      .sidebar { width: 96vw; min-width: 170px; }
     }
     @media (max-width: 500px) {
       header .logoTitle { font-size: 1.05em; }
@@ -274,6 +296,9 @@
       </div>
     </div>
   </div>
+  <!-- BACKDROP -->
+  <div class="backdrop" id="backdrop"></div>
+  <!-- SIDEBAR Detalles -->
   <div class="sidebar" id="detailsDrawer">
     <button class="sidebar-close" id="closeDetails" title="Cerrar">×</button>
     <h4>Detalles y Especificaciones</h4>
@@ -295,6 +320,28 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
+    // SIDEBAR profesional con backdrop
+    const openDetailsBtn = document.getElementById('openDetails');
+    const closeDetailsBtn = document.getElementById('closeDetails');
+    const detailsDrawer = document.getElementById('detailsDrawer');
+    const backdrop = document.getElementById('backdrop');
+    function openSidebar() {
+      detailsDrawer.classList.add('open');
+      backdrop.classList.add('active');
+      document.body.style.overflow = "hidden";
+    }
+    function closeSidebar() {
+      detailsDrawer.classList.remove('open');
+      backdrop.classList.remove('active');
+      document.body.style.overflow = "";
+    }
+    openDetailsBtn.onclick = openSidebar;
+    closeDetailsBtn.onclick = closeSidebar;
+    backdrop.onclick = closeSidebar;
+    // Evita scroll en sidebar abierto en móviles
+    detailsDrawer.addEventListener('touchmove', (e) => e.stopPropagation(), { passive: false });
+
+    // ----- Resto del código igual que antes -----
     const quoteType = document.getElementById('quoteType');
     const tbody = document.querySelector('#itemsTable tbody');
     const hdrExp = document.getElementById('header-express');
@@ -314,9 +361,6 @@
     const commonItemsList = document.getElementById('commonItemsList');
     const previewRes = document.getElementById('previewResponsive');
     const previewPDF = document.getElementById('previewPDF');
-    const openDetailsBtn = document.getElementById('openDetails');
-    const closeDetailsBtn = document.getElementById('closeDetails');
-    const detailsDrawer = document.getElementById('detailsDrawer');
     const withIvaSwitch = document.getElementById('withIvaSwitch');
     const withAnticipoSwitch = document.getElementById('withAnticipoSwitch');
     const anticipoField = document.getElementById('anticipoField');
@@ -325,10 +369,6 @@
     const detailedInputs = document.getElementById('detailedInputs');
     const detalleAdicional = document.getElementById('detalleAdicional');
 
-    openDetailsBtn.onclick = ()=> detailsDrawer.classList.add('open');
-    closeDetailsBtn.onclick = ()=> detailsDrawer.classList.remove('open');
-
-    // Switches para IVA y anticipo
     withIvaSwitch.onchange = recalc;
     withAnticipoSwitch.onchange = function(){
       anticipoField.style.display = this.checked ? "" : "none";
@@ -336,7 +376,6 @@
       recalc();
     };
 
-    // Cambia inputs según tipo cotización
     function updateTypeUI() {
       if (quoteType.value === "express") {
         expressInputs.style.display = "flex";
@@ -354,7 +393,6 @@
     quoteType.onchange = updateTypeUI;
     updateTypeUI();
 
-    // Items frecuentes (memoria local)
     const STORAGE_KEY = 'grupoAR_commonItems';
     let commonItems = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
     function updateDatalist() {
