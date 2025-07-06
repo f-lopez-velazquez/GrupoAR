@@ -9,156 +9,162 @@
       --azul: #0a6ec8;
       --rojo: #dc1e28;
       --gris-fondo: #f6f8fa;
-      --sombra: 0 2px 16px rgba(10,110,200,0.08);
       --input-borde: #c5d5eb;
       --input-focus: #88b8f5;
-      --borde-corp: #0a6ec8;
       --txt: #253250;
-      --bg-blanco: #fff;
     }
-    html, body { height: 100%; margin: 0; padding: 0; background: var(--gris-fondo);}
     body {
+      background: var(--gris-fondo);
       font-family: 'Helvetica Neue', Arial, sans-serif;
       color: var(--txt);
+      margin: 0;
       min-height: 100vh;
-      overscroll-behavior: none;
     }
     .container {
       max-width: 700px;
       margin: 0 auto 30px auto;
-      padding: 8px;
+      padding: 12px;
     }
     header {
-      display: flex; align-items: center; gap: 12px; margin: 12px 0 20px 0; justify-content: center;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 12px 0 18px 0;
+      justify-content: center;
     }
     header img { height: 42px; border-radius: 7px; box-shadow: 0 1px 8px #e7eefa;}
     header .logoTitle {
-      font-size: 1.47em; font-weight: 700; letter-spacing: 0.5px;
-      color: var(--azul); line-height: 1;
+      font-size: 1.47em;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--azul);
+      line-height: 1;
     }
     header .logoTitle span { color: var(--rojo);}
     .form-container, .preview-container {
-      background: var(--bg-blanco);
+      background: #fff;
       border-radius: 13px;
-      box-shadow: var(--sombra);
-      padding: 20px 12px 23px 12px;
-      margin-bottom: 22px;
+      box-shadow: 0 2px 16px rgba(10,110,200,0.08);
+      padding: 22px 12px 23px 12px;
+      margin-bottom: 20px;
     }
-    .form-container label {
-      margin-bottom: 3px;
-      display:block;
-      font-weight:500;
-      font-size: 1.07em;
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 8px;
+    }
+    .form-col {
+      flex: 1 1 220px;
+      min-width: 180px;
+      margin-bottom: 6px;
+    }
+    label {
+      font-weight: 500;
       color: var(--azul);
-      letter-spacing: .1px;
+      display: block;
+      font-size: 1.05em;
+      margin-bottom: 4px;
     }
-    .flex { display: flex; gap: 16px; flex-wrap: wrap;}
-    .flex > * { flex: 1 1 150px; min-width: 120px;}
-    .input-group {
-      position: relative; margin-bottom: 18px;
+    .input-wrap {
+      position: relative;
+      margin-bottom: 6px;
     }
-    .input-group input, .input-group textarea {
+    input, textarea, select {
       width: 100%;
-      padding: 12px 54px 12px 12px;
+      box-sizing: border-box;
       border: 2px solid var(--input-borde);
       border-radius: 8px;
-      background: #fafdff;
-      font-size: 1.08em;
+      font-size: 1.1em;
+      padding: 12px 12px 12px 12px;
+      background: #fafcff;
       color: var(--txt);
-      transition: border-color 0.18s, box-shadow 0.18s;
       outline: none;
-      box-shadow: 0 0px 0 rgba(10,110,200,0);
+      transition: border-color 0.18s;
+      margin-bottom: 0;
     }
-    .input-group input:focus, .input-group textarea:focus {
+    input:focus, textarea:focus, select:focus {
       border-color: var(--input-focus);
       background: #fff;
-      box-shadow: 0 2px 16px #cfe3fa66;
     }
-    .input-group textarea {
-      min-height: 46px; max-height: 120px; resize: vertical;
+    .btn-small-row {
+      display: flex;
+      gap: 7px;
+      margin-top: 5px;
     }
-    .input-group .dictate-btn, .input-group .correct-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      border: none;
+    .btn-micro, .btn-correct {
       background: #eaf3fc;
       color: var(--azul);
-      font-size: 1.23em;
-      right: 7px;
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      font-size: 1.1em;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 1px 2px #d0e4fa40;
-      transition: background 0.14s, box-shadow 0.18s;
       cursor: pointer;
-      z-index: 2;
+      transition: background 0.14s;
     }
-    .input-group .dictate-btn:hover, .input-group .correct-btn:hover {
-      background: #d1eaff;
-      box-shadow: 0 3px 7px #0a6ec822;
-    }
-    .input-group .correct-btn {
+    .btn-correct {
       background: #eafcf1;
       color: #009e47;
-      right: 48px;
     }
-    .input-group .correct-btn:hover { background: #c5ffe5;}
-    @media (max-width: 650px) {
-      .container { max-width: 100vw; padding: 2vw;}
-      .flex { gap: 7px;}
-      .flex > * { min-width: 80px;}
-      .input-group input, .input-group textarea { padding: 12px 50px 12px 10px; font-size: 1em;}
-      .input-group .dictate-btn, .input-group .correct-btn { width:31px; height:31px; font-size: 1.1em;}
+    .btn-micro:hover { background: #d1eaff;}
+    .btn-correct:hover { background: #c5ffe5;}
+    @media (max-width: 640px) {
+      .container { padding: 2vw;}
+      .form-row { flex-direction: column; gap: 3px;}
+      .form-col { min-width: 98px;}
+      input, textarea, select { font-size: 1em; padding: 11px 10px;}
+      .form-container, .preview-container { padding: 13px 4px 16px 4px;}
     }
-    h3 { font-size: 1.12em; color: var(--azul);}
+    h3 { font-size: 1.1em; color: var(--azul);}
     .details-btn, #addItemBtn, #generateBtn, #shareBtn, #addDetalleBtn {
       background: linear-gradient(90deg, var(--azul), var(--rojo) 75%);
-      color: #fff; font-size: 1.07em; font-weight: 600;
-      border: none; border-radius: 8px;
-      box-shadow: 0 2px 10px #dbdbdb60;
-      letter-spacing: .3px;
-      margin: 9px 0 0 0;
+      color: #fff;
+      font-size: 1.08em;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      letter-spacing: .2px;
+      margin: 12px 0 0 0;
       padding: 13px 0;
       cursor: pointer;
-      transition: background 0.15s, box-shadow 0.16s, transform 0.1s;
       width: 100%;
+      transition: background 0.14s, transform 0.09s;
+      box-shadow: 0 2px 8px #b6cde94d;
     }
     .details-btn:active, #addItemBtn:active, #generateBtn:active, #shareBtn:active, #addDetalleBtn:active {
       transform: scale(.97);
-      box-shadow: 0 1px 6px #a0c1ff5b;
     }
     .table-scroll { overflow-x: auto; border-radius: 8px;}
-    table { width: 100%; border-collapse: collapse; margin-top: 12px;}
-    th, td { padding: 10px 7px; border: 1.8px solid #e3e8ef; font-size: 1.04em;}
+    table { width: 100%; border-collapse: collapse; margin-top: 11px;}
+    th, td { padding: 10px 7px; border: 1.4px solid #e3e8ef; font-size: 1em;}
     th {
       background: linear-gradient(90deg, #e8f2fb 75%, #f9e8ea 100%);
-      color: var(--azul); font-weight: 700; letter-spacing: .15px;
+      color: var(--azul); font-weight: 700;
     }
     tr:nth-child(even) { background: #f5faff;}
     .remove-btn {
-      background: none; border: none; color: #c00; font-size: 1.27em; cursor: pointer;
-      transition: color 0.14s;
+      background: none; border: none; color: #c00; font-size: 1.19em; cursor: pointer;
+      transition: color 0.12s;
     }
     .remove-btn:hover { color: #d70022;}
-    .summary {
-      margin-top: 16px; text-align: right; font-size: 1.09em; color: #384357;
-    }
-    .summary div { margin-bottom: 5px;}
+    .summary { margin-top: 13px; text-align: right; font-size: 1.07em; color: #384357;}
+    .summary div { margin-bottom: 4px;}
     #previewResponsive {
-      min-height: 160px; border: 1.2px solid #d8e8f4;
-      border-radius: 9px; padding: 12px; background: #f8fafc;
-      margin-bottom: 12px;
-      font-size: 1.07em;
+      min-height: 140px; border: 1.1px solid #d8e8f4;
+      border-radius: 8px; padding: 12px; background: #f8fafc;
+      margin-bottom: 11px;
+      font-size: 1.06em;
     }
     /* Sidebar/drawer ultra elegante */
     .sidebar {
-      position: fixed; top: 0; right: 0; width: 315px; max-width: 99vw; height: 100vh;
+      position: fixed; top: 0; right: 0; width: 325px; max-width: 99vw; height: 100vh;
       background: #fff; box-shadow: -2px 0 22px #0a6ec815;
       z-index: 999;
-      transition: transform 0.37s cubic-bezier(.44,0,.2,1);
+      transition: transform 0.34s cubic-bezier(.44,0,.2,1);
       padding: 25px 16px 19px 18px; border-radius: 13px 0 0 13px;
       overflow-y: auto; will-change: transform;
       transform: translateX(100%);
@@ -166,45 +172,39 @@
     }
     .sidebar.open { transform: translateX(0); pointer-events: auto;}
     .sidebar.closed { transform: translateX(100%); pointer-events: none;}
-    .sidebar h4 { color: var(--azul); margin-bottom: 16px;}
+    .sidebar h4 { color: var(--azul); margin-bottom: 14px;}
     .sidebar label {
       display: flex; align-items: center; gap: 8px;
       font-weight: 450;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       cursor: pointer;
-      font-size: 1.04em; color: #374569;
-      transition: color .13s;
+      font-size: 1.01em; color: #374569;
     }
-    .sidebar label:hover { color: var(--azul);}
     .sidebar textarea {
-      margin-top: 7px; min-height: 44px; background: #f4f8fd;
+      margin-top: 6px; min-height: 39px; background: #f4f8fd;
       border: 2px solid var(--input-borde);
-      font-size: 1.07em;
-      margin-bottom: 6px;
+      font-size: 1.04em;
+      margin-bottom: 4px;
       border-radius: 7px;
       transition: border-color .13s;
     }
-    .sidebar textarea:focus { border-color: var(--azul);}
     .sidebar-close {
       background: none; border: none; color: var(--azul); font-size: 1.5em; position: absolute; top: 8px; right: 12px; cursor: pointer;
-      border-radius: 6px; transition: background 0.12s;
+      border-radius: 6px;
     }
-    .sidebar-close:active { background: #eef5fa;}
     .detalles-agregados {
-      margin: 12px 0 0 0; padding: 0; list-style: disc; color: #384357; font-size: 1.05em;
+      margin: 10px 0 0 0; padding: 0; list-style: disc; color: #384357; font-size: 1.04em;
     }
     .detalles-agregados li {
-      margin: 4px 0; display: flex; align-items: center; justify-content: space-between; gap: 8px;
-      background: #f7fcff; padding: 6px 9px; border-radius: 5px; transition: background 0.1s;
+      margin: 3px 0; display: flex; align-items: center; justify-content: space-between; gap: 7px;
+      background: #f7fcff; padding: 5px 8px; border-radius: 5px;
     }
-    .detalles-agregados li:hover { background: #e8f5ff;}
     .detalles-agregados .del-detalle {
-      color: #c00; background:none; border:none; font-size:1.18em; cursor:pointer;
-      margin-left: 10px; border-radius: 5px; transition: background 0.11s;
+      color: #c00; background:none; border:none; font-size:1.12em; cursor:pointer;
+      margin-left: 8px; border-radius: 5px;
     }
-    .detalles-agregados .del-detalle:hover { background: #ffd9df;}
     @media (max-width: 650px) {
-      .sidebar { width: 98vw; max-width: 99vw; padding-left: 4vw; padding-right: 4vw;}
+      .sidebar { width: 98vw; max-width: 99vw; padding-left: 3vw; padding-right: 3vw;}
     }
     #previewPDF {
       display: none; width: 210mm; height: 297mm;
@@ -257,106 +257,134 @@
       <div class="logoTitle"><span>GRUPO</span> <span style="color:#dc1e28;">AR</span></div>
     </header>
     <div class="form-container">
-      <div class="flex">
-        <div>
+      <div class="form-row">
+        <div class="form-col">
           <label for="quoteTitle">Título de Cotización</label>
-          <div class="input-group">
+          <div class="input-wrap">
             <input id="quoteTitle" placeholder="Cotización #1234" value="Cotización probable – Nuevo cliente">
-            <button class="dictate-btn" title="Dictar" data-target="quoteTitle">🎤</button>
-            <button class="correct-btn" title="Corregir" data-target="quoteTitle">✓</button>
+            <div class="btn-small-row">
+              <button class="btn-micro" type="button" title="Dictar" data-target="quoteTitle">🎤</button>
+              <button class="btn-correct" type="button" title="Corregir" data-target="quoteTitle">✓</button>
+            </div>
           </div>
         </div>
-        <div>
+        <div class="form-col">
           <label for="fileName">Nombre de Archivo</label>
-          <div class="input-group">
-            <input id="fileName" placeholder="cotizacion_1234" value="cotizacion_cliente">
-            <button class="dictate-btn" title="Dictar" data-target="fileName">🎤</button>
-            <button class="correct-btn" title="Corregir" data-target="fileName">✓</button>
+          <div class="input-wrap">
+            <input id="fileName" placeholder="cotizacion_1234" value="cotizacion_cliente" readonly>
+            <div class="btn-small-row">
+              <button class="btn-correct" type="button" data-target="fileName">✓</button>
+            </div>
           </div>
         </div>
       </div>
-      <div class="flex">
-        <div>
+      <div class="form-row">
+        <div class="form-col">
           <label for="quoteType">Tipo de Cotización</label>
           <select id="quoteType">
             <option value="express">Exprés</option>
             <option value="detailed">Detallada</option>
           </select>
         </div>
-        <div>
+        <div class="form-col">
           <label for="client">Cliente</label>
-          <div class="input-group">
+          <div class="input-wrap">
             <input id="client" placeholder="Nombre del cliente">
-            <button class="dictate-btn" title="Dictar" data-target="client">🎤</button>
-            <button class="correct-btn" title="Corregir" data-target="client">✓</button>
+            <div class="btn-small-row">
+              <button class="btn-micro" type="button" title="Dictar" data-target="client">🎤</button>
+              <button class="btn-correct" type="button" title="Corregir" data-target="client">✓</button>
+            </div>
           </div>
+        </div>
+        <div class="form-col">
+          <label for="location">Ubicación</label>
+          <div class="input-wrap">
+            <input id="location" placeholder="Dirección o ubicación">
+            <div class="btn-small-row">
+              <button class="btn-micro" type="button" title="Dictar" data-target="location">🎤</button>
+              <button class="btn-correct" type="button" title="Corregir" data-target="location">✓</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <input type="checkbox" id="withIvaSwitch" checked>
+          <label for="withIvaSwitch" style="font-weight:400;">¿Incluir IVA (16%)?</label>
         </div>
         <div>
-          <label for="location">Ubicación</label>
-          <div class="input-group">
-            <input id="location" placeholder="Dirección o ubicación">
-            <button class="dictate-btn" title="Dictar" data-target="location">🎤</button>
-            <button class="correct-btn" title="Corregir" data-target="location">✓</button>
-          </div>
+          <input type="checkbox" id="withAnticipoSwitch">
+          <label for="withAnticipoSwitch" style="font-weight:400;">¿Incluir anticipo?</label>
         </div>
-      </div>
-      <div class="flex">
-        <div class="switch"><input type="checkbox" id="withIvaSwitch" checked><label for="withIvaSwitch" style="font-weight:400;">¿Incluir IVA (16%)?</label></div>
-        <div class="switch"><input type="checkbox" id="withAnticipoSwitch"><label for="withAnticipoSwitch" style="font-weight:400;">¿Incluir anticipo?</label></div>
-        <div id="anticipoField" style="display:none">
+        <div id="anticipoField" style="display:none;max-width:160px;">
           <label for="anticipoPct">Anticipo (%)</label>
-          <div class="input-group">
+          <div class="input-wrap">
             <input id="anticipoPct" type="number" min="0" max="100" value="0">
-            <button class="dictate-btn" title="Dictar" data-target="anticipoPct">🎤</button>
-            <button class="correct-btn" title="Corregir" data-target="anticipoPct">✓</button>
+            <div class="btn-small-row">
+              <button class="btn-micro" type="button" title="Dictar" data-target="anticipoPct">🎤</button>
+              <button class="btn-correct" type="button" title="Corregir" data-target="anticipoPct">✓</button>
+            </div>
           </div>
         </div>
       </div>
-      <h3 style="font-size:1.15em;margin:10px 0 6px 0;">Agregar Item</h3>
-      <div class="flex" id="itemInputs">
-        <div style="flex:2">
+      <h3 style="margin:16px 0 6px 0;">Agregar Item</h3>
+      <div class="form-row" id="itemInputs">
+        <div class="form-col" style="flex:2">
           <label for="newItemDesc">Descripción</label>
-          <div class="input-group">
+          <div class="input-wrap">
             <input id="newItemDesc" list="commonItemsList" placeholder="Ej. Pintura">
-            <button class="dictate-btn" title="Dictar" data-target="newItemDesc">🎤</button>
-            <button class="correct-btn" title="Corregir" data-target="newItemDesc">✓</button>
+            <div class="btn-small-row">
+              <button class="btn-micro" type="button" title="Dictar" data-target="newItemDesc">🎤</button>
+              <button class="btn-correct" type="button" title="Corregir" data-target="newItemDesc">✓</button>
+            </div>
           </div>
           <datalist id="commonItemsList"></datalist>
         </div>
-        <div id="expressInputs" style="display:flex;gap:10px;">
-          <div style="flex:1">
+        <div class="form-col" id="expressInputs" style="display:flex;">
+          <div style="width:100%">
             <label for="newItemPrice">Precio</label>
-            <div class="input-group">
+            <div class="input-wrap">
               <input id="newItemPrice" type="number" min="0" value="0">
-              <button class="dictate-btn" title="Dictar" data-target="newItemPrice">🎤</button>
-              <button class="correct-btn" title="Corregir" data-target="newItemPrice">✓</button>
+              <div class="btn-small-row">
+                <button class="btn-micro" type="button" title="Dictar" data-target="newItemPrice">🎤</button>
+                <button class="btn-correct" type="button" title="Corregir" data-target="newItemPrice">✓</button>
+              </div>
             </div>
           </div>
         </div>
-        <div id="detailedInputs" style="display:none;gap:10px;">
-          <div><label for="newItemQty">Cantidad</label>
-            <div class="input-group">
+        <div class="form-col" id="detailedInputs" style="display:none;flex-direction:row;gap:6px;">
+          <div>
+            <label for="newItemQty">Cantidad</label>
+            <div class="input-wrap">
               <input id="newItemQty" type="number" min="1" value="1">
-              <button class="dictate-btn" title="Dictar" data-target="newItemQty">🎤</button>
-              <button class="correct-btn" title="Corregir" data-target="newItemQty">✓</button>
+              <div class="btn-small-row">
+                <button class="btn-micro" type="button" title="Dictar" data-target="newItemQty">🎤</button>
+                <button class="btn-correct" type="button" title="Corregir" data-target="newItemQty">✓</button>
+              </div>
             </div>
           </div>
-          <div><label for="newItemMat">Material</label>
-            <div class="input-group">
+          <div>
+            <label for="newItemMat">Material</label>
+            <div class="input-wrap">
               <input id="newItemMat" type="number" min="0" value="0">
-              <button class="dictate-btn" title="Dictar" data-target="newItemMat">🎤</button>
-              <button class="correct-btn" title="Corregir" data-target="newItemMat">✓</button>
+              <div class="btn-small-row">
+                <button class="btn-micro" type="button" title="Dictar" data-target="newItemMat">🎤</button>
+                <button class="btn-correct" type="button" title="Corregir" data-target="newItemMat">✓</button>
+              </div>
             </div>
           </div>
-          <div><label for="newItemLab">Mano Obra</label>
-            <div class="input-group">
+          <div>
+            <label for="newItemLab">Mano Obra</label>
+            <div class="input-wrap">
               <input id="newItemLab" type="number" min="0" value="0">
-              <button class="dictate-btn" title="Dictar" data-target="newItemLab">🎤</button>
-              <button class="correct-btn" title="Corregir" data-target="newItemLab">✓</button>
+              <div class="btn-small-row">
+                <button class="btn-micro" type="button" title="Dictar" data-target="newItemLab">🎤</button>
+                <button class="btn-correct" type="button" title="Corregir" data-target="newItemLab">✓</button>
+              </div>
             </div>
           </div>
         </div>
-        <div style="align-self:flex-end;"><button id="addItemBtn">Agregar</button></div>
+        <div style="align-self:flex-end;min-width:108px;"><button id="addItemBtn">Agregar</button></div>
       </div>
       <div class="table-scroll">
         <table id="itemsTable">
@@ -405,10 +433,12 @@
     <label><input type="checkbox" value="Cumplimiento normativas y permisos"> Cumplimiento normativas</label>
     <label><input type="checkbox" value="Cláusula de fuerza mayor"> Cláusula fuerza mayor</label>
     <div style="margin-top:13px; font-weight:600;">Detalles adicionales:</div>
-    <div class="input-group">
+    <div class="input-wrap">
       <textarea id="detalleAdicional" placeholder="Escribe o dicta un detalle y agrégalo abajo..."></textarea>
-      <button class="dictate-btn" id="startVoice" title="Dictar">🎤</button>
-      <button class="correct-btn" id="correctVoice" title="Corregir">✓</button>
+      <div class="btn-small-row">
+        <button class="btn-micro" id="startVoice" title="Dictar">🎤</button>
+        <button class="btn-correct" id="correctVoice" title="Corregir">✓</button>
+      </div>
     </div>
     <button type="button" id="addDetalleBtn" style="background:#009e47; margin-bottom:9px;">Agregar detalle</button>
     <ul class="detalles-agregados" id="detallesAgregados"></ul>
@@ -527,7 +557,9 @@
         txt = autocorregir(txt);
         if (currentTarget) {
           if (currentTarget.tagName==="INPUT"||currentTarget.tagName==="TEXTAREA") {
-            currentTarget.value = txt; // Reemplaza lo anterior
+            currentTarget.value = txt;
+            // Auto-refresca archivo si cambia el título
+            if (currentTarget.id==="quoteTitle") syncTitleFileName();
           }
         }
         dictadoStatus.textContent="Texto agregado.";
@@ -536,10 +568,10 @@
       };
       recognition.onerror = function(e) { dictadoStatus.textContent="Error de dictado: "+e.error; currentTarget = null; };
       recognition.onend = ()=>{ recognizing=false; };
-      document.querySelectorAll('.dictate-btn').forEach(btn=>{
+      document.querySelectorAll('.btn-micro').forEach(btn=>{
         btn.onclick = function() {
           let field = document.getElementById(btn.dataset.target);
-          if (!field) field = btn.previousElementSibling || btn.parentElement.querySelector('input,textarea');
+          if (!field) field = btn.parentElement.previousElementSibling;
           listenForField(field);
         }
       });
@@ -547,18 +579,34 @@
         listenForField(detalleAdicional);
       }
     } else {
-      document.querySelectorAll('.dictate-btn').forEach(b=>b.style.display='none');
+      document.querySelectorAll('.btn-micro').forEach(b=>b.style.display='none');
       document.getElementById('dictadoStatus').textContent="Dictado no disponible.";
     }
 
     // Corrección ortográfica y formal para todos los campos (simulado)
-    document.querySelectorAll('.correct-btn').forEach(btn=>{
+    document.querySelectorAll('.btn-correct').forEach(btn=>{
       btn.onclick = function() {
         let field = document.getElementById(btn.dataset.target);
-        if (!field) field = btn.previousElementSibling || btn.parentElement.querySelector('input,textarea');
-        if (field) field.value = autocorregir(field.value);
+        if (!field) field = btn.parentElement.previousElementSibling;
+        if (field) {
+          field.value = autocorregir(field.value);
+          if (field.id==="quoteTitle") syncTitleFileName();
+        }
       }
     });
+
+    // Sincroniza automáticamente el nombre de archivo con el título de la cotización
+    function syncTitleFileName() {
+      let t = quoteTitle.value
+        .toLowerCase()
+        .replace(/[^\w\s-]/g,'') // quita caracteres no válidos
+        .trim()
+        .replace(/\s+/g,'_');
+      fileNameInput.value = t || "cotizacion";
+    }
+    quoteTitle.addEventListener('input', syncTitleFileName);
+    quoteTitle.addEventListener('blur', syncTitleFileName);
+    document.addEventListener('DOMContentLoaded', syncTitleFileName);
 
     // Auto-corrección al salir de campo importante
     ['quoteTitle','client','location','detalleAdicional'].forEach(id=>{
