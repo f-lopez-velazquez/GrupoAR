@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Generador de Cotizaciones – Grupo AR</title>
+  <style>
+    html, body { height: 100%; }
+    body {
+      font-family: 'Helvetica', Arial, sans-serif;
+      background: #f7f9fa;
+      color: #333;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 700px;
+      margin: 0 auto 30px auto;
+      padding: 10px;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 10px 0 16px 0;
+      justify-content: center;
+    }
+    header img {
+      height: 38px;
+    }
+    header .logoTitle {
+      font-size: 1.4em;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      color: #0a6ec8;
+      line-height: 1;
+    }
+    header .logoTitle span { color: #dc1e28; }
+    .form-container, .preview-container {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      padding: 12px 10px 18px 10px;
+      margin-bottom: 16px;
+    }
+    .flex { display: flex; gap: 12px; flex-wrap: wrap; }
+    .flex > * { flex: 1 1 160px; }
+    label { font-weight: bold; margin-bottom: 3px; }
+    input, select, textarea, button {
+      width: 100%; padding: 7px; margin-bottom: 10px;
+      border: 1px solid #ccc; border-radius: 5px; font-size: 1em;
+    }
+    textarea { resize: vertical; min-height: 38px; }
+    button { background: #0a6ec8; color: #fff; border: none; cursor: pointer; font-weight: bold;}
+    button:active { background: #095bb1; }
+    .switch {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 8px;
+      font-size: 1em;
+    }
+    .switch input[type=checkbox] {
+      accent-color: #0a6ec8;
+      width: 1.1em; height: 1.1em; margin: 0;
+    }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    th, td { padding: 7px 6px; border: 1px solid #eee; font-size: 0.98em; }
+    th { background: #f0f5fb; color: #0a6ec8; font-size: 1em;}
+    .remove-btn { background: none; border: none; color: #c00; font-size: 1.25em; cursor: pointer; }
+    .summary { margin-top: 13px; text-align: right; font-size: 1em; }
+    .summary div { margin-bottom: 4px; }
+    .table-scroll { overflow-x: auto; }
+    #previewResponsive {
+      min-height: 160px; border: 1px solid #e6e6e6;
+      border-radius: 6px; padding: 10px; background: #f9fbfe;
+      margin-bottom: 10px;
+    }
+    .details-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: #0a6ec8;
+      color: #fff;
+      border: none;
+      border-radius: 0 0 6px 6px;
+      margin-top: -6px;
+      font-size: 1em;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -320px;
+      width: 290px;
+      height: 100vh;
+      background: #fff;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.11);
+      z-index: 999;
+      transition: right 0.3s;
+      padding: 22px 20px 10px 16px;
+      overflow-y: auto;
+      border-radius: 8px 0 0 8px;
+    }
+    .sidebar.open { right: 0; }
+    .sidebar h4 { color: #0a6ec8; margin-bottom: 10px;}
+    .sidebar label {
+      display: flex; align-items: center; gap: 8px;
+      font-weight: 400;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .sidebar textarea {
+      margin-top: 7px;
+      min-height: 54px;
+      background: #f3f6fa;
+      border: 1px solid #c3dbfc;
+      font-size: 0.98em;
+    }
+    .sidebar-close {
+      background: none; border: none; color: #0a6ec8; font-size: 1.6em; position: absolute; top: 8px; right: 10px; cursor: pointer;
+    }
+    @media (max-width: 760px) {
+      .container { max-width: 100vw; padding: 2vw; }
+      .flex > * { min-width: 110px; }
+      .sidebar { width: 96vw; min-width: 180px; }
+    }
+    @media (max-width: 500px) {
+      header .logoTitle { font-size: 1.05em; }
+      .sidebar { padding: 15px 6vw 10px 8vw; }
+    }
+    #previewPDF {
+      display: none;
+      width: 210mm; height: 297mm;
+      background: #fff; padding: 18mm 15mm 25mm 15mm;
+      margin: 0 auto;
+      font-size: 13px; line-height: 1.38;
+      position: relative;
+      overflow: hidden;
+    }
+    #previewPDF::before {
+      content: "";
+      position: absolute;
+      top: 48%; left: 50%;
+      width: 140mm; height: 140mm;
+      background: url('https://i.imgur.com/kf8e57F.jpg') no-repeat center center;
+      background-size: contain;
+      opacity: 0.06;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+    #previewPDF > * { position: relative; z-index: 1; }
+    #previewPDF .header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 18px;
+    }
+    #previewPDF .header .logo-title {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    #previewPDF .header img {
+      max-width: 195px; max-height: 135px;
+      display: block; margin: 0 auto;
+    }
+    #previewPDF .header .title-groupar {
+      font-size: 2.2em;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+    #previewPDF .header .title-groupar .azul { color: #0a6ec8; }
+    #previewPDF .header .title-groupar .rojo { color: #dc1e28; }
+    #previewPDF .header .datos {
+      text-align: right; font-size: 1.07em;
+    }
+    #previewPDF table {
+      width: 100%; border-collapse: collapse; margin-bottom: 10px;
+    }
+    #previewPDF th, #previewPDF td {
+      padding: 8px; border: 1px solid #ddd; text-align: left; font-size: 13px;
+    }
+    #previewPDF th {
+      background: #0a6ec8; color: #fff;
+    }
+    #previewPDF .summary {
+      text-align: right; font-size: 13px; margin-bottom: 18px;
+    }
+    #previewPDF .footer {
+      text-align: center; font-size: 11px; color: #888;
+      border-top: 1px solid #ccc; padding-top: 8px;
+      position: absolute; bottom: 15mm; left: 15mm; right: 15mm;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="https://i.imgur.com/kf8e57F.jpg" alt="Logo Grupo AR">
+      <div class="logoTitle"><span>GRUPO</span> <span style="color:#dc1e28;">AR</span></div>
+    </header>
+    <div class="form-container">
+      <div class="flex">
+        <div><label for="quoteTitle">Título de Cotización</label>
+          <input id="quoteTitle" placeholder="Cotización #1234" value="Cotización probable – Nuevo cliente"></div>
+        <div><label for="fileName">Nombre de Archivo</label>
+          <input id="fileName" placeholder="cotizacion_1234" value="cotizacion_cliente"></div>
+      </div>
+      <div class="flex">
+        <div>
+          <label for="quoteType">Tipo de Cotización</label>
+          <select id="quoteType">
+            <option value="express">Exprés</option>
+            <option value="detailed">Detallada</option>
+          </select>
+        </div>
+        <div><label for="client">Cliente</label><input id="client" placeholder="Nombre del cliente"></div>
+        <div><label for="location">Ubicación</label><input id="location" placeholder="Dirección o ubicación"></div>
+      </div>
+      <div class="flex">
+        <div class="switch"><input type="checkbox" id="withIvaSwitch" checked><label for="withIvaSwitch" style="font-weight:400;">¿Incluir IVA (16%)?</label></div>
+        <div class="switch"><input type="checkbox" id="withAnticipoSwitch"><label for="withAnticipoSwitch" style="font-weight:400;">¿Incluir anticipo?</label></div>
+        <div id="anticipoField" style="display:none">
+          <label for="anticipoPct">Anticipo (%)</label>
+          <input id="anticipoPct" type="number" min="0" max="100" value="0">
+        </div>
+      </div>
+      <h3 style="font-size:1.12em;">Agregar Item</h3>
+      <div class="flex" id="itemInputs">
+        <div style="flex:2">
+          <label for="newItemDesc">Descripción</label>
+          <input id="newItemDesc" list="commonItemsList" placeholder="Ej. Pintura">
+          <datalist id="commonItemsList"></datalist>
+        </div>
+        <div id="expressInputs" style="display:flex;gap:10px;">
+          <div style="flex:1">
+            <label for="newItemPrice">Precio</label>
+            <input id="newItemPrice" type="number" min="0" value="0">
+          </div>
+        </div>
+        <div id="detailedInputs" style="display:none;gap:10px;">
+          <div><label for="newItemQty">Cantidad</label><input id="newItemQty" type="number" min="1" value="1"></div>
+          <div><label for="newItemMat">Material</label><input id="newItemMat" type="number" min="0" value="0"></div>
+          <div><label for="newItemLab">Mano Obra</label><input id="newItemLab" type="number" min="0" value="0"></div>
+        </div>
+        <div style="align-self:flex-end;"><button id="addItemBtn">Agregar</button></div>
+      </div>
+      <div class="table-scroll">
+        <table id="itemsTable">
+          <thead>
+            <tr id="header-express"><th>Descripción</th><th class="text-right">Precio</th><th class="text-right">Total</th><th></th></tr>
+            <tr id="header-detailed" class="hidden">
+              <th>Descripción</th><th class="text-right">Cant.</th><th class="text-right">Material</th><th class="text-right">Mano Obra</th><th class="text-right">Total</th><th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="summary">
+        <div>Subtotal: $<span id="subtotal">0.00</span></div>
+        <div>IVA: $<span id="ivaAmount">0.00</span></div>
+        <div><strong>Total: $<span id="totalAmount">0.00</span></strong></div>
+        <div id="anticipoSummary" style="display:none;">Anticipo (<span id="anticipoPctDisplay">0</span>%): $<span id="anticipoAmount">0.00</span></div>
+        <div><strong>Saldo: $<span id="balance">0.00</span></strong></div>
+      </div>
+      <button class="details-btn" id="openDetails">🛡️ Detalles y Especificaciones</button>
+    </div>
+    <div class="preview-container">
+      <h3 style="font-size:1.08em;">Vista Previa (no es el PDF final)</h3>
+      <div id="previewResponsive"></div>
+      <div style="text-align:center; margin-top:10px;">
+        <button id="generateBtn">Generar PDF</button>
+        <button id="shareBtn">Compartir</button>
+      </div>
+    </div>
+  </div>
+  <div class="sidebar" id="detailsDrawer">
+    <button class="sidebar-close" id="closeDetails" title="Cerrar">×</button>
+    <h4>Detalles y Especificaciones</h4>
+    <label><input type="checkbox" value="Pago 50% materiales antes de iniciar"> Pago 50% materiales antes de iniciar</label>
+    <label><input type="checkbox" value="Pago 50% restante al finalizar"> Pago 50% restante al finalizar</label>
+    <label><input type="checkbox" value="Incluye materiales, herramientas y mano de obra"> Incluye materiales, herramientas y mano de obra</label>
+    <label><input type="checkbox" value="Retiro de escombro incluido"> Retiro de escombro incluido</label>
+    <label><input type="checkbox" value="Limpieza general incluida"> Limpieza general incluida</label>
+    <label><input type="checkbox" value="Garantía de funcionamiento"> Garantía de funcionamiento</label>
+    <label><input type="checkbox" value="Garantía en materiales"> Garantía en materiales</label>
+    <label><input type="checkbox" value="Vigencia cotización: 30 días"> Vigencia cotización: 30 días</label>
+    <label><input type="checkbox" value="Responsabilidad por daños a terceros"> Responsabilidad terceros</label>
+    <label><input type="checkbox" value="Cumplimiento normativas y permisos"> Cumplimiento normativas</label>
+    <label><input type="checkbox" value="Cláusula de fuerza mayor"> Cláusula fuerza mayor</label>
+    <label style="margin-top:13px; font-weight:600;">Detalle adicional:</label>
+    <textarea id="detalleAdicional" placeholder="Puedes escribir cualquier condición, garantía u observación especial aquí..."></textarea>
+  </div>
+  <div id="previewPDF"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    const quoteType = document.getElementById('quoteType');
+    const tbody = document.querySelector('#itemsTable tbody');
+    const hdrExp = document.getElementById('header-express');
+    const hdrDet = document.getElementById('header-detailed');
+    const anticipoPct = document.getElementById('anticipoPct');
+    const anticipoPctDisp = document.getElementById('anticipoPctDisplay');
+    const newItemDesc = document.getElementById('newItemDesc');
+    const newItemQty = document.getElementById('newItemQty');
+    const newItemMat = document.getElementById('newItemMat');
+    const newItemLab = document.getElementById('newItemLab');
+    const newItemPrice = document.getElementById('newItemPrice');
+    const addItemBtn = document.getElementById('addItemBtn');
+    const clientInput = document.getElementById('client');
+    const locationInput = document.getElementById('location');
+    const quoteTitle = document.getElementById('quoteTitle');
+    const fileNameInput = document.getElementById('fileName');
+    const commonItemsList = document.getElementById('commonItemsList');
+    const previewRes = document.getElementById('previewResponsive');
+    const previewPDF = document.getElementById('previewPDF');
+    const openDetailsBtn = document.getElementById('openDetails');
+    const closeDetailsBtn = document.getElementById('closeDetails');
+    const detailsDrawer = document.getElementById('detailsDrawer');
+    const withIvaSwitch = document.getElementById('withIvaSwitch');
+    const withAnticipoSwitch = document.getElementById('withAnticipoSwitch');
+    const anticipoField = document.getElementById('anticipoField');
+    const anticipoSummary = document.getElementById('anticipoSummary');
+    const expressInputs = document.getElementById('expressInputs');
+    const detailedInputs = document.getElementById('detailedInputs');
+    const detalleAdicional = document.getElementById('detalleAdicional');
+
+    openDetailsBtn.onclick = ()=> detailsDrawer.classList.add('open');
+    closeDetailsBtn.onclick = ()=> detailsDrawer.classList.remove('open');
+
+    // Switches para IVA y anticipo
+    withIvaSwitch.onchange = recalc;
+    withAnticipoSwitch.onchange = function(){
+      anticipoField.style.display = this.checked ? "" : "none";
+      anticipoSummary.style.display = this.checked ? "" : "none";
+      recalc();
+    };
+
+    // Cambia inputs según tipo cotización
+    function updateTypeUI() {
+      if (quoteType.value === "express") {
+        expressInputs.style.display = "flex";
+        detailedInputs.style.display = "none";
+        hdrExp.classList.remove('hidden');
+        hdrDet.classList.add('hidden');
+      } else {
+        expressInputs.style.display = "none";
+        detailedInputs.style.display = "flex";
+        hdrExp.classList.add('hidden');
+        hdrDet.classList.remove('hidden');
+      }
+      recalc();
+    }
+    quoteType.onchange = updateTypeUI;
+    updateTypeUI();
+
+    // Items frecuentes (memoria local)
+    const STORAGE_KEY = 'grupoAR_commonItems';
+    let commonItems = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    function updateDatalist() {
+      commonItemsList.innerHTML = '';
+      Object.entries(commonItems)
+        .sort((a,b)=>b[1]-a[1])
+        .forEach(([desc])=>{
+          const opt = document.createElement('option');
+          opt.value = desc;
+          commonItemsList.append(opt);
+        });
+    }
+    function recordUsage(desc) {
+      if (!desc) return;
+      commonItems[desc] = (commonItems[desc]||0)+1;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(commonItems));
+      updateDatalist();
+    }
+    updateDatalist();
+
+    addItemBtn.onclick = ()=>{
+      const desc = newItemDesc.value.trim(); if(!desc) return;
+      const tr = document.createElement('tr');
+      if(quoteType.value==='express'){
+        const pr = parseFloat(newItemPrice.value)||0;
+        tr.innerHTML = `<td><input class="desc" value="${desc}"></td>
+          <td class="text-right"><input class="price" type="number" value="${pr}" min="0"></td>
+          <td class="text-right"><span class="rowTotal">0.00</span></td>
+          <td><button class="remove-btn">✕</button></td>`;
+      } else {
+        const qt = parseFloat(newItemQty.value)||1;
+        const ma = parseFloat(newItemMat.value)||0;
+        const lb = parseFloat(newItemLab.value)||0;
+        tr.innerHTML = `<td><input class="desc" value="${desc}"></td>
+          <td class="text-right"><input class="qty" type="number" value="${qt}" min="1"></td>
+          <td class="text-right"><input class="mat" type="number" value="${ma}" min="0"></td>
+          <td class="text-right"><input class="lab" type="number" value="${lb}" min="0"></td>
+          <td class="text-right"><span class="rowTotal">0.00</span></td>
+          <td><button class="remove-btn">✕</button></td>`;
+      }
+      tbody.appendChild(tr);
+      tr.querySelectorAll('input').forEach(i=>i.oninput=recalc);
+      tr.querySelector('.remove-btn').onclick = ()=>{ tr.remove(); recalc(); };
+      recordUsage(desc);
+      newItemDesc.value=''; recalc();
+    };
+
+    anticipoPct.oninput = recalc;
+
+    function recalc(){
+      let subtotal=0;
+      tbody.querySelectorAll('tr').forEach(r=>{
+        const qty=parseFloat(r.querySelector('.qty')?.value||1);
+        const mat=parseFloat(r.querySelector('.mat')?.value||0);
+        const lab=parseFloat(r.querySelector('.lab')?.value||0);
+        const pr =parseFloat(r.querySelector('.price')?.value||0);
+        const line = quoteType.value==='express'? pr : (mat+lab)*qty;
+        r.querySelector('.rowTotal').textContent = line.toFixed(2);
+        subtotal+=line;
+      });
+      document.getElementById('subtotal').textContent=subtotal.toFixed(2);
+      const ivaAmt=withIvaSwitch.checked?subtotal*0.16:0;
+      document.getElementById('ivaAmount').textContent=ivaAmt.toFixed(2);
+      const total=subtotal+ivaAmt;
+      document.getElementById('totalAmount').textContent=total.toFixed(2);
+      if (withAnticipoSwitch.checked) {
+        const pct=parseFloat(anticipoPct.value)||0;
+        anticipoPctDisp.textContent=pct;
+        const ant=total*pct/100;
+        document.getElementById('anticipoAmount').textContent=ant.toFixed(2);
+        document.getElementById('balance').textContent=(total-ant).toFixed(2);
+      } else {
+        anticipoPctDisp.textContent="0";
+        document.getElementById('anticipoAmount').textContent="0.00";
+        document.getElementById('balance').textContent=total.toFixed(2);
+      }
+      buildPreview(previewRes, false);
+    }
+
+    function buildPreview(container, isPDF){
+      container.innerHTML = '';
+      // Header: diferente para PDF vs Web
+      if (isPDF) {
+        const hdr = document.createElement('div');
+        hdr.className = 'header';
+        hdr.innerHTML = `
+          <div class="logo-title">
+            <img src="https://i.imgur.com/kf8e57F.jpg" crossorigin="anonymous">
+            <div class="title-groupar"><span class="azul">GRUPO</span> <span class="rojo">AR</span></div>
+          </div>
+          <div class="datos">
+            <div style="font-size:1.08em;"><b>${quoteTitle.value}</b></div>
+            <div><strong>Cliente:</strong> ${clientInput.value||'--'}</div>
+            <div><strong>Ubicación:</strong> ${locationInput.value||'--'}</div>
+          </div>
+        `;
+        container.append(hdr);
+      } else {
+        const hdr = document.createElement('div');
+        hdr.className = 'header';
+        hdr.style.marginBottom = "10px";
+        hdr.innerHTML = `
+          <img src="https://i.imgur.com/kf8e57F.jpg" alt="Logo" style="height:30px;margin-right:8px;">
+          <span style="font-weight:500;font-size:1.15em;color:#0a6ec8;">GRUPO <span style="color:#dc1e28">AR</span></span>
+        `;
+        container.append(hdr);
+        const t = document.createElement('div');
+        t.innerHTML = `<div style="font-size:1.09em"><b>${quoteTitle.value}</b></div>
+        <div style="font-size:.97em"><strong>Cliente:</strong> ${clientInput.value||'--'}<br>
+        <strong>Ubicación:</strong> ${locationInput.value||'--'}</div>`;
+        t.style.marginBottom = "6px";
+        container.append(t);
+      }
+
+      // Tabla
+      const tbl=document.createElement('table');
+      const head=quoteType.value==='express'
+        ?`<tr><th>Descripción</th><th>Precio</th><th>Total</th></tr>`
+        :`<tr><th>Descripción</th><th>Cant.</th><th>Material</th><th>Mano Obra</th><th>Total</th></tr>`;
+      tbl.innerHTML=`<thead>${head}</thead><tbody></tbody>`;
+      const body=tbl.querySelector('tbody');
+      tbody.querySelectorAll('tr').forEach(r=>{
+        const row=document.createElement('tr');
+        Array.from(r.cells).slice(0,-1).forEach(c=>{
+          const cl=c.cloneNode(true);
+          const inp=cl.querySelector('input'), sp=cl.querySelector('span.rowTotal');
+          if(inp) cl.textContent=inp.value;
+          else if(sp) cl.textContent=sp.textContent;
+          row.append(cl);
+        });
+        body.append(row);
+      });
+      container.append(tbl);
+
+      // Summary
+      const sum=document.createElement('div'); sum.className='summary';
+      sum.innerHTML=`<div>Subtotal: $${document.getElementById('subtotal').textContent}</div>
+        <div>IVA: $${document.getElementById('ivaAmount').textContent}</div>
+        <div><strong>Total: $${document.getElementById('totalAmount').textContent}</strong></div>`;
+      if (withAnticipoSwitch.checked) {
+        sum.innerHTML += `<div>Anticipo (${anticipoPctDisp.textContent}%): $${document.getElementById('anticipoAmount').textContent}</div>`;
+      }
+      sum.innerHTML += `<div><strong>Saldo: $${document.getElementById('balance').textContent}</strong></div>`;
+      container.append(sum);
+
+      // Detalles
+      const checks=Array.from(document.querySelectorAll('#detailsDrawer input:checked')).map(i=>i.value);
+      const adicional = (detalleAdicional.value || "").trim();
+      if(checks.length || adicional){
+        const dt=document.createElement('div');
+        dt.innerHTML=`<h4 style="color:#0a6ec8">Detalles y Especificaciones</h4>
+        <ul style="margin:4px 0 0 14px;">
+        ${checks.map(t=>`<li>${t}</li>`).join('')}
+        ${adicional ? `<li><b>${adicional}</b></li>` : ''}
+        </ul>`;
+        container.append(dt);
+      }
+
+      // Footer solo en PDF
+      if(isPDF) {
+        const ft=document.createElement('div'); ft.className='footer';
+        ft.textContent='GRUPO AR Construcción y Diseño — Tel: +52 1 438 134 6142';
+        container.append(ft);
+      }
+    }
+
+    async function generatePDF(){
+      buildPreview(previewPDF, true);
+      previewPDF.style.display='block';
+      const canvas=await html2canvas(previewPDF,{scale:2,useCORS:true, backgroundColor:'#fff'});
+      const img=canvas.toDataURL('image/png');
+      const { jsPDF }=window.jspdf;
+      const pdf=new jsPDF({ unit:'mm', format:'a4', orientation:'portrait' });
+      pdf.addImage(img,'PNG',0,0,210,297);
+      previewPDF.style.display='none';
+      return pdf;
+    }
+
+    document.getElementById('generateBtn').onclick=async()=>{
+      const pdf=await generatePDF();
+      const fn=(fileNameInput.value.trim()||'cotizacion')+'.pdf';
+      pdf.save(fn);
+    };
+    document.getElementById('shareBtn').onclick=async()=>{
+      try{
+        const pdf=await generatePDF();
+        const blob=pdf.output('blob');
+        const file=new File([blob],(fileNameInput.value.trim()||'cotizacion')+'.pdf',{type:'application/pdf'});
+        if(navigator.canShare&&navigator.canShare({files:[file]})){
+          await navigator.share({files:[file],title:'Cotización Grupo AR'});
+        } else {
+          pdf.save(file.name);
+          alert('PDF listo. Compártelo manualmente.');
+        }
+      }catch{ alert('Error al compartir.'); }
+    };
+
+    document.addEventListener('DOMContentLoaded', recalc);
+  </script>
+</body>
+</html>
