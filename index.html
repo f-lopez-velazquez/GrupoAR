@@ -3,250 +3,229 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Generador de Cotizaciones – Grupo AR</title>
+  <title>Cotizaciones Grupo AR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --azul: #0a6ec8;
       --rojo: #dc1e28;
-      --gris-fondo: #f6f8fa;
+      --gris-fondo: #f7fafd;
+      --borde: #e1e6f3;
+      --sombra: 0 2px 14px rgba(10,110,200,0.09);
       --input-borde: #c5d5eb;
       --input-focus: #88b8f5;
-      --txt: #253250;
+      --txt: #223047;
+      --dark-bg: #161e2b;
+      --dark-panel: #212b3a;
+      --dark-txt: #dde9ff;
+      --dark-borde: #334261;
+      --dark-table: #232f44;
     }
+    html, body { height: 100%; }
     body {
-      background: var(--gris-fondo);
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      color: var(--txt);
-      margin: 0;
-      min-height: 100vh;
+      font-family: 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
+      color: var(--txt); margin: 0; min-height: 100vh;
+      background: var(--gris-fondo); transition: background .23s, color .16s;
+    }
+    body.dark {
+      background: var(--dark-bg); color: var(--dark-txt);
     }
     .container {
       max-width: 700px;
-      margin: 0 auto 30px auto;
+      margin: 0 auto 28px auto;
       padding: 12px;
     }
     header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 12px 0 18px 0;
-      justify-content: center;
+      display: flex; align-items: center; gap: 14px; margin: 25px 0 23px 0; justify-content: center;
     }
-    header img { height: 42px; border-radius: 7px; box-shadow: 0 1px 8px #e7eefa;}
+    header img { height: 55px; border-radius: 9px; box-shadow: 0 1px 16px #e7eefa;}
     header .logoTitle {
-      font-size: 1.47em;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      color: var(--azul);
-      line-height: 1;
+      font-size: 1.78em; font-weight: 800; letter-spacing: 0.5px; color: var(--azul); line-height: 1.03;
+      text-shadow: 0 2px 8px #b9d1fa60;
     }
     header .logoTitle span { color: var(--rojo);}
     .form-container, .preview-container {
-      background: #fff;
-      border-radius: 13px;
-      box-shadow: 0 2px 16px rgba(10,110,200,0.08);
-      padding: 22px 12px 23px 12px;
-      margin-bottom: 20px;
+      background: #fff; border-radius: 16px; box-shadow: var(--sombra); padding: 24px 16px 25px 16px; margin-bottom: 20px;
+      transition: background .23s, color .18s;
     }
-    .form-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-bottom: 8px;
+    body.dark .form-container, body.dark .preview-container {
+      background: var(--dark-panel); color: var(--dark-txt);
+      box-shadow: 0 2px 22px #1a2031b5;
     }
-    .form-col {
-      flex: 1 1 220px;
-      min-width: 180px;
-      margin-bottom: 6px;
-    }
+    .form-row { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 11px;}
+    .form-col { flex: 1 1 230px; min-width: 170px;}
     label {
-      font-weight: 500;
-      color: var(--azul);
-      display: block;
-      font-size: 1.05em;
-      margin-bottom: 4px;
+      font-weight: 600; color: var(--azul); display: block; font-size: 1.09em; margin-bottom: 3px; letter-spacing:.2px;
+      transition: color .17s;
     }
-    .input-wrap {
-      position: relative;
-      margin-bottom: 6px;
-    }
+    body.dark label { color: #80a6e8; }
+    .input-wrap { position: relative; margin-bottom: 7px;}
     input, textarea, select {
-      width: 100%;
-      box-sizing: border-box;
-      border: 2px solid var(--input-borde);
-      border-radius: 8px;
-      font-size: 1.1em;
-      padding: 12px 12px 12px 12px;
-      background: #fafcff;
-      color: var(--txt);
-      outline: none;
-      transition: border-color 0.18s;
+      width: 100%; box-sizing: border-box;
+      border: 2px solid var(--input-borde); border-radius: 10px;
+      font-size: 1.12em; padding: 13px 12px 13px 12px;
+      background: #fafdff; color: var(--txt);
+      outline: none; transition: border-color 0.16s, background .17s, color .14s;
       margin-bottom: 0;
+      font-family: inherit;
     }
     input:focus, textarea:focus, select:focus {
-      border-color: var(--input-focus);
-      background: #fff;
+      border-color: var(--input-focus); background: #fff;
     }
-    .btn-small-row {
-      display: flex;
-      gap: 7px;
-      margin-top: 5px;
+    body.dark input, body.dark textarea, body.dark select {
+      background: var(--dark-table); color: var(--dark-txt);
+      border-color: var(--dark-borde);
     }
+    body.dark input:focus, body.dark textarea:focus, body.dark select:focus {
+      background: #232f44; color: #fff;
+      border-color: #47a7fc;
+    }
+    .btn-small-row { display: flex; gap: 10px; margin-top: 7px;}
     .btn-micro, .btn-correct {
-      background: #eaf3fc;
-      color: var(--azul);
-      border: none;
-      border-radius: 50%;
-      width: 28px;
-      height: 28px;
-      font-size: 1.1em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background 0.14s;
+      background: #eaf3fc; color: var(--azul); border: none; border-radius: 50%; width: 30px; height: 30px;
+      font-size: 1.16em; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background 0.14s, box-shadow .17s;
+      box-shadow: 0 1px 3px #c7e0ff3a;
     }
-    .btn-correct {
-      background: #eafcf1;
-      color: #009e47;
-    }
+    .btn-correct { background: #eafcf1; color: #009e47;}
     .btn-micro:hover { background: #d1eaff;}
     .btn-correct:hover { background: #c5ffe5;}
-    @media (max-width: 640px) {
-      .container { padding: 2vw;}
-      .form-row { flex-direction: column; gap: 3px;}
-      .form-col { min-width: 98px;}
+    body.dark .btn-micro { background: #31496b; color: #80c4fe;}
+    body.dark .btn-correct { background: #2c6847; color: #98ffba;}
+    @media (max-width: 700px) {
+      .container { max-width: 99vw; padding: 1vw;}
+      .form-row { flex-direction: column; gap: 4px;}
+      .form-col { min-width: 90px;}
       input, textarea, select { font-size: 1em; padding: 11px 10px;}
-      .form-container, .preview-container { padding: 13px 4px 16px 4px;}
+      .form-container, .preview-container { padding: 13px 3px 16px 3px;}
     }
-    h3 { font-size: 1.1em; color: var(--azul);}
-    .details-btn, #addItemBtn, #generateBtn, #shareBtn, #addDetalleBtn {
-      background: linear-gradient(90deg, var(--azul), var(--rojo) 75%);
-      color: #fff;
-      font-size: 1.08em;
-      font-weight: 600;
-      border: none;
-      border-radius: 8px;
-      letter-spacing: .2px;
-      margin: 12px 0 0 0;
-      padding: 13px 0;
-      cursor: pointer;
-      width: 100%;
-      transition: background 0.14s, transform 0.09s;
-      box-shadow: 0 2px 8px #b6cde94d;
+    h3 { font-size: 1.12em; color: var(--azul);}
+    body.dark h3 { color: #90bcff;}
+    .details-btn, #addItemBtn, #generateBtn, #shareBtn, #addDetalleBtn, #qrBtn {
+      background: linear-gradient(93deg, var(--azul), var(--rojo) 80%);
+      color: #fff; font-size: 1.08em; font-weight: 700; border: none;
+      border-radius: 9px; letter-spacing: .19px; margin: 12px 0 0 0;
+      padding: 14px 0; cursor: pointer; width: 100%;
+      transition: background 0.14s, transform 0.09s, box-shadow .19s;
+      box-shadow: 0 2px 10px #b6cde948;
+      outline: none;
     }
-    .details-btn:active, #addItemBtn:active, #generateBtn:active, #shareBtn:active, #addDetalleBtn:active {
-      transform: scale(.97);
-    }
-    .table-scroll { overflow-x: auto; border-radius: 8px;}
-    table { width: 100%; border-collapse: collapse; margin-top: 11px;}
-    th, td { padding: 10px 7px; border: 1.4px solid #e3e8ef; font-size: 1em;}
-    th {
-      background: linear-gradient(90deg, #e8f2fb 75%, #f9e8ea 100%);
-      color: var(--azul); font-weight: 700;
-    }
+    .details-btn:active, #addItemBtn:active, #generateBtn:active, #shareBtn:active, #addDetalleBtn:active, #qrBtn:active { transform: scale(.97);}
+    .table-scroll { overflow-x: auto; border-radius: 10px;}
+    table { width: 100%; border-collapse: collapse; margin-top: 10px;}
+    th, td { padding: 12px 7px; border: 1.6px solid #e3e8ef; font-size: 1em;}
+    th { background: linear-gradient(90deg, #e8f2fb 75%, #f9e8ea 100%);
+      color: var(--azul); font-weight: 700;}
     tr:nth-child(even) { background: #f5faff;}
-    .remove-btn {
-      background: none; border: none; color: #c00; font-size: 1.19em; cursor: pointer;
-      transition: color 0.12s;
-    }
+    body.dark th { background: #1d3151; color: #81affb;}
+    body.dark td { background: #232f44; color: #dde9ff;}
+    .remove-btn { background: none; border: none; color: #c00; font-size: 1.17em; cursor: pointer; transition: color 0.11s;}
     .remove-btn:hover { color: #d70022;}
-    .summary { margin-top: 13px; text-align: right; font-size: 1.07em; color: #384357;}
+    .summary { margin-top: 16px; text-align: right; font-size: 1.09em; color: #384357;}
+    body.dark .summary { color: #b1cdfa;}
     .summary div { margin-bottom: 4px;}
     #previewResponsive {
-      min-height: 140px; border: 1.1px solid #d8e8f4;
-      border-radius: 8px; padding: 12px; background: #f8fafc;
-      margin-bottom: 11px;
-      font-size: 1.06em;
+      min-height: 120px; border: 1.1px solid #d8e8f4; border-radius: 8px;
+      padding: 13px; background: #f8fafc; margin-bottom: 12px; font-size: 1.05em;
     }
-    /* Sidebar/drawer ultra elegante */
+    body.dark #previewResponsive { background: #25304b; border-color: #39496c;}
+    /* Sidebar elegante */
     .sidebar {
-      position: fixed; top: 0; right: 0; width: 325px; max-width: 99vw; height: 100vh;
-      background: #fff; box-shadow: -2px 0 22px #0a6ec815;
-      z-index: 999;
-      transition: transform 0.34s cubic-bezier(.44,0,.2,1);
+      position: fixed; top: 0; right: 0; width: 340px; max-width: 99vw; height: 100vh;
+      background: #fff; box-shadow: -2px 0 32px #0a6ec81a; z-index: 999;
+      transition: transform 0.33s cubic-bezier(.44,0,.2,1);
       padding: 25px 16px 19px 18px; border-radius: 13px 0 0 13px;
-      overflow-y: auto; will-change: transform;
-      transform: translateX(100%);
+      overflow-y: auto; transform: translateX(100%);
       pointer-events: none; display: block;
     }
+    body.dark .sidebar { background: #263049; color: #dde9ff;}
     .sidebar.open { transform: translateX(0); pointer-events: auto;}
     .sidebar.closed { transform: translateX(100%); pointer-events: none;}
-    .sidebar h4 { color: var(--azul); margin-bottom: 14px;}
-    .sidebar label {
-      display: flex; align-items: center; gap: 8px;
-      font-weight: 450;
-      margin-bottom: 10px;
-      cursor: pointer;
-      font-size: 1.01em; color: #374569;
-    }
-    .sidebar textarea {
-      margin-top: 6px; min-height: 39px; background: #f4f8fd;
-      border: 2px solid var(--input-borde);
-      font-size: 1.04em;
-      margin-bottom: 4px;
-      border-radius: 7px;
-      transition: border-color .13s;
-    }
-    .sidebar-close {
-      background: none; border: none; color: var(--azul); font-size: 1.5em; position: absolute; top: 8px; right: 12px; cursor: pointer;
-      border-radius: 6px;
-    }
-    .detalles-agregados {
-      margin: 10px 0 0 0; padding: 0; list-style: disc; color: #384357; font-size: 1.04em;
-    }
-    .detalles-agregados li {
-      margin: 3px 0; display: flex; align-items: center; justify-content: space-between; gap: 7px;
-      background: #f7fcff; padding: 5px 8px; border-radius: 5px;
-    }
-    .detalles-agregados .del-detalle {
-      color: #c00; background:none; border:none; font-size:1.12em; cursor:pointer;
-      margin-left: 8px; border-radius: 5px;
-    }
-    @media (max-width: 650px) {
+    .sidebar h4 { color: var(--azul); margin-bottom: 13px;}
+    body.dark .sidebar h4 { color: #80a6e8;}
+    .sidebar label { display: flex; align-items: center; gap: 8px; font-weight: 460; margin-bottom: 10px; cursor: pointer; font-size: 1.02em; color: #374569;}
+    body.dark .sidebar label { color: #b4c8e0;}
+    .sidebar textarea { margin-top: 6px; min-height: 37px; background: #f4f8fd;
+      border: 2px solid var(--input-borde); font-size: 1.03em; margin-bottom: 4px; border-radius: 7px;}
+    body.dark .sidebar textarea { background: #212f44; color: #dde9ff; border-color: #39496c;}
+    .sidebar-close { background: none; border: none; color: var(--azul); font-size: 1.5em; position: absolute; top: 8px; right: 12px; cursor: pointer; border-radius: 6px;}
+    body.dark .sidebar-close { color: #80a6e8;}
+    .detalles-agregados { margin: 8px 0 0 0; padding: 0; list-style: disc; color: #384357; font-size: 1.04em;}
+    .detalles-agregados li { margin: 3px 0; display: flex; align-items: center; justify-content: space-between; gap: 7px; background: #f7fcff; padding: 5px 8px; border-radius: 5px;}
+    body.dark .detalles-agregados li { background: #1d2a41; color: #b6cdfb;}
+    .detalles-agregados .del-detalle { color: #c00; background:none; border:none; font-size:1.12em; cursor:pointer; margin-left: 8px; border-radius: 5px;}
+    #qrZone { margin: 15px 0 5px 0; text-align:center; }
+    #qrZone canvas { margin: 0 auto; }
+    @media (max-width: 700px) {
       .sidebar { width: 98vw; max-width: 99vw; padding-left: 3vw; padding-right: 3vw;}
     }
     #previewPDF {
-      display: none; width: 210mm; height: 297mm;
-      background: #fff; padding: 18mm 15mm 25mm 15mm; margin: 0 auto;
-      font-size: 13px; line-height: 1.38; position: relative; overflow: hidden;
+      display: none; width: 210mm; min-height: 297mm; background: #fff;
+      padding: 16mm 12mm 18mm 12mm; margin: 0 auto; font-size: 13px; line-height: 1.39; position: relative; overflow: hidden;
+      box-shadow: 0 1px 38px #b1b9d429;
     }
     #previewPDF::before {
       content: ""; position: absolute; top: 48%; left: 50%;
       width: 140mm; height: 140mm;
       background: url('https://i.imgur.com/kf8e57F.jpg') no-repeat center center;
-      background-size: contain; opacity: 0.06; transform: translate(-50%, -50%); z-index: 0;
+      background-size: 88% 88%; opacity: 0.045; transform: translate(-50%, -50%); z-index: 0;
     }
     #previewPDF > * { position: relative; z-index: 1;}
     #previewPDF .header {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;
     }
     #previewPDF .header .logo-title {
       display: flex; flex-direction: column; align-items: center; gap: 8px;
     }
     #previewPDF .header img {
-      max-width: 195px; max-height: 135px; display: block; margin: 0 auto;
+      max-width: 210px; max-height: 115px; display: block; margin: 0 auto;
     }
     #previewPDF .header .title-groupar {
-      font-size: 2.2em; font-weight: bold; letter-spacing: 1px; margin-top: 2px;
+      font-size: 2.3em; font-weight: bold; letter-spacing: 1.2px; margin-top: 2px;
     }
     #previewPDF .header .title-groupar .azul { color: var(--azul);}
     #previewPDF .header .title-groupar .rojo { color: var(--rojo);}
-    #previewPDF .header .datos { text-align: right; font-size: 1.07em;}
-    #previewPDF table { width: 100%; border-collapse: collapse; margin-bottom: 10px;}
+    #previewPDF .header .datos { text-align: right; font-size: 1.14em;}
+    #previewPDF table { width: 100%; border-collapse: collapse; margin-bottom: 8px;}
     #previewPDF th, #previewPDF td {
-      padding: 8px; border: 1.5px solid #cde0f6; text-align: left; font-size: 13px;
+      padding: 7px; border: 1.3px solid #cde0f6; text-align: left; font-size: 13px;
     }
-    #previewPDF th {
-      background: var(--azul); color: #fff;
+    #previewPDF th { background: var(--azul); color: #fff; letter-spacing:.1px;}
+    #previewPDF .summary { text-align: right; font-size: 13px; margin-bottom: 15px;}
+    #previewPDF .firma-simbolica {
+      margin-top: 36px; text-align: right;
     }
-    #previewPDF .summary {
-      text-align: right; font-size: 13px; margin-bottom: 18px;
+    #previewPDF .firma-simbolica svg {
+      width: 150px; height: 60px; display: block; margin-left: auto; margin-bottom: 0px;
+    }
+    #previewPDF .firma-texto {
+      text-align: right; font-size: 11.5px; color: #888; margin-top: 2px;
     }
     #previewPDF .footer {
-      text-align: center; font-size: 11px; color: #888;
+      text-align: center; font-size: 11.5px; color: #888;
       border-top: 1px solid #ccc; padding-top: 8px;
-      position: absolute; bottom: 15mm; left: 15mm; right: 15mm;
+      position: absolute; bottom: 12mm; left: 12mm; right: 12mm; background:transparent;
+    }
+    /* Animaciones Premium */
+    .sidebar,
+    .form-container,
+    .preview-container {
+      will-change: transform, box-shadow;
+      animation: fadeinup .44s cubic-bezier(.11,.75,.23,1.11) 1;
+    }
+    @keyframes fadeinup {
+      0% { opacity: 0; transform: translateY(20px);}
+      90%{ opacity: .92;}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    #generateBtn, #shareBtn, #qrBtn {
+      box-shadow: 0 4px 22px #b8cce92a;
+      animation: botonShow .25s cubic-bezier(.12,.75,.23,1.08) 1;
+    }
+    @keyframes botonShow {
+      0% { opacity: 0; transform: scale(.93);}
+      100% { opacity: 1; transform: scale(1);}
     }
   </style>
 </head>
@@ -316,7 +295,7 @@
           <input type="checkbox" id="withAnticipoSwitch">
           <label for="withAnticipoSwitch" style="font-weight:400;">¿Incluir anticipo?</label>
         </div>
-        <div id="anticipoField" style="display:none;max-width:160px;">
+        <div id="anticipoField" style="display:none;max-width:170px;">
           <label for="anticipoPct">Anticipo (%)</label>
           <div class="input-wrap">
             <input id="anticipoPct" type="number" min="0" max="100" value="0">
@@ -327,7 +306,7 @@
           </div>
         </div>
       </div>
-      <h3 style="margin:16px 0 6px 0;">Agregar Item</h3>
+      <h3 style="margin:18px 0 6px 0;">Agregar Item</h3>
       <div class="form-row" id="itemInputs">
         <div class="form-col" style="flex:2">
           <label for="newItemDesc">Descripción</label>
@@ -384,7 +363,7 @@
             </div>
           </div>
         </div>
-        <div style="align-self:flex-end;min-width:108px;"><button id="addItemBtn">Agregar</button></div>
+        <div style="align-self:flex-end;min-width:110px;"><button id="addItemBtn">Agregar</button></div>
       </div>
       <div class="table-scroll">
         <table id="itemsTable">
@@ -412,7 +391,9 @@
       <div style="text-align:center; margin-top:12px;">
         <button id="generateBtn">Generar PDF</button>
         <button id="shareBtn">Compartir</button>
+        <button id="qrBtn" style="display:none;">QR del Cotizador</button>
       </div>
+      <div id="qrZone"></div>
     </div>
   </div>
   <!-- BACKDROP -->
@@ -445,33 +426,24 @@
     <span id="dictadoStatus" style="color:#0a6ec8;font-size:.98em;margin-top:3px;display:block;"></span>
   </div>
   <div id="previewPDF"></div>
+  <!-- QR GENERATION LIBRARY -->
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
-    // --- Responsive Sidebar Drawer ---
+    // --- DARK MODE AUTO ---
+    if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.classList.add("dark");
+    }
+    // SIDEBAR
     const openDetailsBtn = document.getElementById('openDetails');
     const closeDetailsBtn = document.getElementById('closeDetails');
     const detailsDrawer = document.getElementById('detailsDrawer');
     const backdrop = document.getElementById('backdrop');
-    function openSidebar() {
-      detailsDrawer.classList.remove('closed');
-      detailsDrawer.classList.add('open');
-      backdrop.classList.add('active');
-      document.body.style.overflow = "hidden";
-      setTimeout(()=>detailsDrawer.focus(), 280);
-    }
-    function closeSidebar() {
-      detailsDrawer.classList.remove('open');
-      detailsDrawer.classList.add('closed');
-      backdrop.classList.remove('active');
-      document.body.style.overflow = "";
-    }
-    openDetailsBtn.onclick = openSidebar;
-    closeDetailsBtn.onclick = closeSidebar;
-    backdrop.onclick = closeSidebar;
-    document.addEventListener('keydown', e=>{
-      if((detailsDrawer.classList.contains('open')) && e.key==='Escape') closeSidebar();
-    });
+    function openSidebar() {detailsDrawer.classList.remove('closed');detailsDrawer.classList.add('open');backdrop.classList.add('active');document.body.style.overflow="hidden";setTimeout(()=>detailsDrawer.focus(),260);}
+    function closeSidebar() {detailsDrawer.classList.remove('open');detailsDrawer.classList.add('closed');backdrop.classList.remove('active');document.body.style.overflow="";}
+    openDetailsBtn.onclick = openSidebar; closeDetailsBtn.onclick = closeSidebar; backdrop.onclick = closeSidebar;
+    document.addEventListener('keydown', e=>{if((detailsDrawer.classList.contains('open'))&&e.key==='Escape') closeSidebar();});
 
     // Variables principales
     const quoteType = document.getElementById('quoteType');
@@ -499,11 +471,12 @@
     const anticipoSummary = document.getElementById('anticipoSummary');
     const expressInputs = document.getElementById('expressInputs');
     const detailedInputs = document.getElementById('detailedInputs');
+    const qrBtn = document.getElementById('qrBtn');
+    const qrZone = document.getElementById('qrZone');
     // Detalles adicionales dinámica
     const detalleAdicional = document.getElementById('detalleAdicional');
     const detallesAgregados = document.getElementById('detallesAgregados');
     let detallesArray = [];
-
     document.getElementById('addDetalleBtn').onclick = function() {
       let txt = detalleAdicional.value.trim();
       if (!txt) return;
@@ -525,7 +498,6 @@
         detallesAgregados.appendChild(li);
       });
     }
-
     // Autocorrección básica para todos los campos
     function autocorregir(text) {
       if (!text) return "";
@@ -536,7 +508,6 @@
       text = text.replace(/\s{2,}/g, ' ').replace(/ ,/g, ',');
       return text;
     }
-
     // Dictado para campos (todos)
     let recognition, recognizing = false;
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
@@ -558,7 +529,6 @@
         if (currentTarget) {
           if (currentTarget.tagName==="INPUT"||currentTarget.tagName==="TEXTAREA") {
             currentTarget.value = txt;
-            // Auto-refresca archivo si cambia el título
             if (currentTarget.id==="quoteTitle") syncTitleFileName();
           }
         }
@@ -582,7 +552,6 @@
       document.querySelectorAll('.btn-micro').forEach(b=>b.style.display='none');
       document.getElementById('dictadoStatus').textContent="Dictado no disponible.";
     }
-
     // Corrección ortográfica y formal para todos los campos (simulado)
     document.querySelectorAll('.btn-correct').forEach(btn=>{
       btn.onclick = function() {
@@ -594,12 +563,11 @@
         }
       }
     });
-
     // Sincroniza automáticamente el nombre de archivo con el título de la cotización
     function syncTitleFileName() {
       let t = quoteTitle.value
         .toLowerCase()
-        .replace(/[^\w\s-]/g,'') // quita caracteres no válidos
+        .replace(/[^\w\s-]/g,'')
         .trim()
         .replace(/\s+/g,'_');
       fileNameInput.value = t || "cotizacion";
@@ -607,13 +575,11 @@
     quoteTitle.addEventListener('input', syncTitleFileName);
     quoteTitle.addEventListener('blur', syncTitleFileName);
     document.addEventListener('DOMContentLoaded', syncTitleFileName);
-
     // Auto-corrección al salir de campo importante
     ['quoteTitle','client','location','detalleAdicional'].forEach(id=>{
       let field = document.getElementById(id);
       if(field) field.addEventListener('blur',()=>{ field.value = autocorregir(field.value); });
     });
-
     withIvaSwitch.onchange = recalc;
     withAnticipoSwitch.onchange = function(){
       anticipoField.style.display = this.checked ? "" : "none";
@@ -636,7 +602,6 @@
     }
     quoteType.onchange = updateTypeUI;
     updateTypeUI();
-
     const STORAGE_KEY = 'grupoAR_commonItems';
     let commonItems = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
     function updateDatalist() {
@@ -656,7 +621,6 @@
       updateDatalist();
     }
     updateDatalist();
-
     addItemBtn.onclick = ()=>{
       const desc = newItemDesc.value.trim(); if(!desc) return;
       const tr = document.createElement('tr');
@@ -683,9 +647,7 @@
       recordUsage(desc);
       newItemDesc.value=''; recalc();
     };
-
     anticipoPct.oninput = recalc;
-
     function recalc(){
       let subtotal=0;
       tbody.querySelectorAll('tr').forEach(r=>{
@@ -715,7 +677,6 @@
       }
       buildPreview(previewRes, false);
     }
-
     function buildPreview(container, isPDF){
       container.innerHTML = '';
       // Header: diferente para PDF vs Web
@@ -728,7 +689,7 @@
             <div class="title-groupar"><span class="azul">GRUPO</span> <span class="rojo">AR</span></div>
           </div>
           <div class="datos">
-            <div style="font-size:1.08em;"><b>${quoteTitle.value}</b></div>
+            <div style="font-size:1.18em; font-weight:bold"><b>${quoteTitle.value}</b></div>
             <div><strong>Cliente:</strong> ${clientInput.value||'--'}</div>
             <div><strong>Ubicación:</strong> ${locationInput.value||'--'}</div>
           </div>
@@ -739,13 +700,13 @@
         hdr.className = 'header';
         hdr.style.marginBottom = "10px";
         hdr.innerHTML = `
-          <img src="https://i.imgur.com/kf8e57F.jpg" alt="Logo" style="height:30px;margin-right:8px;">
-          <span style="font-weight:500;font-size:1.15em;color:#0a6ec8;">GRUPO <span style="color:#dc1e28">AR</span></span>
+          <img src="https://i.imgur.com/kf8e57F.jpg" alt="Logo" style="height:32px;margin-right:10px;">
+          <span style="font-weight:600;font-size:1.16em;color:#0a6ec8;">GRUPO <span style="color:#dc1e28">AR</span></span>
         `;
         container.append(hdr);
         const t = document.createElement('div');
         t.innerHTML = `<div style="font-size:1.09em"><b>${quoteTitle.value}</b></div>
-        <div style="font-size:.97em"><strong>Cliente:</strong> ${clientInput.value||'--'}<br>
+        <div style="font-size:.98em"><strong>Cliente:</strong> ${clientInput.value||'--'}<br>
         <strong>Ubicación:</strong> ${locationInput.value||'--'}</div>`;
         t.style.marginBottom = "7px";
         container.append(t);
@@ -793,6 +754,21 @@
         container.append(dt);
       }
 
+      // Firma simbólica solo en PDF
+      if(isPDF) {
+        const f=document.createElement('div');
+        f.className='firma-simbolica';
+        f.innerHTML = `
+          <div>
+            <svg viewBox="0 0 160 55">
+              <path d="M13,45 Q28,13 57,43 Q75,56 88,37 Q95,26 102,30 Q119,43 124,31 Q128,22 145,18" fill="none" stroke="#0a6ec8" stroke-width="2.3"/>
+              <text x="7" y="52" fill="#0a6ec8" font-family="cursive" font-size="30" font-weight="bold">Grupo AR</text>
+            </svg>
+          </div>
+          <div class="firma-texto">Firma simbólica. Este documento no requiere firma autógrafa para su validez.</div>
+        `;
+        container.append(f);
+      }
       // Footer solo en PDF
       if(isPDF) {
         const ft=document.createElement('div'); ft.className='footer';
@@ -801,14 +777,33 @@
       }
     }
 
+    // PDF Multipágina si tabla muy grande
     async function generatePDF(){
       buildPreview(previewPDF, true);
       previewPDF.style.display='block';
-      const canvas=await html2canvas(previewPDF,{scale:2,useCORS:true, backgroundColor:'#fff'});
-      const img=canvas.toDataURL('image/png');
+      // Paginado automático: Si el contenido excede una hoja, divide en varias
       const { jsPDF }=window.jspdf;
       const pdf=new jsPDF({ unit:'mm', format:'a4', orientation:'portrait' });
-      pdf.addImage(img,'PNG',0,0,210,297);
+      // Multipágina: Render y recortar canvas por fragmentos
+      let pageHeight = 297;
+      let pdfY = 0;
+      const canvas=await html2canvas(previewPDF,{scale:2,useCORS:true, backgroundColor:'#fff'});
+      const ctx = canvas.getContext('2d');
+      let renderedHeight = canvas.height;
+      let pageCanvasHeight = Math.floor(canvas.width * (pageHeight/210));
+      let renderedPages = 0;
+      while(pdfY < renderedHeight){
+        let pageCanvas = document.createElement('canvas');
+        pageCanvas.width = canvas.width;
+        pageCanvas.height = Math.min(pageCanvasHeight, renderedHeight - pdfY);
+        let pageCtx = pageCanvas.getContext('2d');
+        pageCtx.drawImage(canvas, 0, pdfY, canvas.width, pageCanvas.height, 0, 0, canvas.width, pageCanvas.height);
+        let img = pageCanvas.toDataURL('image/png');
+        if(renderedPages > 0) pdf.addPage();
+        pdf.addImage(img,'PNG',0,0,210,Math.min(pageHeight, (pageCanvas.height * 210)/canvas.width));
+        pdfY += pageCanvas.height;
+        renderedPages++;
+      }
       previewPDF.style.display='none';
       return pdf;
     }
@@ -831,6 +826,26 @@
         }
       }catch{ alert('Error al compartir.'); }
     };
+
+    // QR DEL COTIZADOR PREMIUM
+    function maybeShowQR() {
+      if(location.protocol==='https:'){
+        qrBtn.style.display = 'inline-block';
+      }
+    }
+    qrBtn.onclick = function() {
+      qrZone.innerHTML = '';
+      let url = window.location.href;
+      let qr = new QRious({value: url, size: 178, background: '#fff', foreground: '#0a6ec8'});
+      let lbl = document.createElement('div');
+      lbl.textContent = 'Comparte este cotizador escaneando:';
+      lbl.style.marginBottom = '5px'; lbl.style.fontSize = '1em'; lbl.style.color = '#0a6ec8';
+      let wrap = document.createElement('div'); wrap.append(qr.image); wrap.style.marginBottom = "8px";
+      qrZone.append(lbl); qrZone.append(wrap);
+      let u = document.createElement('div'); u.textContent = url; u.style.fontSize='0.91em'; u.style.wordBreak='break-all';
+      qrZone.append(u);
+    }
+    maybeShowQR();
 
     document.addEventListener('DOMContentLoaded', recalc);
   </script>
