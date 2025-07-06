@@ -44,6 +44,32 @@
     .form-container label { margin-bottom: 3px; display:block; font-weight:500;}
     .flex { display: flex; gap: 14px; flex-wrap: wrap; }
     .flex > * { flex: 1 1 150px; min-width: 120px; }
+    .input-group {
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 12px;
+    }
+    .input-group input, .input-group textarea {
+      flex: 1 1 auto;
+      margin-bottom: 0;
+    }
+    .input-group .dictate-btn, .input-group .correct-btn {
+      background: #e3f1fb;
+      border: none;
+      border-radius: 4px;
+      padding: 7px 10px 7px 8px;
+      cursor: pointer;
+      font-size: 1.1em;
+      color: #0a6ec8;
+      margin-left: 2px;
+      margin-bottom: 0;
+      transition: background 0.12s;
+    }
+    .input-group .correct-btn {
+      color: #009e47;
+      background: #e3fae7;
+    }
+    .input-group .dictate-btn:active { background: #b4e1f9; }
+    .input-group .correct-btn:active { background: #c4ffd2; }
     input, select, textarea, button {
       width: 100%;
       padding: 8px 7px;
@@ -97,7 +123,6 @@
       letter-spacing: 0.5px;
     }
     .details-btn:active { background: #095bb1; }
-
     /* BACKDROP */
     .backdrop {
       display: none;
@@ -123,15 +148,20 @@
       background: #fff;
       box-shadow: -2px 0 16px rgba(0,0,0,0.16);
       z-index: 999;
-      transition: right 0.29s cubic-bezier(.44,0,.2,1);
+      transition: right 0.4s cubic-bezier(.44,0,.2,1);
       padding: 24px 18px 18px 14px;
       overflow-y: auto;
       border-radius: 12px 0 0 12px;
       display: flex;
       flex-direction: column;
       min-width: 170px;
+      pointer-events: auto;
     }
-    .sidebar.open { right: 0; }
+    .sidebar.closed {
+      right: -340px !important;
+      pointer-events: none;
+    }
+    .sidebar.open { right: 0 !important; pointer-events:auto; }
     .sidebar h4 { color: #0a6ec8; margin-bottom: 12px;}
     .sidebar label {
       display: flex; align-items: center; gap: 8px;
@@ -142,15 +172,34 @@
     }
     .sidebar textarea {
       margin-top: 7px;
-      min-height: 54px;
+      min-height: 44px;
       background: #f3f6fa;
       border: 1px solid #c3dbfc;
       font-size: 1em;
-      margin-bottom: 10px;
+      margin-bottom: 6px;
       border-radius: 6px;
     }
     .sidebar-close {
       background: none; border: none; color: #0a6ec8; font-size: 1.6em; position: absolute; top: 8px; right: 12px; cursor: pointer;
+    }
+    .detalles-agregados {
+      margin: 10px 0 0 0; padding: 0;
+      list-style: disc;
+      color: #234; font-size: 1em;
+    }
+    .detalles-agregados li {
+      margin: 3px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 7px;
+      background: #f8fcff;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+    .detalles-agregados .del-detalle {
+      color: #c00; background:none; border:none; font-size:1.2em; cursor:pointer;
+      margin-left: 9px;
     }
     @media (max-width: 760px) {
       .container { max-width: 100vw; padding: 1vw; }
@@ -234,10 +283,22 @@
     </header>
     <div class="form-container">
       <div class="flex">
-        <div><label for="quoteTitle">Título de Cotización</label>
-          <input id="quoteTitle" placeholder="Cotización #1234" value="Cotización probable – Nuevo cliente"></div>
-        <div><label for="fileName">Nombre de Archivo</label>
-          <input id="fileName" placeholder="cotizacion_1234" value="cotizacion_cliente"></div>
+        <div>
+          <label for="quoteTitle">Título de Cotización</label>
+          <div class="input-group">
+            <input id="quoteTitle" placeholder="Cotización #1234" value="Cotización probable – Nuevo cliente">
+            <button class="dictate-btn" title="Dictar" data-target="quoteTitle">🎤</button>
+            <button class="correct-btn" title="Corregir" data-target="quoteTitle">✓</button>
+          </div>
+        </div>
+        <div>
+          <label for="fileName">Nombre de Archivo</label>
+          <div class="input-group">
+            <input id="fileName" placeholder="cotizacion_1234" value="cotizacion_cliente">
+            <button class="dictate-btn" title="Dictar" data-target="fileName">🎤</button>
+            <button class="correct-btn" title="Corregir" data-target="fileName">✓</button>
+          </div>
+        </div>
       </div>
       <div class="flex">
         <div>
@@ -247,34 +308,78 @@
             <option value="detailed">Detallada</option>
           </select>
         </div>
-        <div><label for="client">Cliente</label><input id="client" placeholder="Nombre del cliente"></div>
-        <div><label for="location">Ubicación</label><input id="location" placeholder="Dirección o ubicación"></div>
+        <div>
+          <label for="client">Cliente</label>
+          <div class="input-group">
+            <input id="client" placeholder="Nombre del cliente">
+            <button class="dictate-btn" title="Dictar" data-target="client">🎤</button>
+            <button class="correct-btn" title="Corregir" data-target="client">✓</button>
+          </div>
+        </div>
+        <div>
+          <label for="location">Ubicación</label>
+          <div class="input-group">
+            <input id="location" placeholder="Dirección o ubicación">
+            <button class="dictate-btn" title="Dictar" data-target="location">🎤</button>
+            <button class="correct-btn" title="Corregir" data-target="location">✓</button>
+          </div>
+        </div>
       </div>
       <div class="flex">
         <div class="switch"><input type="checkbox" id="withIvaSwitch" checked><label for="withIvaSwitch" style="font-weight:400;">¿Incluir IVA (16%)?</label></div>
         <div class="switch"><input type="checkbox" id="withAnticipoSwitch"><label for="withAnticipoSwitch" style="font-weight:400;">¿Incluir anticipo?</label></div>
         <div id="anticipoField" style="display:none">
           <label for="anticipoPct">Anticipo (%)</label>
-          <input id="anticipoPct" type="number" min="0" max="100" value="0">
+          <div class="input-group">
+            <input id="anticipoPct" type="number" min="0" max="100" value="0">
+            <button class="dictate-btn" title="Dictar" data-target="anticipoPct">🎤</button>
+            <button class="correct-btn" title="Corregir" data-target="anticipoPct">✓</button>
+          </div>
         </div>
       </div>
       <h3 style="font-size:1.15em;margin:10px 0 6px 0;">Agregar Item</h3>
       <div class="flex" id="itemInputs">
         <div style="flex:2">
           <label for="newItemDesc">Descripción</label>
-          <input id="newItemDesc" list="commonItemsList" placeholder="Ej. Pintura">
+          <div class="input-group">
+            <input id="newItemDesc" list="commonItemsList" placeholder="Ej. Pintura">
+            <button class="dictate-btn" title="Dictar" data-target="newItemDesc">🎤</button>
+            <button class="correct-btn" title="Corregir" data-target="newItemDesc">✓</button>
+          </div>
           <datalist id="commonItemsList"></datalist>
         </div>
         <div id="expressInputs" style="display:flex;gap:10px;">
           <div style="flex:1">
             <label for="newItemPrice">Precio</label>
-            <input id="newItemPrice" type="number" min="0" value="0">
+            <div class="input-group">
+              <input id="newItemPrice" type="number" min="0" value="0">
+              <button class="dictate-btn" title="Dictar" data-target="newItemPrice">🎤</button>
+              <button class="correct-btn" title="Corregir" data-target="newItemPrice">✓</button>
+            </div>
           </div>
         </div>
         <div id="detailedInputs" style="display:none;gap:10px;">
-          <div><label for="newItemQty">Cantidad</label><input id="newItemQty" type="number" min="1" value="1"></div>
-          <div><label for="newItemMat">Material</label><input id="newItemMat" type="number" min="0" value="0"></div>
-          <div><label for="newItemLab">Mano Obra</label><input id="newItemLab" type="number" min="0" value="0"></div>
+          <div><label for="newItemQty">Cantidad</label>
+            <div class="input-group">
+              <input id="newItemQty" type="number" min="1" value="1">
+              <button class="dictate-btn" title="Dictar" data-target="newItemQty">🎤</button>
+              <button class="correct-btn" title="Corregir" data-target="newItemQty">✓</button>
+            </div>
+          </div>
+          <div><label for="newItemMat">Material</label>
+            <div class="input-group">
+              <input id="newItemMat" type="number" min="0" value="0">
+              <button class="dictate-btn" title="Dictar" data-target="newItemMat">🎤</button>
+              <button class="correct-btn" title="Corregir" data-target="newItemMat">✓</button>
+            </div>
+          </div>
+          <div><label for="newItemLab">Mano Obra</label>
+            <div class="input-group">
+              <input id="newItemLab" type="number" min="0" value="0">
+              <button class="dictate-btn" title="Dictar" data-target="newItemLab">🎤</button>
+              <button class="correct-btn" title="Corregir" data-target="newItemLab">✓</button>
+            </div>
+          </div>
         </div>
         <div style="align-self:flex-end;"><button id="addItemBtn">Agregar</button></div>
       </div>
@@ -310,7 +415,7 @@
   <!-- BACKDROP -->
   <div class="backdrop" id="backdrop"></div>
   <!-- SIDEBAR Detalles -->
-  <div class="sidebar" id="detailsDrawer" tabindex="-1" aria-modal="true" aria-label="Detalles">
+  <div class="sidebar closed" id="detailsDrawer" tabindex="-1" aria-modal="true" aria-label="Detalles">
     <button class="sidebar-close" id="closeDetails" title="Cerrar">×</button>
     <h4>Detalles y Especificaciones</h4>
     <label><input type="checkbox" value="Pago 50% materiales antes de iniciar"> Pago 50% materiales antes de iniciar</label>
@@ -324,42 +429,46 @@
     <label><input type="checkbox" value="Responsabilidad por daños a terceros"> Responsabilidad terceros</label>
     <label><input type="checkbox" value="Cumplimiento normativas y permisos"> Cumplimiento normativas</label>
     <label><input type="checkbox" value="Cláusula de fuerza mayor"> Cláusula fuerza mayor</label>
-    <label style="margin-top:13px; font-weight:600;">Detalle adicional:</label>
-    <textarea id="detalleAdicional" placeholder="Puedes escribir cualquier condición, garantía u observación especial aquí..."></textarea>
-    <button type="button" id="startVoice" style="margin-top:12px;background:#009e47;">🎤 Dictar Detalle</button>
+    <div style="margin-top:13px; font-weight:600;">Detalles adicionales:</div>
+    <div class="input-group">
+      <textarea id="detalleAdicional" placeholder="Escribe o dicta un detalle y agrégalo abajo..."></textarea>
+      <button class="dictate-btn" id="startVoice" title="Dictar">🎤</button>
+      <button class="correct-btn" id="correctVoice" title="Corregir">✓</button>
+    </div>
+    <button type="button" id="addDetalleBtn" style="background:#009e47; margin-bottom:9px;">Agregar detalle</button>
+    <ul class="detalles-agregados" id="detallesAgregados"></ul>
     <span id="dictadoStatus" style="color:#0a6ec8;font-size:.98em;margin-top:3px;display:block;"></span>
   </div>
   <div id="previewPDF"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
-    // SIDEBAR profesional con backdrop
+    // --- Responsive Sidebar Drawer ---
     const openDetailsBtn = document.getElementById('openDetails');
     const closeDetailsBtn = document.getElementById('closeDetails');
     const detailsDrawer = document.getElementById('detailsDrawer');
     const backdrop = document.getElementById('backdrop');
     function openSidebar() {
+      detailsDrawer.classList.remove('closed');
       detailsDrawer.classList.add('open');
       backdrop.classList.add('active');
       document.body.style.overflow = "hidden";
-      setTimeout(()=>detailsDrawer.focus(), 300);
+      setTimeout(()=>detailsDrawer.focus(), 280);
     }
     function closeSidebar() {
       detailsDrawer.classList.remove('open');
+      detailsDrawer.classList.add('closed');
       backdrop.classList.remove('active');
       document.body.style.overflow = "";
     }
     openDetailsBtn.onclick = openSidebar;
     closeDetailsBtn.onclick = closeSidebar;
     backdrop.onclick = closeSidebar;
-
-    // CIERRA con "Esc"
     document.addEventListener('keydown', e=>{
       if((detailsDrawer.classList.contains('open')) && e.key==='Escape') closeSidebar();
     });
-    detailsDrawer.addEventListener('touchmove', (e) => e.stopPropagation(), { passive: false });
 
-    // ----- Resto del código igual que antes -----
+    // Resto del código igual que antes...
     const quoteType = document.getElementById('quoteType');
     const tbody = document.querySelector('#itemsTable tbody');
     const hdrExp = document.getElementById('header-express');
@@ -385,15 +494,115 @@
     const anticipoSummary = document.getElementById('anticipoSummary');
     const expressInputs = document.getElementById('expressInputs');
     const detailedInputs = document.getElementById('detailedInputs');
+    // Detalles adicionales dinámica
     const detalleAdicional = document.getElementById('detalleAdicional');
+    const detallesAgregados = document.getElementById('detallesAgregados');
+    let detallesArray = [];
 
+    document.getElementById('addDetalleBtn').onclick = function() {
+      let txt = detalleAdicional.value.trim();
+      if (!txt) return;
+      txt = autocorregir(txt);
+      detallesArray.push(txt);
+      detalleAdicional.value = "";
+      renderDetalles();
+    };
+    function renderDetalles() {
+      detallesAgregados.innerHTML = '';
+      detallesArray.forEach((t,idx)=>{
+        const li = document.createElement('li');
+        li.textContent = t;
+        const btn = document.createElement('button');
+        btn.textContent = "✕";
+        btn.className = "del-detalle";
+        btn.onclick = ()=>{ detallesArray.splice(idx,1); renderDetalles(); };
+        li.appendChild(btn);
+        detallesAgregados.appendChild(li);
+      });
+    }
+
+    // Autocorrección básica para todos los campos (simulación, puede mejorarse con IA real si deseas backend o GPT API)
+    function autocorregir(text) {
+      if (!text) return "";
+      // Mayúscula al inicio, minúsculas a lo demás, punto final.
+      text = text.trim();
+      if (text.length === 0) return "";
+      text = text[0].toUpperCase() + text.slice(1);
+      if(!/[.?!]$/.test(text)) text += ".";
+      // Simula corrección ortográfica mínima:
+      text = text.replace(/\s{2,}/g, ' ').replace(/ ,/g, ',');
+      // (aquí puedes añadir reglas de ortografía y estilo adicionales o enviar a una API de corrección si lo deseas)
+      return text;
+    }
+
+    // Dictado para campos (todos)
+    let recognition, recognizing = false;
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SpeechRecognition();
+      recognition.lang = 'es-MX';
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      let currentTarget = null;
+      let dictadoStatus = document.getElementById('dictadoStatus');
+      function listenForField(targetElem) {
+        currentTarget = targetElem;
+        recognition.start();
+        dictadoStatus.textContent="Escuchando...";
+      }
+      recognition.onresult = function(e) {
+        let txt = e.results[0][0].transcript;
+        txt = autocorregir(txt);
+        if (currentTarget) {
+          if (currentTarget.tagName==="INPUT"||currentTarget.tagName==="TEXTAREA") {
+            currentTarget.value = (currentTarget.value ? currentTarget.value + " " : "") + txt;
+          }
+        }
+        dictadoStatus.textContent="Texto agregado.";
+        setTimeout(()=>dictadoStatus.textContent="",1200);
+        currentTarget = null;
+      };
+      recognition.onerror = function(e) { dictadoStatus.textContent="Error de dictado: "+e.error; currentTarget = null; };
+      recognition.onend = ()=>{ recognizing=false; };
+      // Asocia todos los botones .dictate-btn
+      document.querySelectorAll('.dictate-btn').forEach(btn=>{
+        btn.onclick = function() {
+          let field = document.getElementById(btn.dataset.target);
+          if (!field) field = btn.previousElementSibling || btn.parentElement.querySelector('input,textarea');
+          listenForField(field);
+        }
+      });
+      document.getElementById('startVoice').onclick = function() {
+        listenForField(detalleAdicional);
+      }
+    } else {
+      // Si no hay dictado
+      document.querySelectorAll('.dictate-btn').forEach(b=>b.style.display='none');
+      document.getElementById('dictadoStatus').textContent="Dictado no disponible.";
+    }
+
+    // Corrección ortográfica y formal para todos los campos (simulado)
+    document.querySelectorAll('.correct-btn').forEach(btn=>{
+      btn.onclick = function() {
+        let field = document.getElementById(btn.dataset.target);
+        if (!field) field = btn.previousElementSibling || btn.parentElement.querySelector('input,textarea');
+        if (field) field.value = autocorregir(field.value);
+      }
+    });
+
+    // Auto-corrección al salir de campo importante
+    ['quoteTitle','client','location','detalleAdicional'].forEach(id=>{
+      let field = document.getElementById(id);
+      if(field) field.addEventListener('blur',()=>{ field.value = autocorregir(field.value); });
+    });
+
+    // Resto: predictivo, items frecuentes, cálculos, vista previa, PDF igual que antes...
     withIvaSwitch.onchange = recalc;
     withAnticipoSwitch.onchange = function(){
       anticipoField.style.display = this.checked ? "" : "none";
       anticipoSummary.style.display = this.checked ? "" : "none";
       recalc();
     };
-
     function updateTypeUI() {
       if (quoteType.value === "express") {
         expressInputs.style.display = "flex";
@@ -524,7 +733,6 @@
         t.style.marginBottom = "7px";
         container.append(t);
       }
-
       // Tabla
       const tbl=document.createElement('table');
       const head=quoteType.value==='express'
@@ -558,13 +766,12 @@
 
       // Detalles
       const checks=Array.from(document.querySelectorAll('#detailsDrawer input:checked')).map(i=>i.value);
-      const adicional = (detalleAdicional.value || "").trim();
-      if(checks.length || adicional){
+      if(checks.length || detallesArray.length){
         const dt=document.createElement('div');
         dt.innerHTML=`<h4 style="color:#0a6ec8">Detalles y Especificaciones</h4>
         <ul style="margin:4px 0 0 14px;">
         ${checks.map(t=>`<li>${t}</li>`).join('')}
-        ${adicional ? `<li><b>${adicional}</b></li>` : ''}
+        ${detallesArray.map(t=>`<li>${t}</li>`).join('')}
         </ul>`;
         container.append(dt);
       }
@@ -609,37 +816,6 @@
     };
 
     document.addEventListener('DOMContentLoaded', recalc);
-
-    // 🎤 Dictado por voz para Detalle adicional (experimental)
-    const startVoiceBtn = document.getElementById('startVoice');
-    const dictadoStatus = document.getElementById('dictadoStatus');
-    let recognition, recognizing = false;
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      recognition = new SpeechRecognition();
-      recognition.lang = 'es-MX';
-      recognition.continuous = false;
-      recognition.interimResults = false;
-      recognition.onstart = ()=>{ recognizing=true; dictadoStatus.textContent="Escuchando..."; };
-      recognition.onresult = function(e) {
-        let txt = e.results[0][0].transcript;
-        // Limpieza rápida: mayúscula al inicio, punto al final
-        txt = txt.charAt(0).toUpperCase() + txt.slice(1);
-        if(!/[.?!]$/.test(txt)) txt += ".";
-        detalleAdicional.value += (detalleAdicional.value?" ":"")+txt;
-        dictadoStatus.textContent="Texto agregado.";
-        setTimeout(()=>dictadoStatus.textContent="",1300);
-      };
-      recognition.onerror = function(e) { dictadoStatus.textContent="Error en dictado: "+e.error; };
-      recognition.onend = ()=>{ recognizing=false; };
-      startVoiceBtn.onclick = ()=>{
-        if (recognizing) { recognition.stop(); dictadoStatus.textContent="Dictado detenido"; return; }
-        recognition.start();
-      }
-    } else {
-      startVoiceBtn.style.display = "none";
-      dictadoStatus.textContent="Dictado no disponible en este dispositivo.";
-    }
   </script>
 </body>
 </html>
