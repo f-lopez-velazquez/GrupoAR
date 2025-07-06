@@ -11,7 +11,6 @@
       --rojo: #dc1e28;
       --fondo: #f7fafd;
       --borde: #dde6f5;
-      --sombra: 0 2px 14px rgba(10,110,200,0.09);
       --txt: #212b3c;
       --panel: #fff;
       --input-bg: #fafdff;
@@ -20,65 +19,32 @@
       --slide-knob: #fff;
       --slide-off: #c5c5c5;
     }
-    body {
-      font-family: 'Inter', Arial, sans-serif; background: var(--fondo);
-      color: var(--txt); margin:0; min-height:100vh; font-size: 1.04em;
-    }
-    body.dark {
-      --fondo: #171e29; --txt: #e4eaf6; --panel: #232c41; --input-bg: #1e2535;
-      --borde: #23304e; --slide-bg: #2a3752; --slide-active: #37cb72;
-      background: var(--fondo); color: var(--txt);
-    }
+    body { font-family: 'Inter', Arial, sans-serif; background: var(--fondo);
+      color: var(--txt); margin:0; min-height:100vh; font-size: 1.04em;}
+    body.dark { --fondo: #171e29; --txt: #e4eaf6; --panel: #232c41; --input-bg: #1e2535;
+      --borde: #23304e; --slide-bg: #2a3752; --slide-active: #37cb72; background: var(--fondo); color: var(--txt);}
     .container { max-width: 700px; margin:0 auto 26px auto; padding: 8px;}
     header { display:flex; align-items:center; gap:14px; justify-content:center; margin:24px 0 18px 0;}
     header img { height:50px; border-radius:10px; box-shadow: 0 2px 14px #c6def3;}
     .logoTitle { font-size:1.54em; font-weight:700; color:var(--azul);}
     .logoTitle span { color: var(--rojo);}
-    .form-container, .preview-container {
-      background: var(--panel); border-radius: 13px; box-shadow: var(--sombra); padding: 18px 10px 18px 10px; margin-bottom: 20px;
-      transition: background .2s, color .16s;
-    }
+    .form-container, .preview-container { background: var(--panel); border-radius: 13px; box-shadow: 0 2px 14px rgba(10,110,200,0.09); padding: 18px 10px 18px 10px; margin-bottom: 20px; }
     .form-row { display:flex; flex-wrap:wrap; gap:10px 13px; margin-bottom: 7px;}
     .form-col { flex:1 1 175px; min-width:130px;}
-    label {
-      font-weight: 600; color: var(--azul); display: block; font-size: 1.03em;
-      margin-bottom: 1px; letter-spacing:.1px; transition: color .17s;
-    }
+    label { font-weight: 600; color: var(--azul); display: block; font-size: 1.03em; margin-bottom: 1px; letter-spacing:.1px;}
     body.dark label { color: #7bbcff;}
     .input-wrap { position:relative; margin-bottom:2px;}
-    input, select, textarea {
-      width: 100%; box-sizing: border-box; border: 2px solid var(--borde); border-radius: 8px;
-      font-size: 1em; padding: 10px 10px 10px 34px; background: var(--input-bg); color: var(--txt);
-      outline: none; margin-bottom: 0; transition: border-color .14s, background .16s, color .11s;
-      font-family:inherit; 
-    }
-    input:focus, textarea:focus, select:focus {
-      border-color: var(--azul);
-      background: #fff; color: var(--txt);
-    }
+    input, select, textarea { width: 100%; box-sizing: border-box; border: 2px solid var(--borde); border-radius: 8px; font-size: 1em; padding: 10px 10px 10px 34px; background: var(--input-bg); color: var(--txt);}
+    input:focus, textarea:focus, select:focus { border-color: var(--azul); background: #fff; color: var(--txt);}
     .input-icon { position:absolute; top:50%; left:10px; transform:translateY(-50%); font-size:1.13em; color: #93a5c6;}
     .btn-row { display:flex; gap:10px; margin:9px 0;}
-    .btn-main, #generateBtn, #shareBtn {
-      background: linear-gradient(93deg, var(--azul), var(--rojo) 85%);
-      color: #fff; font-size: 1.08em; font-weight: 600; border: none; border-radius: 9px;
-      letter-spacing: .16px; padding: 13px 0; cursor:pointer; width:100%;
-      box-shadow: 0 2px 10px #b6cde948; transition: transform .1s;
-      margin-top: 8px;
-    }
+    .btn-main, #generateBtn, #shareBtn { background: linear-gradient(93deg, var(--azul), var(--rojo) 85%); color: #fff; font-size: 1.08em; font-weight: 600; border: none; border-radius: 9px; letter-spacing: .16px; padding: 13px 0; cursor:pointer; width:100%; box-shadow: 0 2px 10px #b6cde948; transition: transform .1s; margin-top: 8px;}
     .btn-main:active, #generateBtn:active, #shareBtn:active { transform: scale(.97);}
     .switch-wrap { display: flex; align-items:center; gap:6px; margin-bottom:5px;}
-    .switch {
-      position: relative; display: inline-block; width: 48px; height: 27px; vertical-align: middle;
-    }
+    .switch { position: relative; display: inline-block; width: 48px; height: 27px; vertical-align: middle;}
     .switch input { opacity:0; width:0; height:0;}
-    .slider {
-      position: absolute; cursor:pointer; top:0; left:0; right:0; bottom:0;
-      background: var(--slide-bg); border-radius:16px; transition:.18s;
-    }
-    .slider:before {
-      position:absolute; content:""; left:4px; top:4px; width:19px; height:19px;
-      background:var(--slide-knob); border-radius:50%; transition:.17s; box-shadow: 0 1px 3px #b7b7b7;
-    }
+    .slider { position: absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background: var(--slide-bg); border-radius:16px; transition:.18s;}
+    .slider:before { position:absolute; content:""; left:4px; top:4px; width:19px; height:19px; background:var(--slide-knob); border-radius:50%; transition:.17s; box-shadow: 0 1px 3px #b7b7b7;}
     input:checked + .slider { background: var(--slide-active);}
     input:checked + .slider:before { transform: translateX(20px);}
     .slide-label {font-size: .97em; font-weight: 500; color: var(--txt);}
@@ -89,15 +55,13 @@
     .table-scroll { overflow-x:auto; border-radius:7px; }
     table { width:100%; border-collapse:collapse; margin-top:6px;}
     th, td { border:1.4px solid var(--borde); padding:10px 6px; font-size:.99em; background:transparent;}
-    th { background:linear-gradient(90deg, #e8f2fb 75%, #f9e8ea 100%); color: var(--azul); font-weight: 600; position:sticky; top:0;}
+    th { background:linear-gradient(90deg, #e8f2fb 75%, #f9e8ea 100%); color: var(--azul); font-weight: 600;}
     tr { transition: background .2s;}
     tr.row-highlight { background: #d6f3e9 !important; animation:fadeRow .8s 1;}
     @keyframes fadeRow {0%{background:#8be2d7;}100%{background:inherit;}}
     tr:nth-child(even) { background: #f5faff;}
     td input { background:transparent; border:none; border-radius:0; padding:4px; width:96%; font-size:1em;}
-    .btn-del {
-      background:none; border:none; color:#c00; font-size:1.15em; cursor:pointer; transition: color .12s; padding:0 8px;
-    }
+    .btn-del { background:none; border:none; color:#c00; font-size:1.15em; cursor:pointer; transition: color .12s; padding:0 8px;}
     .btn-del:hover { color:#dc1e28;}
     .summary { margin-top:10px; text-align:right; font-size:1.01em; color: #384357;}
     body.dark .summary { color: #c7d6ed;}
@@ -106,15 +70,12 @@
     #previewResponsive { border:1.1px solid #d8e8f4; border-radius:8px; padding:12px; background: #f8fafc; font-size:1.04em; min-height:70px;}
     body.dark #previewResponsive { background: #232c41; border-color:#1d2b44;}
     /* SIDEBAR */
-    .sidebar { position:fixed; top:0; right:0; width:340px; max-width:99vw; height:100vh; background:var(--panel);
-      box-shadow: -2px 0 28px #0a6ec81a; z-index:999; transition: transform 0.33s cubic-bezier(.44,0,.2,1);
-      padding:25px 16px 19px 18px; border-radius:13px 0 0 13px; overflow-y:auto; transform:translateX(100%); pointer-events:none;}
+    .sidebar { position:fixed; top:0; right:0; width:340px; max-width:99vw; height:100vh; background:var(--panel); box-shadow: -2px 0 28px #0a6ec81a; z-index:999; transition: transform 0.33s cubic-bezier(.44,0,.2,1); padding:25px 16px 19px 18px; border-radius:13px 0 0 13px; overflow-y:auto; transform:translateX(100%); pointer-events:none;}
     .sidebar.open { transform:translateX(0); pointer-events:auto;}
     .sidebar.closed { transform:translateX(100%); pointer-events:none;}
     .sidebar h4 { color: var(--azul); margin-bottom:13px;}
     .sidebar label { display:flex; align-items:center; gap:8px; font-weight:460; margin-bottom:10px; cursor:pointer; font-size:1.01em;}
-    .sidebar textarea { margin-top:6px; min-height:37px; background: #f4f8fd;
-      border:2px solid var(--borde); font-size:1em; margin-bottom:4px; border-radius:7px; }
+    .sidebar textarea { margin-top:6px; min-height:37px; background: #f4f8fd; border:2px solid var(--borde); font-size:1em; margin-bottom:4px; border-radius:7px; }
     .sidebar-close { background:none; border:none; color:var(--azul); font-size:1.5em; position:absolute; top:8px; right:12px; cursor:pointer; border-radius:6px;}
     .detalles-agregados { margin:8px 0 0 0; padding:0; list-style:disc; color:#384357; font-size:1.01em;}
     .detalles-agregados li { margin:2px 0; display:flex; align-items:center; justify-content:space-between; gap:7px; background: #f7fcff; padding:5px 8px; border-radius:5px;}
@@ -263,9 +224,11 @@
       </div>
       <div class="table-scroll">
         <table id="itemsTable">
-          <thead>
-            <tr id="header-express"><th>Descripción</th><th>Precio</th><th>Total</th><th></th></tr>
-            <tr id="header-detailed" class="hidden"><th>Descripción</th><th>Cant.</th><th>Material</th><th>Mano Obra</th><th>Total</th><th></th></tr>
+          <thead id="thead-express">
+            <tr><th>Descripción</th><th>Precio</th><th>Total</th><th></th></tr>
+          </thead>
+          <thead id="thead-detailed" style="display:none;">
+            <tr><th>Descripción</th><th>Cant.</th><th>Material</th><th>Mano Obra</th><th>Total</th><th></th></tr>
           </thead>
           <tbody></tbody>
         </table>
@@ -344,10 +307,8 @@
   <!-- jsPDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
-    // --- DARK MODE AUTO ---
     if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
       document.body.classList.add("dark");
-
     // SIDEBAR animado
     const openDetailsBtn = document.getElementById('openDetails');
     const closeDetailsBtn = document.getElementById('closeDetails');
@@ -356,7 +317,6 @@
     function closeSidebar() {detailsDrawer.classList.remove('open');detailsDrawer.classList.add('closed');document.body.style.overflow="";}
     openDetailsBtn.onclick = openSidebar; closeDetailsBtn.onclick = closeSidebar;
     document.addEventListener('keydown', e=>{if((detailsDrawer.classList.contains('open'))&&e.key==='Escape') closeSidebar();});
-
     // Sincronizar nombre de archivo
     function syncTitleFileName() {
       let t = document.getElementById('quoteTitle').value.toLowerCase().replace(/[^\w\s-]/g,'').trim().replace(/\s+/g,'_');
@@ -364,55 +324,43 @@
     }
     document.getElementById('quoteTitle').addEventListener('input', syncTitleFileName);
     document.addEventListener('DOMContentLoaded', syncTitleFileName);
-
     // Tipo cotización
     const quoteType = document.getElementById('quoteType');
     const expressInputs = document.getElementById('expressInputs');
     const detailedInputs = document.getElementById('detailedInputs');
+    const theadExpress = document.getElementById('thead-express');
+    const theadDetailed = document.getElementById('thead-detailed');
     function updateTypeUI() {
       if (quoteType.value === "express") {
         expressInputs.style.display = "flex";
         detailedInputs.style.display = "none";
-        document.getElementById('header-express').classList.remove('hidden');
-        document.getElementById('header-detailed').classList.add('hidden');
+        theadExpress.style.display = "";
+        theadDetailed.style.display = "none";
       } else {
         expressInputs.style.display = "none";
         detailedInputs.style.display = "flex";
-        document.getElementById('header-express').classList.add('hidden');
-        document.getElementById('header-detailed').classList.remove('hidden');
+        theadExpress.style.display = "none";
+        theadDetailed.style.display = "";
       }
+      renderTable();
     }
     quoteType.onchange = updateTypeUI;
     updateTypeUI();
-
-    // Agregar item a tabla
-    const tbody = document.querySelector('#itemsTable tbody');
+    // Array para items
+    let items = [];
+    // Agregar item
     document.getElementById('addItemBtn').onclick = ()=>{
       let desc = document.getElementById('newItemDesc').value.trim();
       if(!desc) return document.getElementById('newItemDesc').focus();
-      let tr = document.createElement('tr');
-      tr.className = 'row-highlight';
-      setTimeout(()=>tr.classList.remove('row-highlight'),700);
       if(quoteType.value==='express'){
         let pr = parseFloat(document.getElementById('newItemPrice').value)||0;
-        tr.innerHTML = `<td><input class="desc" value="${desc}" style="width:96%"></td>
-          <td><input class="price" type="number" value="${pr}" min="0"></td>
-          <td><span class="rowTotal">0.00</span></td>
-          <td><button class="btn-del">✕</button></td>`;
+        items.push({desc, pr});
       } else {
         let qt = parseFloat(document.getElementById('newItemQty').value)||1;
         let ma = parseFloat(document.getElementById('newItemMat').value)||0;
         let lb = parseFloat(document.getElementById('newItemLab').value)||0;
-        tr.innerHTML = `<td><input class="desc" value="${desc}" style="width:96%"></td>
-          <td><input class="qty" type="number" value="${qt}" min="1"></td>
-          <td><input class="mat" type="number" value="${ma}" min="0"></td>
-          <td><input class="lab" type="number" value="${lb}" min="0"></td>
-          <td><span class="rowTotal">0.00</span></td>
-          <td><button class="btn-del">✕</button></td>`;
+        items.push({desc, qt, ma, lb});
       }
-      tbody.appendChild(tr);
-      tr.querySelectorAll('input').forEach(i=>i.oninput=recalc);
-      tr.querySelector('.btn-del').onclick = ()=>{ tr.remove(); recalc(); };
       // Limpiar y enfocar siguiente
       document.getElementById('newItemDesc').value='';
       document.getElementById('newItemPrice').value='0';
@@ -420,20 +368,46 @@
       document.getElementById('newItemMat').value='0';
       document.getElementById('newItemLab').value='0';
       document.getElementById('newItemDesc').focus();
+      renderTable();
       recalc();
     };
+    // Render tabla segun tipo
+    function renderTable(){
+      const tbody = document.querySelector('#itemsTable tbody');
+      tbody.innerHTML = '';
+      items.forEach((item, idx)=>{
+        let tr = document.createElement('tr'); tr.className = 'row-highlight';
+        setTimeout(()=>tr.classList.remove('row-highlight'),700);
+        if(quoteType.value==='express'){
+          let pr = item.pr||0;
+          let total = pr.toFixed(2);
+          tr.innerHTML = `<td>${item.desc}</td>
+            <td>$${pr.toFixed(2)}</td>
+            <td>$${total}</td>
+            <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
+        } else {
+          let qt = item.qt||1, ma = item.ma||0, lb = item.lb||0;
+          let total = ((ma+lb)*qt).toFixed(2);
+          tr.innerHTML = `<td>${item.desc}</td>
+            <td>${qt}</td>
+            <td>$${ma.toFixed(2)}</td>
+            <td>$${lb.toFixed(2)}</td>
+            <td>$${total}</td>
+            <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
+        }
+        tbody.appendChild(tr);
+        tr.querySelector('.btn-del').onclick = ()=>{ items.splice(idx,1); renderTable(); recalc(); };
+      });
+      recalc();
+    }
     // Calculo total
     function recalc(){
       let subtotal=0;
-      tbody.querySelectorAll('tr').forEach(r=>{
-        const qty=parseFloat(r.querySelector('.qty')?.value||1);
-        const mat=parseFloat(r.querySelector('.mat')?.value||0);
-        const lab=parseFloat(r.querySelector('.lab')?.value||0);
-        const pr =parseFloat(r.querySelector('.price')?.value||0);
-        const line = quoteType.value==='express'? pr : (mat+lab)*qty;
-        r.querySelector('.rowTotal').textContent = line.toFixed(2);
-        subtotal+=line;
-      });
+      if(quoteType.value==="express"){
+        items.forEach(item=>{subtotal+=item.pr||0;});
+      } else {
+        items.forEach(item=>{subtotal+=((item.ma||0)+(item.lb||0))*(item.qt||1);});
+      }
       document.getElementById('subtotal').textContent=subtotal.toFixed(2);
       const ivaAmt=document.getElementById('withIvaSwitch').checked?subtotal*0.16:0;
       document.getElementById('ivaAmount').textContent=ivaAmt.toFixed(2);
@@ -452,8 +426,6 @@
       recalc();
     };
     document.getElementById('anticipoPct').oninput = recalc;
-    recalc();
-
     // Detalles y especificaciones
     const detallesArray = [];
     document.getElementById('addDetalleBtn').onclick = function() {
@@ -477,7 +449,6 @@
         detallesAgregados.appendChild(li);
       });
     }
-
     // Vista previa
     function buildPreview(container, isPDF){
       container.innerHTML = '';
@@ -514,22 +485,26 @@
       }
       // Tabla
       const tbl=document.createElement('table');
-      const head=quoteType.value==='express'
-        ?`<tr><th>Descripción</th><th>Precio</th><th>Total</th></tr>`
-        :`<tr><th>Descripción</th><th>Cant.</th><th>Material</th><th>Mano Obra</th><th>Total</th></tr>`;
-      tbl.innerHTML=`<thead>${head}</thead><tbody></tbody>`;
-      const body=tbl.querySelector('tbody');
-      tbody.querySelectorAll('tr').forEach(r=>{
-        const row=document.createElement('tr');
-        Array.from(r.cells).slice(0,-1).forEach(c=>{
-          const cl=c.cloneNode(true);
-          const inp=cl.querySelector('input'), sp=cl.querySelector('span.rowTotal');
-          if(inp) cl.textContent=inp.value;
-          else if(sp) cl.textContent=sp.textContent;
-          row.append(cl);
+      if(quoteType.value==="express"){
+        tbl.innerHTML=`<thead><tr><th>Descripción</th><th>Precio</th><th>Total</th></tr></thead><tbody></tbody>`;
+        const body=tbl.querySelector('tbody');
+        items.forEach(item=>{
+          let tr = document.createElement('tr');
+          let pr = item.pr||0, total = pr.toFixed(2);
+          tr.innerHTML = `<td>${item.desc}</td><td>$${pr.toFixed(2)}</td><td>$${total}</td>`;
+          body.appendChild(tr);
         });
-        body.append(row);
-      });
+      } else {
+        tbl.innerHTML=`<thead><tr><th>Descripción</th><th>Cant.</th><th>Material</th><th>Mano Obra</th><th>Total</th></tr></thead><tbody></tbody>`;
+        const body=tbl.querySelector('tbody');
+        items.forEach(item=>{
+          let qt = item.qt||1, ma = item.ma||0, lb = item.lb||0;
+          let total = ((ma+lb)*qt).toFixed(2);
+          let tr = document.createElement('tr');
+          tr.innerHTML = `<td>${item.desc}</td><td>${qt}</td><td>$${ma.toFixed(2)}</td><td>$${lb.toFixed(2)}</td><td>$${total}</td>`;
+          body.appendChild(tr);
+        });
+      }
       container.append(tbl);
       // Summary
       const sum=document.createElement('div'); sum.className='summary';
@@ -578,20 +553,16 @@
         container.append(ft);
       }
     }
-
     // GENERAR PDF ULTRA LIGERO
     document.getElementById('generateBtn').onclick = async ()=>{
-      // Armamos HTML para PDF y lo pasamos a jsPDF HTML
       buildPreview(previewPDF, true);
       previewPDF.style.display='block';
-      // Logo como marca de agua SVG
       let pdf = new window.jspdf.jsPDF({ unit:'mm', format:'a4', orientation:'portrait' });
       // Marca de agua
       let watermark = "https://i.imgur.com/kf8e57F.jpg";
       let img = new Image(); img.src = watermark;
       await new Promise(r=>{img.onload=r;});
       pdf.addImage(img,"JPEG",35,80,140,140,"","FAST",0.06);
-      // HTML a PDF
       await pdf.html(previewPDF, {
         margin:[15,13,25,13],
         autoPaging: true,
@@ -603,7 +574,10 @@
     document.getElementById('shareBtn').onclick=async()=>{
       alert('Usa "Generar PDF" y compártelo manualmente.');
     };
-    document.addEventListener('DOMContentLoaded', recalc);
+    document.addEventListener('DOMContentLoaded', ()=>{
+      renderTable();
+      recalc();
+    });
   </script>
 </body>
 </html>
