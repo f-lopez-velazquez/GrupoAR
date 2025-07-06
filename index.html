@@ -4,229 +4,148 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Cotizaciones Grupo AR</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --azul: #0a6ec8;
       --rojo: #dc1e28;
-      --gris-fondo: #f7fafd;
-      --borde: #e1e6f3;
+      --fondo: #f7fafd;
+      --borde: #dde6f5;
       --sombra: 0 2px 14px rgba(10,110,200,0.09);
-      --input-borde: #c5d5eb;
-      --input-focus: #88b8f5;
-      --txt: #223047;
-      --dark-bg: #161e2b;
-      --dark-panel: #212b3a;
-      --dark-txt: #dde9ff;
-      --dark-borde: #334261;
-      --dark-table: #232f44;
+      --txt: #212b3c;
+      --panel: #fff;
+      --input-bg: #fafdff;
+      --slide-bg: #d0dbef;
+      --slide-active: #4bb450;
+      --slide-knob: #fff;
+      --slide-off: #c5c5c5;
     }
-    html, body { height: 100%; }
     body {
-      font-family: 'Inter', 'Segoe UI', Arial, Helvetica, sans-serif;
-      color: var(--txt); margin: 0; min-height: 100vh;
-      background: var(--gris-fondo); transition: background .23s, color .16s;
+      font-family: 'Inter', Arial, sans-serif; background: var(--fondo);
+      color: var(--txt); margin:0; min-height:100vh; font-size: 1.04em;
     }
     body.dark {
-      background: var(--dark-bg); color: var(--dark-txt);
+      --fondo: #171e29; --txt: #e4eaf6; --panel: #232c41; --input-bg: #1e2535;
+      --borde: #23304e; --slide-bg: #2a3752; --slide-active: #37cb72;
+      background: var(--fondo); color: var(--txt);
     }
-    .container {
-      max-width: 700px;
-      margin: 0 auto 28px auto;
-      padding: 12px;
-    }
-    header {
-      display: flex; align-items: center; gap: 14px; margin: 25px 0 23px 0; justify-content: center;
-    }
-    header img { height: 55px; border-radius: 9px; box-shadow: 0 1px 16px #e7eefa;}
-    header .logoTitle {
-      font-size: 1.78em; font-weight: 800; letter-spacing: 0.5px; color: var(--azul); line-height: 1.03;
-      text-shadow: 0 2px 8px #b9d1fa60;
-    }
-    header .logoTitle span { color: var(--rojo);}
+    .container { max-width: 700px; margin:0 auto 26px auto; padding: 8px;}
+    header { display:flex; align-items:center; gap:14px; justify-content:center; margin:24px 0 18px 0;}
+    header img { height:50px; border-radius:10px; box-shadow: 0 2px 14px #c6def3;}
+    .logoTitle { font-size:1.54em; font-weight:700; color:var(--azul);}
+    .logoTitle span { color: var(--rojo);}
     .form-container, .preview-container {
-      background: #fff; border-radius: 16px; box-shadow: var(--sombra); padding: 24px 16px 25px 16px; margin-bottom: 20px;
-      transition: background .23s, color .18s;
+      background: var(--panel); border-radius: 13px; box-shadow: var(--sombra); padding: 18px 10px 18px 10px; margin-bottom: 20px;
+      transition: background .2s, color .16s;
     }
-    body.dark .form-container, body.dark .preview-container {
-      background: var(--dark-panel); color: var(--dark-txt);
-      box-shadow: 0 2px 22px #1a2031b5;
-    }
-    .form-row { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 11px;}
-    .form-col { flex: 1 1 230px; min-width: 170px;}
+    .form-row { display:flex; flex-wrap:wrap; gap:10px 13px; margin-bottom: 7px;}
+    .form-col { flex:1 1 175px; min-width:130px;}
     label {
-      font-weight: 600; color: var(--azul); display: block; font-size: 1.09em; margin-bottom: 3px; letter-spacing:.2px;
-      transition: color .17s;
+      font-weight: 600; color: var(--azul); display: block; font-size: 1.03em;
+      margin-bottom: 1px; letter-spacing:.1px; transition: color .17s;
     }
-    body.dark label { color: #80a6e8; }
-    .input-wrap { position: relative; margin-bottom: 7px;}
-    input, textarea, select {
-      width: 100%; box-sizing: border-box;
-      border: 2px solid var(--input-borde); border-radius: 10px;
-      font-size: 1.12em; padding: 13px 12px 13px 12px;
-      background: #fafdff; color: var(--txt);
-      outline: none; transition: border-color 0.16s, background .17s, color .14s;
-      margin-bottom: 0;
-      font-family: inherit;
+    body.dark label { color: #7bbcff;}
+    .input-wrap { position:relative; margin-bottom:2px;}
+    input, select, textarea {
+      width: 100%; box-sizing: border-box; border: 2px solid var(--borde); border-radius: 8px;
+      font-size: 1em; padding: 10px 10px 10px 34px; background: var(--input-bg); color: var(--txt);
+      outline: none; margin-bottom: 0; transition: border-color .14s, background .16s, color .11s;
+      font-family:inherit; 
     }
     input:focus, textarea:focus, select:focus {
-      border-color: var(--input-focus); background: #fff;
+      border-color: var(--azul);
+      background: #fff; color: var(--txt);
     }
-    body.dark input, body.dark textarea, body.dark select {
-      background: var(--dark-table); color: var(--dark-txt);
-      border-color: var(--dark-borde);
+    .input-icon { position:absolute; top:50%; left:10px; transform:translateY(-50%); font-size:1.13em; color: #93a5c6;}
+    .btn-row { display:flex; gap:10px; margin:9px 0;}
+    .btn-main, #generateBtn, #shareBtn {
+      background: linear-gradient(93deg, var(--azul), var(--rojo) 85%);
+      color: #fff; font-size: 1.08em; font-weight: 600; border: none; border-radius: 9px;
+      letter-spacing: .16px; padding: 13px 0; cursor:pointer; width:100%;
+      box-shadow: 0 2px 10px #b6cde948; transition: transform .1s;
+      margin-top: 8px;
     }
-    body.dark input:focus, body.dark textarea:focus, body.dark select:focus {
-      background: #232f44; color: #fff;
-      border-color: #47a7fc;
+    .btn-main:active, #generateBtn:active, #shareBtn:active { transform: scale(.97);}
+    .switch-wrap { display: flex; align-items:center; gap:6px; margin-bottom:5px;}
+    .switch {
+      position: relative; display: inline-block; width: 48px; height: 27px; vertical-align: middle;
     }
-    .btn-small-row { display: flex; gap: 10px; margin-top: 7px;}
-    .btn-micro, .btn-correct {
-      background: #eaf3fc; color: var(--azul); border: none; border-radius: 50%; width: 30px; height: 30px;
-      font-size: 1.16em; display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: background 0.14s, box-shadow .17s;
-      box-shadow: 0 1px 3px #c7e0ff3a;
+    .switch input { opacity:0; width:0; height:0;}
+    .slider {
+      position: absolute; cursor:pointer; top:0; left:0; right:0; bottom:0;
+      background: var(--slide-bg); border-radius:16px; transition:.18s;
     }
-    .btn-correct { background: #eafcf1; color: #009e47;}
-    .btn-micro:hover { background: #d1eaff;}
-    .btn-correct:hover { background: #c5ffe5;}
-    body.dark .btn-micro { background: #31496b; color: #80c4fe;}
-    body.dark .btn-correct { background: #2c6847; color: #98ffba;}
-    @media (max-width: 700px) {
-      .container { max-width: 99vw; padding: 1vw;}
-      .form-row { flex-direction: column; gap: 4px;}
-      .form-col { min-width: 90px;}
-      input, textarea, select { font-size: 1em; padding: 11px 10px;}
-      .form-container, .preview-container { padding: 13px 3px 16px 3px;}
+    .slider:before {
+      position:absolute; content:""; left:4px; top:4px; width:19px; height:19px;
+      background:var(--slide-knob); border-radius:50%; transition:.17s; box-shadow: 0 1px 3px #b7b7b7;
     }
-    h3 { font-size: 1.12em; color: var(--azul);}
-    body.dark h3 { color: #90bcff;}
-    .details-btn, #addItemBtn, #generateBtn, #shareBtn, #addDetalleBtn, #qrBtn {
-      background: linear-gradient(93deg, var(--azul), var(--rojo) 80%);
-      color: #fff; font-size: 1.08em; font-weight: 700; border: none;
-      border-radius: 9px; letter-spacing: .19px; margin: 12px 0 0 0;
-      padding: 14px 0; cursor: pointer; width: 100%;
-      transition: background 0.14s, transform 0.09s, box-shadow .19s;
-      box-shadow: 0 2px 10px #b6cde948;
-      outline: none;
-    }
-    .details-btn:active, #addItemBtn:active, #generateBtn:active, #shareBtn:active, #addDetalleBtn:active, #qrBtn:active { transform: scale(.97);}
-    .table-scroll { overflow-x: auto; border-radius: 10px;}
-    table { width: 100%; border-collapse: collapse; margin-top: 10px;}
-    th, td { padding: 12px 7px; border: 1.6px solid #e3e8ef; font-size: 1em;}
-    th { background: linear-gradient(90deg, #e8f2fb 75%, #f9e8ea 100%);
-      color: var(--azul); font-weight: 700;}
+    input:checked + .slider { background: var(--slide-active);}
+    input:checked + .slider:before { transform: translateX(20px);}
+    .slide-label {font-size: .97em; font-weight: 500; color: var(--txt);}
+    .form-row.switches { gap:18px;}
+    h3 { font-size: 1.08em; color: var(--azul);}
+    body.dark h3 { color: #7bbcff;}
+    /* Tabla de items */
+    .table-scroll { overflow-x:auto; border-radius:7px; }
+    table { width:100%; border-collapse:collapse; margin-top:6px;}
+    th, td { border:1.4px solid var(--borde); padding:10px 6px; font-size:.99em; background:transparent;}
+    th { background:linear-gradient(90deg, #e8f2fb 75%, #f9e8ea 100%); color: var(--azul); font-weight: 600; position:sticky; top:0;}
+    tr { transition: background .2s;}
+    tr.row-highlight { background: #d6f3e9 !important; animation:fadeRow .8s 1;}
+    @keyframes fadeRow {0%{background:#8be2d7;}100%{background:inherit;}}
     tr:nth-child(even) { background: #f5faff;}
-    body.dark th { background: #1d3151; color: #81affb;}
-    body.dark td { background: #232f44; color: #dde9ff;}
-    .remove-btn { background: none; border: none; color: #c00; font-size: 1.17em; cursor: pointer; transition: color 0.11s;}
-    .remove-btn:hover { color: #d70022;}
-    .summary { margin-top: 16px; text-align: right; font-size: 1.09em; color: #384357;}
-    body.dark .summary { color: #b1cdfa;}
-    .summary div { margin-bottom: 4px;}
-    #previewResponsive {
-      min-height: 120px; border: 1.1px solid #d8e8f4; border-radius: 8px;
-      padding: 13px; background: #f8fafc; margin-bottom: 12px; font-size: 1.05em;
+    td input { background:transparent; border:none; border-radius:0; padding:4px; width:96%; font-size:1em;}
+    .btn-del {
+      background:none; border:none; color:#c00; font-size:1.15em; cursor:pointer; transition: color .12s; padding:0 8px;
     }
-    body.dark #previewResponsive { background: #25304b; border-color: #39496c;}
-    /* Sidebar elegante */
-    .sidebar {
-      position: fixed; top: 0; right: 0; width: 340px; max-width: 99vw; height: 100vh;
-      background: #fff; box-shadow: -2px 0 32px #0a6ec81a; z-index: 999;
-      transition: transform 0.33s cubic-bezier(.44,0,.2,1);
-      padding: 25px 16px 19px 18px; border-radius: 13px 0 0 13px;
-      overflow-y: auto; transform: translateX(100%);
-      pointer-events: none; display: block;
-    }
-    body.dark .sidebar { background: #263049; color: #dde9ff;}
-    .sidebar.open { transform: translateX(0); pointer-events: auto;}
-    .sidebar.closed { transform: translateX(100%); pointer-events: none;}
-    .sidebar h4 { color: var(--azul); margin-bottom: 13px;}
-    body.dark .sidebar h4 { color: #80a6e8;}
-    .sidebar label { display: flex; align-items: center; gap: 8px; font-weight: 460; margin-bottom: 10px; cursor: pointer; font-size: 1.02em; color: #374569;}
-    body.dark .sidebar label { color: #b4c8e0;}
-    .sidebar textarea { margin-top: 6px; min-height: 37px; background: #f4f8fd;
-      border: 2px solid var(--input-borde); font-size: 1.03em; margin-bottom: 4px; border-radius: 7px;}
-    body.dark .sidebar textarea { background: #212f44; color: #dde9ff; border-color: #39496c;}
-    .sidebar-close { background: none; border: none; color: var(--azul); font-size: 1.5em; position: absolute; top: 8px; right: 12px; cursor: pointer; border-radius: 6px;}
-    body.dark .sidebar-close { color: #80a6e8;}
-    .detalles-agregados { margin: 8px 0 0 0; padding: 0; list-style: disc; color: #384357; font-size: 1.04em;}
-    .detalles-agregados li { margin: 3px 0; display: flex; align-items: center; justify-content: space-between; gap: 7px; background: #f7fcff; padding: 5px 8px; border-radius: 5px;}
-    body.dark .detalles-agregados li { background: #1d2a41; color: #b6cdfb;}
-    .detalles-agregados .del-detalle { color: #c00; background:none; border:none; font-size:1.12em; cursor:pointer; margin-left: 8px; border-radius: 5px;}
-    #qrZone { margin: 15px 0 5px 0; text-align:center; }
-    #qrZone canvas { margin: 0 auto; }
-    @media (max-width: 700px) {
-      .sidebar { width: 98vw; max-width: 99vw; padding-left: 3vw; padding-right: 3vw;}
+    .btn-del:hover { color:#dc1e28;}
+    .summary { margin-top:10px; text-align:right; font-size:1.01em; color: #384357;}
+    body.dark .summary { color: #c7d6ed;}
+    .summary strong { font-size:1.14em;}
+    .preview-container { margin-top:20px;}
+    #previewResponsive { border:1.1px solid #d8e8f4; border-radius:8px; padding:12px; background: #f8fafc; font-size:1.04em; min-height:70px;}
+    body.dark #previewResponsive { background: #232c41; border-color:#1d2b44;}
+    /* SIDEBAR */
+    .sidebar { position:fixed; top:0; right:0; width:340px; max-width:99vw; height:100vh; background:var(--panel);
+      box-shadow: -2px 0 28px #0a6ec81a; z-index:999; transition: transform 0.33s cubic-bezier(.44,0,.2,1);
+      padding:25px 16px 19px 18px; border-radius:13px 0 0 13px; overflow-y:auto; transform:translateX(100%); pointer-events:none;}
+    .sidebar.open { transform:translateX(0); pointer-events:auto;}
+    .sidebar.closed { transform:translateX(100%); pointer-events:none;}
+    .sidebar h4 { color: var(--azul); margin-bottom:13px;}
+    .sidebar label { display:flex; align-items:center; gap:8px; font-weight:460; margin-bottom:10px; cursor:pointer; font-size:1.01em;}
+    .sidebar textarea { margin-top:6px; min-height:37px; background: #f4f8fd;
+      border:2px solid var(--borde); font-size:1em; margin-bottom:4px; border-radius:7px; }
+    .sidebar-close { background:none; border:none; color:var(--azul); font-size:1.5em; position:absolute; top:8px; right:12px; cursor:pointer; border-radius:6px;}
+    .detalles-agregados { margin:8px 0 0 0; padding:0; list-style:disc; color:#384357; font-size:1.01em;}
+    .detalles-agregados li { margin:2px 0; display:flex; align-items:center; justify-content:space-between; gap:7px; background: #f7fcff; padding:5px 8px; border-radius:5px;}
+    .detalles-agregados .del-detalle { color:#c00; background:none; border:none; font-size:1.08em; cursor:pointer; margin-left:8px; border-radius:5px;}
+    @media (max-width:700px){
+      .container { max-width:99vw; padding:2vw;}
+      .form-row { flex-direction:column; gap:4px;}
+      .form-col { min-width:90px;}
+      .form-container, .preview-container { padding:9px 2px 12px 2px;}
+      table, th, td { font-size:.96em;}
+      #previewResponsive { font-size:.99em;}
+      .sidebar { width:97vw; max-width:99vw; padding-left:2vw; padding-right:2vw;}
     }
     #previewPDF {
-      display: none; width: 210mm; min-height: 297mm; background: #fff;
-      padding: 16mm 12mm 18mm 12mm; margin: 0 auto; font-size: 13px; line-height: 1.39; position: relative; overflow: hidden;
-      box-shadow: 0 1px 38px #b1b9d429;
+      display:none; width:210mm; min-height:297mm; background:#fff; padding:15mm 13mm 18mm 13mm; margin:0 auto;
+      font-size:13px; line-height:1.39; position:relative; overflow:hidden; box-shadow:0 1px 38px #b1b9d429;
     }
-    #previewPDF::before {
-      content: ""; position: absolute; top: 48%; left: 50%;
-      width: 140mm; height: 140mm;
-      background: url('https://i.imgur.com/kf8e57F.jpg') no-repeat center center;
-      background-size: 88% 88%; opacity: 0.045; transform: translate(-50%, -50%); z-index: 0;
-    }
-    #previewPDF > * { position: relative; z-index: 1;}
-    #previewPDF .header {
-      display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;
-    }
-    #previewPDF .header .logo-title {
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
-    }
-    #previewPDF .header img {
-      max-width: 210px; max-height: 115px; display: block; margin: 0 auto;
-    }
-    #previewPDF .header .title-groupar {
-      font-size: 2.3em; font-weight: bold; letter-spacing: 1.2px; margin-top: 2px;
-    }
-    #previewPDF .header .title-groupar .azul { color: var(--azul);}
-    #previewPDF .header .title-groupar .rojo { color: var(--rojo);}
-    #previewPDF .header .datos { text-align: right; font-size: 1.14em;}
-    #previewPDF table { width: 100%; border-collapse: collapse; margin-bottom: 8px;}
-    #previewPDF th, #previewPDF td {
-      padding: 7px; border: 1.3px solid #cde0f6; text-align: left; font-size: 13px;
-    }
-    #previewPDF th { background: var(--azul); color: #fff; letter-spacing:.1px;}
-    #previewPDF .summary { text-align: right; font-size: 13px; margin-bottom: 15px;}
-    #previewPDF .firma-simbolica {
-      margin-top: 36px; text-align: right;
-    }
-    #previewPDF .firma-simbolica svg {
-      width: 150px; height: 60px; display: block; margin-left: auto; margin-bottom: 0px;
-    }
-    #previewPDF .firma-texto {
-      text-align: right; font-size: 11.5px; color: #888; margin-top: 2px;
-    }
-    #previewPDF .footer {
-      text-align: center; font-size: 11.5px; color: #888;
-      border-top: 1px solid #ccc; padding-top: 8px;
-      position: absolute; bottom: 12mm; left: 12mm; right: 12mm; background:transparent;
-    }
-    /* Animaciones Premium */
-    .sidebar,
-    .form-container,
-    .preview-container {
-      will-change: transform, box-shadow;
-      animation: fadeinup .44s cubic-bezier(.11,.75,.23,1.11) 1;
-    }
-    @keyframes fadeinup {
-      0% { opacity: 0; transform: translateY(20px);}
-      90%{ opacity: .92;}
-      100% { opacity: 1; transform: translateY(0);}
-    }
-    #generateBtn, #shareBtn, #qrBtn {
-      box-shadow: 0 4px 22px #b8cce92a;
-      animation: botonShow .25s cubic-bezier(.12,.75,.23,1.08) 1;
-    }
-    @keyframes botonShow {
-      0% { opacity: 0; transform: scale(.93);}
-      100% { opacity: 1; transform: scale(1);}
-    }
+    #previewPDF .header { display:flex; justify-content:space-between; align-items:center; margin-bottom:13px;}
+    #previewPDF .header .logo-title { display:flex; flex-direction:column; align-items:center; gap:8px;}
+    #previewPDF .header img { max-width:210px; max-height:110px; display:block; margin:0 auto;}
+    #previewPDF .header .title-groupar { font-size:2.2em; font-weight:bold; letter-spacing:1.1px; margin-top:2px;}
+    #previewPDF .header .title-groupar .azul { color: #0a6ec8;}
+    #previewPDF .header .title-groupar .rojo { color: #dc1e28;}
+    #previewPDF .header .datos { text-align:right; font-size:1.14em;}
+    #previewPDF th, #previewPDF td { padding:7px; border:1.2px solid #cde0f6; text-align:left; font-size:13px;}
+    #previewPDF th { background: #e7f0fa; color:#0a6ec8; letter-spacing:.1px;}
+    #previewPDF .summary { text-align:right; font-size:13px; margin-bottom:11px;}
+    #previewPDF .firma-simbolica { margin-top:34px; text-align:right;}
+    #previewPDF .firma-simbolica svg { width:140px; height:60px; display:block; margin-left:auto; margin-bottom:0;}
+    #previewPDF .firma-texto { text-align:right; font-size:11.5px; color:#888; margin-top:2px;}
+    #previewPDF .footer { text-align:center; font-size:11.5px; color:#888; border-top:1px solid #ccc; padding-top:8px; position:absolute; bottom:12mm; left:13mm; right:13mm;}
   </style>
 </head>
 <body>
@@ -240,20 +159,15 @@
         <div class="form-col">
           <label for="quoteTitle">Título de Cotización</label>
           <div class="input-wrap">
+            <span class="input-icon">📝</span>
             <input id="quoteTitle" placeholder="Cotización #1234" value="Cotización probable – Nuevo cliente">
-            <div class="btn-small-row">
-              <button class="btn-micro" type="button" title="Dictar" data-target="quoteTitle">🎤</button>
-              <button class="btn-correct" type="button" title="Corregir" data-target="quoteTitle">✓</button>
-            </div>
           </div>
         </div>
         <div class="form-col">
           <label for="fileName">Nombre de Archivo</label>
           <div class="input-wrap">
+            <span class="input-icon">📄</span>
             <input id="fileName" placeholder="cotizacion_1234" value="cotizacion_cliente" readonly>
-            <div class="btn-small-row">
-              <button class="btn-correct" type="button" data-target="fileName">✓</button>
-            </div>
           </div>
         </div>
       </div>
@@ -268,66 +182,55 @@
         <div class="form-col">
           <label for="client">Cliente</label>
           <div class="input-wrap">
+            <span class="input-icon">👤</span>
             <input id="client" placeholder="Nombre del cliente">
-            <div class="btn-small-row">
-              <button class="btn-micro" type="button" title="Dictar" data-target="client">🎤</button>
-              <button class="btn-correct" type="button" title="Corregir" data-target="client">✓</button>
-            </div>
           </div>
         </div>
         <div class="form-col">
           <label for="location">Ubicación</label>
           <div class="input-wrap">
+            <span class="input-icon">📍</span>
             <input id="location" placeholder="Dirección o ubicación">
-            <div class="btn-small-row">
-              <button class="btn-micro" type="button" title="Dictar" data-target="location">🎤</button>
-              <button class="btn-correct" type="button" title="Corregir" data-target="location">✓</button>
-            </div>
           </div>
         </div>
       </div>
-      <div class="form-row">
-        <div>
-          <input type="checkbox" id="withIvaSwitch" checked>
-          <label for="withIvaSwitch" style="font-weight:400;">¿Incluir IVA (16%)?</label>
+      <div class="form-row switches">
+        <div class="switch-wrap">
+          <label class="slide-label" for="withIvaSwitch">IVA (16%)</label>
+          <label class="switch">
+            <input type="checkbox" id="withIvaSwitch" checked>
+            <span class="slider"></span>
+          </label>
         </div>
-        <div>
-          <input type="checkbox" id="withAnticipoSwitch">
-          <label for="withAnticipoSwitch" style="font-weight:400;">¿Incluir anticipo?</label>
+        <div class="switch-wrap">
+          <label class="slide-label" for="withAnticipoSwitch">Anticipo</label>
+          <label class="switch">
+            <input type="checkbox" id="withAnticipoSwitch">
+            <span class="slider"></span>
+          </label>
         </div>
-        <div id="anticipoField" style="display:none;max-width:170px;">
-          <label for="anticipoPct">Anticipo (%)</label>
-          <div class="input-wrap">
-            <input id="anticipoPct" type="number" min="0" max="100" value="0">
-            <div class="btn-small-row">
-              <button class="btn-micro" type="button" title="Dictar" data-target="anticipoPct">🎤</button>
-              <button class="btn-correct" type="button" title="Corregir" data-target="anticipoPct">✓</button>
-            </div>
+        <div id="anticipoField" style="display:none;max-width:140px;">
+          <label for="anticipoPct" style="font-weight:500;margin-bottom:0;">%</label>
+          <div class="input-wrap" style="padding-left:0;">
+            <input id="anticipoPct" type="number" min="0" max="100" value="0" style="padding-left:8px;">
           </div>
         </div>
       </div>
-      <h3 style="margin:18px 0 6px 0;">Agregar Item</h3>
+      <h3 style="margin:14px 0 6px 0;">Agregar Item</h3>
       <div class="form-row" id="itemInputs">
         <div class="form-col" style="flex:2">
           <label for="newItemDesc">Descripción</label>
           <div class="input-wrap">
-            <input id="newItemDesc" list="commonItemsList" placeholder="Ej. Pintura">
-            <div class="btn-small-row">
-              <button class="btn-micro" type="button" title="Dictar" data-target="newItemDesc">🎤</button>
-              <button class="btn-correct" type="button" title="Corregir" data-target="newItemDesc">✓</button>
-            </div>
+            <span class="input-icon">🔧</span>
+            <input id="newItemDesc" placeholder="Ej. Pintura">
           </div>
-          <datalist id="commonItemsList"></datalist>
         </div>
         <div class="form-col" id="expressInputs" style="display:flex;">
           <div style="width:100%">
             <label for="newItemPrice">Precio</label>
             <div class="input-wrap">
-              <input id="newItemPrice" type="number" min="0" value="0">
-              <div class="btn-small-row">
-                <button class="btn-micro" type="button" title="Dictar" data-target="newItemPrice">🎤</button>
-                <button class="btn-correct" type="button" title="Corregir" data-target="newItemPrice">✓</button>
-              </div>
+              <span class="input-icon">$</span>
+              <input id="newItemPrice" type="number" min="0" value="0" placeholder="Precio total">
             </div>
           </div>
         </div>
@@ -335,43 +238,34 @@
           <div>
             <label for="newItemQty">Cantidad</label>
             <div class="input-wrap">
-              <input id="newItemQty" type="number" min="1" value="1">
-              <div class="btn-small-row">
-                <button class="btn-micro" type="button" title="Dictar" data-target="newItemQty">🎤</button>
-                <button class="btn-correct" type="button" title="Corregir" data-target="newItemQty">✓</button>
-              </div>
+              <span class="input-icon">#</span>
+              <input id="newItemQty" type="number" min="1" value="1" placeholder="Cantidad">
             </div>
           </div>
           <div>
             <label for="newItemMat">Material</label>
             <div class="input-wrap">
-              <input id="newItemMat" type="number" min="0" value="0">
-              <div class="btn-small-row">
-                <button class="btn-micro" type="button" title="Dictar" data-target="newItemMat">🎤</button>
-                <button class="btn-correct" type="button" title="Corregir" data-target="newItemMat">✓</button>
-              </div>
+              <span class="input-icon">$</span>
+              <input id="newItemMat" type="number" min="0" value="0" placeholder="Material">
             </div>
           </div>
           <div>
             <label for="newItemLab">Mano Obra</label>
             <div class="input-wrap">
-              <input id="newItemLab" type="number" min="0" value="0">
-              <div class="btn-small-row">
-                <button class="btn-micro" type="button" title="Dictar" data-target="newItemLab">🎤</button>
-                <button class="btn-correct" type="button" title="Corregir" data-target="newItemLab">✓</button>
-              </div>
+              <span class="input-icon">⚒️</span>
+              <input id="newItemLab" type="number" min="0" value="0" placeholder="Mano obra">
             </div>
           </div>
         </div>
-        <div style="align-self:flex-end;min-width:110px;"><button id="addItemBtn">Agregar</button></div>
+        <div style="align-self:flex-end;min-width:110px;">
+          <button class="btn-main" id="addItemBtn" style="padding:10px 0;">Agregar</button>
+        </div>
       </div>
       <div class="table-scroll">
         <table id="itemsTable">
           <thead>
-            <tr id="header-express"><th>Descripción</th><th class="text-right">Precio</th><th class="text-right">Total</th><th></th></tr>
-            <tr id="header-detailed" class="hidden">
-              <th>Descripción</th><th class="text-right">Cant.</th><th class="text-right">Material</th><th class="text-right">Mano Obra</th><th class="text-right">Total</th><th></th>
-            </tr>
+            <tr id="header-express"><th>Descripción</th><th>Precio</th><th>Total</th><th></th></tr>
+            <tr id="header-detailed" class="hidden"><th>Descripción</th><th>Cant.</th><th>Material</th><th>Mano Obra</th><th>Total</th><th></th></tr>
           </thead>
           <tbody></tbody>
         </table>
@@ -383,271 +277,152 @@
         <div id="anticipoSummary" style="display:none;">Anticipo (<span id="anticipoPctDisplay">0</span>%): $<span id="anticipoAmount">0.00</span></div>
         <div><strong>Saldo: $<span id="balance">0.00</span></strong></div>
       </div>
-      <button class="details-btn" id="openDetails">🛡️ Detalles y Especificaciones</button>
+      <button class="btn-main" style="margin-bottom:4px;" id="openDetails">🛡️ Detalles y Especificaciones</button>
     </div>
     <div class="preview-container">
       <h3 style="font-size:1.08em;">Vista Previa (no es el PDF final)</h3>
       <div id="previewResponsive"></div>
-      <div style="text-align:center; margin-top:12px;">
-        <button id="generateBtn">Generar PDF</button>
-        <button id="shareBtn">Compartir</button>
-        <button id="qrBtn" style="display:none;">QR del Cotizador</button>
+      <div style="text-align:center; margin-top:9px;">
+        <button class="btn-main" id="generateBtn">Generar PDF</button>
+        <button class="btn-main" id="shareBtn">Compartir</button>
       </div>
-      <div id="qrZone"></div>
     </div>
   </div>
-  <!-- BACKDROP -->
-  <div class="backdrop" id="backdrop"></div>
-  <!-- SIDEBAR Detalles -->
   <div class="sidebar closed" id="detailsDrawer" tabindex="-1" aria-modal="true" aria-label="Detalles">
     <button class="sidebar-close" id="closeDetails" title="Cerrar">×</button>
     <h4>Detalles y Especificaciones</h4>
-    <label><input type="checkbox" value="Pago 50% materiales antes de iniciar"> Pago 50% materiales antes de iniciar</label>
-    <label><input type="checkbox" value="Pago 50% restante al finalizar"> Pago 50% restante al finalizar</label>
-    <label><input type="checkbox" value="Incluye materiales, herramientas y mano de obra"> Incluye materiales, herramientas y mano de obra</label>
-    <label><input type="checkbox" value="Retiro de escombro incluido"> Retiro de escombro incluido</label>
-    <label><input type="checkbox" value="Limpieza general incluida"> Limpieza general incluida</label>
-    <label><input type="checkbox" value="Garantía de funcionamiento"> Garantía de funcionamiento</label>
-    <label><input type="checkbox" value="Garantía en materiales"> Garantía en materiales</label>
-    <label><input type="checkbox" value="Vigencia cotización: 30 días"> Vigencia cotización: 30 días</label>
-    <label><input type="checkbox" value="Responsabilidad por daños a terceros"> Responsabilidad terceros</label>
-    <label><input type="checkbox" value="Cumplimiento normativas y permisos"> Cumplimiento normativas</label>
-    <label><input type="checkbox" value="Cláusula de fuerza mayor"> Cláusula fuerza mayor</label>
-    <div style="margin-top:13px; font-weight:600;">Detalles adicionales:</div>
-    <div class="input-wrap">
-      <textarea id="detalleAdicional" placeholder="Escribe o dicta un detalle y agrégalo abajo..."></textarea>
-      <div class="btn-small-row">
-        <button class="btn-micro" id="startVoice" title="Dictar">🎤</button>
-        <button class="btn-correct" id="correctVoice" title="Corregir">✓</button>
-      </div>
+    <div class="switch-wrap">
+      <label class="slide-label" for="chk1">Pago 50% materiales antes de iniciar</label>
+      <label class="switch"><input type="checkbox" id="chk1"><span class="slider"></span></label>
     </div>
-    <button type="button" id="addDetalleBtn" style="background:#009e47; margin-bottom:9px;">Agregar detalle</button>
+    <div class="switch-wrap">
+      <label class="slide-label" for="chk2">Pago 50% restante al finalizar</label>
+      <label class="switch"><input type="checkbox" id="chk2"><span class="slider"></span></label>
+    </div>
+    <div class="switch-wrap">
+      <label class="slide-label" for="chk3">Incluye materiales, herramientas y mano de obra</label>
+      <label class="switch"><input type="checkbox" id="chk3"><span class="slider"></span></label>
+    </div>
+    <div class="switch-wrap">
+      <label class="slide-label" for="chk4">Retiro de escombro incluido</label>
+      <label class="switch"><input type="checkbox" id="chk4"><span class="slider"></span></label>
+    </div>
+    <div class="switch-wrap">
+      <label class="slide-label" for="chk5">Limpieza general incluida</label>
+      <label class="switch"><input type="checkbox" id="chk5"><span class="slider"></span></label>
+    </div>
+    <div class="switch-wrap">
+      <label class="slide-label" for="chk6">Garantía de funcionamiento</label>
+      <label class="switch"><input type="checkbox" id="chk6"><span class="slider"></span></label>
+    </div>
+    <div class="switch-wrap">
+      <label class="slide-label" for="chk7">Garantía en materiales</label>
+      <label class="switch"><input type="checkbox" id="chk7"><span class="slider"></span></label>
+    </div>
+    <div class="switch-wrap">
+      <label class="slide-label" for="chk8">Vigencia cotización: 30 días</label>
+      <label class="switch"><input type="checkbox" id="chk8"><span class="slider"></span></label>
+    </div>
+    <div class="switch-wrap">
+      <label class="slide-label" for="chk9">Responsabilidad terceros</label>
+      <label class="switch"><input type="checkbox" id="chk9"><span class="slider"></span></label>
+    </div>
+    <div class="switch-wrap">
+      <label class="slide-label" for="chk10">Cumplimiento normativas</label>
+      <label class="switch"><input type="checkbox" id="chk10"><span class="slider"></span></label>
+    </div>
+    <div class="switch-wrap">
+      <label class="slide-label" for="chk11">Cláusula fuerza mayor</label>
+      <label class="switch"><input type="checkbox" id="chk11"><span class="slider"></span></label>
+    </div>
+    <label style="font-weight:500;margin-top:13px;">Detalles adicionales:</label>
+    <textarea id="detalleAdicional" placeholder="Escribe un detalle adicional..."></textarea>
+    <button type="button" id="addDetalleBtn" class="btn-main" style="background:#009e47; margin-bottom:9px;">Agregar detalle</button>
     <ul class="detalles-agregados" id="detallesAgregados"></ul>
-    <span id="dictadoStatus" style="color:#0a6ec8;font-size:.98em;margin-top:3px;display:block;"></span>
   </div>
   <div id="previewPDF"></div>
-  <!-- QR GENERATION LIBRARY -->
-  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- jsPDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
     // --- DARK MODE AUTO ---
-    if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
       document.body.classList.add("dark");
-    }
-    // SIDEBAR
+
+    // SIDEBAR animado
     const openDetailsBtn = document.getElementById('openDetails');
     const closeDetailsBtn = document.getElementById('closeDetails');
     const detailsDrawer = document.getElementById('detailsDrawer');
-    const backdrop = document.getElementById('backdrop');
-    function openSidebar() {detailsDrawer.classList.remove('closed');detailsDrawer.classList.add('open');backdrop.classList.add('active');document.body.style.overflow="hidden";setTimeout(()=>detailsDrawer.focus(),260);}
-    function closeSidebar() {detailsDrawer.classList.remove('open');detailsDrawer.classList.add('closed');backdrop.classList.remove('active');document.body.style.overflow="";}
-    openDetailsBtn.onclick = openSidebar; closeDetailsBtn.onclick = closeSidebar; backdrop.onclick = closeSidebar;
+    function openSidebar() {detailsDrawer.classList.remove('closed');detailsDrawer.classList.add('open');document.body.style.overflow="hidden";setTimeout(()=>detailsDrawer.focus(),250);}
+    function closeSidebar() {detailsDrawer.classList.remove('open');detailsDrawer.classList.add('closed');document.body.style.overflow="";}
+    openDetailsBtn.onclick = openSidebar; closeDetailsBtn.onclick = closeSidebar;
     document.addEventListener('keydown', e=>{if((detailsDrawer.classList.contains('open'))&&e.key==='Escape') closeSidebar();});
 
-    // Variables principales
+    // Sincronizar nombre de archivo
+    function syncTitleFileName() {
+      let t = document.getElementById('quoteTitle').value.toLowerCase().replace(/[^\w\s-]/g,'').trim().replace(/\s+/g,'_');
+      document.getElementById('fileName').value = t || "cotizacion";
+    }
+    document.getElementById('quoteTitle').addEventListener('input', syncTitleFileName);
+    document.addEventListener('DOMContentLoaded', syncTitleFileName);
+
+    // Tipo cotización
     const quoteType = document.getElementById('quoteType');
-    const tbody = document.querySelector('#itemsTable tbody');
-    const hdrExp = document.getElementById('header-express');
-    const hdrDet = document.getElementById('header-detailed');
-    const anticipoPct = document.getElementById('anticipoPct');
-    const anticipoPctDisp = document.getElementById('anticipoPctDisplay');
-    const newItemDesc = document.getElementById('newItemDesc');
-    const newItemQty = document.getElementById('newItemQty');
-    const newItemMat = document.getElementById('newItemMat');
-    const newItemLab = document.getElementById('newItemLab');
-    const newItemPrice = document.getElementById('newItemPrice');
-    const addItemBtn = document.getElementById('addItemBtn');
-    const clientInput = document.getElementById('client');
-    const locationInput = document.getElementById('location');
-    const quoteTitle = document.getElementById('quoteTitle');
-    const fileNameInput = document.getElementById('fileName');
-    const commonItemsList = document.getElementById('commonItemsList');
-    const previewRes = document.getElementById('previewResponsive');
-    const previewPDF = document.getElementById('previewPDF');
-    const withIvaSwitch = document.getElementById('withIvaSwitch');
-    const withAnticipoSwitch = document.getElementById('withAnticipoSwitch');
-    const anticipoField = document.getElementById('anticipoField');
-    const anticipoSummary = document.getElementById('anticipoSummary');
     const expressInputs = document.getElementById('expressInputs');
     const detailedInputs = document.getElementById('detailedInputs');
-    const qrBtn = document.getElementById('qrBtn');
-    const qrZone = document.getElementById('qrZone');
-    // Detalles adicionales dinámica
-    const detalleAdicional = document.getElementById('detalleAdicional');
-    const detallesAgregados = document.getElementById('detallesAgregados');
-    let detallesArray = [];
-    document.getElementById('addDetalleBtn').onclick = function() {
-      let txt = detalleAdicional.value.trim();
-      if (!txt) return;
-      txt = autocorregir(txt);
-      detallesArray.push(txt);
-      detalleAdicional.value = "";
-      renderDetalles();
-    };
-    function renderDetalles() {
-      detallesAgregados.innerHTML = '';
-      detallesArray.forEach((t,idx)=>{
-        const li = document.createElement('li');
-        li.textContent = t;
-        const btn = document.createElement('button');
-        btn.textContent = "✕";
-        btn.className = "del-detalle";
-        btn.onclick = ()=>{ detallesArray.splice(idx,1); renderDetalles(); };
-        li.appendChild(btn);
-        detallesAgregados.appendChild(li);
-      });
-    }
-    // Autocorrección básica para todos los campos
-    function autocorregir(text) {
-      if (!text) return "";
-      text = text.trim();
-      if (text.length === 0) return "";
-      text = text[0].toUpperCase() + text.slice(1);
-      if(!/[.?!]$/.test(text)) text += ".";
-      text = text.replace(/\s{2,}/g, ' ').replace(/ ,/g, ',');
-      return text;
-    }
-    // Dictado para campos (todos)
-    let recognition, recognizing = false;
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      recognition = new SpeechRecognition();
-      recognition.lang = 'es-MX';
-      recognition.continuous = false;
-      recognition.interimResults = false;
-      let currentTarget = null;
-      let dictadoStatus = document.getElementById('dictadoStatus');
-      function listenForField(targetElem) {
-        currentTarget = targetElem;
-        recognition.start();
-        dictadoStatus.textContent="Escuchando...";
-      }
-      recognition.onresult = function(e) {
-        let txt = e.results[0][0].transcript;
-        txt = autocorregir(txt);
-        if (currentTarget) {
-          if (currentTarget.tagName==="INPUT"||currentTarget.tagName==="TEXTAREA") {
-            currentTarget.value = txt;
-            if (currentTarget.id==="quoteTitle") syncTitleFileName();
-          }
-        }
-        dictadoStatus.textContent="Texto agregado.";
-        setTimeout(()=>dictadoStatus.textContent="",1200);
-        currentTarget = null;
-      };
-      recognition.onerror = function(e) { dictadoStatus.textContent="Error de dictado: "+e.error; currentTarget = null; };
-      recognition.onend = ()=>{ recognizing=false; };
-      document.querySelectorAll('.btn-micro').forEach(btn=>{
-        btn.onclick = function() {
-          let field = document.getElementById(btn.dataset.target);
-          if (!field) field = btn.parentElement.previousElementSibling;
-          listenForField(field);
-        }
-      });
-      document.getElementById('startVoice').onclick = function() {
-        listenForField(detalleAdicional);
-      }
-    } else {
-      document.querySelectorAll('.btn-micro').forEach(b=>b.style.display='none');
-      document.getElementById('dictadoStatus').textContent="Dictado no disponible.";
-    }
-    // Corrección ortográfica y formal para todos los campos (simulado)
-    document.querySelectorAll('.btn-correct').forEach(btn=>{
-      btn.onclick = function() {
-        let field = document.getElementById(btn.dataset.target);
-        if (!field) field = btn.parentElement.previousElementSibling;
-        if (field) {
-          field.value = autocorregir(field.value);
-          if (field.id==="quoteTitle") syncTitleFileName();
-        }
-      }
-    });
-    // Sincroniza automáticamente el nombre de archivo con el título de la cotización
-    function syncTitleFileName() {
-      let t = quoteTitle.value
-        .toLowerCase()
-        .replace(/[^\w\s-]/g,'')
-        .trim()
-        .replace(/\s+/g,'_');
-      fileNameInput.value = t || "cotizacion";
-    }
-    quoteTitle.addEventListener('input', syncTitleFileName);
-    quoteTitle.addEventListener('blur', syncTitleFileName);
-    document.addEventListener('DOMContentLoaded', syncTitleFileName);
-    // Auto-corrección al salir de campo importante
-    ['quoteTitle','client','location','detalleAdicional'].forEach(id=>{
-      let field = document.getElementById(id);
-      if(field) field.addEventListener('blur',()=>{ field.value = autocorregir(field.value); });
-    });
-    withIvaSwitch.onchange = recalc;
-    withAnticipoSwitch.onchange = function(){
-      anticipoField.style.display = this.checked ? "" : "none";
-      anticipoSummary.style.display = this.checked ? "" : "none";
-      recalc();
-    };
     function updateTypeUI() {
       if (quoteType.value === "express") {
         expressInputs.style.display = "flex";
         detailedInputs.style.display = "none";
-        hdrExp.classList.remove('hidden');
-        hdrDet.classList.add('hidden');
+        document.getElementById('header-express').classList.remove('hidden');
+        document.getElementById('header-detailed').classList.add('hidden');
       } else {
         expressInputs.style.display = "none";
         detailedInputs.style.display = "flex";
-        hdrExp.classList.add('hidden');
-        hdrDet.classList.remove('hidden');
+        document.getElementById('header-express').classList.add('hidden');
+        document.getElementById('header-detailed').classList.remove('hidden');
       }
-      recalc();
     }
     quoteType.onchange = updateTypeUI;
     updateTypeUI();
-    const STORAGE_KEY = 'grupoAR_commonItems';
-    let commonItems = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-    function updateDatalist() {
-      commonItemsList.innerHTML = '';
-      Object.entries(commonItems)
-        .sort((a,b)=>b[1]-a[1])
-        .forEach(([desc])=>{
-          const opt = document.createElement('option');
-          opt.value = desc;
-          commonItemsList.append(opt);
-        });
-    }
-    function recordUsage(desc) {
-      if (!desc) return;
-      commonItems[desc] = (commonItems[desc]||0)+1;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(commonItems));
-      updateDatalist();
-    }
-    updateDatalist();
-    addItemBtn.onclick = ()=>{
-      const desc = newItemDesc.value.trim(); if(!desc) return;
-      const tr = document.createElement('tr');
+
+    // Agregar item a tabla
+    const tbody = document.querySelector('#itemsTable tbody');
+    document.getElementById('addItemBtn').onclick = ()=>{
+      let desc = document.getElementById('newItemDesc').value.trim();
+      if(!desc) return document.getElementById('newItemDesc').focus();
+      let tr = document.createElement('tr');
+      tr.className = 'row-highlight';
+      setTimeout(()=>tr.classList.remove('row-highlight'),700);
       if(quoteType.value==='express'){
-        const pr = parseFloat(newItemPrice.value)||0;
-        tr.innerHTML = `<td><input class="desc" value="${desc}"></td>
-          <td class="text-right"><input class="price" type="number" value="${pr}" min="0"></td>
-          <td class="text-right"><span class="rowTotal">0.00</span></td>
-          <td><button class="remove-btn">✕</button></td>`;
+        let pr = parseFloat(document.getElementById('newItemPrice').value)||0;
+        tr.innerHTML = `<td><input class="desc" value="${desc}" style="width:96%"></td>
+          <td><input class="price" type="number" value="${pr}" min="0"></td>
+          <td><span class="rowTotal">0.00</span></td>
+          <td><button class="btn-del">✕</button></td>`;
       } else {
-        const qt = parseFloat(newItemQty.value)||1;
-        const ma = parseFloat(newItemMat.value)||0;
-        const lb = parseFloat(newItemLab.value)||0;
-        tr.innerHTML = `<td><input class="desc" value="${desc}"></td>
-          <td class="text-right"><input class="qty" type="number" value="${qt}" min="1"></td>
-          <td class="text-right"><input class="mat" type="number" value="${ma}" min="0"></td>
-          <td class="text-right"><input class="lab" type="number" value="${lb}" min="0"></td>
-          <td class="text-right"><span class="rowTotal">0.00</span></td>
-          <td><button class="remove-btn">✕</button></td>`;
+        let qt = parseFloat(document.getElementById('newItemQty').value)||1;
+        let ma = parseFloat(document.getElementById('newItemMat').value)||0;
+        let lb = parseFloat(document.getElementById('newItemLab').value)||0;
+        tr.innerHTML = `<td><input class="desc" value="${desc}" style="width:96%"></td>
+          <td><input class="qty" type="number" value="${qt}" min="1"></td>
+          <td><input class="mat" type="number" value="${ma}" min="0"></td>
+          <td><input class="lab" type="number" value="${lb}" min="0"></td>
+          <td><span class="rowTotal">0.00</span></td>
+          <td><button class="btn-del">✕</button></td>`;
       }
       tbody.appendChild(tr);
       tr.querySelectorAll('input').forEach(i=>i.oninput=recalc);
-      tr.querySelector('.remove-btn').onclick = ()=>{ tr.remove(); recalc(); };
-      recordUsage(desc);
-      newItemDesc.value=''; recalc();
+      tr.querySelector('.btn-del').onclick = ()=>{ tr.remove(); recalc(); };
+      // Limpiar y enfocar siguiente
+      document.getElementById('newItemDesc').value='';
+      document.getElementById('newItemPrice').value='0';
+      document.getElementById('newItemQty').value='1';
+      document.getElementById('newItemMat').value='0';
+      document.getElementById('newItemLab').value='0';
+      document.getElementById('newItemDesc').focus();
+      recalc();
     };
-    anticipoPct.oninput = recalc;
+    // Calculo total
     function recalc(){
       let subtotal=0;
       tbody.querySelectorAll('tr').forEach(r=>{
@@ -660,26 +435,53 @@
         subtotal+=line;
       });
       document.getElementById('subtotal').textContent=subtotal.toFixed(2);
-      const ivaAmt=withIvaSwitch.checked?subtotal*0.16:0;
+      const ivaAmt=document.getElementById('withIvaSwitch').checked?subtotal*0.16:0;
       document.getElementById('ivaAmount').textContent=ivaAmt.toFixed(2);
       const total=subtotal+ivaAmt;
       document.getElementById('totalAmount').textContent=total.toFixed(2);
-      if (withAnticipoSwitch.checked) {
-        const pct=parseFloat(anticipoPct.value)||0;
-        anticipoPctDisp.textContent=pct;
-        const ant=total*pct/100;
-        document.getElementById('anticipoAmount').textContent=ant.toFixed(2);
-        document.getElementById('balance').textContent=(total-ant).toFixed(2);
-      } else {
-        anticipoPctDisp.textContent="0";
-        document.getElementById('anticipoAmount').textContent="0.00";
-        document.getElementById('balance').textContent=total.toFixed(2);
-      }
+      const anticipo = document.getElementById('withAnticipoSwitch').checked ? parseFloat(document.getElementById('anticipoPct').value)||0 : 0;
+      document.getElementById('anticipoSummary').style.display = anticipo ? "" : "none";
+      document.getElementById('anticipoPctDisplay').textContent=anticipo;
+      document.getElementById('anticipoAmount').textContent=(total*anticipo/100).toFixed(2);
+      document.getElementById('balance').textContent=(total-total*anticipo/100).toFixed(2);
       buildPreview(previewRes, false);
     }
+    document.getElementById('withIvaSwitch').onchange = recalc;
+    document.getElementById('withAnticipoSwitch').onchange = function(){
+      document.getElementById('anticipoField').style.display = this.checked ? "" : "none";
+      recalc();
+    };
+    document.getElementById('anticipoPct').oninput = recalc;
+    recalc();
+
+    // Detalles y especificaciones
+    const detallesArray = [];
+    document.getElementById('addDetalleBtn').onclick = function() {
+      let txt = document.getElementById('detalleAdicional').value.trim();
+      if(!txt) return;
+      detallesArray.push(txt);
+      document.getElementById('detalleAdicional').value = "";
+      renderDetalles();
+    };
+    function renderDetalles() {
+      const detallesAgregados = document.getElementById('detallesAgregados');
+      detallesAgregados.innerHTML = '';
+      detallesArray.forEach((t,idx)=>{
+        const li = document.createElement('li');
+        li.textContent = t;
+        const btn = document.createElement('button');
+        btn.textContent = "✕";
+        btn.className = "del-detalle";
+        btn.onclick = ()=>{ detallesArray.splice(idx,1); renderDetalles(); };
+        li.appendChild(btn);
+        detallesAgregados.appendChild(li);
+      });
+    }
+
+    // Vista previa
     function buildPreview(container, isPDF){
       container.innerHTML = '';
-      // Header: diferente para PDF vs Web
+      // Header
       if (isPDF) {
         const hdr = document.createElement('div');
         hdr.className = 'header';
@@ -689,26 +491,25 @@
             <div class="title-groupar"><span class="azul">GRUPO</span> <span class="rojo">AR</span></div>
           </div>
           <div class="datos">
-            <div style="font-size:1.18em; font-weight:bold"><b>${quoteTitle.value}</b></div>
-            <div><strong>Cliente:</strong> ${clientInput.value||'--'}</div>
-            <div><strong>Ubicación:</strong> ${locationInput.value||'--'}</div>
+            <div style="font-size:1.17em; font-weight:bold"><b>${document.getElementById('quoteTitle').value}</b></div>
+            <div><strong>Cliente:</strong> ${document.getElementById('client').value||'--'}</div>
+            <div><strong>Ubicación:</strong> ${document.getElementById('location').value||'--'}</div>
           </div>
         `;
         container.append(hdr);
       } else {
         const hdr = document.createElement('div');
         hdr.className = 'header';
-        hdr.style.marginBottom = "10px";
         hdr.innerHTML = `
           <img src="https://i.imgur.com/kf8e57F.jpg" alt="Logo" style="height:32px;margin-right:10px;">
           <span style="font-weight:600;font-size:1.16em;color:#0a6ec8;">GRUPO <span style="color:#dc1e28">AR</span></span>
         `;
         container.append(hdr);
         const t = document.createElement('div');
-        t.innerHTML = `<div style="font-size:1.09em"><b>${quoteTitle.value}</b></div>
-        <div style="font-size:.98em"><strong>Cliente:</strong> ${clientInput.value||'--'}<br>
-        <strong>Ubicación:</strong> ${locationInput.value||'--'}</div>`;
-        t.style.marginBottom = "7px";
+        t.innerHTML = `<div style="font-size:1.09em"><b>${document.getElementById('quoteTitle').value}</b></div>
+        <div style="font-size:.98em"><strong>Cliente:</strong> ${document.getElementById('client').value||'--'}<br>
+        <strong>Ubicación:</strong> ${document.getElementById('location').value||'--'}</div>`;
+        t.style.marginBottom = "6px";
         container.append(t);
       }
       // Tabla
@@ -730,20 +531,22 @@
         body.append(row);
       });
       container.append(tbl);
-
       // Summary
       const sum=document.createElement('div'); sum.className='summary';
       sum.innerHTML=`<div>Subtotal: $${document.getElementById('subtotal').textContent}</div>
         <div>IVA: $${document.getElementById('ivaAmount').textContent}</div>
         <div><strong>Total: $${document.getElementById('totalAmount').textContent}</strong></div>`;
-      if (withAnticipoSwitch.checked) {
-        sum.innerHTML += `<div>Anticipo (${anticipoPctDisp.textContent}%): $${document.getElementById('anticipoAmount').textContent}</div>`;
+      const anticipo = document.getElementById('withAnticipoSwitch').checked ? parseFloat(document.getElementById('anticipoPct').value)||0 : 0;
+      if (anticipo) {
+        sum.innerHTML += `<div>Anticipo (${anticipo}%): $${document.getElementById('anticipoAmount').textContent}</div>`;
       }
       sum.innerHTML += `<div><strong>Saldo: $${document.getElementById('balance').textContent}</strong></div>`;
       container.append(sum);
-
-      // Detalles
-      const checks=Array.from(document.querySelectorAll('#detailsDrawer input:checked')).map(i=>i.value);
+      // Detalles y especificaciones
+      let checks=[];
+      for(let i=1;i<=11;i++){
+        if(document.getElementById('chk'+i).checked) checks.push(document.querySelector('label[for=chk'+i+']').innerText);
+      }
       if(checks.length || detallesArray.length){
         const dt=document.createElement('div');
         dt.innerHTML=`<h4 style="color:#0a6ec8">Detalles y Especificaciones</h4>
@@ -753,8 +556,7 @@
         </ul>`;
         container.append(dt);
       }
-
-      // Firma simbólica solo en PDF
+      // Firma simbólica sólo PDF
       if(isPDF) {
         const f=document.createElement('div');
         f.className='firma-simbolica';
@@ -769,7 +571,7 @@
         `;
         container.append(f);
       }
-      // Footer solo en PDF
+      // Footer sólo PDF
       if(isPDF) {
         const ft=document.createElement('div'); ft.className='footer';
         ft.textContent='GRUPO AR Construcción y Diseño — Tel: +52 1 438 134 6142';
@@ -777,76 +579,30 @@
       }
     }
 
-    // PDF Multipágina si tabla muy grande
-    async function generatePDF(){
+    // GENERAR PDF ULTRA LIGERO
+    document.getElementById('generateBtn').onclick = async ()=>{
+      // Armamos HTML para PDF y lo pasamos a jsPDF HTML
       buildPreview(previewPDF, true);
       previewPDF.style.display='block';
-      // Paginado automático: Si el contenido excede una hoja, divide en varias
-      const { jsPDF }=window.jspdf;
-      const pdf=new jsPDF({ unit:'mm', format:'a4', orientation:'portrait' });
-      // Multipágina: Render y recortar canvas por fragmentos
-      let pageHeight = 297;
-      let pdfY = 0;
-      const canvas=await html2canvas(previewPDF,{scale:2,useCORS:true, backgroundColor:'#fff'});
-      const ctx = canvas.getContext('2d');
-      let renderedHeight = canvas.height;
-      let pageCanvasHeight = Math.floor(canvas.width * (pageHeight/210));
-      let renderedPages = 0;
-      while(pdfY < renderedHeight){
-        let pageCanvas = document.createElement('canvas');
-        pageCanvas.width = canvas.width;
-        pageCanvas.height = Math.min(pageCanvasHeight, renderedHeight - pdfY);
-        let pageCtx = pageCanvas.getContext('2d');
-        pageCtx.drawImage(canvas, 0, pdfY, canvas.width, pageCanvas.height, 0, 0, canvas.width, pageCanvas.height);
-        let img = pageCanvas.toDataURL('image/png');
-        if(renderedPages > 0) pdf.addPage();
-        pdf.addImage(img,'PNG',0,0,210,Math.min(pageHeight, (pageCanvas.height * 210)/canvas.width));
-        pdfY += pageCanvas.height;
-        renderedPages++;
-      }
+      // Logo como marca de agua SVG
+      let pdf = new window.jspdf.jsPDF({ unit:'mm', format:'a4', orientation:'portrait' });
+      // Marca de agua
+      let watermark = "https://i.imgur.com/kf8e57F.jpg";
+      let img = new Image(); img.src = watermark;
+      await new Promise(r=>{img.onload=r;});
+      pdf.addImage(img,"JPEG",35,80,140,140,"","FAST",0.06);
+      // HTML a PDF
+      await pdf.html(previewPDF, {
+        margin:[15,13,25,13],
+        autoPaging: true,
+        html2canvas: { scale:1.25, backgroundColor:'#fff', useCORS:true }
+      });
       previewPDF.style.display='none';
-      return pdf;
-    }
-
-    document.getElementById('generateBtn').onclick=async()=>{
-      const pdf=await generatePDF();
-      const fn=(fileNameInput.value.trim()||'cotizacion')+'.pdf';
-      pdf.save(fn);
+      pdf.save((document.getElementById('fileName').value||'cotizacion')+'.pdf');
     };
     document.getElementById('shareBtn').onclick=async()=>{
-      try{
-        const pdf=await generatePDF();
-        const blob=pdf.output('blob');
-        const file=new File([blob],(fileNameInput.value.trim()||'cotizacion')+'.pdf',{type:'application/pdf'});
-        if(navigator.canShare&&navigator.canShare({files:[file]})){
-          await navigator.share({files:[file],title:'Cotización Grupo AR'});
-        } else {
-          pdf.save(file.name);
-          alert('PDF listo. Compártelo manualmente.');
-        }
-      }catch{ alert('Error al compartir.'); }
+      alert('Usa "Generar PDF" y compártelo manualmente.');
     };
-
-    // QR DEL COTIZADOR PREMIUM
-    function maybeShowQR() {
-      if(location.protocol==='https:'){
-        qrBtn.style.display = 'inline-block';
-      }
-    }
-    qrBtn.onclick = function() {
-      qrZone.innerHTML = '';
-      let url = window.location.href;
-      let qr = new QRious({value: url, size: 178, background: '#fff', foreground: '#0a6ec8'});
-      let lbl = document.createElement('div');
-      lbl.textContent = 'Comparte este cotizador escaneando:';
-      lbl.style.marginBottom = '5px'; lbl.style.fontSize = '1em'; lbl.style.color = '#0a6ec8';
-      let wrap = document.createElement('div'); wrap.append(qr.image); wrap.style.marginBottom = "8px";
-      qrZone.append(lbl); qrZone.append(wrap);
-      let u = document.createElement('div'); u.textContent = url; u.style.fontSize='0.91em'; u.style.wordBreak='break-all';
-      qrZone.append(u);
-    }
-    maybeShowQR();
-
     document.addEventListener('DOMContentLoaded', recalc);
   </script>
 </body>
