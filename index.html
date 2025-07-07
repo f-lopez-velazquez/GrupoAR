@@ -74,7 +74,7 @@
   </style>
 </head>
 <body>
-  <div class="container">
+<div class="container">
     <header>
       <img src="https://i.imgur.com/kf8e57F.jpg" alt="Logo Grupo AR">
       <div class="logoTitle"><span>GRUPO</span> <span style="color:#dc1e28;">AR</span></div>
@@ -270,14 +270,13 @@
   <div id="dictadoStatus" style="display:none;position:fixed;z-index:500;top:0;left:0;width:100vw;text-align:center;font-size:1.14em;color:#fff;background:#119ec1b8;padding:10px 0 10px 0;"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-// ====== FUNCIONES Y VARIABLES GLOBALES ======
 let items = [], detallesArray = [];
 let frequentDescs = JSON.parse(localStorage.getItem('ar_frequentDescs')||'[]');
 let frequentPrices = JSON.parse(localStorage.getItem('ar_frequentPrices')||'{}');
 let hist = JSON.parse(localStorage.getItem('ar_historial')||'[]');
 const previewRes = document.getElementById('previewResponsive');
 
-// ---- ACTUALIZAR ARCHIVO POR TÍTULO ----
+// ==== Funciones de utilidad ====
 function toMoney(val) { return "$" + (+val).toFixed(2); }
 function actualizarArchivo() {
   let t = document.getElementById('quoteTitle').value.toLowerCase().replace(/[^\w\s-]/g,'').trim().replace(/\s+/g,'_');
@@ -286,7 +285,7 @@ function actualizarArchivo() {
 document.getElementById('quoteTitle').addEventListener('input', actualizarArchivo);
 document.addEventListener('DOMContentLoaded', actualizarArchivo);
 
-// ---- UI: TIPO DE COTIZACIÓN ----
+// ==== Tipo de cotización ====
 function updateTypeUI() {
   let quoteType = document.getElementById('quoteType');
   let expressInputs = document.getElementById('expressInputs');
@@ -308,7 +307,7 @@ function updateTypeUI() {
 }
 document.getElementById('quoteType').onchange = updateTypeUI;
 
-// ---- AGREGAR ITEM ----
+// ==== Agregar item ====
 document.getElementById('addItemBtn').onclick = ()=>{
   let desc = document.getElementById('newItemDesc').value.trim();
   if(!desc) return document.getElementById('newItemDesc').focus();
@@ -343,7 +342,6 @@ document.getElementById('addItemBtn').onclick = ()=>{
   recalc();
 };
 
-// ---- PREDICCIÓN ----
 function updatePredictions() {
   if (!document.getElementById('aiPrediccion').checked) return;
   let dl = document.getElementById('descPredictions');
@@ -356,7 +354,7 @@ document.getElementById('newItemDesc').addEventListener('input', function(){
   if(pr && document.getElementById('quoteType').value==='express') document.getElementById('newItemPrice').value = pr;
 });
 
-// ---- TABLA ITEMS ----
+// ==== Tabla items ====
 function renderTable(){
   const tbody = document.querySelector('#itemsTable tbody');
   tbody.innerHTML = '';
@@ -387,7 +385,7 @@ function renderTable(){
   recalc();
 }
 
-// ---- RESUMEN Y CÁLCULOS ----
+// ==== Resumen y cálculos ====
 function recalc(){
   let subtotal=0;
   if(document.getElementById('quoteType').value==="express"){
@@ -414,7 +412,7 @@ document.getElementById('withAnticipoSwitch').onchange = function(){
 };
 document.getElementById('anticipoPct').oninput = recalc;
 
-// ---- DETALLES Y ESPECIFICACIONES ----
+// ==== Detalles y especificaciones ====
 document.getElementById('addDetalleBtn').onclick = function() {
   let txt = document.getElementById('detalleAdicional').value.trim();
   if(!txt) return;
@@ -437,7 +435,7 @@ function renderDetalles() {
   });
 }
 
-// ---- SIDEBAR DETALLES ----
+// ==== Sidebar Detalles ====
 const detailsDrawer = document.getElementById('detailsDrawer');
 detailsDrawer.style.right = '-440px';
 detailsDrawer.style.display = "none";
@@ -454,7 +452,7 @@ closeDetailsBtn.onclick = function(){
 };
 document.addEventListener('keydown', e=>{if(detailsDrawer.style.right=="0px"&&e.key==='Escape') closeDetailsBtn.onclick();});
 
-// ---- VISTA PREVIA ----
+// ==== Vista previa ====
 function buildPreview(container, isPDF){
   container.innerHTML = '';
   // Header
@@ -520,9 +518,11 @@ function buildPreview(container, isPDF){
   }
 }
 setInterval(()=>buildPreview(previewRes, false), 700);
-<!-- ================= HISTORIAL Y AUTOCOMPLETAR ================ -->
 
-// ---- HISTORIAL DE COTIZACIONES ----
+// (El resto del JS, incluido: historial, dictado, IA, PDF PRO y compartir, va en la siguiente parte)
+</script>
+<script>
+// ================= HISTORIAL Y AUTOCOMPLETAR ================
 function updateHistorialBar() {
   const hc = document.getElementById('histContainer');
   hc.innerHTML = '';
@@ -576,7 +576,7 @@ function cargarHistorial(idx){
 document.getElementById('saveHistBtn').onclick = guardarEnHistorial;
 updateHistorialBar();
 
-// ---- DICTADO POR MICRÓFONO ----
+// ==== Dictado por micrófono ====
 let recognition, recognizing = false, dictTarget = "";
 function supportsSpeech() { return 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window; }
 if (supportsSpeech()) {
@@ -616,7 +616,7 @@ if (supportsSpeech()) {
   document.querySelectorAll('.mic-btn').forEach(btn=>btn.style.display="none");
 }
 
-// ---- IA: MEJORA DE REDACCIÓN Y ORTOGRAFÍA (simulado) ----
+// ==== IA: mejora de redacción y ortografía (simulada) ====
 async function mejorarRedaccion() {
   function corrigeFrase(txt){
     if(!txt) return "";
@@ -646,90 +646,90 @@ async function mejorarRedaccion() {
   return Promise.resolve();
 }
 
-// ===== PDF PROFESIONAL, FIRMA, COMPARTIR =====
+// ==== PDF profesional (marca de agua tenue, firma pequeña, diseño premium) ====
 async function generarPDFpro() {
   if(document.getElementById('aiRedaccion').checked) await mejorarRedaccion();
   let doc = new window.jspdf.jsPDF({unit:'mm', format:'a4'});
-  // Marca de agua
+  // Marca de agua (logo central, muy tenue)
   let img = new Image();
+  img.crossOrigin = "anonymous";
   img.src = "https://i.imgur.com/kf8e57F.jpg";
   await new Promise(r=>{img.onload=r;});
-  doc.addImage(img, 'JPEG', 28, 62, 150, 150, '', 'FAST', 0.11);
+  doc.addImage(img, 'JPEG', 45, 80, 120, 120, '', 'FAST', 0.07);
   // Logo principal
-  doc.addImage(img, 'JPEG', 18, 10, 36, 36, '', 'FAST', 1);
-  doc.setFont('helvetica','bold'); doc.setFontSize(23);
-  doc.setTextColor(10,110,200);
-  doc.text("GRUPO", 58, 24);
-  doc.setTextColor(220,30,40);
-  doc.text("AR", 92, 24);
-  doc.setFontSize(13); doc.setTextColor(33,43,60);
-  doc.text(document.getElementById('quoteTitle').value, 58, 31);
-  doc.setFontSize(10);
-  doc.text(`Cliente: ${document.getElementById('client').value||'--'}`,58,37);
-  doc.text(`Ubicación: ${document.getElementById('location').value||'--'}`,58,42);
-  // Tabla (inicio bajo logo, margen izquierdo)
-  let y = 54;
+  doc.addImage(img, 'JPEG', 16, 12, 23, 23, '', 'FAST', 1);
+  doc.setFont('helvetica','bold'); doc.setFontSize(18);
+  doc.setTextColor(10,110,200); doc.text("GRUPO", 43, 22);
+  doc.setTextColor(220,30,40); doc.text("AR", 75, 22);
+  doc.setFontSize(11); doc.setTextColor(33,43,60);
+  doc.text(document.getElementById('quoteTitle').value, 43, 28);
+  doc.setFontSize(10); doc.setTextColor(80,80,80);
+  doc.text(`Cliente: ${document.getElementById('client').value||'--'}`,43,33);
+  doc.text(`Ubicación: ${document.getElementById('location').value||'--'}`,43,37);
+
+  // Tabla
+  let y = 47;
   let tipo = document.getElementById('quoteType').value;
   doc.setFontSize(11); doc.setTextColor(10,110,200);
   if(tipo==='express') {
-    doc.text("Descripción",18,y); doc.text("Precio",93,y); doc.text("Total",140,y);
-    y+=6; doc.setLineWidth(0.25); doc.line(18,y,195,y); doc.setTextColor(40,40,45); doc.setFontSize(10);
+    doc.text("Descripción",16,y); doc.text("Precio",102,y); doc.text("Total",145,y);
+    y+=5; doc.setLineWidth(0.18); doc.line(16,y,195,y); doc.setTextColor(40,40,45); doc.setFontSize(10);
     items.forEach(it=>{
-      doc.text(it.desc,18,y+6);
-      doc.text(`$${(it.pr||0).toFixed(2)}`,93,y+6);
-      doc.text(`$${(it.pr||0).toFixed(2)}`,140,y+6);
-      y+=8.1;
+      doc.text(it.desc,16,y+6);
+      doc.text(`$${(it.pr||0).toFixed(2)}`,102,y+6);
+      doc.text(`$${(it.pr||0).toFixed(2)}`,145,y+6);
+      y+=7;
     });
   } else {
-    doc.text("Descripción",18,y); doc.text("Cant.",80,y); doc.text("Material",103,y); doc.text("Mano Obra",135,y); doc.text("Total",170,y);
-    y+=6; doc.setLineWidth(0.25); doc.line(18,y,195,y); doc.setTextColor(40,40,45); doc.setFontSize(10);
+    doc.text("Descripción",16,y); doc.text("Cant.",80,y); doc.text("Material",103,y); doc.text("Mano Obra",135,y); doc.text("Total",170,y);
+    y+=5; doc.setLineWidth(0.18); doc.line(16,y,195,y); doc.setTextColor(40,40,45); doc.setFontSize(10);
     items.forEach(it=>{
       let tot = ((it.ma||0)+(it.lb||0))*(it.qt||1);
-      doc.text(it.desc,18,y+6); doc.text(`${it.qt||1}`,80,y+6);
+      doc.text(it.desc,16,y+6); doc.text(`${it.qt||1}`,80,y+6);
       doc.text(`$${(it.ma||0).toFixed(2)}`,103,y+6); doc.text(`$${(it.lb||0).toFixed(2)}`,135,y+6);
       doc.text(`$${tot.toFixed(2)}`,170,y+6);
-      y+=8.1;
+      y+=7;
     });
   }
-  y+=6;
+  y+=8;
   doc.setFontSize(11); doc.setTextColor(10,110,200);
   let subtotal=parseFloat(document.getElementById('subtotal').textContent)||0;
   let iva=parseFloat(document.getElementById('ivaAmount').textContent)||0;
   let total=parseFloat(document.getElementById('totalAmount').textContent)||0;
   let anticipo=parseFloat(document.getElementById('anticipoAmount').textContent)||0;
   let saldo=parseFloat(document.getElementById('balance').textContent)||0;
-  doc.text(`Subtotal: $${subtotal.toFixed(2)}`,140,y);
-  doc.text(`IVA: $${iva.toFixed(2)}`,140,y+6);
+  doc.text(`Subtotal: $${subtotal.toFixed(2)}`,120,y);
+  doc.text(`IVA: $${iva.toFixed(2)}`,120,y+5);
   doc.setFont('helvetica','bold');
-  doc.text(`Total: $${total.toFixed(2)}`,140,y+12);
+  doc.text(`Total: $${total.toFixed(2)}`,120,y+10);
   if(anticipo>0){
     doc.setFont('helvetica','normal'); doc.setFontSize(10);
-    doc.text(`Anticipo: $${anticipo.toFixed(2)}`,140,y+18);
-    doc.text(`Saldo: $${saldo.toFixed(2)}`,140,y+24);
-    y+=12;
+    doc.text(`Anticipo: $${anticipo.toFixed(2)}`,120,y+15);
+    doc.text(`Saldo: $${saldo.toFixed(2)}`,120,y+20);
+    y+=10;
   }
-  y+=24;
+  y+=20;
   doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(10,110,200);
-  doc.text("Detalles y Especificaciones:",18,y);
+  doc.text("Detalles y Especificaciones:",16,y);
   doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(60,60,60);
   let y0 = y+4;
   let detalles = [];
   for(let i=1;i<=11;i++) if(document.getElementById('chk'+i).checked) detalles.push(document.querySelector('label[for=chk'+i+']').innerText);
   if(window.detallesArray && window.detallesArray.length) detalles = detalles.concat(window.detallesArray);
   detalles.forEach((d,idx)=>{
-    doc.text(`• ${d}`, 20, y0+6*idx);
+    doc.text(`• ${d}`, 18, y0+5*idx);
   });
-  y0 += 6*detalles.length;
-  y0+=14;
-  // Firma manuscrita
-  doc.setDrawColor(10,110,200); doc.setLineWidth(0.7);
-  doc.line(110, y0, 185, y0);
-  doc.setFont('times','italic'); doc.setTextColor(10,110,200); doc.setFontSize(18);
-  doc.text("Grupo AR", 112, y0+8);
-  doc.setFontSize(9); doc.setTextColor(140,140,140); doc.setFont('helvetica','normal');
-  doc.text("Firma simbólica digital — No requiere firma autógrafa.",110, y0+15);
+  y0 += 5*detalles.length;
+  y0+=11;
+  // Firma manuscrita pequeña
+  doc.setDrawColor(10,110,200); doc.setLineWidth(0.45);
+  doc.line(110, y0, 175, y0);
+  doc.setFont('times','italic'); doc.setTextColor(10,110,200); doc.setFontSize(13);
+  doc.text("Grupo AR", 122, y0+5);
+  doc.setFontSize(8); doc.setTextColor(140,140,140); doc.setFont('helvetica','normal');
+  doc.text("Firma simbólica digital — No requiere firma autógrafa.",110, y0+10);
   // Footer
-  doc.setFontSize(9); doc.setTextColor(150,150,150);
+  doc.setFontSize(8.2); doc.setTextColor(150,150,150);
   doc.text("GRUPO AR Construcción y Diseño — Tel: +52 1 438 134 6142",105,287,{align:'center'});
   let fname=(document.getElementById('fileName').value||'cotizacion')+'.pdf';
   doc.save(fname);
@@ -737,7 +737,7 @@ async function generarPDFpro() {
 }
 document.getElementById('generateBtn').onclick = generarPDFpro;
 
-// ----------- COMPARTIR MODERNO ----------
+// ----------- Compartir moderno ----------
 document.getElementById('shareBtn').onclick = async ()=>{
   let {fname, doc} = await generarPDFpro();
   let blob = doc.output('blob');
@@ -754,7 +754,7 @@ document.getElementById('shareBtn').onclick = async ()=>{
   }
 };
 
-// ---- INICIALIZACIÓN ----
+// ==== Inicialización ====
 updateTypeUI();
 renderTable();
 recalc();
