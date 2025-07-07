@@ -9,21 +9,13 @@
     :root {
       --azul: #0a6ec8;
       --rojo: #dc1e28;
-      --fondo: #f7fafd;
+      --panel: #fff;
       --borde: #dde6f5;
       --txt: #212b3c;
-      --panel: #fff;
-      --input-bg: #fafdff;
-      --slide-bg: #d0dbef;
-      --slide-active: #4bb450;
-      --slide-knob: #fff;
-      --slide-off: #c5c5c5;
-      --primary: #0a6ec8;
+      --fondo: #f7fafd;
     }
-    body { font-family: 'Inter', Arial, sans-serif; background: var(--fondo);
-      color: var(--txt); margin:0; min-height:100vh; font-size: 1.04em;}
-    body.dark { --fondo: #171e29; --txt: #e4eaf6; --panel: #232c41; --input-bg: #1e2535;
-      --borde: #23304e; --slide-bg: #2a3752; --slide-active: #37cb72; background: var(--fondo); color: var(--txt);}
+    body { font-family: 'Inter', Arial, sans-serif; background: var(--fondo); color: var(--txt); margin:0; }
+    body.dark { --fondo: #171e29; --txt: #e4eaf6; --panel: #232c41; --borde: #23304e; background: var(--fondo); color: var(--txt);}
     .container { max-width: 700px; margin:0 auto 26px auto; padding: 8px;}
     header { display:flex; align-items:center; gap:14px; justify-content:center; margin:24px 0 18px 0;}
     header img { height:50px; border-radius:10px; box-shadow: 0 2px 14px #c6def3;}
@@ -35,56 +27,41 @@
     label { font-weight: 600; color: var(--azul); display: block; font-size: 1.03em; margin-bottom: 1px; letter-spacing:.1px;}
     body.dark label { color: #7bbcff;}
     .input-wrap { position:relative; margin-bottom:2px;}
-    input, select, textarea { width: 100%; box-sizing: border-box; border: 2px solid var(--borde); border-radius: 8px; font-size: 1em; padding: 10px 10px 10px 34px; background: var(--input-bg); color: var(--txt);}
+    input, select, textarea { width: 100%; box-sizing: border-box; border: 2px solid var(--borde); border-radius: 8px; font-size: 1em; padding: 10px 10px 10px 38px; background: #fafdff; color: var(--txt);}
     input:focus, textarea:focus, select:focus { border-color: var(--azul); background: #fff; color: var(--txt);}
     .input-icon { position:absolute; top:50%; left:10px; transform:translateY(-50%); font-size:1.13em; color: #93a5c6;}
-    .btn-row { display:flex; gap:10px; margin:9px 0;}
+    .mic-btn { position:absolute; right:8px; top:50%; transform:translateY(-50%); background:none; border:none; color:#13a0e5; font-size:1.25em; cursor:pointer; border-radius:5px; transition:background .12s;}
+    .mic-btn.listening { color:#d9143b; background:#f7e6ea;}
     .btn-main, #generateBtn, #shareBtn { background: linear-gradient(93deg, var(--azul), var(--rojo) 85%); color: #fff; font-size: 1.08em; font-weight: 600; border: none; border-radius: 9px; letter-spacing: .16px; padding: 13px 0; cursor:pointer; width:100%; box-shadow: 0 2px 10px #b6cde948; transition: transform .1s; margin-top: 8px;}
     .btn-main:active, #generateBtn:active, #shareBtn:active { transform: scale(.97);}
     .switch-wrap { display: flex; align-items:center; gap:6px; margin-bottom:5px;}
     .switch { position: relative; display: inline-block; width: 48px; height: 27px; vertical-align: middle;}
     .switch input { opacity:0; width:0; height:0;}
-    .slider { position: absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background: var(--slide-bg); border-radius:16px; transition:.18s;}
-    .slider:before { position:absolute; content:""; left:4px; top:4px; width:19px; height:19px; background:var(--slide-knob); border-radius:50%; transition:.17s; box-shadow: 0 1px 3px #b7b7b7;}
-    input:checked + .slider { background: var(--slide-active);}
+    .slider { position: absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background: #d0dbef; border-radius:16px; transition:.18s;}
+    .slider:before { position:absolute; content:""; left:4px; top:4px; width:19px; height:19px; background:#fff; border-radius:50%; transition:.17s; box-shadow: 0 1px 3px #b7b7b7;}
+    input:checked + .slider { background: #4bb450;}
     input:checked + .slider:before { transform: translateX(20px);}
     .slide-label {font-size: .97em; font-weight: 500; color: var(--txt);}
     .form-row.switches { gap:18px;}
-    h3 { font-size: 1.08em; color: var(--azul);}
-    body.dark h3 { color: #7bbcff;}
     .table-scroll { overflow-x:auto; border-radius:7px; }
     table { width:100%; border-collapse:collapse; margin-top:6px;}
     th, td { border:1.4px solid var(--borde); padding:10px 6px; font-size:.99em; background:transparent;}
     th { background:linear-gradient(90deg, #e8f2fb 75%, #f9e8ea 100%); color: var(--azul); font-weight: 600;}
-    tr { transition: background .2s;}
     tr.row-highlight { background: #d6f3e9 !important; animation:fadeRow .8s 1;}
-    @keyframes fadeRow {0%{background:#8be2d7;}100%{background:inherit;}}
     tr:nth-child(even) { background: #f5faff;}
-    td input { background:transparent; border:none; border-radius:0; padding:4px; width:96%; font-size:1em;}
     .btn-del { background:none; border:none; color:#c00; font-size:1.15em; cursor:pointer; transition: color .12s; padding:0 8px;}
     .btn-del:hover { color:#dc1e28;}
     .summary { margin-top:10px; text-align:right; font-size:1.01em; color: #384357;}
-    body.dark .summary { color: #c7d6ed;}
     .summary strong { font-size:1.14em;}
     .preview-container { margin-top:20px;}
     #previewResponsive { border:1.1px solid #d8e8f4; border-radius:8px; padding:12px; background: #f8fafc; font-size:1.04em; min-height:70px;}
-    body.dark #previewResponsive { background: #232c41; border-color:#1d2b44;}
-    /* SIDEBAR */
-    .sidebar { position:fixed; top:0; right:0; width:340px; max-width:99vw; height:100vh; background:var(--panel); box-shadow: -2px 0 28px #0a6ec81a; z-index:999; transition: transform 0.33s cubic-bezier(.44,0,.2,1); padding:25px 16px 19px 18px; border-radius:13px 0 0 13px; overflow-y:auto; transform:translateX(100%); pointer-events:none;}
-    .sidebar.open { transform:translateX(0); pointer-events:auto;}
-    .sidebar.closed { transform:translateX(100%); pointer-events:none;}
-    .sidebar h4 { color: var(--azul); margin-bottom:13px;}
-    .sidebar label { display:flex; align-items:center; gap:8px; font-weight:460; margin-bottom:10px; cursor:pointer; font-size:1.01em;}
-    .sidebar textarea { margin-top:6px; min-height:37px; background: #f4f8fd; border:2px solid var(--borde); font-size:1em; margin-bottom:4px; border-radius:7px; }
-    .sidebar-close { background:none; border:none; color:var(--azul); font-size:1.5em; position:absolute; top:8px; right:12px; cursor:pointer; border-radius:6px;}
-    .detalles-agregados { margin:8px 0 0 0; padding:0; list-style:disc; color:#384357; font-size:1.01em;}
-    .detalles-agregados li { margin:2px 0; display:flex; align-items:center; justify-content:space-between; gap:7px; background: #f7fcff; padding:5px 8px; border-radius:5px;}
-    .detalles-agregados .del-detalle { color:#c00; background:none; border:none; font-size:1.08em; cursor:pointer; margin-left:8px; border-radius:5px;}
-    #dictadoBtn { position:fixed; bottom:34px; right:24px; z-index:1500; background:#fff; color:var(--azul); border-radius:50%; width:54px; height:54px; font-size:2.1em; box-shadow:0 2px 10px #0a6ec83a; border:none; display:none; cursor:pointer; }
-    #dictadoStatus { position:fixed; bottom:90px; right:20px; z-index:1501; background:var(--panel); color:var(--primary); border-radius:12px; padding:8px 18px; box-shadow:0 1px 7px #123a49;}
     .ai-tools-bar { text-align:center; margin-bottom:8px;}
-    .ai-tools-bar label { color:var(--primary); font-weight:600; font-size:1.03em;}
+    .ai-tools-bar label { color:var(--azul); font-weight:600; font-size:1.03em;}
     .ai-toggle { margin:0 7px;}
+    .historico-bar {margin:12px 0 10px 0; display:flex; flex-wrap:wrap; gap:8px;}
+    .historico-bar button { font-size:.99em; padding:6px 10px; border-radius:7px; border:1.6px solid var(--azul); background:#e8f2fb; color:var(--azul); cursor:pointer;}
+    .historico-bar button.active {background:#0a6ec8;color:#fff;}
+    .historico-bar .delhist { color:#e00; margin-left:5px; background:transparent; border:none; cursor:pointer;}
     @media (max-width:700px){
       .container { max-width:99vw; padding:2vw;}
       .form-row { flex-direction:column; gap:4px;}
@@ -92,28 +69,7 @@
       .form-container, .preview-container { padding:9px 2px 12px 2px;}
       table, th, td { font-size:.96em;}
       #previewResponsive { font-size:.99em;}
-      .sidebar { width:97vw; max-width:99vw; padding-left:2vw; padding-right:2vw;}
-      #dictadoBtn { right:13px; bottom:12px;}
-      #dictadoStatus { right:7px;}
     }
-    #previewPDF {
-      display:none; width:210mm; min-height:297mm; background:#fff; padding:15mm 13mm 18mm 13mm; margin:0 auto;
-      font-size:13px; line-height:1.39; position:relative; overflow:hidden; box-shadow:0 1px 38px #b1b9d429;
-    }
-    #previewPDF .header { display:flex; justify-content:space-between; align-items:center; margin-bottom:13px;}
-    #previewPDF .header .logo-title { display:flex; flex-direction:column; align-items:center; gap:8px;}
-    #previewPDF .header img { max-width:210px; max-height:110px; display:block; margin:0 auto;}
-    #previewPDF .header .title-groupar { font-size:2.2em; font-weight:bold; letter-spacing:1.1px; margin-top:2px;}
-    #previewPDF .header .title-groupar .azul { color: #0a6ec8;}
-    #previewPDF .header .title-groupar .rojo { color: #dc1e28;}
-    #previewPDF .header .datos { text-align:right; font-size:1.14em;}
-    #previewPDF th, #previewPDF td { padding:7px; border:1.2px solid #cde0f6; text-align:left; font-size:13px;}
-    #previewPDF th { background: #e7f0fa; color:#0a6ec8; letter-spacing:.1px;}
-    #previewPDF .summary { text-align:right; font-size:13px; margin-bottom:11px;}
-    #previewPDF .firma-simbolica { margin-top:34px; text-align:right;}
-    #previewPDF .firma-simbolica svg { width:140px; height:60px; display:block; margin-left:auto; margin-bottom:0;}
-    #previewPDF .firma-texto { text-align:right; font-size:11.5px; color:#888; margin-top:2px;}
-    #previewPDF .footer { text-align:center; font-size:11.5px; color:#888; border-top:1px solid #ccc; padding-top:8px; position:absolute; bottom:12mm; left:13mm; right:13mm;}
   </style>
 </head>
 <body>
@@ -129,23 +85,25 @@
       </label>
       <label>
         <input type="checkbox" class="ai-toggle" id="aiPrediccion" checked>
-        ⚡ Autocompletar ítems más frecuentes
+        ⚡ Autocompletar ítems frecuentes
       </label>
     </div>
+    <div class="historico-bar" id="histContainer"></div>
     <div class="form-container">
       <div class="form-row">
         <div class="form-col">
           <label for="quoteTitle">Título de Cotización</label>
           <div class="input-wrap">
             <span class="input-icon">📝</span>
-            <input id="quoteTitle" placeholder="Cotización #1234" value="Cotización probable – Nuevo cliente">
+            <input id="quoteTitle" placeholder="Cotización #1234">
+            <button class="mic-btn" data-for="quoteTitle" title="Dictar"><span>🎤</span></button>
           </div>
         </div>
         <div class="form-col">
           <label for="fileName">Nombre de Archivo</label>
           <div class="input-wrap">
             <span class="input-icon">📄</span>
-            <input id="fileName" placeholder="cotizacion_1234" value="cotizacion_cliente" readonly>
+            <input id="fileName" placeholder="cotizacion_1234" readonly>
           </div>
         </div>
       </div>
@@ -162,6 +120,7 @@
           <div class="input-wrap">
             <span class="input-icon">👤</span>
             <input id="client" placeholder="Nombre del cliente">
+            <button class="mic-btn" data-for="client"><span>🎤</span></button>
           </div>
         </div>
         <div class="form-col">
@@ -169,6 +128,7 @@
           <div class="input-wrap">
             <span class="input-icon">📍</span>
             <input id="location" placeholder="Dirección o ubicación">
+            <button class="mic-btn" data-for="location"><span>🎤</span></button>
           </div>
         </div>
       </div>
@@ -202,6 +162,7 @@
             <span class="input-icon">🔧</span>
             <input id="newItemDesc" placeholder="Ej. Pintura" autocomplete="off" list="descPredictions">
             <datalist id="descPredictions"></datalist>
+            <button class="mic-btn" data-for="newItemDesc"><span>🎤</span></button>
           </div>
         </div>
         <div class="form-col" id="expressInputs" style="display:flex;">
@@ -210,6 +171,7 @@
             <div class="input-wrap">
               <span class="input-icon">$</span>
               <input id="newItemPrice" type="number" min="0" value="0" placeholder="Precio total" autocomplete="off">
+              <button class="mic-btn" data-for="newItemPrice"><span>🎤</span></button>
             </div>
           </div>
         </div>
@@ -219,6 +181,7 @@
             <div class="input-wrap">
               <span class="input-icon">#</span>
               <input id="newItemQty" type="number" min="1" value="1" placeholder="Cantidad" autocomplete="off">
+              <button class="mic-btn" data-for="newItemQty"><span>🎤</span></button>
             </div>
           </div>
           <div>
@@ -226,6 +189,7 @@
             <div class="input-wrap">
               <span class="input-icon">$</span>
               <input id="newItemMat" type="number" min="0" value="0" placeholder="Material" autocomplete="off">
+              <button class="mic-btn" data-for="newItemMat"><span>🎤</span></button>
             </div>
           </div>
           <div>
@@ -233,6 +197,7 @@
             <div class="input-wrap">
               <span class="input-icon">⚒️</span>
               <input id="newItemLab" type="number" min="0" value="0" placeholder="Mano obra" autocomplete="off">
+              <button class="mic-btn" data-for="newItemLab"><span>🎤</span></button>
             </div>
           </div>
         </div>
@@ -265,12 +230,17 @@
       <div id="previewResponsive"></div>
       <div style="text-align:center; margin-top:9px;">
         <button class="btn-main" id="generateBtn">Generar PDF</button>
-        <button class="btn-main" id="shareBtn">Compartir</button>
+        <button class="btn-main" id="shareBtn">Compartir PDF</button>
+        <button class="btn-main" id="saveHistBtn" style="background:#14b34a;margin-top:8px;">Guardar en Historial</button>
       </div>
     </div>
   </div>
-  <div class="sidebar closed" id="detailsDrawer" tabindex="-1" aria-modal="true" aria-label="Detalles">
-    <button class="sidebar-close" id="closeDetails" title="Cerrar">×</button>
+  <div id="previewPDF" style="display:none"></div>
+  <!-- SIDEBAR y resto del HTML sigue en la parte 2 -->
+  <!-- SIDEBAR Detalles -->
+  <div class="sidebar closed" id="detailsDrawer" tabindex="-1" aria-modal="true" aria-label="Detalles"
+    style="position:fixed;top:0;right:0;width:98vw;max-width:400px;min-width:220px;height:100%;background:#fff;box-shadow:-2px 0 20px #b4cde5cc;z-index:20;overflow-y:auto;padding:19px 18px 12px 18px;transition:right .23s;display:block;">
+    <button class="sidebar-close" id="closeDetails" title="Cerrar" style="position:absolute;top:12px;right:16px;font-size:1.8em;background:none;border:none;color:#e00;cursor:pointer;">×</button>
     <h4>Detalles y Especificaciones</h4>
     <div class="switch-wrap">
       <label class="slide-label" for="chk1">Pago 50% materiales antes de iniciar</label>
@@ -321,402 +291,514 @@
     <button type="button" id="addDetalleBtn" class="btn-main" style="background:#009e47; margin-bottom:9px;">Agregar detalle</button>
     <ul class="detalles-agregados" id="detallesAgregados"></ul>
   </div>
-  <div id="previewPDF"></div>
-  <button id="dictadoBtn" title="Dictar texto"><span>🎤</span></button>
-  <div id="dictadoStatus" style="display:none;"></div>
-  <!-- jsPDF -->
+  <div id="dictadoStatus" style="display:none;position:fixed;z-index:500;top:0;left:0;width:100vw;text-align:center;font-size:1.14em;color:#fff;background:#119ec1b8;padding:10px 0 10px 0;"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
-    // Dark mode auto
-    if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
-      document.body.classList.add("dark");
-    // SIDEBAR animado
-    const openDetailsBtn = document.getElementById('openDetails');
-    const closeDetailsBtn = document.getElementById('closeDetails');
-    const detailsDrawer = document.getElementById('detailsDrawer');
-    function openSidebar() {detailsDrawer.classList.remove('closed');detailsDrawer.classList.add('open');document.body.style.overflow="hidden";setTimeout(()=>detailsDrawer.focus(),250);}
-    function closeSidebar() {detailsDrawer.classList.remove('open');detailsDrawer.classList.add('closed');document.body.style.overflow="";}
-    openDetailsBtn.onclick = openSidebar; closeDetailsBtn.onclick = closeSidebar;
-    document.addEventListener('keydown', e=>{if((detailsDrawer.classList.contains('open'))&&e.key==='Escape') closeSidebar();});
-    // Sincronizar nombre de archivo
-    function syncTitleFileName() {
-      let t = document.getElementById('quoteTitle').value.toLowerCase().replace(/[^\w\s-]/g,'').trim().replace(/\s+/g,'_');
-      document.getElementById('fileName').value = t || "cotizacion";
+  // ========== MODO OSCURO
+  if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    document.body.classList.add("dark");
+  // ========== VARIABLES GLOBALES ==========
+  let items = [];
+  let detallesArray = [];
+  let frequentDescs = JSON.parse(localStorage.getItem('ar_frequentDescs')||'[]');
+  let frequentPrices = JSON.parse(localStorage.getItem('ar_frequentPrices')||'{}');
+  let hist = JSON.parse(localStorage.getItem('ar_historial')||'[]');
+  // ========== UTILIDADES ==============
+  function toMoney(val) { return "$" + (+val).toFixed(2); }
+  function actualizarArchivo() {
+    let t = document.getElementById('quoteTitle').value.toLowerCase().replace(/[^\w\s-]/g,'').trim().replace(/\s+/g,'_');
+    document.getElementById('fileName').value = t || "cotizacion";
+  }
+  document.getElementById('quoteTitle').addEventListener('input', actualizarArchivo);
+  document.addEventListener('DOMContentLoaded', actualizarArchivo);
+  // ========== SIDEBAR DETALLES ==========
+  const openDetailsBtn = document.getElementById('openDetails');
+  const closeDetailsBtn = document.getElementById('closeDetails');
+  const detailsDrawer = document.getElementById('detailsDrawer');
+  function openSidebar() {detailsDrawer.classList.remove('closed');detailsDrawer.style.right="0";document.body.style.overflow="hidden";setTimeout(()=>detailsDrawer.focus(),250);}
+  function closeSidebar() {detailsDrawer.classList.add('closed');detailsDrawer.style.right="-420px";document.body.style.overflow="";}
+  openDetailsBtn.onclick = openSidebar; closeDetailsBtn.onclick = closeSidebar;
+  document.addEventListener('keydown', e=>{if((detailsDrawer.style.right=="0px" || detailsDrawer.classList.contains('open'))&&e.key==='Escape') closeSidebar();});
+  // ========== ANTICIPO SWITCH ==========
+  document.getElementById('withAnticipoSwitch').onchange = function(){
+    document.getElementById('anticipoField').style.display = this.checked ? "" : "none";
+    recalc();
+  };
+  document.getElementById('anticipoPct').oninput = recalc;
+  // ========== PREDICCIÓN DESCRIPCIONES ==========
+  function updatePredictions() {
+    if (!document.getElementById('aiPrediccion').checked) return;
+    let dl = document.getElementById('descPredictions');
+    dl.innerHTML = frequentDescs.slice(-15).reverse().map(desc=>`<option value="${desc}">`).join('');
+  }
+  document.getElementById('newItemDesc').addEventListener('input', function(){
+    if (!document.getElementById('aiPrediccion').checked) return;
+    let val = this.value.trim();
+    let pr = frequentPrices[val];
+    if(pr && document.getElementById('quoteType').value==='express') document.getElementById('newItemPrice').value = pr;
+  });
+  // ========== TIPO DE COTIZACION UI ==========
+  function updateTypeUI() {
+    let quoteType = document.getElementById('quoteType');
+    let expressInputs = document.getElementById('expressInputs');
+    let detailedInputs = document.getElementById('detailedInputs');
+    let theadExpress = document.getElementById('thead-express');
+    let theadDetailed = document.getElementById('thead-detailed');
+    if (quoteType.value === "express") {
+      expressInputs.style.display = "flex";
+      detailedInputs.style.display = "none";
+      theadExpress.style.display = "";
+      theadDetailed.style.display = "none";
+    } else {
+      expressInputs.style.display = "none";
+      detailedInputs.style.display = "flex";
+      theadExpress.style.display = "none";
+      theadDetailed.style.display = "";
     }
-    document.getElementById('quoteTitle').addEventListener('input', syncTitleFileName);
-    document.addEventListener('DOMContentLoaded', syncTitleFileName);
-    // Tipo cotización
-    const quoteType = document.getElementById('quoteType');
-    const expressInputs = document.getElementById('expressInputs');
-    const detailedInputs = document.getElementById('detailedInputs');
-    const theadExpress = document.getElementById('thead-express');
-    const theadDetailed = document.getElementById('thead-detailed');
-    function updateTypeUI() {
-      if (quoteType.value === "express") {
-        expressInputs.style.display = "flex";
-        detailedInputs.style.display = "none";
-        theadExpress.style.display = "";
-        theadDetailed.style.display = "none";
-      } else {
-        expressInputs.style.display = "none";
-        detailedInputs.style.display = "flex";
-        theadExpress.style.display = "none";
-        theadDetailed.style.display = "";
+    renderTable();
+    recalc();
+  }
+  document.getElementById('quoteType').onchange = updateTypeUI;
+  // ========== AGREGAR ITEMS ==========
+  document.getElementById('addItemBtn').onclick = ()=>{
+    let desc = document.getElementById('newItemDesc').value.trim();
+    if(!desc) return document.getElementById('newItemDesc').focus();
+    if(document.getElementById('aiPrediccion').checked) {
+      if(!frequentDescs.includes(desc)) {
+        frequentDescs.push(desc);
+        if(frequentDescs.length>35) frequentDescs=frequentDescs.slice(-35);
       }
-      renderTable();
-      recalc();
     }
-    quoteType.onchange = updateTypeUI;
-    // Array para items y predicción
-    let items = [];
-    let frequentDescs = JSON.parse(localStorage.getItem('ar_frequentDescs')||'[]');
-    let frequentPrices = JSON.parse(localStorage.getItem('ar_frequentPrices')||'{}');
-    function updatePredictions() {
-      if (!document.getElementById('aiPrediccion').checked) return;
-      let dl = document.getElementById('descPredictions');
-      dl.innerHTML = frequentDescs.slice(-15).reverse().map(desc=>`<option value="${desc}">`).join('');
-    }
-    document.getElementById('newItemDesc').addEventListener('input', function(){
-      if (!document.getElementById('aiPrediccion').checked) return;
-      let val = this.value.trim();
-      let pr = frequentPrices[val];
-      if(pr && quoteType.value==='express') document.getElementById('newItemPrice').value = pr;
-    });
-    // Botón agregar item
-    document.getElementById('addItemBtn').onclick = ()=>{
-      let desc = document.getElementById('newItemDesc').value.trim();
-      if(!desc) return document.getElementById('newItemDesc').focus();
+    if(document.getElementById('quoteType').value==='express'){
+      let pr = parseFloat(document.getElementById('newItemPrice').value)||0;
       if(document.getElementById('aiPrediccion').checked) {
-        if(!frequentDescs.includes(desc)) {
-          frequentDescs.push(desc);
-          if(frequentDescs.length>35) frequentDescs=frequentDescs.slice(-35);
-        }
+        frequentPrices[desc]=pr;
+        localStorage.setItem('ar_frequentPrices',JSON.stringify(frequentPrices));
       }
-      if(quoteType.value==='express'){
-        let pr = parseFloat(document.getElementById('newItemPrice').value)||0;
-        if(document.getElementById('aiPrediccion').checked) {
-          frequentPrices[desc]=pr;
-          localStorage.setItem('ar_frequentPrices',JSON.stringify(frequentPrices));
-        }
-        items.push({desc, pr});
-      } else {
-        let qt = parseFloat(document.getElementById('newItemQty').value)||1;
-        let ma = parseFloat(document.getElementById('newItemMat').value)||0;
-        let lb = parseFloat(document.getElementById('newItemLab').value)||0;
-        items.push({desc, qt, ma, lb});
-      }
-      localStorage.setItem('ar_frequentDescs',JSON.stringify(frequentDescs));
-      // Limpiar y enfocar siguiente
-      document.getElementById('newItemDesc').value='';
-      document.getElementById('newItemPrice').value='0';
-      document.getElementById('newItemQty').value='1';
-      document.getElementById('newItemMat').value='0';
-      document.getElementById('newItemLab').value='0';
-      document.getElementById('newItemDesc').focus();
-      updatePredictions();
-      renderTable();
-      recalc();
-    };
-    // Render tabla segun tipo
-    function renderTable(){
-      const tbody = document.querySelector('#itemsTable tbody');
-      tbody.innerHTML = '';
-      items.forEach((item, idx)=>{
-        let tr = document.createElement('tr'); tr.className = 'row-highlight';
-        setTimeout(()=>tr.classList.remove('row-highlight'),700);
-        if(quoteType.value==='express'){
-          let pr = item.pr||0;
-          let total = pr.toFixed(2);
-          tr.innerHTML = `<td>${item.desc}</td>
-            <td>$${pr.toFixed(2)}</td>
-            <td>$${total}</td>
-            <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
-        } else {
-          let qt = item.qt||1, ma = item.ma||0, lb = item.lb||0;
-          let total = ((ma+lb)*qt).toFixed(2);
-          tr.innerHTML = `<td>${item.desc}</td>
-            <td>${qt}</td>
-            <td>$${ma.toFixed(2)}</td>
-            <td>$${lb.toFixed(2)}</td>
-            <td>$${total}</td>
-            <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
-        }
-        tbody.appendChild(tr);
-        tr.querySelector('.btn-del').onclick = ()=>{ items.splice(idx,1); renderTable(); recalc(); };
-      });
-      recalc();
+      items.push({desc, pr});
+    } else {
+      let qt = parseFloat(document.getElementById('newItemQty').value)||1;
+      let ma = parseFloat(document.getElementById('newItemMat').value)||0;
+      let lb = parseFloat(document.getElementById('newItemLab').value)||0;
+      items.push({desc, qt, ma, lb});
     }
-    // Calculo total
-    function recalc(){
-      let subtotal=0;
-      if(quoteType.value==="express"){
-        items.forEach(item=>{subtotal+=item.pr||0;});
+    localStorage.setItem('ar_frequentDescs',JSON.stringify(frequentDescs));
+    document.getElementById('newItemDesc').value='';
+    document.getElementById('newItemPrice').value='0';
+    document.getElementById('newItemQty').value='1';
+    document.getElementById('newItemMat').value='0';
+    document.getElementById('newItemLab').value='0';
+    document.getElementById('newItemDesc').focus();
+    updatePredictions();
+    renderTable();
+    recalc();
+  };
+  // ========== RENDER TABLA ==========
+  function renderTable(){
+    const tbody = document.querySelector('#itemsTable tbody');
+    tbody.innerHTML = '';
+    let tipo = document.getElementById('quoteType').value;
+    items.forEach((item, idx)=>{
+      let tr = document.createElement('tr'); tr.className = 'row-highlight';
+      setTimeout(()=>tr.classList.remove('row-highlight'),700);
+      if(tipo==='express'){
+        let pr = item.pr||0;
+        let total = pr.toFixed(2);
+        tr.innerHTML = `<td>${item.desc}</td>
+          <td>${toMoney(pr)}</td>
+          <td>${toMoney(total)}</td>
+          <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
       } else {
-        items.forEach(item=>{subtotal+=((item.ma||0)+(item.lb||0))*(item.qt||1);});
+        let qt = item.qt||1, ma = item.ma||0, lb = item.lb||0;
+        let total = ((ma+lb)*qt).toFixed(2);
+        tr.innerHTML = `<td>${item.desc}</td>
+          <td>${qt}</td>
+          <td>${toMoney(ma)}</td>
+          <td>${toMoney(lb)}</td>
+          <td>${toMoney(total)}</td>
+          <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
       }
-      document.getElementById('subtotal').textContent=subtotal.toFixed(2);
-      const ivaAmt=document.getElementById('withIvaSwitch').checked?subtotal*0.16:0;
-      document.getElementById('ivaAmount').textContent=ivaAmt.toFixed(2);
-      const total=subtotal+ivaAmt;
-      document.getElementById('totalAmount').textContent=total.toFixed(2);
-      const anticipo = document.getElementById('withAnticipoSwitch').checked ? parseFloat(document.getElementById('anticipoPct').value)||0 : 0;
-      document.getElementById('anticipoSummary').style.display = anticipo ? "" : "none";
-      document.getElementById('anticipoPctDisplay').textContent=anticipo;
-      document.getElementById('anticipoAmount').textContent=(total*anticipo/100).toFixed(2);
-      document.getElementById('balance').textContent=(total-total*anticipo/100).toFixed(2);
-      buildPreview(previewRes, false);
-    }
-    document.getElementById('withIvaSwitch').onchange = recalc;
-    document.getElementById('withAnticipoSwitch').onchange = function(){
-      document.getElementById('anticipoField').style.display = this.checked ? "" : "none";
-      recalc();
-    };
-    document.getElementById('anticipoPct').oninput = recalc;
-    // Detalles y especificaciones
-    const detallesArray = [];
-    document.getElementById('addDetalleBtn').onclick = function() {
-      let txt = document.getElementById('detalleAdicional').value.trim();
-      if(!txt) return;
-      detallesArray.push(txt);
-      document.getElementById('detalleAdicional').value = "";
-      renderDetalles();
-    };
-    function renderDetalles() {
-      const detallesAgregados = document.getElementById('detallesAgregados');
-      detallesAgregados.innerHTML = '';
-      detallesArray.forEach((t,idx)=>{
-        const li = document.createElement('li');
-        li.textContent = t;
-        const btn = document.createElement('button');
-        btn.textContent = "✕";
-        btn.className = "del-detalle";
-        btn.onclick = ()=>{ detallesArray.splice(idx,1); renderDetalles(); };
-        li.appendChild(btn);
-        detallesAgregados.appendChild(li);
-      });
-    }
-    // Vista previa
-    const previewRes = document.getElementById('previewResponsive');
-    function buildPreview(container, isPDF){
-      container.innerHTML = '';
-      // Header
-      if (isPDF) {
-        const hdr = document.createElement('div');
-        hdr.className = 'header';
-        hdr.innerHTML = `
-          <div class="logo-title">
-            <img src="https://i.imgur.com/kf8e57F.jpg" crossorigin="anonymous">
-            <div class="title-groupar"><span class="azul">GRUPO</span> <span class="rojo">AR</span></div>
-          </div>
-          <div class="datos">
-            <div style="font-size:1.17em; font-weight:bold"><b>${document.getElementById('quoteTitle').value}</b></div>
-            <div><strong>Cliente:</strong> ${document.getElementById('client').value||'--'}</div>
-            <div><strong>Ubicación:</strong> ${document.getElementById('location').value||'--'}</div>
-          </div>
-        `;
-        container.append(hdr);
-      } else {
-        const hdr = document.createElement('div');
-        hdr.className = 'header';
-        hdr.innerHTML = `
-          <img src="https://i.imgur.com/kf8e57F.jpg" alt="Logo" style="height:32px;margin-right:10px;">
-          <span style="font-weight:600;font-size:1.16em;color:#0a6ec8;">GRUPO <span style="color:#dc1e28">AR</span></span>
-        `;
-        container.append(hdr);
-        const t = document.createElement('div');
-        t.innerHTML = `<div style="font-size:1.09em"><b>${document.getElementById('quoteTitle').value}</b></div>
-        <div style="font-size:.98em"><strong>Cliente:</strong> ${document.getElementById('client').value||'--'}<br>
-        <strong>Ubicación:</strong> ${document.getElementById('location').value||'--'}</div>`;
-        t.style.marginBottom = "6px";
-        container.append(t);
-      }
-      // Tabla
-      const tbl=document.createElement('table');
-      if(quoteType.value==="express"){
-        tbl.innerHTML=`<thead><tr><th>Descripción</th><th>Precio</th><th>Total</th></tr></thead><tbody></tbody>`;
-        const body=tbl.querySelector('tbody');
-        items.forEach(item=>{
-          let tr = document.createElement('tr');
-          let pr = item.pr||0, total = pr.toFixed(2);
-          tr.innerHTML = `<td>${item.desc}</td><td>$${pr.toFixed(2)}</td><td>$${total}</td>`;
-          body.appendChild(tr);
-        });
-      } else {
-        tbl.innerHTML=`<thead><tr><th>Descripción</th><th>Cant.</th><th>Material</th><th>Mano Obra</th><th>Total</th></tr></thead><tbody></tbody>`;
-        const body=tbl.querySelector('tbody');
-        items.forEach(item=>{
-          let qt = item.qt||1, ma = item.ma||0, lb = item.lb||0;
-          let total = ((ma+lb)*qt).toFixed(2);
-          let tr = document.createElement('tr');
-          tr.innerHTML = `<td>${item.desc}</td><td>${qt}</td><td>$${ma.toFixed(2)}</td><td>$${lb.toFixed(2)}</td><td>$${total}</td>`;
-          body.appendChild(tr);
-        });
-      }
-      container.append(tbl);
-      // Summary
-      const sum=document.createElement('div'); sum.className='summary';
-      sum.innerHTML=`<div>Subtotal: $${document.getElementById('subtotal').textContent}</div>
-        <div>IVA: $${document.getElementById('ivaAmount').textContent}</div>
-        <div><strong>Total: $${document.getElementById('totalAmount').textContent}</strong></div>`;
-      const anticipo = document.getElementById('withAnticipoSwitch').checked ? parseFloat(document.getElementById('anticipoPct').value)||0 : 0;
-      if (anticipo) {
-        sum.innerHTML += `<div>Anticipo (${anticipo}%): $${document.getElementById('anticipoAmount').textContent}</div>`;
-      }
-      sum.innerHTML += `<div><strong>Saldo: $${document.getElementById('balance').textContent}</strong></div>`;
-      container.append(sum);
-      // Detalles y especificaciones
-      let checks=[];
-      for(let i=1;i<=11;i++){
-        if(document.getElementById('chk'+i).checked) checks.push(document.querySelector('label[for=chk'+i+']').innerText);
-      }
-      if(checks.length || detallesArray.length){
-        const dt=document.createElement('div');
-        dt.innerHTML=`<h4 style="color:#0a6ec8">Detalles y Especificaciones</h4>
-        <ul style="margin:4px 0 0 14px;">
-        ${checks.map(t=>`<li>${t}</li>`).join('')}
-        ${detallesArray.map(t=>`<li>${t}</li>`).join('')}
-        </ul>`;
-        container.append(dt);
-      }
-      // Firma simbólica sólo PDF
-      if(isPDF) {
-        const f=document.createElement('div');
-        f.className='firma-simbolica';
-        f.innerHTML = `
-          <div>
-            <svg viewBox="0 0 160 55">
-              <path d="M13,45 Q28,13 57,43 Q75,56 88,37 Q95,26 102,30 Q119,43 124,31 Q128,22 145,18" fill="none" stroke="#0a6ec8" stroke-width="2.3"/>
-              <text x="7" y="52" fill="#0a6ec8" font-family="cursive" font-size="30" font-weight="bold">Grupo AR</text>
-            </svg>
-          </div>
-          <div class="firma-texto">Firma simbólica. Este documento no requiere firma autógrafa para su validez.</div>
-        `;
-        container.append(f);
-      }
-      // Footer sólo PDF
-      if(isPDF) {
-        const ft=document.createElement('div'); ft.className='footer';
-        ft.textContent='GRUPO AR Construcción y Diseño — Tel: +52 1 438 134 6142';
-        container.append(ft);
-      }
-    }
-    // GENERAR PDF ULTRA LIGERO
-    document.getElementById('generateBtn').onclick = async ()=>{
-      // Mejora automática de redacción
-      if(document.getElementById('aiRedaccion').checked) await mejorarRedaccion();
-      buildPreview(previewPDF, true);
-      previewPDF.style.display='block';
-      let pdf = new window.jspdf.jsPDF({ unit:'mm', format:'a4', orientation:'portrait' });
-      // Marca de agua
-      let watermark = "https://i.imgur.com/kf8e57F.jpg";
-      let img = new Image(); img.src = watermark;
-      await new Promise(r=>{img.onload=r;});
-      pdf.addImage(img,"JPEG",35,80,140,140,"","FAST",0.06);
-      await pdf.html(previewPDF, {
-        margin:[15,13,25,13],
-        autoPaging: true,
-        html2canvas: { scale:1.25, backgroundColor:'#fff', useCORS:true }
-      });
-      previewPDF.style.display='none';
-      pdf.save((document.getElementById('fileName').value||'cotizacion')+'.pdf');
-    };
-    document.getElementById('shareBtn').onclick=async()=>{
-      alert('Usa "Generar PDF" y compártelo manualmente. (Función compartir nativa limitada por seguridad del navegador)');
-    };
-    document.addEventListener('DOMContentLoaded', ()=>{
-      updatePredictions();
-      renderTable();
-      recalc();
+      tbody.appendChild(tr);
+      tr.querySelector('.btn-del').onclick = ()=>{ items.splice(idx,1); renderTable(); recalc(); };
     });
-    // VISTA PREVIA DINÁMICA
-    setInterval(()=>buildPreview(previewRes, false), 650);
-    // --- DICTADO POR VOZ GENERAL ---
-    let dictadoTarget = null;
-    let recognition, dictadoActivo = false;
-    function supportSpeech(){
-      return window.SpeechRecognition||window.webkitSpeechRecognition;
+    recalc();
+  }
+  // ========== RESUMEN Y CÁLCULOS ==========
+  function recalc(){
+    let subtotal=0;
+    if(document.getElementById('quoteType').value==="express"){
+      items.forEach(item=>{subtotal+=item.pr||0;});
+    } else {
+      items.forEach(item=>{subtotal+=((item.ma||0)+(item.lb||0))*(item.qt||1);});
     }
-    const dictadoBtn = document.getElementById('dictadoBtn');
-    if(supportSpeech()){
-      dictadoBtn.style.display = 'block';
-      dictadoBtn.onclick = ()=>{
-        if(dictadoActivo){stopDictado();return;}
-        const allInputs = Array.from(document.querySelectorAll('input, textarea')).filter(inp=>!inp.readOnly && inp.offsetParent!==null);
-        let idx = allInputs.findIndex(i=>i===document.activeElement);
-        dictadoTarget = allInputs[idx>=0?idx:0];
-        startDictado();
-      };
-      document.querySelectorAll('input, textarea').forEach(inp=>{
-        inp.onfocus = ()=>{ dictadoTarget=inp; };
+    document.getElementById('subtotal').textContent=subtotal.toFixed(2);
+    const ivaAmt=document.getElementById('withIvaSwitch').checked?subtotal*0.16:0;
+    document.getElementById('ivaAmount').textContent=ivaAmt.toFixed(2);
+    const total=subtotal+ivaAmt;
+    document.getElementById('totalAmount').textContent=total.toFixed(2);
+    const anticipo = document.getElementById('withAnticipoSwitch').checked ? parseFloat(document.getElementById('anticipoPct').value)||0 : 0;
+    document.getElementById('anticipoSummary').style.display = anticipo ? "" : "none";
+    document.getElementById('anticipoPctDisplay').textContent=anticipo;
+    document.getElementById('anticipoAmount').textContent=(total*anticipo/100).toFixed(2);
+    document.getElementById('balance').textContent=(total-total*anticipo/100).toFixed(2);
+    buildPreview(previewRes, false);
+  }
+  document.getElementById('withIvaSwitch').onchange = recalc;
+  // ========== DETALLES Y ESPECIFICACIONES ==========
+  document.getElementById('addDetalleBtn').onclick = function() {
+    let txt = document.getElementById('detalleAdicional').value.trim();
+    if(!txt) return;
+    detallesArray.push(txt);
+    document.getElementById('detalleAdicional').value = "";
+    renderDetalles();
+  };
+  function renderDetalles() {
+    const detallesAgregados = document.getElementById('detallesAgregados');
+    detallesAgregados.innerHTML = '';
+    detallesArray.forEach((t,idx)=>{
+      const li = document.createElement('li');
+      li.textContent = t;
+      const btn = document.createElement('button');
+      btn.textContent = "✕";
+      btn.className = "del-detalle";
+      btn.onclick = ()=>{ detallesArray.splice(idx,1); renderDetalles(); };
+      li.appendChild(btn);
+      detallesAgregados.appendChild(li);
+    });
+  }
+  // ========== VISTA PREVIA ==========
+  const previewRes = document.getElementById('previewResponsive');
+  function buildPreview(container, isPDF){
+    container.innerHTML = '';
+    // Header
+    const hdr = document.createElement('div');
+    hdr.className = 'header';
+    hdr.innerHTML = `<img src="https://i.imgur.com/kf8e57F.jpg" alt="Logo" style="height:${isPDF?'56':'32'}px;margin-right:10px;">
+      <span style="font-weight:600;font-size:1.16em;color:#0a6ec8;">GRUPO <span style="color:#dc1e28">AR</span></span>`;
+    container.append(hdr);
+    const t = document.createElement('div');
+    t.innerHTML = `<div style="font-size:1.09em"><b>${document.getElementById('quoteTitle').value}</b></div>
+    <div style="font-size:.98em"><strong>Cliente:</strong> ${document.getElementById('client').value||'--'}<br>
+    <strong>Ubicación:</strong> ${document.getElementById('location').value||'--'}</div>`;
+    t.style.marginBottom = "6px";
+    container.append(t);
+    // Tabla
+    const tbl=document.createElement('table');
+    let tipo=document.getElementById('quoteType').value;
+    if(tipo==="express"){
+      tbl.innerHTML=`<thead><tr><th>Descripción</th><th>Precio</th><th>Total</th></tr></thead><tbody></tbody>`;
+      const body=tbl.querySelector('tbody');
+      items.forEach(item=>{
+        let tr = document.createElement('tr');
+        let pr = item.pr||0, total = pr.toFixed(2);
+        tr.innerHTML = `<td>${item.desc}</td><td>${toMoney(pr)}</td><td>${toMoney(total)}</td>`;
+        body.appendChild(tr);
+      });
+    } else {
+      tbl.innerHTML=`<thead><tr><th>Descripción</th><th>Cant.</th><th>Material</th><th>Mano Obra</th><th>Total</th></tr></thead><tbody></tbody>`;
+      const body=tbl.querySelector('tbody');
+      items.forEach(item=>{
+        let qt = item.qt||1, ma = item.ma||0, lb = item.lb||0;
+        let total = ((ma+lb)*qt).toFixed(2);
+        let tr = document.createElement('tr');
+        tr.innerHTML = `<td>${item.desc}</td><td>${qt}</td><td>${toMoney(ma)}</td><td>${toMoney(lb)}</td><td>${toMoney(total)}</td>`;
+        body.appendChild(tr);
       });
     }
-    function startDictado(){
-      if(!supportSpeech()) return;
-      recognition = recognition||new (window.SpeechRecognition||window.webkitSpeechRecognition)();
-      recognition.lang = "es-MX";
-      recognition.interimResults = false;
-      dictadoActivo = true;
-      dictadoBtn.style.background="#f9d472"; dictadoBtn.style.color="#222";
-      document.getElementById('dictadoStatus').style.display = 'block';
-      document.getElementById('dictadoStatus').textContent = "Escuchando…";
-      recognition.start();
-      recognition.onresult = function(ev){
-        let txt = ev.results[0][0].transcript;
-        if(dictadoTarget){
-          if(dictadoTarget.value) dictadoTarget.value += " " + txt;
-          else dictadoTarget.value = txt;
-          dictadoTarget.focus();
-        }
-        document.getElementById('dictadoStatus').textContent = "Dictado listo ✔️";
-        setTimeout(()=>document.getElementById('dictadoStatus').style.display='none', 1300);
-      };
-      recognition.onend = function(){ dictadoActivo = false; dictadoBtn.style.background=""; dictadoBtn.style.color="";};
-      recognition.onerror = function(){ dictadoActivo = false; dictadoBtn.style.background=""; dictadoBtn.style.color=""; document.getElementById('dictadoStatus').textContent="Error en dictado";};
+    container.append(tbl);
+    // Summary
+    const sum=document.createElement('div'); sum.className='summary';
+    sum.innerHTML=`<div>Subtotal: $${document.getElementById('subtotal').textContent}</div>
+      <div>IVA: $${document.getElementById('ivaAmount').textContent}</div>
+      <div><strong>Total: $${document.getElementById('totalAmount').textContent}</strong></div>`;
+    const anticipo = document.getElementById('withAnticipoSwitch').checked ? parseFloat(document.getElementById('anticipoPct').value)||0 : 0;
+    if (anticipo) {
+      sum.innerHTML += `<div>Anticipo (${anticipo}%): $${document.getElementById('anticipoAmount').textContent}</div>`;
     }
-    function stopDictado(){if(recognition){recognition.stop();dictadoActivo=false;dictadoBtn.style.background="";dictadoBtn.style.color="";}}
-    // --- MEJORA AUTOMÁTICA (Redacción/Ortografía) ---
-    async function mejorarRedaccion(){
-      // Simulación: mejora capitalización, quita dobles espacios, y pone mayúscula inicial y punto.
-      function corrigeFrase(txt){
-        txt = txt.replace(/\s+/g," ").trim();
-        if(txt.length===0) return "";
-        txt = txt.charAt(0).toUpperCase() + txt.slice(1);
-        if(!txt.endsWith(".")) txt += ".";
-        return txt;
+    sum.innerHTML += `<div><strong>Saldo: $${document.getElementById('balance').textContent}</strong></div>`;
+    container.append(sum);
+    // Detalles y especificaciones
+    let checks=[];
+    for(let i=1;i<=11;i++){
+      if(document.getElementById('chk'+i).checked) checks.push(document.querySelector('label[for=chk'+i+']').innerText);
+    }
+    if(checks.length || detallesArray.length){
+      const dt=document.createElement('div');
+      dt.innerHTML=`<h4 style="color:#0a6ec8">Detalles y Especificaciones</h4>
+      <ul style="margin:4px 0 0 14px;">
+      ${checks.map(t=>`<li>${t}</li>`).join('')}
+      ${detallesArray.map(t=>`<li>${t}</li>`).join('')}
+      </ul>`;
+      container.append(dt);
+    }
+    // Firma simbólica sólo PDF
+    if(isPDF) {
+      const f=document.createElement('div');
+      f.className='firma-simbolica';
+      f.innerHTML = `
+        <div>
+          <svg viewBox="0 0 160 55">
+            <path d="M13,45 Q28,13 57,43 Q75,56 88,37 Q95,26 102,30 Q119,43 124,31 Q128,22 145,18" fill="none" stroke="#0a6ec8" stroke-width="2.3"/>
+            <text x="7" y="52" fill="#0a6ec8" font-family="cursive" font-size="30" font-weight="bold">Grupo AR</text>
+          </svg>
+        </div>
+        <div class="firma-texto">Firma simbólica digital — No requiere firma autógrafa.</div>
+      `;
+      container.append(f);
+    }
+    // Footer sólo PDF
+    if(isPDF) {
+      const ft=document.createElement('div'); ft.className='footer';
+      ft.textContent='GRUPO AR Construcción y Diseño — Tel: +52 1 438 134 6142';
+      container.append(ft);
+    }
+  }
+  // VISTA PREVIA EN TIEMPO REAL
+  setInterval(()=>buildPreview(previewRes, false), 700);
+
+  // ========== HISTÓRICO DE COTIZACIONES ==========
+  function guardarHistorial(){
+    const datos = {
+      title: document.getElementById('quoteTitle').value,
+      client: document.getElementById('client').value,
+      location: document.getElementById('location').value,
+      type: document.getElementById('quoteType').value,
+      items: JSON.parse(JSON.stringify(items)),
+      detalles: JSON.parse(JSON.stringify(detallesArray)),
+      chk: Array.from({length:11},(_,i)=>document.getElementById('chk'+(i+1)).checked),
+      iva: document.getElementById('withIvaSwitch').checked,
+      anticipo: document.getElementById('withAnticipoSwitch').checked,
+      anticipoPct: document.getElementById('anticipoPct').value
+    };
+    let hist = JSON.parse(localStorage.getItem('ar_historial')||'[]');
+    // Si ya existe cotización con el mismo nombre, sobreescribe
+    let idx = hist.findIndex(h=>h.title===datos.title);
+    if(idx>=0) hist[idx]=datos;
+    else hist.push(datos);
+    localStorage.setItem('ar_historial',JSON.stringify(hist));
+    mostrarHistorial();
+    alert("Cotización guardada en historial.");
+  }
+  function mostrarHistorial(){
+    let hist = JSON.parse(localStorage.getItem('ar_historial')||'[]');
+    let cont = document.getElementById('histContainer');
+    cont.innerHTML = hist.map((h,i)=>
+      `<button onclick="cargarHistorial(${i})">${h.title||"Sin título"}</button>
+       <button class="delhist" title="Eliminar" onclick="eliminarHistorial(${i})">🗑️</button>`
+    ).join("");
+  }
+  window.cargarHistorial = function(idx){
+    let hist = JSON.parse(localStorage.getItem('ar_historial')||'[]');
+    if(!hist[idx]) return;
+    const h = hist[idx];
+    document.getElementById('quoteTitle').value = h.title;
+    document.getElementById('client').value = h.client;
+    document.getElementById('location').value = h.location;
+    document.getElementById('quoteType').value = h.type;
+    items = JSON.parse(JSON.stringify(h.items));
+    detallesArray = JSON.parse(JSON.stringify(h.detalles));
+    for(let i=0;i<11;i++) document.getElementById('chk'+(i+1)).checked = !!h.chk[i];
+    document.getElementById('withIvaSwitch').checked = h.iva;
+    document.getElementById('withAnticipoSwitch').checked = h.anticipo;
+    document.getElementById('anticipoPct').value = h.anticipoPct;
+    updateTypeUI(); renderTable(); recalc(); renderDetalles();
+  }
+  window.eliminarHistorial = function(idx){
+    let hist = JSON.parse(localStorage.getItem('ar_historial')||'[]');
+    hist.splice(idx,1);
+    localStorage.setItem('ar_historial',JSON.stringify(hist));
+    mostrarHistorial();
+  }
+  document.getElementById('saveHistBtn').onclick = guardarHistorial;
+  mostrarHistorial();
+
+  // ========== DICTADO INDIVIDUAL EN CADA CAMPO ==========
+  let dictadoActivo = null;
+  let recognition;
+  function supportSpeech(){
+    return window.SpeechRecognition||window.webkitSpeechRecognition;
+  }
+  function startDictado(target){
+    if(!supportSpeech()) return;
+    if(dictadoActivo) stopDictado();
+    recognition = new (window.SpeechRecognition||window.webkitSpeechRecognition)();
+    recognition.lang = "es-MX";
+    recognition.interimResults = false;
+    dictadoActivo = target;
+    target.classList.add('listening');
+    document.getElementById('dictadoStatus').textContent = "Escuchando…";
+    document.getElementById('dictadoStatus').style.display = 'block';
+    recognition.start();
+    recognition.onresult = function(ev){
+      let txt = ev.results[0][0].transcript;
+      let inp = document.getElementById(target.getAttribute("data-for"));
+      if(inp){
+        inp.value = (inp.value ? inp.value + " " : "") + txt;
+        inp.focus();
+        if(inp.oninput) inp.oninput();
       }
-      // Título
-      let t = document.getElementById('quoteTitle');
-      t.value = corrigeFrase(t.value);
-      // Cliente
-      let cl = document.getElementById('client');
-      cl.value = corrigeFrase(cl.value);
-      // Ubicación
-      let loc = document.getElementById('location');
-      loc.value = corrigeFrase(loc.value);
-      // Ítems
-      items = items.map(it=>{
-        if(quoteType.value==='express'){
-          return { desc: corrigeFrase(it.desc), pr: it.pr };
-        } else {
-          return { desc: corrigeFrase(it.desc), qt: it.qt, ma: it.ma, lb: it.lb };
-        }
+      document.getElementById('dictadoStatus').textContent = "Dictado listo ✔️";
+      setTimeout(()=>document.getElementById('dictadoStatus').style.display='none', 1100);
+    };
+    recognition.onend = function(){ target.classList.remove('listening'); dictadoActivo=null; document.getElementById('dictadoStatus').style.display='none';};
+    recognition.onerror = function(){ target.classList.remove('listening'); dictadoActivo=null; document.getElementById('dictadoStatus').textContent="Error en dictado";};
+  }
+  function stopDictado(){
+    if(recognition){recognition.stop();}
+    let btns = document.querySelectorAll('.mic-btn');
+    btns.forEach(btn=>btn.classList.remove('listening'));
+    dictadoActivo=null;
+    document.getElementById('dictadoStatus').style.display='none';
+  }
+  document.querySelectorAll('.mic-btn').forEach(btn=>{
+    btn.onclick = (e)=>{
+      e.preventDefault();
+      if(btn.classList.contains('listening')) { stopDictado(); return;}
+      startDictado(btn);
+    };
+  });
+
+  // ========== MEJORA AUTOMÁTICA (Redacción/Ortografía) ==========
+  async function mejorarRedaccion(){
+    function corrigeFrase(txt){
+      txt = txt.replace(/\s+/g," ").trim();
+      if(txt.length===0) return "";
+      txt = txt.charAt(0).toUpperCase() + txt.slice(1);
+      if(!txt.endsWith(".")) txt += ".";
+      return txt;
+    }
+    let t = document.getElementById('quoteTitle');
+    t.value = corrigeFrase(t.value);
+    let cl = document.getElementById('client');
+    cl.value = corrigeFrase(cl.value);
+    let loc = document.getElementById('location');
+    loc.value = corrigeFrase(loc.value);
+    items = items.map(it=>{
+      if(document.getElementById('quoteType').value==='express'){
+        return { desc: corrigeFrase(it.desc), pr: it.pr };
+      } else {
+        return { desc: corrigeFrase(it.desc), qt: it.qt, ma: it.ma, lb: it.lb };
+      }
+    });
+    for(let i=0;i<detallesArray.length;i++){
+      detallesArray[i] = corrigeFrase(detallesArray[i]);
+    }
+    renderTable();
+    recalc();
+    return Promise.resolve();
+  }
+
+  // ========== PDF PROFESIONAL ==========
+  async function generarPDFpro() {
+    if(document.getElementById('aiRedaccion').checked) await mejorarRedaccion();
+    let doc = new window.jspdf.jsPDF({unit:'mm', format:'a4'});
+    // Marca de agua (logo pálido)
+    let img = new Image();
+    img.src = "https://i.imgur.com/kf8e57F.jpg";
+    await new Promise(r=>{img.onload=r;});
+    doc.addImage(img, 'JPEG', 30, 55, 150, 150, '', 'FAST', 0.1);
+    doc.setFont('helvetica','bold'); doc.setFontSize(20);
+    doc.setTextColor(10,110,200);
+    doc.text("GRUPO", 17, 25);
+    doc.setTextColor(220,30,40);
+    doc.text("AR", 53, 25);
+    doc.setFontSize(13); doc.setTextColor(33,43,60);
+    doc.text(document.getElementById('quoteTitle').value, 17, 33);
+    doc.setFontSize(10);
+    doc.text(`Cliente: ${document.getElementById('client').value||'--'}`,17,39);
+    doc.text(`Ubicación: ${document.getElementById('location').value||'--'}`,17,44);
+    // Tabla
+    let y = 53;
+    let tipo = document.getElementById('quoteType').value;
+    doc.setFontSize(11); doc.setTextColor(10,110,200);
+    if(tipo==='express') {
+      doc.text("Descripción",17,y); doc.text("Precio",95,y); doc.text("Total",140,y);
+      y+=7; doc.setLineWidth(0.25); doc.line(17,y,195,y); doc.setTextColor(40,40,45); doc.setFontSize(10);
+      items.forEach(it=>{
+        doc.text(it.desc,17,y+6);
+        doc.text(`$${(it.pr||0).toFixed(2)}`,95,y+6);
+        doc.text(`$${(it.pr||0).toFixed(2)}`,140,y+6);
+        y+=8.3;
       });
-      // Detalles adicionales
-      for(let i=0;i<detallesArray.length;i++){
-        detallesArray[i] = corrigeFrase(detallesArray[i]);
-      }
-      renderTable();
-      recalc();
-      return Promise.resolve();
+    } else {
+      doc.text("Descripción",17,y); doc.text("Cant.",90,y); doc.text("Material",110,y); doc.text("Mano Obra",137,y); doc.text("Total",170,y);
+      y+=7; doc.setLineWidth(0.25); doc.line(17,y,195,y); doc.setTextColor(40,40,45); doc.setFontSize(10);
+      items.forEach(it=>{
+        let tot = ((it.ma||0)+(it.lb||0))*(it.qt||1);
+        doc.text(it.desc,17,y+6); doc.text(`${it.qt||1}`,90,y+6);
+        doc.text(`$${(it.ma||0).toFixed(2)}`,110,y+6); doc.text(`$${(it.lb||0).toFixed(2)}`,137,y+6);
+        doc.text(`$${tot.toFixed(2)}`,170,y+6);
+        y+=8.3;
+      });
     }
-    // Actualizar predicciones si se activa/desactiva
-    document.getElementById('aiPrediccion').onchange = updatePredictions;
-    // Vuelve a renderizar
-    quoteType.onchange = updateTypeUI;
-    // Sincronizar título de archivo
-    document.getElementById('quoteTitle').addEventListener('input', syncTitleFileName);
-    // Para móviles, hide dictado en teclado
-    window.addEventListener('blur', ()=>{ if(dictadoActivo) stopDictado(); });
+    y+=6;
+    doc.setFontSize(11); doc.setTextColor(10,110,200);
+    let subtotal=parseFloat(document.getElementById('subtotal').textContent)||0;
+    let iva=parseFloat(document.getElementById('ivaAmount').textContent)||0;
+    let total=parseFloat(document.getElementById('totalAmount').textContent)||0;
+    let anticipo=parseFloat(document.getElementById('anticipoAmount').textContent)||0;
+    let saldo=parseFloat(document.getElementById('balance').textContent)||0;
+    doc.text(`Subtotal: $${subtotal.toFixed(2)}`,140,y);
+    doc.text(`IVA: $${iva.toFixed(2)}`,140,y+6);
+    doc.setFont('helvetica','bold');
+    doc.text(`Total: $${total.toFixed(2)}`,140,y+12);
+    if(anticipo>0){
+      doc.setFont('helvetica','normal'); doc.setFontSize(10);
+      doc.text(`Anticipo: $${anticipo.toFixed(2)}`,140,y+18);
+      doc.text(`Saldo: $${saldo.toFixed(2)}`,140,y+24);
+      y+=12;
+    }
+    y+=24;
+    doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(10,110,200);
+    doc.text("Detalles y Especificaciones:",17,y);
+    doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(60,60,60);
+    let y0 = y+4;
+    let detalles = [];
+    for(let i=1;i<=11;i++) if(document.getElementById('chk'+i).checked) detalles.push(document.querySelector('label[for=chk'+i+']').innerText);
+    if(window.detallesArray && window.detallesArray.length) detalles = detalles.concat(window.detallesArray);
+    detalles.forEach((d,idx)=>{
+      doc.text(`• ${d}`, 19, y0+6*idx);
+    });
+    y0 += 6*detalles.length;
+    y0+=15;
+    doc.setDrawColor(10,110,200); doc.setLineWidth(0.7);
+    doc.line(120, y0, 185, y0);
+    doc.setFont('times','italic'); doc.setTextColor(10,110,200); doc.setFontSize(17);
+    doc.text("Grupo AR", 123, y0+7);
+    doc.setFontSize(9); doc.setTextColor(140,140,140); doc.setFont('helvetica','normal');
+    doc.text("Firma simbólica digital — No requiere firma autógrafa.",120, y0+13);
+    doc.setFontSize(9); doc.setTextColor(150,150,150);
+    doc.text("GRUPO AR Construcción y Diseño — Tel: +52 1 438 134 6142",105,287,{align:'center'});
+    let fname=(document.getElementById('fileName').value||'cotizacion')+'.pdf';
+    doc.save(fname);
+    return fname;
+  }
+  document.getElementById('generateBtn').onclick = generarPDFpro;
+  document.getElementById('shareBtn').onclick = async ()=>{
+    let fname = await generarPDFpro();
+    if(navigator.canShare && window.showOpenFilePicker){
+      try {
+        let picker = await window.showOpenFilePicker({
+          types:[{description:"PDF",accept:{"application/pdf":[".pdf"]}}],
+          excludeAcceptAllOption:true,multiple:false
+        });
+        let fileHandle = picker[0];
+        let writable = await fileHandle.createWritable();
+        let docData = window.jspdf.jsPDF().output("arraybuffer");
+        await writable.write(docData);
+        await writable.close();
+        await navigator.share({
+          files: [new File([docData], fname, {type:"application/pdf"})],
+          title: fname,
+          text: "Cotización GRUPO AR"
+        });
+      } catch(e){ alert("No se pudo compartir automáticamente. Abre el PDF desde tu gestor de archivos para compartirlo."); }
+    } else {
+      alert("Comparte el PDF manualmente desde tu gestor de archivos. (Función compartir automática no soportada en este navegador)");
+    }
+  };
+  // Inicializar la app
+  updateTypeUI(); renderTable(); recalc(); renderDetalles();
   </script>
 </body>
 </html>
