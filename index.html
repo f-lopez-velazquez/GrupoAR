@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="manifest" href="manifest.json">
+<link rel="icon" sizes="192x192" href="https://i.imgur.com/kf8e57F.jpg">
+<meta name="theme-color" content="#0a6ec8">
+
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Cotizador Grupo AR</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --azul: #0a6ec8;
@@ -675,118 +680,159 @@ async function mejorarRedaccion() {
 
 // ==== PDF premium PRO ====
 async function generarPDFpro() {
-  if(document.getElementById('aiRedaccion').checked) await mejorarRedaccion();
-  let doc = new window.jspdf.jsPDF({unit:'mm', format:'a4'});
-  let img = new window.Image();
-  img.crossOrigin = "anonymous";
-  img.src = "https://i.imgur.com/kf8e57F.jpg";
-  await new Promise(r=>{img.onload=r;});
+  if (document.getElementById('aiRedaccion').checked) await mejorarRedaccion();
 
-  // --- Marca de agua super tenue ---
+  const doc = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' });
+  const w = doc.internal.pageSize.getWidth();
+  const h = doc.internal.pageSize.getHeight();
+  const margin = 15;
+  const logo = new Image();
+  logo.crossOrigin = "anonymous";
+  logo.src = "https://i.imgur.com/kf8e57F.jpg";
+  await new Promise(r => { logo.onload = r; });
+
+  // --- Marca de agua ---
   doc.saveGraphicsState();
-  doc.setGState(new doc.GState({opacity:0.045}));
-  doc.addImage(img, 'JPEG', 45, 80, 120, 120, '', 'FAST');
+  doc.setGState(new doc.GState({ opacity: 0.035 }));
+  doc.addImage(logo, 'JPEG', (w-90)/2, (h-110)/2, 90, 110);
   doc.restoreGraphicsState();
 
-  // --- Encabezado: dos columnas ---
-  doc.addImage(img, 'JPEG', 17, 16, 32, 32, '', 'FAST');
+  // --- Encabezado ---
+  // Logo más grande a la izquierda
+  doc.addImage(logo, 'JPEG', margin, margin+2, 23, 29);
+  // "GRUPO AR" pequeño a la derecha del logo
   doc.setFont('helvetica','bold');
-  doc.setFontSize(19); doc.setTextColor(10,110,200);
-  doc.text("GRUPO", 55, 22);
-  doc.setTextColor(220,30,40); doc.text("AR", 90, 22);
-  doc.setTextColor(30,33,45); doc.setFontSize(12.5);
+  doc.setFontSize(12.5);
+  doc.setTextColor(10, 110, 200);
+  doc.text("GRUPO", margin + 28, margin + 13);
+  doc.setTextColor(220, 30, 40);
+  doc.text("AR", margin + 48, margin + 13);
 
-  // Segunda columna (datos del cliente)
-  let fecha = new Date(), ftxt = fecha.toLocaleDateString();
-  doc.setFont('helvetica','normal');
-  doc.text(`Cliente: ${document.getElementById('client').value||'--'}`, 130, 20);
-  doc.text(`Ubicación: ${document.getElementById('location').value||'--'}`, 130, 26);
-  doc.text(`Fecha: ${ftxt}`, 130, 32);
+  // Datos cliente/ubicación/fecha alineados a la derecha
+  doc.setFontSize(9.5);
+  doc.setTextColor(65, 65, 65);
+  doc.setFont('helvetica', 'normal');
+  let encY = margin + 4;
+  doc.text("Cotización probable – Nuevo cliente", w - margin, encY, { align: 'right' });
+  doc.setFont('helvetica', 'bold');
+  doc.text("Cliente:", w - margin - 32, encY + 8, { align: 'right' });
+  doc.text("Ubicación:", w - margin - 32, encY + 14, { align: 'right' });
+  doc.setFont('helvetica', 'normal');
+  doc.text(document.getElementById('client').value || '--', w - margin, encY + 8, { align: 'right' });
+  doc.text(document.getElementById('location').value || '--', w - margin, encY + 14, { align: 'right' });
+  doc.text("Fecha: " + (new Date().toLocaleDateString()), w - margin, encY + 20, { align: 'right' });
 
+  // Línea divisoria SUTIL (sin tapar el logo)
+  doc.setDrawColor(200, 210, 220);
+  doc.setLineWidth(0.6);
+  doc.line(margin, margin+32.5, w - margin, margin+32.5);
+
+  // --- Tabla de ítems ---
+  let y = margin + 38;
+  const tipo = document.getElementById('quoteType').value;
   doc.setFont('helvetica','bold');
-  doc.setFontSize(13); doc.setTextColor(10,110,200);
-  doc.text(document.getElementById('quoteTitle').value, 17, 54);
+  doc.setFontSize(9.7);
+  doc.setFillColor(10,110,200);
+  doc.setTextColor(255,255,255);
 
-  // --- Tabla Premium ---
-  let y = 63;
-  let tipo = document.getElementById('quoteType').value;
-  doc.setFont('helvetica','bold'); doc.setFontSize(10.6); doc.setTextColor(10,110,200);
-  if(tipo==='express') {
-    // Header
-    doc.text("Descripción",17,y); doc.text("Precio",97,y,{align:'right'}); doc.text("Total",144,y,{align:'right'});
-    doc.setLineWidth(0.22); doc.line(17,y+2,192,y+2);
-    doc.setFont('helvetica','normal'); doc.setFontSize(10.2); doc.setTextColor(40,40,45);
-    y+=8;
+  if (tipo === 'express') {
+    doc.rect(margin, y, w-margin*2, 7.2, 'F');
+    doc.text("Descripción", margin+2, y+5.3);
+    doc.text("Precio", w-margin-48, y+5.3, {align:'right'});
+    doc.text("Total", w-margin-10, y+5.3, {align:'right'});
+    y += 8.3;
+    doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
+    let subtotal=0;
     items.forEach(it=>{
-      doc.text(it.desc,17,y);
-      doc.text(`$${(it.pr||0).toFixed(2)}`,97,y,{align:'right'});
-      doc.text(`$${(it.pr||0).toFixed(2)}`,144,y,{align:'right'});
-      y+=7.2;
+      doc.text(it.desc, margin+2, y);
+      doc.text(`$${(it.pr||0).toFixed(2)}`, w-margin-48, y, {align:'right'});
+      doc.text(`$${(it.pr||0).toFixed(2)}`, w-margin-10, y, {align:'right'});
+      y+=6.5; subtotal += it.pr||0;
     });
   } else {
-    doc.text("Descripción",17,y); doc.text("Cant.",81,y,{align:'center'});
-    doc.text("Material",108,y,{align:'right'}); doc.text("Mano Obra",135,y,{align:'right'}); doc.text("Total",167,y,{align:'right'});
-    doc.setLineWidth(0.22); doc.line(17,y+2,192,y+2);
-    doc.setFont('helvetica','normal'); doc.setFontSize(10.2); doc.setTextColor(40,40,45);
-    y+=8;
+    doc.rect(margin, y, w-margin*2, 7.2, 'F');
+    doc.text("Descripción", margin+2, y+5.3);
+    doc.text("Cant.", w-margin-70, y+5.3, {align:'right'});
+    doc.text("Material", w-margin-52, y+5.3, {align:'right'});
+    doc.text("Mano Obra", w-margin-28, y+5.3, {align:'right'});
+    doc.text("Total", w-margin-10, y+5.3, {align:'right'});
+    y += 8.3;
+    doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
     items.forEach(it=>{
-      let tot = ((it.ma||0)+(it.lb||0))*(it.qt||1);
-      doc.text(it.desc,17,y);
-      doc.text(`${it.qt||1}`,81,y,{align:'center'});
-      doc.text(`$${(it.ma||0).toFixed(2)}`,108,y,{align:'right'});
-      doc.text(`$${(it.lb||0).toFixed(2)}`,135,y,{align:'right'});
-      doc.text(`$${tot.toFixed(2)}`,167,y,{align:'right'});
-      y+=7.2;
+      const tot = ((it.ma||0)+(it.lb||0))*(it.qt||1);
+      doc.text(it.desc, margin+2, y);
+      doc.text(`${it.qt||1}`, w-margin-70, y, {align:'right'});
+      doc.text(`$${(it.ma||0).toFixed(2)}`, w-margin-52, y, {align:'right'});
+      doc.text(`$${(it.lb||0).toFixed(2)}`, w-margin-28, y, {align:'right'});
+      doc.text(`$${tot.toFixed(2)}`, w-margin-10, y, {align:'right'});
+      y+=6.5;
     });
   }
-  y+=9;
-  doc.setFontSize(11.5); doc.setTextColor(10,110,200);
-  let subtotal=parseFloat(document.getElementById('subtotal').textContent)||0;
-  let iva=parseFloat(document.getElementById('ivaAmount').textContent)||0;
-  let total=parseFloat(document.getElementById('totalAmount').textContent)||0;
-  let anticipo=parseFloat(document.getElementById('anticipoAmount').textContent)||0;
-  let saldo=parseFloat(document.getElementById('balance').textContent)||0;
-  doc.text(`Subtotal: $${subtotal.toFixed(2)}`,130,y);
-  doc.text(`IVA: $${iva.toFixed(2)}`,130,y+6);
+
+  // --- Totales a la derecha ---
+  let subtotal = parseFloat(document.getElementById('subtotal').textContent)||0;
+  let iva = document.getElementById('withIvaSwitch').checked ? subtotal*0.16 : 0;
+  let total = subtotal + iva;
+  let anticipo = document.getElementById('withAnticipoSwitch').checked ? parseFloat(document.getElementById('anticipoAmount').textContent) : 0;
+  let saldo = document.getElementById('balance').textContent;
+
+  y+=3;
+  doc.setFont('helvetica','normal'); doc.setFontSize(9.6);
+  doc.text(`Subtotal: $${subtotal.toFixed(2)}`, w-margin-1, y, {align:'right'});
+  doc.text(`IVA: $${iva.toFixed(2)}`, w-margin-1, y+5.2, {align:'right'});
   doc.setFont('helvetica','bold');
-  doc.text(`Total: $${total.toFixed(2)}`,130,y+13);
-  if(anticipo>0){
-    doc.setFont('helvetica','normal'); doc.setFontSize(10.4);
-    doc.text(`Anticipo: $${anticipo.toFixed(2)}`,130,y+19);
-    doc.text(`Saldo: $${saldo.toFixed(2)}`,130,y+24);
-    y+=10;
+  doc.text(`Total: $${total.toFixed(2)}`, w-margin-1, y+11, {align:'right'});
+  if (anticipo > 0) {
+    doc.setFont('helvetica','normal');
+    doc.text(`Anticipo: $${anticipo.toFixed(2)}`, w-margin-1, y+16.3, {align:'right'});
+    doc.setFont('helvetica','bold');
+    doc.text(`Saldo: $${saldo}`, w-margin-1, y+21.3, {align:'right'});
+    y+=12;
   }
-  y+=28;
-  doc.setFont('helvetica','bold'); doc.setFontSize(11.5); doc.setTextColor(10,110,200);
-  doc.text("Detalles y Especificaciones:",17,y);
-  doc.setFont('helvetica','normal'); doc.setFontSize(9.4); doc.setTextColor(60,60,60);
-  let y0 = y+5;
+
+  // --- Detalles y especificaciones (si hay) ---
   let detalles = [];
   for(let i=1;i<=11;i++) if(document.getElementById('chk'+i).checked) detalles.push(document.querySelector('label[for=chk'+i+']').innerText);
   if(window.detallesArray && window.detallesArray.length) detalles = detalles.concat(window.detallesArray);
-  detalles.forEach((d,idx)=>{
-    if (y0+idx*5 > 260) return; // No se pase de hoja
-    doc.text(`• ${d}`, 19, y0+5*idx);
-  });
-  y0 += 5*detalles.length;
-  y0+=10;
+  if (detalles.length) {
+    y += 16;
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(10.3);
+    doc.setTextColor(10,110,200);
+    doc.text("Detalles y Especificaciones:", margin, y);
+    y += 6;
+    doc.setFont('helvetica','normal'); doc.setFontSize(8.6); doc.setTextColor(60,60,60);
+    detalles.forEach((d, idx)=>{
+      if (y+5 > h-35) return;
+      doc.text("• "+d, margin+2, y+4);
+      y+=5;
+    });
+  }
 
-  // Firma manuscrita elegante
-  doc.setDrawColor(10,110,200); doc.setLineWidth(0.36);
-  doc.line(113, y0, 172, y0);
-  doc.setFont('times','italic'); doc.setTextColor(10,110,200); doc.setFontSize(13.5);
-  doc.text("Grupo AR", 125, y0+6);
-  doc.setFontSize(8); doc.setTextColor(120,120,120); doc.setFont('helvetica','normal');
-  doc.text("Firma simbólica digital — No requiere firma autógrafa.",113, y0+11);
+  // --- Firma manuscrita elegante ---
+  y += 20;
+  doc.setDrawColor(180, 180, 180);
+  doc.setLineWidth(0.23);
+  doc.line(w/2-23, y, w/2+23, y);
 
-  // Footer discreto
-  doc.setFontSize(8.5); doc.setTextColor(160,160,160);
-  doc.text("GRUPO AR Construcción y Diseño — Tel: +52 1 438 134 6142",105,287,{align:'center'});
+  doc.setFont('times', 'italic');
+  doc.setFontSize(14);
+  doc.setTextColor(10, 110, 200);
+  doc.text('Grupo AR', w/2, y+6, {align:'center'});
+  doc.setFont('helvetica','normal'); doc.setFontSize(8.2); doc.setTextColor(150, 150, 150);
+  doc.text('Firma simbólica digital — No requiere firma autógrafa.', w/2, y+11, {align:'center'});
 
-  let fname=(document.getElementById('fileName').value||'cotizacion')+'.pdf';
+  // --- Footer discreto ---
+  doc.setFontSize(8.1);
+  doc.setTextColor(170,170,170);
+  doc.text('GRUPO AR Construcción y Diseño — Tel: +52 1 438 134 6142', w/2, h-8, {align:'center'});
+
+  // === Guardar PDF ===
+  let fname = (document.getElementById('fileName').value || 'cotizacion') + '.pdf';
   doc.save(fname);
-  return {fname,doc};
+  return { fname, doc };
 }
+
 document.getElementById('generateBtn').onclick = generarPDFpro;
 
 // ----------- Compartir moderno ----------
@@ -813,5 +859,17 @@ recalc();
 renderDetalles();
 updatePredictions();
 </script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js').then(function(reg) {
+      // Success
+    }, function(err) {
+      // Error
+    });
+  });
+}
+</script>
+
 </body>
 </html>
