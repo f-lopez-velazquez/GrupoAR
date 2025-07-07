@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Cotizaciones Grupo AR</title>
+  <title>Cotizador Grupo AR</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -18,6 +18,7 @@
       --slide-active: #4bb450;
       --slide-knob: #fff;
       --slide-off: #c5c5c5;
+      --primary: #0a6ec8;
     }
     body { font-family: 'Inter', Arial, sans-serif; background: var(--fondo);
       color: var(--txt); margin:0; min-height:100vh; font-size: 1.04em;}
@@ -51,7 +52,6 @@
     .form-row.switches { gap:18px;}
     h3 { font-size: 1.08em; color: var(--azul);}
     body.dark h3 { color: #7bbcff;}
-    /* Tabla de items */
     .table-scroll { overflow-x:auto; border-radius:7px; }
     table { width:100%; border-collapse:collapse; margin-top:6px;}
     th, td { border:1.4px solid var(--borde); padding:10px 6px; font-size:.99em; background:transparent;}
@@ -80,6 +80,11 @@
     .detalles-agregados { margin:8px 0 0 0; padding:0; list-style:disc; color:#384357; font-size:1.01em;}
     .detalles-agregados li { margin:2px 0; display:flex; align-items:center; justify-content:space-between; gap:7px; background: #f7fcff; padding:5px 8px; border-radius:5px;}
     .detalles-agregados .del-detalle { color:#c00; background:none; border:none; font-size:1.08em; cursor:pointer; margin-left:8px; border-radius:5px;}
+    #dictadoBtn { position:fixed; bottom:34px; right:24px; z-index:1500; background:#fff; color:var(--azul); border-radius:50%; width:54px; height:54px; font-size:2.1em; box-shadow:0 2px 10px #0a6ec83a; border:none; display:none; cursor:pointer; }
+    #dictadoStatus { position:fixed; bottom:90px; right:20px; z-index:1501; background:var(--panel); color:var(--primary); border-radius:12px; padding:8px 18px; box-shadow:0 1px 7px #123a49;}
+    .ai-tools-bar { text-align:center; margin-bottom:8px;}
+    .ai-tools-bar label { color:var(--primary); font-weight:600; font-size:1.03em;}
+    .ai-toggle { margin:0 7px;}
     @media (max-width:700px){
       .container { max-width:99vw; padding:2vw;}
       .form-row { flex-direction:column; gap:4px;}
@@ -88,6 +93,8 @@
       table, th, td { font-size:.96em;}
       #previewResponsive { font-size:.99em;}
       .sidebar { width:97vw; max-width:99vw; padding-left:2vw; padding-right:2vw;}
+      #dictadoBtn { right:13px; bottom:12px;}
+      #dictadoStatus { right:7px;}
     }
     #previewPDF {
       display:none; width:210mm; min-height:297mm; background:#fff; padding:15mm 13mm 18mm 13mm; margin:0 auto;
@@ -115,6 +122,16 @@
       <img src="https://i.imgur.com/kf8e57F.jpg" alt="Logo Grupo AR">
       <div class="logoTitle"><span>GRUPO</span> <span style="color:#dc1e28;">AR</span></div>
     </header>
+    <div class="ai-tools-bar">
+      <label>
+        <input type="checkbox" class="ai-toggle" id="aiRedaccion" checked>
+        🧠 Mejora automática de redacción y ortografía
+      </label>
+      <label>
+        <input type="checkbox" class="ai-toggle" id="aiPrediccion" checked>
+        ⚡ Autocompletar ítems más frecuentes
+      </label>
+    </div>
     <div class="form-container">
       <div class="form-row">
         <div class="form-col">
@@ -179,11 +196,12 @@
       </div>
       <h3 style="margin:14px 0 6px 0;">Agregar Item</h3>
       <div class="form-row" id="itemInputs">
-        <div class="form-col" style="flex:2">
+        <div class="form-col" style="flex:2; position:relative;">
           <label for="newItemDesc">Descripción</label>
           <div class="input-wrap">
             <span class="input-icon">🔧</span>
-            <input id="newItemDesc" placeholder="Ej. Pintura">
+            <input id="newItemDesc" placeholder="Ej. Pintura" autocomplete="off" list="descPredictions">
+            <datalist id="descPredictions"></datalist>
           </div>
         </div>
         <div class="form-col" id="expressInputs" style="display:flex;">
@@ -191,7 +209,7 @@
             <label for="newItemPrice">Precio</label>
             <div class="input-wrap">
               <span class="input-icon">$</span>
-              <input id="newItemPrice" type="number" min="0" value="0" placeholder="Precio total">
+              <input id="newItemPrice" type="number" min="0" value="0" placeholder="Precio total" autocomplete="off">
             </div>
           </div>
         </div>
@@ -200,21 +218,21 @@
             <label for="newItemQty">Cantidad</label>
             <div class="input-wrap">
               <span class="input-icon">#</span>
-              <input id="newItemQty" type="number" min="1" value="1" placeholder="Cantidad">
+              <input id="newItemQty" type="number" min="1" value="1" placeholder="Cantidad" autocomplete="off">
             </div>
           </div>
           <div>
             <label for="newItemMat">Material</label>
             <div class="input-wrap">
               <span class="input-icon">$</span>
-              <input id="newItemMat" type="number" min="0" value="0" placeholder="Material">
+              <input id="newItemMat" type="number" min="0" value="0" placeholder="Material" autocomplete="off">
             </div>
           </div>
           <div>
             <label for="newItemLab">Mano Obra</label>
             <div class="input-wrap">
               <span class="input-icon">⚒️</span>
-              <input id="newItemLab" type="number" min="0" value="0" placeholder="Mano obra">
+              <input id="newItemLab" type="number" min="0" value="0" placeholder="Mano obra" autocomplete="off">
             </div>
           </div>
         </div>
@@ -304,9 +322,12 @@
     <ul class="detalles-agregados" id="detallesAgregados"></ul>
   </div>
   <div id="previewPDF"></div>
+  <button id="dictadoBtn" title="Dictar texto"><span>🎤</span></button>
+  <div id="dictadoStatus" style="display:none;"></div>
   <!-- jsPDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script>
+    // Dark mode auto
     if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
       document.body.classList.add("dark");
     // SIDEBAR animado
@@ -343,17 +364,40 @@
         theadDetailed.style.display = "";
       }
       renderTable();
+      recalc();
     }
     quoteType.onchange = updateTypeUI;
-    updateTypeUI();
-    // Array para items
+    // Array para items y predicción
     let items = [];
-    // Agregar item
+    let frequentDescs = JSON.parse(localStorage.getItem('ar_frequentDescs')||'[]');
+    let frequentPrices = JSON.parse(localStorage.getItem('ar_frequentPrices')||'{}');
+    function updatePredictions() {
+      if (!document.getElementById('aiPrediccion').checked) return;
+      let dl = document.getElementById('descPredictions');
+      dl.innerHTML = frequentDescs.slice(-15).reverse().map(desc=>`<option value="${desc}">`).join('');
+    }
+    document.getElementById('newItemDesc').addEventListener('input', function(){
+      if (!document.getElementById('aiPrediccion').checked) return;
+      let val = this.value.trim();
+      let pr = frequentPrices[val];
+      if(pr && quoteType.value==='express') document.getElementById('newItemPrice').value = pr;
+    });
+    // Botón agregar item
     document.getElementById('addItemBtn').onclick = ()=>{
       let desc = document.getElementById('newItemDesc').value.trim();
       if(!desc) return document.getElementById('newItemDesc').focus();
+      if(document.getElementById('aiPrediccion').checked) {
+        if(!frequentDescs.includes(desc)) {
+          frequentDescs.push(desc);
+          if(frequentDescs.length>35) frequentDescs=frequentDescs.slice(-35);
+        }
+      }
       if(quoteType.value==='express'){
         let pr = parseFloat(document.getElementById('newItemPrice').value)||0;
+        if(document.getElementById('aiPrediccion').checked) {
+          frequentPrices[desc]=pr;
+          localStorage.setItem('ar_frequentPrices',JSON.stringify(frequentPrices));
+        }
         items.push({desc, pr});
       } else {
         let qt = parseFloat(document.getElementById('newItemQty').value)||1;
@@ -361,6 +405,7 @@
         let lb = parseFloat(document.getElementById('newItemLab').value)||0;
         items.push({desc, qt, ma, lb});
       }
+      localStorage.setItem('ar_frequentDescs',JSON.stringify(frequentDescs));
       // Limpiar y enfocar siguiente
       document.getElementById('newItemDesc').value='';
       document.getElementById('newItemPrice').value='0';
@@ -368,6 +413,7 @@
       document.getElementById('newItemMat').value='0';
       document.getElementById('newItemLab').value='0';
       document.getElementById('newItemDesc').focus();
+      updatePredictions();
       renderTable();
       recalc();
     };
@@ -450,6 +496,7 @@
       });
     }
     // Vista previa
+    const previewRes = document.getElementById('previewResponsive');
     function buildPreview(container, isPDF){
       container.innerHTML = '';
       // Header
@@ -555,6 +602,8 @@
     }
     // GENERAR PDF ULTRA LIGERO
     document.getElementById('generateBtn').onclick = async ()=>{
+      // Mejora automática de redacción
+      if(document.getElementById('aiRedaccion').checked) await mejorarRedaccion();
       buildPreview(previewPDF, true);
       previewPDF.style.display='block';
       let pdf = new window.jspdf.jsPDF({ unit:'mm', format:'a4', orientation:'portrait' });
@@ -572,12 +621,102 @@
       pdf.save((document.getElementById('fileName').value||'cotizacion')+'.pdf');
     };
     document.getElementById('shareBtn').onclick=async()=>{
-      alert('Usa "Generar PDF" y compártelo manualmente.');
+      alert('Usa "Generar PDF" y compártelo manualmente. (Función compartir nativa limitada por seguridad del navegador)');
     };
     document.addEventListener('DOMContentLoaded', ()=>{
+      updatePredictions();
       renderTable();
       recalc();
     });
+    // VISTA PREVIA DINÁMICA
+    setInterval(()=>buildPreview(previewRes, false), 650);
+    // --- DICTADO POR VOZ GENERAL ---
+    let dictadoTarget = null;
+    let recognition, dictadoActivo = false;
+    function supportSpeech(){
+      return window.SpeechRecognition||window.webkitSpeechRecognition;
+    }
+    const dictadoBtn = document.getElementById('dictadoBtn');
+    if(supportSpeech()){
+      dictadoBtn.style.display = 'block';
+      dictadoBtn.onclick = ()=>{
+        if(dictadoActivo){stopDictado();return;}
+        const allInputs = Array.from(document.querySelectorAll('input, textarea')).filter(inp=>!inp.readOnly && inp.offsetParent!==null);
+        let idx = allInputs.findIndex(i=>i===document.activeElement);
+        dictadoTarget = allInputs[idx>=0?idx:0];
+        startDictado();
+      };
+      document.querySelectorAll('input, textarea').forEach(inp=>{
+        inp.onfocus = ()=>{ dictadoTarget=inp; };
+      });
+    }
+    function startDictado(){
+      if(!supportSpeech()) return;
+      recognition = recognition||new (window.SpeechRecognition||window.webkitSpeechRecognition)();
+      recognition.lang = "es-MX";
+      recognition.interimResults = false;
+      dictadoActivo = true;
+      dictadoBtn.style.background="#f9d472"; dictadoBtn.style.color="#222";
+      document.getElementById('dictadoStatus').style.display = 'block';
+      document.getElementById('dictadoStatus').textContent = "Escuchando…";
+      recognition.start();
+      recognition.onresult = function(ev){
+        let txt = ev.results[0][0].transcript;
+        if(dictadoTarget){
+          if(dictadoTarget.value) dictadoTarget.value += " " + txt;
+          else dictadoTarget.value = txt;
+          dictadoTarget.focus();
+        }
+        document.getElementById('dictadoStatus').textContent = "Dictado listo ✔️";
+        setTimeout(()=>document.getElementById('dictadoStatus').style.display='none', 1300);
+      };
+      recognition.onend = function(){ dictadoActivo = false; dictadoBtn.style.background=""; dictadoBtn.style.color="";};
+      recognition.onerror = function(){ dictadoActivo = false; dictadoBtn.style.background=""; dictadoBtn.style.color=""; document.getElementById('dictadoStatus').textContent="Error en dictado";};
+    }
+    function stopDictado(){if(recognition){recognition.stop();dictadoActivo=false;dictadoBtn.style.background="";dictadoBtn.style.color="";}}
+    // --- MEJORA AUTOMÁTICA (Redacción/Ortografía) ---
+    async function mejorarRedaccion(){
+      // Simulación: mejora capitalización, quita dobles espacios, y pone mayúscula inicial y punto.
+      function corrigeFrase(txt){
+        txt = txt.replace(/\s+/g," ").trim();
+        if(txt.length===0) return "";
+        txt = txt.charAt(0).toUpperCase() + txt.slice(1);
+        if(!txt.endsWith(".")) txt += ".";
+        return txt;
+      }
+      // Título
+      let t = document.getElementById('quoteTitle');
+      t.value = corrigeFrase(t.value);
+      // Cliente
+      let cl = document.getElementById('client');
+      cl.value = corrigeFrase(cl.value);
+      // Ubicación
+      let loc = document.getElementById('location');
+      loc.value = corrigeFrase(loc.value);
+      // Ítems
+      items = items.map(it=>{
+        if(quoteType.value==='express'){
+          return { desc: corrigeFrase(it.desc), pr: it.pr };
+        } else {
+          return { desc: corrigeFrase(it.desc), qt: it.qt, ma: it.ma, lb: it.lb };
+        }
+      });
+      // Detalles adicionales
+      for(let i=0;i<detallesArray.length;i++){
+        detallesArray[i] = corrigeFrase(detallesArray[i]);
+      }
+      renderTable();
+      recalc();
+      return Promise.resolve();
+    }
+    // Actualizar predicciones si se activa/desactiva
+    document.getElementById('aiPrediccion').onchange = updatePredictions;
+    // Vuelve a renderizar
+    quoteType.onchange = updateTypeUI;
+    // Sincronizar título de archivo
+    document.getElementById('quoteTitle').addEventListener('input', syncTitleFileName);
+    // Para móviles, hide dictado en teclado
+    window.addEventListener('blur', ()=>{ if(dictadoActivo) stopDictado(); });
   </script>
 </body>
 </html>
