@@ -678,155 +678,168 @@ async function generarPDFpro() {
   if (document.getElementById('aiRedaccion').checked) await mejorarRedaccion();
 
   const doc = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' });
-  const w = doc.internal.pageSize.getWidth();
-  const h = doc.internal.pageSize.getHeight();
-  const margin = 15;
+  const pageWidth = 210, pageHeight = 297;
+  const marginX = 16, marginY = 15;
+  const contentWidth = pageWidth - marginX * 2;
+  const logoSize = 28;
   const logo = new Image();
   logo.crossOrigin = "anonymous";
   logo.src = "https://i.imgur.com/kf8e57F.jpg";
   await new Promise(r => { logo.onload = r; });
 
-  // --- Marca de agua ---
+  // Marca de agua grande, centrada y opaca
   doc.saveGraphicsState();
-  doc.setGState(new doc.GState({ opacity: 0.035 }));
-  doc.addImage(logo, 'JPEG', (w-110)/2, (h-140)/2, 110, 140);
+  doc.setGState(new doc.GState({ opacity: 0.04 }));
+  doc.addImage(logo, 'JPEG', (pageWidth-110)/2, (pageHeight-130)/2, 110, 130);
   doc.restoreGraphicsState();
 
   // --- Encabezado ---
-  // Logo más grande a la izquierda
-  doc.addImage(logo, 'JPEG', margin, margin+2, 31, 39);
-  // "GRUPO AR" pequeño a la derecha del logo, centrado verticalmente
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(11.5);
-  doc.setTextColor(10, 110, 200);
-  doc.text("GRUPO", margin + 38, margin + 18);
-  doc.setTextColor(220, 30, 40);
-  doc.text("AR", margin + 62, margin + 18);
-
-  // Datos cliente/ubicación/fecha alineados simétricamente
-  doc.setFontSize(9.5);
-  doc.setTextColor(65, 65, 65);
-  doc.setFont('helvetica', 'normal');
-  let encY = margin + 8;
-  doc.text("Cotización probable – Nuevo cliente", w - margin, encY, { align: 'right' });
+  // Logo a la izquierda, más grande
+  doc.addImage(logo, 'JPEG', marginX, marginY, logoSize, logoSize+4);
+  // "Grupo AR" pequeño, centrado vertical respecto al logo
   doc.setFont('helvetica', 'bold');
-  doc.text("Cliente:", w - margin - 38, encY + 10, { align: 'right' });
-  doc.text("Ubicación:", w - margin - 38, encY + 16, { align: 'right' });
+  doc.setFontSize(13);
+  doc.setTextColor(10, 110, 200);
+  doc.text("GRUPO", marginX + logoSize + 7, marginY + 13);
+  doc.setTextColor(220, 30, 40);
+  doc.text("AR", marginX + logoSize + 29, marginY + 13);
+
+  // Datos cliente/ubicación/fecha alineados a la derecha y bien ordenados
+  const encDataY = marginY + 5;
   doc.setFont('helvetica', 'normal');
-  doc.text(document.getElementById('client').value || '--', w - margin, encY + 10, { align: 'right' });
-  doc.text(document.getElementById('location').value || '--', w - margin, encY + 16, { align: 'right' });
-  doc.text("Fecha: " + (new Date().toLocaleDateString()), w - margin, encY + 22, { align: 'right' });
+  doc.setFontSize(9.3);
+  doc.setTextColor(60, 60, 60);
 
-  // Línea divisoria SUTIL (sin tapar el logo)
-  doc.setDrawColor(200, 210, 220);
+  // Ajuste: todo dentro de márgenes
+  const dataRightX = pageWidth - marginX;
+  doc.text("Cotización:", dataRightX - 44, encDataY, { align: 'left' });
+  doc.text(document.getElementById('quoteTitle').value || '--', dataRightX - 20, encDataY, { align: 'left' });
+
+  doc.text("Cliente:", dataRightX - 44, encDataY + 6, { align: 'left' });
+  doc.text(document.getElementById('client').value || '--', dataRightX - 20, encDataY + 6, { align: 'left' });
+
+  doc.text("Ubicación:", dataRightX - 44, encDataY + 12, { align: 'left' });
+  doc.text(document.getElementById('location').value || '--', dataRightX - 20, encDataY + 12, { align: 'left' });
+
+  doc.text("Fecha:", dataRightX - 44, encDataY + 18, { align: 'left' });
+  doc.text((new Date().toLocaleDateString()), dataRightX - 20, encDataY + 18, { align: 'left' });
+
+  // Línea divisoria sutil (abajo del logo)
+  const headerBottom = marginY + logoSize + 7;
+  doc.setDrawColor(210, 215, 230);
   doc.setLineWidth(0.6);
-  doc.line(margin, margin+42.5, w - margin, margin+42.5);
+  doc.line(marginX, headerBottom, pageWidth - marginX, headerBottom);
 
-  // --- Tabla de ítems ---
-  let y = margin + 49;
-  const tipo = document.getElementById('quoteType').value;
-  doc.setFont('helvetica','bold');
-  doc.setFontSize(9.7);
-  doc.setFillColor(10,110,200);
-  doc.setTextColor(255,255,255);
+  // --- TABLA ITEMS ---
+  let y = headerBottom + 6;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(9.9);
+  doc.setFillColor(10, 110, 200);
+  doc.setTextColor(255, 255, 255);
 
+  let tipo = document.getElementById('quoteType').value;
   if (tipo === 'express') {
-    doc.rect(margin, y, w-margin*2, 7.2, 'F');
-    doc.text("Descripción", margin+2, y+5.3);
-    doc.text("Precio", w-margin-48, y+5.3, {align:'right'});
-    doc.text("Total", w-margin-10, y+5.3, {align:'right'});
-    y += 9.5;
-    doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
-    let subtotal=0;
-    items.forEach(it=>{
-      doc.text(it.desc, margin+2, y);
-      doc.text(`$${(it.pr||0).toFixed(2)}`, w-margin-48, y, {align:'right'});
-      doc.text(`$${(it.pr||0).toFixed(2)}`, w-margin-10, y, {align:'right'});
-      y+=7.3; subtotal += it.pr||0;
+    // Header de tabla
+    doc.rect(marginX, y, contentWidth, 7.4, 'F');
+    doc.text("Descripción", marginX + 2, y + 5.1);
+    doc.text("Precio", pageWidth - marginX - 45, y + 5.1, { align: 'right' });
+    doc.text("Total", pageWidth - marginX - 6, y + 5.1, { align: 'right' });
+    y += 8.5;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(9.1); doc.setTextColor(33,33,33);
+    items.forEach(it => {
+      doc.setFillColor(245, 248, 255);
+      doc.rect(marginX, y - 4.2, contentWidth, 6.2, 'F'); // Fondo alterno fila
+      doc.text(it.desc, marginX + 2, y);
+      doc.text(`$${(it.pr||0).toFixed(2)}`, pageWidth - marginX - 45, y, { align: 'right' });
+      doc.text(`$${(it.pr||0).toFixed(2)}`, pageWidth - marginX - 6, y, { align: 'right' });
+      y += 6.3;
     });
   } else {
-    doc.rect(margin, y, w-margin*2, 7.2, 'F');
-    doc.text("Descripción", margin+2, y+5.3);
-    doc.text("Cant.", w-margin-70, y+5.3, {align:'right'});
-    doc.text("Material", w-margin-52, y+5.3, {align:'right'});
-    doc.text("Mano Obra", w-margin-28, y+5.3, {align:'right'});
-    doc.text("Total", w-margin-10, y+5.3, {align:'right'});
-    y += 9.5;
-    doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
-    items.forEach(it=>{
+    doc.rect(marginX, y, contentWidth, 7.4, 'F');
+    doc.text("Descripción", marginX + 2, y + 5.1);
+    doc.text("Cant.", pageWidth - marginX - 80, y + 5.1, { align: 'right' });
+    doc.text("Material", pageWidth - marginX - 56, y + 5.1, { align: 'right' });
+    doc.text("Mano Obra", pageWidth - marginX - 32, y + 5.1, { align: 'right' });
+    doc.text("Total", pageWidth - marginX - 6, y + 5.1, { align: 'right' });
+    y += 8.5;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(9.1); doc.setTextColor(33,33,33);
+    items.forEach(it => {
+      doc.setFillColor(245, 248, 255);
+      doc.rect(marginX, y - 4.2, contentWidth, 6.2, 'F');
+      doc.text(it.desc, marginX + 2, y);
+      doc.text(`${it.qt||1}`, pageWidth - marginX - 80, y, { align: 'right' });
+      doc.text(`$${(it.ma||0).toFixed(2)}`, pageWidth - marginX - 56, y, { align: 'right' });
+      doc.text(`$${(it.lb||0).toFixed(2)}`, pageWidth - marginX - 32, y, { align: 'right' });
       const tot = ((it.ma||0)+(it.lb||0))*(it.qt||1);
-      doc.text(it.desc, margin+2, y);
-      doc.text(`${it.qt||1}`, w-margin-70, y, {align:'right'});
-      doc.text(`$${(it.ma||0).toFixed(2)}`, w-margin-52, y, {align:'right'});
-      doc.text(`$${(it.lb||0).toFixed(2)}`, w-margin-28, y, {align:'right'});
-      doc.text(`$${tot.toFixed(2)}`, w-margin-10, y, {align:'right'});
-      y+=7.3;
+      doc.text(`$${tot.toFixed(2)}`, pageWidth - marginX - 6, y, { align: 'right' });
+      y += 6.3;
     });
   }
 
-  // --- Totales a la derecha ---
+  // Totales a la derecha
+  y += 2;
   let subtotal = parseFloat(document.getElementById('subtotal').textContent)||0;
   let iva = document.getElementById('withIvaSwitch').checked ? subtotal*0.16 : 0;
   let total = subtotal + iva;
   let anticipo = document.getElementById('withAnticipoSwitch').checked ? parseFloat(document.getElementById('anticipoAmount').textContent) : 0;
   let saldo = document.getElementById('balance').textContent;
 
-  y+=3;
-  doc.setFont('helvetica','normal'); doc.setFontSize(9.6);
-  doc.text(`Subtotal: $${subtotal.toFixed(2)}`, w-margin-1, y, {align:'right'});
-  doc.text(`IVA: $${iva.toFixed(2)}`, w-margin-1, y+5.2, {align:'right'});
-  doc.setFont('helvetica','bold');
-  doc.text(`Total: $${total.toFixed(2)}`, w-margin-1, y+11, {align:'right'});
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(9.1); doc.setTextColor(25,25,50);
+  doc.text(`Subtotal: $${subtotal.toFixed(2)}`, pageWidth - marginX - 1, y, { align: 'right' });
+  doc.text(`IVA: $${iva.toFixed(2)}`, pageWidth - marginX - 1, y + 5, { align: 'right' });
+  doc.setFont('helvetica', 'bold');
+  doc.text(`Total: $${total.toFixed(2)}`, pageWidth - marginX - 1, y + 11, { align: 'right' });
   if (anticipo > 0) {
-    doc.setFont('helvetica','normal');
-    doc.text(`Anticipo: $${anticipo.toFixed(2)}`, w-margin-1, y+16.3, {align:'right'});
-    doc.setFont('helvetica','bold');
-    doc.text(`Saldo: $${saldo}`, w-margin-1, y+21.3, {align:'right'});
-    y+=12;
+    doc.setFont('helvetica', 'normal');
+    doc.text(`Anticipo: $${anticipo.toFixed(2)}`, pageWidth - marginX - 1, y + 16, { align: 'right' });
+    doc.setFont('helvetica', 'bold');
+    doc.text(`Saldo: $${saldo}`, pageWidth - marginX - 1, y + 21, { align: 'right' });
+    y += 12;
   }
 
-  // --- Detalles y especificaciones (si hay) ---
+  // --- Detalles y especificaciones ---
   let detalles = [];
   for(let i=1;i<=11;i++) if(document.getElementById('chk'+i).checked) detalles.push(document.querySelector('label[for=chk'+i+']').innerText);
   if(window.detallesArray && window.detallesArray.length) detalles = detalles.concat(window.detallesArray);
   if (detalles.length) {
-    y += 16;
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(10.3);
-    doc.setTextColor(10,110,200);
-    doc.text("Detalles y Especificaciones:", margin, y);
-    y += 6;
-    doc.setFont('helvetica','normal'); doc.setFontSize(8.6); doc.setTextColor(60,60,60);
+    y += 15;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.setTextColor(10, 110, 200);
+    doc.text("Detalles y Especificaciones:", marginX, y);
+    y += 5.5;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(8.3); doc.setTextColor(66,66,66);
     detalles.forEach((d, idx)=>{
-      if (y+5 > h-35) return;
-      doc.text("• "+d, margin+2, y+4);
-      y+=5;
+      if (y+5 > pageHeight-32) return;
+      doc.text("• "+d, marginX+2, y+4);
+      y+=4.8;
     });
   }
 
   // --- Firma manuscrita elegante ---
-  y += 22;
-  doc.setDrawColor(180, 180, 180);
-  doc.setLineWidth(0.23);
-  doc.line(w/2-26, y, w/2+26, y);
+  y += 19;
+  doc.setDrawColor(185, 185, 185);
+  doc.setLineWidth(0.20);
+  doc.line(pageWidth/2-23, y, pageWidth/2+23, y);
 
   doc.setFont('times', 'italic');
   doc.setFontSize(13);
   doc.setTextColor(10, 110, 200);
-  doc.text('Grupo AR', w/2, y+6, {align:'center'});
-  doc.setFont('helvetica','normal'); doc.setFontSize(8.2); doc.setTextColor(150, 150, 150);
-  doc.text('Firma simbólica digital — No requiere firma autógrafa.', w/2, y+11, {align:'center'});
+  doc.text('Grupo AR', pageWidth/2, y+5.3, {align:'center'});
+  doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(145, 145, 145);
+  doc.text('Firma simbólica digital — No requiere firma autógrafa.', pageWidth/2, y+10.5, {align:'center'});
 
   // --- Footer discreto ---
-  doc.setFontSize(8.1);
-  doc.setTextColor(170,170,170);
-  doc.text('GRUPO AR Construcción y Diseño — Tel: +52 1 438 134 6142', w/2, h-8, {align:'center'});
+  doc.setFontSize(8.2);
+  doc.setTextColor(175,175,175);
+  doc.text('GRUPO AR Construcción y Diseño — Tel: +52 1 438 134 6142', pageWidth/2, pageHeight-8, {align:'center'});
 
   // === Guardar PDF ===
   let fname = (document.getElementById('fileName').value || 'cotizacion') + '.pdf';
   doc.save(fname);
   return { fname, doc };
 }
+
 
 document.getElementById('generateBtn').onclick = generarPDFpro;
 
