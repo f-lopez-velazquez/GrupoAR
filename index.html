@@ -688,39 +688,37 @@ async function generarPDFpro() {
   logo.src = "https://i.imgur.com/kf8e57F.jpg";
   await new Promise(r => { logo.onload = r; });
 
-  // --- Marca de agua ---
+  // --- Marca de agua visible pero sutil ---
   doc.saveGraphicsState();
-  doc.setGState(new doc.GState({ opacity: 0.04 }));
+  doc.setGState(new doc.GState({ opacity: 0.09 })); // Más visible, pero tenue
   doc.addImage(logo, 'JPEG', (w-90)/2, (h-120)/2, 90, 120);
   doc.restoreGraphicsState();
 
   // --- Encabezado profesional y simétrico ---
-  // Logo más grande a la izquierda
   doc.addImage(logo, 'JPEG', margin, margin + 2, 28, 34);
-
-  // "GRUPO AR" pequeño, alineado verticalmente al centro del logo
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(13);
   doc.setTextColor(10, 110, 200);
-  const logoCenterY = margin + 19; // centro vertical del logo
+  const logoCenterY = margin + 19;
   doc.text("GRUPO", margin + 37, logoCenterY);
   doc.setTextColor(220, 30, 40);
   doc.text("AR", margin + 60, logoCenterY);
 
-  // Datos cliente/ubicación/fecha alineados a la derecha y simétricos
+  // --- Título dinámico de cotización ---
+  const quoteTitle = document.getElementById('quoteTitle').value?.trim() || "Cotización";
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10.4);
+  doc.setTextColor(60, 60, 60);
+  doc.text(quoteTitle, w - margin - 2, margin + 8, { align: 'right' });
+
+  // --- Datos cliente/ubicación/fecha alineados a la derecha y simétricos
   const fieldFontSize = 10.2;
   const valueFontSize = 10.2;
   const labelColor = [30, 30, 30];
   const valueColor = [60, 60, 60];
 
   let encX = w - margin - 2;
-  let encY = margin + 8;
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10.4);
-  doc.setTextColor(60, 60, 60);
-  doc.text("Cotización probable – Nuevo cliente", encX, encY, { align: 'right' });
-
-  encY += 9;
+  let encY = margin + 17;
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(fieldFontSize);
   doc.setTextColor(...labelColor);
@@ -753,7 +751,7 @@ async function generarPDFpro() {
   doc.line(margin, lineaY, w - margin, lineaY);
 
   // --- Tabla de ítems ---
-  let y = lineaY + 8;
+  let y = lineaY + 10;
   const tipo = document.getElementById('quoteType').value;
   doc.setFont('helvetica','bold');
   doc.setFontSize(10);
@@ -761,13 +759,13 @@ async function generarPDFpro() {
   doc.setTextColor(255,255,255);
 
   // --- Encabezado tabla ---
-  const rowHeight = 7.1;
+  const rowHeight = 7.6; // Más alto para dejar respiro
   if (tipo === 'express') {
     doc.rect(margin, y, w-margin*2, rowHeight, 'F');
     doc.text("Descripción", margin+2, y+5.0);
     doc.text("Precio", w-margin-48, y+5.0, {align:'right'});
     doc.text("Total", w-margin-10, y+5.0, {align:'right'});
-    y += rowHeight;
+    y += rowHeight + 1.5; // Deja espacio antes de la primer fila
     doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
     let subtotal=0;
     items.forEach(it=>{
@@ -784,7 +782,7 @@ async function generarPDFpro() {
     doc.text("Material", w-margin-52, y+5.0, {align:'right'});
     doc.text("Mano Obra", w-margin-28, y+5.0, {align:'right'});
     doc.text("Total", w-margin-10, y+5.0, {align:'right'});
-    y += rowHeight;
+    y += rowHeight + 1.5;
     doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
     items.forEach(it=>{
       const tot = ((it.ma||0)+(it.lb||0))*(it.qt||1);
@@ -797,14 +795,15 @@ async function generarPDFpro() {
     });
   }
 
-  // --- Totales a la derecha ---
+  // --- Totales a la derecha, SIEMPRE después de la tabla y con espacio ---
   let subtotal = parseFloat(document.getElementById('subtotal').textContent)||0;
   let iva = document.getElementById('withIvaSwitch').checked ? subtotal*0.16 : 0;
   let total = subtotal + iva;
   let anticipo = document.getElementById('withAnticipoSwitch').checked ? parseFloat(document.getElementById('anticipoAmount').textContent) : 0;
   let saldo = document.getElementById('balance').textContent;
 
-  let totalsY = lineaY + 8 + Math.max(items.length,1) * rowHeight + 3;
+  let minY = y + 6; // Espacio mínimo antes de totales
+  let totalsY = Math.max(minY, lineaY + 22 + items.length*rowHeight); // Siempre debajo de la tabla
   doc.setFont('helvetica','normal'); doc.setFontSize(9.6); doc.setTextColor(30,30,30);
   doc.text(`Subtotal: $${subtotal.toFixed(2)}`, w-margin-1, totalsY, {align:'right'});
   doc.text(`IVA: $${iva.toFixed(2)}`, w-margin-1, totalsY+5.2, {align:'right'});
@@ -821,7 +820,7 @@ async function generarPDFpro() {
   let detalles = [];
   for(let i=1;i<=11;i++) if(document.getElementById('chk'+i).checked) detalles.push(document.querySelector('label[for=chk'+i+']').innerText);
   if(window.detallesArray && window.detallesArray.length) detalles = detalles.concat(window.detallesArray);
-  let detallesY = totalsY + 20;
+  let detallesY = totalsY + 24;
   if (detalles.length) {
     doc.setFont('helvetica','bold');
     doc.setFontSize(10.3);
@@ -838,7 +837,7 @@ async function generarPDFpro() {
 
   // --- Firma manuscrita elegante ---
   let firmaY = detallesY + 32;
-  if (firmaY > h - 52) firmaY = h - 52; // no dejar que baje de más
+  if (firmaY > h - 52) firmaY = h - 52;
   doc.setDrawColor(180, 180, 180);
   doc.setLineWidth(0.23);
   doc.line(w/2-32, firmaY, w/2+32, firmaY);
