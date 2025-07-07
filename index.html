@@ -15,11 +15,12 @@
       --fondo: #f7fafd;
       --gris: #a5b0c6;
     }
+    html, body { height:100%; }
     body { font-family: 'Inter', Arial, sans-serif; background: var(--fondo); color: var(--txt); margin:0; }
-    .container { max-width: 700px; margin:0 auto 26px auto; padding: 8px;}
+    .container { max-width: 730px; margin:0 auto 26px auto; padding: 8px;}
     header { display:flex; align-items:center; gap:18px; justify-content:center; margin:22px 0 12px 0;}
     header img { height:60px; border-radius:12px; box-shadow: 0 2px 16px #b6d8fb68;}
-    .logoTitle { font-size:1.82em; font-weight:700; color:var(--azul);}
+    .logoTitle { font-size:1.85em; font-weight:700; color:var(--azul);}
     .logoTitle span { color: var(--rojo);}
     .form-container, .preview-container { background: var(--panel); border-radius: 14px; box-shadow: 0 2px 14px rgba(10,110,200,0.08); padding: 18px 10px 18px 10px; margin-bottom: 20px; }
     .form-row { display:flex; flex-wrap:wrap; gap:10px 13px; margin-bottom: 7px;}
@@ -354,7 +355,54 @@ document.getElementById('newItemDesc').addEventListener('input', function(){
   if(pr && document.getElementById('quoteType').value==='express') document.getElementById('newItemPrice').value = pr;
 });
 
-// ==== Tabla items ====
+// ==== Dictado premium ====
+let recognition, recognizing = false, dictTarget = "";
+function supportsSpeech() { return 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window; }
+if (supportsSpeech()) {
+  document.querySelectorAll('.mic-btn').forEach(btn=>{
+    btn.style.display = "";
+    btn.onclick = function(){
+      if(recognizing) return;
+      dictTarget = btn.getAttribute('data-for');
+      let input = document.getElementById(dictTarget);
+      input.focus();
+      document.getElementById('dictadoStatus').style.display = "";
+      document.getElementById('dictadoStatus').textContent = "Escuchando... habla ahora";
+      recognition = new (window.SpeechRecognition||window.webkitSpeechRecognition)();
+      recognition.lang = input.type==="number" ? "es-MX" : "es-MX";
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognizing = true;
+      btn.classList.add("listening");
+      recognition.onresult = function(ev){
+        let txt = ev.results[0][0].transcript;
+        // Intentar convertir a número si el campo lo es
+        if(input.type==="number"){
+          txt = txt.replace(/,/g,".").replace(/[^\d\.]/g,"");
+          let num=parseFloat(txt);
+          input.value = isNaN(num)? "" : num;
+        }else{
+          input.value = (input.value.trim()?input.value.trim()+" ":"") + txt;
+        }
+        dictTarget="";
+        recognizing = false;
+        btn.classList.remove("listening");
+        document.getElementById('dictadoStatus').style.display = "none";
+        recalc();
+      };
+      recognition.onend = function(){
+        recognizing = false;
+        btn.classList.remove("listening");
+        document.getElementById('dictadoStatus').style.display = "none";
+      };
+      recognition.start();
+    };
+  });
+} else {
+  document.querySelectorAll('.mic-btn').forEach(btn=>btn.style.display="none");
+}
+
+// ==== Tabla de items ====
 function renderTable(){
   const tbody = document.querySelector('#itemsTable tbody');
   tbody.innerHTML = '';
@@ -366,17 +414,17 @@ function renderTable(){
       let pr = item.pr||0;
       let total = pr.toFixed(2);
       tr.innerHTML = `<td>${item.desc}</td>
-        <td>${toMoney(pr)}</td>
-        <td>${toMoney(total)}</td>
+        <td style="text-align:right;">${toMoney(pr)}</td>
+        <td style="text-align:right;">${toMoney(total)}</td>
         <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
     } else {
       let qt = item.qt||1, ma = item.ma||0, lb = item.lb||0;
       let total = ((ma+lb)*qt).toFixed(2);
       tr.innerHTML = `<td>${item.desc}</td>
-        <td>${qt}</td>
-        <td>${toMoney(ma)}</td>
-        <td>${toMoney(lb)}</td>
-        <td>${toMoney(total)}</td>
+        <td style="text-align:center;">${qt}</td>
+        <td style="text-align:right;">${toMoney(ma)}</td>
+        <td style="text-align:right;">${toMoney(lb)}</td>
+        <td style="text-align:right;">${toMoney(total)}</td>
         <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
     }
     tbody.appendChild(tr);
@@ -452,45 +500,65 @@ closeDetailsBtn.onclick = function(){
 };
 document.addEventListener('keydown', e=>{if(detailsDrawer.style.right=="0px"&&e.key==='Escape') closeDetailsBtn.onclick();});
 
-// ==== Vista previa ====
+// ==== Vista previa dinámica ====
 function buildPreview(container, isPDF){
   container.innerHTML = '';
-  // Header
-  const hdr = document.createElement('div');
-  hdr.className = 'header';
-  hdr.innerHTML = `<img src="https://i.imgur.com/kf8e57F.jpg" alt="Logo" style="height:${isPDF?'56':'36'}px;margin-right:10px;">
-    <span style="font-weight:600;font-size:1.16em;color:#0a6ec8;">GRUPO <span style="color:#dc1e28">AR</span></span>`;
-  container.append(hdr);
-  const t = document.createElement('div');
-  t.innerHTML = `<div style="font-size:1.09em"><b>${document.getElementById('quoteTitle').value}</b></div>
-  <div style="font-size:.98em"><strong>Cliente:</strong> ${document.getElementById('client').value||'--'}<br>
-  <strong>Ubicación:</strong> ${document.getElementById('location').value||'--'}</div>`;
-  t.style.marginBottom = "6px";
-  container.append(t);
-  // Tabla
+  // Header pro
+  const header = document.createElement('div');
+  header.style.display = "flex"; header.style.alignItems="center";
+  header.innerHTML = `<img src="https://i.imgur.com/kf8e57F.jpg" alt="Logo" style="height:46px;margin-right:15px;border-radius:7px;">
+    <div>
+      <div style="font-weight:700;font-size:1.16em;color:#0a6ec8;">GRUPO <span style="color:#dc1e28">AR</span></div>
+      <div style="font-size:.98em;color:#425;">${document.getElementById('quoteTitle').value||''}</div>
+      <div style="font-size:.96em;">
+        <b>Cliente:</b> ${document.getElementById('client').value||'--'}<br>
+        <b>Ubicación:</b> ${document.getElementById('location').value||'--'}
+      </div>
+    </div>`;
+  container.append(header);
+
+  // Tabla premium
   const tbl=document.createElement('table');
+  tbl.style.marginTop = "10px";
   let tipo=document.getElementById('quoteType').value;
   if(tipo==="express"){
-    tbl.innerHTML=`<thead><tr><th>Descripción</th><th>Precio</th><th>Total</th></tr></thead><tbody></tbody>`;
+    tbl.innerHTML=`<thead><tr>
+      <th style="min-width:120px;">Descripción</th>
+      <th style="min-width:70px;text-align:right;">Precio</th>
+      <th style="min-width:70px;text-align:right;">Total</th>
+      </tr></thead><tbody></tbody>`;
     const body=tbl.querySelector('tbody');
     items.forEach(item=>{
       let tr = document.createElement('tr');
       let pr = item.pr||0, total = pr.toFixed(2);
-      tr.innerHTML = `<td>${item.desc}</td><td>${toMoney(pr)}</td><td>${toMoney(total)}</td>`;
+      tr.innerHTML = `<td>${item.desc}</td>
+        <td style="text-align:right;">${toMoney(pr)}</td>
+        <td style="text-align:right;">${toMoney(total)}</td>`;
       body.appendChild(tr);
     });
   } else {
-    tbl.innerHTML=`<thead><tr><th>Descripción</th><th>Cant.</th><th>Material</th><th>Mano Obra</th><th>Total</th></tr></thead><tbody></tbody>`;
+    tbl.innerHTML=`<thead><tr>
+      <th style="min-width:120px;">Descripción</th>
+      <th style="min-width:32px;text-align:center;">Cant.</th>
+      <th style="min-width:70px;text-align:right;">Material</th>
+      <th style="min-width:70px;text-align:right;">Mano Obra</th>
+      <th style="min-width:70px;text-align:right;">Total</th>
+      </tr></thead><tbody></tbody>`;
     const body=tbl.querySelector('tbody');
     items.forEach(item=>{
       let qt = item.qt||1, ma = item.ma||0, lb = item.lb||0;
       let total = ((ma+lb)*qt).toFixed(2);
       let tr = document.createElement('tr');
-      tr.innerHTML = `<td>${item.desc}</td><td>${qt}</td><td>${toMoney(ma)}</td><td>${toMoney(lb)}</td><td>${toMoney(total)}</td>`;
+      tr.innerHTML = `<td>${item.desc}</td>
+        <td style="text-align:center;">${qt}</td>
+        <td style="text-align:right;">${toMoney(ma)}</td>
+        <td style="text-align:right;">${toMoney(lb)}</td>
+        <td style="text-align:right;">${toMoney(total)}</td>`;
       body.appendChild(tr);
     });
   }
   container.append(tbl);
+
   // Summary
   const sum=document.createElement('div'); sum.className='summary';
   sum.innerHTML=`<div>Subtotal: $${document.getElementById('subtotal').textContent}</div>
@@ -502,6 +570,7 @@ function buildPreview(container, isPDF){
   }
   sum.innerHTML += `<div><strong>Saldo: $${document.getElementById('balance').textContent}</strong></div>`;
   container.append(sum);
+
   // Detalles y especificaciones
   let checks=[];
   for(let i=1;i<=11;i++){
@@ -509,7 +578,7 @@ function buildPreview(container, isPDF){
   }
   if(checks.length || detallesArray.length){
     const dt=document.createElement('div');
-    dt.innerHTML=`<h4 style="color:#0a6ec8">Detalles y Especificaciones</h4>
+    dt.innerHTML=`<h4 style="color:#0a6ec8;margin:9px 0 3px 0;">Detalles y Especificaciones</h4>
     <ul style="margin:4px 0 0 14px;">
     ${checks.map(t=>`<li>${t}</li>`).join('')}
     ${detallesArray.map(t=>`<li>${t}</li>`).join('')}
@@ -517,10 +586,10 @@ function buildPreview(container, isPDF){
     container.append(dt);
   }
 }
-setInterval(()=>buildPreview(previewRes, false), 700);
+setInterval(()=>buildPreview(previewRes, false), 600);
 </script>
 <script>
-// ================= HISTORIAL Y AUTOCOMPLETAR ================
+// ================= HISTORIAL Y AUTOCOMPLETAR (igual que antes) ================
 function updateHistorialBar() {
   const hc = document.getElementById('histContainer');
   hc.innerHTML = '';
@@ -574,46 +643,6 @@ function cargarHistorial(idx){
 document.getElementById('saveHistBtn').onclick = guardarEnHistorial;
 updateHistorialBar();
 
-// ==== Dictado por micrófono ====
-let recognition, recognizing = false, dictTarget = "";
-function supportsSpeech() { return 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window; }
-if (supportsSpeech()) {
-  document.querySelectorAll('.mic-btn').forEach(btn=>{
-    btn.style.display = "";
-    btn.onclick = function(){
-      if(recognizing) return;
-      dictTarget = btn.getAttribute('data-for');
-      let input = document.getElementById(dictTarget);
-      input.focus();
-      document.getElementById('dictadoStatus').style.display = "";
-      document.getElementById('dictadoStatus').textContent = "Escuchando... habla ahora";
-      recognition = new (window.SpeechRecognition||window.webkitSpeechRecognition)();
-      recognition.lang = "es-MX";
-      recognition.continuous = false;
-      recognition.interimResults = false;
-      recognizing = true;
-      btn.classList.add("listening");
-      recognition.onresult = function(ev){
-        let txt = ev.results[0][0].transcript;
-        input.value = (input.value.trim()?input.value.trim()+" ":"") + txt;
-        dictTarget="";
-        recognizing = false;
-        btn.classList.remove("listening");
-        document.getElementById('dictadoStatus').style.display = "none";
-        recalc();
-      };
-      recognition.onend = function(){
-        recognizing = false;
-        btn.classList.remove("listening");
-        document.getElementById('dictadoStatus').style.display = "none";
-      };
-      recognition.start();
-    };
-  });
-} else {
-  document.querySelectorAll('.mic-btn').forEach(btn=>btn.style.display="none");
-}
-
 // ==== IA: mejora de redacción y ortografía (simulada) ====
 async function mejorarRedaccion() {
   function corrigeFrase(txt){
@@ -644,7 +673,7 @@ async function mejorarRedaccion() {
   return Promise.resolve();
 }
 
-// ==== PDF premium (marca de agua hiper-opaca y encabezado pro) ====
+// ==== PDF premium PRO ====
 async function generarPDFpro() {
   if(document.getElementById('aiRedaccion').checked) await mejorarRedaccion();
   let doc = new window.jspdf.jsPDF({unit:'mm', format:'a4'});
@@ -652,82 +681,97 @@ async function generarPDFpro() {
   img.crossOrigin = "anonymous";
   img.src = "https://i.imgur.com/kf8e57F.jpg";
   await new Promise(r=>{img.onload=r;});
-  // Marca de agua ultra-sutil (¡MUY opaca!)
+
+  // --- Marca de agua super tenue ---
   doc.saveGraphicsState();
-  doc.setGState(new doc.GState({opacity:0.055}));
-  doc.addImage(img, 'JPEG', 30, 70, 150, 150, '', 'FAST');
+  doc.setGState(new doc.GState({opacity:0.045}));
+  doc.addImage(img, 'JPEG', 45, 80, 120, 120, '', 'FAST');
   doc.restoreGraphicsState();
 
-  // Encabezado premium (logo grande izquierda, texto derecha)
-  doc.addImage(img, 'JPEG', 15, 14, 30, 30, '', 'FAST', 1);
+  // --- Encabezado: dos columnas ---
+  doc.addImage(img, 'JPEG', 17, 16, 32, 32, '', 'FAST');
   doc.setFont('helvetica','bold');
   doc.setFontSize(19); doc.setTextColor(10,110,200);
-  doc.text("GRUPO", 49, 22);
-  doc.setTextColor(220,30,40); doc.text("AR", 88, 22);
-  doc.setTextColor(30,33,45); doc.setFontSize(13);
-  let fecha = new Date(), ftxt = fecha.toLocaleDateString();
-  doc.text(`Cliente: ${document.getElementById('client').value||'--'}`,49,29);
-  doc.text(`Ubicación: ${document.getElementById('location').value||'--'}`,49,34);
-  doc.text(`Fecha: ${ftxt}`,49,39);
-  doc.setTextColor(80,80,80); doc.setFontSize(12);
-  doc.text(document.getElementById('quoteTitle').value,49,46);
+  doc.text("GRUPO", 55, 22);
+  doc.setTextColor(220,30,40); doc.text("AR", 90, 22);
+  doc.setTextColor(30,33,45); doc.setFontSize(12.5);
 
-  // Tabla pro
-  let y = 58;
+  // Segunda columna (datos del cliente)
+  let fecha = new Date(), ftxt = fecha.toLocaleDateString();
+  doc.setFont('helvetica','normal');
+  doc.text(`Cliente: ${document.getElementById('client').value||'--'}`, 130, 20);
+  doc.text(`Ubicación: ${document.getElementById('location').value||'--'}`, 130, 26);
+  doc.text(`Fecha: ${ftxt}`, 130, 32);
+
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(13); doc.setTextColor(10,110,200);
+  doc.text(document.getElementById('quoteTitle').value, 17, 54);
+
+  // --- Tabla Premium ---
+  let y = 63;
   let tipo = document.getElementById('quoteType').value;
-  doc.setFontSize(11); doc.setTextColor(10,110,200);
+  doc.setFont('helvetica','bold'); doc.setFontSize(10.6); doc.setTextColor(10,110,200);
   if(tipo==='express') {
-    doc.text("Descripción",16,y); doc.text("Precio",102,y); doc.text("Total",145,y);
-    y+=6; doc.setLineWidth(0.18); doc.line(16,y,195,y); doc.setTextColor(44,44,55); doc.setFontSize(10.2);
+    // Header
+    doc.text("Descripción",17,y); doc.text("Precio",97,y,{align:'right'}); doc.text("Total",144,y,{align:'right'});
+    doc.setLineWidth(0.22); doc.line(17,y+2,192,y+2);
+    doc.setFont('helvetica','normal'); doc.setFontSize(10.2); doc.setTextColor(40,40,45);
+    y+=8;
     items.forEach(it=>{
-      doc.text(it.desc,16,y+7);
-      doc.text(`$${(it.pr||0).toFixed(2)}`,102,y+7);
-      doc.text(`$${(it.pr||0).toFixed(2)}`,145,y+7);
-      y+=8;
+      doc.text(it.desc,17,y);
+      doc.text(`$${(it.pr||0).toFixed(2)}`,97,y,{align:'right'});
+      doc.text(`$${(it.pr||0).toFixed(2)}`,144,y,{align:'right'});
+      y+=7.2;
     });
   } else {
-    doc.text("Descripción",16,y); doc.text("Cant.",80,y); doc.text("Material",103,y); doc.text("Mano Obra",135,y); doc.text("Total",170,y);
-    y+=6; doc.setLineWidth(0.18); doc.line(16,y,195,y); doc.setTextColor(44,44,55); doc.setFontSize(10.2);
+    doc.text("Descripción",17,y); doc.text("Cant.",81,y,{align:'center'});
+    doc.text("Material",108,y,{align:'right'}); doc.text("Mano Obra",135,y,{align:'right'}); doc.text("Total",167,y,{align:'right'});
+    doc.setLineWidth(0.22); doc.line(17,y+2,192,y+2);
+    doc.setFont('helvetica','normal'); doc.setFontSize(10.2); doc.setTextColor(40,40,45);
+    y+=8;
     items.forEach(it=>{
       let tot = ((it.ma||0)+(it.lb||0))*(it.qt||1);
-      doc.text(it.desc,16,y+7); doc.text(`${it.qt||1}`,80,y+7);
-      doc.text(`$${(it.ma||0).toFixed(2)}`,103,y+7); doc.text(`$${(it.lb||0).toFixed(2)}`,135,y+7);
-      doc.text(`$${tot.toFixed(2)}`,170,y+7);
-      y+=8;
+      doc.text(it.desc,17,y);
+      doc.text(`${it.qt||1}`,81,y,{align:'center'});
+      doc.text(`$${(it.ma||0).toFixed(2)}`,108,y,{align:'right'});
+      doc.text(`$${(it.lb||0).toFixed(2)}`,135,y,{align:'right'});
+      doc.text(`$${tot.toFixed(2)}`,167,y,{align:'right'});
+      y+=7.2;
     });
   }
-  y+=10;
+  y+=9;
   doc.setFontSize(11.5); doc.setTextColor(10,110,200);
   let subtotal=parseFloat(document.getElementById('subtotal').textContent)||0;
   let iva=parseFloat(document.getElementById('ivaAmount').textContent)||0;
   let total=parseFloat(document.getElementById('totalAmount').textContent)||0;
   let anticipo=parseFloat(document.getElementById('anticipoAmount').textContent)||0;
   let saldo=parseFloat(document.getElementById('balance').textContent)||0;
-  doc.text(`Subtotal: $${subtotal.toFixed(2)}`,120,y);
-  doc.text(`IVA: $${iva.toFixed(2)}`,120,y+6);
+  doc.text(`Subtotal: $${subtotal.toFixed(2)}`,130,y);
+  doc.text(`IVA: $${iva.toFixed(2)}`,130,y+6);
   doc.setFont('helvetica','bold');
-  doc.text(`Total: $${total.toFixed(2)}`,120,y+13);
+  doc.text(`Total: $${total.toFixed(2)}`,130,y+13);
   if(anticipo>0){
     doc.setFont('helvetica','normal'); doc.setFontSize(10.4);
-    doc.text(`Anticipo: $${anticipo.toFixed(2)}`,120,y+19);
-    doc.text(`Saldo: $${saldo.toFixed(2)}`,120,y+24);
+    doc.text(`Anticipo: $${anticipo.toFixed(2)}`,130,y+19);
+    doc.text(`Saldo: $${saldo.toFixed(2)}`,130,y+24);
     y+=10;
   }
-  y+=27;
+  y+=28;
   doc.setFont('helvetica','bold'); doc.setFontSize(11.5); doc.setTextColor(10,110,200);
-  doc.text("Detalles y Especificaciones:",16,y);
+  doc.text("Detalles y Especificaciones:",17,y);
   doc.setFont('helvetica','normal'); doc.setFontSize(9.4); doc.setTextColor(60,60,60);
-  let y0 = y+4;
+  let y0 = y+5;
   let detalles = [];
   for(let i=1;i<=11;i++) if(document.getElementById('chk'+i).checked) detalles.push(document.querySelector('label[for=chk'+i+']').innerText);
   if(window.detallesArray && window.detallesArray.length) detalles = detalles.concat(window.detallesArray);
   detalles.forEach((d,idx)=>{
-    doc.text(`• ${d}`, 18, y0+5*idx);
+    if (y0+idx*5 > 260) return; // No se pase de hoja
+    doc.text(`• ${d}`, 19, y0+5*idx);
   });
   y0 += 5*detalles.length;
   y0+=10;
 
-  // Firma manuscrita pequeña y elegante
+  // Firma manuscrita elegante
   doc.setDrawColor(10,110,200); doc.setLineWidth(0.36);
   doc.line(113, y0, 172, y0);
   doc.setFont('times','italic'); doc.setTextColor(10,110,200); doc.setFontSize(13.5);
