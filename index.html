@@ -674,7 +674,7 @@ async function mejorarRedaccion() {
 }
 
 // ==== PDF premium PRO ====
-async function generarPDFpro() {
+async function generarPDFpro(returnDocOnly = false) {
   if (document.getElementById('aiRedaccion').checked) await mejorarRedaccion();
 
   const doc = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' });
@@ -711,7 +711,7 @@ async function generarPDFpro() {
   doc.setTextColor(60, 60, 60);
   doc.text(quoteTitle, w - margin - 2, margin + 8, { align: 'right' });
 
-  // --- Datos cliente/ubicación/fecha alineados a la derecha y simétricos
+  // --- Datos cliente/ubicación/fecha alineados a la derecha y simétricos ---
   const fieldFontSize = 10.2;
   const valueFontSize = 10.2;
   const labelColor = [30, 30, 30];
@@ -759,13 +759,13 @@ async function generarPDFpro() {
   doc.setTextColor(255,255,255);
 
   // --- Encabezado tabla ---
-  const rowHeight = 7.6; // Más alto para dejar respiro
+  const rowHeight = 7.6;
   if (tipo === 'express') {
     doc.rect(margin, y, w-margin*2, rowHeight, 'F');
     doc.text("Descripción", margin+2, y+5.0);
     doc.text("Precio", w-margin-48, y+5.0, {align:'right'});
     doc.text("Total", w-margin-10, y+5.0, {align:'right'});
-    y += rowHeight + 1.5; // Deja espacio antes de la primer fila
+    y += rowHeight + 1.5;
     doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
     let subtotal=0;
     items.forEach(it=>{
@@ -795,15 +795,15 @@ async function generarPDFpro() {
     });
   }
 
-  // --- Totales a la derecha, SIEMPRE después de la tabla y con espacio ---
+  // --- Totales ---
   let subtotal = parseFloat(document.getElementById('subtotal').textContent)||0;
   let iva = document.getElementById('withIvaSwitch').checked ? subtotal*0.16 : 0;
   let total = subtotal + iva;
   let anticipo = document.getElementById('withAnticipoSwitch').checked ? parseFloat(document.getElementById('anticipoAmount').textContent) : 0;
   let saldo = document.getElementById('balance').textContent;
 
-  let minY = y + 6; // Espacio mínimo antes de totales
-  let totalsY = Math.max(minY, lineaY + 22 + items.length*rowHeight); // Siempre debajo de la tabla
+  let minY = y + 6;
+  let totalsY = Math.max(minY, lineaY + 22 + items.length*rowHeight);
   doc.setFont('helvetica','normal'); doc.setFontSize(9.6); doc.setTextColor(30,30,30);
   doc.text(`Subtotal: $${subtotal.toFixed(2)}`, w-margin-1, totalsY, {align:'right'});
   doc.text(`IVA: $${iva.toFixed(2)}`, w-margin-1, totalsY+5.2, {align:'right'});
@@ -816,7 +816,7 @@ async function generarPDFpro() {
     doc.text(`Saldo: $${saldo}`, w-margin-1, totalsY+21.3, {align:'right'});
   }
 
-  // --- Detalles y especificaciones (si hay) ---
+  // --- Detalles y especificaciones ---
   let detalles = [];
   for(let i=1;i<=11;i++) if(document.getElementById('chk'+i).checked) detalles.push(document.querySelector('label[for=chk'+i+']').innerText);
   if(window.detallesArray && window.detallesArray.length) detalles = detalles.concat(window.detallesArray);
@@ -854,11 +854,7 @@ async function generarPDFpro() {
   doc.setTextColor(170,170,170);
   doc.text('GRUPO AR Construcción y Diseño — Tel: +52 1 438 134 6142', w/2, h-8, {align:'center'});
 
-  // === Guardar PDF ===
-  let fname = (document.getElementById('fileName').value || 'cotizacion') + '.pdf';
-  doc.save(fname);
-
-  // === Función truncar texto ===
+  // --- Función truncar texto largo en los campos ---
   function truncateToWidth(doc, txt, maxWidthMm) {
     let width = doc.getTextWidth(txt);
     while (width > maxWidthMm) {
@@ -868,7 +864,18 @@ async function generarPDFpro() {
     }
     return txt;
   }
+
+  let fname = (document.getElementById('fileName').value || 'cotizacion') + '.pdf';
+
+  // --- Cambia SOLO esto para el botón compartir ---
+  if (returnDocOnly) {
+    return { fname, doc };
+  } else {
+    doc.save(fname);
+    return { fname, doc };
+  }
 }
+
 
 
 document.getElementById('generateBtn').onclick = generarPDFpro;
