@@ -17,9 +17,9 @@
     }
     body { font-family: 'Inter', Arial, sans-serif; background: var(--fondo); color: var(--txt); margin:0; }
     .container { max-width: 700px; margin:0 auto 26px auto; padding: 8px;}
-    header { display:flex; align-items:center; gap:14px; justify-content:center; margin:22px 0 12px 0;}
-    header img { height:56px; border-radius:12px; box-shadow: 0 2px 16px #b6d8fb68;}
-    .logoTitle { font-size:1.65em; font-weight:700; color:var(--azul);}
+    header { display:flex; align-items:center; gap:18px; justify-content:center; margin:22px 0 12px 0;}
+    header img { height:60px; border-radius:12px; box-shadow: 0 2px 16px #b6d8fb68;}
+    .logoTitle { font-size:1.82em; font-weight:700; color:var(--azul);}
     .logoTitle span { color: var(--rojo);}
     .form-container, .preview-container { background: var(--panel); border-radius: 14px; box-shadow: 0 2px 14px rgba(10,110,200,0.08); padding: 18px 10px 18px 10px; margin-bottom: 20px; }
     .form-row { display:flex; flex-wrap:wrap; gap:10px 13px; margin-bottom: 7px;}
@@ -68,8 +68,8 @@
       .form-container, .preview-container { padding:9px 2px 12px 2px;}
       table, th, td { font-size:.97em;}
       #previewResponsive { font-size:1em;}
-      header img { height:44px;}
-      .logoTitle { font-size:1.1em;}
+      header img { height:46px;}
+      .logoTitle { font-size:1.23em;}
     }
   </style>
 </head>
@@ -518,8 +518,6 @@ function buildPreview(container, isPDF){
   }
 }
 setInterval(()=>buildPreview(previewRes, false), 700);
-
-// (El resto del JS, incluido: historial, dictado, IA, PDF PRO y compartir, va en la siguiente parte)
 </script>
 <script>
 // ================= HISTORIAL Y AUTOCOMPLETAR ================
@@ -646,72 +644,79 @@ async function mejorarRedaccion() {
   return Promise.resolve();
 }
 
-// ==== PDF profesional (marca de agua tenue, firma pequeña, diseño premium) ====
+// ==== PDF premium (marca de agua hiper-opaca y encabezado pro) ====
 async function generarPDFpro() {
   if(document.getElementById('aiRedaccion').checked) await mejorarRedaccion();
   let doc = new window.jspdf.jsPDF({unit:'mm', format:'a4'});
-  // Marca de agua (logo central, muy tenue)
-  let img = new Image();
+  let img = new window.Image();
   img.crossOrigin = "anonymous";
   img.src = "https://i.imgur.com/kf8e57F.jpg";
   await new Promise(r=>{img.onload=r;});
-  doc.addImage(img, 'JPEG', 45, 80, 120, 120, '', 'FAST', 0.07);
-  // Logo principal
-  doc.addImage(img, 'JPEG', 16, 12, 23, 23, '', 'FAST', 1);
-  doc.setFont('helvetica','bold'); doc.setFontSize(18);
-  doc.setTextColor(10,110,200); doc.text("GRUPO", 43, 22);
-  doc.setTextColor(220,30,40); doc.text("AR", 75, 22);
-  doc.setFontSize(11); doc.setTextColor(33,43,60);
-  doc.text(document.getElementById('quoteTitle').value, 43, 28);
-  doc.setFontSize(10); doc.setTextColor(80,80,80);
-  doc.text(`Cliente: ${document.getElementById('client').value||'--'}`,43,33);
-  doc.text(`Ubicación: ${document.getElementById('location').value||'--'}`,43,37);
+  // Marca de agua ultra-sutil (¡MUY opaca!)
+  doc.saveGraphicsState();
+  doc.setGState(new doc.GState({opacity:0.055}));
+  doc.addImage(img, 'JPEG', 30, 70, 150, 150, '', 'FAST');
+  doc.restoreGraphicsState();
 
-  // Tabla
-  let y = 47;
+  // Encabezado premium (logo grande izquierda, texto derecha)
+  doc.addImage(img, 'JPEG', 15, 14, 30, 30, '', 'FAST', 1);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(19); doc.setTextColor(10,110,200);
+  doc.text("GRUPO", 49, 22);
+  doc.setTextColor(220,30,40); doc.text("AR", 88, 22);
+  doc.setTextColor(30,33,45); doc.setFontSize(13);
+  let fecha = new Date(), ftxt = fecha.toLocaleDateString();
+  doc.text(`Cliente: ${document.getElementById('client').value||'--'}`,49,29);
+  doc.text(`Ubicación: ${document.getElementById('location').value||'--'}`,49,34);
+  doc.text(`Fecha: ${ftxt}`,49,39);
+  doc.setTextColor(80,80,80); doc.setFontSize(12);
+  doc.text(document.getElementById('quoteTitle').value,49,46);
+
+  // Tabla pro
+  let y = 58;
   let tipo = document.getElementById('quoteType').value;
   doc.setFontSize(11); doc.setTextColor(10,110,200);
   if(tipo==='express') {
     doc.text("Descripción",16,y); doc.text("Precio",102,y); doc.text("Total",145,y);
-    y+=5; doc.setLineWidth(0.18); doc.line(16,y,195,y); doc.setTextColor(40,40,45); doc.setFontSize(10);
+    y+=6; doc.setLineWidth(0.18); doc.line(16,y,195,y); doc.setTextColor(44,44,55); doc.setFontSize(10.2);
     items.forEach(it=>{
-      doc.text(it.desc,16,y+6);
-      doc.text(`$${(it.pr||0).toFixed(2)}`,102,y+6);
-      doc.text(`$${(it.pr||0).toFixed(2)}`,145,y+6);
-      y+=7;
+      doc.text(it.desc,16,y+7);
+      doc.text(`$${(it.pr||0).toFixed(2)}`,102,y+7);
+      doc.text(`$${(it.pr||0).toFixed(2)}`,145,y+7);
+      y+=8;
     });
   } else {
     doc.text("Descripción",16,y); doc.text("Cant.",80,y); doc.text("Material",103,y); doc.text("Mano Obra",135,y); doc.text("Total",170,y);
-    y+=5; doc.setLineWidth(0.18); doc.line(16,y,195,y); doc.setTextColor(40,40,45); doc.setFontSize(10);
+    y+=6; doc.setLineWidth(0.18); doc.line(16,y,195,y); doc.setTextColor(44,44,55); doc.setFontSize(10.2);
     items.forEach(it=>{
       let tot = ((it.ma||0)+(it.lb||0))*(it.qt||1);
-      doc.text(it.desc,16,y+6); doc.text(`${it.qt||1}`,80,y+6);
-      doc.text(`$${(it.ma||0).toFixed(2)}`,103,y+6); doc.text(`$${(it.lb||0).toFixed(2)}`,135,y+6);
-      doc.text(`$${tot.toFixed(2)}`,170,y+6);
-      y+=7;
+      doc.text(it.desc,16,y+7); doc.text(`${it.qt||1}`,80,y+7);
+      doc.text(`$${(it.ma||0).toFixed(2)}`,103,y+7); doc.text(`$${(it.lb||0).toFixed(2)}`,135,y+7);
+      doc.text(`$${tot.toFixed(2)}`,170,y+7);
+      y+=8;
     });
   }
-  y+=8;
-  doc.setFontSize(11); doc.setTextColor(10,110,200);
+  y+=10;
+  doc.setFontSize(11.5); doc.setTextColor(10,110,200);
   let subtotal=parseFloat(document.getElementById('subtotal').textContent)||0;
   let iva=parseFloat(document.getElementById('ivaAmount').textContent)||0;
   let total=parseFloat(document.getElementById('totalAmount').textContent)||0;
   let anticipo=parseFloat(document.getElementById('anticipoAmount').textContent)||0;
   let saldo=parseFloat(document.getElementById('balance').textContent)||0;
   doc.text(`Subtotal: $${subtotal.toFixed(2)}`,120,y);
-  doc.text(`IVA: $${iva.toFixed(2)}`,120,y+5);
+  doc.text(`IVA: $${iva.toFixed(2)}`,120,y+6);
   doc.setFont('helvetica','bold');
-  doc.text(`Total: $${total.toFixed(2)}`,120,y+10);
+  doc.text(`Total: $${total.toFixed(2)}`,120,y+13);
   if(anticipo>0){
-    doc.setFont('helvetica','normal'); doc.setFontSize(10);
-    doc.text(`Anticipo: $${anticipo.toFixed(2)}`,120,y+15);
-    doc.text(`Saldo: $${saldo.toFixed(2)}`,120,y+20);
+    doc.setFont('helvetica','normal'); doc.setFontSize(10.4);
+    doc.text(`Anticipo: $${anticipo.toFixed(2)}`,120,y+19);
+    doc.text(`Saldo: $${saldo.toFixed(2)}`,120,y+24);
     y+=10;
   }
-  y+=20;
-  doc.setFont('helvetica','bold'); doc.setFontSize(11); doc.setTextColor(10,110,200);
+  y+=27;
+  doc.setFont('helvetica','bold'); doc.setFontSize(11.5); doc.setTextColor(10,110,200);
   doc.text("Detalles y Especificaciones:",16,y);
-  doc.setFont('helvetica','normal'); doc.setFontSize(9); doc.setTextColor(60,60,60);
+  doc.setFont('helvetica','normal'); doc.setFontSize(9.4); doc.setTextColor(60,60,60);
   let y0 = y+4;
   let detalles = [];
   for(let i=1;i<=11;i++) if(document.getElementById('chk'+i).checked) detalles.push(document.querySelector('label[for=chk'+i+']').innerText);
@@ -720,17 +725,20 @@ async function generarPDFpro() {
     doc.text(`• ${d}`, 18, y0+5*idx);
   });
   y0 += 5*detalles.length;
-  y0+=11;
-  // Firma manuscrita pequeña
-  doc.setDrawColor(10,110,200); doc.setLineWidth(0.45);
-  doc.line(110, y0, 175, y0);
-  doc.setFont('times','italic'); doc.setTextColor(10,110,200); doc.setFontSize(13);
-  doc.text("Grupo AR", 122, y0+5);
-  doc.setFontSize(8); doc.setTextColor(140,140,140); doc.setFont('helvetica','normal');
-  doc.text("Firma simbólica digital — No requiere firma autógrafa.",110, y0+10);
-  // Footer
-  doc.setFontSize(8.2); doc.setTextColor(150,150,150);
+  y0+=10;
+
+  // Firma manuscrita pequeña y elegante
+  doc.setDrawColor(10,110,200); doc.setLineWidth(0.36);
+  doc.line(113, y0, 172, y0);
+  doc.setFont('times','italic'); doc.setTextColor(10,110,200); doc.setFontSize(13.5);
+  doc.text("Grupo AR", 125, y0+6);
+  doc.setFontSize(8); doc.setTextColor(120,120,120); doc.setFont('helvetica','normal');
+  doc.text("Firma simbólica digital — No requiere firma autógrafa.",113, y0+11);
+
+  // Footer discreto
+  doc.setFontSize(8.5); doc.setTextColor(160,160,160);
   doc.text("GRUPO AR Construcción y Diseño — Tel: +52 1 438 134 6142",105,287,{align:'center'});
+
   let fname=(document.getElementById('fileName').value||'cotizacion')+'.pdf';
   doc.save(fname);
   return {fname,doc};
