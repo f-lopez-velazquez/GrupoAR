@@ -65,6 +65,9 @@
     .historico-bar button { font-size:.97em; padding:5px 9px; border-radius:7px; border:1.3px solid var(--azul); background:#e8f2fb; color:var(--azul); cursor:pointer;}
     .historico-bar button.active {background:#0a6ec8;color:#fff;}
     .historico-bar .delhist { color:#e00; margin-left:5px; background:transparent; border:none; cursor:pointer;}
+    .precio-opcional-wrap {display:flex;align-items:center;gap:7px;}
+    .sin-precio-chk {margin-left:0;}
+    .precio-opcional-wrap input[type="number"] {width: 75px;}
     @media (max-width:700px){
       .container { max-width:99vw; padding:2vw;}
       .form-row { flex-direction:column; gap:2px;}
@@ -74,228 +77,232 @@
       #previewResponsive { font-size:.98em;}
       header img { height:48px;}
       .logoTitle { font-size:1.09em;}
+      .precio-opcional-wrap input[type="number"] {width:100%;}
+    }
+    tfoot td {font-weight:600;}
+    .pdf-footer {
+      color:#888; font-size:.91em; text-align:center; margin-top:10px; font-style:italic;
     }
   </style>
 </head>
 <body>
 <div class="container">
-    <header>
-      <img src="https://i.imgur.com/kf8e57F.jpg" alt="Logo Grupo AR">
-      <div class="logoTitle"><span>GRUPO</span> <span style="color:#dc1e28;">AR</span></div>
-    </header>
-    <div class="ai-tools-bar">
-      <label>
-        <input type="checkbox" class="ai-toggle" id="aiRedaccion" checked>
-        🧠 Mejora automática de redacción y ortografía
-      </label>
-      <label>
-        <input type="checkbox" class="ai-toggle" id="aiPrediccion" checked>
-        ⚡ Autocompletar ítems frecuentes
-      </label>
+  <header>
+    <img src="https://i.imgur.com/kf8e57F.jpg" alt="Logo Grupo AR">
+    <div class="logoTitle"><span>GRUPO</span> <span style="color:#dc1e28;">AR</span></div>
+  </header>
+  <div class="ai-tools-bar">
+    <label>
+      <input type="checkbox" class="ai-toggle" id="aiRedaccion" checked>
+      🧠 Mejora automática de redacción y ortografía
+    </label>
+    <label>
+      <input type="checkbox" class="ai-toggle" id="aiPrediccion" checked>
+      ⚡ Autocompletar ítems frecuentes
+    </label>
+  </div>
+  <div class="historico-bar" id="histContainer"></div>
+  <div class="form-container">
+    <div class="form-row">
+      <div class="form-col">
+        <label for="quoteTitle">Título de Cotización</label>
+        <div class="input-wrap">
+          <span class="input-icon">📝</span>
+          <input id="quoteTitle" placeholder="Cotización #1234">
+          <button class="mic-btn" data-for="quoteTitle" title="Dictar"><span>🎤</span></button>
+        </div>
+      </div>
+      <div class="form-col">
+        <label for="fileName">Nombre de Archivo</label>
+        <div class="input-wrap">
+          <span class="input-icon">📄</span>
+          <input id="fileName" placeholder="cotizacion_1234" readonly>
+        </div>
+      </div>
     </div>
-    <div class="historico-bar" id="histContainer"></div>
-    <div class="form-container">
-      <div class="form-row">
-        <div class="form-col">
-          <label for="quoteTitle">Título de Cotización</label>
-          <div class="input-wrap">
-            <span class="input-icon">📝</span>
-            <input id="quoteTitle" placeholder="Cotización #1234">
-            <button class="mic-btn" data-for="quoteTitle" title="Dictar"><span>🎤</span></button>
-          </div>
-        </div>
-        <div class="form-col">
-          <label for="fileName">Nombre de Archivo</label>
-          <div class="input-wrap">
-            <span class="input-icon">📄</span>
-            <input id="fileName" placeholder="cotizacion_1234" readonly>
-          </div>
+    <div class="form-row">
+      <div class="form-col">
+        <label for="quoteType">Tipo de Cotización</label>
+        <select id="quoteType">
+          <option value="express">Exprés</option>
+          <option value="detailed">Detallada</option>
+        </select>
+      </div>
+      <div class="form-col">
+        <label for="client">Cliente</label>
+        <div class="input-wrap">
+          <span class="input-icon">👤</span>
+          <input id="client" placeholder="Nombre del cliente">
+          <button class="mic-btn" data-for="client"><span>🎤</span></button>
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-col">
-          <label for="quoteType">Tipo de Cotización</label>
-          <select id="quoteType">
-            <option value="express">Exprés</option>
-            <option value="detailed">Detallada</option>
-          </select>
-        </div>
-        <div class="form-col">
-          <label for="client">Cliente</label>
-          <div class="input-wrap">
-            <span class="input-icon">👤</span>
-            <input id="client" placeholder="Nombre del cliente">
-            <button class="mic-btn" data-for="client"><span>🎤</span></button>
-          </div>
-        </div>
-        <div class="form-col">
-          <label for="location">Ubicación</label>
-          <div class="input-wrap">
-            <span class="input-icon">📍</span>
-            <input id="location" placeholder="Dirección o ubicación">
-            <button class="mic-btn" data-for="location"><span>🎤</span></button>
-          </div>
+      <div class="form-col">
+        <label for="location">Ubicación</label>
+        <div class="input-wrap">
+          <span class="input-icon">📍</span>
+          <input id="location" placeholder="Dirección o ubicación">
+          <button class="mic-btn" data-for="location"><span>🎤</span></button>
         </div>
       </div>
-      <div class="form-row switches">
-        <div class="switch-wrap">
-          <label class="slide-label" for="withIvaSwitch">IVA (16%)</label>
-          <label class="switch">
-            <input type="checkbox" id="withIvaSwitch" checked>
-            <span class="slider"></span>
+    </div>
+    <div class="form-row switches">
+      <div class="switch-wrap">
+        <label class="slide-label" for="withIvaSwitch">IVA (16%)</label>
+        <label class="switch">
+          <input type="checkbox" id="withIvaSwitch" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="switch-wrap">
+        <label class="slide-label" for="withAnticipoSwitch">Anticipo</label>
+        <label class="switch">
+          <input type="checkbox" id="withAnticipoSwitch">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div id="anticipoField" style="display:none;max-width:140px;">
+        <label for="anticipoPct" style="font-weight:500;margin-bottom:0;">%</label>
+        <div class="input-wrap" style="padding-left:0;">
+          <input id="anticipoPct" type="number" min="0" max="100" value="0" style="padding-left:8px;">
+        </div>
+      </div>
+    </div>
+    <h3 style="margin:12px 0 6px 0;">Agregar Item</h3>
+    <div class="form-row" id="itemInputs">
+      <div class="form-col" style="flex:1.2; min-width:90px;">
+        <label for="newItemGroup">Sección / Grupo</label>
+        <div class="input-wrap">
+          <span class="input-icon">📑</span>
+          <input id="newItemGroup" placeholder="Ej: Descripción de obra, Materiales..." list="groupPredictions">
+          <datalist id="groupPredictions">
+            <option value="Descripción de obra"></option>
+            <option value="Materiales"></option>
+            <option value="Mano de obra"></option>
+            <option value="Otros"></option>
+          </datalist>
+        </div>
+      </div>
+      <div class="form-col" style="flex:2; position:relative;">
+        <label for="newItemDesc">Descripción</label>
+        <div class="input-wrap">
+          <span class="input-icon">🔧</span>
+          <input id="newItemDesc" placeholder="Ej. Pintura" autocomplete="off" list="descPredictions">
+          <datalist id="descPredictions"></datalist>
+          <button class="mic-btn" data-for="newItemDesc"><span>🎤</span></button>
+        </div>
+      </div>
+      <div class="form-col" id="expressInputs" style="display:flex;flex-direction:column;">
+        <label>&nbsp;</label>
+        <div class="precio-opcional-wrap">
+          <input id="newItemPrice" type="number" min="0" value="0" placeholder="Precio total" autocomplete="off" style="flex:1;">
+          <label style="margin:0 3px 0 7px; font-weight:400;font-size:.99em; color:#c00;">
+            <input id="chkSinPrecio" class="sin-precio-chk" type="checkbox"> Sin precio
           </label>
         </div>
-        <div class="switch-wrap">
-          <label class="slide-label" for="withAnticipoSwitch">Anticipo</label>
-          <label class="switch">
-            <input type="checkbox" id="withAnticipoSwitch">
-            <span class="slider"></span>
+      </div>
+      <div class="form-col" id="detailedInputs" style="display:none;flex-direction:row;gap:6px;">
+        <div>
+          <label for="newItemQty">Cantidad</label>
+          <div class="input-wrap">
+            <span class="input-icon">#</span>
+            <input id="newItemQty" type="number" min="1" value="1" placeholder="Cantidad" autocomplete="off">
+            <button class="mic-btn" data-for="newItemQty"><span>🎤</span></button>
+          </div>
+        </div>
+        <div>
+          <label for="newItemMat">Material</label>
+          <div class="input-wrap">
+            <span class="input-icon">$</span>
+            <input id="newItemMat" type="number" min="0" value="0" placeholder="Material" autocomplete="off">
+            <button class="mic-btn" data-for="newItemMat"><span>🎤</span></button>
+          </div>
+          <label style="font-weight:400;font-size:.97em;color:#c00;display:flex;align-items:center;gap:4px;margin-top:1px;">
+            <input id="chkSinPrecioDet" class="sin-precio-chk" type="checkbox"> Sin precio
           </label>
         </div>
-        <div id="anticipoField" style="display:none;max-width:140px;">
-          <label for="anticipoPct" style="font-weight:500;margin-bottom:0;">%</label>
-          <div class="input-wrap" style="padding-left:0;">
-            <input id="anticipoPct" type="number" min="0" max="100" value="0" style="padding-left:8px;">
-          </div>
-        </div>
-      </div>
-      <h3 style="margin:12px 0 6px 0;">Agregar Item</h3>
-      <div class="form-row" id="itemInputs">
-        <div class="form-col" style="flex:1.2; min-width:90px;">
-          <label for="newItemGroup">Sección / Grupo</label>
+        <div>
+          <label for="newItemLab">Mano Obra</label>
           <div class="input-wrap">
-            <span class="input-icon">📑</span>
-            <input id="newItemGroup" placeholder="Ej: Descripción de obra, Materiales..." list="groupPredictions">
-            <datalist id="groupPredictions">
-              <option value="Descripción de obra"></option>
-              <option value="Materiales"></option>
-              <option value="Mano de obra"></option>
-              <option value="Otros"></option>
-            </datalist>
+            <span class="input-icon">⚒️</span>
+            <input id="newItemLab" type="number" min="0" value="0" placeholder="Mano obra" autocomplete="off">
+            <button class="mic-btn" data-for="newItemLab"><span>🎤</span></button>
           </div>
-        </div>
-        <div class="form-col" style="flex:2; position:relative;">
-          <label for="newItemDesc">Descripción</label>
-          <div class="input-wrap">
-            <span class="input-icon">🔧</span>
-            <input id="newItemDesc" placeholder="Ej. Pintura" autocomplete="off" list="descPredictions">
-            <datalist id="descPredictions"></datalist>
-            <button class="mic-btn" data-for="newItemDesc"><span>🎤</span></button>
-          </div>
-        </div>
-        <div class="form-col" id="expressInputs" style="display:flex;">
-          <div style="width:100%">
-            <label for="newItemPrice">Precio</label>
-            <div class="input-wrap">
-              <span class="input-icon">$</span>
-              <input id="newItemPrice" type="number" min="0" value="0" placeholder="Precio total" autocomplete="off">
-              <button class="mic-btn" data-for="newItemPrice"><span>🎤</span></button>
-            </div>
-          </div>
-        </div>
-        <div class="form-col" id="detailedInputs" style="display:none;flex-direction:row;gap:6px;">
-          <div>
-            <label for="newItemQty">Cantidad</label>
-            <div class="input-wrap">
-              <span class="input-icon">#</span>
-              <input id="newItemQty" type="number" min="1" value="1" placeholder="Cantidad" autocomplete="off">
-              <button class="mic-btn" data-for="newItemQty"><span>🎤</span></button>
-            </div>
-          </div>
-          <div>
-            <label for="newItemMat">Material</label>
-            <div class="input-wrap">
-              <span class="input-icon">$</span>
-              <input id="newItemMat" type="number" min="0" value="0" placeholder="Material" autocomplete="off">
-              <button class="mic-btn" data-for="newItemMat"><span>🎤</span></button>
-            </div>
-          </div>
-          <div>
-            <label for="newItemLab">Mano Obra</label>
-            <div class="input-wrap">
-              <span class="input-icon">⚒️</span>
-              <input id="newItemLab" type="number" min="0" value="0" placeholder="Mano obra" autocomplete="off">
-              <button class="mic-btn" data-for="newItemLab"><span>🎤</span></button>
-            </div>
-          </div>
-        </div>
-        <div style="align-self:flex-end;min-width:110px;">
-          <button class="btn-main" id="addItemBtn" style="padding:10px 0;">Agregar</button>
         </div>
       </div>
-      <div class="table-scroll">
-        <table id="itemsTable">
-          <thead id="thead-express">
-            <tr><th>Descripción</th><th>Precio</th><th>Total</th><th></th></tr>
-          </thead>
-          <thead id="thead-detailed" style="display:none;">
-            <tr><th>Descripción</th><th>Cant.</th><th>Material</th><th>Mano Obra</th><th>Total</th><th></th></tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <div class="summary">
-        <div>Subtotal: $<span id="subtotal">0.00</span></div>
-        <div>IVA: $<span id="ivaAmount">0.00</span></div>
-        <div><strong>Total: $<span id="totalAmount">0.00</span></strong></div>
-        <div id="anticipoSummary" style="display:none;">Anticipo (<span id="anticipoPctDisplay">0</span>%): $<span id="anticipoAmount">0.00</span></div>
-        <div><strong>Saldo: $<span id="balance">0.00</span></strong></div>
-      </div>
-      <button class="btn-main" style="margin-bottom:4px;" id="openDetails">🛡️ Detalles y Especificaciones</button>
-    </div>
-    <div class="preview-container">
-      <h3 style="font-size:1.08em;">Vista Previa (no es el PDF final)</h3>
-      <div id="previewResponsive"></div>
-      <div style="text-align:center; margin-top:9px;">
-        <button class="btn-main" id="generateBtn">Generar PDF</button>
-        <button class="btn-main" id="shareBtn">Compartir PDF</button>
-        <button class="btn-main" id="saveHistBtn" style="background:#14b34a;margin-top:8px;">Guardar en Historial</button>
+      <div style="align-self:flex-end;min-width:110px;">
+        <button class="btn-main" id="addItemBtn" style="padding:10px 0;">Agregar</button>
       </div>
     </div>
+    <div class="table-scroll">
+      <table id="itemsTable">
+        <thead id="thead-express">
+          <tr><th>Descripción</th><th>Precio</th><th>Total</th><th></th></tr>
+        </thead>
+        <thead id="thead-detailed" style="display:none;">
+          <tr><th>Descripción</th><th>Cant.</th><th>Material</th><th>Mano Obra</th><th>Total</th><th></th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="summary">
+      <div>Subtotal: $<span id="subtotal">0.00</span></div>
+      <div>IVA: $<span id="ivaAmount">0.00</span></div>
+      <div><strong>Total: $<span id="totalAmount">0.00</span></strong></div>
+      <div id="anticipoSummary" style="display:none;">Anticipo (<span id="anticipoPctDisplay">0</span>%): $<span id="anticipoAmount">0.00</span></div>
+      <div><strong>Saldo: $<span id="balance">0.00</span></strong></div>
+    </div>
+    <button class="btn-main" style="margin-bottom:4px;" id="openDetails">🛡️ Detalles y Especificaciones</button>
   </div>
-  <!-- Sidebar Detalles -->
-  <div id="detailsDrawer" style="display:none;position:fixed;top:0;right:0;width:98vw;max-width:400px;min-width:220px;height:100%;background:#fff;box-shadow:-2px 0 20px #b4cde5cc;z-index:20;overflow-y:auto;padding:19px 18px 12px 18px;transition:right .23s;">
-    <button id="closeDetails" title="Cerrar" style="position:absolute;top:12px;right:16px;font-size:1.8em;background:none;border:none;color:#e00;cursor:pointer;">×</button>
-    <h4>Detalles y Especificaciones</h4>
-    <div class="switch-wrap"><label class="slide-label" for="chk1">Pago 50% materiales antes de iniciar</label>
-      <label class="switch"><input type="checkbox" id="chk1"><span class="slider"></span></label></div>
-    <div class="switch-wrap"><label class="slide-label" for="chk2">Pago 50% restante al finalizar</label>
-      <label class="switch"><input type="checkbox" id="chk2"><span class="slider"></span></label></div>
-    <div class="switch-wrap"><label class="slide-label" for="chk3">Incluye materiales, herramientas y mano de obra</label>
-      <label class="switch"><input type="checkbox" id="chk3"><span class="slider"></span></label></div>
-    <div class="switch-wrap"><label class="slide-label" for="chk4">Retiro de escombro incluido</label>
-      <label class="switch"><input type="checkbox" id="chk4"><span class="slider"></span></label></div>
-    <div class="switch-wrap"><label class="slide-label" for="chk5">Limpieza general incluida</label>
-      <label class="switch"><input type="checkbox" id="chk5"><span class="slider"></span></label></div>
-    <div class="switch-wrap"><label class="slide-label" for="chk6">Garantía de funcionamiento</label>
-      <label class="switch"><input type="checkbox" id="chk6"><span class="slider"></span></label></div>
-    <div class="switch-wrap"><label class="slide-label" for="chk7">Garantía en materiales</label>
-      <label class="switch"><input type="checkbox" id="chk7"><span class="slider"></span></label></div>
-    <div class="switch-wrap"><label class="slide-label" for="chk8">Vigencia cotización: 30 días</label>
-      <label class="switch"><input type="checkbox" id="chk8"><span class="slider"></span></label></div>
-    <div class="switch-wrap"><label class="slide-label" for="chk9">Responsabilidad terceros</label>
-      <label class="switch"><input type="checkbox" id="chk9"><span class="slider"></span></label></div>
-    <div class="switch-wrap"><label class="slide-label" for="chk10">Cumplimiento normativas</label>
-      <label class="switch"><input type="checkbox" id="chk10"><span class="slider"></span></label></div>
-    <div class="switch-wrap"><label class="slide-label" for="chk11">Cláusula fuerza mayor</label>
-      <label class="switch"><input type="checkbox" id="chk11"><span class="slider"></span></label></div>
-    <label style="font-weight:500;margin-top:13px;">Detalles adicionales:</label>
-    <textarea id="detalleAdicional" placeholder="Escribe un detalle adicional..."></textarea>
-    <button type="button" id="addDetalleBtn" class="btn-main" style="background:#009e47; margin-bottom:9px;">Agregar detalle</button>
-    <ul class="detalles-agregados" id="detallesAgregados"></ul>
+  <div class="preview-container">
+    <h3 style="font-size:1.08em;">Vista Previa (no es el PDF final)</h3>
+    <div id="previewResponsive"></div>
+    <div style="text-align:center; margin-top:9px;">
+      <button class="btn-main" id="generateBtn">Generar PDF</button>
+      <button class="btn-main" id="shareBtn">Compartir PDF</button>
+      <button class="btn-main" id="saveHistBtn" style="background:#14b34a;margin-top:8px;">Guardar en Historial</button>
+    </div>
   </div>
-  <div id="dictadoStatus" style="display:none;position:fixed;z-index:500;top:0;left:0;width:100vw;text-align:center;font-size:1.14em;color:#fff;background:#119ec1b8;padding:10px 0 10px 0;"></div>
+</div>
+<!-- Sidebar Detalles -->
+<div id="detailsDrawer" style="display:none;position:fixed;top:0;right:0;width:98vw;max-width:400px;min-width:220px;height:100%;background:#fff;box-shadow:-2px 0 20px #b4cde5cc;z-index:20;overflow-y:auto;padding:19px 18px 12px 18px;transition:right .23s;">
+  <button id="closeDetails" title="Cerrar" style="position:absolute;top:12px;right:16px;font-size:1.8em;background:none;border:none;color:#e00;cursor:pointer;">×</button>
+  <h4>Detalles y Especificaciones</h4>
+  <div class="switch-wrap"><label class="slide-label" for="chk1">Pago 50% materiales antes de iniciar</label>
+    <label class="switch"><input type="checkbox" id="chk1"><span class="slider"></span></label></div>
+  <div class="switch-wrap"><label class="slide-label" for="chk2">Pago 50% restante al finalizar</label>
+    <label class="switch"><input type="checkbox" id="chk2"><span class="slider"></span></label></div>
+  <div class="switch-wrap"><label class="slide-label" for="chk3">Incluye materiales, herramientas y mano de obra</label>
+    <label class="switch"><input type="checkbox" id="chk3"><span class="slider"></span></label></div>
+  <div class="switch-wrap"><label class="slide-label" for="chk4">Retiro de escombro incluido</label>
+    <label class="switch"><input type="checkbox" id="chk4"><span class="slider"></span></label></div>
+  <div class="switch-wrap"><label class="slide-label" for="chk5">Limpieza general incluida</label>
+    <label class="switch"><input type="checkbox" id="chk5"><span class="slider"></span></label></div>
+  <div class="switch-wrap"><label class="slide-label" for="chk6">Garantía de funcionamiento</label>
+    <label class="switch"><input type="checkbox" id="chk6"><span class="slider"></span></label></div>
+  <div class="switch-wrap"><label class="slide-label" for="chk7">Garantía en materiales</label>
+    <label class="switch"><input type="checkbox" id="chk7"><span class="slider"></span></label></div>
+  <div class="switch-wrap"><label class="slide-label" for="chk8">Vigencia cotización: 30 días</label>
+    <label class="switch"><input type="checkbox" id="chk8"><span class="slider"></span></label></div>
+  <div class="switch-wrap"><label class="slide-label" for="chk9">Responsabilidad terceros</label>
+    <label class="switch"><input type="checkbox" id="chk9"><span class="slider"></span></label></div>
+  <div class="switch-wrap"><label class="slide-label" for="chk10">Cumplimiento normativas</label>
+    <label class="switch"><input type="checkbox" id="chk10"><span class="slider"></span></label></div>
+  <div class="switch-wrap"><label class="slide-label" for="chk11">Cláusula fuerza mayor</label>
+    <label class="switch"><input type="checkbox" id="chk11"><span class="slider"></span></label></div>
+  <label style="font-weight:500;margin-top:13px;">Detalles adicionales:</label>
+  <textarea id="detalleAdicional" placeholder="Escribe un detalle adicional..."></textarea>
+  <button type="button" id="addDetalleBtn" class="btn-main" style="background:#009e47; margin-bottom:9px;">Agregar detalle</button>
+  <ul class="detalles-agregados" id="detallesAgregados"></ul>
+</div>
+<div id="dictadoStatus" style="display:none;position:fixed;z-index:500;top:0;left:0;width:100vw;text-align:center;font-size:1.14em;color:#fff;background:#119ec1b8;padding:10px 0 10px 0;"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
-// === Lógica principal con soporte a grupos ===
-
 let items = [], detallesArray = [];
 let frequentDescs = JSON.parse(localStorage.getItem('ar_frequentDescs')||'[]');
 let frequentPrices = JSON.parse(localStorage.getItem('ar_frequentPrices')||'{}');
 let hist = JSON.parse(localStorage.getItem('ar_historial')||'[]');
 const previewRes = document.getElementById('previewResponsive');
 
-// ==== Utilidades ====
 function toMoney(val) { return "$" + (+val).toFixed(2); }
 function actualizarArchivo() {
   let t = document.getElementById('quoteTitle').value.toLowerCase().replace(/[^\w\s-]/g,'').trim().replace(/\s+/g,'_');
@@ -326,30 +333,38 @@ function updateTypeUI() {
 }
 document.getElementById('quoteType').onchange = updateTypeUI;
 
-// ==== Agregar item con grupo ====
+// ======== AGREGAR ITEM (con/sin precio) =========
 document.getElementById('addItemBtn').onclick = ()=>{
   let desc = document.getElementById('newItemDesc').value.trim();
   let group = document.getElementById('newItemGroup').value.trim() || "Otros";
+  let quoteType = document.getElementById('quoteType').value;
+
   if(!desc) return document.getElementById('newItemDesc').focus();
-  if(document.getElementById('aiPrediccion').checked) {
-    if(!frequentDescs.includes(desc)) {
-      frequentDescs.push(desc);
-      if(frequentDescs.length>35) frequentDescs=frequentDescs.slice(-35);
-    }
+
+  // Verifica sin precio
+  let sinPrecio = (quoteType==='express')
+    ? document.getElementById('chkSinPrecio').checked
+    : document.getElementById('chkSinPrecioDet').checked;
+
+  if(document.getElementById('aiPrediccion').checked && !frequentDescs.includes(desc)) {
+    frequentDescs.push(desc);
+    if(frequentDescs.length>35) frequentDescs=frequentDescs.slice(-35);
   }
-  if(document.getElementById('quoteType').value==='express'){
-    let pr = parseFloat(document.getElementById('newItemPrice').value)||0;
-    if(document.getElementById('aiPrediccion').checked) {
+
+  if(quoteType==='express'){
+    let pr = sinPrecio ? 0 : parseFloat(document.getElementById('newItemPrice').value)||0;
+    if(document.getElementById('aiPrediccion').checked && !sinPrecio) {
       frequentPrices[desc]=pr;
       localStorage.setItem('ar_frequentPrices',JSON.stringify(frequentPrices));
     }
-    items.push({desc, pr, group});
+    items.push({desc, pr, group, sinPrecio});
   } else {
     let qt = parseFloat(document.getElementById('newItemQty').value)||1;
-    let ma = parseFloat(document.getElementById('newItemMat').value)||0;
-    let lb = parseFloat(document.getElementById('newItemLab').value)||0;
-    items.push({desc, qt, ma, lb, group});
+    let ma = sinPrecio ? 0 : parseFloat(document.getElementById('newItemMat').value)||0;
+    let lb = sinPrecio ? 0 : parseFloat(document.getElementById('newItemLab').value)||0;
+    items.push({desc, qt, ma, lb, group, sinPrecio});
   }
+
   localStorage.setItem('ar_frequentDescs',JSON.stringify(frequentDescs));
   document.getElementById('newItemGroup').value='';
   document.getElementById('newItemDesc').value='';
@@ -357,10 +372,29 @@ document.getElementById('addItemBtn').onclick = ()=>{
   document.getElementById('newItemQty').value='1';
   document.getElementById('newItemMat').value='0';
   document.getElementById('newItemLab').value='0';
+  document.getElementById('chkSinPrecio').checked = false;
+  document.getElementById('chkSinPrecioDet').checked = false;
+  document.getElementById('newItemPrice').disabled = false;
+  document.getElementById('newItemMat').disabled = false;
+  document.getElementById('newItemLab').disabled = false;
   document.getElementById('newItemDesc').focus();
   updatePredictions();
   renderTable();
   recalc();
+};
+
+// Manejo de "sin precio"
+document.getElementById('chkSinPrecio').onchange = function() {
+  document.getElementById('newItemPrice').disabled = this.checked;
+  if(this.checked) document.getElementById('newItemPrice').value = '';
+};
+document.getElementById('chkSinPrecioDet').onchange = function() {
+  document.getElementById('newItemMat').disabled = this.checked;
+  document.getElementById('newItemLab').disabled = this.checked;
+  if(this.checked) {
+    document.getElementById('newItemMat').value = '';
+    document.getElementById('newItemLab').value = '';
+  }
 };
 
 function updatePredictions() {
@@ -446,21 +480,34 @@ function renderTable(){
       tr.className = 'row-highlight';
       setTimeout(()=>tr.classList.remove('row-highlight'),700);
       if(tipo==='express'){
-        let pr = item.pr||0;
-        let total = pr.toFixed(2);
-        tr.innerHTML = `<td>${item.desc}</td>
-          <td style="text-align:right;">${toMoney(pr)}</td>
-          <td style="text-align:right;">${toMoney(total)}</td>
-          <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
+        if(item.sinPrecio) {
+          tr.innerHTML = `<td>${item.desc}</td>
+            <td colspan="2" style="text-align:center;color:#888;">Sin precio</td>
+            <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
+        } else {
+          let pr = item.pr||0;
+          let total = pr.toFixed(2);
+          tr.innerHTML = `<td>${item.desc}</td>
+            <td style="text-align:right;">${toMoney(pr)}</td>
+            <td style="text-align:right;">${toMoney(total)}</td>
+            <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
+        }
       } else {
-        let qt = item.qt||1, ma = item.ma||0, lb = item.lb||0;
-        let total = ((ma+lb)*qt).toFixed(2);
-        tr.innerHTML = `<td>${item.desc}</td>
-          <td style="text-align:center;">${qt}</td>
-          <td style="text-align:right;">${toMoney(ma)}</td>
-          <td style="text-align:right;">${toMoney(lb)}</td>
-          <td style="text-align:right;">${toMoney(total)}</td>
-          <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
+        if(item.sinPrecio) {
+          tr.innerHTML = `<td>${item.desc}</td>
+            <td style="text-align:center;">${item.qt||1}</td>
+            <td colspan="3" style="text-align:center;color:#888;">Sin precio</td>
+            <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
+        } else {
+          let qt = item.qt||1, ma = item.ma||0, lb = item.lb||0;
+          let total = ((ma+lb)*qt).toFixed(2);
+          tr.innerHTML = `<td>${item.desc}</td>
+            <td style="text-align:center;">${qt}</td>
+            <td style="text-align:right;">${toMoney(ma)}</td>
+            <td style="text-align:right;">${toMoney(lb)}</td>
+            <td style="text-align:right;">${toMoney(total)}</td>
+            <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
+        }
       }
       tbody.appendChild(tr);
       tr.querySelector('.btn-del').onclick = ()=>{ items.splice(idx,1); renderTable(); recalc(); };
@@ -473,9 +520,9 @@ function renderTable(){
 function recalc(){
   let subtotal=0;
   if(document.getElementById('quoteType').value==="express"){
-    items.forEach(item=>{subtotal+=item.pr||0;});
+    items.forEach(item=>{ if(!item.sinPrecio) subtotal+=item.pr||0; });
   } else {
-    items.forEach(item=>{subtotal+=((item.ma||0)+(item.lb||0))*(item.qt||1);});
+    items.forEach(item=>{ if(!item.sinPrecio) subtotal+=((item.ma||0)+(item.lb||0))*(item.qt||1); });
   }
   document.getElementById('subtotal').textContent=subtotal.toFixed(2);
   const ivaAmt=document.getElementById('withIvaSwitch').checked?subtotal*0.16:0;
@@ -580,10 +627,15 @@ function buildPreview(container, isPDF){
       body.appendChild(trGrupo);
       grupos[grupo].forEach(item=>{
         let tr = document.createElement('tr');
-        let pr = item.pr||0, total = pr.toFixed(2);
-        tr.innerHTML = `<td>${item.desc}</td>
-          <td style="text-align:right;">${toMoney(pr)}</td>
-          <td style="text-align:right;">${toMoney(total)}</td>`;
+        if(item.sinPrecio){
+          tr.innerHTML = `<td>${item.desc}</td>
+            <td colspan="2" style="text-align:center;color:#888;">Sin precio</td>`;
+        } else {
+          let pr = item.pr||0, total = pr.toFixed(2);
+          tr.innerHTML = `<td>${item.desc}</td>
+            <td style="text-align:right;">${toMoney(pr)}</td>
+            <td style="text-align:right;">${toMoney(total)}</td>`;
+        }
         body.appendChild(tr);
       });
     });
@@ -609,14 +661,20 @@ function buildPreview(container, isPDF){
       </td>`;
       body.appendChild(trGrupo);
       grupos[grupo].forEach(item=>{
-        let qt = item.qt||1, ma = item.ma||0, lb = item.lb||0;
-        let total = ((ma+lb)*qt).toFixed(2);
         let tr = document.createElement('tr');
-        tr.innerHTML = `<td>${item.desc}</td>
-          <td style="text-align:center;">${qt}</td>
-          <td style="text-align:right;">${toMoney(ma)}</td>
-          <td style="text-align:right;">${toMoney(lb)}</td>
-          <td style="text-align:right;">${toMoney(total)}</td>`;
+        if(item.sinPrecio){
+          tr.innerHTML = `<td>${item.desc}</td>
+            <td style="text-align:center;">${item.qt||1}</td>
+            <td colspan="3" style="text-align:center;color:#888;">Sin precio</td>`;
+        } else {
+          let qt = item.qt||1, ma = item.ma||0, lb = item.lb||0;
+          let total = ((ma+lb)*qt).toFixed(2);
+          tr.innerHTML = `<td>${item.desc}</td>
+            <td style="text-align:center;">${qt}</td>
+            <td style="text-align:right;">${toMoney(ma)}</td>
+            <td style="text-align:right;">${toMoney(lb)}</td>
+            <td style="text-align:right;">${toMoney(total)}</td>`;
+        }
         body.appendChild(tr);
       });
     });
@@ -649,8 +707,14 @@ function buildPreview(container, isPDF){
     </ul>`;
     container.append(dt);
   }
+  // Pie de página preview (simulado, solo visual, el real sale en el PDF)
+  const pie = document.createElement('div');
+  pie.className = "pdf-footer";
+  pie.innerHTML = "GRUPO AR · contacto.zolva@gmail.com · Tel. 438 134 6142 · Vigencia: 15 días";
+  container.append(pie);
 }
 setInterval(()=>buildPreview(previewRes, false), 600);
+
 // ================= HISTORIAL Y AUTOCOMPLETAR =================
 function updateHistorialBar() {
   const hc = document.getElementById('histContainer');
@@ -722,9 +786,9 @@ async function mejorarRedaccion() {
   });
   items = items.map(it=>{
     if(document.getElementById('quoteType').value==='express'){
-      return { desc: corrigeFrase(it.desc), pr: it.pr, group: it.group };
+      return { ...it, desc: corrigeFrase(it.desc) };
     } else {
-      return { desc: corrigeFrase(it.desc), qt: it.qt, ma: it.ma, lb: it.lb, group: it.group };
+      return { ...it, desc: corrigeFrase(it.desc) };
     }
   });
   for(let i=0;i<detallesArray.length;i++){
@@ -735,7 +799,7 @@ async function mejorarRedaccion() {
   return Promise.resolve();
 }
 
-// ==== PDF premium PRO agrupado ====
+// ==== PDF premium PRO agrupado y con pie de página ====
 async function generarPDFpro(returnDocOnly = false) {
   if (document.getElementById('aiRedaccion').checked) await mejorarRedaccion();
 
@@ -845,9 +909,14 @@ async function generarPDFpro(returnDocOnly = false) {
       y += rowHeight-2;
       doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
       grupos[grupo].forEach(it=>{
-        doc.text(it.desc, margin+2, y+5);
-        doc.text(`$${(it.pr||0).toFixed(2)}`, w-margin-48, y+5, {align:'right'});
-        doc.text(`$${(it.pr||0).toFixed(2)}`, w-margin-10, y+5, {align:'right'});
+        if(it.sinPrecio){
+          doc.text(it.desc, margin+2, y+5);
+          doc.text("Sin precio", w-margin-22, y+5, {align:'right'});
+        } else {
+          doc.text(it.desc, margin+2, y+5);
+          doc.text(`$${(it.pr||0).toFixed(2)}`, w-margin-48, y+5, {align:'right'});
+          doc.text(`$${(it.pr||0).toFixed(2)}`, w-margin-10, y+5, {align:'right'});
+        }
         y += rowHeight;
       });
     });
@@ -876,12 +945,18 @@ async function generarPDFpro(returnDocOnly = false) {
       y += rowHeight-2;
       doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
       grupos[grupo].forEach(it=>{
-        const tot = ((it.ma||0)+(it.lb||0))*(it.qt||1);
-        doc.text(it.desc, margin+2, y+5);
-        doc.text(`${it.qt||1}`, w-margin-70, y+5, {align:'right'});
-        doc.text(`$${(it.ma||0).toFixed(2)}`, w-margin-52, y+5, {align:'right'});
-        doc.text(`$${(it.lb||0).toFixed(2)}`, w-margin-28, y+5, {align:'right'});
-        doc.text(`$${tot.toFixed(2)}`, w-margin-10, y+5, {align:'right'});
+        if(it.sinPrecio){
+          doc.text(it.desc, margin+2, y+5);
+          doc.text(`${it.qt||1}`, w-margin-70, y+5, {align:'right'});
+          doc.text("Sin precio", w-margin-22, y+5, {align:'right'});
+        } else {
+          const tot = ((it.ma||0)+(it.lb||0))*(it.qt||1);
+          doc.text(it.desc, margin+2, y+5);
+          doc.text(`${it.qt||1}`, w-margin-70, y+5, {align:'right'});
+          doc.text(`$${(it.ma||0).toFixed(2)}`, w-margin-52, y+5, {align:'right'});
+          doc.text(`$${(it.lb||0).toFixed(2)}`, w-margin-28, y+5, {align:'right'});
+          doc.text(`$${tot.toFixed(2)}`, w-margin-10, y+5, {align:'right'});
+        }
         y += rowHeight;
       });
     });
@@ -921,6 +996,13 @@ async function generarPDFpro(returnDocOnly = false) {
       doc.text("- " + txt, margin+5, y0+i*5.5);
     });
   }
+
+  // --- Pie de página profesional Grupo AR ---
+  doc.setFont('helvetica','italic');
+  doc.setFontSize(9.2);
+  doc.setTextColor(110,110,110);
+  let pieTxt = "GRUPO AR · contacto.zolva@gmail.com · Tel. 438 134 6142 · Cotización válida por 15 días";
+  doc.text(pieTxt, w/2, h-10, {align:'center'});
 
   if (returnDocOnly) return doc;
 
