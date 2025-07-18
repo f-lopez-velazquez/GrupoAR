@@ -161,6 +161,19 @@
       </div>
       <h3 style="margin:12px 0 6px 0;">Agregar Item</h3>
       <div class="form-row" id="itemInputs">
+        <div class="form-col" style="flex:1.2; min-width:90px;">
+          <label for="newItemGroup">Sección / Grupo</label>
+          <div class="input-wrap">
+            <span class="input-icon">📑</span>
+            <input id="newItemGroup" placeholder="Ej: Descripción de obra, Materiales..." list="groupPredictions">
+            <datalist id="groupPredictions">
+              <option value="Descripción de obra"></option>
+              <option value="Materiales"></option>
+              <option value="Mano de obra"></option>
+              <option value="Otros"></option>
+            </datalist>
+          </div>
+        </div>
         <div class="form-col" style="flex:2; position:relative;">
           <label for="newItemDesc">Descripción</label>
           <div class="input-wrap">
@@ -274,6 +287,8 @@
   <div id="dictadoStatus" style="display:none;position:fixed;z-index:500;top:0;left:0;width:100vw;text-align:center;font-size:1.14em;color:#fff;background:#119ec1b8;padding:10px 0 10px 0;"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
+// === Lógica principal con soporte a grupos ===
+
 let items = [], detallesArray = [];
 let frequentDescs = JSON.parse(localStorage.getItem('ar_frequentDescs')||'[]');
 let frequentPrices = JSON.parse(localStorage.getItem('ar_frequentPrices')||'{}');
@@ -311,9 +326,10 @@ function updateTypeUI() {
 }
 document.getElementById('quoteType').onchange = updateTypeUI;
 
-// ==== Agregar item ====
+// ==== Agregar item con grupo ====
 document.getElementById('addItemBtn').onclick = ()=>{
   let desc = document.getElementById('newItemDesc').value.trim();
+  let group = document.getElementById('newItemGroup').value.trim() || "Otros";
   if(!desc) return document.getElementById('newItemDesc').focus();
   if(document.getElementById('aiPrediccion').checked) {
     if(!frequentDescs.includes(desc)) {
@@ -327,14 +343,15 @@ document.getElementById('addItemBtn').onclick = ()=>{
       frequentPrices[desc]=pr;
       localStorage.setItem('ar_frequentPrices',JSON.stringify(frequentPrices));
     }
-    items.push({desc, pr});
+    items.push({desc, pr, group});
   } else {
     let qt = parseFloat(document.getElementById('newItemQty').value)||1;
     let ma = parseFloat(document.getElementById('newItemMat').value)||0;
     let lb = parseFloat(document.getElementById('newItemLab').value)||0;
-    items.push({desc, qt, ma, lb});
+    items.push({desc, qt, ma, lb, group});
   }
   localStorage.setItem('ar_frequentDescs',JSON.stringify(frequentDescs));
+  document.getElementById('newItemGroup').value='';
   document.getElementById('newItemDesc').value='';
   document.getElementById('newItemPrice').value='0';
   document.getElementById('newItemQty').value='1';
@@ -404,33 +421,50 @@ if (supportsSpeech()) {
   document.querySelectorAll('.mic-btn').forEach(btn=>btn.style.display="none");
 }
 
-// ==== Tabla de items ====
+// ==== Tabla de items agrupada ====
 function renderTable(){
   const tbody = document.querySelector('#itemsTable tbody');
   tbody.innerHTML = '';
   let tipo = document.getElementById('quoteType').value;
-  items.forEach((item, idx)=>{
-    let tr = document.createElement('tr'); tr.className = 'row-highlight';
-    setTimeout(()=>tr.classList.remove('row-highlight'),700);
-    if(tipo==='express'){
-      let pr = item.pr||0;
-      let total = pr.toFixed(2);
-      tr.innerHTML = `<td>${item.desc}</td>
-        <td style="text-align:right;">${toMoney(pr)}</td>
-        <td style="text-align:right;">${toMoney(total)}</td>
-        <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
-    } else {
-      let qt = item.qt||1, ma = item.ma||0, lb = item.lb||0;
-      let total = ((ma+lb)*qt).toFixed(2);
-      tr.innerHTML = `<td>${item.desc}</td>
-        <td style="text-align:center;">${qt}</td>
-        <td style="text-align:right;">${toMoney(ma)}</td>
-        <td style="text-align:right;">${toMoney(lb)}</td>
-        <td style="text-align:right;">${toMoney(total)}</td>
-        <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
-    }
-    tbody.appendChild(tr);
-    tr.querySelector('.btn-del').onclick = ()=>{ items.splice(idx,1); renderTable(); recalc(); };
+  // Agrupar ítems por grupo/sección
+  let grupos = {};
+  items.forEach((item, idx) => {
+    let grupo = item.group || "Otros";
+    if (!grupos[grupo]) grupos[grupo] = [];
+    grupos[grupo].push({...item, idx});
+  });
+  Object.keys(grupos).forEach(grupo => {
+    // Fila de encabezado de grupo/sección
+    let trGrupo = document.createElement('tr');
+    trGrupo.innerHTML = `<td colspan="${tipo==='express'?4:6}" style="background:#e8f2fb;font-weight:700;font-size:1.08em;color:#0a6ec8;border-top:2px solid #0a6ec8;">
+      ${grupo}
+    </td>`;
+    tbody.appendChild(trGrupo);
+    // Filas de ítems normales
+    grupos[grupo].forEach(({idx, ...item}) => {
+      let tr = document.createElement('tr');
+      tr.className = 'row-highlight';
+      setTimeout(()=>tr.classList.remove('row-highlight'),700);
+      if(tipo==='express'){
+        let pr = item.pr||0;
+        let total = pr.toFixed(2);
+        tr.innerHTML = `<td>${item.desc}</td>
+          <td style="text-align:right;">${toMoney(pr)}</td>
+          <td style="text-align:right;">${toMoney(total)}</td>
+          <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
+      } else {
+        let qt = item.qt||1, ma = item.ma||0, lb = item.lb||0;
+        let total = ((ma+lb)*qt).toFixed(2);
+        tr.innerHTML = `<td>${item.desc}</td>
+          <td style="text-align:center;">${qt}</td>
+          <td style="text-align:right;">${toMoney(ma)}</td>
+          <td style="text-align:right;">${toMoney(lb)}</td>
+          <td style="text-align:right;">${toMoney(total)}</td>
+          <td><button class="btn-del" data-idx="${idx}">✕</button></td>`;
+      }
+      tbody.appendChild(tr);
+      tr.querySelector('.btn-del').onclick = ()=>{ items.splice(idx,1); renderTable(); recalc(); };
+    });
   });
   recalc();
 }
@@ -502,7 +536,7 @@ closeDetailsBtn.onclick = function(){
 };
 document.addEventListener('keydown', e=>{if(detailsDrawer.style.right=="0px"&&e.key==='Escape') closeDetailsBtn.onclick();});
 
-// ==== Vista previa dinámica ====
+// ==== Vista previa dinámica AGRUPADA ====
 function buildPreview(container, isPDF){
   container.innerHTML = '';
   // Header pro
@@ -519,10 +553,11 @@ function buildPreview(container, isPDF){
     </div>`;
   container.append(header);
 
-  // Tabla premium
+  // Tabla agrupada por grupo/sección
   const tbl=document.createElement('table');
   tbl.style.marginTop = "10px";
   let tipo=document.getElementById('quoteType').value;
+
   if(tipo==="express"){
     tbl.innerHTML=`<thead><tr>
       <th style="min-width:120px;">Descripción</th>
@@ -530,13 +565,27 @@ function buildPreview(container, isPDF){
       <th style="min-width:70px;text-align:right;">Total</th>
       </tr></thead><tbody></tbody>`;
     const body=tbl.querySelector('tbody');
+    let grupos = {};
     items.forEach(item=>{
-      let tr = document.createElement('tr');
-      let pr = item.pr||0, total = pr.toFixed(2);
-      tr.innerHTML = `<td>${item.desc}</td>
-        <td style="text-align:right;">${toMoney(pr)}</td>
-        <td style="text-align:right;">${toMoney(total)}</td>`;
-      body.appendChild(tr);
+      let grupo = item.group || "Otros";
+      if (!grupos[grupo]) grupos[grupo] = [];
+      grupos[grupo].push(item);
+    });
+    Object.keys(grupos).forEach(grupo => {
+      // Encabezado grupo
+      let trGrupo = document.createElement('tr');
+      trGrupo.innerHTML = `<td colspan="3" style="background:#e8f2fb;font-weight:700;font-size:1.08em;color:#0a6ec8;border-top:2px solid #0a6ec8;">
+        ${grupo}
+      </td>`;
+      body.appendChild(trGrupo);
+      grupos[grupo].forEach(item=>{
+        let tr = document.createElement('tr');
+        let pr = item.pr||0, total = pr.toFixed(2);
+        tr.innerHTML = `<td>${item.desc}</td>
+          <td style="text-align:right;">${toMoney(pr)}</td>
+          <td style="text-align:right;">${toMoney(total)}</td>`;
+        body.appendChild(tr);
+      });
     });
   } else {
     tbl.innerHTML=`<thead><tr>
@@ -547,16 +596,29 @@ function buildPreview(container, isPDF){
       <th style="min-width:70px;text-align:right;">Total</th>
       </tr></thead><tbody></tbody>`;
     const body=tbl.querySelector('tbody');
+    let grupos = {};
     items.forEach(item=>{
-      let qt = item.qt||1, ma = item.ma||0, lb = item.lb||0;
-      let total = ((ma+lb)*qt).toFixed(2);
-      let tr = document.createElement('tr');
-      tr.innerHTML = `<td>${item.desc}</td>
-        <td style="text-align:center;">${qt}</td>
-        <td style="text-align:right;">${toMoney(ma)}</td>
-        <td style="text-align:right;">${toMoney(lb)}</td>
-        <td style="text-align:right;">${toMoney(total)}</td>`;
-      body.appendChild(tr);
+      let grupo = item.group || "Otros";
+      if (!grupos[grupo]) grupos[grupo] = [];
+      grupos[grupo].push(item);
+    });
+    Object.keys(grupos).forEach(grupo => {
+      let trGrupo = document.createElement('tr');
+      trGrupo.innerHTML = `<td colspan="5" style="background:#e8f2fb;font-weight:700;font-size:1.08em;color:#0a6ec8;border-top:2px solid #0a6ec8;">
+        ${grupo}
+      </td>`;
+      body.appendChild(trGrupo);
+      grupos[grupo].forEach(item=>{
+        let qt = item.qt||1, ma = item.ma||0, lb = item.lb||0;
+        let total = ((ma+lb)*qt).toFixed(2);
+        let tr = document.createElement('tr');
+        tr.innerHTML = `<td>${item.desc}</td>
+          <td style="text-align:center;">${qt}</td>
+          <td style="text-align:right;">${toMoney(ma)}</td>
+          <td style="text-align:right;">${toMoney(lb)}</td>
+          <td style="text-align:right;">${toMoney(total)}</td>`;
+        body.appendChild(tr);
+      });
     });
   }
   container.append(tbl);
@@ -660,9 +722,9 @@ async function mejorarRedaccion() {
   });
   items = items.map(it=>{
     if(document.getElementById('quoteType').value==='express'){
-      return { desc: corrigeFrase(it.desc), pr: it.pr };
+      return { desc: corrigeFrase(it.desc), pr: it.pr, group: it.group };
     } else {
-      return { desc: corrigeFrase(it.desc), qt: it.qt, ma: it.ma, lb: it.lb };
+      return { desc: corrigeFrase(it.desc), qt: it.qt, ma: it.ma, lb: it.lb, group: it.group };
     }
   });
   for(let i=0;i<detallesArray.length;i++){
@@ -673,7 +735,7 @@ async function mejorarRedaccion() {
   return Promise.resolve();
 }
 
-// ==== PDF premium PRO ====
+// ==== PDF premium PRO agrupado ====
 async function generarPDFpro(returnDocOnly = false) {
   if (document.getElementById('aiRedaccion').checked) await mejorarRedaccion();
 
@@ -750,16 +812,15 @@ async function generarPDFpro(returnDocOnly = false) {
   doc.setLineWidth(0.63);
   doc.line(margin, lineaY, w - margin, lineaY);
 
-  // --- Tabla de ítems ---
+  // --- Tabla de ítems agrupada ---
   let y = lineaY + 10;
   const tipo = document.getElementById('quoteType').value;
+  const rowHeight = 7.6;
   doc.setFont('helvetica','bold');
   doc.setFontSize(10);
   doc.setFillColor(10,110,200);
   doc.setTextColor(255,255,255);
 
-  // --- Encabezado tabla ---
-  const rowHeight = 7.6;
   if (tipo === 'express') {
     doc.rect(margin, y, w-margin*2, rowHeight, 'F');
     doc.text("Descripción", margin+2, y+5.0);
@@ -767,13 +828,28 @@ async function generarPDFpro(returnDocOnly = false) {
     doc.text("Total", w-margin-10, y+5.0, {align:'right'});
     y += rowHeight + 1.5;
     doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
-    let subtotal=0;
+
+    // Agrupar ítems por grupo
+    let grupos = {};
     items.forEach(it=>{
-      doc.text(it.desc, margin+2, y+5);
-      doc.text(`$${(it.pr||0).toFixed(2)}`, w-margin-48, y+5, {align:'right'});
-      doc.text(`$${(it.pr||0).toFixed(2)}`, w-margin-10, y+5, {align:'right'});
-      y += rowHeight;
-      subtotal += it.pr||0;
+      let grupo = it.group || "Otros";
+      if (!grupos[grupo]) grupos[grupo] = [];
+      grupos[grupo].push(it);
+    });
+    Object.keys(grupos).forEach(grupo=>{
+      // Encabezado de grupo/sección en PDF
+      doc.setFont('helvetica','bold');
+      doc.setFontSize(9.8);
+      doc.setTextColor(10,110,200);
+      doc.text(grupo, margin+1, y+5);
+      y += rowHeight-2;
+      doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
+      grupos[grupo].forEach(it=>{
+        doc.text(it.desc, margin+2, y+5);
+        doc.text(`$${(it.pr||0).toFixed(2)}`, w-margin-48, y+5, {align:'right'});
+        doc.text(`$${(it.pr||0).toFixed(2)}`, w-margin-10, y+5, {align:'right'});
+        y += rowHeight;
+      });
     });
   } else {
     doc.rect(margin, y, w-margin*2, rowHeight, 'F');
@@ -784,14 +860,30 @@ async function generarPDFpro(returnDocOnly = false) {
     doc.text("Total", w-margin-10, y+5.0, {align:'right'});
     y += rowHeight + 1.5;
     doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
+
+    let grupos = {};
     items.forEach(it=>{
-      const tot = ((it.ma||0)+(it.lb||0))*(it.qt||1);
-      doc.text(it.desc, margin+2, y+5);
-      doc.text(`${it.qt||1}`, w-margin-70, y+5, {align:'right'});
-      doc.text(`$${(it.ma||0).toFixed(2)}`, w-margin-52, y+5, {align:'right'});
-      doc.text(`$${(it.lb||0).toFixed(2)}`, w-margin-28, y+5, {align:'right'});
-      doc.text(`$${tot.toFixed(2)}`, w-margin-10, y+5, {align:'right'});
-      y += rowHeight;
+      let grupo = it.group || "Otros";
+      if (!grupos[grupo]) grupos[grupo] = [];
+      grupos[grupo].push(it);
+    });
+    Object.keys(grupos).forEach(grupo=>{
+      // Encabezado de grupo/sección en PDF
+      doc.setFont('helvetica','bold');
+      doc.setFontSize(9.8);
+      doc.setTextColor(10,110,200);
+      doc.text(grupo, margin+1, y+5);
+      y += rowHeight-2;
+      doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
+      grupos[grupo].forEach(it=>{
+        const tot = ((it.ma||0)+(it.lb||0))*(it.qt||1);
+        doc.text(it.desc, margin+2, y+5);
+        doc.text(`${it.qt||1}`, w-margin-70, y+5, {align:'right'});
+        doc.text(`$${(it.ma||0).toFixed(2)}`, w-margin-52, y+5, {align:'right'});
+        doc.text(`$${(it.lb||0).toFixed(2)}`, w-margin-28, y+5, {align:'right'});
+        doc.text(`$${tot.toFixed(2)}`, w-margin-10, y+5, {align:'right'});
+        y += rowHeight;
+      });
     });
   }
 
@@ -807,115 +899,55 @@ async function generarPDFpro(returnDocOnly = false) {
   doc.setFont('helvetica','normal'); doc.setFontSize(9.6); doc.setTextColor(30,30,30);
   doc.text(`Subtotal: $${subtotal.toFixed(2)}`, w-margin-1, totalsY, {align:'right'});
   doc.text(`IVA: $${iva.toFixed(2)}`, w-margin-1, totalsY+5.2, {align:'right'});
-  doc.setFont('helvetica','bold');
+  doc.setFont('helvetica','bold'); doc.setFontSize(10.2);
+  doc.setTextColor(10,110,200);
   doc.text(`Total: $${total.toFixed(2)}`, w-margin-1, totalsY+11, {align:'right'});
-  if (anticipo > 0) {
-    doc.setFont('helvetica','normal');
-    doc.text(`Anticipo: $${anticipo.toFixed(2)}`, w-margin-1, totalsY+16.3, {align:'right'});
-    doc.setFont('helvetica','bold');
-    doc.text(`Saldo: $${saldo}`, w-margin-1, totalsY+21.3, {align:'right'});
-  }
+  if (anticipo) doc.text(`Anticipo: $${anticipo.toFixed(2)}`, w-margin-1, totalsY+16, {align:'right'});
+  doc.setTextColor(60,60,60); doc.setFont('helvetica','bold');
+  doc.text(`Saldo: $${saldo}`, w-margin-1, totalsY+21, {align:'right'});
 
   // --- Detalles y especificaciones ---
-  let detalles = [];
-  for(let i=1;i<=11;i++) if(document.getElementById('chk'+i).checked) detalles.push(document.querySelector('label[for=chk'+i+']').innerText);
-  if(window.detallesArray && window.detallesArray.length) detalles = detalles.concat(window.detallesArray);
-  let detallesY = totalsY + 24;
-  if (detalles.length) {
-    doc.setFont('helvetica','bold');
-    doc.setFontSize(10.3);
-    doc.setTextColor(10,110,200);
-    doc.text("Detalles y Especificaciones:", margin, detallesY);
-    detallesY += 6;
-    doc.setFont('helvetica','normal'); doc.setFontSize(8.6); doc.setTextColor(60,60,60);
-    detalles.forEach((d, idx)=>{
-      if (detallesY+5 > h-45) return;
-      doc.text("• "+d, margin+2, detallesY+4);
-      detallesY += 5;
+  let checks=[];
+  for(let i=1;i<=11;i++){
+    if(document.getElementById('chk'+i).checked) checks.push(document.querySelector('label[for=chk'+i+']').innerText);
+  }
+  let detY = totalsY + 27;
+  if(checks.length || detallesArray.length){
+    doc.setFont('helvetica','bold'); doc.setFontSize(10.5); doc.setTextColor(10,110,200);
+    doc.text("Detalles y Especificaciones", margin+2, detY+1.8);
+    doc.setFont('helvetica','normal'); doc.setFontSize(9.3); doc.setTextColor(30,30,30);
+    let y0 = detY+7.5;
+    [...checks, ...detallesArray].forEach((txt,i)=>{
+      doc.text("- " + txt, margin+5, y0+i*5.5);
     });
   }
 
-  // --- Firma manuscrita elegante ---
-  let firmaY = detallesY + 32;
-  if (firmaY > h - 52) firmaY = h - 52;
-  doc.setDrawColor(180, 180, 180);
-  doc.setLineWidth(0.23);
-  doc.line(w/2-32, firmaY, w/2+32, firmaY);
+  if (returnDocOnly) return doc;
 
-  doc.setFont('times', 'italic');
-  doc.setFontSize(15.6);
-  doc.setTextColor(10, 110, 200);
-  doc.text('Grupo AR', w/2, firmaY+7, {align:'center'});
-  doc.setFont('helvetica','normal'); doc.setFontSize(8.2); doc.setTextColor(150, 150, 150);
-  doc.text('Firma simbólica digital — No requiere firma autógrafa.', w/2, firmaY+12, {align:'center'});
-
-  // --- Footer discreto ---
-  doc.setFontSize(8.1);
-  doc.setTextColor(170,170,170);
-  doc.text('GRUPO AR Construcción y Diseño — Tel: +52 1 438 134 6142', w/2, h-8, {align:'center'});
-
-  // --- Función truncar texto largo en los campos ---
-  function truncateToWidth(doc, txt, maxWidthMm) {
-    let width = doc.getTextWidth(txt);
-    while (width > maxWidthMm) {
-      txt = txt.slice(0, -1);
-      width = doc.getTextWidth(txt + '...');
-      if (width <= maxWidthMm) return txt + '...';
-    }
-    return txt;
-  }
-
-  let fname = (document.getElementById('fileName').value || 'cotizacion') + '.pdf';
-
-  // --- Cambia SOLO esto para el botón compartir ---
-  if (returnDocOnly) {
-    return { fname, doc };
-  } else {
-    doc.save(fname);
-    return { fname, doc };
-  }
+  // --- Descargar PDF
+  doc.save(document.getElementById('fileName').value + ".pdf");
 }
-
-
-
-document.getElementById('generateBtn').onclick = generarPDFpro;
-
-// ----------- Compartir moderno ----------
+function truncateToWidth(doc, str, maxWidth) {
+  let text = String(str), res = text, w = doc.getTextWidth(text);
+  while (w > maxWidth && res.length > 4) {
+    res = res.slice(0, -2) + "…";
+    w = doc.getTextWidth(res);
+  }
+  return res;
+}
+document.getElementById('generateBtn').onclick = ()=>generarPDFpro();
 document.getElementById('shareBtn').onclick = async ()=>{
-  let {fname, doc} = await generarPDFpro();
+  let doc = await generarPDFpro(true);
   let blob = doc.output('blob');
-  if (navigator.canShare && window.File && navigator.canShare({ files: [new File([blob], fname, {type: "application/pdf"})]})) {
-    try {
-      await navigator.share({
-        files: [new File([blob], fname, {type: "application/pdf"})],
-        title: fname,
-        text: "Cotización GRUPO AR"
-      });
-    } catch(e) { alert("No se pudo compartir automáticamente. Abre el PDF desde tu gestor de archivos para compartirlo."); }
+  let file = new File([blob], document.getElementById('fileName').value+'.pdf', {type:'application/pdf'});
+  if(navigator.canShare && navigator.canShare({files:[file]})){
+    await navigator.share({files:[file],title:document.getElementById('fileName').value});
   } else {
-    alert("Comparte el PDF manualmente desde tu gestor de archivos. (Función compartir automática no soportada en este navegador)");
+    let url = URL.createObjectURL(blob);
+    window.open(url, '_blank');
   }
 };
-
-// ==== Inicialización ====
-updateTypeUI();
-renderTable();
-recalc();
-renderDetalles();
-updatePredictions();
+updateTypeUI(); recalc(); renderTable(); renderDetalles();
 </script>
-<script>
-// =========== Service Worker para instalable PWA ===========
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('sw.js').then(function(reg) {
-      // Registrado
-    }, function(err) {
-      // Fallo
-    });
-  });
-}
-</script>
-
 </body>
 </html>
