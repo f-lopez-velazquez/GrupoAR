@@ -885,82 +885,80 @@ async function generarPDFpro(returnDocOnly = false) {
   doc.setFillColor(10,110,200);
   doc.setTextColor(255,255,255);
 
-  if (tipo === 'express') {
-    doc.rect(margin, y, w-margin*2, rowHeight, 'F');
-    doc.text("Descripción", margin+2, y+5.0);
-    doc.text("Precio", w-margin-48, y+5.0, {align:'right'});
-    doc.text("Total", w-margin-10, y+5.0, {align:'right'});
-    y += rowHeight + 1.5;
-    doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
+  // ...lo anterior igual...
+if (tipo === 'express') {
+  doc.rect(margin, y, w-margin*2, rowHeight, 'F');
+  doc.text("Descripción", margin+2, y+5.0);
+  doc.text("Precio", w-margin-48, y+5.0, {align:'right'});
+  doc.text("Total", w-margin-10, y+5.0, {align:'right'});
+  y += rowHeight + 1.5;
+  doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
 
-    // Agrupar ítems por grupo
-    let grupos = {};
-    items.forEach(it=>{
-      let grupo = it.group || "Otros";
-      if (!grupos[grupo]) grupos[grupo] = [];
-      grupos[grupo].push(it);
-    });
-    Object.keys(grupos).forEach(grupo=>{
-      // Encabezado de grupo/sección en PDF
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(9.8);
-      doc.setTextColor(10,110,200);
-      doc.text(grupo, margin+1, y+5);
-      y += rowHeight-2;
-      doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
-      grupos[grupo].forEach(it=>{
-        if(it.sinPrecio){
-          doc.text(it.desc, margin+2, y+5);
-          doc.text("Sin precio", w-margin-22, y+5, {align:'right'});
-        } else {
-          doc.text(it.desc, margin+2, y+5);
-          doc.text(`$${(it.pr||0).toFixed(2)}`, w-margin-48, y+5, {align:'right'});
-          doc.text(`$${(it.pr||0).toFixed(2)}`, w-margin-10, y+5, {align:'right'});
-        }
-        y += rowHeight;
-      });
-    });
-  } else {
-    doc.rect(margin, y, w-margin*2, rowHeight, 'F');
-    doc.text("Descripción", margin+2, y+5.0);
-    doc.text("Cant.", w-margin-70, y+5.0, {align:'right'});
-    doc.text("Material", w-margin-52, y+5.0, {align:'right'});
-    doc.text("Mano Obra", w-margin-28, y+5.0, {align:'right'});
-    doc.text("Total", w-margin-10, y+5.0, {align:'right'});
-    y += rowHeight + 1.5;
+  // Agrupar ítems por grupo
+  let grupos = {};
+  items.forEach(it=>{
+    let grupo = it.group || "Otros";
+    if (!grupos[grupo]) grupos[grupo] = [];
+    grupos[grupo].push(it);
+  });
+  Object.keys(grupos).forEach(grupo=>{
+    // Encabezado de grupo/sección en PDF
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(9.8);
+    doc.setTextColor(10,110,200);
+    doc.text(grupo, margin+1, y+5);
+    y += rowHeight-2;
     doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
+    grupos[grupo].forEach(it=>{
+      doc.text(it.desc, margin+2, y+5);
+      if(it.sinPrecio){
+        // Solo deja en blanco (no escribe nada en columnas de precio/total)
+      } else {
+        doc.text(`$${(it.pr||0).toFixed(2)}`, w-margin-48, y+5, {align:'right'});
+        doc.text(`$${(it.pr||0).toFixed(2)}`, w-margin-10, y+5, {align:'right'});
+      }
+      y += rowHeight;
+    });
+  });
+} else {
+  doc.rect(margin, y, w-margin*2, rowHeight, 'F');
+  doc.text("Descripción", margin+2, y+5.0);
+  doc.text("Cant.", w-margin-70, y+5.0, {align:'right'});
+  doc.text("Material", w-margin-52, y+5.0, {align:'right'});
+  doc.text("Mano Obra", w-margin-28, y+5.0, {align:'right'});
+  doc.text("Total", w-margin-10, y+5.0, {align:'right'});
+  y += rowHeight + 1.5;
+  doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
 
-    let grupos = {};
-    items.forEach(it=>{
-      let grupo = it.group || "Otros";
-      if (!grupos[grupo]) grupos[grupo] = [];
-      grupos[grupo].push(it);
+  let grupos = {};
+  items.forEach(it=>{
+    let grupo = it.group || "Otros";
+    if (!grupos[grupo]) grupos[grupo] = [];
+    grupos[grupo].push(it);
+  });
+  Object.keys(grupos).forEach(grupo=>{
+    // Encabezado de grupo/sección en PDF
+    doc.setFont('helvetica','bold');
+    doc.setFontSize(9.8);
+    doc.setTextColor(10,110,200);
+    doc.text(grupo, margin+1, y+5);
+    y += rowHeight-2;
+    doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
+    grupos[grupo].forEach(it=>{
+      doc.text(it.desc, margin+2, y+5);
+      doc.text(`${it.qt||1}`, w-margin-70, y+5, {align:'right'});
+      if(it.sinPrecio){
+        // Deja celdas Material, Mano Obra, Total en blanco
+      } else {
+        doc.text(`$${(it.ma||0).toFixed(2)}`, w-margin-52, y+5, {align:'right'});
+        doc.text(`$${(it.lb||0).toFixed(2)}`, w-margin-28, y+5, {align:'right'});
+        const tot = ((it.ma||0)+(it.lb||0))*(it.qt||1);
+        doc.text(`$${tot.toFixed(2)}`, w-margin-10, y+5, {align:'right'});
+      }
+      y += rowHeight;
     });
-    Object.keys(grupos).forEach(grupo=>{
-      // Encabezado de grupo/sección en PDF
-      doc.setFont('helvetica','bold');
-      doc.setFontSize(9.8);
-      doc.setTextColor(10,110,200);
-      doc.text(grupo, margin+1, y+5);
-      y += rowHeight-2;
-      doc.setFont('helvetica','normal'); doc.setFontSize(9.2); doc.setTextColor(30,30,30);
-      grupos[grupo].forEach(it=>{
-        if(it.sinPrecio){
-          doc.text(it.desc, margin+2, y+5);
-          doc.text(`${it.qt||1}`, w-margin-70, y+5, {align:'right'});
-          doc.text("Sin precio", w-margin-22, y+5, {align:'right'});
-        } else {
-          const tot = ((it.ma||0)+(it.lb||0))*(it.qt||1);
-          doc.text(it.desc, margin+2, y+5);
-          doc.text(`${it.qt||1}`, w-margin-70, y+5, {align:'right'});
-          doc.text(`$${(it.ma||0).toFixed(2)}`, w-margin-52, y+5, {align:'right'});
-          doc.text(`$${(it.lb||0).toFixed(2)}`, w-margin-28, y+5, {align:'right'});
-          doc.text(`$${tot.toFixed(2)}`, w-margin-10, y+5, {align:'right'});
-        }
-        y += rowHeight;
-      });
-    });
-  }
+  });
+}
 
   // --- Totales ---
   let subtotal = parseFloat(document.getElementById('subtotal').textContent)||0;
