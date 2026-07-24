@@ -19,10 +19,12 @@ const parseArgs = () => {
 
 const args = parseArgs();
 const serviceAccountPath =
-  args.serviceAccount || process.env.GOOGLE_APPLICATION_CREDENTIALS;
+  args.serviceAccount ||
+  process.env.GRUPOAR_SERVICE_ACCOUNT_PATH ||
+  process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
 if (!serviceAccountPath || !fs.existsSync(serviceAccountPath)) {
-  console.error("Falta --serviceAccount o GOOGLE_APPLICATION_CREDENTIALS.");
+  console.error("Falta --serviceAccount, GRUPOAR_SERVICE_ACCOUNT_PATH o GOOGLE_APPLICATION_CREDENTIALS.");
   process.exit(1);
 }
 

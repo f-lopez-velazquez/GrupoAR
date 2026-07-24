@@ -1,28 +1,37 @@
-/**
- * Seed Superadmin Script
- * Run with: node scripts/seed_superadmin.js
- * 
- * Creates the initial superadmin user:
- * - Username: paco-gpoAR
- * - Email: paco@grupoar.mx
- * - Password: soyunSmoth#55
- */
-
+const fs = require("fs");
 const admin = require("firebase-admin");
-const serviceAccount = require("../../../../gpo-ar-firebase-adminsdk-fbsvc-b0668afbad.json");
+const path = require("path");
+
+const resolveServiceAccount = () => {
+    const serviceAccountPath =
+        process.env.GRUPOAR_SERVICE_ACCOUNT_PATH ||
+        process.env.GOOGLE_APPLICATION_CREDENTIALS;
+
+    if (!serviceAccountPath || !fs.existsSync(serviceAccountPath)) {
+        console.error("Falta GRUPOAR_SERVICE_ACCOUNT_PATH o GOOGLE_APPLICATION_CREDENTIALS.");
+        process.exit(1);
+    }
+
+    return require(path.resolve(serviceAccountPath));
+};
 
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert(resolveServiceAccount()),
 });
 
 const db = admin.firestore();
 
 const SUPERADMIN = {
-    email: "paco@grupoar.mx",
-    password: "soyunSmoth#55",
-    displayName: "Paco - Superadmin",
-    username: "paco-gpoAR",
+    email: process.env.GRUPOAR_SEED_EMAIL,
+    password: process.env.GRUPOAR_SEED_PASSWORD,
+    displayName: process.env.GRUPOAR_SEED_DISPLAY_NAME,
+    username: process.env.GRUPOAR_SEED_USERNAME,
 };
+
+if (!SUPERADMIN.email || !SUPERADMIN.password || !SUPERADMIN.displayName || !SUPERADMIN.username) {
+    console.error("Faltan GRUPOAR_SEED_EMAIL, GRUPOAR_SEED_PASSWORD, GRUPOAR_SEED_DISPLAY_NAME o GRUPOAR_SEED_USERNAME.");
+    process.exit(1);
+}
 
 const ALL_PERMISSIONS = [
     "frontend",

@@ -1,26 +1,27 @@
 # GrupoAR
 
-## Resumen
+Aplicación web y stack Firebase para operación, catálogo público y utilidades internas de Grupo AR.
 
-Repositorio preparado desde el inventario local de `Programaciòn/` para conservar este proyecto como una base retomable y compartible.
+## Seguridad y credenciales
 
-## Estado
+- Este repositorio no debe contener llaves privadas, service accounts ni `.env` reales.
+- Los scripts administrativos usan `GRUPOAR_SERVICE_ACCOUNT_PATH` o `GOOGLE_APPLICATION_CREDENTIALS`.
+- Las credenciales operativas sensibles deben inyectarse por variables de entorno.
 
-- Visibilidad objetivo: `public`
-- Ruta local: `GRUPO AR`
-- Stack detectado: `Node.js + Firebase`
-
-## Arranque rapido
+## Arranque rápido
 
 1. `npm install`
-1. `npm run dev`
 1. `firebase emulators:start`
+1. Configurar `GRUPOAR_SERVICE_ACCOUNT_PATH` solo en entornos administrativos locales o CI privado.
 
 ## Estructura
 
-- `README.md`: contexto rapido del proyecto.
-- `.gitignore`: exclusiones locales y artefactos generados.
+- `fronted/`: frontend público y ERP.
+- `functions/`: Cloud Functions y scripts operativos.
+- `scripts/`: utilidades locales de administración y seed.
 
-## Notas
+## Política de publicación
 
-Proyecto Firebase con frontend/functions; repo publico existente probable.
+- Firebase client config pública puede existir en frontend; no es un secreto por sí misma.
+- Nunca deben publicarse service accounts, tokens, contraseñas de seed ni credenciales de terceros.
+- Revisa [SECURITY.md](SECURITY.md) antes de compartir cambios operativos.

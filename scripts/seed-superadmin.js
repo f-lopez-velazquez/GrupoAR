@@ -1,9 +1,21 @@
-﻿const admin = require("firebase-admin");
+const fs = require("fs");
+const admin = require("firebase-admin");
 const path = require("path");
 
-const serviceAccountPath =
-  process.env.GOOGLE_APPLICATION_CREDENTIALS ||
-  path.resolve(__dirname, "..", "gpo-ar-firebase-adminsdk-fbsvc-b0668afbad.json");
+const resolveServiceAccount = () => {
+  const serviceAccountPath =
+    process.env.GRUPOAR_SERVICE_ACCOUNT_PATH ||
+    process.env.GOOGLE_APPLICATION_CREDENTIALS;
+
+  if (!serviceAccountPath || !fs.existsSync(serviceAccountPath)) {
+    console.error(
+      "Falta GRUPOAR_SERVICE_ACCOUNT_PATH o GOOGLE_APPLICATION_CREDENTIALS con una credencial valida."
+    );
+    process.exit(1);
+  }
+
+  return require(path.resolve(serviceAccountPath));
+};
 
 const username = process.env.SUPERADMIN_USERNAME;
 const password = process.env.SUPERADMIN_PASSWORD;
@@ -15,7 +27,7 @@ if (!username || !password) {
 }
 
 admin.initializeApp({
-  credential: admin.credential.cert(require(serviceAccountPath)),
+  credential: admin.credential.cert(resolveServiceAccount()),
 });
 
 const email = username.includes("@") ? username : `${username}@${domain}`;

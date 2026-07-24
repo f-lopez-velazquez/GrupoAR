@@ -7,8 +7,16 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Load Service Account
-const serviceAccountPath = path.resolve(__dirname, '../../../gpo-ar-firebase-adminsdk-fbsvc-b0668afbad.json');
-const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, 'utf8'));
+const serviceAccountPath =
+  process.env.GRUPOAR_SERVICE_ACCOUNT_PATH ||
+  process.env.GOOGLE_APPLICATION_CREDENTIALS;
+
+if (!serviceAccountPath || !fs.existsSync(serviceAccountPath)) {
+    console.error("Falta GRUPOAR_SERVICE_ACCOUNT_PATH o GOOGLE_APPLICATION_CREDENTIALS.");
+    process.exit(1);
+}
+
+const serviceAccount = JSON.parse(fs.readFileSync(path.resolve(serviceAccountPath), 'utf8'));
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)

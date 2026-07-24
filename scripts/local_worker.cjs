@@ -10,11 +10,25 @@
  */
 
 const admin = require("firebase-admin");
-const serviceAccount = require("../gpo-ar-firebase-adminsdk-fbsvc-b0668afbad.json");
+const fs = require("fs");
+const path = require("path");
+
+const resolveServiceAccount = () => {
+    const serviceAccountPath =
+        process.env.GRUPOAR_SERVICE_ACCOUNT_PATH ||
+        process.env.GOOGLE_APPLICATION_CREDENTIALS;
+
+    if (!serviceAccountPath || !fs.existsSync(serviceAccountPath)) {
+        console.error("Falta GRUPOAR_SERVICE_ACCOUNT_PATH o GOOGLE_APPLICATION_CREDENTIALS.");
+        process.exit(1);
+    }
+
+    return require(path.resolve(serviceAccountPath));
+};
 
 // Inicializar Firebase Admin
 admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
+    credential: admin.credential.cert(resolveServiceAccount()),
 });
 
 const db = admin.firestore();

@@ -1,0 +1,38 @@
+name: Security Hygiene
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  schedule:
+    - cron: "17 4 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  npm-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit root package lock
+        if: ${{ hashFiles('package-lock.json') != '' }}
+        run: npm audit --audit-level=high --omit=dev --package-lock-only
+      - name: Audit functions package lock
+        if: ${{ hashFiles('functions/package-lock.json') != '' }}
+        working-directory: functions
+        run: npm audit --audit-level=high --omit=dev --package-lock-only
+      - name: Audit ERP package lock
+        if: ${{ hashFiles('fronted/erp/package-lock.json') != '' }}
+        working-directory: fronted/erp
+        run: npm audit --audit-level=high --omit=dev --package-lock-only

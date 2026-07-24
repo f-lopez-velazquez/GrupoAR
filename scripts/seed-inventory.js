@@ -1,13 +1,25 @@
-﻿const admin = require("firebase-admin");
+const fs = require("fs");
+const admin = require("firebase-admin");
 const path = require("path");
 const data = require(path.resolve(__dirname, "..", "fronted", "assets", "inventario_ferreteria_grupo_ar.json"));
 
-const serviceAccountPath =
-  process.env.GOOGLE_APPLICATION_CREDENTIALS ||
-  path.resolve(__dirname, "..", "gpo-ar-firebase-adminsdk-fbsvc-b0668afbad.json");
+const resolveServiceAccount = () => {
+  const serviceAccountPath =
+    process.env.GRUPOAR_SERVICE_ACCOUNT_PATH ||
+    process.env.GOOGLE_APPLICATION_CREDENTIALS;
+
+  if (!serviceAccountPath || !fs.existsSync(serviceAccountPath)) {
+    console.error(
+      "Falta GRUPOAR_SERVICE_ACCOUNT_PATH o GOOGLE_APPLICATION_CREDENTIALS con una credencial valida."
+    );
+    process.exit(1);
+  }
+
+  return require(path.resolve(serviceAccountPath));
+};
 
 admin.initializeApp({
-  credential: admin.credential.cert(require(serviceAccountPath)),
+  credential: admin.credential.cert(resolveServiceAccount()),
 });
 
 const db = admin.firestore();
