@@ -1,0 +1,550 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bitácora de Herramientas - Grupo AR</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        /* Custom scrollbar for dark mode feeling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101022; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222249; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #303169; 
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-white font-display overflow-hidden h-screen flex">
+<!-- Sidebar -->
+<aside class="w-20 lg:w-72 bg-[#101023] border-r border-[#222249] flex flex-col h-full shrink-0 transition-all duration-300">
+<div class="p-6 flex items-center gap-4">
+<div class="bg-primary/20 bg-center bg-no-repeat bg-cover rounded-xl size-10 shrink-0 flex items-center justify-center text-primary font-bold text-xl">
+                AR
+            </div>
+<div class="flex-col hidden lg:flex">
+<h1 class="text-white text-base font-bold leading-none">Grupo AR</h1>
+<p class="text-[#8f90cc] text-xs font-medium mt-1">ERP Admin</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2 px-3 py-4 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#8f90cc] hover:text-white hover:bg-[#222249] transition-colors group" href="/dashboard-ejecutivo">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">dashboard</span>
+<p class="text-sm font-medium hidden lg:block">Panel</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary text-white shadow-lg shadow-primary/20 group" href="/bitacora">
+<span class="material-symbols-outlined fill-1">build</span>
+<p class="text-sm font-bold hidden lg:block">Bitácora</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#8f90cc] hover:text-white hover:bg-[#222249] transition-colors group" href="/inventario">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">inventory_2</span>
+<p class="text-sm font-medium hidden lg:block">Inventario</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#8f90cc] hover:text-white hover:bg-[#222249] transition-colors group" href="/proyectos-activos">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">folder_open</span>
+<p class="text-sm font-medium hidden lg:block">Proyectos</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#8f90cc] hover:text-white hover:bg-[#222249] transition-colors group" href="/finanzas">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">payments</span>
+<p class="text-sm font-medium hidden lg:block">Finanzas</p>
+</a>
+</nav>
+<div class="p-4 border-t border-[#222249]">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#8f90cc] hover:text-white hover:bg-[#222249] transition-colors" href="/ajustes">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium hidden lg:block">Configuración</p>
+</a>
+<div class="mt-4 flex items-center gap-3 px-3 lg:bg-[#1a1a2e] lg:p-3 rounded-xl cursor-pointer hover:bg-[#222249] transition-colors">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-8 shrink-0 border border-[#303169]" data-alt="Profile picture of logged in user" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDptSiBZ3ZM3M_G4BEtkjOatbCrgYLAcYls2eBtfEHIHiZo_pnAWc9UxooYFCcjnI0KKAYZFEwOY-mf8h9OuvES-MQ1ccIAiWHoM9-VQhH2Hq6HtCov81COcB28bSqcDznFAAGOckwT-8GeSqAFvHcCNx2xq4Kkzs0KpyPSu94vuA4jtEZzfauS1jRNvfSBBDhUWz37B2E2rxCyyMK6pK8SUM5IdjOqx0lHAmYKb2r2vL7177iE_wZONZowXjCqC8m0dWzNFkl78kai");'></div>
+<div class="hidden lg:flex flex-col overflow-hidden">
+<p class="text-white text-sm font-medium truncate">Carlos M.</p>
+<p class="text-[#8f90cc] text-xs truncate">Jefe de Obra</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Header Section -->
+<header class="shrink-0 p-6 pb-0 md:p-8 md:pb-0 z-10 bg-background-dark/95 backdrop-blur-sm sticky top-0">
+<div class="max-w-[1400px] mx-auto flex flex-col gap-6">
+<!-- Page Title & Primary Action -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex flex-col gap-1">
+<h2 class="text-white text-3xl font-black tracking-tight flex items-center gap-3">
+                            Bitácora de Herramientas
+                            <span class="px-2 py-1 rounded-md bg-[#222249] text-[#8f90cc] text-xs font-normal border border-[#303169]">V.2.4</span>
+</h2>
+<p class="text-[#8f90cc] text-base">Registro centralizado de movimientos de equipo</p>
+</div>
+<button id="newToolEntryBtn" class="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-bold shadow-lg shadow-primary/25 transition-all active:scale-95 group">
+<span class="material-symbols-outlined group-hover:rotate-90 transition-transform">add</span>
+                        Nueva Entrada
+                    </button>
+</div>
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="bg-[#16162c] border border-[#222249] p-5 rounded-xl flex items-center justify-between relative overflow-hidden group">
+<div class="absolute right-0 top-0 w-24 h-full bg-gradient-to-l from-primary/5 to-transparent"></div>
+<div>
+<p class="text-[#8f90cc] text-sm font-medium mb-1">Herramientas Fuera</p>
+<div class="flex items-baseline gap-2">
+<span id="toolsOutCount" class="text-3xl font-bold text-white">0</span>
+<span class="text-emerald-400 text-sm font-medium flex items-center">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +2
+                                </span>
+</div>
+</div>
+<div class="size-12 rounded-full bg-[#222249] flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">output</span>
+</div>
+</div>
+<div class="bg-[#16162c] border border-[#222249] p-5 rounded-xl flex items-center justify-between relative overflow-hidden group">
+<div>
+<p class="text-[#8f90cc] text-sm font-medium mb-1">Devoluciones Atrasadas</p>
+<div class="flex items-baseline gap-2">
+<span id="toolsLateCount" class="text-3xl font-bold text-white">0</span>
+<span class="text-rose-400 text-sm font-medium flex items-center">
+<span class="material-symbols-outlined text-[16px]">warning</span> Acción requerida
+                                </span>
+</div>
+</div>
+<div class="size-12 rounded-full bg-[#222249] flex items-center justify-center text-rose-500 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+</div>
+<div class="bg-[#16162c] border border-[#222249] p-5 rounded-xl flex items-center justify-between relative overflow-hidden group">
+<div>
+<p class="text-[#8f90cc] text-sm font-medium mb-1">En Mantenimiento</p>
+<div class="flex items-baseline gap-2">
+<span id="toolsMaintenanceCount" class="text-3xl font-bold text-white">0</span>
+<span class="text-orange-400 text-sm font-medium flex items-center">
+                                    -1 esta semana
+                                </span>
+</div>
+</div>
+<div class="size-12 rounded-full bg-[#222249] flex items-center justify-center text-orange-500 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">handyman</span>
+</div>
+</div>
+</div>
+<!-- Toolbar (Search + Filters) -->
+<div class="flex flex-col lg:flex-row gap-4 lg:items-center justify-between py-2">
+<!-- Search -->
+<div class="relative w-full lg:max-w-md group/search">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-[#8f90cc] group-focus-within/search:text-primary transition-colors">search</span>
+</div>
+<input id="toolSearchInput" class="block w-full pl-10 pr-3 py-2.5 border border-[#303169] rounded-lg leading-5 bg-[#16162c] text-white placeholder-[#8f90cc] focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm transition-all" placeholder="Buscar por ID, herramienta o responsable..." type="text"/>
+</div>
+<!-- Filter Chips -->
+<div class="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 scrollbar-hide">
+<span class="text-[#8f90cc] text-xs font-bold uppercase tracking-wider mr-2 hidden lg:block">Filtrar:</span>
+<button id="filterAllBtn" class="flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-white text-sm font-medium whitespace-nowrap shadow-md shadow-primary/20">
+                            Todas
+                        </button>
+<button id="filterInBtn" class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#222249] text-[#8f90cc] hover:text-white hover:bg-[#303169] text-sm font-medium whitespace-nowrap border border-[#303169] transition-all">
+<div class="size-2 rounded-full bg-emerald-500"></div> Entradas
+                        </button>
+<button id="filterOutBtn" class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#222249] text-[#8f90cc] hover:text-white hover:bg-[#303169] text-sm font-medium whitespace-nowrap border border-[#303169] transition-all">
+<div class="size-2 rounded-full bg-amber-500"></div> Salidas
+                        </button>
+<button id="filterLateBtn" class="flex items-center gap-2 px-4 py-2 rounded-full bg-[#222249] text-[#8f90cc] hover:text-white hover:bg-[#303169] text-sm font-medium whitespace-nowrap border border-[#303169] transition-all">
+<div class="size-2 rounded-full bg-rose-500"></div> Atrasados
+                        </button>
+<div class="h-6 w-px bg-[#303169] mx-2"></div>
+<button class="flex items-center justify-center size-9 rounded-lg bg-[#222249] text-[#8f90cc] hover:text-white hover:bg-[#303169] border border-[#303169] transition-all">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+</button>
+<button class="flex items-center justify-center size-9 rounded-lg bg-[#222249] text-[#8f90cc] hover:text-white hover:bg-[#303169] border border-[#303169] transition-all">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Ledger Table Section -->
+<div class="flex-1 overflow-auto px-6 md:px-8 pb-8 pt-4">
+<div class="max-w-[1400px] mx-auto h-full flex flex-col">
+<div class="border border-[#303169] rounded-lg overflow-hidden bg-[#16162c] shadow-xl shadow-black/20 flex-1 flex flex-col">
+<div class="overflow-auto flex-1">
+<table class="w-full text-left border-collapse">
+<thead class="bg-[#1a1a2e] text-[#8f90cc] sticky top-0 z-10 shadow-sm shadow-[#101022]">
+<tr>
+<th class="p-4 text-xs font-bold uppercase tracking-wider border-b border-[#303169] w-28">Estado</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider border-b border-[#303169] border-l border-[#303169]/30">Herramienta</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider border-b border-[#303169] border-l border-[#303169]/30">Responsable</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider border-b border-[#303169] border-l border-[#303169]/30">Fecha / Hora</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider border-b border-[#303169] border-l border-[#303169]/30">Condición</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider border-b border-[#303169] border-l border-[#303169]/30 text-right">Acciones</th>
+</tr>
+</thead>
+<tbody id="toolLogBody" class="divide-y divide-[#303169]/30">
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="p-4 border-t border-[#303169] bg-[#1a1a2e] flex items-center justify-between">
+<p class="text-xs text-[#8f90cc]">Mostrando 6 de 145 registros</p>
+<div class="flex gap-2">
+<button class="size-8 flex items-center justify-center rounded-lg border border-[#303169] bg-[#222249] text-white hover:bg-[#303169] transition-colors disabled:opacity-50">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="size-8 flex items-center justify-center rounded-lg border border-[#303169] bg-[#222249] text-white hover:bg-[#303169] transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script type="module">
+import { ensureAuth } from "/shared/auth.js";
+import { logToolMovement, listenToolLog } from "/shared/services/tools.js";
+import { logAuditEvent } from "/shared/audit.js";
+
+const newEntryBtn = document.getElementById("newToolEntryBtn");
+const toolsOutCount = document.getElementById("toolsOutCount");
+const toolsLateCount = document.getElementById("toolsLateCount");
+const toolsMaintenanceCount = document.getElementById("toolsMaintenanceCount");
+const searchInput = document.getElementById("toolSearchInput");
+const filterAllBtn = document.getElementById("filterAllBtn");
+const filterInBtn = document.getElementById("filterInBtn");
+const filterOutBtn = document.getElementById("filterOutBtn");
+const filterLateBtn = document.getElementById("filterLateBtn");
+const toolLogBody = document.getElementById("toolLogBody");
+
+const state = {
+  logs: [],
+  filter: "all",
+  search: "",
+};
+
+const formatDateTime = (value) => {
+  if (!value) return "Sin fecha";
+  const date = value.seconds ? new Date(value.seconds * 1000) : new Date(value);
+  if (Number.isNaN(date.getTime())) return "Sin fecha";
+  return new Intl.DateTimeFormat("es-MX", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(date);
+};
+
+const getLatestByTool = (logs) => {
+  const map = new Map();
+  logs.forEach((log) => {
+    if (!log.toolId) return;
+    if (!map.has(log.toolId)) {
+      map.set(log.toolId, log);
+    }
+  });
+  return Array.from(map.values());
+};
+
+const computeStats = (logs) => {
+  const latest = getLatestByTool(logs);
+  let out = 0;
+  let maintenance = 0;
+  let overdue = 0;
+  const now = Date.now();
+
+  latest.forEach((log) => {
+    if (log.action === "prestamo") {
+      out += 1;
+      if (log.dueDate) {
+        const due = new Date(log.dueDate).getTime();
+        if (!Number.isNaN(due) && due < now) overdue += 1;
+      }
+    }
+    if (log.action === "mantenimiento") maintenance += 1;
+  });
+
+  toolsOutCount.textContent = String(out);
+  toolsLateCount.textContent = String(overdue);
+  toolsMaintenanceCount.textContent = String(maintenance);
+};
+
+const applyFilters = (logs) => {
+  let filtered = [...logs];
+  if (state.filter === "in") {
+    filtered = filtered.filter((log) => log.action === "devolucion");
+  } else if (state.filter === "out") {
+    filtered = filtered.filter((log) => log.action === "prestamo");
+  } else if (state.filter === "late") {
+    const now = Date.now();
+    filtered = filtered.filter((log) => {
+      if (log.action !== "prestamo" || !log.dueDate) return false;
+      const due = new Date(log.dueDate).getTime();
+      return !Number.isNaN(due) && due < now;
+    });
+  }
+
+  if (state.search) {
+    const term = state.search.toLowerCase();
+    filtered = filtered.filter((log) => {
+      return (
+        (log.toolName || "").toLowerCase().includes(term) ||
+        (log.toolId || "").toLowerCase().includes(term) ||
+        (log.responsible || "").toLowerCase().includes(term) ||
+        (log.notes || "").toLowerCase().includes(term)
+      );
+    });
+  }
+  return filtered;
+};
+
+const actionBadge = (action) => {
+  if (action === "prestamo") {
+    return `
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">
+        <span class="size-1.5 rounded-full bg-amber-500"></span> SALIDA
+      </span>`;
+  }
+  if (action === "devolucion") {
+    return `
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">
+        <span class="size-1.5 rounded-full bg-emerald-500"></span> ENTRADA
+      </span>`;
+  }
+  if (action === "mantenimiento") {
+    return `
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-slate-500/10 text-slate-400 border border-slate-500/20">
+        <span class="material-symbols-outlined text-[14px]">build_circle</span> MANT.
+      </span>`;
+  }
+  return `
+    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-[#222249] text-[#8f90cc] border border-[#303169]">
+      OTRO
+    </span>`;
+};
+
+const renderRows = (logs) => {
+  toolLogBody.innerHTML = "";
+  if (!logs.length) {
+    toolLogBody.innerHTML = `
+      <tr>
+        <td colspan="6" class="p-6 text-center text-[#8f90cc]">Sin movimientos registrados.</td>
+      </tr>`;
+    return;
+  }
+  logs.forEach((log) => {
+    const toolName = log.toolName || "Herramienta";
+    const toolId = log.toolId || "N/A";
+    const responsible = log.responsible || "Sin responsable";
+    const location = log.location || "Sin ubicacion";
+    const condition = log.condition || log.notes || "Sin notas";
+    toolLogBody.insertAdjacentHTML(
+      "beforeend",
+      `<tr class="group hover:bg-[#1f1f35] transition-colors">
+        <td class="p-4 align-middle">${actionBadge(log.action)}</td>
+        <td class="p-4 align-middle border-l border-[#303169]/30">
+          <div class="flex flex-col">
+            <span class="text-white font-bold text-sm">${toolName}</span>
+            <span class="text-[#8f90cc] text-xs font-mono">ID: ${toolId}</span>
+          </div>
+        </td>
+        <td class="p-4 align-middle border-l border-[#303169]/30">
+          <div class="flex items-center gap-3">
+            <div class="size-8 rounded-full bg-[#303169] flex items-center justify-center text-white text-xs font-bold border border-[#303169]">
+              ${responsible.split(" ").map((p) => p[0]).join("").slice(0, 2)}
+            </div>
+            <div>
+              <p class="text-white text-sm font-medium">${responsible}</p>
+              <p class="text-[#8f90cc] text-xs">${location}</p>
+            </div>
+          </div>
+        </td>
+        <td class="p-4 align-middle border-l border-[#303169]/30">
+          <div class="flex items-center gap-2 text-white/90 font-mono text-sm">
+            <span class="material-symbols-outlined text-xs text-[#8f90cc]">calendar_today</span>
+            ${formatDateTime(log.createdAt)}
+          </div>
+        </td>
+        <td class="p-4 align-middle border-l border-[#303169]/30">
+          <span class="text-white text-sm">${condition}</span>
+        </td>
+        <td class="p-4 align-middle border-l border-[#303169]/30 text-right">
+          <div class="flex justify-end gap-2">
+            <button data-action="edit" data-id="${log.id}" class="px-2 py-1 rounded-md bg-primary/20 text-primary text-xs font-semibold hover:bg-primary/30">Editar</button>
+            <button data-action="delete" data-id="${log.id}" class="px-2 py-1 rounded-md border border-[#303169] text-[#8f90cc] text-xs font-semibold hover:text-white">Eliminar</button>
+          </div>
+        </td>
+      </tr>`
+    );
+  });
+};
+
+const render = () => {
+  const filtered = applyFilters(state.logs);
+  renderRows(filtered);
+  computeStats(state.logs);
+};
+
+const updateFilter = (filter, btn) => {
+  state.filter = filter;
+  [filterAllBtn, filterInBtn, filterOutBtn, filterLateBtn].forEach((button) => {
+    if (!button) return;
+    button.classList.remove("bg-primary", "text-white", "shadow-md", "shadow-primary/20");
+    button.classList.add("bg-[#222249]", "text-[#8f90cc]", "border", "border-[#303169]");
+  });
+  btn.classList.add("bg-primary", "text-white", "shadow-md", "shadow-primary/20");
+  btn.classList.remove("bg-[#222249]", "text-[#8f90cc]", "border", "border-[#303169]");
+  render();
+};
+
+const createModal = () => {
+  const modal = document.createElement("div");
+  modal.id = "toolModal";
+  modal.className = "fixed inset-0 z-[90] hidden items-center justify-center bg-[#0b0f1f]/70 p-6";
+  modal.innerHTML = `
+    <div class="w-full max-w-xl rounded-2xl bg-[#16162c] border border-[#303169] p-6 shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-white text-lg font-bold">Registrar movimiento</h3>
+        <button id="toolModalClose" class="text-[#8f90cc] hover:text-white">✕</button>
+      </div>
+      <form id="toolModalForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <label class="flex flex-col gap-2 text-sm text-[#8f90cc]">
+          Herramienta
+          <input id="toolNameInput" required class="h-11 rounded-lg bg-[#101023] border border-[#303169] px-3 text-white" placeholder="Taladro Makita" />
+        </label>
+        <label class="flex flex-col gap-2 text-sm text-[#8f90cc]">
+          ID de herramienta
+          <input id="toolIdInput" required class="h-11 rounded-lg bg-[#101023] border border-[#303169] px-3 text-white" placeholder="TL-MK-405" />
+        </label>
+        <label class="flex flex-col gap-2 text-sm text-[#8f90cc]">
+          Responsable
+          <input id="toolResponsibleInput" class="h-11 rounded-lg bg-[#101023] border border-[#303169] px-3 text-white" placeholder="Juan Perez" />
+        </label>
+        <label class="flex flex-col gap-2 text-sm text-[#8f90cc]">
+          Ubicacion
+          <input id="toolLocationInput" class="h-11 rounded-lg bg-[#101023] border border-[#303169] px-3 text-white" placeholder="Obra Central" />
+        </label>
+        <label class="flex flex-col gap-2 text-sm text-[#8f90cc]">
+          Accion
+          <select id="toolActionInput" class="h-11 rounded-lg bg-[#101023] border border-[#303169] px-3 text-white">
+            <option value="prestamo">Salida</option>
+            <option value="devolucion">Entrada</option>
+            <option value="mantenimiento">Mantenimiento</option>
+          </select>
+        </label>
+        <label class="flex flex-col gap-2 text-sm text-[#8f90cc]">
+          Fecha limite
+          <input id="toolDueDateInput" type="date" class="h-11 rounded-lg bg-[#101023] border border-[#303169] px-3 text-white" />
+        </label>
+        <label class="flex flex-col gap-2 text-sm text-[#8f90cc] md:col-span-2">
+          Condicion / notas
+          <textarea id="toolNotesInput" class="min-h-[80px] rounded-lg bg-[#101023] border border-[#303169] px-3 py-2 text-white" placeholder="Estado de la herramienta..."></textarea>
+        </label>
+        <div class="md:col-span-2 flex justify-end gap-3 pt-2">
+          <button type="button" id="toolModalCancel" class="px-4 py-2 rounded-lg border border-[#303169] text-[#8f90cc] hover:text-white">Cancelar</button>
+          <button type="submit" id="toolModalSubmit" class="px-5 py-2 rounded-lg bg-primary text-white font-bold hover:bg-blue-700">Guardar</button>
+        </div>
+      </form>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  return modal;
+};
+
+const modal = createModal();
+const modalForm = modal.querySelector("#toolModalForm");
+const modalClose = modal.querySelector("#toolModalClose");
+const modalCancel = modal.querySelector("#toolModalCancel");
+const modalSubmit = modal.querySelector("#toolModalSubmit");
+
+const openModal = () => {
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+};
+
+const closeModal = () => {
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+  modalForm.reset();
+};
+
+modalClose.addEventListener("click", closeModal);
+modalCancel.addEventListener("click", closeModal);
+
+newEntryBtn.addEventListener("click", () => {
+  modalSubmit.textContent = "Guardar";
+  openModal();
+});
+
+let currentUser = null;
+
+modalForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (!currentUser) return;
+  const payload = {
+    uid: currentUser.uid,
+    toolName: modalForm.querySelector("#toolNameInput").value.trim(),
+    toolId: modalForm.querySelector("#toolIdInput").value.trim(),
+    responsible: modalForm.querySelector("#toolResponsibleInput").value.trim(),
+    location: modalForm.querySelector("#toolLocationInput").value.trim(),
+    action: modalForm.querySelector("#toolActionInput").value,
+    dueDate: modalForm.querySelector("#toolDueDateInput").value || null,
+    condition: modalForm.querySelector("#toolNotesInput").value.trim(),
+  };
+  await logToolMovement(payload);
+  logAuditEvent({
+    action: "create",
+    resource: "toolLog",
+    severity: "info",
+    details: { toolId: payload.toolId },
+  });
+  closeModal();
+});
+
+searchInput.addEventListener("input", (event) => {
+  state.search = event.target.value.trim().toLowerCase();
+  render();
+});
+
+filterAllBtn.addEventListener("click", () => updateFilter("all", filterAllBtn));
+filterInBtn.addEventListener("click", () => updateFilter("in", filterInBtn));
+filterOutBtn.addEventListener("click", () => updateFilter("out", filterOutBtn));
+filterLateBtn.addEventListener("click", () => updateFilter("late", filterLateBtn));
+
+ensureAuth({ allowRoles: ["Admin", "StaffFerreteria"], allowPermissions: ["toolLog"] }).then(({ user, profile }) => {
+  currentUser = user;
+  const nameEl = document.querySelector(".mt-4 .text-white.text-sm.font-medium.truncate");
+  const roleEl = document.querySelector(".mt-4 .text-[#8f90cc].text-xs.truncate");
+  if (nameEl) nameEl.textContent = profile?.displayName || user.email?.split("@")[0] || "Usuario";
+  if (roleEl) roleEl.textContent = profile?.role || "Rol asignado";
+  listenToolLog((logs) => {
+    state.logs = logs;
+    render();
+  }, { max: 80 });
+});
+</script>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

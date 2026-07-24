@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html lang="es" class="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Grupo AR - Catálogo de clientes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/tailwind.css" />
+    <link rel="stylesheet" href="/assets/theme.css" />
+  </head>
+  <body class="bg-background-light text-slate-900 font-display min-h-screen flex flex-col">
+    <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur">
+      <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4">
+        <a class="flex items-center gap-3" href="/dashboard-ejecutivo">
+          <img src="/assets/logo.png" alt="Logo Grupo AR" class="h-9 w-9" />
+          <div>
+            <p class="text-sm font-semibold">Grupo AR</p>
+            <p class="text-xs text-slate-500">Catálogo de clientes</p>
+          </div>
+        </a>
+        <nav class="hidden items-center gap-4 text-sm font-semibold text-slate-600 md:flex">
+          <a class="hover:text-primary" href="/dashboard-ejecutivo">Panel</a>
+          <a class="hover:text-primary" href="/roles-permisos">Módulos</a>
+          <a class="hover:text-primary" href="/reportes">Reportes</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="flex-1 px-4 py-8">
+      <div class="mx-auto w-full max-w-6xl">
+        <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Clientes</p>
+            <h1 class="text-3xl font-extrabold">Seguimiento de cotizaciones</h1>
+            <p class="mt-2 text-sm text-slate-500">
+              Registra clientes, cotizaciones pendientes y enlaces a PDFs.
+            </p>
+          </div>
+          <div class="flex gap-2">
+            <button id="addClientBtn" class="rounded-full bg-primary px-4 py-2 text-xs font-bold text-white">Nuevo cliente</button>
+          </div>
+        </div>
+
+        <div class="mt-6 grid gap-4 md:grid-cols-3">
+          <div class="md:col-span-2">
+            <div class="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2">
+              <span class="material-symbols-outlined text-slate-400">search</span>
+              <input id="searchInput" class="w-full text-sm outline-none" placeholder="Buscar por nombre, correo o estado" />
+            </div>
+          </div>
+          <div>
+            <select id="statusFilter" class="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm">
+              <option value="Todos">Todos los estados</option>
+              <option value="Pendiente">Pendiente</option>
+              <option value="En seguimiento">En seguimiento</option>
+              <option value="Cerrado">Cerrado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mt-6 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm">
+          <table class="w-full text-left text-sm">
+            <thead class="border-b border-slate-200 bg-slate-50 text-xs uppercase tracking-wider text-slate-400">
+              <tr>
+                <th class="px-4 py-3">Cliente</th>
+                <th class="px-4 py-3">Contacto</th>
+                <th class="px-4 py-3">Estado</th>
+                <th class="px-4 py-3">Cotización</th>
+                <th class="px-4 py-3 text-right">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="clientsTable"></tbody>
+          </table>
+        </div>
+
+        <div id="emptyState" class="hidden mt-6 rounded-xl border border-dashed border-slate-200 p-6 text-center text-sm text-slate-500">
+          No hay clientes registrados.
+        </div>
+      </div>
+    </main>
+
+    <div id="clientModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 p-4">
+      <div class="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl">
+        <div class="flex items-center justify-between">
+          <h2 id="modalTitle" class="text-lg font-bold">Nuevo cliente</h2>
+          <button id="closeModal" class="text-slate-400 hover:text-slate-600">X</button>
+        </div>
+        <form id="clientForm" class="mt-4 grid gap-3">
+          <input type="hidden" id="clientId" />
+          <label class="text-xs font-semibold text-slate-500">Nombre
+            <input id="clientName" required class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+          </label>
+          <label class="text-xs font-semibold text-slate-500">Contacto
+            <input id="clientContact" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" placeholder="Persona de contacto" />
+          </label>
+          <div class="grid grid-cols-2 gap-3">
+            <label class="text-xs font-semibold text-slate-500">Correo
+              <input id="clientEmail" type="email" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+            </label>
+            <label class="text-xs font-semibold text-slate-500">Teléfono
+              <input id="clientPhone" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" />
+            </label>
+          </div>
+          <label class="text-xs font-semibold text-slate-500">Estado
+            <select id="clientStatus" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm">
+              <option>Pendiente</option>
+              <option>En seguimiento</option>
+              <option>Cerrado</option>
+            </select>
+          </label>
+          <label class="text-xs font-semibold text-slate-500">URL cotización PDF
+            <input id="clientQuote" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm" placeholder="https://..." />
+          </label>
+          <label class="text-xs font-semibold text-slate-500">Notas
+            <textarea id="clientNotes" rows="3" class="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm"></textarea>
+          </label>
+          <div class="mt-2 flex justify-end gap-2">
+            <button type="button" id="cancelModal" class="rounded-lg border border-slate-200 px-4 py-2 text-sm">Cancelar</button>
+            <button type="submit" class="rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module">
+      import { ensureAuth } from "/shared/auth.js";
+      import { db } from "/shared/firebase.js";
+      import {
+        addDoc,
+        collection,
+        deleteDoc,
+        doc,
+        onSnapshot,
+        orderBy,
+        query,
+        serverTimestamp,
+        updateDoc,
+      } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+      const clientsTable = document.getElementById("clientsTable");
+      const emptyState = document.getElementById("emptyState");
+      const searchInput = document.getElementById("searchInput");
+      const statusFilter = document.getElementById("statusFilter");
+
+      const modal = document.getElementById("clientModal");
+      const modalTitle = document.getElementById("modalTitle");
+      const clientForm = document.getElementById("clientForm");
+      const clientId = document.getElementById("clientId");
+      const clientName = document.getElementById("clientName");
+      const clientContact = document.getElementById("clientContact");
+      const clientEmail = document.getElementById("clientEmail");
+      const clientPhone = document.getElementById("clientPhone");
+      const clientStatus = document.getElementById("clientStatus");
+      const clientQuote = document.getElementById("clientQuote");
+      const clientNotes = document.getElementById("clientNotes");
+
+      const addClientBtn = document.getElementById("addClientBtn");
+      const closeModal = document.getElementById("closeModal");
+      const cancelModal = document.getElementById("cancelModal");
+
+      let clients = [];
+
+      const openModal = (client = null) => {
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+        if (client) {
+          modalTitle.textContent = "Editar cliente";
+          clientId.value = client.id;
+          clientName.value = client.name || "";
+          clientContact.value = client.contact || "";
+          clientEmail.value = client.email || "";
+          clientPhone.value = client.phone || "";
+          clientStatus.value = client.status || "Pendiente";
+          clientQuote.value = client.quoteUrl || "";
+          clientNotes.value = client.notes || "";
+        } else {
+          modalTitle.textContent = "Nuevo cliente";
+          clientForm.reset();
+          clientId.value = "";
+        }
+      };
+
+      const closeModalFn = () => {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      };
+
+      const renderClients = () => {
+        const term = searchInput.value.trim().toLowerCase();
+        const status = statusFilter.value;
+        const filtered = clients.filter((client) => {
+          const matchesTerm = !term || [client.name, client.email, client.status].filter(Boolean).some((value) => value.toLowerCase().includes(term));
+          const matchesStatus = status === "Todos" || client.status === status;
+          return matchesTerm && matchesStatus;
+        });
+
+        clientsTable.innerHTML = "";
+        if (!filtered.length) {
+          emptyState.classList.remove("hidden");
+          return;
+        }
+        emptyState.classList.add("hidden");
+
+        filtered.forEach((client) => {
+          const quoteLink = client.quoteUrl
+            ? `<a href="${client.quoteUrl}" target="_blank" class="text-primary text-xs font-semibold">Ver PDF</a>`
+            : "-";
+          clientsTable.insertAdjacentHTML(
+            "beforeend",
+            `
+            <tr class="border-b border-slate-100 last:border-none">
+              <td class="px-4 py-3">
+                <p class="font-semibold">${client.name || "Cliente"}</p>
+                <p class="text-xs text-slate-500">${client.notes || "Sin notas"}</p>
+              </td>
+              <td class="px-4 py-3 text-xs text-slate-600">
+                <div>${client.contact || "-"}</div>
+                <div>${client.email || "-"}</div>
+                <div>${client.phone || "-"}</div>
+              </td>
+              <td class="px-4 py-3">
+                <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">${client.status || "Pendiente"}</span>
+              </td>
+              <td class="px-4 py-3 text-xs">${quoteLink}</td>
+              <td class="px-4 py-3 text-right">
+                <div class="flex justify-end gap-2">
+                  <button data-action="edit" data-id="${client.id}" class="text-xs font-semibold text-primary">Editar</button>
+                  <button data-action="delete" data-id="${client.id}" class="text-xs font-semibold text-rose-500">Eliminar</button>
+                </div>
+              </td>
+            </tr>
+          `
+          );
+        });
+      };
+
+      addClientBtn.addEventListener("click", () => openModal());
+      closeModal.addEventListener("click", closeModalFn);
+      cancelModal.addEventListener("click", closeModalFn);
+
+      searchInput.addEventListener("input", renderClients);
+      statusFilter.addEventListener("change", renderClients);
+
+      clientsTable.addEventListener("click", async (event) => {
+        const button = event.target.closest("button[data-action]");
+        if (!button) return;
+        const id = button.dataset.id;
+        const client = clients.find((entry) => entry.id === id);
+        if (button.dataset.action === "edit") {
+          openModal(client);
+          return;
+        }
+        if (button.dataset.action === "delete") {
+          if (!confirm("Eliminar cliente?")) return;
+          await deleteDoc(doc(db, "clients", id));
+        }
+      });
+
+      clientForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const payload = {
+          name: clientName.value.trim(),
+          contact: clientContact.value.trim(),
+          email: clientEmail.value.trim(),
+          phone: clientPhone.value.trim(),
+          status: clientStatus.value,
+          quoteUrl: clientQuote.value.trim(),
+          notes: clientNotes.value.trim(),
+          updatedAt: serverTimestamp(),
+        };
+        const id = clientId.value;
+        if (id) {
+          await updateDoc(doc(db, "clients", id), payload);
+        } else {
+          await addDoc(collection(db, "clients"), { ...payload, createdAt: serverTimestamp() });
+        }
+        closeModalFn();
+      });
+
+      ensureAuth({ allowRoles: ["Admin", "StaffFerreteria"], allowPermissions: ["clients"] }).then(() => {
+        const q = query(collection(db, "clients"), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+          clients = snapshot.docs.map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }));
+          renderClients();
+        });
+      });
+    </script>
+    <script type="module" src="/shared/footer.js"></script>
+    <script type="module" src="/shared/i18n-es.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

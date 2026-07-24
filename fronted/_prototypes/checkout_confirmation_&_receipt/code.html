@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout Confirmation - Grupo AR</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .print-only-container {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 20px !important;
+            }
+            body {
+                background-color: white !important;
+                height: auto !important;
+                overflow: visible !important;
+            }
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-white font-display overflow-x-hidden transition-colors duration-200">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Side Navigation -->
+<aside class="no-print hidden w-72 flex-col border-r border-slate-200 bg-background-light border-slate-800 bg-background-dark lg:flex">
+<div class="flex h-full flex-col justify-between p-6">
+<div class="flex flex-col gap-8">
+<!-- Brand -->
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 shadow-sm" data-alt="Abstract blue logo for Grupo AR" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC4cvkVteXxiA2StnH9z6ChKVLe1CRquDLqJ27Lj_kH7Pf3mSLM_ZHMgdvKFW3Eq8-eQbdNgSZn35F-qsHucXs7Ev1ohYzjyw1PY9aEuGG_3GQZeAaFE_s2XxKGfuSN0P0oxfoDUuFNp0v_mejpQwZ5N7oUEuOqiBykf-1SKAH0tbZ4OuXrAOcryvpYcgfb_IZZx0SyCv_DMjXtWRvDGSXEFrfzcJM8fUUKqNNVULHdMSizAuk12XPRB03zFSC9IBbtZkIcFnp-w8_M");'></div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 text-white text-base font-bold leading-tight">Grupo AR</h1>
+<p class="text-primary text-xs font-medium uppercase tracking-wider">ERP System</p>
+</div>
+</div>
+<!-- Navigation Menu -->
+<nav class="flex flex-col gap-2">
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]" data-weight="regular">grid_view</span>
+<span class="text-sm font-medium">Panel</span>
+</a>
+<!-- Active State: Logbook -->
+<a class="group flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2.5 text-primary bg-primary/20 text-primary-300" href="#">
+<span class="material-symbols-outlined text-[24px] text-primary" data-weight="fill">book</span>
+<span class="text-sm font-bold">Logbook (Bitácora)</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]" data-weight="regular">inventory_2</span>
+<span class="text-sm font-medium">Inventario</span>
+</a>
+<a class="group flex items-center gap-3 rounded-lg px-3 py-2.5 text-slate-600 hover:bg-slate-100 hover:text-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]" data-weight="regular">description</span>
+<span class="text-sm font-medium">Reportes</span>
+</a>
+</nav>
+</div>
+<!-- Bottom User Info -->
+<div class="flex items-center gap-3 rounded-xl border border-slate-200 bg-white p-3 shadow-sm border-slate-800 bg-slate-900">
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-9 w-9" data-alt="Profile picture of warehouse manager" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCYfXBfy61iY35qRhsDfxIfcFYUIMpOEWM3HXp0HNkC5iB79h-v_2BdGo00Ssjhh1VVjdhzgaOY491PfNHHPTZDjuY3qjZoyIfOGJA9IklQDE2ZoxrV2iADii5PqUvLdxSdWU_hfzBnAXsUzekFSH6vD7vQ66rcbk8tq2tSSmCsa4KyZrsjqmCT-7u0PN7xvHMDtReWLkVL742juI7WuP-pDWHnF9G-Acp9R_zW8LjcGHG3fe44R23vFNMojBIX_B_2LsuExqCFKzO1");'></div>
+<div class="flex flex-col overflow-hidden">
+<p class="truncate text-sm font-bold text-slate-900 text-white">Roberto M.</p>
+<p class="truncate text-xs text-slate-500 text-slate-400">Warehouse Mgr</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex h-full flex-1 flex-col overflow-y-auto bg-background-light bg-background-dark">
+<!-- Top Header -->
+<header class="no-print sticky top-0 z-20 flex items-center justify-between border-b border-slate-200 bg-background-light/80 px-8 py-4 backdrop-blur-md border-slate-800 bg-background-dark/80">
+<div class="flex items-center gap-4">
+<button class="lg:hidden p-2 text-slate-500 hover:text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<nav class="flex items-center text-sm text-slate-500 text-slate-400">
+<span class="hover:text-primary cursor-pointer transition-colors">Logbook</span>
+<span class="material-symbols-outlined mx-2 text-base">chevron_right</span>
+<span class="text-slate-900 font-medium text-white">Checkout Confirmation</span>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50 border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span>Soporte</span>
+</button>
+<div class="relative">
+<span class="absolute right-0 top-0 flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+</span>
+<span class="material-symbols-outlined text-slate-600 text-slate-300 text-[24px]">notifications</span>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex flex-1 flex-col items-center justify-center p-6 md:p-12">
+<div class="w-full max-w-[800px] flex flex-col gap-8 animate-fade-in-up">
+<!-- Success Header -->
+<div class="text-center flex flex-col items-center gap-4">
+<div class="flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 bg-emerald-900/30 text-emerald-400 shadow-sm ring-8 ring-emerald-50 ring-emerald-900/20">
+<span class="material-symbols-outlined text-[48px] font-bold">check_circle</span>
+</div>
+<div>
+<h1 class="text-3xl font-bold tracking-tight text-slate-900 text-white sm:text-4xl">Checkout Confirmed</h1>
+<p class="mt-2 text-lg text-slate-500 text-slate-400">Transaction #93021 successfully recorded in the digital ledger.</p>
+</div>
+</div>
+<!-- Receipt Card -->
+<div class="print-only-container overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-slate-200 bg-slate-900 ring-slate-800 shadow-black/40">
+<!-- Card Header -->
+<div class="border-b border-slate-100 bg-slate-50/50 px-8 py-4 border-slate-800 bg-slate-800/50">
+<div class="flex items-center justify-between">
+<span class="text-xs font-bold uppercase tracking-wider text-slate-500 text-slate-400">Digital Receipt</span>
+<span class="text-sm font-medium text-slate-400 text-slate-500">Oct 24, 2023</span>
+</div>
+</div>
+<!-- Card Body -->
+<div class="px-8 py-6">
+<div class="grid gap-y-8 gap-x-12 md:grid-cols-2">
+<!-- Tool Info -->
+<div class="space-y-1">
+<label class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 text-slate-400">
+<span class="material-symbols-outlined text-[16px]">handyman</span>
+                                        Tool Identification
+                                    </label>
+<p class="text-lg font-bold text-slate-900 text-white">Hammer-Drill-04</p>
+<p class="text-sm text-slate-500 text-slate-400">Makita XGT 40V Max</p>
+</div>
+<!-- Responsible Party -->
+<div class="space-y-1">
+<label class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 text-slate-400">
+<span class="material-symbols-outlined text-[16px]">badge</span>
+                                        Responsible Party
+                                    </label>
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-slate-200 bg-slate-700 bg-center bg-cover" data-alt="Portrait of Juan Perez" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD15xD9P_nZflis18-vgkTDo_b68lCUlMcGcpiwD5mfQuhvdeeoTISxFn1z0T_yJXxsAuGIORm6zd4TaQs9YG-IPh83tbZ-zzDsHJsVBLdcNQjKkbEAIZVcYs9i68Uy0o5HsYrIleN2CD0LNrzWnnyCepQuqfq1gQgxa2FtYJ8M-hiHzNd24hGwmpjw54JFvj2VFqptuEsmJ60P6WvW97M_q9C5DmmrARLl9Iw1tw0_NTg1_z9979U4LGzpzY8_wLVODkRHxYvVLEGV");'></div>
+<div>
+<p class="text-base font-bold text-slate-900 text-white">Juan Perez</p>
+<p class="text-xs font-mono text-slate-500 text-slate-400">ID: JP-88</p>
+</div>
+</div>
+</div>
+<!-- Time Out -->
+<div class="space-y-1">
+<label class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 text-slate-400">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                                        Time Out
+                                    </label>
+<p class="text-base font-medium text-slate-900 text-white">08:15 AM</p>
+<span class="inline-flex items-center rounded-full bg-yellow-100 px-2.5 py-0.5 text-xs font-medium text-yellow-800 bg-yellow-900/30 text-yellow-400">
+                                        On Loan
+                                    </span>
+</div>
+<!-- Authorized By -->
+<div class="space-y-1">
+<label class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-500 text-slate-400">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+                                        Authorized By
+                                    </label>
+<p class="text-base font-medium text-slate-900 text-white">Warehouse Manager</p>
+<p class="text-xs text-slate-500 text-slate-400">via Terminal #4</p>
+</div>
+</div>
+<!-- Signature Block -->
+<div class="mt-8 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4 border-slate-700 bg-slate-800/30">
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+<div>
+<p class="text-xs font-semibold uppercase tracking-wider text-slate-500 text-slate-400">Digital Signature</p>
+<p class="mt-1 text-xs text-slate-400 text-slate-500">Signed electronically on Oct 24, 08:14:55 AM</p>
+</div>
+<div class="h-16 w-32 shrink-0 overflow-hidden rounded bg-white bg-slate-800 opacity-80 mix-blend-multiply mix-blend-normal flex items-center justify-center border border-slate-200 border-slate-600">
+<!-- Placeholder for signature image -->
+<div class="h-full w-full bg-center bg-contain bg-no-repeat" data-alt="Digital signature of Juan Perez" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAA_ClGXfIXEHbRZBo0JtI3bTXPSWuOnDVEi2rXL5GOJc5LFc1pTMpF__7_nsYW_yP2E004jd2-ApAgi2mg5qm8QIVOvLDbnYxpBLnjKXvIDEkOVPW-K1gt8M8Qvi0vq1XoE572n6C5GU8RL20xE6nYEMOZPfFXwtlCHOkQgVEArEplYFBjHUXqbJb7FWhEEgok5gPUknQPKSLfU8i-AVLh5sVDFDyyYe-9BFUYmAQ_HpUYRiOSPEuBSy9S8iMerRBHkwEIRE4R0ybh"); background-size: 80%;'></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="no-print flex w-full flex-col items-center justify-center gap-4 sm:flex-row">
+<button class="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-slate-700 shadow-sm ring-1 ring-slate-200 hover:bg-slate-50 hover:text-slate-900 bg-slate-800 text-slate-200 ring-slate-700 hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined">print</span>
+                            Print Receipt
+                        </button>
+<button class="w-full sm:w-auto flex items-center justify-center gap-2 rounded-xl bg-primary px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-primary/25 hover:bg-primary/90 focus:ring-4 focus:ring-primary/20 transition-all">
+<span class="material-symbols-outlined">arrow_back</span>
+                            Return to Logbook
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

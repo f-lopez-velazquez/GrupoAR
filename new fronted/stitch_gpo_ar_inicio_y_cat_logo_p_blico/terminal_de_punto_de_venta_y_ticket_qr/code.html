@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GPO-AR POS Terminal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a6fc7",
+                        "primary-dark": "#085a9e",
+                        "destructive": "#dc1e28",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        .modal-overlay {
+            /* This modal is displayed by default for the demo. To hide it, add 'hidden' class */
+            display: flex; 
+        }
+    </style>
+</head>
+<body class="bg-background-light font-display text-[#111518] antialiased overflow-hidden h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#dbe1e6] bg-white px-6 py-3 shrink-0 z-20">
+<div class="flex items-center gap-4 text-[#111518]">
+<div class="size-8 flex items-center justify-center rounded bg-primary/10 text-primary">
+<span class="material-symbols-outlined" style="font-size: 24px;">storefront</span>
+</div>
+<h2 class="text-[#111518] text-xl font-bold leading-tight tracking-[-0.015em]">GPO-AR Hardware POS</h2>
+</div>
+<!-- System Clock & Status -->
+<div class="flex items-center gap-6">
+<div class="hidden md:flex flex-col items-end mr-2">
+<span class="text-sm font-bold text-[#111518]">14:35 PM</span>
+<span class="text-xs font-medium text-[#60778a]">Oct 24, 2023</span>
+</div>
+<div class="flex gap-3">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors hover:bg-primary-dark">
+<span class="material-symbols-outlined mr-2" style="font-size: 18px;">person</span>
+<span class="truncate">Caja 1 - F. López</span>
+</button>
+<button class="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-[#f0f2f5] text-[#111518] hover:bg-[#e2e4e8] transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">notifications</span>
+</button>
+<button class="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-[#f0f2f5] text-[#111518] hover:bg-[#e2e4e8] transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">settings</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Layout -->
+<div class="flex flex-1 overflow-hidden">
+<!-- LEFT PANEL: Product Search & Grid -->
+<div class="flex flex-col flex-[2] overflow-hidden p-6 gap-6">
+<!-- Search Bar -->
+<div class="flex w-full">
+<label class="flex flex-col w-full">
+<div class="flex w-full items-stretch rounded-lg shadow-sm">
+<input autofocus="" class="form-input flex-1 resize-none overflow-hidden rounded-l-lg text-[#111518] focus:outline-0 focus:ring-2 focus:ring-primary/20 border border-[#dbe1e6] bg-white h-14 placeholder:text-[#60778a] p-4 text-lg font-medium leading-normal" placeholder="[F2] Escanear código o buscar producto..." value=""/>
+<button class="flex items-center justify-center px-6 bg-white border border-l-0 border-[#dbe1e6] rounded-r-lg text-[#60778a] hover:bg-[#f8f9fa] hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-size: 28px;">barcode_reader</span>
+</button>
+</div>
+</label>
+</div>
+<!-- Categories / Chips -->
+<div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-primary text-white pl-4 pr-4 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[18px]">construction</span>
+<p class="text-sm font-medium">Todo</p>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white border border-[#dbe1e6] hover:bg-[#f0f2f5] pl-4 pr-4 transition-colors">
+<span class="material-symbols-outlined text-[18px] text-[#60778a]">handyman</span>
+<p class="text-[#111518] text-sm font-medium">Herramientas</p>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white border border-[#dbe1e6] hover:bg-[#f0f2f5] pl-4 pr-4 transition-colors">
+<span class="material-symbols-outlined text-[18px] text-[#60778a]">bolt</span>
+<p class="text-[#111518] text-sm font-medium">Electricidad</p>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white border border-[#dbe1e6] hover:bg-[#f0f2f5] pl-4 pr-4 transition-colors">
+<span class="material-symbols-outlined text-[18px] text-[#60778a]">water_drop</span>
+<p class="text-[#111518] text-sm font-medium">Plomería</p>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-white border border-[#dbe1e6] hover:bg-[#f0f2f5] pl-4 pr-4 transition-colors">
+<span class="material-symbols-outlined text-[18px] text-[#60778a]">brush</span>
+<p class="text-[#111518] text-sm font-medium">Pintura</p>
+</button>
+</div>
+<!-- Product Grid -->
+<div class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-4 overflow-y-auto pb-4 pr-2">
+<!-- Card 1 -->
+<div class="group flex flex-col gap-3 rounded-xl border border-[#dbe1e6] bg-white p-4 cursor-pointer hover:border-primary hover:shadow-md transition-all">
+<div class="bg-center bg-no-repeat aspect-[4/3] bg-cover rounded-lg w-full relative" data-alt="Hammer tool on white background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCHYbtLeRFSvsYuo9a-l6osfirCRmU3j7Uk2SwxRGwy9tN_SmE8ra5462HwfvTGfRPVv6LbJ6YKnhlBunHYxEb6Gf0rNJ7LjPIUzGld2J3F0JxPlX25u4wYqJ7iym7MyzPOD2rshd1byZsXIhRhshs_N_7yfqtbrBEt-qhxwRy75JVDSjBpkM7HiOiId6EIxrtH_nmDjrHuQWxTvOyCs-r5WbhTslqSDysyCUGEXXHaVoa0tfGFKQFvREKutx4O2Sgqq1UFj18x1g4");'>
+<div class="absolute top-2 right-2 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-xs font-bold text-[#111518]">Qty: 45</div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-[#111518] text-base font-bold leading-tight line-clamp-1 group-hover:text-primary">Martillo uña curva</h2>
+<p class="text-[#60778a] text-xs font-medium">SKU: 10293</p>
+<p class="text-[#111518] text-lg font-bold mt-1">$125.00</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group flex flex-col gap-3 rounded-xl border border-[#dbe1e6] bg-white p-4 cursor-pointer hover:border-primary hover:shadow-md transition-all">
+<div class="bg-center bg-no-repeat aspect-[4/3] bg-cover rounded-lg w-full relative" data-alt="Yellow measuring tape" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAS4ctrQtb1GUSpWwioK01VEFiGnm4eLK6UbQq1P_iUami5qbTh40fgsLaXiXAoXDLIYgWt8opoBJivqhhRELa3RYw7WsnBJMI90ZsnVIZ2UJP96SljDC4tvlCSZbI33D8KBv5kwvsUJ8SdryOELQB1s_gnUc_IBZBgNYWm7a3OhUwvAmwrxSmLlte3jxhaZbOC5Y5K4aJoZYFT3WtrCUzlntfE2NYNMZarVJjCDXCifXAh3t0oVUvhwHocXJFr9unzPuje3cHIpVQ");'>
+<div class="absolute top-2 right-2 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-xs font-bold text-[#111518]">Qty: 120</div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-[#111518] text-base font-bold leading-tight line-clamp-1 group-hover:text-primary">Cinta métrica 5m</h2>
+<p class="text-[#60778a] text-xs font-medium">SKU: 39482</p>
+<p class="text-[#111518] text-lg font-bold mt-1">$85.00</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group flex flex-col gap-3 rounded-xl border border-[#dbe1e6] bg-white p-4 cursor-pointer hover:border-primary hover:shadow-md transition-all">
+<div class="bg-center bg-no-repeat aspect-[4/3] bg-cover rounded-lg w-full relative" data-alt="Screwdriver set" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDdIuIATGYpM3HXbD3L1ownTCnqWf-78zbxNNLfrX_1C53Dec6__BvzlCcd8ODqVf_-1vC6yN8WQBnMDBhI8gXQI0ZrmPxVADwXELaaw9vxaFkCiac_Mi1r7lPwIetcVmZJTaEdXDOOGzdNBfYHn0XDqQ-GtLcc9E3oACrKV6kz7AQjy1nfz9sXom4aA08IMFY3e8WDHUT6LKDZvqW5nbi8XoXHV5TgFgC6xg_RFvMzsqtla3kmXZ_J561DzmiIrLn3YURcTqXEe4s");'>
+<div class="absolute top-2 right-2 bg-red-100 text-red-800 px-2 py-0.5 rounded text-xs font-bold">Qty: 5</div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-[#111518] text-base font-bold leading-tight line-clamp-1 group-hover:text-primary">Juego desarmadores</h2>
+<p class="text-[#60778a] text-xs font-medium">SKU: 55921</p>
+<p class="text-[#111518] text-lg font-bold mt-1">$250.00</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group flex flex-col gap-3 rounded-xl border border-[#dbe1e6] bg-white p-4 cursor-pointer hover:border-primary hover:shadow-md transition-all">
+<div class="bg-center bg-no-repeat aspect-[4/3] bg-cover rounded-lg w-full relative" data-alt="Cordless power drill" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBYfbVMfChngjLocNR2d59wRg5mK2Ul5gNbmoM8_pjORZM13O8qqgJXwfLJxmcUazf_cDj2_sRZT9JaPh7bC5pQTsz6H_llsUH2UQwqnkKuTX_VC1sWVWZ-NgUxZE4PiuhzHgbpqh7wcjjv0j4OSOiBpANq6V2vKMO1Qc-22xkNnDIRRECm36Aqgy5BNXXpuXbxoawBaXKV1U_eGWFEl7TP7hEEVCuaPDC4TfWSLgFNV0945Y6TJVlDarUIj1B-Mn_KS0MMTAjjEcM");'>
+<div class="absolute top-2 right-2 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-xs font-bold text-[#111518]">Qty: 8</div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-[#111518] text-base font-bold leading-tight line-clamp-1 group-hover:text-primary">Taladro inalámbrico</h2>
+<p class="text-[#60778a] text-xs font-medium">SKU: 99102</p>
+<p class="text-[#111518] text-lg font-bold mt-1">$1,200.00</p>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group flex flex-col gap-3 rounded-xl border border-[#dbe1e6] bg-white p-4 cursor-pointer hover:border-primary hover:shadow-md transition-all">
+<div class="bg-center bg-no-repeat aspect-[4/3] bg-cover rounded-lg w-full relative" data-alt="Adjustable wrench" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCxMMgPsqa6wOqk0ubDzTKqprAqVPsEs8dLtEgPTznAHIIJwdT5q28hkZnqEcneBIv_kAZE521Ta2uS0sqq_ENOWdzfYdgfhVfiDciJiUs2MZWSR6yvryka3y8o_TCy7OSYBOvh3PxX8jv69v2cQU7HXVpb44h_Bn8MFNXlFIYlaEL50DlIIlYnaNosaxb9Xb3OhIfc6uVcvCxhxVY1x9EBoGLZvi87Y-NppuSUgvChUkSXvN9360INwGb1JwgsGMdckj2u6N4bLaE");'>
+<div class="absolute top-2 right-2 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-xs font-bold text-[#111518]">Qty: 22</div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-[#111518] text-base font-bold leading-tight line-clamp-1 group-hover:text-primary">Llave inglesa 10"</h2>
+<p class="text-[#60778a] text-xs font-medium">SKU: 11200</p>
+<p class="text-[#111518] text-lg font-bold mt-1">$180.00</p>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group flex flex-col gap-3 rounded-xl border border-[#dbe1e6] bg-white p-4 cursor-pointer hover:border-primary hover:shadow-md transition-all">
+<div class="bg-center bg-no-repeat aspect-[4/3] bg-cover rounded-lg w-full relative" data-alt="Locking pliers" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCeiiRwN9oyMqUdxi4qjy1olNgh_qz5PAmnkDT66aXoddK1Ru3LklaT-xnI0TfDwXmj0nq5FeMOvwgb2WVbjc-rxpbysCBX49C_qqr2rLUYRO_eUJ4Ch4mLhq40BsbyBd4OlZfnGhz1krY0jW80frBCyDWJhYSgTdbKQz3wtBRcIyBZ8Iyum1vtLhArqzODxwBmOlpD1eGY6-anSyoK09f0AnPp7x3tgw_9dIfWwV6HZnBAvLuBkgaRhOCOjvQQz3ufIr_Guhy_C40");'>
+<div class="absolute top-2 right-2 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-xs font-bold text-[#111518]">Qty: 12</div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-[#111518] text-base font-bold leading-tight line-clamp-1 group-hover:text-primary">Pinzas de presión</h2>
+<p class="text-[#60778a] text-xs font-medium">SKU: 33411</p>
+<p class="text-[#111518] text-lg font-bold mt-1">$300.00</p>
+</div>
+</div>
+<!-- Card 7 -->
+<div class="group flex flex-col gap-3 rounded-xl border border-[#dbe1e6] bg-white p-4 cursor-pointer hover:border-primary hover:shadow-md transition-all">
+<div class="bg-center bg-no-repeat aspect-[4/3] bg-cover rounded-lg w-full relative" data-alt="Safety helmet yellow" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuABcTPL2tKPegLhGCgb8eDueet5GANDt1rjXbiblua2eY6Ib-1CpgSuP4dbkZqAZHlduVWbilj2gJBIYHTXs-l5JlGaZM7llWvC6jRyHto3Zmp2FUwSIgCPa5QQddYPt40qmtAOSmF99dMKHXIFODoSR6Y0pJ67VYJdEiephYgC0EAgxnFsWVDKaE5dtJaj0w2VPGlHoPBS-zNaSn20V4EYUgBWWOSZajdNl_V5XpHgKyx7ZApwYybEZJZdAEQuTTsp-U2upNMcV1M");'>
+<div class="absolute top-2 right-2 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-xs font-bold text-[#111518]">Qty: 60</div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-[#111518] text-base font-bold leading-tight line-clamp-1 group-hover:text-primary">Casco seguridad</h2>
+<p class="text-[#60778a] text-xs font-medium">SKU: 88712</p>
+<p class="text-[#111518] text-lg font-bold mt-1">$150.00</p>
+</div>
+</div>
+<!-- Card 8 -->
+<div class="group flex flex-col gap-3 rounded-xl border border-[#dbe1e6] bg-white p-4 cursor-pointer hover:border-primary hover:shadow-md transition-all">
+<div class="bg-center bg-no-repeat aspect-[4/3] bg-cover rounded-lg w-full relative" data-alt="Box of screws" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC3eYJF_3a5d2Bdd6gShNdVs00-MbYvQjr0y-3eS-zpX5z_-OBAl4WjF9eIP6w65LHexRFVbR9lBqoXrtLQ7-baZtIffokBUMNh1s6eUmkTUWoRTXAER5KDW1DqIIB9NRzVfjCL5uujCkzFtWxE2ZwsYiMFh0AsVYQ3NELrXFfDbsyi4Z381C6ICZDx6DdC5HJrxV4oYM3OhvZPKuGVx1F69xhCqCOkIldOzaciIIhrnj9bif48MZ9Z9YEgkybWxBHfWisF3-_M4Lk");'>
+<div class="absolute top-2 right-2 bg-white/90 backdrop-blur px-2 py-0.5 rounded text-xs font-bold text-[#111518]">Qty: 500+</div>
+</div>
+<div class="flex flex-col gap-1">
+<h2 class="text-[#111518] text-base font-bold leading-tight line-clamp-1 group-hover:text-primary">Pijas Tablaroca 1"</h2>
+<p class="text-[#60778a] text-xs font-medium">SKU: 11102</p>
+<p class="text-[#111518] text-lg font-bold mt-1">$45.00</p>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT PANEL: Cart & Summary -->
+<div class="flex flex-col flex-1 bg-white border-l border-[#dbe1e6] shadow-xl relative z-10">
+<!-- Cart Header -->
+<div class="p-4 border-b border-[#f0f2f5] flex justify-between items-center bg-white">
+<h3 class="text-[#111518] text-lg font-bold">Carrito de Compras</h3>
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-xs font-bold">Ticket #2049</span>
+</div>
+<!-- Cart Items (Scrollable) -->
+<div class="flex-1 overflow-y-auto p-4 flex flex-col gap-4">
+<!-- Item 1 -->
+<div class="flex items-start justify-between gap-3 p-3 rounded-lg bg-[#f8f9fa] border border-transparent hover:border-[#dbe1e6] transition-colors group">
+<div class="flex gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded w-14 h-14 shrink-0 border border-[#dbe1e6]" data-alt="Hammer thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBLqc6CncpeDeC9JkCwQuuwsolQZb_BNjYZmfdnYG10D7d6KIJ-V0IAtd89HjW3JKdB2J1wd5Jw0ztMipr2vcJS-iALrmGCo35YlVXuaJGwAnjq7f7V2u0VvgFa6Bv5qGyFakXXGOF7fXV9qBJ7hUWbXzIlSTHZ_7Ne_9EY2U7GV8lIkSRgiMbxrutOfF9UGtUPnd3-vbBjXUoMQY2X5WCNonduQNqR5el1lnqUMYrWgR3s9VxwpKp63jtnF_0LVywjtuA9JnvK9Ag");'></div>
+<div class="flex flex-col justify-center">
+<h4 class="text-sm font-bold text-[#111518]">Martillo uña curva</h4>
+<p class="text-xs text-[#60778a]">$125.00 x unidad</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<p class="text-sm font-bold text-[#111518]">$125.00</p>
+<div class="flex items-center gap-2 bg-white rounded border border-[#dbe1e6] h-7">
+<button class="w-6 flex items-center justify-center hover:bg-gray-100 text-[#60778a]">-</button>
+<span class="text-xs font-bold w-4 text-center">1</span>
+<button class="w-6 flex items-center justify-center hover:bg-gray-100 text-[#60778a]">+</button>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 absolute -right-2 -top-2 bg-destructive text-white rounded-full p-1 shadow-md hover:scale-110 transition-all">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+<!-- Item 2 -->
+<div class="flex items-start justify-between gap-3 p-3 rounded-lg bg-[#f8f9fa] border border-transparent hover:border-[#dbe1e6] transition-colors group relative">
+<div class="flex gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded w-14 h-14 shrink-0 border border-[#dbe1e6]" data-alt="Wrench thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBs-w5tJvJdGVUtGqRiiN0wWgKnQwO15NBV4ATvwQmS72gdcJa6yFKAX_6Dt1T-JkdnINZZVEXuGI61Sg7F334cwH0wQvNcMU7xOg74Wy0p1zloUJ1RVIlnCsCJQN6YxqMf6UnrtGARZRrkQN9F7oIpqQYUhb8I5kkX2cHrr0mF_zDDs_jF2rkRJLrKcLX76_x_tuQeWYHCuL2XnZ_RTIfNJrG4h_m2-KDgIIMycQVGjEuOZN7dohA3ViMD30vgNl020mQo1HbLxss");'></div>
+<div class="flex flex-col justify-center">
+<h4 class="text-sm font-bold text-[#111518]">Llave inglesa 10"</h4>
+<p class="text-xs text-[#60778a]">$180.00 x unidad</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<p class="text-sm font-bold text-[#111518]">$360.00</p>
+<div class="flex items-center gap-2 bg-white rounded border border-[#dbe1e6] h-7">
+<button class="w-6 flex items-center justify-center hover:bg-gray-100 text-[#60778a]">-</button>
+<span class="text-xs font-bold w-4 text-center">2</span>
+<button class="w-6 flex items-center justify-center hover:bg-gray-100 text-[#60778a]">+</button>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 absolute -right-2 -top-2 bg-destructive text-white rounded-full p-1 shadow-md hover:scale-110 transition-all">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+<!-- Item 3 -->
+<div class="flex items-start justify-between gap-3 p-3 rounded-lg bg-[#f8f9fa] border border-transparent hover:border-[#dbe1e6] transition-colors group relative">
+<div class="flex gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded w-14 h-14 shrink-0 border border-[#dbe1e6]" data-alt="Tape thumbnail" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAPPf-Cev-yRiIS6k4qWVvjhRqkxfddQOZPqJktrnQg7lfuaWZBcRKlxZuPqDVRTw3VAwISqh3FD1LqDZs9_c-2IXGpJOt3rvK-LBmdckqN3FtBlSG7OkNzDyTGzDZdDZUFUiLNBUOkBOw1qNEOfwXfEJh2rt1YzbD5WyEZqX7j51iHPN99SVMaxW8AhvivOpMrE3GDWFqUgu-DDz92NGq9iE4K0qgAPmfJ2Y6yPuqNqWGvGTl7cmqK3UyRSffJJkFqS8QDKljul88");'></div>
+<div class="flex flex-col justify-center">
+<h4 class="text-sm font-bold text-[#111518]">Cinta métrica 5m</h4>
+<p class="text-xs text-[#60778a]">$85.00 x unidad</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<p class="text-sm font-bold text-[#111518]">$85.00</p>
+<div class="flex items-center gap-2 bg-white rounded border border-[#dbe1e6] h-7">
+<button class="w-6 flex items-center justify-center hover:bg-gray-100 text-[#60778a]">-</button>
+<span class="text-xs font-bold w-4 text-center">1</span>
+<button class="w-6 flex items-center justify-center hover:bg-gray-100 text-[#60778a]">+</button>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 absolute -right-2 -top-2 bg-destructive text-white rounded-full p-1 shadow-md hover:scale-110 transition-all">
+<span class="material-symbols-outlined text-[14px]">close</span>
+</button>
+</div>
+</div>
+<!-- Cart Footer (Calculations & Actions) -->
+<div class="border-t border-[#dbe1e6] bg-[#f8f9fa] p-6 space-y-4">
+<div class="space-y-2">
+<div class="flex justify-between text-sm text-[#60778a]">
+<span>Subtotal</span>
+<span>$570.00</span>
+</div>
+<div class="flex justify-between text-sm text-[#60778a]">
+<span>IVA (16%)</span>
+<span>$91.20</span>
+</div>
+<div class="flex justify-between text-xl font-bold text-[#111518] pt-2 border-t border-[#dbe1e6]">
+<span>Total a Pagar</span>
+<span class="text-primary">$661.20</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 pt-2">
+<button class="flex items-center justify-center gap-2 h-12 rounded-lg border border-destructive/30 text-destructive bg-white hover:bg-destructive hover:text-white transition-colors font-bold text-sm">
+<span class="material-symbols-outlined text-[20px]">cancel</span>
+                        Cancelar
+                    </button>
+<!-- This button would trigger the modal in a real app -->
+<button class="flex items-center justify-center gap-2 h-12 rounded-lg bg-primary text-white hover:bg-primary-dark transition-colors font-bold text-sm shadow-md hover:shadow-lg">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+                        Finalizar [F9]
+                    </button>
+</div>
+<div class="text-center pt-2">
+<p class="text-[10px] text-[#60778a]">Programado por Francisco López Velázquez • <a class="underline" href="#">Términos y Condiciones</a></p>
+</div>
+</div>
+</div>
+</div>
+<!-- MODAL (Overlay) - Displayed for demo purposes -->
+<!-- In a real React/JS app, this would be conditional rendered. Here we use an overlay. -->
+<div class="modal-overlay fixed inset-0 z-50 bg-black/60 backdrop-blur-sm items-center justify-center">
+<div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden flex flex-col animate-in fade-in zoom-in duration-300">
+<!-- Modal Header -->
+<div class="bg-primary p-6 text-center">
+<div class="inline-flex p-3 rounded-full bg-white/20 text-white mb-3">
+<span class="material-symbols-outlined text-[32px]">check</span>
+</div>
+<h2 class="text-white text-2xl font-bold">¡Venta Exitosa!</h2>
+<p class="text-white/90 text-sm mt-1">Ticket #2049 generado correctamente</p>
+</div>
+<!-- Modal Body -->
+<div class="p-8 flex flex-col items-center gap-6">
+<div class="flex flex-col items-center gap-2 text-center">
+<p class="text-[#111518] font-bold text-lg">Escanea para tu Ticket Digital</p>
+<p class="text-[#60778a] text-sm max-w-[260px]">Evita el papel. Escanea este código QR con tu celular para descargar tu recibo.</p>
+</div>
+<!-- QR Code Container -->
+<div class="p-4 rounded-xl border-2 border-dashed border-primary/30 bg-primary/5">
+<!-- Placeholder QR Code using a generator API or static image -->
+<img alt="QR code for digital receipt" class="size-48 mix-blend-multiply" data-alt="Black and blue QR code pattern" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzrfwGzHaB0roSstGNF43KFcPojXA3xWKIbEbl--5PiyRiehAA1esXSCkvMUSCoc22SioWupVzx2zHr0R1JSpLHa6HMsKyKe0G5udqwPyHXJGS9cTOG5-gwsu94KAV9LQ7u1lS63YIVL9VkjWBtTZjR8dmYAZDs6M36sFqY79OcWYzQbhvcYcbZ7ViJJnPsxYVt0V29_AhJXmQOWsG3VS8nwDhAKK8SGCgnQfBJE4m1ccfydn35t6L9OpEk6Ab2pN1fQMKCLMuFTE"/>
+</div>
+<div class="w-full h-px bg-[#f0f2f5]"></div>
+<!-- Modal Actions -->
+<div class="flex flex-col w-full gap-3">
+<button class="w-full h-11 bg-primary text-white rounded-lg font-bold text-sm hover:bg-primary-dark transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+                        Nueva Venta
+                    </button>
+<button class="w-full h-11 bg-white text-[#60778a] border border-[#dbe1e6] rounded-lg font-bold text-sm hover:bg-[#f0f2f5] transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">print</span>
+                        Imprimir Ticket Físico
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

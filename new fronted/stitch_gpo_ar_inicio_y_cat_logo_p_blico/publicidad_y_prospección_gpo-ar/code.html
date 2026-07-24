@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Publicidad y Prospección GPO-AR</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a6fc7",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-[#111518] dark:text-white transition-colors duration-200">
+<div class="flex h-screen w-full flex-col overflow-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex flex-none items-center justify-between border-b border-[#e5e7eb] dark:border-[#2a3441] bg-white dark:bg-[#111827] px-6 py-3">
+<div class="flex items-center gap-4">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-[24px]">campaign</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight text-[#111518] dark:text-white">Publicidad y Prospección GPO-AR</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-center gap-8">
+<nav class="flex gap-1 bg-[#f0f2f5] dark:bg-[#1f2937] p-1 rounded-lg">
+<a class="px-4 py-1.5 rounded-md bg-white dark:bg-[#374151] shadow-sm text-sm font-semibold text-primary" href="#">Calendario</a>
+<a class="px-4 py-1.5 rounded-md text-[#60778a] dark:text-gray-400 hover:text-[#111518] dark:hover:text-white text-sm font-medium transition-colors" href="#">Prospección Email</a>
+<a class="px-4 py-1.5 rounded-md text-[#60778a] dark:text-gray-400 hover:text-[#111518] dark:hover:text-white text-sm font-medium transition-colors" href="#">Assets</a>
+<a class="px-4 py-1.5 rounded-md text-[#60778a] dark:text-gray-400 hover:text-[#111518] dark:hover:text-white text-sm font-medium transition-colors" href="#">Reportes</a>
+</nav>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex h-9 w-9 items-center justify-center rounded-full bg-[#f0f2f5] dark:bg-[#1f2937] text-[#111518] dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+<button class="relative flex h-9 w-9 items-center justify-center rounded-full bg-[#f0f2f5] dark:bg-[#1f2937] text-[#111518] dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-0 right-0 h-2.5 w-2.5 rounded-full bg-red-500 border-2 border-white dark:border-[#1f2937]"></span>
+</button>
+<div class="h-9 w-9 rounded-full bg-cover bg-center ring-2 ring-white dark:ring-[#111827] cursor-pointer" data-alt="User avatar profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBfYu0irz_2_YetC4aFq_DMdPJ5zFp7Xw380SI4Xvg2yAOLVLY2KznzCu8bcgt7DvhKN7ZWrSqhS_ytnd5i9tCW-l0SjQ7gGfzEnfmNdiwdu2t1kXPakEBscHpu8JNe1vq84koo8tvvK9pebaTyl2QVrgsfWKp3t_bd_8N0NJBBARBGmgjqIvANJ64uuFt4D9ZfoypAqSH0tUYlpwJhrqhP5oibE_68FDw6ICfhzbO45PE4jEIiGP1meOzL3BnVkxXfjTvTtf2R7ns");'></div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex flex-1 overflow-hidden">
+<!-- Left Panel: Calendar & Scheduler -->
+<div class="flex flex-1 flex-col overflow-y-auto bg-white dark:bg-[#111827] p-6 lg:p-8 border-r border-[#e5e7eb] dark:border-[#2a3441]">
+<!-- Page Heading -->
+<div class="mb-6 flex flex-wrap items-end justify-between gap-4">
+<div>
+<h1 class="text-3xl font-black tracking-tight text-[#111518] dark:text-white">Calendario de Marketing</h1>
+<p class="mt-1 text-[#60778a] dark:text-gray-400 text-sm">Planificación de contenidos para Octubre 2023</p>
+</div>
+<div class="flex gap-3">
+<button class="inline-flex items-center justify-center gap-2 rounded-lg bg-white dark:bg-[#1f2937] border border-[#e5e7eb] dark:border-[#374151] px-4 py-2 text-sm font-semibold text-[#111518] dark:text-white shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                            Filtrar
+                        </button>
+<button class="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-700 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                            Nuevo Post
+                        </button>
+</div>
+</div>
+<!-- Calendar Controls -->
+<div class="mb-6 flex items-center justify-between rounded-xl border border-[#e5e7eb] dark:border-[#2a3441] bg-[#fcfcfd] dark:bg-[#1f2937] p-2">
+<div class="flex items-center gap-2">
+<button class="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="flex h-8 w-8 items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+<span class="ml-2 text-base font-bold text-[#111518] dark:text-white">Octubre 2023</span>
+</div>
+<div class="flex gap-1">
+<button class="rounded-md bg-white dark:bg-[#374151] px-3 py-1 text-xs font-semibold text-[#111518] dark:text-white shadow-sm border border-gray-100 dark:border-gray-600">Mes</button>
+<button class="rounded-md px-3 py-1 text-xs font-medium text-[#60778a] dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">Semana</button>
+<button class="rounded-md px-3 py-1 text-xs font-medium text-[#60778a] dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">Día</button>
+</div>
+</div>
+<!-- Calendar Grid -->
+<div class="flex-1 min-h-[500px] rounded-xl border border-[#e5e7eb] dark:border-[#2a3441] bg-white dark:bg-[#111827] shadow-sm overflow-hidden">
+<!-- Weekday Headers -->
+<div class="grid grid-cols-7 border-b border-[#e5e7eb] dark:border-[#2a3441] bg-[#f9fafb] dark:bg-[#1f2937]">
+<div class="py-3 text-center text-xs font-semibold uppercase tracking-wide text-[#60778a] dark:text-gray-400">Lun</div>
+<div class="py-3 text-center text-xs font-semibold uppercase tracking-wide text-[#60778a] dark:text-gray-400">Mar</div>
+<div class="py-3 text-center text-xs font-semibold uppercase tracking-wide text-[#60778a] dark:text-gray-400">Mié</div>
+<div class="py-3 text-center text-xs font-semibold uppercase tracking-wide text-[#60778a] dark:text-gray-400">Jue</div>
+<div class="py-3 text-center text-xs font-semibold uppercase tracking-wide text-[#60778a] dark:text-gray-400">Vie</div>
+<div class="py-3 text-center text-xs font-semibold uppercase tracking-wide text-[#60778a] dark:text-gray-400">Sáb</div>
+<div class="py-3 text-center text-xs font-semibold uppercase tracking-wide text-[#60778a] dark:text-gray-400">Dom</div>
+</div>
+<!-- Days Grid -->
+<div class="grid grid-cols-7 grid-rows-5 h-full">
+<!-- Empty Previous Month Days -->
+<div class="min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] bg-[#f9fafb]/50 dark:bg-[#1f2937]/30 p-2"></div>
+<div class="min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] bg-[#f9fafb]/50 dark:bg-[#1f2937]/30 p-2"></div>
+<!-- Day 1 -->
+<div class="min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] p-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 group-hover:text-primary mb-1">1</span>
+</div>
+<!-- Day 2 -->
+<div class="min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] p-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 group-hover:text-primary mb-1">2</span>
+<div class="mb-1 rounded px-1.5 py-1 text-[10px] font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border-l-2 border-blue-500 truncate cursor-pointer">
+                                FB: Tip de Inversión
+                            </div>
+</div>
+<!-- Day 3 -->
+<div class="min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] p-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 group-hover:text-primary mb-1">3</span>
+</div>
+<!-- Day 4 -->
+<div class="min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] p-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 group-hover:text-primary mb-1">4</span>
+<div class="mb-1 rounded px-1.5 py-1 text-[10px] font-bold bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300 border-l-2 border-pink-500 truncate cursor-pointer">
+                                IG: Reel Visita
+                            </div>
+</div>
+<!-- Day 5 -->
+<div class="min-h-[100px] border-b border-[#e5e7eb] dark:border-[#2a3441] p-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 group-hover:text-primary mb-1">5</span>
+</div>
+<!-- Row 2 -->
+<!-- Day 6 - 12 (Simplified for demo) -->
+<div class="min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] p-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 group-hover:text-primary mb-1">6</span>
+</div>
+<div class="min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] p-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 group-hover:text-primary mb-1">7</span>
+<div class="mb-1 rounded px-1.5 py-1 text-[10px] font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 border-l-2 border-purple-500 truncate cursor-pointer">
+                                Newsletter Mensual
+                            </div>
+</div>
+<div class="min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] p-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 group-hover:text-primary mb-1">8</span>
+</div>
+<div class="min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] p-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 group-hover:text-primary mb-1">9</span>
+</div>
+<div class="min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] p-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 group-hover:text-primary mb-1">10</span>
+<div class="mb-1 rounded px-1.5 py-1 text-[10px] font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border-l-2 border-blue-500 truncate cursor-pointer">
+                                LI: Artículo Mercado
+                            </div>
+</div>
+<div class="min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] p-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 group-hover:text-primary mb-1">11</span>
+</div>
+<div class="min-h-[100px] border-b border-[#e5e7eb] dark:border-[#2a3441] p-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 group-hover:text-primary mb-1">12</span>
+</div>
+<!-- Row 3 -->
+<!-- ... -->
+<!-- Day 24 (Highlighted) -->
+<div class="col-start-2 min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] bg-blue-50/50 dark:bg-blue-900/10 p-2 ring-2 ring-inset ring-primary z-10">
+<span class="flex justify-end mb-1">
+<span class="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">24</span>
+</span>
+<div class="mb-1 rounded px-1.5 py-1 text-[10px] font-bold bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300 border-l-2 border-pink-500 truncate cursor-pointer shadow-sm">
+                                IG: Story Open House
+                            </div>
+<div class="mb-1 rounded px-1.5 py-1 text-[10px] font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border-l-2 border-blue-500 truncate cursor-pointer shadow-sm">
+                                FB: Album Fotos
+                            </div>
+</div>
+<!-- Other days to fill grid visual -->
+<div class="min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] p-2">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 mb-1">25</span>
+</div>
+<div class="min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] p-2">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 mb-1">26</span>
+<div class="mb-1 rounded px-1.5 py-1 text-[10px] font-bold bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300 border-l-2 border-green-500 truncate cursor-pointer">
+                                WA: Mensaje Difusión
+                            </div>
+</div>
+<div class="min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] p-2">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 mb-1">27</span>
+</div>
+<div class="min-h-[100px] border-b border-r border-[#e5e7eb] dark:border-[#2a3441] p-2">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 mb-1">28</span>
+</div>
+<div class="min-h-[100px] border-b border-[#e5e7eb] dark:border-[#2a3441] p-2">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 mb-1">29</span>
+</div>
+<!-- Row 4 (Partial) -->
+<div class="min-h-[100px] border-r border-[#e5e7eb] dark:border-[#2a3441] p-2">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 mb-1">30</span>
+</div>
+<div class="min-h-[100px] border-r border-[#e5e7eb] dark:border-[#2a3441] p-2">
+<span class="block text-right text-xs font-medium text-[#60778a] dark:text-gray-400 mb-1">31</span>
+<div class="mb-1 rounded px-1.5 py-1 text-[10px] font-bold bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300 border-l-2 border-red-500 truncate cursor-pointer">
+                                YT: Video Recorrido
+                            </div>
+</div>
+<div class="min-h-[100px] border-r border-[#e5e7eb] dark:border-[#2a3441] bg-[#f9fafb]/50 dark:bg-[#1f2937]/30 p-2"></div>
+<div class="min-h-[100px] border-r border-[#e5e7eb] dark:border-[#2a3441] bg-[#f9fafb]/50 dark:bg-[#1f2937]/30 p-2"></div>
+<div class="min-h-[100px] border-r border-[#e5e7eb] dark:border-[#2a3441] bg-[#f9fafb]/50 dark:bg-[#1f2937]/30 p-2"></div>
+<div class="min-h-[100px] border-r border-[#e5e7eb] dark:border-[#2a3441] bg-[#f9fafb]/50 dark:bg-[#1f2937]/30 p-2"></div>
+<div class="min-h-[100px] bg-[#f9fafb]/50 dark:bg-[#1f2937]/30 p-2"></div>
+</div>
+</div>
+</div>
+<!-- Right Panel: Details & Automation Sidebar -->
+<aside class="w-full max-w-[420px] flex-none flex-col overflow-y-auto bg-[#f9fafb] dark:bg-[#161f2c] border-l border-[#e5e7eb] dark:border-[#2a3441]">
+<!-- Email Automation Section (Collapsible style card) -->
+<div class="p-6 pb-2">
+<div class="rounded-xl border border-orange-200 bg-orange-50 dark:bg-orange-900/10 dark:border-orange-900/30 p-4 shadow-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2 text-orange-700 dark:text-orange-400">
+<span class="material-symbols-outlined">mark_email_unread</span>
+<h3 class="text-sm font-bold uppercase tracking-wide">Reactivación de Clientes</h3>
+</div>
+<span class="inline-flex items-center rounded-full bg-orange-200 dark:bg-orange-800 px-2 py-0.5 text-xs font-bold text-orange-800 dark:text-orange-200">24 Pendientes</span>
+</div>
+<p class="mt-2 text-xs leading-relaxed text-orange-800 dark:text-orange-300">
+                            Hay 24 clientes antiguos que no han interactuado en 6 meses. La campaña de "Nuevas Oportunidades" está lista.
+                        </p>
+<button class="mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-orange-600 px-3 py-2 text-xs font-bold text-white shadow-sm hover:bg-orange-700 transition-colors">
+<span class="material-symbols-outlined text-[16px]">send</span>
+                            Enviar Recordatorios
+                        </button>
+</div>
+</div>
+<div class="h-px w-full bg-[#e5e7eb] dark:bg-[#2a3441] my-2"></div>
+<!-- Selected Date Details -->
+<div class="flex flex-col p-6">
+<div class="mb-4 flex items-center justify-between">
+<h2 class="text-xl font-bold text-[#111518] dark:text-white">Detalles del Post</h2>
+<span class="rounded-full bg-[#f0f2f5] dark:bg-[#374151] px-3 py-1 text-xs font-medium text-[#60778a] dark:text-gray-300">24 Oct, 2023</span>
+</div>
+<!-- Post Card -->
+<div class="flex flex-col gap-5 rounded-xl border border-[#e5e7eb] dark:border-[#2a3441] bg-white dark:bg-[#1f2937] p-4 shadow-sm">
+<!-- Platforms Badges -->
+<div class="flex flex-wrap gap-2">
+<div class="inline-flex items-center gap-1.5 rounded-md bg-pink-50 dark:bg-pink-900/20 px-2.5 py-1 text-xs font-bold text-pink-700 dark:text-pink-300 border border-pink-100 dark:border-pink-800">
+<span class="material-symbols-outlined text-[14px]">photo_camera</span> Instagram Story
+                            </div>
+<div class="inline-flex items-center gap-1.5 rounded-md bg-blue-50 dark:bg-blue-900/20 px-2.5 py-1 text-xs font-bold text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-800">
+<span class="material-symbols-outlined text-[14px]">public</span> Facebook Feed
+                            </div>
+<div class="inline-flex ml-auto items-center gap-1.5 rounded-md bg-green-50 dark:bg-green-900/20 px-2.5 py-1 text-xs font-bold text-green-700 dark:text-green-300">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Programado
+                            </div>
+</div>
+<!-- Asset Preview -->
+<div class="group relative aspect-video w-full overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-800">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" data-alt="Modern house interior living room with large windows and sunlight" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBNhVGNb3ycK07Hu4vSKS1jthI3vDvmFJmaW4d4Xn5O94IwWHPtKBmOUYduw0VYMXWOFuaX-AwOGtSNQy6ag-nsGcwzxZGpdx2EPDTadypi7ThCVUfHcKkf98OK4mH6m4p3_gqtqrNzw8H4mvER3ckxewDPNefP0Nbm3Yg_-wkcWKVmey96tlc_GK4kYTWtxmTUnY-Y-OYe9WJd5U05zHCvmw70JB9TVONbC7S2ojyjnSrvRV5nl9XeKFrtXF9O5IzsupEg_az3Usc");'>
+</div>
+<!-- Overlay actions -->
+<div class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover:opacity-100">
+<button class="rounded-full bg-white/90 p-3 text-[#111518] shadow-lg backdrop-blur hover:bg-white hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[24px]">visibility</span>
+</button>
+</div>
+</div>
+<!-- Asset Info & Download -->
+<div class="flex items-center justify-between rounded-lg bg-[#f9fafb] dark:bg-[#111827] p-3 border border-[#e5e7eb] dark:border-[#2a3441]">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded bg-white dark:bg-[#374151] text-[#60778a] shadow-sm border border-[#e5e7eb] dark:border-[#4b5563]">
+<span class="material-symbols-outlined">image</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-[#111518] dark:text-white">Living_Room_HQ.jpg</span>
+<span class="text-[10px] text-[#60778a] dark:text-gray-400">2.4 MB • 1920x1080</span>
+</div>
+</div>
+<button class="flex h-8 w-8 items-center justify-center rounded hover:bg-gray-200 dark:hover:bg-gray-700 text-[#60778a] dark:text-gray-300 transition-colors" title="Descargar Asset">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+<!-- Copy Text Area -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<label class="text-xs font-bold uppercase tracking-wider text-[#60778a] dark:text-gray-400">Copy / Caption</label>
+<button class="text-xs font-medium text-primary hover:underline">Copiar Texto</button>
+</div>
+<div class="rounded-lg border border-[#e5e7eb] dark:border-[#2a3441] bg-[#fcfcfd] dark:bg-[#111827] p-3 text-sm leading-relaxed text-[#111518] dark:text-gray-300">
+<p>✨ Descubre el lujo en cada rincón. Esta hermosa residencia en Las Lomas combina arquitectura moderna con acabados premium. Perfecta para quienes buscan exclusividad y confort. 🏡💎</p>
+<p class="mt-2 text-blue-500 dark:text-blue-400">#GPOAR #BienesRaices #Lujo #Arquitectura #LasLomas #RealEstate #DreamHome</p>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="grid grid-cols-2 gap-3 pt-2">
+<button class="flex items-center justify-center gap-2 rounded-lg border border-[#e5e7eb] dark:border-[#374151] bg-white dark:bg-[#1f2937] px-4 py-2.5 text-sm font-bold text-[#111518] dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+                                Editar
+                            </button>
+<button class="flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-white hover:bg-blue-700 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                Aprobar
+                            </button>
+</div>
+</div>
+<!-- Activity Log / Comments Preview -->
+<div class="mt-6">
+<h4 class="mb-3 text-xs font-bold uppercase tracking-wider text-[#60778a] dark:text-gray-400">Comentarios Recientes</h4>
+<div class="flex flex-col gap-4">
+<div class="flex gap-3">
+<div class="h-8 w-8 flex-none rounded-full bg-cover bg-center" data-alt="Team member portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDn8nkl9sSjPLLG1EP7FFtQUar0rkOjqcXiSfQbTocBZLWGFwzFzCO0p8jpJlHW7-n_jmeKjjmv5iXcrzkDRESDej6aMeKh-ewwW5UuoxPcSS2US-NBvoHK5fNv4k0LjmvkaeI8fSUm3JvwwMCSp98PXOAn_hZBIauq_tbg3LPno3kjAYgbBmv_n49ry5BQNlnJUGhwHSrC2A411wea0L6Z9bfpYI4KwvkF-jHYqwovpH_ZdTXS1fx4swqPxNY5h6do5LWwFoH-Vl8");'></div>
+<div class="flex flex-col gap-1">
+<div class="flex items-baseline gap-2">
+<span class="text-xs font-bold text-[#111518] dark:text-white">Sarah M.</span>
+<span class="text-[10px] text-[#60778a] dark:text-gray-500">hace 2h</span>
+</div>
+<p class="text-xs text-[#60778a] dark:text-gray-300">Me gusta la foto, pero ¿podemos agregar más hashtags sobre inversión?</p>
+</div>
+</div>
+</div>
+<div class="mt-3 relative">
+<input class="w-full rounded-md border border-[#e5e7eb] dark:border-[#2a3441] bg-white dark:bg-[#1f2937] py-2 pl-3 pr-10 text-xs text-[#111518] dark:text-white placeholder:text-gray-400 focus:border-primary focus:ring-1 focus:ring-primary" placeholder="Escribe un comentario..." type="text"/>
+<button class="absolute right-2 top-1.5 text-primary hover:text-blue-700">
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+</div>
+</div>
+</aside>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,68 @@
+﻿[
+  {
+    "name": "Diseño arquitectónico & estructural",
+    "description": "Planeación, cálculo y optimización estructural para proyectos industriales y comerciales.",
+    "prompt": "Render arquitectonico industrial moderno, planos y estructura metalica, estilo premium, iluminacion de estudio, fondo neutro.",
+    "imageId": "stock/servicios/arquitectura"
+  },
+  {
+    "name": "Obra civil y cimentaciones",
+    "description": "Ejecución completa de cimentaciones, plataformas y obra civil pesada.",
+    "prompt": "Fotografia de obra civil con cimentacion industrial, maquinaria pesada, estilo catalogo, alta nitidez.",
+    "imageId": "stock/servicios/cimentacion"
+  },
+  {
+    "name": "Fabricación y montaje de estructuras",
+    "description": "Estructura metálica, racks, plataformas y sistemas de montaje industrial.",
+    "prompt": "Estructura metalica industrial en montaje, gruas y equipo, iluminacion dramatica, estilo premium.",
+    "imageId": "stock/servicios/estructura"
+  },
+  {
+    "name": "Soldadura y pailería industrial",
+    "description": "Fabricación especializada, acero inoxidable y trabajos de precisión.",
+    "prompt": "Soldador industrial en taller, chispas controladas, acero inoxidable, estilo catalogo.",
+    "imageId": "stock/servicios/soldadura"
+  },
+  {
+    "name": "Titanes y grúas para izaje",
+    "description": "Flotilla propia para maniobras, izajes y montajes de gran escala.",
+    "prompt": "Grua industrial levantando estructura, cielo limpio, estilo premium, alta nitidez.",
+    "imageId": "stock/servicios/gruas"
+  },
+  {
+    "name": "Electricidad industrial & automatización",
+    "description": "Instalaciones, subestaciones y sistemas de control industrial.",
+    "prompt": "Tableros electricos industriales y cableado ordenado, estilo catalogo tecnico, fondo oscuro.",
+    "imageId": "stock/servicios/electricidad"
+  },
+  {
+    "name": "Flotilla de maquinaria y renta",
+    "description": "Equipo pesado, operadores certificados y logística para obra compleja.",
+    "prompt": "Maquinaria pesada en patio industrial, excavadora y montacargas, estilo premium.",
+    "imageId": "stock/servicios/maquinaria"
+  },
+  {
+    "name": "Mantenimiento industrial & obra nueva",
+    "description": "Planes preventivos, correctivos y ejecución de obra nueva.",
+    "prompt": "Tecnicos en mantenimiento industrial, herramientas y EPP, estilo catalogo.",
+    "imageId": "stock/servicios/mantenimiento"
+  },
+  {
+    "name": "Acero inoxidable grado alimenticio",
+    "description": "Fabricación sanitaria para industria alimenticia y farmacéutica.",
+    "prompt": "Equipo industrial de acero inoxidable brillante, estilo sanitario, fondo neutro.",
+    "imageId": "stock/servicios/acero"
+  },
+  {
+    "name": "Remodelación, ampliaciones y pintura",
+    "description": "Adecuaciones, acabados y remodelación en ambientes industriales.",
+    "prompt": "Interior industrial en remodelacion, pintura profesional, estilo catalogo.",
+    "imageId": "stock/servicios/remodelacion"
+  },
+  {
+    "name": "Certificación, seguridad y garantía",
+    "description": "Cumplimos OSHA, NOM, ANSI, ASME con supervisión especializada.",
+    "prompt": "Ingeniero con casco revisando checklist de seguridad industrial, estilo premium.",
+    "imageId": "stock/servicios/seguridad"
+  }
+]

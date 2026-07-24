@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Configuración General e Identidad GPO-AR</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#096fc8",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111518] dark:text-white">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navbar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e5e7eb] bg-white dark:bg-[#111518] dark:border-b-[#293038] px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-[#111518] dark:text-white">
+<div class="size-6 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[28px]">admin_panel_settings</span>
+</div>
+<h2 class="text-[#111518] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Admin GPO-AR</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<button class="flex items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-background-light dark:bg-[#293038] text-[#111518] dark:text-white hover:bg-[#e5e7eb] transition-colors relative">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+</button>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold text-[#111518] dark:text-white leading-none">Superadmin</p>
+<p class="text-xs text-[#60778a] dark:text-[#9ca3af] mt-1">GPO-AR Manager</p>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-white shadow-sm cursor-pointer" data-alt="User profile avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDbKleIjkGrLEZoEeCoJUfuPgOknEvgvxSMlvl2RLoR2-Gs7G5ljiti21Odt_8-xbYdIYkS3caUjRZvXM9g5dCRca2Fqx60ewamROEXSt7sKyuJixOCq9Zb_QRbX7JZz6QjtyUySki3wUgI0zN17IVoa8q1Ahjvrrrq-LiUfmoMAh20BXmL4jK83_9jqCgCq3iB_rM-ba2-QSM7sYhIfdaDhwOeIL-8IgzFZYWeepXgjFm_NGQoT6TqdvyEGcywHN1sX-7z8v6lHC4");'>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<div class="flex flex-col grow">
+<div class="flex flex-1 justify-center py-5 px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col max-w-[1200px] flex-1 w-full">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 px-4 py-2 mb-2">
+<a class="text-[#60778a] dark:text-[#9ca3af] text-sm font-medium hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">home</span> Inicio
+                        </a>
+<span class="text-[#60778a] dark:text-[#9ca3af] text-sm font-medium">/</span>
+<a class="text-[#60778a] dark:text-[#9ca3af] text-sm font-medium hover:text-primary transition-colors" href="#">Admin</a>
+<span class="text-[#60778a] dark:text-[#9ca3af] text-sm font-medium">/</span>
+<span class="text-primary text-sm font-medium">Configuración General</span>
+</div>
+<!-- Page Heading -->
+<div class="flex flex-wrap justify-between items-end gap-3 px-4 mb-8">
+<div class="flex flex-col gap-2">
+<h1 class="text-[#111518] dark:text-white text-3xl sm:text-4xl font-black leading-tight tracking-[-0.033em]">Configuración General</h1>
+<p class="text-[#60778a] dark:text-[#9ca3af] text-base font-normal leading-normal max-w-2xl">
+                                Gestione la identidad corporativa, datos fiscales y puntos de contacto de GPO-AR.
+                            </p>
+</div>
+<div class="hidden sm:block">
+<span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                                Sistema Activo
+                            </span>
+</div>
+</div>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 px-4 mb-8">
+<!-- Col 1: Identidad Corporativa -->
+<div class="lg:col-span-1 space-y-6">
+<div class="bg-white dark:bg-[#1e2732] rounded-xl shadow-sm border border-[#e5e7eb] dark:border-[#293038] p-6">
+<div class="flex items-center gap-3 mb-4">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">branding_watermark</span>
+</div>
+<h3 class="text-lg font-bold text-[#111518] dark:text-white">Identidad Corporativa</h3>
+</div>
+<div class="space-y-4">
+<div class="flex flex-col items-center justify-center w-full">
+<label class="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed border-[#d1d5db] dark:border-[#4b5563] rounded-xl cursor-pointer bg-[#f9fafb] dark:bg-[#111518] hover:bg-gray-50 dark:hover:bg-[#1a202c] transition-colors group" for="dropzone-file">
+<div class="flex flex-col items-center justify-center pt-5 pb-6">
+<span class="material-symbols-outlined text-4xl text-[#9ca3af] mb-2 group-hover:text-primary transition-colors">cloud_upload</span>
+<p class="mb-2 text-sm text-[#6b7280] dark:text-[#9ca3af]"><span class="font-semibold text-primary">Clic para subir</span> o arrastrar</p>
+<p class="text-xs text-[#9ca3af] dark:text-[#6b7280]">SVG, PNG, JPG (MAX. 2MB)</p>
+</div>
+<input class="hidden" id="dropzone-file" type="file"/>
+</label>
+</div>
+<div class="pt-4 border-t border-[#f0f2f5] dark:border-[#293038]">
+<p class="text-xs font-semibold text-[#60778a] dark:text-[#9ca3af] uppercase tracking-wider mb-3">Logo Actual</p>
+<div class="flex items-center justify-center bg-[#f0f2f5] dark:bg-black/20 rounded-lg p-6 border border-[#e5e7eb] dark:border-[#293038]">
+<div class="h-16 w-auto flex items-center justify-center">
+<!-- Placeholder for current logo -->
+<img alt="GPO-AR Logo" class="max-h-full object-contain" data-alt="Official GPO-AR text logo in blue" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbj9365cbZ13u3e557V0NHVqSwgwWL5ZlYeifjdR3GD3rkU13-0Z544P8tvurErN1DvzQ5xDgbHgbkW7N-dxeNTYr-8TPMnwod88oM_nTF4vl2axOGF2TgycY126ZFhZCvpoJHO0RdnnKE23X_9LuQkHhuG1dV6SpterR34Ox30AWX-uyB1zXURXX9M4rkxDarYDgdb74J4GhAOx6zqwbhWdgiPVfWpfAWYRGWb0m3NwiOXMqKphu6JHjpW9GvVced2TZ9oUKCF94"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- System Status Card -->
+<div class="bg-white dark:bg-[#1e2732] rounded-xl shadow-sm border border-[#e5e7eb] dark:border-[#293038] p-6">
+<div class="flex items-center gap-3 mb-4">
+<div class="bg-orange-100 dark:bg-orange-900/30 p-2 rounded-lg text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined">settings_power</span>
+</div>
+<h3 class="text-lg font-bold text-[#111518] dark:text-white">Sistema</h3>
+</div>
+<div class="flex items-center justify-between py-2">
+<div class="flex flex-col">
+<span class="text-sm font-medium text-[#111518] dark:text-white">Modo Mantenimiento</span>
+<span class="text-xs text-[#60778a] dark:text-[#9ca3af]">Desactiva el acceso público</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/30 dark:peer-focus:ring-primary/80 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Col 2 & 3: Forms -->
+<div class="lg:col-span-2 space-y-6">
+<!-- Datos Fiscales -->
+<div class="bg-white dark:bg-[#1e2732] rounded-xl shadow-sm border border-[#e5e7eb] dark:border-[#293038] p-6">
+<div class="flex items-center gap-3 mb-6 pb-4 border-b border-[#f0f2f5] dark:border-[#293038]">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">receipt_long</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-[#111518] dark:text-white">Datos Fiscales</h3>
+<p class="text-sm text-[#60778a] dark:text-[#9ca3af]">Información para facturación y registros oficiales.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="md:col-span-2">
+<label class="block text-sm font-medium leading-6 text-[#111518] dark:text-white mb-1" for="razon-social">Razón Social</label>
+<div class="relative mt-1 rounded-md shadow-sm">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+<span class="material-symbols-outlined text-[#9ca3af] text-[20px]">corporate_fare</span>
+</div>
+<input class="block w-full rounded-lg border-0 py-2.5 pl-10 text-[#111518] dark:text-white dark:bg-[#111518] ring-1 ring-inset ring-[#d1d5db] dark:ring-[#4b5563] placeholder:text-[#9ca3af] focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" id="razon-social" name="razon-social" placeholder="Ej. Grupo Operativo AR S.A. de C.V." type="text"/>
+</div>
+</div>
+<div class="md:col-span-1">
+<label class="block text-sm font-medium leading-6 text-[#111518] dark:text-white mb-1" for="rfc">RFC</label>
+<div class="relative mt-1 rounded-md shadow-sm">
+<input class="block w-full rounded-lg border-0 py-2.5 px-3 text-[#111518] dark:text-white dark:bg-[#111518] ring-1 ring-inset ring-[#d1d5db] dark:ring-[#4b5563] placeholder:text-[#9ca3af] focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" id="rfc" name="rfc" placeholder="XAXX010101000" type="text"/>
+</div>
+</div>
+<div class="md:col-span-1">
+<label class="block text-sm font-medium leading-6 text-[#111518] dark:text-white mb-1" for="regimen">Régimen Fiscal</label>
+<div class="relative mt-1 rounded-md shadow-sm">
+<select class="block w-full rounded-lg border-0 py-2.5 px-3 text-[#111518] dark:text-white dark:bg-[#111518] ring-1 ring-inset ring-[#d1d5db] dark:ring-[#4b5563] focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" id="regimen" name="regimen">
+<option>601 - General de Ley Personas Morales</option>
+<option>612 - Personas Físicas con Actividades Empresariales</option>
+</select>
+</div>
+</div>
+<div class="md:col-span-2">
+<label class="block text-sm font-medium leading-6 text-[#111518] dark:text-white mb-1" for="domicilio">Domicilio Fiscal</label>
+<div class="relative mt-1 rounded-md shadow-sm">
+<textarea class="block w-full rounded-lg border-0 py-2.5 px-3 text-[#111518] dark:text-white dark:bg-[#111518] ring-1 ring-inset ring-[#d1d5db] dark:ring-[#4b5563] placeholder:text-[#9ca3af] focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" id="domicilio" name="domicilio" placeholder="Calle, Número, Colonia, CP, Ciudad, Estado" rows="3"></textarea>
+</div>
+</div>
+</div>
+</div>
+<!-- Información de Contacto -->
+<div class="bg-white dark:bg-[#1e2732] rounded-xl shadow-sm border border-[#e5e7eb] dark:border-[#293038] p-6">
+<div class="flex items-center gap-3 mb-6 pb-4 border-b border-[#f0f2f5] dark:border-[#293038]">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">perm_contact_calendar</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-[#111518] dark:text-white">Información de Contacto</h3>
+<p class="text-sm text-[#60778a] dark:text-[#9ca3af]">Canales de comunicación visibles para el cliente.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div class="md:col-span-1">
+<label class="block text-sm font-medium leading-6 text-[#111518] dark:text-white mb-1" for="whatsapp">WhatsApp Business</label>
+<div class="relative mt-1 rounded-md shadow-sm">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+<span class="material-symbols-outlined text-green-600 text-[20px]">chat</span>
+</div>
+<input class="block w-full rounded-lg border-0 py-2.5 pl-10 text-[#111518] dark:text-white dark:bg-[#111518] ring-1 ring-inset ring-[#d1d5db] dark:ring-[#4b5563] placeholder:text-[#9ca3af] focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" id="whatsapp" name="whatsapp" type="text" value="+52 4641390122"/>
+</div>
+</div>
+<div class="md:col-span-1">
+<label class="block text-sm font-medium leading-6 text-[#111518] dark:text-white mb-1" for="email">Correo Electrónico</label>
+<div class="relative mt-1 rounded-md shadow-sm">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+<span class="material-symbols-outlined text-[#9ca3af] text-[20px]">mail</span>
+</div>
+<input class="block w-full rounded-lg border-0 py-2.5 pl-10 text-[#111518] dark:text-white dark:bg-[#111518] ring-1 ring-inset ring-[#d1d5db] dark:ring-[#4b5563] placeholder:text-[#9ca3af] focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6" id="email" name="email" placeholder="contacto@gpo-ar.com" type="email"/>
+</div>
+</div>
+<div class="md:col-span-2">
+<label class="block text-sm font-medium leading-6 text-[#111518] dark:text-white mb-3">Redes Sociales</label>
+<div class="space-y-3">
+<div class="flex rounded-md shadow-sm ring-1 ring-inset ring-[#d1d5db] dark:ring-[#4b5563] focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary rounded-lg overflow-hidden">
+<span class="flex select-none items-center pl-3 pr-3 bg-gray-50 dark:bg-[#111518] text-gray-500 sm:text-sm border-r border-[#d1d5db] dark:border-[#4b5563]">facebook.com/</span>
+<input class="block flex-1 border-0 bg-transparent py-2.5 pl-2 text-[#111518] dark:text-white placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" id="facebook" name="facebook" placeholder="gpo.ar" type="text"/>
+</div>
+<div class="flex rounded-md shadow-sm ring-1 ring-inset ring-[#d1d5db] dark:ring-[#4b5563] focus-within:ring-2 focus-within:ring-inset focus-within:ring-primary rounded-lg overflow-hidden">
+<span class="flex select-none items-center pl-3 pr-3 bg-gray-50 dark:bg-[#111518] text-gray-500 sm:text-sm border-r border-[#d1d5db] dark:border-[#4b5563]">instagram.com/</span>
+<input class="block flex-1 border-0 bg-transparent py-2.5 pl-2 text-[#111518] dark:text-white placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6" id="instagram" name="instagram" placeholder="gpo_ar_oficial" type="text"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Action Bar -->
+<div class="sticky bottom-4 z-40 mx-4 mb-4">
+<div class="bg-[#111518] dark:bg-black text-white rounded-xl shadow-lg p-4 flex flex-col sm:flex-row items-center justify-between gap-4 max-w-[1200px] mx-auto ring-1 ring-white/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-yellow-400">info</span>
+<p class="text-sm font-medium">Hay cambios sin guardar en su configuración.</p>
+</div>
+<div class="flex gap-3 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-4 py-2.5 text-sm font-bold text-white bg-transparent hover:bg-white/10 rounded-lg transition-colors border border-white/20">
+                                    Cancelar
+                                </button>
+<button class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 text-sm font-bold text-white bg-primary hover:bg-primary/90 rounded-lg shadow-md transition-all transform hover:scale-[1.02]">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                                    Guardar Cambios
+                                </button>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="mt-auto py-8 text-center text-sm text-[#60778a] dark:text-[#9ca3af] border-t border-[#e5e7eb] dark:border-[#293038] mx-4">
+<p class="font-medium mb-2">© 2023 GPO-AR. Todos los derechos reservados.</p>
+<p class="mb-4">Programado por <span class="text-[#111518] dark:text-white font-semibold">Francisco López Velázquez</span></p>
+<div class="flex justify-center gap-4 text-xs">
+<a class="hover:text-primary underline" href="#">Términos y Condiciones</a>
+<a class="hover:text-primary underline" href="#">Política de Privacidad</a>
+<a class="hover:text-primary underline" href="#">Soporte</a>
+</div>
+</footer>
+</div>
+</div>
+</div>
+</div>
+</body></html>

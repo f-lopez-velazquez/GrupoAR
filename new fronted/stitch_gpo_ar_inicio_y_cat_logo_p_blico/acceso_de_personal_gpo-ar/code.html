@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Acceso de Personal GPO-AR</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a6fc7",
+                        "primary-dark": "#064b88",
+                        "accent-red": "#d32f2f",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "sans": ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark min-h-screen flex flex-col justify-between text-[#111518] dark:text-white transition-colors duration-200">
+<!-- Top Navigation Bar (Simplified for Login Page) -->
+<header class="w-full bg-white dark:bg-[#1a2632] border-b border-[#f0f2f5] dark:border-[#2a3642] px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-size: 32px;">business</span>
+</div>
+<h1 class="text-primary dark:text-blue-400 text-xl font-bold tracking-tight">GPO-AR</h1>
+</div>
+<div class="hidden sm:flex items-center gap-6">
+<a class="text-sm font-medium text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-blue-300 transition-colors" href="#">Soporte Técnico</a>
+<a class="text-sm font-medium text-gray-500 hover:text-primary dark:text-gray-400 dark:hover:text-blue-300 transition-colors" href="#">Ayuda</a>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex items-center justify-center px-4 py-12 sm:px-6 lg:px-8 bg-cover bg-center relative" data-alt="Abstract corporate blue geometric pattern background" style="background-image: linear-gradient(rgba(245, 247, 248, 0.9), rgba(245, 247, 248, 0.95)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuDC3tACaH7gBsOO5mIllxtAhWSylPwTSPdVsKN6MMEgjA2kCJgwL57TLhkdt9LC0eeIIz-YH_TC-eRpkvHVD5TlvN1ALiH-zUnXNMznqBj_oF-EqALbrEBzEX7N0_j95ly_CGS-0wj6w0H2AnTz89VRlBaMp7bOLIzZfBcz5HkODYhcaRxvmqVQxjYZBs3GJukuN5beRp8_4GIQxs_JXIAuP0oo6ZYCMliSidWvWJOZvWndLFCd4tCwzvoHGHK1SUGZ3mTDfJ5SQIg');">
+<div class="w-full max-w-md space-y-8 bg-white dark:bg-[#1a2632] p-8 sm:p-10 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.4)] border border-gray-100 dark:border-gray-700 relative overflow-hidden group">
+<!-- Decorative Top Bar -->
+<div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary to-blue-400"></div>
+<div class="text-center">
+<div class="mx-auto h-16 w-16 bg-blue-50 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary dark:text-blue-400" style="font-size: 32px;">lock</span>
+</div>
+<h2 class="mt-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    Acceso de Personal
+                </h2>
+<p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                    Ingrese sus credenciales corporativas
+                </p>
+</div>
+<form action="#" class="mt-8 space-y-6" method="POST">
+<div class="space-y-5">
+<!-- Username Field -->
+<div>
+<label class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-200" for="username">
+                            Usuario
+                        </label>
+<div class="relative mt-2 rounded-md shadow-sm">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+<span class="material-symbols-outlined text-gray-400" style="font-size: 20px;">person</span>
+</div>
+<input autocomplete="username" class="block w-full rounded-lg border-0 py-3 pl-10 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-blue-500 sm:text-sm sm:leading-6 bg-white dark:bg-[#24303c]" id="username" name="username" placeholder="ID de empleado o correo" required="" type="text"/>
+</div>
+</div>
+<!-- Password Field -->
+<div>
+<label class="block text-sm font-medium leading-6 text-gray-900 dark:text-gray-200" for="password">
+                            Contraseña
+                        </label>
+<div class="relative mt-2 rounded-md shadow-sm">
+<div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+<span class="material-symbols-outlined text-gray-400" style="font-size: 20px;">key</span>
+</div>
+<input autocomplete="current-password" class="block w-full rounded-lg border-0 py-3 pl-10 pr-10 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-600 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-blue-500 sm:text-sm sm:leading-6 bg-white dark:bg-[#24303c]" id="password" name="password" placeholder="Ingrese su contraseña" required="" type="password"/>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer group-hover/eye">
+<span class="material-symbols-outlined text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors" style="font-size: 20px;">visibility</span>
+</div>
+</div>
+<div class="flex items-center justify-end mt-2">
+<div class="text-sm">
+<a class="font-medium text-primary hover:text-primary-dark dark:text-blue-400 dark:hover:text-blue-300" href="#">
+                                    ¿Olvidó su contraseña?
+                                </a>
+</div>
+</div>
+</div>
+</div>
+<!-- Submit Button -->
+<div>
+<button class="flex w-full justify-center rounded-lg bg-primary px-3 py-3 text-sm font-bold leading-6 text-white shadow-sm hover:bg-primary-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all duration-200 transform active:scale-[0.98]" type="submit">
+                        Iniciar Sesión
+                    </button>
+</div>
+</form>
+<!-- Warning Section -->
+<div class="mt-6 border-l-4 border-accent-red bg-red-50 dark:bg-red-900/20 p-4 rounded-r-lg">
+<div class="flex">
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-accent-red" style="font-size: 20px;">gpp_maybe</span>
+</div>
+<div class="ml-3">
+<p class="text-xs text-red-700 dark:text-red-200 font-medium">
+<strong class="font-bold">Acceso Restringido:</strong> Este sistema es monitoreado. El acceso no autorizado está estrictamente prohibido y puede resultar en acciones legales.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-white dark:bg-[#1a2632] border-t border-[#f0f2f5] dark:border-[#2a3642]">
+<div class="mx-auto max-w-7xl px-6 py-6 md:flex md:items-center md:justify-between lg:px-8">
+<div class="flex justify-center space-x-6 md:order-2">
+<a class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" href="#">
+<span class="sr-only">Privacidad</span>
+<span class="text-xs">Política de Privacidad</span>
+</a>
+<a class="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" href="#">
+<span class="sr-only">Términos</span>
+<span class="text-xs">Términos de Uso</span>
+</a>
+</div>
+<div class="mt-4 md:order-1 md:mt-0">
+<p class="text-center text-xs leading-5 text-gray-500 dark:text-gray-400">
+                    © 2024 GPO-AR. Todos los derechos reservados.
+                </p>
+<p class="text-center text-[10px] leading-4 text-gray-400 dark:text-gray-500 mt-1 font-mono">
+                    Programado por Francisco López Velázquez
+                </p>
+</div>
+</div>
+</footer>
+</body></html>

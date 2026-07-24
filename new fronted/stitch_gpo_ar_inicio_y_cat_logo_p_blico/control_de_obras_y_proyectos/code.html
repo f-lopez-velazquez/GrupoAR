@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GPO-AR Control de Obras</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a6fc7",
+                        "secondary": "#e73908",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101a22",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2632",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.375rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+        /* Custom scrollbar for table if needed */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-background-light text-[#111518] antialiased">
+<div class="relative flex h-screen w-full flex-col overflow-hidden">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e5e7eb] bg-white px-6 py-3 shadow-sm z-20">
+<div class="flex items-center gap-4 text-[#111518]">
+<div class="size-10 bg-primary/10 flex items-center justify-center rounded-lg text-primary">
+<span class="material-symbols-outlined">apartment</span>
+</div>
+<h2 class="text-primary text-xl font-black leading-tight tracking-tight">GPO-AR Control</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-primary font-semibold text-sm leading-normal border-b-2 border-primary py-1" href="#">Dashboard</a>
+<a class="text-[#60778a] hover:text-primary transition-colors text-sm font-medium leading-normal py-1" href="#">Proyectos</a>
+<a class="text-[#60778a] hover:text-primary transition-colors text-sm font-medium leading-normal py-1" href="#">Finanzas</a>
+<a class="text-[#60778a] hover:text-primary transition-colors text-sm font-medium leading-normal py-1" href="#">Configuración</a>
+</nav>
+<div class="flex items-center gap-4 border-l border-gray-200 pl-8">
+<button class="text-[#60778a] hover:text-primary">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border-2 border-primary/20 cursor-pointer" data-alt="User profile picture of the project manager" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAvfeE7M-wH5dMYZq2ef85uxkFrC83DdfyEfHnc1nIJVIQBMA2kdXPSIB8f2HqEeYNIh53gKBy92EgvpooVOmItp02cpPZAqwXu1dO5Lt5PupF6nsq3qZ-Btoch5vHoFxErEYHQl06RdxX7SqPJIUs8QPFa_cNIl8FGDEnfoQj3M7pW72Ya3rnkK4RSXxBVe9pVtLMBx7LzomFFpDFhD-p5eok5-pH2n762BbyyEqk6CvFovYTMF35ws83MtrSLV69hWCAwCqT8yvQ");'>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area with independent scrolling -->
+<div class="flex flex-1 overflow-hidden">
+<main class="flex-1 overflow-y-auto bg-background-light p-6 md:p-10">
+<div class="mx-auto max-w-7xl flex flex-col gap-8">
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-[#111518] text-3xl font-black leading-tight tracking-[-0.033em]">Dashboard de Control</h1>
+<p class="text-[#60778a] text-base font-normal">Gestión integral de sitios de construcción y finanzas.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 bg-white border border-gray-300 px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 shadow-sm transition-all">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                                Exportar Reporte
+                            </button>
+<button class="flex items-center gap-2 bg-primary px-4 py-2 rounded-lg text-sm font-medium text-white shadow-md hover:bg-[#085a9c] transition-all">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                                Nueva Obra
+                            </button>
+</div>
+</div>
+<!-- Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="flex flex-col gap-2 rounded-xl bg-white p-5 border border-gray-200 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-[#60778a] text-sm font-medium">Obras Activas</p>
+<span class="material-symbols-outlined text-primary">engineering</span>
+</div>
+<div class="flex items-end gap-2">
+<p class="text-[#111518] text-3xl font-bold leading-none">12</p>
+<p class="text-emerald-600 text-sm font-medium flex items-center">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                                    +2
+                                </p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl bg-white p-5 border border-gray-200 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-[#60778a] text-sm font-medium">Pagos Pendientes</p>
+<span class="material-symbols-outlined text-secondary">payments</span>
+</div>
+<div class="flex items-end gap-2">
+<p class="text-[#111518] text-3xl font-bold leading-none">$450k</p>
+<p class="text-secondary text-sm font-medium flex items-center">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+                                    Vencidos
+                                </p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl bg-white p-5 border border-gray-200 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-[#60778a] text-sm font-medium">Margen Promedio</p>
+<span class="material-symbols-outlined text-emerald-600">bar_chart</span>
+</div>
+<div class="flex items-end gap-2">
+<p class="text-[#111518] text-3xl font-bold leading-none">18.5%</p>
+<p class="text-emerald-600 text-sm font-medium">+1.5%</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl bg-white p-5 border border-gray-200 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-[#60778a] text-sm font-medium">Pagos Diferidos</p>
+<span class="material-symbols-outlined text-blue-400">schedule</span>
+</div>
+<div class="flex items-end gap-2">
+<p class="text-[#111518] text-3xl font-bold leading-none">5</p>
+<p class="text-[#60778a] text-sm font-medium">Esta semana</p>
+</div>
+</div>
+</div>
+<!-- Split View: Table & Financial Ops -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+<!-- Left Column: Projects Table (Span 2) -->
+<div class="xl:col-span-2 flex flex-col gap-4">
+<!-- Tabs & Filter -->
+<div class="bg-white rounded-xl border border-gray-200 shadow-sm flex flex-col">
+<div class="border-b border-gray-200 px-6 pt-4 flex items-center justify-between flex-wrap gap-4 pb-0">
+<div class="flex gap-6">
+<button class="pb-3 border-b-[3px] border-primary text-primary font-bold text-sm">
+                                            Obras en Curso
+                                        </button>
+<button class="pb-3 border-b-[3px] border-transparent text-[#60778a] hover:text-gray-700 font-medium text-sm transition-colors">
+                                            Prospectos
+                                        </button>
+<button class="pb-3 border-b-[3px] border-transparent text-[#60778a] hover:text-gray-700 font-medium text-sm transition-colors">
+                                            Finalizados
+                                        </button>
+</div>
+<div class="pb-2">
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-gray-400 text-[20px]">search</span>
+</span>
+<input class="pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary w-64 bg-gray-50" placeholder="Buscar por nombre o ID..." type="text"/>
+</div>
+</div>
+</div>
+<!-- Table Container -->
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead class="bg-gray-50/50">
+<tr>
+<th class="py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider">Proyecto</th>
+<th class="py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider">Equipo</th>
+<th class="py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider w-48">Cronograma (Est vs Real)</th>
+<th class="py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider text-right">Margen</th>
+<th class="py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">Estado</th>
+<th class="py-4 px-6 text-xs font-semibold text-gray-500 uppercase tracking-wider"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100">
+<!-- Row 1 -->
+<tr class="group hover:bg-gray-50 transition-colors">
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-bold text-[#111518]">Torre Vista Norte</span>
+<span class="text-xs text-[#60778a] truncate max-w-[200px]">Cimentación y estructura principal</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex -space-x-2 overflow-hidden">
+<img alt="Engineer 1" class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJvNWbdlCNKjdaFA9h4nn5IJhy9CM49nvwFLxBZc80EYKR_7iBAuuQbbWfEnSyLCbbf4_Gjg6xjDaGi_wDNV8vY4q9VqqA-vGT6f6MV6K20rR8JIvSiTdTabSxE9HA1PdaDZg6a5SVdZ_bhJPaeoJqpkrSLmNIqs0Y9OB-1DCmzvT1AjlijiG5EsZjgLsEXjBHEEeFgZ1ZIVCT4Xmn9a103clwvLQi2D6OknH_fvlQz4HvVKrSGISaa19IJf2DpSLeDtr_Epi0j4U"/>
+<img alt="Engineer 2" class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyH08MUCf8BydiOWsU6IYr29WjuA4QABXdES3BVH6CbakxOmM27OznlQgceh3ddRt6Tcyqq3G1sgAldpfzstE1ACGpVXu5ExY1E8Ftk4idEJwJLOr0I9kSiLCeeBJW1aHHN9h-R92YprJYc_8kDerlMWplJICjBrq88qgDoTV3RkKTI-o3P_33Nj6CXb8YPrCXakpOIbPGUr4LifwbnsH4a3Hme_FEnfuewuYWq8TcVEGaDKLWEUGydjvmAgBeCUQX1UTLO4uw3Lc"/>
+<div class="flex h-8 w-8 items-center justify-center rounded-full ring-2 ring-white bg-gray-100 text-xs font-medium text-gray-600">+3</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col gap-1 w-full">
+<div class="flex justify-between text-[10px] text-gray-500 font-medium">
+<span>Est: 12 sem</span>
+<span class="text-emerald-600">Real: 10 sem</span>
+</div>
+<div class="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 rounded-full" style="width: 83%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                                                        22%
+                                                    </span>
+</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+<span class="size-1.5 rounded-full bg-blue-600"></span>
+                                                        En Proceso
+                                                    </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-gray-50 transition-colors">
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-bold text-[#111518]">Centro Logístico GPO</span>
+<span class="text-xs text-[#60778a] truncate max-w-[200px]">Nave industrial fase 2</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex -space-x-2 overflow-hidden">
+<img alt="Manager" class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBF8G7JaS0bRtR55UVjqztYpOkCL-0BLzLGaFp0_7v7wAmKkrBN_iQt9jA9x6jFvSY7o6unK-FHUvzUKSMx_Yyf6fj6SoIrlTyy_Evi6BF5BcxnosarHLJ1ZdGVwYyrn_6SB6m7a3FBA-KkFQb1A0dJKwLSBy62FHDlw8pujAVgiE8eBzUExl0Di2wanwF6oYSWn0Mv_VI0wOkiongZnrNWwHGrahqhOYn1wA7CBJDnG9zHtAyuCUQxYhjbbx4GEnZ3GJXsOQaXBg"/>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col gap-1 w-full">
+<div class="flex justify-between text-[10px] text-gray-500 font-medium">
+<span>Est: 20 sem</span>
+<span class="text-secondary">Real: 22 sem</span>
+</div>
+<div class="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden relative">
+<!-- Estimated marker line -->
+<div class="absolute top-0 bottom-0 w-0.5 bg-black/20 z-10" style="left: 90%"></div>
+<div class="h-full bg-secondary rounded-full" style="width: 95%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                                        8%
+                                                    </span>
+</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700 border border-amber-100">
+<span class="size-1.5 rounded-full bg-amber-600"></span>
+                                                        Retrasado
+                                                    </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-gray-50 transition-colors">
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-bold text-[#111518]">Remodelación Oficinas Centrales</span>
+<span class="text-xs text-[#60778a] truncate max-w-[200px]">Acabados e instalaciones</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex -space-x-2 overflow-hidden">
+<img alt="Architect" class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsWPseQQHu3Wyd7WpbMrQf5Wor8S49uvNp9uEF4PxcA5u5NINUEhScY7IkTNF3u7Tu_4iZVlwDDXRyBdp3vjHmhu3ydt4KMB8WluSvippfrfjYeNd_EttGnQtV6_VqJyRUCT3YSN-lIeikj4VE3W2Xt0hiwSoJOIe59nkiUCrOirPhobJTIJhVPnVVuzrMK65RHRk4OKihmjWoy_BPSWTV2PXl2bIMyWyVDw2CpW4MMabs0A_HgTo6kuyylPZa_BKBaniKwQmPBd4"/>
+<img alt="Foreman" class="inline-block h-8 w-8 rounded-full ring-2 ring-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbaS1Szvy0pGV1FBdS3QH-30rzxZtlRfauEHaSO2fJFjMWJvkcnlPD8g0lOG-Cuwr-n11BnAzs5b0HGd5TbfLYsAtDfYSEGqBPzbxiggVCn2NhpkMEnDx7c2hCMsPXI8qmsPqBCBNR6geVmJ2uvZehJ-ssjxuD2SRn7G5WOqhA_-BbDUven35wJ9kBmVf-j_8wfemRWxDFcsOJFHUyR29jtvBiFJpZEw6KKa4W3MGrnCSXZV-jRKnXCBro9zKuxb1_Y_smwB8Ar8k"/>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col gap-1 w-full">
+<div class="flex justify-between text-[10px] text-gray-500 font-medium">
+<span>Est: 8 sem</span>
+<span class="text-blue-600">Real: 2 sem</span>
+</div>
+<div class="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
+<div class="h-full bg-blue-500 rounded-full" style="width: 25%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                                                        15%
+                                                    </span>
+</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+<span class="size-1.5 rounded-full bg-blue-600"></span>
+                                                        En Proceso
+                                                    </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-gray-50 transition-colors">
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-bold text-[#111518]">Pavimentación Acceso Sur</span>
+<span class="text-xs text-[#60778a] truncate max-w-[200px]">Infraestructura vial</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex -space-x-2 overflow-hidden">
+<div class="flex h-8 w-8 items-center justify-center rounded-full ring-2 ring-white bg-primary text-white text-xs font-medium">JD</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col gap-1 w-full">
+<div class="flex justify-between text-[10px] text-gray-500 font-medium">
+<span>Est: 4 sem</span>
+<span class="text-gray-600">Real: --</span>
+</div>
+<div class="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
+<div class="h-full bg-gray-300 rounded-full" style="width: 0%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                                                        --
+                                                    </span>
+</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200">
+<span class="size-1.5 rounded-full bg-gray-400"></span>
+                                                        Pendiente
+                                                    </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-gray-200 bg-gray-50/50 rounded-b-xl flex justify-center">
+<button class="text-sm text-primary font-medium hover:underline">Ver todos los proyectos</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Financial Operations (Span 1) -->
+<div class="flex flex-col gap-6">
+<!-- Upload Invoice Card -->
+<div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+<div class="bg-primary/5 p-4 border-b border-primary/10 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">cloud_upload</span>
+<h3 class="text-[#111518] font-bold text-lg">Carga Rápida</h3>
+</div>
+<div class="p-5 flex flex-col gap-4">
+<!-- Tabs for action type -->
+<div class="flex p-1 bg-gray-100 rounded-lg mb-2">
+<button class="flex-1 py-1.5 px-3 rounded-md bg-white shadow text-xs font-bold text-gray-800">Factura</button>
+<button class="flex-1 py-1.5 px-3 rounded-md text-xs font-medium text-gray-500 hover:text-gray-800">Gasto Extra</button>
+</div>
+<!-- Drop Zone -->
+<div class="border-2 border-dashed border-gray-300 rounded-lg p-6 flex flex-col items-center justify-center text-center hover:bg-gray-50 transition-colors cursor-pointer group">
+<div class="bg-primary/10 p-3 rounded-full mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+</div>
+<p class="text-sm font-medium text-gray-900">Arrastra tu XML/PDF aquí</p>
+<p class="text-xs text-gray-500 mt-1">o haz clic para buscar</p>
+</div>
+<div class="relative flex items-center py-2">
+<div class="flex-grow border-t border-gray-200"></div>
+<span class="flex-shrink-0 mx-4 text-gray-400 text-xs uppercase">Detalles Manuales</span>
+<div class="flex-grow border-t border-gray-200"></div>
+</div>
+<form class="flex flex-col gap-3">
+<div>
+<label class="text-xs font-semibold text-gray-700 mb-1 block">Tipo de Gasto</label>
+<select class="w-full rounded-lg border-gray-300 text-sm focus:ring-primary focus:border-primary">
+<option>Materiales de Construcción</option>
+<option>Mano de Obra</option>
+<option>Permisos y Trámites</option>
+<option>Maquinaria</option>
+</select>
+</div>
+<div>
+<label class="text-xs font-semibold text-gray-700 mb-1 block">Folio Fiscal (UUID)</label>
+<input class="w-full rounded-lg border-gray-300 text-sm focus:ring-primary focus:border-primary placeholder:text-gray-400" placeholder="Ej: 550e8400-e29b..." type="text"/>
+</div>
+<button class="mt-2 w-full bg-primary hover:bg-[#085a9c] text-white font-medium py-2.5 rounded-lg text-sm transition-colors shadow flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                            Registrar Factura
+                                        </button>
+</form>
+</div>
+</div>
+<!-- Deferred Payments Card -->
+<div class="bg-white rounded-xl border border-gray-200 shadow-sm p-5">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-bold text-[#111518]">Pagos Diferidos</h3>
+<button class="text-primary text-xs font-bold hover:underline">Ver Calendario</button>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Item 1 -->
+<div class="flex items-center justify-between p-3 rounded-lg border border-gray-100 hover:border-gray-300 transition-colors bg-gray-50">
+<div class="flex items-center gap-3">
+<div class="bg-white p-2 rounded border border-gray-200">
+<p class="text-[10px] font-bold text-gray-500 uppercase text-center leading-none">OCT</p>
+<p class="text-lg font-black text-[#111518] text-center leading-none">24</p>
+</div>
+<div>
+<p class="text-sm font-bold text-[#111518]">Cementos del Norte</p>
+<p class="text-xs text-[#60778a]">Prov. #8921</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-[#111518]">$12,500</p>
+<span class="inline-block size-2 rounded-full bg-amber-500" title="Pendiente"></span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between p-3 rounded-lg border border-gray-100 hover:border-gray-300 transition-colors bg-gray-50">
+<div class="flex items-center gap-3">
+<div class="bg-white p-2 rounded border border-gray-200">
+<p class="text-[10px] font-bold text-gray-500 uppercase text-center leading-none">OCT</p>
+<p class="text-lg font-black text-[#111518] text-center leading-none">28</p>
+</div>
+<div>
+<p class="text-sm font-bold text-[#111518]">Renta Grúa Titan</p>
+<p class="text-xs text-[#60778a]">Maquinaria</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-[#111518]">$45,000</p>
+<span class="inline-block size-2 rounded-full bg-primary" title="Programado"></span>
+</div>
+</div>
+<button class="mt-2 w-full border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2 rounded-lg text-xs transition-colors">
+                                        + Agregar Nuevo Pago
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

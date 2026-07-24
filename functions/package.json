@@ -1,0 +1,19 @@
+{
+  "name": "grupo-ar-functions",
+  "engines": {
+    "node": "20"
+  },
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "private": true,
+  "dependencies": {
+    "firebase-admin": "^12.5.0",
+    "firebase-functions": "^5.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.2",
+    "globals": "^17.1.0"
+  }
+}

@@ -1,0 +1,552 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Grupo AR - Finanzas y caja</title>
+<!-- Tailwind CSS -->
+<!-- Theme Configuration -->
+<script>
+      if (window.tailwind) {
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#090dc8",
+              "background-light": "#f5f6f8",
+              "background-dark": "#101022",
+              "card-dark": "#1a1a2e", // Slightly customized for better contrast
+              "surface-dark": "#222249", // Keeping the purple-ish tone from components for brand consistency
+            },
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {
+              "DEFAULT": "0.25rem", 
+              "lg": "0.5rem", 
+              "xl": "0.75rem", 
+              "2xl": "1rem",
+              "full": "9999px"
+            },
+          },
+        },
+      }
+      }
+    </script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px; 
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom scrollbar for dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101022; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #33334d; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444466; 
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-white font-display overflow-hidden antialiased selection:bg-primary selection:text-white">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- SideNavBar -->
+<aside class="w-72 bg-background-dark border-r border-white/5 flex flex-col flex-shrink-0 h-full">
+<div class="p-6 flex flex-col gap-8 h-full">
+<!-- Brand -->
+<div class="flex items-center gap-4 px-2">
+<div class="bg-gradient-to-br from-primary to-purple-600 aspect-square rounded-xl size-10 flex items-center justify-center shadow-lg shadow-primary/20" data-alt="Abstract gradient logo representing Grupo AR brand identity">
+<span class="text-white font-bold text-xl">AR</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-white text-lg font-bold leading-tight tracking-tight">Grupo AR</h1>
+<p class="text-[#8f90cc] text-xs font-medium uppercase tracking-wider">ERP System</p>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex flex-col gap-2 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#8f90cc] hover:text-white hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">dashboard</span>
+<span class="text-sm font-medium">Panel</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#8f90cc] hover:text-white hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">inventory_2</span>
+<span class="text-sm font-medium">Inventario</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#8f90cc] hover:text-white hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">account_tree</span>
+<span class="text-sm font-medium">Proyectos</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary text-white shadow-lg shadow-primary/25" href="#">
+<span class="material-symbols-outlined icon-fill">finance</span>
+<span class="text-sm font-bold">Finanzas &amp; Caja</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#8f90cc] hover:text-white hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">settings</span>
+<span class="text-sm font-medium">Configuración</span>
+</a>
+</nav>
+<!-- User Profile Snippet -->
+<div class="mt-auto pt-6 border-t border-white/5">
+<div class="flex items-center gap-3 px-2">
+<div class="bg-center bg-cover rounded-full size-10 ring-2 ring-white/10" data-alt="Portrait of the current user logged into the system" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBxbYhfLLuhjrl-5wZEsiLxsNLwnTeyEKzoXy7QRhrjk2uCgYFYsh2h_tYmJmQWBtybErm_obwV6zs9BuhLaqIqhWi3UxTvWDZRzu5RkU9S4NTr6Y21GXYUDmfKp5Qp2u-gfxOAOA4RBoPzTdcqSaptG1di4IJeHEQi1fnW56-P5v9k_V4p67qB3pPqr3gf_ei1hHRAuyrLcpMVVxtP5n_7LSQi8ZZ5pW9g4thlkHLwmwI1HTI3ozgJUDqCuvEIi-0ua6tsllBt9rji");'></div>
+<div class="flex flex-col">
+<p class="text-white text-sm font-medium">Carlos Méndez</p>
+<p class="text-[#8f90cc] text-xs">Contralor General</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background-dark relative">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between border-b border-white/5 px-8 py-5 bg-background-dark/95 backdrop-blur-sm sticky top-0 z-20">
+<div class="flex items-center gap-6">
+<button class="text-white md:hidden">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="text-white text-xl font-bold tracking-tight hidden md:block">Vista General de Caja</h2>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search Bar -->
+<div class="relative hidden md:flex items-center w-80">
+<span class="material-symbols-outlined absolute left-3 text-[#8f90cc] text-[20px]">search</span>
+<input class="w-full h-10 bg-[#1a1a2e] border-none rounded-lg pl-10 pr-4 text-sm text-white placeholder-[#8f90cc] focus:ring-2 focus:ring-primary/50 focus:bg-[#222249] transition-all" placeholder="Buscar transacción, ID o concepto..." type="text"/>
+</div>
+<!-- Action Icons -->
+<div class="flex items-center gap-3">
+<button class="size-10 rounded-lg bg-[#1a1a2e] hover:bg-[#222249] text-white flex items-center justify-center transition-colors relative">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2.5 right-2.5 size-2 bg-red-500 rounded-full border border-[#1a1a2e]"></span>
+</button>
+<button class="size-10 rounded-lg bg-[#1a1a2e] hover:bg-[#222249] text-white flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[20px]">help</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-8 scroll-smooth">
+<div class="flex flex-col gap-8 max-w-[1600px] mx-auto pb-10">
+<!-- Header & Page Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-3xl font-black text-white tracking-tight">Panel Financiero</h1>
+<p class="text-[#8f90cc]">Gestión de flujos de efectivo, cortes diarios y conciliación bancaria.</p>
+</div>
+<div class="flex gap-3">
+<button class="h-11 px-5 rounded-lg border border-white/10 text-white font-semibold text-sm hover:bg-white/5 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                                Exportar Reporte
+                            </button>
+<button class="h-11 px-6 rounded-lg bg-primary hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-primary/25 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+                                Generar Ticket
+                            </button>
+</div>
+</div>
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-[#222249] p-6 rounded-xl border border-white/5 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl text-white">account_balance_wallet</span>
+</div>
+<div class="relative z-10 flex flex-col gap-4">
+<div class="flex items-center gap-2">
+<span class="p-1.5 bg-blue-500/20 rounded-md text-blue-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">attach_money</span>
+</span>
+<p class="text-[#8f90cc] font-medium text-sm uppercase tracking-wide">Balance Total</p>
+</div>
+<div>
+<p class="text-white text-3xl font-bold tracking-tight tabular-nums">$1,240,500.00</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[#0bda68] text-[18px]">trending_up</span>
+<p class="text-[#0bda68] text-sm font-semibold">+2.5%</p>
+<span class="text-gray-500 text-xs ml-1">vs mes anterior</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-[#222249] p-6 rounded-xl border border-white/5 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl text-white">payments</span>
+</div>
+<div class="relative z-10 flex flex-col gap-4">
+<div class="flex items-center gap-2">
+<span class="p-1.5 bg-green-500/20 rounded-md text-green-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">point_of_sale</span>
+</span>
+<p class="text-[#8f90cc] font-medium text-sm uppercase tracking-wide">Efectivo en Caja</p>
+</div>
+<div>
+<p class="text-white text-3xl font-bold tracking-tight tabular-nums">$45,200.00</p>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[#0bda68] text-[18px]">trending_up</span>
+<p class="text-[#0bda68] text-sm font-semibold">+12%</p>
+<span class="text-gray-500 text-xs ml-1">ingreso hoy</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-[#222249] p-6 rounded-xl border border-white/5 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl text-white">pending_actions</span>
+</div>
+<div class="relative z-10 flex flex-col gap-4">
+<div class="flex items-center gap-2">
+<span class="p-1.5 bg-orange-500/20 rounded-md text-orange-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">hourglass_empty</span>
+</span>
+<p class="text-[#8f90cc] font-medium text-sm uppercase tracking-wide">Pendiente Conciliación</p>
+</div>
+<div>
+<p class="text-white text-3xl font-bold tracking-tight tabular-nums">$12,000.00</p>
+<div class="flex items-center gap-1 mt-1">
+<p class="text-orange-400 text-sm font-medium">Requiere Atención</p>
+<span class="text-gray-500 text-xs ml-1">3 movimientos</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Cash Registers Grid Section -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h3 class="text-white text-lg font-bold">Cortes de Caja (Registros Diarios)</h3>
+<button class="text-primary text-sm font-semibold hover:text-blue-400 flex items-center gap-1">
+                                Ver todas
+                                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Register 1: Active -->
+<div class="bg-[#1a1a2e] rounded-xl p-4 border-l-4 border-l-green-500 shadow-md flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-white font-bold">Caja 01 - Matriz</p>
+<p class="text-xs text-gray-400">ID: CAJ-001</p>
+</div>
+<span class="px-2 py-1 rounded-full bg-green-500/10 text-green-400 text-xs font-bold border border-green-500/20">ABIERTA</span>
+</div>
+<div class="h-px bg-white/5 w-full"></div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[#8f90cc] text-xs">Cajero</p>
+<div class="flex items-center gap-2 mt-1">
+<div class="size-6 rounded-full bg-gray-700 bg-cover" data-alt="Avatar of cashier Maria" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA10q5O8983bbydwIIc7V6q9NoDYposztvKmNiUgcoduSTZq4vANW6bY4DXV8uGBuN6Uu9vYsIcpZKGc4uHtu9hT94_5cvP9IbUidjujELlY08OEaFpYMGzvwGTcL_RnzYhY3b5FpwQt1RNMZmUCHZe-ORQfUq2XhqCe6N85w7whV9SmB9wpjmN4cD8CV5uFxNycDdVnXa31MAjPdVm1nF7YH-vSiDWqV0nuJxpNtUQIH43dMPmm_FumMARF1hf_Mo8NeyKoO7m1gjM");'></div>
+<span class="text-sm text-white">Maria S.</span>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[#8f90cc] text-xs">Total Actual</p>
+<p class="text-white font-bold text-lg tabular-nums">$15,400</p>
+</div>
+</div>
+</div>
+<!-- Register 2: Active -->
+<div class="bg-[#1a1a2e] rounded-xl p-4 border-l-4 border-l-green-500 shadow-md flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-white font-bold">Caja 02 - Patio</p>
+<p class="text-xs text-gray-400">ID: CAJ-002</p>
+</div>
+<span class="px-2 py-1 rounded-full bg-green-500/10 text-green-400 text-xs font-bold border border-green-500/20">ABIERTA</span>
+</div>
+<div class="h-px bg-white/5 w-full"></div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[#8f90cc] text-xs">Cajero</p>
+<div class="flex items-center gap-2 mt-1">
+<div class="size-6 rounded-full bg-gray-700 bg-cover" data-alt="Avatar of cashier Jorge" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC7_zd5hXMjOA7oRLFZbbNN7bzSL9PurJ3SgmI-gvSm0S6JNuDnMQzKLRkZXdzoqTzPnFYsIWTFAIhQ8n-XC6fJnSUs-vgmmifZ3urY71d7a54Wg_F1suwPjR6fh7E1SWv7YVGojgd9UzoJboF_DY0RRRwHNHE_JeXluqClaYJ-1EYi1-bDnUSO-_pqCFQ1sG4vbbk8cBpqgHCBKjg3jJtBSDDSVkbTf_r4sg2NHVIj070aofRzRFtZjUjPgkPcxrkYjxcQckJuCBrQ");'></div>
+<span class="text-sm text-white">Jorge R.</span>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[#8f90cc] text-xs">Total Actual</p>
+<p class="text-white font-bold text-lg tabular-nums">$8,250</p>
+</div>
+</div>
+</div>
+<!-- Register 3: Closed -->
+<div class="bg-[#1a1a2e] rounded-xl p-4 border-l-4 border-l-red-500 shadow-md flex flex-col gap-3 opacity-75">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-white font-bold">Caja 03 - Mostrador</p>
+<p class="text-xs text-gray-400">ID: CAJ-003</p>
+</div>
+<span class="px-2 py-1 rounded-full bg-red-500/10 text-red-400 text-xs font-bold border border-red-500/20">CERRADA</span>
+</div>
+<div class="h-px bg-white/5 w-full"></div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[#8f90cc] text-xs">Ult. Cierre</p>
+<p class="text-sm text-gray-400 mt-1">Hoy, 14:00</p>
+</div>
+<div class="text-right">
+<p class="text-[#8f90cc] text-xs">Total Cierre</p>
+<p class="text-gray-400 font-bold text-lg tabular-nums">$0.00</p>
+</div>
+</div>
+</div>
+<!-- Register 4: Closed -->
+<div class="bg-[#1a1a2e] rounded-xl p-4 border-l-4 border-l-gray-500 shadow-md flex flex-col gap-3 opacity-60">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-white font-bold">Caja 04 - Auxiliar</p>
+<p class="text-xs text-gray-400">ID: CAJ-004</p>
+</div>
+<span class="px-2 py-1 rounded-full bg-gray-700/50 text-gray-400 text-xs font-bold border border-gray-600/30">INACTIVA</span>
+</div>
+<div class="h-px bg-white/5 w-full"></div>
+<div class="flex justify-center items-center h-full py-2">
+<p class="text-xs text-gray-500 italic">Sin asignar</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Transactions Table Section -->
+<section class="bg-[#1a1a2e] border border-white/5 rounded-2xl overflow-hidden shadow-xl flex flex-col">
+<!-- Table Filters -->
+<div class="p-5 border-b border-white/5 flex flex-wrap items-center justify-between gap-4">
+<h3 class="text-white font-bold text-lg">Historial de Transacciones</h3>
+<div class="flex gap-3">
+<div class="relative">
+<select class="h-9 pl-3 pr-8 rounded-lg bg-[#222249] text-white text-xs border-none focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
+<option>Hoy</option>
+<option>Esta Semana</option>
+<option>Este Mes</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-gray-400 pointer-events-none text-[18px]">expand_more</span>
+</div>
+<div class="relative">
+<select class="h-9 pl-3 pr-8 rounded-lg bg-[#222249] text-white text-xs border-none focus:ring-1 focus:ring-primary appearance-none cursor-pointer">
+<option>Todos los métodos</option>
+<option>Efectivo</option>
+<option>Tarjeta</option>
+<option>Transferencia</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-gray-400 pointer-events-none text-[18px]">expand_more</span>
+</div>
+<button class="size-9 rounded-lg bg-[#222249] hover:bg-white/10 text-white flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Data Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-[#151525]">
+<tr>
+<th class="p-4 text-xs font-semibold text-[#8f90cc] uppercase tracking-wider">ID Transacción</th>
+<th class="p-4 text-xs font-semibold text-[#8f90cc] uppercase tracking-wider">Hora</th>
+<th class="p-4 text-xs font-semibold text-[#8f90cc] uppercase tracking-wider">Concepto</th>
+<th class="p-4 text-xs font-semibold text-[#8f90cc] uppercase tracking-wider">Proyecto Ref.</th>
+<th class="p-4 text-xs font-semibold text-[#8f90cc] uppercase tracking-wider">Método</th>
+<th class="p-4 text-xs font-semibold text-[#8f90cc] uppercase tracking-wider text-right">Monto</th>
+<th class="p-4 text-xs font-semibold text-[#8f90cc] uppercase tracking-wider text-center">Estado</th>
+<th class="p-4 text-xs font-semibold text-[#8f90cc] uppercase tracking-wider text-center">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<!-- Row 1 -->
+<tr class="group hover:bg-white/[0.02] transition-colors">
+<td class="p-4 text-sm text-white font-mono">#TRX-8849</td>
+<td class="p-4 text-sm text-gray-300">10:42 AM</td>
+<td class="p-4 text-sm text-white font-medium">Venta Material - Cemento</td>
+<td class="p-4 text-sm text-blue-400 hover:underline cursor-pointer">Torre Nte - Lote 4</td>
+<td class="p-4 text-sm text-gray-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-gray-500">payments</span>
+                                            Efectivo
+                                        </td>
+<td class="p-4 text-sm text-white font-bold text-right tabular-nums">$12,500.00</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-[10px] font-bold bg-green-500/10 text-green-400 border border-green-500/20 uppercase tracking-wide">
+                                                Completado
+                                            </span>
+</td>
+<td class="p-4 text-center">
+<button class="text-gray-500 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-white/[0.02] transition-colors">
+<td class="p-4 text-sm text-white font-mono">#TRX-8848</td>
+<td class="p-4 text-sm text-gray-300">10:15 AM</td>
+<td class="p-4 text-sm text-white font-medium">Pago Proveedor (Caja Chica)</td>
+<td class="p-4 text-sm text-blue-400 hover:underline cursor-pointer">Mantenimiento Gral</td>
+<td class="p-4 text-sm text-gray-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-gray-500">payments</span>
+                                            Efectivo
+                                        </td>
+<td class="p-4 text-sm text-red-400 font-bold text-right tabular-nums">-$450.00</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-[10px] font-bold bg-gray-500/10 text-gray-400 border border-gray-500/20 uppercase tracking-wide">
+                                                Autorizado
+                                            </span>
+</td>
+<td class="p-4 text-center">
+<button class="text-gray-500 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-white/[0.02] transition-colors">
+<td class="p-4 text-sm text-white font-mono">#TRX-8847</td>
+<td class="p-4 text-sm text-gray-300">09:55 AM</td>
+<td class="p-4 text-sm text-white font-medium">Venta Herramienta</td>
+<td class="p-4 text-sm text-gray-500 italic">--</td>
+<td class="p-4 text-sm text-gray-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-gray-500">credit_card</span>
+                                            Tarjeta Crédito
+                                        </td>
+<td class="p-4 text-sm text-white font-bold text-right tabular-nums">$2,100.00</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-[10px] font-bold bg-green-500/10 text-green-400 border border-green-500/20 uppercase tracking-wide">
+                                                Completado
+                                            </span>
+</td>
+<td class="p-4 text-center">
+<button class="text-gray-500 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-white/[0.02] transition-colors">
+<td class="p-4 text-sm text-white font-mono">#TRX-8846</td>
+<td class="p-4 text-sm text-gray-300">09:30 AM</td>
+<td class="p-4 text-sm text-white font-medium">Anticipo Proyecto</td>
+<td class="p-4 text-sm text-blue-400 hover:underline cursor-pointer">Residencial Valle</td>
+<td class="p-4 text-sm text-gray-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-gray-500">account_balance</span>
+                                            Transferencia
+                                        </td>
+<td class="p-4 text-sm text-white font-bold text-right tabular-nums">$50,000.00</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded-full text-[10px] font-bold bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 uppercase tracking-wide">
+                                                Pend. Conciliar
+                                            </span>
+</td>
+<td class="p-4 text-center">
+<button class="text-gray-500 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-4 border-t border-white/5 flex items-center justify-between">
+<p class="text-xs text-gray-400">Mostrando <span class="text-white font-semibold">1-4</span> de <span class="text-white font-semibold">124</span> transacciones</p>
+<div class="flex gap-2">
+<button class="size-8 rounded hover:bg-white/10 text-white flex items-center justify-center disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="size-8 rounded hover:bg-white/10 text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Ticket Preview Floating Card (Visual Mockup of the "Open" state described) -->
+<div class="absolute bottom-8 right-8 w-80 bg-white rounded-xl shadow-2xl overflow-hidden z-30 animate-in slide-in-from-bottom-5 fade-in duration-500 hidden xl:block border border-gray-200">
+<div class="bg-primary p-3 flex justify-between items-center">
+<h4 class="text-white font-bold text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">receipt</span>
+                    Ticket Preview
+                 </h4>
+<button class="text-white/80 hover:text-white">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="p-5 flex flex-col gap-4 text-slate-800">
+<div class="text-center border-b border-dashed border-gray-300 pb-3">
+<p class="font-bold uppercase text-sm">Grupo AR Materiales</p>
+<p class="text-[10px] text-gray-500">RFC: GAR880120HM1</p>
+<p class="text-[10px] text-gray-500">Av. Industrial 450, Col. Centro</p>
+</div>
+<div class="flex flex-col gap-2 text-xs">
+<div class="flex justify-between">
+<span>1x Cemento Cruz Azul 50kg</span>
+<span class="font-bold">$250.00</span>
+</div>
+<div class="flex justify-between">
+<span>1x Varilla 3/8" Tonelada</span>
+<span class="font-bold">$12,000.00</span>
+</div>
+<div class="flex justify-between">
+<span>2x Pala Cuadrada Truper</span>
+<span class="font-bold">$250.00</span>
+</div>
+</div>
+<div class="border-t border-dashed border-gray-300 pt-3 flex justify-between items-end">
+<div class="text-xs text-gray-500">
+<p>Subtotal: $10,775.86</p>
+<p>IVA (16%): $1,724.14</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-slate-900">TOTAL</p>
+<p class="text-lg font-black text-slate-900">$12,500.00</p>
+</div>
+</div>
+<div class="flex justify-center pt-2">
+<div class="size-20 bg-gray-100 rounded flex items-center justify-center text-gray-400">
+<span class="material-symbols-outlined text-4xl">qr_code_2</span>
+</div>
+</div>
+<button class="w-full py-2 bg-slate-900 text-white rounded text-xs font-bold hover:bg-slate-800">Imprimir Ticket</button>
+</div>
+</div>
+</div>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

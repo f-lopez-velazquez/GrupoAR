@@ -1,0 +1,358 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Site Manager Project Tasks - Grupo AR</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<!-- Tailwind Config -->
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-white antialiased transition-colors duration-200">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Sidebar -->
+<aside class="hidden w-64 flex-col border-r border-slate-200 bg-white border-slate-800 bg-[#111a22] lg:flex">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-6">
+<!-- Logo Section -->
+<div class="flex flex-col px-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-3xl">token</span>
+<h1 class="text-xl font-bold leading-tight tracking-tight text-slate-900 text-white">Grupo AR</h1>
+</div>
+<p class="mt-1 text-xs font-medium uppercase tracking-wider text-slate-500 text-[#92adc9]">ERP System</p>
+</div>
+<!-- Navigation -->
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 text-[#92adc9] hover:bg-[#233648] hover:text-white" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2.5 text-primary bg-primary text-white" href="#">
+<span class="material-symbols-outlined fill-icon">assignment</span>
+<span class="text-sm font-medium">Proyectos</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 text-[#92adc9] hover:bg-[#233648] hover:text-white" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Staff</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 text-[#92adc9] hover:bg-[#233648] hover:text-white" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-sm font-medium">Inventario</span>
+</a>
+<a class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900 text-[#92adc9] hover:bg-[#233648] hover:text-white" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-sm font-medium">Reportes</span>
+</a>
+</nav>
+</div>
+<!-- User Profile -->
+<div class="border-t border-slate-200 pt-4 border-slate-800">
+<button class="flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left transition-colors hover:bg-slate-100 hover:bg-[#233648]">
+<div class="h-10 w-10 overflow-hidden rounded-full bg-slate-200">
+<img alt="Profile picture of Juan" class="h-full w-full object-cover" data-alt="Portrait of a site manager named Juan" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIDGw_BfcNN-3he84opgmpiwvtGHNz6waBsBQb0n9bLlUGPLQ1o81WPToRQvdKTCpCefYKnMkfkLo45rXdXGHs9U67wuM1tqYKMnFYWKXL2xu_SP8T0mKlOjbdwY6mEj1cbXTPbFF5f74QocHAQ47q6iKv4N6nt0Evi3e_SIs2176squDUWGsNIn8V6XYru628sZqAR1OuDyVQRTELNsZgXW9Z61WBT4o2MMuljNv6gslQ1c2H0sHJ1MFGa1W0rmvVj9emWeZGmc5k"/>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-slate-900 text-white">Juan Pérez</span>
+<span class="text-xs text-slate-500 text-[#92adc9]">Site Manager</span>
+</div>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex flex-1 flex-col overflow-y-auto overflow-x-hidden bg-background-light bg-background-dark">
+<!-- Mobile Header -->
+<header class="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-slate-200 bg-white/80 px-4 backdrop-blur-md border-slate-800 bg-[#111a22]/90 lg:hidden">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl">token</span>
+<span class="font-bold text-slate-900 text-white">Grupo AR</span>
+</div>
+<button class="rounded-lg p-2 text-slate-600 hover:bg-slate-100 text-white hover:bg-slate-800">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<div class="mx-auto w-full max-w-[1400px] p-4 lg:p-8">
+<!-- Page Header & Title -->
+<div class="mb-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+<div class="flex flex-col gap-2">
+<h2 class="font-display text-3xl font-bold tracking-tight text-slate-900 text-white lg:text-4xl">Panel de Jefe de Obra</h2>
+<p class="text-sm font-medium text-slate-500 text-secondary-text">Oct 24, 2023 | Welcome back, Juan</p>
+</div>
+<!-- Search Bar -->
+<div class="w-full lg:w-96">
+<label class="relative flex w-full items-center">
+<span class="absolute left-4 flex items-center justify-center text-slate-400 text-[#92adc9]">
+<span class="material-symbols-outlined">search</span>
+</span>
+<input class="h-12 w-full rounded-xl border-none bg-white py-3 pl-12 pr-4 text-sm font-medium text-slate-900 shadow-sm ring-1 ring-slate-200 placeholder:text-slate-400 focus:ring-2 focus:ring-primary bg-[#233648] text-white ring-0 placeholder:text-[#92adc9]/60" placeholder="Buscar código o nombre de proyecto..." type="text"/>
+</label>
+</div>
+</div>
+<!-- Filters & Quick Stats -->
+<div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+<!-- Chips -->
+<div class="flex flex-wrap gap-2">
+<button class="group flex h-9 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 text-sm font-medium text-slate-600 transition hover:border-primary hover:text-primary border-[#233648] bg-[#233648] text-white hover:border-primary">
+<span>Urgency</span>
+<span class="material-symbols-outlined text-lg">expand_more</span>
+</button>
+<button class="group flex h-9 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 text-sm font-medium text-slate-600 transition hover:border-primary hover:text-primary border-[#233648] bg-[#233648] text-white hover:border-primary">
+<span>Status</span>
+<span class="material-symbols-outlined text-lg">expand_more</span>
+</button>
+<button class="group flex h-9 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 text-sm font-medium text-slate-600 transition hover:border-primary hover:text-primary border-[#233648] bg-[#233648] text-white hover:border-primary">
+<span>Location</span>
+<span class="material-symbols-outlined text-lg">expand_more</span>
+</button>
+<button class="group flex h-9 items-center gap-2 rounded-lg border border-slate-200 bg-white px-3 text-sm font-medium text-slate-600 transition hover:border-primary hover:text-primary border-[#233648] bg-[#233648] text-white hover:border-primary">
+<span>My Tasks</span>
+<span class="material-symbols-outlined text-lg">expand_more</span>
+</button>
+</div>
+<!-- View Toggle -->
+<div class="hidden items-center gap-1 rounded-lg bg-slate-200 p-1 bg-[#233648] sm:flex">
+<button class="rounded p-1.5 text-slate-500 hover:text-slate-900 text-[#92adc9] hover:text-white">
+<span class="material-symbols-outlined">list</span>
+</button>
+<button class="rounded bg-white p-1.5 text-primary shadow-sm bg-[#111a22] text-white">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+</div>
+</div>
+<!-- Content Grid -->
+<div class="@container">
+<div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
+<!-- Project Card 1 -->
+<div class="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all hover:shadow-md border-none bg-[#192633] shadow-none hover:bg-[#202f3e]">
+<!-- Card Header Image -->
+<div class="relative h-48 w-full bg-slate-800">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<img alt="Construction site interior with exposed beams" class="h-full w-full object-cover opacity-90 mix-blend-overlay" data-alt="Construction site interior showing office renovation progress" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCvOlu0x_9vRczvX_AAOwc89hh9s_V3QzG-cM7btLrsAnElln3EE2Z7-D4vIqKNgS6G-_Hq-URvR6bLEaQat8r77bWaptS9o2rRlXM54F9uRZVhUH68L_FksURkL_XGKs73JPiHRGCoi2NI3DrsymbbF5OdNkfbf8-loE6iUN09gTJXZow7sPfWoE44Ykjo2dK7jiXXG8JGCmlCa8ELL3IHESUhC8HcdR7IChqvm1GXroRzSKoTuWoLZU0C2JjtP4n20LgsqGhZzDV"/>
+<div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+<div>
+<div class="mb-1 flex items-center gap-2">
+<span class="inline-flex items-center rounded-md bg-green-500/20 px-2 py-0.5 text-xs font-bold text-green-300 ring-1 ring-inset ring-green-500/30">On Track</span>
+<span class="text-xs font-medium text-white/80">Code: AR-2023-001</span>
+</div>
+<h3 class="font-display text-xl font-bold text-white">Renovation Office Block A</h3>
+</div>
+<div class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm">
+<span class="font-display text-xs font-bold text-white">45%</span>
+</div>
+</div>
+</div>
+<!-- Card Body -->
+<div class="flex flex-1 flex-col justify-between p-5">
+<div class="mb-6 space-y-4">
+<!-- Progress Bar -->
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-medium text-slate-500 text-[#92adc9]">
+<span>Progress</span>
+<span>Deadline: Nov 15</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-slate-100 bg-[#111a22]">
+<div class="h-full rounded-full bg-primary" style="width: 45%"></div>
+</div>
+</div>
+<!-- Details -->
+<div class="space-y-3">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined mt-0.5 text-lg text-slate-400 text-[#92adc9]">location_on</span>
+<span class="text-sm font-medium text-slate-700 text-slate-200">Downtown Branch, 142 Main St.</span>
+</div>
+<div class="rounded-lg bg-slate-50 p-3 bg-[#233648]/50">
+<div class="mb-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary">today</span>
+<span class="text-xs font-bold uppercase tracking-wider text-slate-500 text-[#92adc9]">Daily Brief</span>
+</div>
+<p class="text-sm leading-relaxed text-slate-600 text-slate-300">Install HVAC ducting on 2nd floor; Inspect drywall delivery from supplier.</p>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="grid grid-cols-3 gap-3 border-t border-slate-100 pt-4 border-slate-700">
+<button class="flex flex-col items-center justify-center gap-1 rounded-lg bg-slate-50 py-3 text-slate-700 transition hover:bg-slate-100 bg-[#111a22] text-[#92adc9] hover:bg-[#233648] hover:text-white">
+<span class="material-symbols-outlined">update</span>
+<span class="text-[10px] font-bold uppercase">Progress</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 rounded-lg bg-slate-50 py-3 text-slate-700 transition hover:bg-slate-100 bg-[#111a22] text-[#92adc9] hover:bg-[#233648] hover:text-white">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-[10px] font-bold uppercase">Expense</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 rounded-lg bg-primary/10 py-3 text-primary transition hover:bg-primary/20 bg-primary text-white hover:bg-primary/90">
+<span class="material-symbols-outlined">photo_camera</span>
+<span class="text-[10px] font-bold uppercase">Photo</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all hover:shadow-md border-none bg-[#192633] shadow-none hover:bg-[#202f3e]">
+<!-- Card Header Image -->
+<div class="relative h-48 w-full bg-slate-800">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<img alt="Construction site foundation work" class="h-full w-full object-cover opacity-90 mix-blend-overlay" data-alt="Concrete foundation pouring site view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa3Q6r1WYxDNrM_8g61NE3EEnR_ElTWajTgw9L-tqQbhRXfx6BtpprS-sG-vGU-bT70p-pGT6KMVftU9OOpvJ4OZGlPBo8m3VC4q4l9Xkwd-c7mi4kqZdmLRQeePi1Tgm7fb303x_uUXSeEadd4X7D_JxZfkMXG2-0NmBmNKay1TY_oLUPxyBW2lepCWcM3EKUwmp5yag2DRwsfQtWU5v99oKc6dNSbBSTJ9EVRdFkE-rASAZWjl3ywbWwS6AiZH-nddNv-xMDGWOs"/>
+<div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+<div>
+<div class="mb-1 flex items-center gap-2">
+<span class="inline-flex items-center rounded-md bg-red-500/20 px-2 py-0.5 text-xs font-bold text-red-300 ring-1 ring-inset ring-red-500/30">Delayed</span>
+<span class="text-xs font-medium text-white/80">Code: AR-2023-04B</span>
+</div>
+<h3 class="font-display text-xl font-bold text-white">Residencial "Los Olivos" - Ph 2</h3>
+</div>
+<div class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm">
+<span class="font-display text-xs font-bold text-white">12%</span>
+</div>
+</div>
+</div>
+<!-- Card Body -->
+<div class="flex flex-1 flex-col justify-between p-5">
+<div class="mb-6 space-y-4">
+<!-- Progress Bar -->
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-medium text-slate-500 text-[#92adc9]">
+<span>Progress</span>
+<span class="text-red-400">Due: Yesterday</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-slate-100 bg-[#111a22]">
+<div class="h-full rounded-full bg-red-500" style="width: 12%"></div>
+</div>
+</div>
+<!-- Details -->
+<div class="space-y-3">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined mt-0.5 text-lg text-slate-400 text-[#92adc9]">location_on</span>
+<span class="text-sm font-medium text-slate-700 text-slate-200">Sector 4, West District</span>
+</div>
+<div class="rounded-lg bg-slate-50 p-3 bg-[#233648]/50">
+<div class="mb-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary">today</span>
+<span class="text-xs font-bold uppercase tracking-wider text-slate-500 text-[#92adc9]">Daily Brief</span>
+</div>
+<p class="text-sm leading-relaxed text-slate-600 text-slate-300">Pour concrete for foundation block B; Sign off on rebar inspection with safety officer.</p>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="grid grid-cols-3 gap-3 border-t border-slate-100 pt-4 border-slate-700">
+<button class="flex flex-col items-center justify-center gap-1 rounded-lg bg-slate-50 py-3 text-slate-700 transition hover:bg-slate-100 bg-[#111a22] text-[#92adc9] hover:bg-[#233648] hover:text-white">
+<span class="material-symbols-outlined">update</span>
+<span class="text-[10px] font-bold uppercase">Progress</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 rounded-lg bg-slate-50 py-3 text-slate-700 transition hover:bg-slate-100 bg-[#111a22] text-[#92adc9] hover:bg-[#233648] hover:text-white">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-[10px] font-bold uppercase">Expense</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 rounded-lg bg-primary/10 py-3 text-primary transition hover:bg-primary/20 bg-primary text-white hover:bg-primary/90">
+<span class="material-symbols-outlined">photo_camera</span>
+<span class="text-[10px] font-bold uppercase">Photo</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-all hover:shadow-md border-none bg-[#192633] shadow-none hover:bg-[#202f3e]">
+<!-- Card Header Image -->
+<div class="relative h-48 w-full bg-slate-800">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<img alt="Modern interior fit-out project" class="h-full w-full object-cover opacity-90 mix-blend-overlay" data-alt="Modern interior retail space fit-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQMRTY1H-J7Dz_9kYUda4WAyGAcAi2OOVO8SXvi5ficEt5bN-VLiIrojOya1X5dz2ID0T-NdmTd7tneR54E8n7Ibw1203hiqAS2peeb_8WZq7eZRc-wKy8JZIaZKbXkDug6JfNQXb49WIcu55zc7tjpT02xOa0EyavtISrB4UKEtKcoAGJS7YdaE3jszCbhtVssUVF1T8PwBknavCmJZ9xXFfJIrBWjLnE51cPwEviN9Qm3r4XISlUBttxaiWrQs54r7rtSXPKjPFe"/>
+<div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+<div>
+<div class="mb-1 flex items-center gap-2">
+<span class="inline-flex items-center rounded-md bg-yellow-500/20 px-2 py-0.5 text-xs font-bold text-yellow-300 ring-1 ring-inset ring-yellow-500/30">Action Needed</span>
+<span class="text-xs font-medium text-white/80">Code: AR-2023-019</span>
+</div>
+<h3 class="font-display text-xl font-bold text-white">Retail Fit-Out "Zara"</h3>
+</div>
+<div class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm">
+<span class="font-display text-xs font-bold text-white">88%</span>
+</div>
+</div>
+</div>
+<!-- Card Body -->
+<div class="flex flex-1 flex-col justify-between p-5">
+<div class="mb-6 space-y-4">
+<!-- Progress Bar -->
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-medium text-slate-500 text-[#92adc9]">
+<span>Progress</span>
+<span>Deadline: Oct 30</span>
+</div>
+<div class="h-2 w-full overflow-hidden rounded-full bg-slate-100 bg-[#111a22]">
+<div class="h-full rounded-full bg-primary" style="width: 88%"></div>
+</div>
+</div>
+<!-- Details -->
+<div class="space-y-3">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined mt-0.5 text-lg text-slate-400 text-[#92adc9]">location_on</span>
+<span class="text-sm font-medium text-slate-700 text-slate-200">Mall Plaza, Unit 204</span>
+</div>
+<div class="rounded-lg bg-slate-50 p-3 bg-[#233648]/50">
+<div class="mb-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary">today</span>
+<span class="text-xs font-bold uppercase tracking-wider text-slate-500 text-[#92adc9]">Daily Brief</span>
+</div>
+<p class="text-sm leading-relaxed text-slate-600 text-slate-300">Final lighting tests; Approve signage installation; Cleanup crew coordination.</p>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="grid grid-cols-3 gap-3 border-t border-slate-100 pt-4 border-slate-700">
+<button class="flex flex-col items-center justify-center gap-1 rounded-lg bg-slate-50 py-3 text-slate-700 transition hover:bg-slate-100 bg-[#111a22] text-[#92adc9] hover:bg-[#233648] hover:text-white">
+<span class="material-symbols-outlined">update</span>
+<span class="text-[10px] font-bold uppercase">Progress</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 rounded-lg bg-slate-50 py-3 text-slate-700 transition hover:bg-slate-100 bg-[#111a22] text-[#92adc9] hover:bg-[#233648] hover:text-white">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-[10px] font-bold uppercase">Expense</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-1 rounded-lg bg-primary/10 py-3 text-primary transition hover:bg-primary/20 bg-primary text-white hover:bg-primary/90">
+<span class="material-symbols-outlined">photo_camera</span>
+<span class="text-[10px] font-bold uppercase">Photo</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

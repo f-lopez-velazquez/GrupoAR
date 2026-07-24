@@ -1,0 +1,233 @@
+﻿<!DOCTYPE html>
+<html lang="es" class="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Proveedores - Grupo AR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/tailwind.css" />
+    <link rel="stylesheet" href="/assets/theme.css" />
+  </head>
+  <body class="bg-background-light bg-background-dark text-slate-900 text-white font-display min-h-screen">
+    <header class="sticky top-0 z-30 flex items-center justify-between border-b border-slate-200 border-slate-800 bg-white bg-[#111827] px-6 py-4">
+      <div class="flex items-center gap-3">
+        <img src="/assets/logo.png" class="h-9 w-9" alt="Logo Grupo AR" />
+        <div>
+          <h1 class="text-lg font-bold">Grupo AR</h1>
+          <p class="text-xs text-slate-500 text-slate-400">Gestión de proveedores</p>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 text-slate-300">
+        <a href="/dashboard-ejecutivo" class="hover:text-primary">Panel</a>
+        <a href="/inventario" class="hover:text-primary">Inventario</a>
+        <a href="/pos" class="hover:text-primary">Ventas</a>
+        <a href="/proveedores" class="text-primary font-semibold">Proveedores</a>
+        <a href="/ajustes" class="hover:text-primary">Ajustes</a>
+      </nav>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-8 flex flex-col gap-6">
+      <section class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-bold">Catálogo de proveedores</h2>
+          <p class="text-sm text-slate-500 text-slate-400">Registra contactos clave para compras, cotizaciones y logística.</p>
+        </div>
+        <div class="flex gap-3">
+          <button id="newVendorBtn" class="px-4 py-2 rounded-lg bg-primary text-white text-sm font-semibold">Nuevo proveedor</button>
+        </div>
+      </section>
+
+      <section class="bg-white bg-[#111827] border border-slate-200 border-slate-800 rounded-xl shadow-sm overflow-hidden">
+        <div class="p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+          <input id="vendorSearch" class="h-10 w-full md:w-64 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3 text-sm" placeholder="Buscar por nombre o categoría" />
+          <span id="vendorCount" class="text-xs text-slate-500">0 proveedores</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-slate-50 bg-slate-900 text-slate-500">
+              <tr>
+                <th class="px-4 py-3">Proveedor</th>
+                <th class="px-4 py-3">Contacto</th>
+                <th class="px-4 py-3">Teléfono</th>
+                <th class="px-4 py-3">Categoría</th>
+                <th class="px-4 py-3">Estado</th>
+                <th class="px-4 py-3 text-right">Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="vendorTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <div id="vendorModal" class="fixed inset-0 z-[90] hidden items-center justify-center bg-black/60 p-6">
+      <div class="w-full max-w-lg rounded-2xl bg-white bg-[#111827] p-6 shadow-2xl">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-lg font-bold">Proveedor</h3>
+          <button id="vendorModalClose" class="text-slate-400 hover:text-slate-600">×</button>
+        </div>
+        <form id="vendorForm" class="grid grid-cols-1 gap-3">
+          <input id="vendorName" class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3" placeholder="Nombre del proveedor" required />
+          <input id="vendorContact" class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3" placeholder="Contacto principal" />
+          <input id="vendorPhone" class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3" placeholder="Teléfono" />
+          <input id="vendorEmail" type="email" class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3" placeholder="Correo" />
+          <input id="vendorCategory" class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3" placeholder="Categoría" />
+          <textarea id="vendorNotes" class="min-h-[80px] rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3 py-2" placeholder="Notas"></textarea>
+          <div class="flex justify-end gap-3 pt-2">
+            <button type="button" id="vendorModalCancel" class="px-4 py-2 rounded-lg border border-slate-200 border-slate-700">Cancelar</button>
+            <button type="submit" class="px-4 py-2 rounded-lg bg-primary text-white font-semibold">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module">
+      import { ensureAuth } from "/shared/auth.js";
+      import { db } from "/shared/firebase.js";
+      import {
+        addDoc,
+        collection,
+        deleteDoc,
+        doc,
+        onSnapshot,
+        serverTimestamp,
+        updateDoc,
+      } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+      const vendorTableBody = document.getElementById("vendorTableBody");
+      const vendorSearch = document.getElementById("vendorSearch");
+      const vendorCount = document.getElementById("vendorCount");
+      const modal = document.getElementById("vendorModal");
+      const modalClose = document.getElementById("vendorModalClose");
+      const modalCancel = document.getElementById("vendorModalCancel");
+      const newVendorBtn = document.getElementById("newVendorBtn");
+      const vendorForm = document.getElementById("vendorForm");
+
+      const fields = {
+        name: document.getElementById("vendorName"),
+        contact: document.getElementById("vendorContact"),
+        phone: document.getElementById("vendorPhone"),
+        email: document.getElementById("vendorEmail"),
+        category: document.getElementById("vendorCategory"),
+        notes: document.getElementById("vendorNotes"),
+      };
+
+      let vendors = [];
+      let editingId = null;
+
+      const openModal = () => {
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      };
+      const closeModal = () => {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+        vendorForm.reset();
+        editingId = null;
+      };
+
+      newVendorBtn.addEventListener("click", openModal);
+      modalClose.addEventListener("click", closeModal);
+      modalCancel.addEventListener("click", closeModal);
+
+      const render = () => {
+        const term = vendorSearch.value.trim().toLowerCase();
+        const filtered = term
+          ? vendors.filter((vendor) =>
+              [vendor.name, vendor.category, vendor.contact]
+                .filter(Boolean)
+                .some((value) => value.toLowerCase().includes(term))
+            )
+          : vendors;
+        vendorCount.textContent = `${filtered.length} proveedores`;
+        vendorTableBody.innerHTML = "";
+        if (!filtered.length) {
+          vendorTableBody.innerHTML = `<tr><td colspan="6" class="px-4 py-6 text-center text-slate-500">Sin proveedores registrados.</td></tr>`;
+          return;
+        }
+        filtered.forEach((vendor) => {
+          vendorTableBody.insertAdjacentHTML(
+            "beforeend",
+            `<tr class="border-b border-slate-100 border-slate-800">
+              <td class="px-4 py-3 font-semibold">${vendor.name || "Proveedor"}</td>
+              <td class="px-4 py-3 text-slate-500">${vendor.contact || "-"}</td>
+              <td class="px-4 py-3 text-slate-500">${vendor.phone || "-"}</td>
+              <td class="px-4 py-3 text-slate-500">${vendor.category || "-"}</td>
+              <td class="px-4 py-3">
+                <span class="inline-flex items-center rounded-full bg-emerald-100 text-emerald-700 text-xs px-2 py-1">Activo</span>
+              </td>
+              <td class="px-4 py-3 text-right">
+                <button data-action="edit" data-id="${vendor.id}" class="text-xs text-primary hover:underline mr-2">Editar</button>
+                <button data-action="delete" data-id="${vendor.id}" class="text-xs text-rose-500 hover:underline">Eliminar</button>
+              </td>
+            </tr>`
+          );
+        });
+      };
+
+      vendorSearch.addEventListener("input", render);
+
+      vendorForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const payload = {
+          name: fields.name.value.trim(),
+          contact: fields.contact.value.trim(),
+          phone: fields.phone.value.trim(),
+          email: fields.email.value.trim(),
+          category: fields.category.value.trim(),
+          notes: fields.notes.value.trim(),
+          updatedAt: serverTimestamp(),
+        };
+        if (editingId) {
+          await updateDoc(doc(db, "vendors", editingId), payload);
+        } else {
+          await addDoc(collection(db, "vendors"), { ...payload, createdAt: serverTimestamp() });
+        }
+        closeModal();
+      });
+
+      vendorTableBody.addEventListener("click", async (event) => {
+        const btn = event.target.closest("button[data-action]");
+        if (!btn) return;
+        const vendor = vendors.find((item) => item.id === btn.dataset.id);
+        if (!vendor) return;
+        if (btn.dataset.action === "edit") {
+          editingId = vendor.id;
+          fields.name.value = vendor.name || "";
+          fields.contact.value = vendor.contact || "";
+          fields.phone.value = vendor.phone || "";
+          fields.email.value = vendor.email || "";
+          fields.category.value = vendor.category || "";
+          fields.notes.value = vendor.notes || "";
+          openModal();
+        }
+        if (btn.dataset.action === "delete") {
+          if (confirm("¿Eliminar proveedor?")) {
+            await deleteDoc(doc(db, "vendors", vendor.id));
+          }
+        }
+      });
+
+      ensureAuth({ allowRoles: ["Admin"], allowPermissions: ["vendors"] }).then(() => {
+        onSnapshot(collection(db, "vendors"), (snapshot) => {
+          vendors = snapshot.docs.map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }));
+          render();
+        });
+      });
+    </script>
+    <script type="module" src="/shared/footer.js"></script>
+    <script type="module" src="/shared/i18n-es.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+

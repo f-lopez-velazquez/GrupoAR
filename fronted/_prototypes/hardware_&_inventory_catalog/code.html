@@ -1,0 +1,420 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hardware &amp; Inventory Catalog - Grupo AR</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<!-- Theme Config -->
+<style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-white font-display overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Sidebar Navigation -->
+<aside class="hidden md:flex flex-col w-64 h-full bg-sidebar border-r border-white/5 flex-shrink-0">
+<div class="p-6">
+<div class="flex flex-col gap-1">
+<h1 class="text-white text-xl font-bold leading-normal tracking-tight">Grupo AR</h1>
+<p class="text-[#8f90cc] text-xs font-medium uppercase tracking-wider">Enterprise ERP</p>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 space-y-2">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#8f90cc] hover:text-white hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#8f90cc] group-hover:text-white">dashboard</span>
+<span class="text-sm font-medium">Panel</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#8f90cc] hover:text-white hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#8f90cc] group-hover:text-white">folder</span>
+<span class="text-sm font-medium">Proyectos</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/20 border border-primary/20 text-white shadow-sm" href="#">
+<span class="material-symbols-outlined text-primary fill-1">inventory_2</span>
+<span class="text-sm font-bold">Inventario</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#8f90cc] hover:text-white hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#8f90cc] group-hover:text-white">attach_money</span>
+<span class="text-sm font-medium">Finanzas</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#8f90cc] hover:text-white hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#8f90cc] group-hover:text-white">people</span>
+<span class="text-sm font-medium">HR &amp; Team</span>
+</a>
+</nav>
+<div class="p-4 mt-auto border-t border-white/5">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-[#8f90cc] hover:text-white hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#8f90cc] group-hover:text-white">settings</span>
+<span class="text-sm font-medium">Ajustes</span>
+</a>
+<div class="flex items-center gap-3 px-3 py-4 mt-2">
+<div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-blue-400 flex items-center justify-center text-xs font-bold text-white shadow-lg shadow-primary/30">JD</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-white">John Doe</span>
+<span class="text-xs text-[#8f90cc]">Admin</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Top Header & Actions -->
+<header class="flex-shrink-0 bg-white bg-background-dark/50 backdrop-blur-md border-b border-slate-200 border-white/5 z-10">
+<div class="px-6 py-5">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 mb-4 text-sm">
+<a class="text-[#8f90cc] hover:text-primary transition-colors font-medium" href="#">Inventario</a>
+<span class="text-[#8f90cc] material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-slate-900 text-white font-medium">Catálogo</span>
+</div>
+<div class="flex flex-col xl:flex-row xl:items-end justify-between gap-6">
+<!-- Title -->
+<div>
+<h2 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900 text-white mb-2">Hardware Catalog</h2>
+<p class="text-slate-500 text-[#8f90cc] text-sm max-w-2xl">Manage your construction hardware, track real-time stock levels, and update pricing across all warehouses.</p>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-wrap items-center gap-3">
+<button class="flex items-center justify-center gap-2 h-10 px-4 rounded-lg bg-white bg-[#222249] border border-slate-200 border-white/10 text-slate-700 text-white text-sm font-bold hover:bg-slate-50 hover:bg-[#2d2d5a] transition-all shadow-sm">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Add Item</span>
+</button>
+<button class="flex items-center justify-center gap-2 h-10 px-4 rounded-lg bg-white bg-[#222249] border border-slate-200 border-white/10 text-slate-700 text-white text-sm font-bold hover:bg-slate-50 hover:bg-[#2d2d5a] transition-all shadow-sm">
+<span class="material-symbols-outlined text-[20px]">file_download</span>
+<span>Export Report</span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 bg-white/10 mx-1 hidden sm:block"></div>
+<button class="flex items-center justify-center gap-2 h-12 px-6 rounded-lg bg-primary hover:bg-blue-700 text-white text-base font-bold shadow-lg shadow-primary/25 transition-all transform active:scale-95">
+<span class="material-symbols-outlined">cloud_upload</span>
+<span>Import JSON</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Filters & Search Toolbar -->
+<div class="flex-shrink-0 px-6 py-4 border-b border-slate-200 border-white/5 bg-slate-50 bg-[#15152a]">
+<div class="flex flex-col md:flex-row gap-4 justify-between">
+<!-- Search -->
+<div class="relative flex-1 max-w-md group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary material-symbols-outlined">search</span>
+<input class="w-full h-10 pl-10 pr-4 rounded-lg bg-white bg-[#101023] border border-slate-200 border-white/10 text-slate-900 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm transition-all shadow-sm" placeholder="Buscar por nombre, SKU o etiqueta..." type="text"/>
+</div>
+<!-- Filter Controls -->
+<div class="flex flex-wrap items-center gap-3">
+<div class="relative">
+<select class="appearance-none h-10 pl-4 pr-10 rounded-lg bg-white bg-[#101023] border border-slate-200 border-white/10 text-slate-700 text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/50 cursor-pointer shadow-sm">
+<option>Category: All</option>
+<option>Power Tools</option>
+<option>Hand Tools</option>
+<option>Raw Materials</option>
+<option>Plumbing</option>
+</select>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+<div class="relative">
+<select class="appearance-none h-10 pl-4 pr-10 rounded-lg bg-white bg-[#101023] border border-slate-200 border-white/10 text-slate-700 text-white text-sm font-medium focus:outline-none focus:ring-2 focus:ring-primary/50 cursor-pointer shadow-sm">
+<option>Stock: All Status</option>
+<option>In Stock</option>
+<option>Low Stock</option>
+<option>Out of Stock</option>
+</select>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none material-symbols-outlined text-[20px]">expand_more</span>
+</div>
+<div class="h-8 w-[1px] bg-slate-200 bg-white/10 mx-1"></div>
+<div class="flex bg-white bg-[#101023] rounded-lg p-1 border border-slate-200 border-white/10 shadow-sm">
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-white shadow-sm">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded text-slate-400 hover:text-slate-700 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">view_list</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Scrollable Grid Area -->
+<div class="flex-1 overflow-y-auto p-6 scrollbar-hide">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 pb-6">
+<!-- Card 1 -->
+<div class="group relative flex flex-col bg-card-light bg-card-dark rounded-xl overflow-hidden border border-slate-200 border-white/5 hover:border-primary/50 hover:border-primary/50 transition-all hover:shadow-xl hover:shadow-primary/5">
+<div class="relative h-48 w-full bg-slate-100 bg-[#15152a] overflow-hidden">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Yellow cordless drill on a wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDF3ItP3cYTKQ1wYJzOXlre8Zs4G3GErVrkoXjWlQn4_L3YZ9ruLVziBePZlGj08VmquMwD_fdyECRlVtUu2wThnSDCm41ZlCCm96ofOuWmIcW3mhywBzqXBwhSAxk6J305irmCiZh_E4Dugf9dNJh2vms60xvjf4qskf4i-Cn0TaqAbg_kzMZhXm8ilC7Y4qNwPhDvKB4ECzq32Yv0uFSZvV0ui-ak7fXJxO_HcOjg8bxzpvnwwRIlU2bzjdwwRVvHt9ceN2-Vb_J0"/>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center px-2 py-1 rounded bg-green-500/10 text-green-600 text-green-400 text-xs font-bold border border-green-500/20 backdrop-blur-sm">
+                                    In Stock
+                                </span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-4">
+<div class="flex justify-between items-start gap-2 mb-2">
+<span class="text-xs font-bold uppercase tracking-wider text-primary">Power Tools</span>
+<span class="text-xs text-slate-400 text-[#8f90cc]">SKU: DW-771</span>
+</div>
+<h3 class="text-slate-900 text-white font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors">Cordless Drill Driver 20V Max</h3>
+<div class="mt-auto pt-4 flex items-end justify-between border-t border-slate-100 border-white/5">
+<div class="flex flex-col">
+<span class="text-xs text-slate-400 text-[#8f90cc]">Price per unit</span>
+<span class="text-xl font-black text-slate-900 text-white">$129.00</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-xs text-slate-400 text-[#8f90cc]">Stock</span>
+<span class="text-sm font-bold text-slate-700 text-white">124 <span class="text-xs font-normal text-slate-400">pcs</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative flex flex-col bg-card-light bg-card-dark rounded-xl overflow-hidden border border-slate-200 border-white/5 hover:border-primary/50 hover:border-primary/50 transition-all hover:shadow-xl hover:shadow-primary/5">
+<div class="relative h-48 w-full bg-slate-100 bg-[#15152a] overflow-hidden">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Stack of cement bags on a pallet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAyNjp4M-kJSUbkZpq5xbl89gHq-jP2_WjOwFU0crBuqakVVZMiZqL5HxZBDnKS19Xenk48iS0h-alPopXya57v5Q3NMQ_8MmSfGjRNTeSlby4ziFMIAUGqAu7QXy-0XvrzLyzYl7LNHsQJrgZzpvJ6Pbvz6jj2fOj43N1IJJUe7faK4qqTecunTlvdwFGbsDvcY1smyjW4Ql9TEzD0hCsEdqMD0McV9efQHM466vZr-wCARAbPrV4wS3EoE6rIYAfTPWkF2j4fPxs"/>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center px-2 py-1 rounded bg-red-500/10 text-red-600 text-red-400 text-xs font-bold border border-red-500/20 backdrop-blur-sm">
+                                    Low Stock
+                                </span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-4">
+<div class="flex justify-between items-start gap-2 mb-2">
+<span class="text-xs font-bold uppercase tracking-wider text-primary">Raw Materials</span>
+<span class="text-xs text-slate-400 text-[#8f90cc]">SKU: CEM-001</span>
+</div>
+<h3 class="text-slate-900 text-white font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors">Portland Cement Type I (50kg)</h3>
+<div class="mt-auto pt-4 flex items-end justify-between border-t border-slate-100 border-white/5">
+<div class="flex flex-col">
+<span class="text-xs text-slate-400 text-[#8f90cc]">Price per unit</span>
+<span class="text-xl font-black text-slate-900 text-white">$12.50</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-xs text-slate-400 text-[#8f90cc]">Stock</span>
+<span class="text-sm font-bold text-red-500">15 <span class="text-xs font-normal text-slate-400">bags</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative flex flex-col bg-card-light bg-card-dark rounded-xl overflow-hidden border border-slate-200 border-white/5 hover:border-primary/50 hover:border-primary/50 transition-all hover:shadow-xl hover:shadow-primary/5">
+<div class="relative h-48 w-full bg-slate-100 bg-[#15152a] overflow-hidden">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Industrial metal pipes stacked" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl1ESvV9HThckmGOV8KRHqGoTpDMxWw6nVvAySfaTqLULd01C_nKmESEQzgCMwriXHNuXreHY_GPXc4qcOtc-z1FH1u8vsm-RJPy-K68AgP7QArsXTVcSDmhtCw8crvN7GZNHE5GL-_pO2cqtp2Ug2RYDQK-MPEQ7FIlJCYSaEFZuFNDbOrytpXYqeYvwKgw9XaXZlHIWwaxVi9D8XPsSjrOdaLZWdui7FyW9Ba3uu1DEGWOwrbfvdiDCLZzDt1QiNMti1ud03aBQk"/>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center px-2 py-1 rounded bg-green-500/10 text-green-600 text-green-400 text-xs font-bold border border-green-500/20 backdrop-blur-sm">
+                                    In Stock
+                                </span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-4">
+<div class="flex justify-between items-start gap-2 mb-2">
+<span class="text-xs font-bold uppercase tracking-wider text-primary">Plumbing</span>
+<span class="text-xs text-slate-400 text-[#8f90cc]">SKU: PIP-PVC-4</span>
+</div>
+<h3 class="text-slate-900 text-white font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors">PVC Pipe Schedule 40 - 4 Inch</h3>
+<div class="mt-auto pt-4 flex items-end justify-between border-t border-slate-100 border-white/5">
+<div class="flex flex-col">
+<span class="text-xs text-slate-400 text-[#8f90cc]">Price per unit</span>
+<span class="text-xl font-black text-slate-900 text-white">$24.00</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-xs text-slate-400 text-[#8f90cc]">Stock</span>
+<span class="text-sm font-bold text-slate-700 text-white">450 <span class="text-xs font-normal text-slate-400">ft</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group relative flex flex-col bg-card-light bg-card-dark rounded-xl overflow-hidden border border-slate-200 border-white/5 hover:border-primary/50 hover:border-primary/50 transition-all hover:shadow-xl hover:shadow-primary/5">
+<div class="relative h-48 w-full bg-slate-100 bg-[#15152a] overflow-hidden">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Safety helmet and gloves on construction site" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDa2AZv5vggE7iZ1ldCDmuqWT5CiTIrvsKjWqJ7FbnW8ed3arcFW21R1-Zu3gyFK4gy5XQCqoulsEToeQ_lgAkxnQ8cZ_uPmvzyJSEftTmPqVpAvpB_q7Jk_uywORDc3cvNLGfXsCoC-2zNyiXhoZA5Qh_XuuqNFcecFxfUmIuylbNsKeqB6_AGwuDxoOFUL5detB9Krd8c6MGasFhVCnYFByKQcA6HvUG7VDwb5lt5QvIhLnmGAhTDdplwywuaj-ltwNZMAsa6BPKa"/>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center px-2 py-1 rounded bg-orange-500/10 text-orange-600 text-orange-400 text-xs font-bold border border-orange-500/20 backdrop-blur-sm">
+                                    On Order
+                                </span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-4">
+<div class="flex justify-between items-start gap-2 mb-2">
+<span class="text-xs font-bold uppercase tracking-wider text-primary">Safety Gear</span>
+<span class="text-xs text-slate-400 text-[#8f90cc]">SKU: SAF-HLM-Y</span>
+</div>
+<h3 class="text-slate-900 text-white font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors">Industrial Safety Helmet (Yellow)</h3>
+<div class="mt-auto pt-4 flex items-end justify-between border-t border-slate-100 border-white/5">
+<div class="flex flex-col">
+<span class="text-xs text-slate-400 text-[#8f90cc]">Price per unit</span>
+<span class="text-xl font-black text-slate-900 text-white">$18.99</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-xs text-slate-400 text-[#8f90cc]">Stock</span>
+<span class="text-sm font-bold text-slate-700 text-white">0 <span class="text-xs font-normal text-slate-400">pcs</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group relative flex flex-col bg-card-light bg-card-dark rounded-xl overflow-hidden border border-slate-200 border-white/5 hover:border-primary/50 hover:border-primary/50 transition-all hover:shadow-xl hover:shadow-primary/5">
+<div class="relative h-48 w-full bg-slate-100 bg-[#15152a] overflow-hidden">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Assortment of metal bolts and screws" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAjbh2cjRWSfkP7kUPQ8vtIoPXfHblEAezPDbnQD2iXUcBa-hzmH2IXHChB86BwoaPOICd3nid5HCuvM99cyWNZfGsYk__z3kcWSsoDx_4zfLqJVZQg6dgaSm4pLkFumbq3WcpmGBv3Szd95RJRVCaCVSQpMdKOwHcdsHvoM4cg93MPY19jbmByz5FEbyYvXwGniLPWgDWgLznHered53DfNp5ahOT7XHnHsp6-eGrE8umuFyCpPaRtIgH1IYOYy3jftObHrfED38m"/>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center px-2 py-1 rounded bg-green-500/10 text-green-600 text-green-400 text-xs font-bold border border-green-500/20 backdrop-blur-sm">
+                                    In Stock
+                                </span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-4">
+<div class="flex justify-between items-start gap-2 mb-2">
+<span class="text-xs font-bold uppercase tracking-wider text-primary">Fasteners</span>
+<span class="text-xs text-slate-400 text-[#8f90cc]">SKU: BLT-M10</span>
+</div>
+<h3 class="text-slate-900 text-white font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors">Hex Bolt M10 x 50mm (Pack of 100)</h3>
+<div class="mt-auto pt-4 flex items-end justify-between border-t border-slate-100 border-white/5">
+<div class="flex flex-col">
+<span class="text-xs text-slate-400 text-[#8f90cc]">Price per unit</span>
+<span class="text-xl font-black text-slate-900 text-white">$8.50</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-xs text-slate-400 text-[#8f90cc]">Stock</span>
+<span class="text-sm font-bold text-slate-700 text-white">2,500 <span class="text-xs font-normal text-slate-400">pks</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group relative flex flex-col bg-card-light bg-card-dark rounded-xl overflow-hidden border border-slate-200 border-white/5 hover:border-primary/50 hover:border-primary/50 transition-all hover:shadow-xl hover:shadow-primary/5">
+<div class="relative h-48 w-full bg-slate-100 bg-[#15152a] overflow-hidden">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Circular saw cutting wood" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATXcpVwehj44y6ihp3w58wIgyXooZ1JM89yjcn-QbWyKHTMAtG29A6_LvS44g4-N7s0nrR38pbTBuqeKFQikrRK4mBA3J-nC276d4Y1zMXsYz-Mw5B-1B7od6lrKZV2KsjVfqaZJQT6Vnw5B6ulFDrJvairchBcQOTovs0TDvwa1k4SzHGmWdUczYuA3I7TyRVBmekAZpek7ts5uxR5o7LyBtH0ael_DjIfLbdc8-PZiB4h8iqnxQYXGTvKfJii7aZuQb64lquoU4Z"/>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center px-2 py-1 rounded bg-red-500/10 text-red-600 text-red-400 text-xs font-bold border border-red-500/20 backdrop-blur-sm">
+                                    Low Stock
+                                </span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-4">
+<div class="flex justify-between items-start gap-2 mb-2">
+<span class="text-xs font-bold uppercase tracking-wider text-primary">Power Tools</span>
+<span class="text-xs text-slate-400 text-[#8f90cc]">SKU: SAW-CIRC-7</span>
+</div>
+<h3 class="text-slate-900 text-white font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors">Circular Saw 7-1/4 Inch</h3>
+<div class="mt-auto pt-4 flex items-end justify-between border-t border-slate-100 border-white/5">
+<div class="flex flex-col">
+<span class="text-xs text-slate-400 text-[#8f90cc]">Price per unit</span>
+<span class="text-xl font-black text-slate-900 text-white">$89.00</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-xs text-slate-400 text-[#8f90cc]">Stock</span>
+<span class="text-sm font-bold text-red-500">5 <span class="text-xs font-normal text-slate-400">pcs</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 7 -->
+<div class="group relative flex flex-col bg-card-light bg-card-dark rounded-xl overflow-hidden border border-slate-200 border-white/5 hover:border-primary/50 hover:border-primary/50 transition-all hover:shadow-xl hover:shadow-primary/5">
+<div class="relative h-48 w-full bg-slate-100 bg-[#15152a] overflow-hidden">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Electric cables and wires" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4B8LFrHuqh6-lnEIz9g8fNA5_tRW3sO2tqUueLia34dMhQxs84yo8XbYG1ykqZ6y52Gu1eQ7Gl1T1ie4FASbs3h0ko3P21yGC9NwHrCqFD-9WwzSBZqfqU8Z_5fH2XRiloBhs4a6wN711MPnWL_5wXFhurrJDDeKsn_IxLtrXPx6tWIj3FgwatDQdTUCCZL9b1UNcqQus_Z3FfFrWu-l7gOuSRUiYc4kuS7ycTNeaykFZEa_Hfc20_0H5D3CR-p5D4ybrNvxlaRfq"/>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center px-2 py-1 rounded bg-green-500/10 text-green-600 text-green-400 text-xs font-bold border border-green-500/20 backdrop-blur-sm">
+                                    In Stock
+                                </span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-4">
+<div class="flex justify-between items-start gap-2 mb-2">
+<span class="text-xs font-bold uppercase tracking-wider text-primary">Electrical</span>
+<span class="text-xs text-slate-400 text-[#8f90cc]">SKU: WIR-12G-100</span>
+</div>
+<h3 class="text-slate-900 text-white font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors">12/2 NM-B Wire 100ft Roll</h3>
+<div class="mt-auto pt-4 flex items-end justify-between border-t border-slate-100 border-white/5">
+<div class="flex flex-col">
+<span class="text-xs text-slate-400 text-[#8f90cc]">Price per unit</span>
+<span class="text-xl font-black text-slate-900 text-white">$65.00</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-xs text-slate-400 text-[#8f90cc]">Stock</span>
+<span class="text-sm font-bold text-slate-700 text-white">82 <span class="text-xs font-normal text-slate-400">rolls</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 8 -->
+<div class="group relative flex flex-col bg-card-light bg-card-dark rounded-xl overflow-hidden border border-slate-200 border-white/5 hover:border-primary/50 hover:border-primary/50 transition-all hover:shadow-xl hover:shadow-primary/5">
+<div class="relative h-48 w-full bg-slate-100 bg-[#15152a] overflow-hidden">
+<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500" data-alt="Paint brushes and rollers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5xPowLPQH9Aqw9lYZeMDUjLW_jZ_Rm_le3BxMl3HHCokMkHDHecw4g8wiSa0ky-x0nNRfTD8tYq-46YSw_RcKe_s3oqGSoohVRH5jiOI7r1cNHKaZ0Hqq-8dFbE5ZTwB31M_cXzN_Lne1iVH9oDXY-AdCc9l-ci16SS_SH7HEDPqDqxF_b5fbm5SYH0swJNByVXautPe4I7rFP1Jdc-EG-6XfyDNQX_afEtZRZieolxCAikHOsY6WIWxlPxHvW7bi3bHmaZUHnw-t"/>
+<div class="absolute top-3 right-3">
+<span class="inline-flex items-center px-2 py-1 rounded bg-green-500/10 text-green-600 text-green-400 text-xs font-bold border border-green-500/20 backdrop-blur-sm">
+                                    In Stock
+                                </span>
+</div>
+</div>
+<div class="flex flex-col flex-1 p-4">
+<div class="flex justify-between items-start gap-2 mb-2">
+<span class="text-xs font-bold uppercase tracking-wider text-primary">Painting</span>
+<span class="text-xs text-slate-400 text-[#8f90cc]">SKU: PNT-KIT-PRO</span>
+</div>
+<h3 class="text-slate-900 text-white font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors">Professional Paint Kit 9pc</h3>
+<div class="mt-auto pt-4 flex items-end justify-between border-t border-slate-100 border-white/5">
+<div class="flex flex-col">
+<span class="text-xs text-slate-400 text-[#8f90cc]">Price per unit</span>
+<span class="text-xl font-black text-slate-900 text-white">$22.50</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-xs text-slate-400 text-[#8f90cc]">Stock</span>
+<span class="text-sm font-bold text-slate-700 text-white">210 <span class="text-xs font-normal text-slate-400">kits</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex flex-col sm:flex-row items-center justify-between border-t border-slate-200 border-white/5 pt-6 gap-4">
+<p class="text-sm text-slate-500 text-[#8f90cc]">
+                        Showing <span class="font-bold text-slate-900 text-white">1-8</span> of <span class="font-bold text-slate-900 text-white">432</span> products
+                    </p>
+<div class="flex items-center gap-1">
+<button class="w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 border-white/10 text-slate-400 hover:text-primary hover:border-primary disabled:opacity-50 transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg bg-primary text-white text-sm font-bold">1</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 border-white/10 text-slate-600 text-slate-300 hover:bg-slate-50 hover:bg-white/5 text-sm font-medium transition-colors">2</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 border-white/10 text-slate-600 text-slate-300 hover:bg-slate-50 hover:bg-white/5 text-sm font-medium transition-colors">3</button>
+<span class="px-2 text-slate-400">...</span>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 border-white/10 text-slate-600 text-slate-300 hover:bg-slate-50 hover:bg-white/5 text-sm font-medium transition-colors">54</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 border-white/10 text-slate-400 hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

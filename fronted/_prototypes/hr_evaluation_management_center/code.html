@@ -1,0 +1,552 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Centro de evaluaciones - Grupo AR</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<!-- Theme Configuration -->
+<style>
+        body {
+            font-family: "Public Sans", sans-serif;
+        }
+        /* Custom scrollbar for better look in table */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-white overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Sidebar -->
+<aside class="hidden lg:flex flex-col w-72 bg-white bg-[#1a2632] border-r border-slate-200 border-slate-800 flex-shrink-0">
+<div class="flex flex-col h-full p-4 justify-between">
+<div class="flex flex-col gap-6">
+<!-- Brand / User Profile -->
+<div class="flex items-center gap-3 px-2 py-2">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12 shadow-sm" data-alt="HR Admin profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBiZTDLLjLRXPu0t4LLi3XDkbUf2tamRCOWNEBxc9ohXNNjap4hGKKaJR8tmNpT8_Nwj_DXRPNe0vsCd9N-U4KXVmEZRJwIk_2W7Vkxi-_e_ds-zSUMY5M_f3qK_vXgDimbGxykpMtjXuIEAHKP4X2wGZqUMOocv64IB2d0eAvdimKYhoNz23OEmCg9_YzYNZuGpre3sTCeLxulpxgk842BB9E2LzXr4pf55Es9V5mODzzfkOnj51S_NPYUq9dg62rB7xtn97FuzEh7");'></div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 text-white text-base font-bold leading-tight">Administrador RRHH</h1>
+<p class="text-slate-500 text-slate-400 text-sm font-normal">Gestión interna</p>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 text-slate-300 hover:bg-slate-50 hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors">dashboard</span>
+<span class="text-sm font-medium">Panel</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 text-slate-300 hover:bg-slate-50 hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors">group</span>
+<span class="text-sm font-medium">Empleados</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 text-slate-300 hover:bg-slate-50 hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors">payments</span>
+<span class="text-sm font-medium">Nómina</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary text-primary font-semibold" href="#">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">assignment</span>
+<span class="text-sm">Evaluaciones</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 text-slate-300 hover:bg-slate-50 hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm font-medium">Ajustes</span>
+</a>
+</nav>
+</div>
+<div class="px-3">
+<button class="flex w-full items-center gap-3 px-3 py-2.5 rounded-lg text-corporate-red hover:bg-red-50 hover:bg-red-900/10 transition-colors">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm font-medium">Salir</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex flex-col flex-1 h-full overflow-hidden relative">
+<!-- Top Header -->
+<header class="flex items-center justify-between border-b border-slate-200 border-slate-800 bg-white bg-[#1a2632] px-8 py-4 z-10">
+<div class="flex items-center gap-4">
+<div class="lg:hidden p-2 rounded-md hover:bg-slate-100 cursor-pointer">
+<span class="material-symbols-outlined">menu</span>
+</div>
+<div class="flex items-center gap-2 text-slate-900 text-white">
+<div class="p-1.5 bg-primary/10 rounded-md text-primary">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<h2 class="text-lg font-bold leading-tight">Centro de evaluaciones</h2>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<!-- Search (Desktop) -->
+<div class="hidden md:flex relative">
+<input class="pl-10 pr-4 py-2 bg-slate-100 bg-slate-800 border-none rounded-lg text-sm text-slate-700 text-slate-200 focus:ring-2 focus:ring-primary w-64 placeholder-slate-400" placeholder="Buscar sitio o encargado..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-slate-400 text-[20px]">search</span>
+</div>
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 hover:bg-slate-800 text-slate-600 text-slate-300 relative transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-corporate-red rounded-full border-2 border-white border-[#1a2632]"></span>
+</button>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto bg-background-light bg-background-dark p-6 md:p-10">
+<div class="max-w-6xl mx-auto flex flex-col gap-8">
+<!-- Page Heading & Actions -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-slate-900 text-white text-3xl font-black tracking-tight">Panel de evaluaciones semanales</h1>
+<div class="flex items-center gap-2 text-slate-500 text-slate-400">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<p id="currentWeekLabel" class="text-sm font-medium">Semana en curso</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button id="exportEvaluationBtn" class="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-slate-300 border-slate-600 bg-white bg-slate-800 text-slate-700 text-slate-200 text-sm font-bold hover:bg-slate-50 hover:bg-slate-700 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                                Exportar reporte
+                            </button>
+<button id="createEvaluationBtn" class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold shadow-md shadow-blue-500/20 hover:bg-blue-600 transition-colors">
+<span class="material-symbols-outlined text-[20px]">send</span>
+                                Enviar evaluación semanal
+                            </button>
+</div>
+</div>
+<!-- KPI Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Stat 1 -->
+<div class="bg-white bg-[#1a2632] rounded-xl p-6 border border-slate-200 border-slate-700 shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-slate-900 text-white">domain</span>
+</div>
+<div>
+<p class="text-slate-500 text-slate-400 text-sm font-semibold uppercase tracking-wider">Evaluaciones enviadas</p>
+<p id="totalRequestsCount" class="text-slate-900 text-white text-3xl font-bold mt-1">0</p>
+</div>
+<div class="flex items-center gap-1 text-green-600 text-sm font-medium">
+<span class="material-symbols-outlined text-[18px]">trending_up</span>
+<span id="totalRequestsDelta">0 nuevas</span>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="bg-white bg-[#1a2632] rounded-xl p-6 border border-slate-200 border-slate-700 shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-corporate-red">pending_actions</span>
+</div>
+<div>
+<p class="text-slate-500 text-slate-400 text-sm font-semibold uppercase tracking-wider">Pendientes</p>
+<p id="pendingRequestsCount" class="text-slate-900 text-white text-3xl font-bold mt-1">0</p>
+</div>
+<div class="flex items-center gap-1 text-corporate-red text-sm font-medium">
+<span class="material-symbols-outlined text-[18px]">priority_high</span>
+<span>Requiere atención</span>
+</div>
+</div>
+<!-- Stat 3 -->
+<div class="bg-white bg-[#1a2632] rounded-xl p-6 border border-slate-200 border-slate-700 shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-corporate-blue">task_alt</span>
+</div>
+<div>
+<p class="text-slate-500 text-slate-400 text-sm font-semibold uppercase tracking-wider">Completadas</p>
+<p id="completionRate" class="text-slate-900 text-white text-3xl font-bold mt-1">0%</p>
+</div>
+<div class="flex items-center gap-1 text-corporate-blue text-sm font-medium">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span id="completedLabel">0 completadas</span>
+</div>
+</div>
+</div>
+<!-- Progress Tracker Section -->
+<div class="bg-white bg-[#1a2632] rounded-xl border border-slate-200 border-slate-700 p-6 shadow-sm">
+<div class="flex justify-between items-end mb-3">
+<div>
+<h3 class="text-slate-900 text-white font-bold text-lg">Progreso del ciclo</h3>
+<p class="text-slate-500 text-slate-400 text-sm mt-1">Estado en tiempo real de las evaluaciones enviadas.</p>
+</div>
+<span id="progressPercent" class="text-slate-900 text-white font-bold text-xl">0%</span>
+</div>
+<!-- Multi-segment Progress Bar -->
+<div class="h-4 w-full bg-slate-100 bg-slate-700 rounded-full flex overflow-hidden">
+<!-- Completed -->
+<div id="progressCompleted" class="bg-corporate-blue h-full" style="width: 0%" title="Completadas"></div>
+<!-- In Progress -->
+<div id="progressInProgress" class="bg-primary h-full" style="width: 0%" title="En proceso"></div>
+<!-- Sent (Pending) -->
+<div id="progressSent" class="bg-slate-300 bg-slate-500 h-full" style="width: 0%" title="Enviadas"></div>
+<!-- Remaining transparent/base background is Not Started -->
+</div>
+<!-- Legend -->
+<div class="flex flex-wrap gap-6 mt-4">
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-corporate-blue"></span>
+<span id="legendCompleted" class="text-sm font-medium text-slate-600 text-slate-300">Completadas (0)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-primary"></span>
+<span id="legendInProgress" class="text-sm font-medium text-slate-600 text-slate-300">En proceso (0)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-slate-300 bg-slate-500"></span>
+<span id="legendSent" class="text-sm font-medium text-slate-600 text-slate-300">Enviadas (0)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-corporate-red"></span>
+<span id="legendOverdue" class="text-sm font-medium text-slate-600 text-slate-300">Atrasadas (0)</span>
+</div>
+</div>
+</div>
+<!-- Main Data Table -->
+<div class="bg-white bg-[#1a2632] rounded-xl border border-slate-200 border-slate-700 shadow-sm overflow-hidden flex flex-col">
+<!-- Table Toolbar -->
+<div class="p-4 border-b border-slate-200 border-slate-700 flex flex-col sm:flex-row gap-4 justify-between items-center bg-slate-50/50 bg-[#1e2b38]">
+<div class="flex items-center gap-2 w-full sm:w-auto">
+<button class="flex items-center gap-1 px-3 py-2 bg-white bg-slate-800 border border-slate-300 border-slate-600 rounded-md text-sm font-medium text-slate-700 text-slate-300 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                                    Filter
+                                </button>
+<div class="h-6 w-px bg-slate-300 bg-slate-600 mx-1"></div>
+<span id="requestsCount" class="text-sm text-slate-500 text-slate-400">0 solicitudes</span>
+</div>
+<div class="flex gap-2 w-full sm:w-auto">
+<input id="requestSearchInput" class="w-full sm:w-64 px-3 py-2 text-sm bg-white bg-slate-800 border border-slate-300 border-slate-600 rounded-md focus:ring-1 focus:ring-primary focus:border-primary" placeholder="Filtrar por encargado..." type="text"/>
+</div>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-slate-200 border-slate-700 bg-slate-50 bg-[#1e2b38] text-xs uppercase text-slate-500 text-slate-400 font-semibold tracking-wider">
+<th class="p-4 w-12 text-center">
+<input class="rounded border-slate-300 text-primary focus:ring-primary bg-white bg-slate-700" type="checkbox"/>
+</th>
+<th class="p-4 min-w-[240px]">Proyecto</th>
+<th class="p-4 min-w-[200px]">Encargado</th>
+<th class="p-4 min-w-[140px]">Estado</th>
+<th class="p-4 min-w-[160px]">Última actualización</th>
+<th class="p-4 min-w-[160px] text-right">Acciones</th>
+</tr>
+</thead>
+<tbody id="evaluationRequestsBody" class="divide-y divide-slate-100 divide-slate-700 text-sm text-slate-700 text-slate-200">
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between p-4 border-t border-slate-200 border-slate-700 bg-white bg-[#1a2632]">
+<p class="text-sm text-slate-500 text-slate-400">Showing <span class="font-semibold text-slate-900 text-white">1-5</span> of <span class="font-semibold text-slate-900 text-white">12</span> results</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 rounded border border-slate-300 border-slate-600 text-sm disabled:opacity-50 text-slate-600 text-slate-300 hover:bg-slate-50 hover:bg-slate-800" disabled="">Previous</button>
+<button class="px-3 py-1 rounded border border-slate-300 border-slate-600 text-sm text-slate-600 text-slate-300 hover:bg-slate-50 hover:bg-slate-800">Next</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<div id="evaluationModal" class="fixed inset-0 z-[90] hidden items-center justify-center bg-black/60 p-6">
+  <div class="w-full max-w-2xl rounded-2xl bg-white bg-[#1a2632] p-6 shadow-2xl">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-lg font-bold text-slate-900 text-white">Enviar evaluación semanal</h3>
+      <button id="evaluationModalClose" class="text-slate-400 hover:text-slate-600">×</button>
+    </div>
+    <form id="evaluationForm" class="flex flex-col gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <label class="text-sm font-medium text-slate-600 text-slate-300 flex flex-col gap-2">
+          Proyecto
+          <input id="evalProjectInput" class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3 text-slate-900 text-white" placeholder="Nombre del proyecto" />
+        </label>
+        <label class="text-sm font-medium text-slate-600 text-slate-300 flex flex-col gap-2">
+          Semana
+          <input id="evalWeekInput" class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3 text-slate-900 text-white" placeholder="Ej. 15 Ene - 21 Ene" />
+        </label>
+      </div>
+      <label class="text-sm font-medium text-slate-600 text-slate-300 flex flex-col gap-2">
+        Encargado
+        <select id="evalManagerSelect" class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3 text-slate-900 text-white"></select>
+      </label>
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <p class="text-sm font-semibold text-slate-700 text-slate-200">Personal a evaluar</p>
+          <button type="button" id="selectAllEmployees" class="text-xs text-primary hover:underline">Seleccionar todos</button>
+        </div>
+        <div id="evalEmployeesList" class="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-56 overflow-y-auto rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 p-3"></div>
+      </div>
+      <div class="flex justify-end gap-3 pt-2">
+        <button type="button" id="evaluationModalCancel" class="px-4 py-2 rounded-lg border border-slate-200 border-slate-700 text-slate-600 text-slate-300">Cancelar</button>
+        <button type="submit" class="px-4 py-2 rounded-lg bg-primary text-white font-bold">Crear enlace</button>
+      </div>
+      <div id="evaluationLinkOutput" class="hidden rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs text-emerald-700"></div>
+    </form>
+  </div>
+</div>
+<script type="module">
+import { ensureAuth } from "/shared/auth.js";
+import { db } from "/shared/firebase.js";
+import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import { createEvaluationRequest, watchEvaluationRequests } from "/shared/services/evaluations.js";
+
+const createBtn = document.getElementById("createEvaluationBtn");
+const modal = document.getElementById("evaluationModal");
+const modalClose = document.getElementById("evaluationModalClose");
+const modalCancel = document.getElementById("evaluationModalCancel");
+const evaluationForm = document.getElementById("evaluationForm");
+const managerSelect = document.getElementById("evalManagerSelect");
+const employeesList = document.getElementById("evalEmployeesList");
+const weekInput = document.getElementById("evalWeekInput");
+const projectInput = document.getElementById("evalProjectInput");
+const linkOutput = document.getElementById("evaluationLinkOutput");
+const selectAllBtn = document.getElementById("selectAllEmployees");
+const requestsBody = document.getElementById("evaluationRequestsBody");
+const requestSearchInput = document.getElementById("requestSearchInput");
+const currentWeekLabel = document.getElementById("currentWeekLabel");
+const totalRequestsCount = document.getElementById("totalRequestsCount");
+const pendingRequestsCount = document.getElementById("pendingRequestsCount");
+const completionRate = document.getElementById("completionRate");
+const progressPercent = document.getElementById("progressPercent");
+const progressCompleted = document.getElementById("progressCompleted");
+const progressInProgress = document.getElementById("progressInProgress");
+const progressSent = document.getElementById("progressSent");
+const legendCompleted = document.getElementById("legendCompleted");
+const legendInProgress = document.getElementById("legendInProgress");
+const legendSent = document.getElementById("legendSent");
+const legendOverdue = document.getElementById("legendOverdue");
+const requestsCount = document.getElementById("requestsCount");
+const completedLabel = document.getElementById("completedLabel");
+
+let currentUser = null;
+let users = [];
+let requests = [];
+
+const formatWeekRange = () => {
+  const now = new Date();
+  const day = now.getDay();
+  const diffToMonday = (day === 0 ? -6 : 1) - day;
+  const monday = new Date(now);
+  monday.setDate(now.getDate() + diffToMonday);
+  const sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+  const fmt = (d) => d.toLocaleDateString("es-MX", { day: "2-digit", month: "short" });
+  return `${fmt(monday)} - ${fmt(sunday)}`;
+};
+
+const openModal = () => {
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  linkOutput.classList.add("hidden");
+  linkOutput.textContent = "";
+  if (!weekInput.value) weekInput.value = formatWeekRange();
+};
+const closeModal = () => {
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+  evaluationForm.reset();
+};
+
+createBtn.addEventListener("click", openModal);
+modalClose.addEventListener("click", closeModal);
+modalCancel.addEventListener("click", closeModal);
+
+const renderEmployees = (list) => {
+  employeesList.innerHTML = "";
+  if (!list.length) {
+    employeesList.innerHTML = `<p class="text-xs text-slate-500">No hay empleados disponibles.</p>`;
+    return;
+  }
+  list.forEach((user) => {
+    employeesList.insertAdjacentHTML(
+      "beforeend",
+      `<label class="flex items-center gap-2 text-xs text-slate-600 text-slate-300">
+        <input type="checkbox" value="${user.id}" class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary" />
+        <span class="font-semibold">${user.displayName || user.email || user.id}</span>
+        <span class="text-slate-400">(${user.role || "Personal"})</span>
+      </label>`
+    );
+  });
+};
+
+const loadUsers = async () => {
+  const snapshot = await getDocs(collection(db, "users"));
+  users = snapshot.docs.map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }));
+  const managers = users.filter((user) => user.role === "PersonalObra" || (user.permissions || []).includes("attendance"));
+  managerSelect.innerHTML = managers
+    .map((user) => `<option value="${user.id}">${user.displayName || user.email || user.id}</option>`)
+    .join("");
+  const employees = users.filter((user) => user.role === "PersonalObra");
+  renderEmployees(employees);
+};
+
+selectAllBtn.addEventListener("click", () => {
+  employeesList.querySelectorAll('input[type="checkbox"]').forEach((input) => {
+    input.checked = true;
+  });
+});
+
+const badgeForStatus = (status) => {
+  if (status === "completed") return "bg-emerald-100 text-emerald-700";
+  if (status === "in_progress") return "bg-blue-50 text-primary";
+  if (status === "overdue") return "bg-red-50 text-red-600";
+  return "bg-slate-100 text-slate-600";
+};
+
+const renderRequests = () => {
+  const term = requestSearchInput.value.trim().toLowerCase();
+  const filtered = term
+    ? requests.filter((req) =>
+        [req.projectName, req.managerName, req.managerUid]
+          .filter(Boolean)
+          .some((value) => String(value).toLowerCase().includes(term))
+      )
+    : requests;
+  requestsBody.innerHTML = "";
+  if (!filtered.length) {
+    requestsBody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-500">No hay solicitudes.</td></tr>`;
+    return;
+  }
+  filtered.forEach((req) => {
+    const status = req.status || "sent";
+    const updated = req.updatedAt?.toDate ? req.updatedAt.toDate() : req.createdAt?.toDate ? req.createdAt.toDate() : null;
+    const updatedLabel = updated ? updated.toLocaleString("es-MX") : "-";
+    const link = `${window.location.origin}/evaluaciones?req=${req.id}`;
+    requestsBody.insertAdjacentHTML(
+      "beforeend",
+      `<tr class="hover:bg-slate-50 hover:bg-slate-800/50 transition-colors">
+        <td class="p-4">
+          <div class="flex flex-col">
+            <span class="font-bold text-slate-900 text-white">${req.projectName || "Sin proyecto"}</span>
+            <span class="text-xs text-slate-500">Semana: ${req.weekRange || "Sin definir"}</span>
+          </div>
+        </td>
+        <td class="p-4">
+          <span class="font-medium">${req.managerName || req.managerUid || "-"}</span>
+        </td>
+        <td class="p-4">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold ${badgeForStatus(status)}">${status}</span>
+        </td>
+        <td class="p-4 text-slate-500">${updatedLabel}</td>
+        <td class="p-4 text-right flex justify-end gap-2">
+          <button data-action="copy" data-link="${link}" class="px-3 py-1 rounded-md border border-slate-200 border-slate-700 text-xs font-semibold text-slate-600 text-slate-300 hover:text-primary">Copiar enlace</button>
+          <a href="${link}" class="px-3 py-1 rounded-md bg-primary text-white text-xs font-semibold">Abrir</a>
+        </td>
+      </tr>`
+    );
+  });
+};
+
+const updateStats = () => {
+  const total = requests.length;
+  const completed = requests.filter((req) => req.status === "completed").length;
+  const inProgress = requests.filter((req) => req.status === "in_progress").length;
+  const sent = requests.filter((req) => req.status === "sent").length;
+  const overdue = requests.filter((req) => req.status === "overdue").length;
+  const pending = sent + inProgress + overdue;
+  const percent = total ? Math.round((completed / total) * 100) : 0;
+
+  totalRequestsCount.textContent = String(total);
+  pendingRequestsCount.textContent = String(pending);
+  completionRate.textContent = `${percent}%`;
+  progressPercent.textContent = `${percent}%`;
+  progressCompleted.style.width = `${total ? (completed / total) * 100 : 0}%`;
+  progressInProgress.style.width = `${total ? (inProgress / total) * 100 : 0}%`;
+  progressSent.style.width = `${total ? (sent / total) * 100 : 0}%`;
+  legendCompleted.textContent = `Completadas (${completed})`;
+  legendInProgress.textContent = `En proceso (${inProgress})`;
+  legendSent.textContent = `Enviadas (${sent})`;
+  legendOverdue.textContent = `Atrasadas (${overdue})`;
+  requestsCount.textContent = `${total} solicitudes`;
+  completedLabel.textContent = `${completed} completadas`;
+};
+
+requestSearchInput.addEventListener("input", renderRequests);
+
+evaluationForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const managerUid = managerSelect.value;
+  const manager = users.find((user) => user.id === managerUid);
+  const selected = Array.from(employeesList.querySelectorAll('input[type="checkbox"]:checked')).map((input) => input.value);
+  if (!managerUid || !selected.length) {
+    alert("Selecciona un encargado y al menos un empleado.");
+    return;
+  }
+  const employees = selected
+    .map((uid) => {
+      const user = users.find((entry) => entry.id === uid);
+      return user ? { uid, name: user.displayName || user.email || uid, role: user.role || "Personal" } : null;
+    })
+    .filter(Boolean);
+  const requestId = await createEvaluationRequest({
+    managerUid,
+    managerName: manager?.displayName || manager?.email || managerUid,
+    employeeIds: selected,
+    employees,
+    projectName: projectInput.value.trim(),
+    weekRange: weekInput.value.trim() || formatWeekRange(),
+    createdBy: currentUser?.uid,
+  });
+  const link = `${window.location.origin}/evaluaciones?req=${requestId}`;
+  linkOutput.textContent = `Enlace generado: ${link}`;
+  linkOutput.classList.remove("hidden");
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(link).catch(() => {});
+  }
+});
+
+requestsBody.addEventListener("click", (event) => {
+  const btn = event.target.closest("button[data-action='copy']");
+  if (!btn) return;
+  const link = btn.dataset.link;
+  if (!link) return;
+  navigator.clipboard?.writeText(link).then(() => {
+    btn.textContent = "Copiado";
+    setTimeout(() => (btn.textContent = "Copiar enlace"), 1200);
+  });
+});
+
+ensureAuth({ allowRoles: ["Admin"], allowPermissions: ["payroll", "reports"] }).then(async ({ user }) => {
+  currentUser = user;
+  currentWeekLabel.textContent = formatWeekRange();
+  await loadUsers();
+  watchEvaluationRequests((list) => {
+    requests = list;
+    renderRequests();
+    updateStats();
+  });
+});
+</script>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

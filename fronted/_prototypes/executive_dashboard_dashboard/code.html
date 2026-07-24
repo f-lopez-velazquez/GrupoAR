@@ -1,0 +1,526 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Grupo AR - Panel ejecutivo</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        if (window.tailwind) {
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a6ec8", // Corporate Blue
+                        "corporate-red": "#dc1e28", // Corporate Red
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#101023",
+                        "card-dark": "#222249",
+                        "text-secondary": "#8f90cc",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.375rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101023; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333366; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444488; 
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-white font-display overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="flex w-64 flex-col border-r border-[#222249] bg-background-dark hidden md:flex">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-6">
+<!-- Brand -->
+<div class="flex items-center gap-3 px-2 py-2">
+<div class="flex items-center justify-center rounded-lg bg-gradient-to-br from-[#0a6ec8] to-[#064a88] h-10 w-10 text-white font-bold text-xl shadow-lg">
+                            AR
+                        </div>
+<div class="flex flex-col">
+<h1 class="text-white text-base font-bold leading-tight tracking-wide">Grupo AR</h1>
+<p class="text-text-secondary text-xs font-normal">Construction ERP</p>
+</div>
+</div>
+<!-- Nav Links -->
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/20 border-l-4 border-primary group transition-all" href="#">
+<span class="material-symbols-outlined text-primary group-hover:text-white transition-colors">dashboard</span>
+<p class="text-white text-sm font-semibold">Panel</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#222249] group transition-all text-text-secondary hover:text-white" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors">hard_drive</span>
+<p class="text-sm font-medium">Proyectos</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#222249] group transition-all text-text-secondary hover:text-white" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors">package_2</span>
+<p class="text-sm font-medium">Inventario</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#222249] group transition-all text-text-secondary hover:text-white" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors">attach_money</span>
+<p class="text-sm font-medium">Finanzas</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#222249] group transition-all text-text-secondary hover:text-white" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors">analytics</span>
+<p class="text-sm font-medium">Reportes</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#222249] group transition-all text-text-secondary hover:text-white" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors">settings</span>
+<p class="text-sm font-medium">Ajustes</p>
+</a>
+</nav>
+</div>
+<!-- Profile -->
+<div class="border-t border-[#222249] pt-4">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#222249] transition-all" href="#">
+<div class="h-10 w-10 rounded-full bg-cover bg-center ring-2 ring-[#222249]" data-alt="Profile picture of executive user" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBSonh__35tDAn_USXNvE_uirwtgiTrwP4nmRdGx-f5Zu0yTejH-5kTf6sLI6KA5dZu9PhLHGEaw5LGY_Z1onBc9wfEDbGyH6G0Rvy04ee5Y8Mx2D_G3R4mZDhGjvybCFInc7mcBrdhO91ndKvaNd7Nrubfz2Ee7-lKGQQMJVApSucPeyg50cXZsnvEHxe7voomluX_GPnh9DwBknSt7DBrYfLqubc6aZTzDX3kyIQhDLZcWhOZzQuxWdWayGwHOowVm2dt5kFwdraI');"></div>
+<div class="flex flex-col">
+<p class="text-white text-sm font-semibold">Alex Rivera</p>
+<p class="text-text-secondary text-xs">Chief Operations</p>
+</div>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background-dark relative">
+<!-- Top Header -->
+<header class="h-16 flex items-center justify-between px-8 border-b border-[#222249] bg-background-dark/95 backdrop-blur shrink-0 z-10">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="text-white text-lg font-bold tracking-tight">Executive Overview</h2>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search -->
+<div class="hidden md:flex items-center relative">
+<span class="material-symbols-outlined absolute left-3 text-text-secondary text-[20px]">search</span>
+<input class="bg-[#222249] border-none rounded-lg pl-10 pr-4 py-2 text-sm text-white placeholder-text-secondary focus:ring-1 focus:ring-primary w-64 transition-all" placeholder="Buscar proyectos, facturas..." type="text"/>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center h-9 w-9 rounded-lg hover:bg-[#222249] text-text-secondary hover:text-white transition-all relative">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2 right-2 h-2 w-2 rounded-full bg-corporate-red border border-background-dark"></span>
+</button>
+<button class="flex items-center justify-center h-9 w-9 rounded-lg hover:bg-[#222249] text-text-secondary hover:text-white transition-all">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto p-4 md:p-8">
+<div class="max-w-7xl mx-auto flex flex-col gap-6">
+<!-- KPI Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- KPI Card 1 -->
+<div class="bg-card-dark rounded-xl p-5 border border-white/5 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary">payments</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-text-secondary text-sm font-medium">Total Revenue</p>
+<h3 class="text-white text-2xl font-bold font-display tracking-tight">$4.2M</h3>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> 12%
+                                </span>
+<span class="text-text-secondary text-xs">vs last month</span>
+</div>
+</div>
+<!-- KPI Card 2 -->
+<div class="bg-card-dark rounded-xl p-5 border border-white/5 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-blue-400">construction</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-text-secondary text-sm font-medium">Active Projects</p>
+<h3 class="text-white text-2xl font-bold font-display tracking-tight">8 Sites</h3>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="bg-[#222249] border border-white/10 text-text-secondary text-xs font-bold px-2 py-0.5 rounded flex items-center gap-1">
+                                    2 Pending
+                                </span>
+<span class="text-text-secondary text-xs">Approval needed</span>
+</div>
+</div>
+<!-- KPI Card 3 -->
+<div class="bg-card-dark rounded-xl p-5 border border-white/5 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-orange-400">inventory_2</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-text-secondary text-sm font-medium">Inventory Value</p>
+<h3 class="text-white text-2xl font-bold font-display tracking-tight">$850k</h3>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="bg-corporate-red/20 text-corporate-red text-xs font-bold px-2 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_down</span> 2%
+                                </span>
+<span class="text-text-secondary text-xs">Critical levels</span>
+</div>
+</div>
+<!-- KPI Card 4 -->
+<div class="bg-card-dark rounded-xl p-5 border border-white/5 relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-green-400">account_balance_wallet</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-text-secondary text-sm font-medium">Net Profit</p>
+<h3 class="text-white text-2xl font-bold font-display tracking-tight">$320k</h3>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> 5%
+                                </span>
+<span class="text-text-secondary text-xs">vs target</span>
+</div>
+</div>
+</div>
+<!-- Main Grid Area -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Main Chart Section (Span 2) -->
+<div class="lg:col-span-2 bg-card-dark rounded-xl p-6 border border-white/5 flex flex-col h-[420px]">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="text-white font-bold text-lg">Financial Performance</h3>
+<p class="text-text-secondary text-sm">Income vs Expenses (Q3 2023)</p>
+</div>
+<div class="flex items-center bg-[#101023] rounded-lg p-1">
+<button class="px-3 py-1 rounded text-xs font-medium bg-primary text-white shadow-sm">Quarterly</button>
+<button class="px-3 py-1 rounded text-xs font-medium text-text-secondary hover:text-white">Monthly</button>
+</div>
+</div>
+<!-- Custom CSS Chart Representation -->
+<div class="flex-1 w-full relative pt-4 pl-8 pb-8 pr-4">
+<!-- Y Axis Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pl-8 pb-8 pr-4 text-text-secondary text-xs select-none pointer-events-none">
+<div class="w-full border-b border-white/5 flex items-end"><span>$200k</span></div>
+<div class="w-full border-b border-white/5 flex items-end"><span>$150k</span></div>
+<div class="w-full border-b border-white/5 flex items-end"><span>$100k</span></div>
+<div class="w-full border-b border-white/5 flex items-end"><span>$50k</span></div>
+<div class="w-full border-b border-white/5 flex items-end"><span>0</span></div>
+</div>
+<!-- Chart Bars & Line Container -->
+<div class="absolute inset-0 pl-16 pb-8 pr-4 pt-4 flex items-end justify-between gap-4 z-10">
+<!-- Bar Group 1 (Jul) -->
+<div class="flex-1 h-full flex items-end justify-center group relative cursor-pointer">
+<div class="w-3 bg-[#3b3b64] rounded-t-sm h-[40%] group-hover:bg-[#4a4a7a] transition-all relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">Exp: $80k</div>
+</div>
+<div class="absolute bottom-[-24px] text-text-secondary text-xs font-medium">Jul</div>
+<!-- Line point approximation -->
+<div class="absolute bottom-[55%] w-2 h-2 rounded-full bg-primary ring-4 ring-[#222249] z-20"></div>
+</div>
+<!-- Bar Group 2 (Aug) -->
+<div class="flex-1 h-full flex items-end justify-center group relative cursor-pointer">
+<div class="w-3 bg-[#3b3b64] rounded-t-sm h-[65%] group-hover:bg-[#4a4a7a] transition-all relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">Exp: $130k</div>
+</div>
+<div class="absolute bottom-[-24px] text-text-secondary text-xs font-medium">Aug</div>
+<div class="absolute bottom-[72%] w-2 h-2 rounded-full bg-primary ring-4 ring-[#222249] z-20"></div>
+</div>
+<!-- Bar Group 3 (Sep) -->
+<div class="flex-1 h-full flex items-end justify-center group relative cursor-pointer">
+<div class="w-3 bg-[#3b3b64] rounded-t-sm h-[50%] group-hover:bg-[#4a4a7a] transition-all relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">Exp: $100k</div>
+</div>
+<div class="absolute bottom-[-24px] text-text-secondary text-xs font-medium">Sep</div>
+<div class="absolute bottom-[60%] w-2 h-2 rounded-full bg-primary ring-4 ring-[#222249] z-20"></div>
+</div>
+<!-- Bar Group 4 (Oct) -->
+<div class="flex-1 h-full flex items-end justify-center group relative cursor-pointer">
+<div class="w-3 bg-[#3b3b64] rounded-t-sm h-[70%] group-hover:bg-[#4a4a7a] transition-all relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">Exp: $140k</div>
+</div>
+<div class="absolute bottom-[-24px] text-text-secondary text-xs font-medium">Oct</div>
+<div class="absolute bottom-[85%] w-2 h-2 rounded-full bg-primary ring-4 ring-[#222249] z-20"></div>
+</div>
+<!-- Bar Group 5 (Nov) -->
+<div class="flex-1 h-full flex items-end justify-center group relative cursor-pointer">
+<div class="w-3 bg-[#3b3b64] rounded-t-sm h-[45%] group-hover:bg-[#4a4a7a] transition-all relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">Exp: $90k</div>
+</div>
+<div class="absolute bottom-[-24px] text-text-secondary text-xs font-medium">Nov</div>
+<div class="absolute bottom-[58%] w-2 h-2 rounded-full bg-primary ring-4 ring-[#222249] z-20"></div>
+</div>
+<!-- Bar Group 6 (Dec) -->
+<div class="flex-1 h-full flex items-end justify-center group relative cursor-pointer">
+<div class="w-3 bg-[#3b3b64] rounded-t-sm h-[80%] group-hover:bg-[#4a4a7a] transition-all relative">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap z-20">Exp: $160k</div>
+</div>
+<div class="absolute bottom-[-24px] text-text-secondary text-xs font-medium">Dec</div>
+<div class="absolute bottom-[90%] w-2 h-2 rounded-full bg-primary ring-4 ring-[#222249] z-20"></div>
+</div>
+</div>
+<!-- Decorative Line Connecting Points (SVG overlay) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-10 pl-16 pb-8 pr-4 pt-4" style="overflow: visible;">
+<path d="M 30 145 L 120 90 L 210 130 L 300 50 L 390 135 L 480 32" fill="none" stroke="#0a6ec8" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" vector-effect="non-scaling-stroke"></path>
+<defs>
+<lineargradient id="areaGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#0a6ec8" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#0a6ec8" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M 30 145 L 120 90 L 210 130 L 300 50 L 390 135 L 480 32 L 480 300 L 30 300 Z" fill="url(#areaGradient)" stroke="none"></path>
+</svg>
+</div>
+<!-- Legend -->
+<div class="flex items-center justify-center gap-6 mt-4 pt-2 border-t border-white/5">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-[#3b3b64]"></div>
+<span class="text-text-secondary text-xs font-medium">Expenses</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="text-text-secondary text-xs font-medium">Income</span>
+</div>
+</div>
+</div>
+<!-- Side List / Alerts (Span 1) -->
+<div class="bg-card-dark rounded-xl border border-white/5 flex flex-col overflow-hidden h-[420px]">
+<div class="p-5 border-b border-white/5 bg-[#2a2a55]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-corporate-red">warning</span>
+<h3 class="text-white font-bold text-lg">Urgent Attention</h3>
+</div>
+<p class="text-text-secondary text-xs mt-1">3 critical updates require action</p>
+</div>
+<div class="flex-1 overflow-y-auto p-2">
+<div class="flex flex-col gap-2">
+<!-- Alert Item 1 -->
+<div class="flex gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="mt-1 h-8 w-8 rounded bg-corporate-red/10 flex items-center justify-center shrink-0 text-corporate-red">
+<span class="material-symbols-outlined text-[18px]">local_shipping</span>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex justify-between items-start">
+<h4 class="text-white text-sm font-semibold group-hover:text-primary transition-colors">Project Alpha</h4>
+<span class="text-[10px] bg-corporate-red text-white px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Delayed</span>
+</div>
+<p class="text-text-secondary text-xs mt-1 leading-relaxed">Cement delivery delayed by 48h. Site manager requesting schedule adjustment.</p>
+<p class="text-text-secondary/60 text-[10px] mt-2">2 hours ago</p>
+</div>
+</div>
+<!-- Alert Item 2 -->
+<div class="flex gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="mt-1 h-8 w-8 rounded bg-orange-500/10 flex items-center justify-center shrink-0 text-orange-400">
+<span class="material-symbols-outlined text-[18px]">inventory</span>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex justify-between items-start">
+<h4 class="text-white text-sm font-semibold group-hover:text-primary transition-colors">Warehouse B</h4>
+<span class="text-[10px] bg-orange-500/20 text-orange-400 border border-orange-500/20 px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Low Stock</span>
+</div>
+<p class="text-text-secondary text-xs mt-1 leading-relaxed">Steel inventory dropped below safety stock levels (Item #ST-900).</p>
+<p class="text-text-secondary/60 text-[10px] mt-2">5 hours ago</p>
+</div>
+</div>
+<!-- Alert Item 3 -->
+<div class="flex gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="mt-1 h-8 w-8 rounded bg-blue-500/10 flex items-center justify-center shrink-0 text-blue-400">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+</div>
+<div class="flex flex-col flex-1">
+<div class="flex justify-between items-start">
+<h4 class="text-white text-sm font-semibold group-hover:text-primary transition-colors">Finance Dept</h4>
+<span class="text-[10px] bg-blue-500/20 text-blue-400 border border-blue-500/20 px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Approval</span>
+</div>
+<p class="text-text-secondary text-xs mt-1 leading-relaxed">Invoice #4092 for equipment rental pending &gt; 30 days.</p>
+<p class="text-text-secondary/60 text-[10px] mt-2">1 day ago</p>
+</div>
+</div>
+</div>
+</div>
+<div class="p-3 border-t border-white/5">
+<button class="w-full py-2 text-xs font-medium text-text-secondary hover:text-white hover:bg-white/5 rounded transition-colors">View All Notifications</button>
+</div>
+</div>
+</div>
+<!-- Additional Data Row: Projects & Map Preview -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-6">
+<!-- Recent Projects Table -->
+<div class="lg:col-span-2 bg-card-dark rounded-xl border border-white/5 overflow-hidden">
+<div class="p-5 border-b border-white/5 flex items-center justify-between">
+<h3 class="text-white font-bold text-lg">Active Projects Overview</h3>
+<button class="text-primary text-xs font-bold hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="bg-[#1a1a3a] text-text-secondary text-xs uppercase font-semibold">
+<tr>
+<th class="px-5 py-3">Project Name</th>
+<th class="px-5 py-3">Manager</th>
+<th class="px-5 py-3">Progress</th>
+<th class="px-5 py-3 text-right">Budget Used</th>
+<th class="px-5 py-3 text-center">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-5 py-4 font-medium text-white">Skyline Tower A</td>
+<td class="px-5 py-4 text-text-secondary flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-cover bg-center" data-alt="Avatar of manager" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCMf5Qo3kWWeFK3tU2maecOHD8AERG6sSCpUm0pK4bGSlfgG2GBkMBGnNuWC1pfvvGanS3Ib14Z-Q5M9OvavhtEFPw-1SBVBiHzMQ_bGS7_WFWlQy9bYvV25h4-eKGwCu0LaYjwTZ2Fh4tmQ1KouSGd9ywxyeftnMVO_C22dtoAYjtWZDcdkZpgjw_0yqqGwqfakzUwpikJ9V3Rjxwvql-vSvAp7ql_66cLszhbb0M7HcnfqyafxWyywV8hDdfeiK5wYeKR_oE7_GvM');"></div>
+                                                Sarah Jenkins
+                                            </td>
+<td class="px-5 py-4">
+<div class="flex items-center gap-2">
+<div class="w-24 bg-[#3b3b64] rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 75%"></div>
+</div>
+<span class="text-xs text-white">75%</span>
+</div>
+</td>
+<td class="px-5 py-4 text-white text-right font-mono">$1.2M</td>
+<td class="px-5 py-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-green-500/10 text-green-400">On Track</span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-5 py-4 font-medium text-white">Harbor Logistics Hub</td>
+<td class="px-5 py-4 text-text-secondary flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-cover bg-center" data-alt="Avatar of manager" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDPKAct8juJVAp36LJolOKsAL8fAFDdiW5O1NpRYZJUZKAPym2IqbB-ojISYVamKz1f_Usd0A5wG3yGYCLG4U_nGCNQf6nHqEspGW8uJA08VAgkSvjkNBFAofS7tYHzF9kV75NpvwRuTBoTA05lTCCrSq6CTPMH0cDMmB9e0K1OddwS1G4F4P2bDR4IJJqwVogKR-H3eOw47byJJyHIgQzItiYrFGamgfJdA6sJgRzVLgPUT-E4SjuLpg7HH_13TbyWHynJQCGjKnFV');"></div>
+                                                David Chen
+                                            </td>
+<td class="px-5 py-4">
+<div class="flex items-center gap-2">
+<div class="w-24 bg-[#3b3b64] rounded-full h-1.5">
+<div class="bg-corporate-red h-1.5 rounded-full" style="width: 45%"></div>
+</div>
+<span class="text-xs text-white">45%</span>
+</div>
+</td>
+<td class="px-5 py-4 text-white text-right font-mono">$840k</td>
+<td class="px-5 py-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-corporate-red/10 text-corporate-red">Delayed</span>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-5 py-4 font-medium text-white">City Center Mall</td>
+<td class="px-5 py-4 text-text-secondary flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-cover bg-center" data-alt="Avatar of manager" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDS8LWMiHZBnkzmcrTuOH8qRt4tqn-HNyh79wdfQ2F6W3MPAKMqvJPyYMmrPrjqodV4djIXCHC9L8Dzrlrsw8YcLew2el9keTpNcIdmMvFnKBhm_G6XD1HpRSfcNipZIuF6Fh8rduGTwanRV9ivX91QTqmh4fauFtUtFx8oAOzv7omEgMreCj67H4BnRLL4cF6iedaTsdi08yzWSbTVausBLIE__Pz1fgZv_ywYde8jxlHPbaPfHiTpoYFNpdB-o9FpPbZbvxyCRXL0');"></div>
+                                                Elena Ross
+                                            </td>
+<td class="px-5 py-4">
+<div class="flex items-center gap-2">
+<div class="w-24 bg-[#3b3b64] rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 90%"></div>
+</div>
+<span class="text-xs text-white">90%</span>
+</div>
+</td>
+<td class="px-5 py-4 text-white text-right font-mono">$2.1M</td>
+<td class="px-5 py-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-blue-500/10 text-blue-400">Finishing</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Mini Map / Location Overview -->
+<div class="bg-card-dark rounded-xl border border-white/5 overflow-hidden flex flex-col">
+<div class="p-5 border-b border-white/5">
+<h3 class="text-white font-bold text-lg">Site Locations</h3>
+</div>
+<div class="relative flex-1 min-h-[200px] w-full bg-[#1a1a3a] group">
+<!-- Abstract Map Background -->
+<div class="w-full h-full bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-500" data-alt="Map showing location of construction sites" data-location="Metropolis Area" style="background-image: url('https://placeholder.pics/svg/300'); filter: grayscale(100%) invert(1);"></div>
+<!-- Map Pins (Simulated) -->
+<div class="absolute top-[30%] left-[40%] flex flex-col items-center">
+<div class="h-3 w-3 rounded-full bg-primary ring-4 ring-primary/20 animate-pulse"></div>
+<div class="mt-1 bg-black/80 px-2 py-0.5 rounded text-[10px] text-white">Site A</div>
+</div>
+<div class="absolute top-[60%] right-[30%] flex flex-col items-center">
+<div class="h-3 w-3 rounded-full bg-corporate-red ring-4 ring-corporate-red/20"></div>
+<div class="mt-1 bg-black/80 px-2 py-0.5 rounded text-[10px] text-white">Site B</div>
+</div>
+<div class="absolute bottom-[20%] left-[20%] flex flex-col items-center">
+<div class="h-3 w-3 rounded-full bg-green-500 ring-4 ring-green-500/20"></div>
+<div class="mt-1 bg-black/80 px-2 py-0.5 rounded text-[10px] text-white">HQ</div>
+</div>
+</div>
+<div class="p-4 bg-[#2a2a55]">
+<div class="flex justify-between items-center text-xs">
+<span class="text-text-secondary">Next site visit:</span>
+<span class="text-white font-medium">Tomorrow, 09:00 AM (Site B)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+  const demoPhrases = [
+    "Project Alpha",
+    "Warehouse B",
+    "Skyline Tower",
+    "Harbor Logistics",
+    "City Center Mall",
+    "Metropolis",
+    "Site A",
+    "Site B",
+    "HQ"
+  ];
+  const shouldRemove = (el) => demoPhrases.some((phrase) => (el.textContent || "").includes(phrase));
+  document.querySelectorAll("tr").forEach((row) => {
+    if (shouldRemove(row)) row.remove();
+  });
+  document.querySelectorAll("div").forEach((card) => {
+    if (shouldRemove(card) && card.className.includes("rounded")) {
+      card.remove();
+    }
+  });
+  document.querySelectorAll("tbody").forEach((body) => {
+    if (!body.children.length) {
+      body.innerHTML = '<tr><td class="px-5 py-4 text-text-secondary text-sm" colspan="6">Sin datos disponibles.</td></tr>';
+    }
+  });
+</script>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

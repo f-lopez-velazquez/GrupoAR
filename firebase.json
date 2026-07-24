@@ -1,0 +1,254 @@
+{
+    "firestore": {
+        "rules": "fronted/erp/firestore.rules"
+    },
+    "functions": {
+        "source": "functions"
+    },
+    "hosting": {
+        "site": "gpo-ar",
+        "public": "fronted",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ],
+        "headers": [
+            {
+                "source": "**",
+                "headers": [
+                    {
+                        "key": "Cache-Control",
+                        "value": "no-cache, no-store, must-revalidate"
+                    },
+                    {
+                        "key": "X-Content-Type-Options",
+                        "value": "nosniff"
+                    },
+                    {
+                        "key": "X-Frame-Options",
+                        "value": "DENY"
+                    },
+                    {
+                        "key": "Referrer-Policy",
+                        "value": "no-referrer"
+                    },
+                    {
+                        "key": "Permissions-Policy",
+                        "value": "geolocation=(self), camera=(), microphone=()"
+                    },
+                    {
+                        "key": "Content-Security-Policy",
+                        "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com https://esm.sh https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://lh3.googleusercontent.com https://res.cloudinary.com; connect-src 'self' https://www.gstatic.com https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://securetoken.googleapis.com https://www.googleapis.com https://api.cloudinary.com https://us-central1-gpo-ar.cloudfunctions.net; frame-ancestors 'none'; base-uri 'self';"
+                    }
+                ]
+            }
+        ],
+        "rewrites": [
+            {
+                "source": "/",
+                "destination": "/_prototypes/high-impact_landing_hero/code.html"
+            },
+            {
+                "source": "/terms",
+                "destination": "/_prototypes/terms_and_conditions/code.html"
+            },
+            {
+                "source": "/privacy",
+                "destination": "/_prototypes/privacy_policy/code.html"
+            },
+            {
+                "source": "/catalogo",
+                "destination": "/_prototypes/public_customer_catalog_landing/code.html"
+            },
+            {
+                "source": "/catalogo-productos",
+                "destination": "/_prototypes/public_customer_product_catalog/code.html"
+            },
+            {
+                "source": "/catalogo-ferreteria",
+                "destination": "/_prototypes/hardware_&_inventory_catalog/code.html"
+            },
+            {
+                "source": "/servicios",
+                "destination": "/_prototypes/catalogo_servicios/code.html"
+            },
+            {
+                "source": "/servicios-destacados",
+                "destination": "/_prototypes/interactive_services_&_featured_catalog/code.html"
+            },
+            {
+                "source": "/contacto",
+                "destination": "/_prototypes/contact_&_trust_section/code.html"
+            },
+            {
+                "source": "/pos",
+                "destination": "/_prototypes/hardware_pos_interface/code.html"
+            },
+            {
+                "source": "/inventario",
+                "destination": "/_prototypes/hardware_inventory_management/code.html"
+            },
+            {
+                "source": "/dashboard-ferreteria",
+                "destination": "/_prototypes/hardware_store_dashboard/code.html"
+            },
+            {
+                "source": "/dashboard-ejecutivo",
+                "destination": "/_prototypes/executive_dashboard_dashboard/code.html"
+            },
+            {
+                "source": "/reportes",
+                "destination": "/_prototypes/performance_report_generator_dashboard/code.html"
+            },
+            {
+                "source": "/exportar-reporte",
+                "destination": "/_prototypes/performance_report_export_preview/code.html"
+            },
+            {
+                "source": "/admin-usuarios",
+                "destination": "/_prototypes/admin_user_management_panel/code.html"
+            },
+            {
+                "source": "/roles-permisos",
+                "destination": "/_prototypes/roles_&_permissions_matrix/code.html"
+            },
+            {
+                "source": "/clientes",
+                "destination": "/_prototypes/clientes/code.html"
+            },
+            {
+                "source": "/proveedores",
+                "destination": "/_prototypes/proveedores/code.html"
+            },
+            {
+                "source": "/promociones",
+                "destination": "/_prototypes/promociones/code.html"
+            },
+            {
+                "source": "/finanzas",
+                "destination": "/_prototypes/cash_&_finance_management/code.html"
+            },
+            {
+                "source": "/rrhh-nomina",
+                "destination": "/_prototypes/hr_&_payroll_panel/code.html"
+            },
+            {
+                "source": "/detalle-nomina",
+                "destination": "/_prototypes/detailed_payroll_statement_view/code.html"
+            },
+            {
+                "source": "/integracion-nomina",
+                "destination": "/_prototypes/payroll_integration_dashboard/code.html"
+            },
+            {
+                "source": "/evaluaciones",
+                "destination": "/_prototypes/site_manager_weekly_quick_form/code.html"
+            },
+            {
+                "source": "/resumen-evaluaciones",
+                "destination": "/_prototypes/weekly_evaluation_results_summary/code.html"
+            },
+            {
+                "source": "/evaluaciones-rrhh",
+                "destination": "/_prototypes/hr_evaluation_management_center/code.html"
+            },
+            {
+                "source": "/incidentes",
+                "destination": "/_prototypes/site_manager_incident_reporting/code.html"
+            },
+            {
+                "source": "/bitacora",
+                "destination": "/_prototypes/digital_tool_logbook/code.html"
+            },
+            {
+                "source": "/proyectos-activos",
+                "destination": "/_prototypes/active_projects_kanban/code.html"
+            },
+            {
+                "source": "/proyecto",
+                "destination": "/_prototypes/project_details_breakdown/code.html"
+            },
+            {
+                "source": "/tareas-obra",
+                "destination": "/_prototypes/site_manager_project_tasks/code.html"
+            },
+            {
+                "source": "/dashboard-obra",
+                "destination": "/_prototypes/site_manager_dashboard_view/code.html"
+            },
+            {
+                "source": "/ticket",
+                "destination": "/_prototypes/sales_ticket_receipt_preview/code.html"
+            },
+            {
+                "source": "/verificar-ticket",
+                "destination": "/_prototypes/public_ticket_verification_view/code.html"
+            },
+            {
+                "source": "/consulta/**",
+                "destination": "/_prototypes/public_ticket_verification_view/code.html"
+            },
+            {
+                "source": "/producto",
+                "destination": "/_prototypes/public_product_detail_view/code.html"
+            },
+            {
+                "source": "/gafete",
+                "destination": "/_prototypes/public_employee_badge/code.html"
+            },
+            {
+                "source": "/consulta-empleado/**",
+                "destination": "/_prototypes/public_employee_badge/code.html"
+            },
+            {
+                "source": "/importar-inventario",
+                "destination": "/_prototypes/inventory_import_dropzone/code.html"
+            },
+            {
+                "source": "/validacion-importacion",
+                "destination": "/_prototypes/import_data_validation_preview/code.html"
+            },
+            {
+                "source": "/importacion-exitosa",
+                "destination": "/_prototypes/import_success_summary/code.html"
+            },
+            {
+                "source": "/alertas-mantenimiento",
+                "destination": "/_prototypes/alerts_&_maintenance_center/code.html"
+            },
+            {
+                "source": "/mantenimiento-equipo",
+                "destination": "/_prototypes/equipment_maintenance_details/code.html"
+            },
+            {
+                "source": "/firma-digital",
+                "destination": "/_prototypes/digital_signature_tool_checkout/code.html"
+            },
+            {
+                "source": "/devolucion-herramienta",
+                "destination": "/_prototypes/tool_return_verification_signature/code.html"
+            },
+            {
+                "source": "/perfil-desempeno",
+                "destination": "/_prototypes/individual_performance_profile_view/code.html"
+            },
+            {
+                "source": "/renovar-certificacion",
+                "destination": "/_prototypes/staff_certification_renewal_flow/code.html"
+            },
+            {
+                "source": "/checkout",
+                "destination": "/_prototypes/checkout_confirmation_&_receipt/code.html"
+            },
+            {
+                "source": "/audit",
+                "destination": "/_prototypes/security_&_audit_log/code.html"
+            },
+            {
+                "source": "/ajustes",
+                "destination": "/_prototypes/ajustes/code.html"
+            }
+        ]
+    }
+}

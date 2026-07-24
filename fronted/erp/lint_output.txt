@@ -1,0 +1,6 @@
+
+C:\Users\Smoth\OneDrive\Documentos\GRUPO AR\fronted\erp\src\pages\portal\Evaluations.jsx
+  193:35  error  Parsing error: Unexpected token `>`. Did you mean `&gt;` or `{">"}`?
+
+✖ 1 problem (1 error, 0 warnings)
+

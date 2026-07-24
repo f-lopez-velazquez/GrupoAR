@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GPO-AR CMS Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#096fc8",
+                        "primary-hover": "#075aa3",
+                        "danger": "#dc1e28",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101a22",
+                        "border-light": "#dbe1e6",
+                        "text-main": "#111518",
+                        "text-secondary": "#60778a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                    },
+                    boxShadow: {
+                        'soft': '0 2px 8px rgba(0, 0, 0, 0.04)',
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-body text-text-main antialiased min-h-screen flex flex-col">
+<!-- Top Navbar -->
+<header class="bg-white sticky top-0 z-50 border-b border-border-light px-6 py-3 shadow-sm">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<!-- Left: Logo & Title -->
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center size-10 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-2xl">grid_view</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight text-text-main">GPO-AR</h1>
+<p class="text-xs text-text-secondary font-medium uppercase tracking-wider">Panel de Control</p>
+</div>
+</div>
+<!-- Right: Actions & Profile -->
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-3">
+<button class="flex items-center justify-center h-10 px-4 rounded-lg border border-border-light bg-white hover:bg-gray-50 text-text-main text-sm font-semibold transition-colors">
+<span class="material-symbols-outlined text-[18px] mr-2">visibility</span>
+                        Vista Previa
+                    </button>
+<button class="flex items-center justify-center h-10 px-4 rounded-lg bg-primary hover:bg-primary-hover text-white text-sm font-semibold shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[18px] mr-2">publish</span>
+                        Publicar Cambios
+                    </button>
+</div>
+<div class="h-8 w-px bg-border-light mx-2"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="flex flex-col items-end hidden sm:flex">
+<span class="text-sm font-semibold text-text-main">Francisco López</span>
+<span class="text-xs text-text-secondary">Administrador</span>
+</div>
+<div class="size-10 rounded-full bg-gray-200 bg-center bg-cover border-2 border-white shadow-sm group-hover:border-primary transition-all" data-alt="Profile picture of the administrator" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAVtlO0uDTk00eQrs9cfujpzPfKmShvpcDUySIOLGzeos-cq77drtCNDHmiZ145KDdJ2cxwUrV1nyaI5RZod0M2bO6QjzfjeW58OUFoF5nLX7V4-k7WV9pYCzhR-SnFnVl4bS595Z60NLHy-qdM17HBvHpwwpBcEqo6JX4vnrn8_PgiX2XWuTxpZX7gklKqgDeWjMd8h4nMcYnsMzKtYK09mpqjMtoNmT1NdTmL_BcFzrhVPAR0L_eQsTg3skZ_A-U2Yp3GzDERbuo");'></div>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Layout -->
+<main class="flex-grow max-w-7xl mx-auto w-full px-6 py-8">
+<!-- Tabs -->
+<div class="mb-8 border-b border-border-light">
+<nav aria-label="Tabs" class="flex gap-8">
+<a class="group flex items-center gap-2 border-b-2 border-primary py-4 px-1" href="#">
+<span class="material-symbols-outlined text-primary group-hover:text-primary-hover">architecture</span>
+<p class="text-sm font-bold text-primary">Servicios de Construcción</p>
+</a>
+<a class="group flex items-center gap-2 border-b-2 border-transparent hover:border-gray-300 py-4 px-1 transition-all" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-text-main">hardware</span>
+<p class="text-sm font-medium text-text-secondary group-hover:text-text-main">Catálogo de Ferretería</p>
+</a>
+</nav>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Editor (Active) -->
+<div class="lg:col-span-7 flex flex-col gap-6">
+<!-- Editor Card -->
+<div class="bg-white rounded-xl shadow-soft border border-border-light overflow-hidden">
+<div class="px-6 py-5 border-b border-border-light flex justify-between items-center bg-gray-50/50">
+<h2 class="text-lg font-bold text-text-main flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">edit_document</span>
+                            Editor de Servicios
+                        </h2>
+<span class="text-xs font-semibold bg-blue-100 text-blue-700 px-2 py-1 rounded">Borrador</span>
+</div>
+<div class="p-6 flex flex-col gap-6">
+<!-- Title Input -->
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-text-main">Título del Servicio</label>
+<input class="w-full rounded-lg border-border-light bg-white px-4 py-3 text-sm text-text-main placeholder-text-secondary focus:border-primary focus:ring-1 focus:ring-primary transition-shadow" placeholder="Ej: Diseño Arquitectónico Residencial" type="text" value="Diseño Arquitectónico Moderno"/>
+</div>
+<!-- Description Input -->
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-text-main">Descripción Detallada</label>
+<div class="relative">
+<textarea class="w-full min-h-[160px] rounded-lg border-border-light bg-white px-4 py-3 text-sm text-text-main placeholder-text-secondary focus:border-primary focus:ring-1 focus:ring-primary resize-y" placeholder="Describe el servicio, materiales y alcance...">Ofrecemos servicios integrales de diseño arquitectónico enfocados en la funcionalidad y la estética moderna. Nuestro equipo utiliza las últimas tecnologías BIM para visualizar su proyecto antes de la construcción.</textarea>
+<div class="absolute bottom-3 right-3 flex gap-2">
+<button class="p-1.5 text-text-secondary hover:text-primary hover:bg-gray-100 rounded transition-colors" title="Negrita">
+<span class="material-symbols-outlined text-lg">format_bold</span>
+</button>
+<button class="p-1.5 text-text-secondary hover:text-primary hover:bg-gray-100 rounded transition-colors" title="Lista">
+<span class="material-symbols-outlined text-lg">format_list_bulleted</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Image Uploader -->
+<div class="space-y-2">
+<label class="block text-sm font-semibold text-text-main">Galería de Imágenes</label>
+<div class="border-2 border-dashed border-border-light rounded-xl p-8 flex flex-col items-center justify-center text-center hover:bg-gray-50 transition-colors cursor-pointer group">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-2xl">cloud_upload</span>
+</div>
+<p class="text-sm font-medium text-text-main">Haz clic para subir o arrastra archivos aquí</p>
+<p class="text-xs text-text-secondary mt-1">Soporta JPG, PNG de alta calidad (Max 5MB)</p>
+</div>
+<!-- Uploaded Images Preview -->
+<div class="flex gap-3 mt-3 overflow-x-auto pb-2">
+<div class="relative group shrink-0 w-24 h-24 rounded-lg overflow-hidden border border-border-light">
+<img class="w-full h-full object-cover" data-alt="Modern house architecture detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb864yIA1gSmVcREqWnk6EIo0E1cZ7eO3fO8xHFq1E9XwaknUBoKwMESNuhn84is1tFIf_HXA3_5ookeXfGSFTrxTW-L85LChJ7Hg23KGSz0wSBHaeCKI6ren7zHOFVEvfrEOLkrs7K0QxhZiquYjimoOV7U6v9-zAprf5N1x9F1OInOI31aCR427emunFlwLRYFf3jJ8RPnLP1iGUnA-N-Bs8KKZJ_MSbXXRoRP1JV4YbI4pMKc6abWBYSuHH5A9-Yw9R7XLUZ6k"/>
+<button class="absolute top-1 right-1 bg-white/90 p-1 rounded-full shadow-sm hover:text-danger opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+<div class="relative group shrink-0 w-24 h-24 rounded-lg overflow-hidden border border-border-light">
+<img class="w-full h-full object-cover" data-alt="Interior design minimalist kitchen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPxPoYJud7gS_Y_QzxGV7ViyQ_lA8Dy6zhXN8HsljTEIv6z1iWuSJF-y2hO8CUtxvvQJCpkCSRNYC2JpM8PGEzAhx9rQ4uFFUeF-pj2w9JimIRxt_uN7tyJwe26MdIcgXn5lT5b48NVqZLK5-GKTNLCV2RC3Idjpiktg6Ly4Bv5-xO8RmUdvHVVlyXIat9lp7m87GiyXxVKGd2ov_Fbk3AgpbclfD22lwIVVAjNAAC0-97d0eUQN2ENgY9oRnzk216-dZqO6WE760"/>
+<button class="absolute top-1 right-1 bg-white/90 p-1 rounded-full shadow-sm hover:text-danger opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-gray-50 px-6 py-4 border-t border-border-light flex items-center justify-end gap-3">
+<button class="px-4 py-2 text-sm font-semibold text-text-secondary hover:text-text-main transition-colors">Cancelar</button>
+<button class="px-6 py-2 bg-primary hover:bg-primary-hover text-white text-sm font-bold rounded-lg shadow-sm transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">save</span>
+                            Guardar Servicio
+                        </button>
+</div>
+</div>
+</div>
+<!-- Right Column: Services List (Overview) -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold text-text-main">Servicios Publicados</h3>
+<button class="text-sm text-primary font-semibold hover:underline">Ver todos</button>
+</div>
+<!-- Service Card 1 -->
+<div class="group bg-white rounded-xl border border-border-light shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-row h-32 relative">
+<div class="w-32 bg-gray-100 shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Construction site planning" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAazEDvckN_NRO6rlDXsrsYXPJpg9QeRtnFdmKyt5AmKIqqTr_DC5-rKsPuFaxKibaE7Xqd3VDy20UHvEnmwmywb4iuYIQThPZDW-McBQRVsH2Jg_gm46VnleCqKLXfhHAHNZlAeVijcQ6PKf6sHKNzu9pFJQOmfBagRbbHjwAZzRHfRVQG3_3LQyovMtq6uGcowpU5sXLoKvHcYAKzwdtJBJryAZSbzf4dClH5Zsd0286V4iiZnbSftKL9uBM3B-panwTa9f3jjIk"/>
+</div>
+<div class="flex-1 p-4 flex flex-col justify-between">
+<div>
+<h4 class="font-bold text-text-main line-clamp-1">Remodelación Comercial</h4>
+<p class="text-xs text-text-secondary mt-1 line-clamp-2">Optimización de espacios para oficinas y locales comerciales.</p>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-50 text-green-700 text-[10px] font-bold uppercase tracking-wider border border-green-100">
+<span class="size-1.5 rounded-full bg-green-500"></span>
+                                Publicado
+                            </span>
+<div class="flex gap-1">
+<button class="p-1.5 text-text-secondary hover:text-primary hover:bg-blue-50 rounded transition-colors" title="Editar">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 text-text-secondary hover:text-danger hover:bg-red-50 rounded transition-colors" title="Eliminar">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Service Card 2 -->
+<div class="group bg-white rounded-xl border border-border-light shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-row h-32 relative">
+<div class="w-32 bg-gray-100 shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Industrial worker welding" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7PBFa0doFxBsv5zC_5kGbT4AWMTgFNsxvmYFjFMLAG6swVYTLd-MCcu37wexorGDOumhUgZt2DIRSVKlrYuQisjgwtqEYSBIPUGQHlIkXTZIlVtmoE44ML4t5-KHnn9993IX0BBuaJ0XydYSNJMaoIO6-ta1Q7HnO0LwpXaiAbPIu7imr4YCOdHg1OkFq1GqbJkrWrR-ZS1TF6-FnhHYHuugCYn-tqNhYIfXgHeCXgtFTNF_koDlGHRCENkp_va-Rt3YJLXQaI2w"/>
+</div>
+<div class="flex-1 p-4 flex flex-col justify-between">
+<div>
+<h4 class="font-bold text-text-main line-clamp-1">Mantenimiento Industrial</h4>
+<p class="text-xs text-text-secondary mt-1 line-clamp-2">Servicios preventivos y correctivos para maquinaria pesada.</p>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-green-50 text-green-700 text-[10px] font-bold uppercase tracking-wider border border-green-100">
+<span class="size-1.5 rounded-full bg-green-500"></span>
+                                Publicado
+                            </span>
+<div class="flex gap-1">
+<button class="p-1.5 text-text-secondary hover:text-primary hover:bg-blue-50 rounded transition-colors" title="Editar">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 text-text-secondary hover:text-danger hover:bg-red-50 rounded transition-colors" title="Eliminar">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Service Card 3 -->
+<div class="group bg-white rounded-xl border border-border-light shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-row h-32 relative">
+<div class="w-32 bg-gray-100 shrink-0 relative">
+<img class="w-full h-full object-cover" data-alt="Blueprints on a desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfbCAzYr03-ANqP-GzkVDPy-TQe7rPszMogWH79Pfm5C-Cr10NfQdFefGfZ2jqzPF4xJ_717BIhnTwcg1q7ePapZnlAkwwlzcggMCB5DHdy4JV93VAVHEJLcieFj-xEzbtzxtSUG6VM4Yc6GsBL3wjAFTYeLf5TEiMokRW_JTFtuVw6J8fsoSawR71FR1j62Zqb-WRx-CiGIw_m1e8czLlt7QnQZBRxfbPtjClJ4N3nTA5RgFRVREkUDwn06Ra4Tgd1avzp9hfMmA"/>
+</div>
+<div class="flex-1 p-4 flex flex-col justify-between">
+<div>
+<h4 class="font-bold text-text-main line-clamp-1">Consultoría Estructural</h4>
+<p class="text-xs text-text-secondary mt-1 line-clamp-2">Evaluación y diagnóstico de estructuras existentes.</p>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-gray-100 text-gray-600 text-[10px] font-bold uppercase tracking-wider border border-gray-200">
+<span class="size-1.5 rounded-full bg-gray-400"></span>
+                                Oculto
+                            </span>
+<div class="flex gap-1">
+<button class="p-1.5 text-text-secondary hover:text-primary hover:bg-blue-50 rounded transition-colors" title="Editar">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 text-text-secondary hover:text-danger hover:bg-red-50 rounded transition-colors" title="Eliminar">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Catalog Teaser Section (To acknowledge the second tab visually) -->
+<div class="mt-12 pt-8 border-t border-border-light opacity-50 hover:opacity-100 transition-opacity">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-sm font-bold text-text-secondary uppercase tracking-wider">Resumen de Catálogo (ERP Sync)</h3>
+<div class="flex items-center gap-2 text-xs font-medium text-green-600 bg-green-50 px-2 py-1 rounded border border-green-100">
+<span class="size-2 bg-green-500 rounded-full animate-pulse"></span>
+                    Conectado al Inventario
+                </div>
+</div>
+<div class="bg-white rounded-lg border border-border-light overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-sm text-left">
+<thead class="bg-gray-50 text-text-secondary font-semibold border-b border-border-light">
+<tr>
+<th class="px-6 py-3">Producto</th>
+<th class="px-6 py-3">Categoría</th>
+<th class="px-6 py-3">Stock (ERP)</th>
+<th class="px-6 py-3">Precio Público</th>
+<th class="px-6 py-3 text-right">Estado</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light">
+<tr class="hover:bg-gray-50/50">
+<td class="px-6 py-3 font-medium text-text-main">Taladro Percutor 1/2"</td>
+<td class="px-6 py-3 text-text-secondary">Herramientas</td>
+<td class="px-6 py-3 text-text-main">45 un.</td>
+<td class="px-6 py-3 font-mono text-text-main">$1,250.00</td>
+<td class="px-6 py-3 text-right">
+<span class="text-green-600 font-medium text-xs">Visible</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50/50">
+<td class="px-6 py-3 font-medium text-text-main">Cemento Portland 50kg</td>
+<td class="px-6 py-3 text-text-secondary">Materiales</td>
+<td class="px-6 py-3 text-text-main">120 un.</td>
+<td class="px-6 py-3 font-mono text-text-main">$210.00</td>
+<td class="px-6 py-3 text-right">
+<span class="text-green-600 font-medium text-xs">Visible</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-white border-t border-border-light mt-auto">
+<div class="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+<p class="text-sm text-text-secondary">
+                © 2024 GPO-AR. Todos los derechos reservados.
+            </p>
+<div class="flex items-center gap-6">
+<span class="text-xs font-medium text-text-secondary bg-gray-100 px-3 py-1 rounded-full">
+                    Programado por Francisco López Velázquez
+                </span>
+<a class="text-sm text-text-secondary hover:text-primary transition-colors" href="#">Términos y Condiciones</a>
+<a class="text-sm text-text-secondary hover:text-primary transition-colors" href="#">Privacidad</a>
+</div>
+</div>
+</footer>
+</body></html>

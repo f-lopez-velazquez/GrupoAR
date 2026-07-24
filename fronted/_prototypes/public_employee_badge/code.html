@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html lang="es" class="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gafete de empleado - Grupo AR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/tailwind.css" />
+    <link rel="stylesheet" href="/assets/theme.css" />
+  </head>
+  <body class="bg-background-light bg-background-dark text-slate-900 text-white font-display min-h-screen">
+    <main class="max-w-3xl mx-auto px-6 py-10 flex flex-col gap-6">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img src="/assets/logo.png" alt="Logo Grupo AR" class="h-10 w-10" />
+          <div>
+            <h1 class="text-xl font-bold">Gafete digital</h1>
+            <p class="text-sm text-slate-500 text-slate-400">Verificación pública</p>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <button id="downloadBadgeBtn" class="px-4 py-2 rounded-lg bg-primary text-white text-sm font-semibold">Descargar imagen</button>
+          <button id="printBadgeBtn" class="px-4 py-2 rounded-lg border border-slate-200 border-slate-700 text-sm">Imprimir PDF</button>
+        </div>
+      </div>
+
+      <section id="badgeCard" class="rounded-2xl border border-slate-200 border-slate-800 bg-white bg-[#0f172a] shadow-lg p-6 flex flex-col md:flex-row gap-6 items-center">
+        <div class="flex flex-col items-center gap-3">
+          <div id="badgeAvatar" class="h-24 w-24 rounded-full bg-slate-100 bg-slate-800 flex items-center justify-center text-xl font-bold text-primary">AR</div>
+          <p id="badgeStatus" class="text-xs px-3 py-1 rounded-full bg-emerald-100 text-emerald-700">Activo</p>
+        </div>
+        <div class="flex-1 flex flex-col gap-3">
+          <div>
+            <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Grupo AR</p>
+            <h2 id="badgeName" class="text-2xl font-bold">Empleado</h2>
+            <p id="badgeRole" class="text-sm text-slate-500">Rol</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3 text-sm">
+            <div>
+              <p class="text-xs text-slate-400">ID</p>
+              <p id="badgeUid" class="font-mono text-sm">-</p>
+            </div>
+            <div>
+              <p class="text-xs text-slate-400">Ubicación</p>
+              <p class="text-sm">Salamanca, GTO.</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col items-center gap-2">
+          <div id="qrContainer" class="h-28 w-28 rounded-lg bg-white border border-slate-200 flex items-center justify-center"></div>
+          <p class="text-[10px] text-slate-500">Escanea para validar</p>
+        </div>
+      </section>
+
+      <div id="badgeError" class="hidden rounded-lg border border-rose-200 bg-rose-50 text-rose-700 text-sm px-4 py-3"></div>
+    </main>
+
+    <script type="module">
+      import { db } from "/shared/firebase.js";
+      import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+      import { exportElementAsPng } from "/shared/services/reports.js";
+      import QRCode from "https://unpkg.com/qrcode@1.5.3/build/qrcode.esm.js";
+
+      const badgeName = document.getElementById("badgeName");
+      const badgeRole = document.getElementById("badgeRole");
+      const badgeUid = document.getElementById("badgeUid");
+      const badgeStatus = document.getElementById("badgeStatus");
+      const badgeAvatar = document.getElementById("badgeAvatar");
+      const qrContainer = document.getElementById("qrContainer");
+      const badgeError = document.getElementById("badgeError");
+      const downloadBtn = document.getElementById("downloadBadgeBtn");
+      const printBtn = document.getElementById("printBadgeBtn");
+      const badgeCard = document.getElementById("badgeCard");
+
+      const getUidFromUrl = () => {
+        const params = new URLSearchParams(window.location.search);
+        const fromQuery = params.get("uid");
+        if (fromQuery) return fromQuery;
+        const parts = window.location.pathname.split("/").filter(Boolean);
+        const idx = parts.indexOf("consulta-empleado");
+        if (idx >= 0 && parts[idx + 1]) return parts[idx + 1];
+        return null;
+      };
+
+      const initials = (name) =>
+        String(name || "")
+          .split(" ")
+          .filter(Boolean)
+          .map((part) => part[0])
+          .slice(0, 2)
+          .join("")
+          .toUpperCase() || "AR";
+
+      const loadBadge = async () => {
+        const uid = getUidFromUrl();
+        if (!uid) {
+          badgeError.textContent = "No se encontró el identificador del empleado.";
+          badgeError.classList.remove("hidden");
+          return;
+        }
+        const snap = await getDoc(doc(db, "publicEmployees", uid));
+        if (!snap.exists()) {
+          badgeError.textContent = "No existe un gafete activo para este empleado.";
+          badgeError.classList.remove("hidden");
+          return;
+        }
+        const data = snap.data();
+        badgeName.textContent = data.name || "Empleado";
+        badgeRole.textContent = data.role || "Personal";
+        badgeUid.textContent = uid;
+        badgeStatus.textContent = data.active === false ? "Inactivo" : "Activo";
+        badgeStatus.className = `text-xs px-3 py-1 rounded-full ${data.active === false ? "bg-rose-100 text-rose-700" : "bg-emerald-100 text-emerald-700"}`;
+        badgeAvatar.textContent = initials(data.name || "Empleado");
+        const link = `${window.location.origin}/consulta-empleado/${uid}`;
+        const dataUrl = await QRCode.toDataURL(link, { width: 200, margin: 1 });
+        qrContainer.innerHTML = `<img src="${dataUrl}" alt="QR" class="h-24 w-24" />`;
+      };
+
+      downloadBtn.addEventListener("click", () => exportElementAsPng(badgeCard, "gafete-grupo-ar.png"));
+      printBtn.addEventListener("click", () => window.print());
+
+      loadBadge();
+    </script>
+    <script type="module" src="/shared/footer.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+

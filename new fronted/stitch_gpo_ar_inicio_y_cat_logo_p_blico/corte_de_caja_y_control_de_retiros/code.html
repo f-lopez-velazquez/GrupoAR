@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Corte de Caja - GPO-AR</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#096fc8",
+              "primary-dark": "#075aa3",
+              "alert": "#dc1e28",
+              "alert-dark": "#b0121a",
+              "background-light": "#f5f7f8",
+              "background-dark": "#101a22",
+              "surface-light": "#ffffff",
+              "surface-dark": "#1e293b",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"],
+              "body": ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+                "DEFAULT": "0.375rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "2xl": "1rem",
+            },
+            boxShadow: {
+                'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+            vertical-align: middle;
+        }
+        /* Custom scrollbar for table */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+    </style>
+</head>
+<body class="bg-background-light text-slate-900 antialiased min-h-screen flex flex-col relative">
+<!-- Navbar -->
+<header class="sticky top-0 z-30 flex items-center justify-between whitespace-nowrap border-b border-gray-200 bg-white px-4 py-3 shadow-sm lg:px-10">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center rounded bg-primary/10 p-2 text-primary">
+<span class="material-symbols-outlined text-2xl">storefront</span>
+</div>
+<h2 class="text-slate-900 text-lg font-bold leading-tight tracking-tight">GPO-AR Punto de Venta</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8 items-center">
+<nav class="flex items-center gap-6">
+<a class="text-slate-600 hover:text-primary text-sm font-medium transition-colors" href="#">Tablero</a>
+<a class="text-slate-600 hover:text-primary text-sm font-medium transition-colors" href="#">Ventas</a>
+<a class="text-slate-600 hover:text-primary text-sm font-medium transition-colors" href="#">Inventario</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-0.5" href="#">Corte de Caja</a>
+<a class="text-slate-600 hover:text-primary text-sm font-medium transition-colors" href="#">Configuración</a>
+</nav>
+<div class="flex items-center gap-4 border-l pl-6 border-gray-200">
+<div class="flex flex-col items-end">
+<span class="text-sm font-bold text-slate-800">Caja 01</span>
+<span class="text-xs text-slate-500">Turno Matutino</span>
+</div>
+<div class="h-10 w-10 overflow-hidden rounded-full border border-gray-200 bg-gray-100" data-alt="User avatar placeholder">
+<img alt="User Avatar" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu70rkFaueLH15jTq3VHTNeTUgcMvo_Zb0ALKFIv9sJpJQUTSl8dN568tbAfeHQqgQ0EOuGG5ubR0NBNJAPYxMGTxY6gjXrKNIzqX1SJw0BCVPlgZ59-8d5mPYiu3DvdtK4aUuTzMFD-6TSxRmWWhipmnmVHMBujP8kA-Bz_aQ1bQAK0xYZ6gvJ9iwhxpnS7lPX1Q2uu-MLolzqbjr5glBIzkcHU1kOGcS3YJL6liAmsVMfopAmX1yk77T_8_EZr3v4XW6NjNyjW0"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-[1440px] mx-auto px-4 lg:px-10 py-8 space-y-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-slate-500 text-sm font-medium">
+<span class="material-symbols-outlined text-lg">calendar_today</span>
+<span>14 de Octubre, 2023</span>
+<span class="text-gray-300">|</span>
+<span class="material-symbols-outlined text-lg">schedule</span>
+<span>16:45 PM</span>
+</div>
+<h1 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900">Corte de Caja y Control</h1>
+<p class="text-slate-500 text-base max-w-2xl">Supervise el flujo de efectivo, realice retiros seguros y finalice el turno operativo.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-gray-50 hover:text-slate-900 transition-all shadow-sm">
+<span class="material-symbols-outlined text-[20px]">print</span>
+<span>Imprimir Reporte</span>
+</button>
+<button class="flex items-center justify-center gap-2 rounded-lg bg-slate-800 px-4 py-2.5 text-sm font-bold text-white hover:bg-slate-900 transition-all shadow-md">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+<span>Cerrar Turno</span>
+</button>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1: Initial -->
+<div class="relative overflow-hidden rounded-xl bg-white p-6 shadow-soft border border-slate-100 group">
+<div class="absolute right-0 top-0 h-24 w-24 translate-x-8 translate-y--8 rounded-full bg-blue-50 opacity-50 group-hover:scale-110 transition-transform"></div>
+<div class="relative z-10 flex flex-col gap-1">
+<div class="flex items-center gap-2 text-slate-500 mb-2">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<p class="text-sm font-medium uppercase tracking-wider">Fondo Inicial</p>
+</div>
+<p class="text-3xl font-bold text-slate-800">$2,000.00</p>
+<p class="text-sm text-green-600 font-medium flex items-center mt-1">
+<span class="material-symbols-outlined text-sm mr-1">check_circle</span>
+                        Verificado 8:00 AM
+                    </p>
+</div>
+</div>
+<!-- Card 2: Sales -->
+<div class="relative overflow-hidden rounded-xl bg-white p-6 shadow-soft border border-slate-100 group">
+<div class="absolute right-0 top-0 h-24 w-24 translate-x-8 translate-y--8 rounded-full bg-green-50 opacity-50 group-hover:scale-110 transition-transform"></div>
+<div class="relative z-10 flex flex-col gap-1">
+<div class="flex items-center gap-2 text-slate-500 mb-2">
+<span class="material-symbols-outlined">payments</span>
+<p class="text-sm font-medium uppercase tracking-wider">Ventas Totales</p>
+</div>
+<p class="text-3xl font-bold text-slate-800">$15,450.00</p>
+<p class="text-sm text-green-600 font-medium flex items-center mt-1">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span>
+                        +12.5% vs ayer
+                    </p>
+</div>
+</div>
+<!-- Card 3: Current Balance (Primary) -->
+<div class="relative overflow-hidden rounded-xl bg-primary p-6 shadow-lg shadow-primary/20 group">
+<div class="absolute -right-6 -top-6 h-32 w-32 rounded-full bg-white/10 blur-xl group-hover:bg-white/20 transition-colors"></div>
+<div class="relative z-10 flex flex-col gap-1">
+<div class="flex items-center gap-2 text-white/80 mb-2">
+<span class="material-symbols-outlined">savings</span>
+<p class="text-sm font-bold uppercase tracking-wider">Saldo Actual en Caja</p>
+</div>
+<p class="text-4xl font-black text-white tracking-tight">$17,450.00</p>
+<p class="text-sm text-white/90 font-medium mt-2 opacity-80">
+                        Disponible para retiros
+                    </p>
+</div>
+</div>
+</div>
+<!-- Layout Split: Actions & Logs -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 h-full">
+<!-- Left Column: High Security Actions -->
+<div class="lg:col-span-1 space-y-6">
+<!-- Withdrawal Action -->
+<div class="rounded-xl border border-red-100 bg-white p-6 shadow-soft">
+<div class="flex items-center gap-3 mb-4">
+<div class="p-2 bg-red-50 rounded-lg text-alert">
+<span class="material-symbols-outlined">lock_open</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900">Retiros de Efectivo</h3>
+</div>
+<p class="text-slate-500 text-sm mb-6 leading-relaxed">
+                        Esta acción requiere autorización de supervisor mediante <strong>Llave Especial</strong>. El retiro se reflejará inmediatamente en el corte.
+                    </p>
+<button class="w-full flex items-center justify-center gap-2 rounded-lg bg-alert hover:bg-alert-dark text-white px-5 py-3.5 text-base font-bold transition-all shadow-md active:scale-[0.98]">
+<span class="material-symbols-outlined">warning</span>
+<span>Solicitar Retiro Seguro</span>
+</button>
+</div>
+<!-- Recent Alerts / Info -->
+<div class="rounded-xl border border-slate-200 bg-slate-50 p-5">
+<h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Estado del Sistema</h4>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-green-600 text-[20px] mt-0.5">wifi</span>
+<div>
+<p class="text-sm font-semibold text-slate-800">Conexión Estable</p>
+<p class="text-xs text-slate-500">Sincronizado hace 2 min</p>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] mt-0.5">security</span>
+<div>
+<p class="text-sm font-semibold text-slate-800">Seguridad Activa</p>
+<p class="text-xs text-slate-500">Protocolo de encriptación nivel 3</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<!-- Right Column: Transaction Log -->
+<div class="lg:col-span-2 flex flex-col h-full min-h-[400px]">
+<div class="rounded-xl border border-gray-200 bg-white shadow-soft flex flex-col flex-1 overflow-hidden">
+<div class="flex items-center justify-between border-b border-gray-100 px-6 py-4 bg-gray-50/50">
+<h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400">history</span>
+                            Bitácora de Movimientos
+                        </h3>
+<div class="flex gap-2">
+<span class="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-700 border border-blue-100">
+                                42 Transacciones
+                              </span>
+</div>
+</div>
+<div class="overflow-auto custom-scrollbar flex-1 p-0">
+<table class="w-full text-left border-collapse">
+<thead class="bg-white sticky top-0 z-10 shadow-sm">
+<tr>
+<th class="px-6 py-3 text-xs font-bold uppercase tracking-wider text-slate-500 w-24">Hora</th>
+<th class="px-6 py-3 text-xs font-bold uppercase tracking-wider text-slate-500 w-32">Tipo</th>
+<th class="px-6 py-3 text-xs font-bold uppercase tracking-wider text-slate-500">Concepto / ID</th>
+<th class="px-6 py-3 text-xs font-bold uppercase tracking-wider text-slate-500 w-32">Usuario</th>
+<th class="px-6 py-3 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">Monto</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 text-sm text-slate-600 bg-white">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-3 font-medium whitespace-nowrap">16:42</td>
+<td class="px-6 py-3"><span class="inline-flex items-center gap-1 rounded bg-green-50 px-2 py-1 text-xs font-bold text-green-700 border border-green-100">VENTA</span></td>
+<td class="px-6 py-3 font-medium text-slate-900">Ticket #A-89201 - Herramientas Gral.</td>
+<td class="px-6 py-3">F. López</td>
+<td class="px-6 py-3 font-bold text-slate-900 text-right whitespace-nowrap">+$ 450.00</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-3 font-medium whitespace-nowrap">16:30</td>
+<td class="px-6 py-3"><span class="inline-flex items-center gap-1 rounded bg-green-50 px-2 py-1 text-xs font-bold text-green-700 border border-green-100">VENTA</span></td>
+<td class="px-6 py-3 font-medium text-slate-900">Ticket #A-89200 - Cementos 50kg</td>
+<td class="px-6 py-3">F. López</td>
+<td class="px-6 py-3 font-bold text-slate-900 text-right whitespace-nowrap">+$ 1,200.00</td>
+</tr>
+<!-- Row 3: Withdrawal -->
+<tr class="bg-red-50/40 hover:bg-red-50 transition-colors border-l-4 border-l-alert">
+<td class="px-6 py-3 font-medium whitespace-nowrap">15:15</td>
+<td class="px-6 py-3"><span class="inline-flex items-center gap-1 rounded bg-red-100 px-2 py-1 text-xs font-bold text-red-700 border border-red-200">RETIRO</span></td>
+<td class="px-6 py-3 font-medium text-slate-900">Retiro Parcial por Exceso de Efectivo</td>
+<td class="px-6 py-3 font-semibold text-slate-800">Admin</td>
+<td class="px-6 py-3 font-bold text-red-600 text-right whitespace-nowrap">-$ 3,000.00</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-3 font-medium whitespace-nowrap">14:50</td>
+<td class="px-6 py-3"><span class="inline-flex items-center gap-1 rounded bg-green-50 px-2 py-1 text-xs font-bold text-green-700 border border-green-100">VENTA</span></td>
+<td class="px-6 py-3 font-medium text-slate-900">Ticket #A-89199 - Pintura Vinílica</td>
+<td class="px-6 py-3">M. García</td>
+<td class="px-6 py-3 font-bold text-slate-900 text-right whitespace-nowrap">+$ 850.50</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-3 font-medium whitespace-nowrap">14:10</td>
+<td class="px-6 py-3"><span class="inline-flex items-center gap-1 rounded bg-green-50 px-2 py-1 text-xs font-bold text-green-700 border border-green-100">VENTA</span></td>
+<td class="px-6 py-3 font-medium text-slate-900">Ticket #A-89198 - Tubería PVC</td>
+<td class="px-6 py-3">M. García</td>
+<td class="px-6 py-3 font-bold text-slate-900 text-right whitespace-nowrap">+$ 320.00</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-3 font-medium whitespace-nowrap">13:45</td>
+<td class="px-6 py-3"><span class="inline-flex items-center gap-1 rounded bg-green-50 px-2 py-1 text-xs font-bold text-green-700 border border-green-100">VENTA</span></td>
+<td class="px-6 py-3 font-medium text-slate-900">Ticket #A-89197 - Material Eléctrico</td>
+<td class="px-6 py-3">M. García</td>
+<td class="px-6 py-3 font-bold text-slate-900 text-right whitespace-nowrap">+$ 1,500.00</td>
+</tr>
+<!-- Row 7 -->
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-3 font-medium whitespace-nowrap">09:00</td>
+<td class="px-6 py-3"><span class="inline-flex items-center gap-1 rounded bg-blue-50 px-2 py-1 text-xs font-bold text-blue-700 border border-blue-100">APERTURA</span></td>
+<td class="px-6 py-3 font-medium text-slate-900">Fondo Inicial de Caja</td>
+<td class="px-6 py-3">F. López</td>
+<td class="px-6 py-3 font-bold text-slate-900 text-right whitespace-nowrap">+$ 2,000.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="mt-auto w-full border-t border-gray-200 bg-white px-10 py-4 text-center">
+<p class="text-xs text-slate-400 font-medium">
+            GPO-AR System v2.0.4 © 2023 | Programado por Francisco López Velázquez
+        </p>
+</footer>
+<!-- Security Modal (Simulated Active State) -->
+<!-- This overlay represents the high-security modal triggered by "Solicitar Retiro Seguro" -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+<div class="w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-slate-900/5 transform transition-all scale-100">
+<!-- Modal Header -->
+<div class="relative bg-alert px-6 py-4 flex items-center gap-3 overflow-hidden">
+<!-- Abstract pattern for security header -->
+<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" data-alt="Security carbon fiber pattern"></div>
+<div class="relative z-10 flex items-center gap-3 text-white">
+<div class="rounded-full bg-white/20 p-1.5 backdrop-blur-md">
+<span class="material-symbols-outlined text-2xl">shield_lock</span>
+</div>
+<div>
+<h3 class="text-lg font-bold leading-none">Llave Especial Requerida</h3>
+<p class="text-white/80 text-xs font-medium mt-1">Autorización de Nivel Administrativo</p>
+</div>
+</div>
+</div>
+<!-- Modal Body -->
+<div class="px-8 py-8">
+<p class="text-slate-600 text-sm mb-6 text-center">
+                    Para proceder con el retiro de efectivo, ingrese su código de llave digital o solicite la huella del supervisor.
+                </p>
+<div class="space-y-4">
+<div class="relative">
+<label class="sr-only" for="security-code">Código de Seguridad</label>
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400">key</span>
+</div>
+<input autofocus="" class="block w-full rounded-lg border-gray-300 bg-slate-50 pl-10 py-3 text-slate-900 placeholder-slate-400 focus:border-alert focus:ring-alert sm:text-sm shadow-sm transition-all text-center tracking-[0.5em] font-bold text-lg" id="security-code" name="security-code" placeholder="••••••" type="password" value="8821"/>
+<!-- Simulation of being typed -->
+<div class="absolute inset-y-0 right-0 pr-3 flex items-center">
+<span class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs text-slate-400 px-1">
+<span>Intentos restantes: 2</span>
+<a class="text-primary hover:underline" href="#">¿Olvidó su código?</a>
+</div>
+</div>
+</div>
+<!-- Modal Footer -->
+<div class="bg-gray-50 px-6 py-4 flex gap-3 justify-end border-t border-gray-100">
+<button class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-gray-50 hover:text-slate-900 transition-colors">
+                    Cancelar
+                </button>
+<button class="flex items-center gap-2 rounded-lg bg-alert px-6 py-2 text-sm font-bold text-white shadow-md hover:bg-alert-dark transition-colors focus:ring-2 focus:ring-alert focus:ring-offset-2">
+<span>Autorizar Retiro</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>

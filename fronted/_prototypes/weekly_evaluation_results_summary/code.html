@@ -1,0 +1,739 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resumen de evaluaciones semanales - Grupo AR</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for high density data tables if needed */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101a22; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #223749; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #304e69; 
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-white font-display overflow-x-hidden min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-card-border px-10 py-3 bg-card-dark">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-white">
+<div class="size-6 text-primary">
+<span class="material-symbols-outlined text-3xl">grid_view</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Grupo AR ERP</h2>
+</div>
+<div class="hidden lg:flex items-center gap-9">
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Panel</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Evaluaciones</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Personal</a>
+<a class="text-primary text-sm font-bold leading-normal" href="#">Reportes</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Ajustes</a>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<label class="flex flex-col min-w-40 !h-10 max-w-64 hidden sm:flex">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-card-border bg-background-dark/50">
+<div class="text-neutral-text flex border-none items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input id="summarySearchInput" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-transparent focus:border-none h-full placeholder:text-neutral-text px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal" placeholder="Buscar..." value=""/>
+</div>
+</label>
+<div class="flex items-center gap-2">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-card-border text-white relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-danger rounded-full border border-card-dark"></span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-card-border" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCESHkPHSpkRC29UhykJFZp2ydjlQYFi9DUdIlp4ujgRYVR1J1G9D-Vwzz8wyGp4jI3L-FbqMlk22jsN6FUprcdiPRe3D2tWEFMRILVrqo6XTMuNNrCTzuHRFd-PHabpQ6JlA9WNsOYQd5R3lR7eDW6tg2LjdRliRpBu89aXc4t7uYnBoB5Yecz0EGm95nPiXH9-LMmBeusD8pS8PsjKJVApGpYNC7q0moiSQAVCTuNFcRLdJAFNwLVVB-Zuq_Yld6AKghLttzrrh0F");'></div>
+</div>
+</div>
+</header>
+<div id="weeklySummaryContent" class="flex flex-1 flex-col px-4 md:px-10 lg:px-40 py-6 max-w-[1920px] mx-auto w-full">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 mb-4">
+<a class="text-neutral-text text-sm font-medium leading-normal hover:text-white" href="#">Inicio</a>
+<span class="text-neutral-text text-sm font-medium leading-normal">/</span>
+<a class="text-neutral-text text-sm font-medium leading-normal hover:text-white" href="#">Reportes</a>
+<span class="text-neutral-text text-sm font-medium leading-normal">/</span>
+<span class="text-white text-sm font-medium leading-normal">Resumen semanal</span>
+</div>
+<!-- Header Section -->
+<div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-8">
+<div class="flex flex-col gap-2">
+<h1 class="text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Resumen de evaluaciones semanales</h1>
+<p id="weekRangeSummary" class="text-neutral-text text-base font-normal leading-normal max-w-2xl">
+                    Consolidado de desempeño y asistencia de la semana en curso.
+                </p>
+<!-- Filters -->
+<div class="flex gap-3 pt-2 flex-wrap">
+<button class="group flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-card-dark border border-card-border hover:border-primary/50 transition-colors pl-4 pr-3">
+<p class="text-white text-xs md:text-sm font-medium leading-normal">Week: 42 (Current)</p>
+<span class="material-symbols-outlined text-neutral-text group-hover:text-white text-[20px]">expand_more</span>
+</button>
+<button class="group flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-card-dark border border-card-border hover:border-primary/50 transition-colors pl-4 pr-3">
+<p class="text-white text-xs md:text-sm font-medium leading-normal">Region: All Zones</p>
+<span class="material-symbols-outlined text-neutral-text group-hover:text-white text-[20px]">expand_more</span>
+</button>
+<button class="group flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-card-dark border border-card-border hover:border-primary/50 transition-colors pl-4 pr-3">
+<p class="text-white text-xs md:text-sm font-medium leading-normal">Manager: All</p>
+<span class="material-symbols-outlined text-neutral-text group-hover:text-white text-[20px]">expand_more</span>
+</button>
+</div>
+</div>
+<div class="flex gap-3">
+<button id="printSummaryBtn" class="flex min-w-[120px] cursor-pointer items-center justify-center gap-2 rounded-lg h-10 px-4 bg-transparent border border-card-border hover:bg-card-border text-white text-sm font-bold leading-normal transition-colors">
+<span class="material-symbols-outlined text-[20px]">print</span>
+<span class="truncate">Print</span>
+</button>
+<button id="exportSummaryBtn" class="flex min-w-[140px] cursor-pointer items-center justify-center gap-2 rounded-lg h-10 px-4 bg-primary hover:bg-primary/90 text-white text-sm font-bold leading-normal shadow-lg shadow-primary/20 transition-all">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span class="truncate">Exportar reporte</span>
+</button>
+</div>
+</div>
+<!-- Stats Row -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+<div class="flex flex-col gap-1 rounded-xl p-5 border border-card-border bg-card-dark shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-neutral-text text-sm font-medium">Personal evaluado</p>
+<span class="material-symbols-outlined text-primary text-[24px]">groups</span>
+</div>
+<div class="flex items-baseline gap-2 mt-1">
+<p id="totalEmployeesCount" class="text-white text-2xl font-bold leading-tight">0</p>
+<span id="totalEmployeesDelta" class="text-success text-xs font-medium bg-success/10 px-1.5 py-0.5 rounded">0%</span>
+</div>
+<p class="text-neutral-text/60 text-xs mt-1">Personal activo en evaluación</p>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-5 border border-card-border bg-card-dark shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-neutral-text text-sm font-medium">Asistencia promedio</p>
+<span class="material-symbols-outlined text-warning text-[24px]">fact_check</span>
+</div>
+<div class="flex items-baseline gap-2 mt-1">
+<p id="attendanceRate" class="text-white text-2xl font-bold leading-tight">0%</p>
+<span id="attendanceDelta" class="text-warning text-xs font-medium bg-warning/10 px-1.5 py-0.5 rounded">0%</span>
+</div>
+<p class="text-neutral-text/60 text-xs mt-1">Meta de puntualidad semanal</p>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-5 border border-card-border bg-card-dark shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-neutral-text text-sm font-medium">Promedio desempeño</p>
+<span class="material-symbols-outlined text-success text-[24px]">trending_up</span>
+</div>
+<div class="flex items-baseline gap-2 mt-1">
+<p id="performanceAvg" class="text-white text-2xl font-bold leading-tight">0<span class="text-lg text-neutral-text font-normal">/10</span></p>
+<span id="performanceDelta" class="text-success text-xs font-medium bg-success/10 px-1.5 py-0.5 rounded">0</span>
+</div>
+<p class="text-neutral-text/60 text-xs mt-1">Basado en evaluaciones</p>
+</div>
+<!-- Critical Alerts Card -->
+<div class="flex flex-col gap-1 rounded-xl p-5 border border-danger/40 bg-danger/5 shadow-sm relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-danger text-[80px]">warning</span>
+</div>
+<div class="flex justify-between items-start relative z-10">
+<p class="text-danger text-sm font-bold">Alertas críticas</p>
+<span class="material-symbols-outlined text-danger text-[24px]">notifications_active</span>
+</div>
+<div class="flex items-baseline gap-2 mt-1 relative z-10">
+<p id="alertsCount" class="text-white text-2xl font-bold leading-tight">0</p>
+<span class="text-danger text-xs font-medium bg-danger/10 px-1.5 py-0.5 rounded border border-danger/20">Requiere acción</span>
+</div>
+<p class="text-danger/80 text-xs mt-1 relative z-10">Incidencias con ausencias o retrasos</p>
+</div>
+</div>
+<!-- Main Dashboard Content Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6">
+<!-- Left Column: Trends & Heatmap -->
+<div class="xl:col-span-2 flex flex-col gap-6">
+<!-- Performance Trend Chart Container -->
+<div class="rounded-xl border border-card-border bg-card-dark p-6 hidden">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="text-white text-lg font-bold">Performance Velocity</h3>
+<p class="text-neutral-text text-sm">Comparison: Current Week vs Previous Month Avg</p>
+</div>
+<div class="flex items-center gap-4 text-xs">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="text-white">This Week</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full border border-neutral-text border-dashed bg-transparent"></div>
+<span class="text-neutral-text">Last Month</span>
+</div>
+</div>
+</div>
+<!-- SVG Chart -->
+<div class="w-full h-48 relative">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 800 200">
+<!-- Grid Lines -->
+<line stroke="#223749" stroke-width="1" x1="0" x2="800" y1="190" y2="190"></line>
+<line stroke="#223749" stroke-dasharray="4" stroke-width="1" x1="0" x2="800" y1="142.5" y2="142.5"></line>
+<line stroke="#223749" stroke-dasharray="4" stroke-width="1" x1="0" x2="800" y1="95" y2="95"></line>
+<line stroke="#223749" stroke-dasharray="4" stroke-width="1" x1="0" x2="800" y1="47.5" y2="47.5"></line>
+<!-- Dashed Line (Last Month) -->
+<path d="M0,120 C100,110 200,130 300,100 C400,70 500,90 600,80 C700,70 800,60" fill="none" stroke="#4b637d" stroke-dasharray="6,4" stroke-width="2"></path>
+<!-- Solid Line (Current Week) -->
+<path d="M0,140 C100,100 200,110 300,70 C400,30 500,50 600,40 C700,30 800,20" fill="none" stroke="#096fc8" stroke-width="3"></path>
+<!-- Area Gradient under Current Week -->
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#096fc8" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#096fc8" stop-opacity="0"></stop>
+</lineargradient>
+<path d="M0,140 C100,100 200,110 300,70 C400,30 500,50 600,40 C700,30 800,20 V 200 H 0 Z" fill="url(#chartGradient)"></path>
+<!-- Data Points -->
+<circle cx="300" cy="70" fill="#096fc8" r="4" stroke="white" stroke-width="2"></circle>
+<circle cx="600" cy="40" fill="#096fc8" r="4" stroke="white" stroke-width="2"></circle>
+</svg>
+<!-- X Axis Labels -->
+<div class="flex justify-between w-full text-xs text-neutral-text mt-2 font-mono">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span>Sun</span>
+</div>
+</div>
+</div>
+<!-- Attendance Heatmap -->
+<div class="rounded-xl border border-card-border bg-card-dark p-6 flex-1 hidden">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-white text-lg font-bold">Attendance Heat Map</h3>
+<div class="flex gap-2 text-xs">
+<span class="flex items-center gap-1 text-neutral-text"><div class="size-3 rounded-sm bg-[#163a2b] border border-[#0bda5b]"></div> 95%+</span>
+<span class="flex items-center gap-1 text-neutral-text"><div class="size-3 rounded-sm bg-[#3a2e16] border border-[#fa6238]"></div> 85-94%</span>
+<span class="flex items-center gap-1 text-neutral-text"><div class="size-3 rounded-sm bg-[#3a1616] border border-[#dc1e28]"></div> &lt;85%</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-sm text-left">
+<thead>
+<tr class="text-neutral-text border-b border-card-border">
+<th class="py-3 px-2 font-medium">Site Name</th>
+<th class="py-3 px-2 font-medium text-center">Mon</th>
+<th class="py-3 px-2 font-medium text-center">Tue</th>
+<th class="py-3 px-2 font-medium text-center">Wed</th>
+<th class="py-3 px-2 font-medium text-center">Thu</th>
+<th class="py-3 px-2 font-medium text-center">Fri</th>
+<th class="py-3 px-2 font-medium text-center">Sat</th>
+<th class="py-3 px-2 font-medium text-center">Sun</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-card-border">
+<!-- Row 1 -->
+<tr class="group hover:bg-white/5 transition-colors">
+<td class="py-3 px-2 text-white font-medium">Site Alpha</td>
+<td class="p-1"><div class="h-8 rounded bg-[#0bda5b]/20 text-[#0bda5b] flex items-center justify-center font-mono text-xs cursor-help" title="98%">98%</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#0bda5b]/20 text-[#0bda5b] flex items-center justify-center font-mono text-xs" title="97%">97%</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#0bda5b]/20 text-[#0bda5b] flex items-center justify-center font-mono text-xs" title="95%">95%</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#fa6238]/20 text-[#fa6238] flex items-center justify-center font-mono text-xs" title="92%">92%</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#0bda5b]/20 text-[#0bda5b] flex items-center justify-center font-mono text-xs" title="96%">96%</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#223749] text-neutral-text flex items-center justify-center font-mono text-xs">-</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#223749] text-neutral-text flex items-center justify-center font-mono text-xs">-</div></td>
+</tr>
+<!-- Row 2 (Problematic) -->
+<tr class="group hover:bg-white/5 transition-colors">
+<td class="py-3 px-2 text-white font-medium">Site Beta (Ind)</td>
+<td class="p-1"><div class="h-8 rounded bg-[#0bda5b]/20 text-[#0bda5b] flex items-center justify-center font-mono text-xs" title="95%">95%</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#dc1e28]/20 text-[#dc1e28] border border-[#dc1e28]/50 flex items-center justify-center font-mono text-xs font-bold" title="82%">82%</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#dc1e28]/20 text-[#dc1e28] border border-[#dc1e28]/50 flex items-center justify-center font-mono text-xs font-bold" title="80%">80%</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#fa6238]/20 text-[#fa6238] flex items-center justify-center font-mono text-xs" title="88%">88%</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#0bda5b]/20 text-[#0bda5b] flex items-center justify-center font-mono text-xs" title="95%">95%</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#fa6238]/20 text-[#fa6238] flex items-center justify-center font-mono text-xs" title="90%">90%</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#223749] text-neutral-text flex items-center justify-center font-mono text-xs">-</div></td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-white/5 transition-colors">
+<td class="py-3 px-2 text-white font-medium">Site Gamma</td>
+<td class="p-1"><div class="h-8 rounded bg-[#0bda5b]/20 text-[#0bda5b] flex items-center justify-center font-mono text-xs" title="100%">100%</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#0bda5b]/20 text-[#0bda5b] flex items-center justify-center font-mono text-xs" title="100%">100%</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#0bda5b]/20 text-[#0bda5b] flex items-center justify-center font-mono text-xs" title="98%">98%</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#0bda5b]/20 text-[#0bda5b] flex items-center justify-center font-mono text-xs" title="99%">99%</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#0bda5b]/20 text-[#0bda5b] flex items-center justify-center font-mono text-xs" title="96%">96%</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#223749] text-neutral-text flex items-center justify-center font-mono text-xs">-</div></td>
+<td class="p-1"><div class="h-8 rounded bg-[#223749] text-neutral-text flex items-center justify-center font-mono text-xs">-</div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Column: Alerts & Breakdown -->
+<div class="xl:col-span-1 flex flex-col gap-6">
+<!-- Critical Alerts Panel -->
+<div class="rounded-xl bg-background-dark border border-danger/50 overflow-hidden flex flex-col hidden">
+<div class="bg-danger/10 p-4 border-b border-danger/20 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-danger">report</span>
+<h3 class="text-danger font-bold text-base">Attention Required</h3>
+</div>
+<span class="bg-danger text-white text-xs font-bold px-2 py-0.5 rounded-full">3</span>
+</div>
+<div class="p-2 flex flex-col gap-1 max-h-[300px] overflow-y-auto">
+<!-- Alert Item 1 -->
+<div class="p-3 hover:bg-white/5 rounded-lg flex gap-3 transition-colors cursor-pointer group">
+<div class="mt-1 min-w-4 max-w-4">
+<div class="size-2 rounded-full bg-danger mt-1.5 shadow-[0_0_8px_rgba(220,30,40,0.6)]"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between w-full">
+<p class="text-white text-sm font-semibold group-hover:text-danger transition-colors">Site Beta (Industrial)</p>
+<span class="text-neutral-text text-xs">Tue</span>
+</div>
+<p class="text-neutral-text text-xs mt-1">High Absenteeism: 6 workers absent (crew B).</p>
+<button class="mt-2 text-xs font-medium text-danger border border-danger/30 rounded px-2 py-1 hover:bg-danger/10 transition-colors">View Details</button>
+</div>
+</div>
+<!-- Alert Item 2 -->
+<div class="p-3 hover:bg-white/5 rounded-lg flex gap-3 transition-colors cursor-pointer group">
+<div class="mt-1 min-w-4 max-w-4">
+<div class="size-2 rounded-full bg-danger mt-1.5 shadow-[0_0_8px_rgba(220,30,40,0.6)]"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between w-full">
+<p class="text-white text-sm font-semibold group-hover:text-danger transition-colors">Site Zeta (Comm)</p>
+<span class="text-neutral-text text-xs">Mon</span>
+</div>
+<p class="text-neutral-text text-xs mt-1">Safety: Incident reported involving minor injury.</p>
+</div>
+</div>
+<!-- Alert Item 3 -->
+<div class="p-3 hover:bg-white/5 rounded-lg flex gap-3 transition-colors cursor-pointer group">
+<div class="mt-1 min-w-4 max-w-4">
+<div class="size-2 rounded-full bg-danger mt-1.5 shadow-[0_0_8px_rgba(220,30,40,0.6)]"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between w-full">
+<p class="text-white text-sm font-semibold group-hover:text-danger transition-colors">Site Omega</p>
+<span class="text-neutral-text text-xs">Wed</span>
+</div>
+<p class="text-neutral-text text-xs mt-1">Performance: Efficiency dropped below threshold (6.2).</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Mini Map / Region context -->
+<div class="rounded-xl border border-card-border bg-card-dark p-6 flex-1 flex flex-col hidden">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-white text-base font-bold">Regional Impact</h3>
+<button class="text-primary text-xs font-medium hover:underline">View Map</button>
+</div>
+<div class="bg-background-dark rounded-lg flex-1 relative overflow-hidden bg-cover bg-center" data-alt="Mapa de sitios de construcción con marcadores" data-location="Ciudad de México" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAIHm8stNQl8gqgsTM-9UwlpuFtAHPZvILjs-9s9B2W9ZykgtYR7sgBp0Pa0ftSw0lc2sllz4prz_LUJMU3L380UXj6A8iiZYCCaRBrEmZmvu0k18nA7Ee0iaNM6pS6VBsIb9HpUNTPbIXIElQTdgnpQlxSNYU51m-PSfSIF-iezMyYRbKWwCctXy1fOJ88JtH2uM00iPPtHHGi79p2KPG5AGY51tQ0NYtJrpj10ZgkowbvCi_aPLGEuPhJIp6HYwcFPTB2N-F9GjPV");'>
+<div class="absolute inset-0 bg-background-dark/60"></div>
+<!-- Markers -->
+<div class="absolute top-1/3 left-1/4 size-3 bg-danger rounded-full border-2 border-white shadow-lg animate-pulse" title="Site Beta"></div>
+<div class="absolute bottom-1/4 right-1/3 size-3 bg-success rounded-full border-2 border-white shadow-lg" title="Site Alpha"></div>
+<div class="absolute top-1/2 right-1/4 size-3 bg-success rounded-full border-2 border-white shadow-lg" title="Site Gamma"></div>
+</div>
+<div class="mt-4 space-y-2">
+<div class="flex justify-between items-center text-sm">
+<span class="text-neutral-text">North Zone</span>
+<span class="text-danger font-medium">82% Avg</span>
+</div>
+<div class="w-full bg-card-border rounded-full h-1.5">
+<div class="bg-danger h-1.5 rounded-full" style="width: 82%"></div>
+</div>
+<div class="flex justify-between items-center text-sm mt-2">
+<span class="text-neutral-text">South Zone</span>
+<span class="text-success font-medium">96% Avg</span>
+</div>
+<div class="w-full bg-card-border rounded-full h-1.5">
+<div class="bg-success h-1.5 rounded-full" style="width: 96%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Data Grid -->
+<div class="rounded-xl border border-card-border bg-card-dark flex flex-col">
+<div class="p-6 border-b border-card-border flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<h3 class="text-white text-lg font-bold">Resumen de nómina semanal</h3>
+<div class="flex gap-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2.5 top-2 text-neutral-text text-[18px]">search</span>
+<input id="payrollSearch" class="bg-background-dark border-card-border rounded-lg pl-9 pr-3 py-1.5 text-sm text-white focus:ring-1 focus:ring-primary w-64 placeholder:text-neutral-text" placeholder="Filtrar empleados..." type="text"/>
+</div>
+<button class="flex items-center justify-center size-8 rounded-lg border border-card-border bg-background-dark text-neutral-text hover:text-white hover:bg-card-border">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+<button class="flex items-center justify-center size-8 rounded-lg border border-card-border bg-background-dark text-neutral-text hover:text-white hover:bg-card-border">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-sm text-left">
+<thead class="bg-background-dark/50 text-neutral-text uppercase text-xs">
+<tr>
+<th class="px-6 py-3 font-semibold">Empleado</th>
+<th class="px-6 py-3 font-semibold">Rol</th>
+<th class="px-6 py-3 font-semibold">Asistencia</th>
+<th class="px-6 py-3 font-semibold">Puntualidad</th>
+<th class="px-6 py-3 font-semibold">Desempeño</th>
+<th class="px-6 py-3 font-semibold">Salario semanal</th>
+<th class="px-6 py-3 font-semibold text-right">Acciones</th>
+</tr>
+</thead>
+<tbody id="payrollTableBody" class="divide-y divide-card-border">
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-card-border flex justify-between items-center text-xs text-neutral-text">
+<p>Showing 1-4 of 12 Sites</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 rounded border border-card-border hover:bg-card-border text-white disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1 rounded border border-card-border hover:bg-card-border text-white">Next</button>
+</div>
+</div>
+</div>
+</div>
+<div id="payrollModal" class="fixed inset-0 z-[90] hidden items-center justify-center bg-black/70 p-6">
+  <div class="w-full max-w-lg rounded-2xl bg-card-dark border border-card-border p-6 shadow-2xl">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-white text-lg font-bold">Editar nómina semanal</h3>
+      <button id="payrollModalClose" class="text-neutral-text hover:text-white">×</button>
+    </div>
+    <form id="payrollForm" class="flex flex-col gap-4">
+      <div class="text-sm text-neutral-text">Empleado</div>
+      <input id="payrollEmployeeName" readonly class="h-11 rounded-lg bg-background-dark border border-card-border px-3 text-white" />
+      <label class="text-sm text-neutral-text flex flex-col gap-2">
+        Salario base semanal
+        <input id="payrollBaseSalary" type="number" step="0.01" class="h-11 rounded-lg bg-background-dark border border-card-border px-3 text-white" />
+      </label>
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-sm font-semibold text-white">Bonos</span>
+          <button type="button" id="addBonusBtn" class="text-xs text-primary hover:underline">Agregar bono</button>
+        </div>
+        <div id="bonusList" class="space-y-2"></div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-sm font-semibold text-white">Descuentos</span>
+          <button type="button" id="addDeductionBtn" class="text-xs text-primary hover:underline">Agregar descuento</button>
+        </div>
+        <div id="deductionList" class="space-y-2"></div>
+      </div>
+      <label class="text-sm text-neutral-text flex flex-col gap-2">
+        Notas
+        <textarea id="payrollNotes" class="min-h-[80px] rounded-lg bg-background-dark border border-card-border px-3 py-2 text-white"></textarea>
+      </label>
+      <div class="flex justify-end gap-3 pt-2">
+        <button type="button" id="payrollModalCancel" class="px-4 py-2 rounded-lg border border-card-border text-neutral-text hover:text-white">Cancelar</button>
+        <button type="submit" class="px-4 py-2 rounded-lg bg-primary text-white font-bold">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script type="module">
+import { ensureAuth } from "/shared/auth.js";
+import { fetchRecentEvaluations } from "/shared/services/evaluations.js";
+import { listPayrollByWeek, upsertPayrollEntry } from "/shared/services/payroll.js";
+import { exportElementAsPng } from "/shared/services/reports.js";
+import { formatMoney } from "/shared/utils.js";
+import { db } from "/shared/firebase.js";
+import {
+  doc,
+  serverTimestamp,
+  setDoc,
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+const payrollBody = document.getElementById("payrollTableBody");
+const payrollSearch = document.getElementById("payrollSearch");
+const weekRangeSummary = document.getElementById("weekRangeSummary");
+const printBtn = document.getElementById("printSummaryBtn");
+const exportBtn = document.getElementById("exportSummaryBtn");
+const summaryContainer = document.getElementById("weeklySummaryContent");
+const totalEmployeesCount = document.getElementById("totalEmployeesCount");
+const attendanceRate = document.getElementById("attendanceRate");
+const performanceAvg = document.getElementById("performanceAvg");
+const alertsCount = document.getElementById("alertsCount");
+
+const payrollModal = document.getElementById("payrollModal");
+const payrollModalClose = document.getElementById("payrollModalClose");
+const payrollModalCancel = document.getElementById("payrollModalCancel");
+const payrollForm = document.getElementById("payrollForm");
+const payrollEmployeeName = document.getElementById("payrollEmployeeName");
+const payrollBaseSalary = document.getElementById("payrollBaseSalary");
+const bonusList = document.getElementById("bonusList");
+const deductionList = document.getElementById("deductionList");
+const payrollNotes = document.getElementById("payrollNotes");
+const addBonusBtn = document.getElementById("addBonusBtn");
+const addDeductionBtn = document.getElementById("addDeductionBtn");
+
+let currentUser = null;
+let evaluations = [];
+let payrollEntries = [];
+let weekRange = null;
+let tableRows = [];
+let payrollMap = new Map();
+let modalState = { employee: null, bonuses: [], deductions: [], notes: "" };
+
+const formatWeekRange = () => {
+  const now = new Date();
+  const day = now.getDay();
+  const diffToMonday = (day === 0 ? -6 : 1) - day;
+  const monday = new Date(now);
+  monday.setDate(now.getDate() + diffToMonday);
+  const sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+  const fmt = (d) => d.toLocaleDateString("es-MX", { day: "2-digit", month: "short" });
+  return `${fmt(monday)} - ${fmt(sunday)}`;
+};
+
+const openPayrollModal = (employee, payroll) => {
+  modalState = {
+    employee,
+    bonuses: payroll?.bonuses ? [...payroll.bonuses] : [],
+    deductions: payroll?.deductions ? [...payroll.deductions] : [],
+    notes: payroll?.notes || "",
+  };
+  payrollEmployeeName.value = employee.name;
+  payrollBaseSalary.value = payroll?.baseSalary || 0;
+  payrollNotes.value = modalState.notes;
+  renderAdjustments();
+  payrollModal.classList.remove("hidden");
+  payrollModal.classList.add("flex");
+};
+
+const closePayrollModal = () => {
+  payrollModal.classList.add("hidden");
+  payrollModal.classList.remove("flex");
+};
+
+payrollModalClose.addEventListener("click", closePayrollModal);
+payrollModalCancel.addEventListener("click", closePayrollModal);
+
+const renderAdjustments = () => {
+  bonusList.innerHTML = "";
+  deductionList.innerHTML = "";
+  const renderItem = (item, type) => {
+    return `
+      <div class="flex items-center justify-between gap-2 rounded-lg border border-card-border bg-background-dark px-3 py-2 text-xs text-neutral-text">
+        <span>${item.reason || "Sin motivo"} · ${formatMoney(item.amount || 0)} · ${item.date || "Sin fecha"}</span>
+        <button data-type="${type}" data-id="${item.id}" class="text-danger hover:text-white">Eliminar</button>
+      </div>
+    `;
+  };
+  if (!modalState.bonuses.length) {
+    bonusList.innerHTML = `<p class="text-xs text-neutral-text">Sin bonos.</p>`;
+  } else {
+    modalState.bonuses.forEach((item) => {
+      bonusList.insertAdjacentHTML("beforeend", renderItem(item, "bonus"));
+    });
+  }
+  if (!modalState.deductions.length) {
+    deductionList.innerHTML = `<p class="text-xs text-neutral-text">Sin descuentos.</p>`;
+  } else {
+    modalState.deductions.forEach((item) => {
+      deductionList.insertAdjacentHTML("beforeend", renderItem(item, "deduction"));
+    });
+  }
+};
+
+const promptAdjustment = (type) => {
+  const reason = prompt(type === "bonus" ? "Motivo del bono" : "Motivo del descuento");
+  if (!reason) return;
+  const amount = Number(prompt("Monto (MXN)") || 0);
+  if (!amount) return;
+  const date = prompt("Fecha (opcional)", new Date().toLocaleDateString("es-MX"));
+  const entry = { id: `${Date.now()}-${Math.random().toString(16).slice(2, 6)}`, reason, amount, date };
+  if (type === "bonus") modalState.bonuses.push(entry);
+  if (type === "deduction") modalState.deductions.push(entry);
+  renderAdjustments();
+};
+
+addBonusBtn.addEventListener("click", () => promptAdjustment("bonus"));
+addDeductionBtn.addEventListener("click", () => promptAdjustment("deduction"));
+
+payrollModal.addEventListener("click", (event) => {
+  const btn = event.target.closest("button[data-type]");
+  if (!btn) return;
+  const type = btn.dataset.type;
+  const id = btn.dataset.id;
+  if (type === "bonus") modalState.bonuses = modalState.bonuses.filter((item) => item.id !== id);
+  if (type === "deduction") modalState.deductions = modalState.deductions.filter((item) => item.id !== id);
+  renderAdjustments();
+});
+
+payrollForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const employee = modalState.employee;
+  if (!employee) return;
+  const payload = {
+    employeeUid: employee.uid,
+    employeeName: employee.name,
+    role: employee.role,
+    weekRange,
+    baseSalary: Number(payrollBaseSalary.value || 0),
+    bonuses: modalState.bonuses,
+    deductions: modalState.deductions,
+    notes: payrollNotes.value.trim(),
+    updatedBy: currentUser?.uid,
+  };
+  await upsertPayrollEntry(payload);
+  closePayrollModal();
+  await loadData();
+});
+
+const buildRows = () => {
+  const rows = new Map();
+  evaluations.forEach((entry) => {
+    if (weekRange && entry.weekRange && entry.weekRange !== weekRange) return;
+    const uid = entry.employeeUid || entry.workerId || entry.employeeId;
+    if (!uid) return;
+    const existing = rows.get(uid);
+    const createdAt = entry.createdAt?.seconds ? entry.createdAt.seconds : 0;
+    if (!existing || createdAt > existing._ts) {
+      rows.set(uid, {
+        uid,
+        name: entry.employeeName || entry.name || entry.workerName || "Empleado",
+        role: entry.role || "Personal",
+        attendance: entry.attendance || "sin registro",
+        punctuality: entry.punctuality || "sin registro",
+        rating: entry.rating || 0,
+        _ts: createdAt,
+      });
+    }
+  });
+  return Array.from(rows.values());
+};
+
+const renderTable = () => {
+  payrollBody.innerHTML = "";
+  const term = payrollSearch.value.trim().toLowerCase();
+  const filtered = term
+    ? tableRows.filter((row) =>
+        [row.name, row.role].some((value) => String(value).toLowerCase().includes(term))
+      )
+    : tableRows;
+
+  if (!filtered.length) {
+    payrollBody.innerHTML = `<tr><td colspan="7" class="px-6 py-6 text-center text-neutral-text">Sin evaluaciones registradas.</td></tr>`;
+    return;
+  }
+
+  filtered.forEach((row) => {
+    const payroll = payrollMap.get(row.uid);
+    const base = Number(payroll?.baseSalary || 0);
+    const bonuses = (payroll?.bonuses || []).reduce((sum, item) => sum + Number(item.amount || 0), 0);
+    const deductions = (payroll?.deductions || []).reduce((sum, item) => sum + Number(item.amount || 0), 0);
+    const total = base + bonuses - deductions;
+    const attendanceLabel = row.attendance === "present" ? "Presente" : row.attendance === "absent" ? "Ausente" : "Sin registro";
+    const punctualityLabel = row.punctuality === "on_time" ? "A tiempo" : row.punctuality === "late" ? "Tarde" : "Sin registro";
+    const ratingLabel = row.rating ? `${row.rating}/5` : "-";
+    payrollBody.insertAdjacentHTML(
+      "beforeend",
+      `<tr class="group hover:bg-white/5 transition-colors">
+        <td class="px-6 py-4 font-medium text-white">${row.name}</td>
+        <td class="px-6 py-4 text-neutral-text">${row.role}</td>
+        <td class="px-6 py-4 text-white">${attendanceLabel}</td>
+        <td class="px-6 py-4 text-white">${punctualityLabel}</td>
+        <td class="px-6 py-4 text-white font-mono">${ratingLabel}</td>
+        <td class="px-6 py-4 text-white font-mono">${formatMoney(total)}</td>
+        <td class="px-6 py-4 text-right flex justify-end gap-2">
+          <button data-action="edit" data-id="${row.uid}" class="px-3 py-1 rounded-md border border-card-border text-xs text-neutral-text hover:text-white">Editar</button>
+          <button data-action="badge" data-id="${row.uid}" class="px-3 py-1 rounded-md bg-primary text-xs text-white">Gafete</button>
+        </td>
+      </tr>`
+    );
+  });
+};
+
+const updateStats = () => {
+  const total = tableRows.length;
+  totalEmployeesCount.textContent = String(total);
+  const attendanceOk = tableRows.filter((row) => row.attendance === "present").length;
+  const attendancePct = total ? Math.round((attendanceOk / total) * 100) : 0;
+  attendanceRate.textContent = `${attendancePct}%`;
+  const avgRating = total
+    ? (tableRows.reduce((sum, row) => sum + Number(row.rating || 0), 0) / total).toFixed(1)
+    : "0.0";
+  performanceAvg.textContent = `${avgRating}`;
+  const alerts = tableRows.filter((row) => row.attendance === "absent" || row.punctuality === "late").length;
+  alertsCount.textContent = String(alerts);
+};
+
+const loadData = async () => {
+  evaluations = await fetchRecentEvaluations({ max: 400 });
+  weekRange = evaluations.find((entry) => entry.weekRange)?.weekRange || formatWeekRange();
+  weekRangeSummary.textContent = `Consolidado de desempeño y asistencia · ${weekRange}`;
+  payrollEntries = await listPayrollByWeek(weekRange);
+  payrollMap = new Map(payrollEntries.map((entry) => [entry.employeeUid, entry]));
+  tableRows = buildRows();
+  renderTable();
+  updateStats();
+};
+
+payrollSearch.addEventListener("input", renderTable);
+
+payrollBody.addEventListener("click", async (event) => {
+  const btn = event.target.closest("button[data-action]");
+  if (!btn) return;
+  const row = tableRows.find((item) => item.uid === btn.dataset.id);
+  if (!row) return;
+  if (btn.dataset.action === "edit") {
+    openPayrollModal(row, payrollMap.get(row.uid));
+  }
+  if (btn.dataset.action === "badge") {
+    await setDoc(doc(db, "publicEmployees", row.uid), {
+      name: row.name,
+      role: row.role,
+      active: true,
+      updatedAt: serverTimestamp(),
+    }, { merge: true });
+    window.open(`/gafete?uid=${row.uid}`, "_blank");
+  }
+});
+
+printBtn.addEventListener("click", () => window.print());
+exportBtn.addEventListener("click", () => exportElementAsPng(summaryContainer, "resumen-evaluaciones.png"));
+
+ensureAuth({ allowRoles: ["Admin"], allowPermissions: ["payroll", "reports"] }).then(({ user }) => {
+  currentUser = user;
+  loadData();
+});
+</script>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

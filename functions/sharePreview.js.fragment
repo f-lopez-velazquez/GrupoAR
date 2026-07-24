@@ -1,0 +1,51 @@
+/**
+ * SEO & Link Preview Interceptor
+ * Serves dynamic meta tags based on the URL for professional social media previews.
+ */
+exports.sharePreview = functions.https.onRequest(async (req, res) => {
+  const path = req.path;
+  const parts = path.split("/").filter(Boolean); // e.g. ["consulta", "id"] or ["evaluar", "id"]
+  
+  const type = parts[0];
+  const id = parts[1];
+  
+  let title = "Grupo AR - Sistema Industrial & Construcción";
+  let description = "Servicios integrales de construcción, estructuras metálicas y ferretería industrial.";
+  let imageUrl = "https://gpo-ar.web.app/assets/og_banner.png";
+  
+  try {
+    if (type === "consulta" && id) {
+      const ticketSnap = await db.collection("tickets").doc(id).get();
+      if (ticketSnap.exists) {
+        const data = ticketSnap.data();
+        title = `Ticket #${data.ticketNumber || id} - Grupo AR`;
+        description = `Venta por $${(data.total || 0).toLocaleString()} - ${data.clientName || "Cliente Profesional"}`;
+      }
+    } else if (type === "evaluar" && id) {
+      const requestSnap = await db.collection("evaluationRequests").doc(id).get();
+      if (requestSnap.exists) {
+        const data = requestSnap.data();
+        title = "Evaluación de Personal - Grupo AR";
+        description = `Solicitud para obra: ${data.projectName} | Semana: ${data.weekStart}`;
+      }
+    } else if (type === "verificar" && id) {
+      title = "Verificación de Documento Oficial";
+      description = "Valida la integridad y autenticidad del documento generado por Grupo AR.";
+    }
+  } catch (error) {
+    console.error("SEO Preview Error:", error);
+  }
+
+  // Determine if it's a bot or a real user
+  const userAgent = req.headers["user-agent"] || "";
+  const bots = ["WhatsApp", "facebookexternalhit", "Twitterbot", "Slackbot", "LinkedInBot", "TelegramBot"];
+  const isBot = bots.some(bot => userAgent.includes(bot));
+
+  if (isBot) {
+    // Return Meta Tags only
+    res.status(200).send(`<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>${title}</title><meta name="description" content="${description}"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:image" content="${imageUrl}"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${title}"><meta name="twitter:description" content="${description}"><meta name="twitter:image" content="${imageUrl}"></head><body></body></html>`);
+  } else {
+    // Redirect real user to the app
+    res.redirect("https://gpo-ar.web.app" + path);
+  }
+});

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GPO-AR - Inicio y Catálogo Público</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a6fc7",
+                        "accent": "#dc1e28",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-[#111518] antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Header -->
+<header class="sticky top-0 z-50 w-full bg-white border-b border-[#f0f2f5] shadow-sm">
+<div class="px-4 lg:px-40 flex justify-center">
+<div class="flex flex-1 max-w-[960px] items-center justify-between py-3">
+<div class="flex items-center gap-4 text-[#111518]">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2L2 22H22L12 2ZM12 6L18 18H6L12 6Z"></path>
+</svg>
+</div>
+<h2 class="text-[#111518] text-xl font-black leading-tight tracking-[-0.015em]">GPO-AR</h2>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex items-center gap-6">
+<a class="text-[#111518] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Inicio</a>
+<a class="text-[#111518] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Servicios</a>
+<a class="text-[#111518] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Catálogo</a>
+<a class="text-[#111518] text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Contacto</a>
+</nav>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-accent hover:bg-red-700 text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors shadow-md">
+<span class="truncate">Acceso Personal</span>
+</button>
+</div>
+<div class="md:hidden">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex flex-col items-center w-full">
+<!-- Hero Section -->
+<section class="w-full bg-white">
+<div class="px-4 lg:px-40 flex justify-center py-5">
+<div class="flex flex-col max-w-[960px] flex-1">
+<div class="@container">
+<div class="flex flex-col gap-6 py-10 @[480px]:gap-8 @[864px]:flex-row-reverse">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl shadow-lg @[480px]:h-auto @[480px]:min-w-[400px] @[864px]:w-1/2 relative overflow-hidden group" data-alt="Modern architectural construction site with blue sky" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBd-6PqL9KuLiPC3IV0Rp94nJ_DSfbqzENvi1xIHSwY8tqMX2Sasldu0MfJ_6_SrW8cIS8ch9l1Jjibvcpb2yf1N-3ZMavacErOTZbWZNnR3jEDmQIWwREKzGqRyGs_yMaq5LKuZdkv8CZo_aBsl2gtuRxgZ7LBBbN0vY3eCTroAX9zVbMT_NDODESCDzTYFLgBz0y9Btx7K8KzhMqgv0SIOP_3RlE7SySpK6gjPmti0l0-4X7-9cn7dqZIObKvyFKKksqetxfGeyw");'>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+<div class="absolute bottom-4 left-4 text-white font-bold text-lg">Calidad Industrial</div>
+</div>
+<div class="flex flex-col gap-6 @[480px]:min-w-[400px] @[480px]:gap-8 @[864px]:justify-center @[864px]:w-1/2">
+<div class="flex flex-col gap-4 text-left">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 w-fit">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-primary text-xs font-bold uppercase tracking-wide">Líderes en el bajío</span>
+</div>
+<h1 class="text-[#111518] text-4xl font-black leading-[1.1] tracking-[-0.033em] @[480px]:text-5xl">
+                                            Construimos el Futuro, <span class="text-primary">Equipamos tu Obra.</span>
+</h1>
+<h2 class="text-gray-600 text-lg font-normal leading-relaxed">
+                                            Soluciones integrales de construcción, diseño arquitectónico y ferretería de alta gama. Todo lo que necesitas para tu proyecto, en un solo lugar.
+                                        </h2>
+</div>
+<div class="flex gap-4 flex-wrap">
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary hover:bg-blue-700 text-white text-base font-bold leading-normal tracking-[0.015em] transition-all shadow-lg hover:shadow-xl">
+<span class="truncate">Ver Catálogo</span>
+</button>
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-white border border-gray-200 hover:border-gray-300 text-[#111518] text-base font-bold leading-normal tracking-[0.015em] transition-all hover:bg-gray-50">
+<span class="truncate">Nuestros Servicios</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Section -->
+<section class="w-full bg-background-light dark:bg-background-dark py-16">
+<div class="px-4 lg:px-40 flex justify-center">
+<div class="flex flex-col max-w-[960px] flex-1 gap-10">
+<div class="flex flex-col gap-3 text-center items-center">
+<h2 class="text-[#111518] text-3xl font-black leading-tight tracking-[-0.02em] md:text-4xl">
+                                Servicios Especializados
+                            </h2>
+<p class="text-gray-600 text-base font-normal leading-normal max-w-[720px]">
+                                Garantizamos excelencia en cada etapa, desde los cimientos hasta los acabados finales.
+                            </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="group flex flex-col gap-4 rounded-xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">engineering</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-[#111518] text-xl font-bold leading-tight">Construcción General</h3>
+<p class="text-gray-500 text-sm leading-relaxed">Ejecución de obra civil, residencial e industrial con estándares de seguridad y calidad internacionales.</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group flex flex-col gap-4 rounded-xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">architecture</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-[#111518] text-xl font-bold leading-tight">Diseño Arquitectónico</h3>
+<p class="text-gray-500 text-sm leading-relaxed">Planificación detallada, renderizado y modelado 3D para crear espacios funcionales y modernos.</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group flex flex-col gap-4 rounded-xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl">hardware</span>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="text-[#111518] text-xl font-bold leading-tight">Ferretería Premium</h3>
+<p class="text-gray-500 text-sm leading-relaxed">Suministro de herramientas y materiales de las mejores marcas globales, directo a tu obra.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Catalog Section Header -->
+<section class="w-full bg-white pt-10">
+<div class="px-4 lg:px-40 flex justify-center">
+<div class="flex flex-col max-w-[960px] flex-1">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-gray-100 pb-6 mb-6">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="flex h-2 w-2 rounded-full bg-green-500"></span>
+<span class="text-xs font-bold text-green-600 uppercase tracking-wider">Inventario Sincronizado</span>
+</div>
+<h2 class="text-[#111518] text-3xl font-black leading-tight tracking-[-0.015em]">Catálogo Destacado</h2>
+</div>
+<button class="text-primary text-sm font-bold flex items-center gap-1 hover:gap-2 transition-all">
+                                Ver todo el inventario <span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Catalog Grid -->
+<section class="w-full bg-white pb-16">
+<div class="px-4 lg:px-40 flex justify-center">
+<div class="flex flex-col max-w-[960px] flex-1">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Product 1 -->
+<div class="group flex flex-col gap-3 pb-3 relative">
+<div class="relative w-full aspect-square overflow-hidden rounded-xl bg-gray-100">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Yellow industrial power drill on workbench" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDhxgwJpxGQGPxOFjwPA9VbWpJcAUaXqf4B6GGU_5fP7YAFUB4lG4a1uIlbEN0Kk3kFjE9wXHVspI33zHzAKTlKdtU6-f3pAOV4wZmC4DUsiUOCMoP8Vx2YV7aCGpd_MlMyQEIBrzWBTZCZ31mCweRSBua0FrYdd3_oHGyaBmWdK9ow6BoQUvcw6Ag_lxj0PgA215TSnr7JakNC_aId_yj-L45ytV18pDnkq9veV-ebSX-E8v-E9sADqGJdUshwl5wfWuk-FT2U-lI");'>
+</div>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-green-700 shadow-sm">
+                                        En Stock
+                                    </div>
+</div>
+<div class="flex flex-col gap-1">
+<h4 class="text-[#111518] text-base font-bold leading-normal group-hover:text-primary transition-colors">Taladro Industrial 20V</h4>
+<p class="text-gray-500 text-sm font-normal leading-normal">Herramientas de Poder</p>
+<div class="flex items-center justify-between mt-1">
+<p class="text-[#111518] text-lg font-black leading-normal">$2,500 MXN</p>
+<button class="h-8 w-8 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="group flex flex-col gap-3 pb-3 relative">
+<div class="relative w-full aspect-square overflow-hidden rounded-xl bg-gray-100">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Stack of cement bags on pallet" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCzLlfxkc-g5BXnKNrTSSUWTAKplKKPKEfuAeNqeqMMJt4HqP5OpgFwMMm_UiElScTRkPiqY0G9hZ8TbPiga9gXFP1gqgcbQ_rSnShbayaAm8a-rvqYD5wo8LmKwveKHztFaEFBmDNHFgU9CIzRpWXrHFqxMuNFooRLl9phKvYvQnmnSzVSbnmIQCfKTDPLHD09VCDsBa67Eoc4B_yIw-8lErwCeTfhbpMzMd_zlMwQCcPbO-Am2p_xSwFS2xn3s3H8do6g2OTRLno");'>
+</div>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-green-700 shadow-sm">
+                                        Disponible
+                                    </div>
+</div>
+<div class="flex flex-col gap-1">
+<h4 class="text-[#111518] text-base font-bold leading-normal group-hover:text-primary transition-colors">Cemento Portland 50kg</h4>
+<p class="text-gray-500 text-sm font-normal leading-normal">Materiales de Construcción</p>
+<div class="flex items-center justify-between mt-1">
+<p class="text-[#111518] text-lg font-black leading-normal">Consulte Precio</p>
+<button class="h-8 w-8 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="group flex flex-col gap-3 pb-3 relative">
+<div class="relative w-full aspect-square overflow-hidden rounded-xl bg-gray-100">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="Set of metal wrenches on dark background" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCqWk3hSW6hJSys7QAVNxsbqm-BT87oO9dnauorRd3oxwSoPQAw9PAIweNW2J9Z4IrWZN83fmEiIoxkOane45UW2WAyc7kWKB9fRfJlRjUIOcDtI01TQN41yh8VrzRyxvnD7NMmeOY4yZFuYK20hKjsf62iu-hz8MNb27VcMUaUaoma7MzSb-81z3gjZi4CHuaarQyQIYsNrXKRupvted7jWpzW5SY0ZaoisLoJHLVsuFP-Mp0EqtigP_93Pegr8mlVq5GQ3wjVC6U");'>
+</div>
+<div class="absolute top-3 left-3 bg-accent text-white px-2 py-1 rounded text-xs font-bold shadow-sm">
+                                        Oferta
+                                    </div>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-orange-600 shadow-sm">
+                                        Pocas Unidades
+                                    </div>
+</div>
+<div class="flex flex-col gap-1">
+<h4 class="text-[#111518] text-base font-bold leading-normal group-hover:text-primary transition-colors">Juego de Llaves Maestras</h4>
+<p class="text-gray-500 text-sm font-normal leading-normal">Herramientas Manuales</p>
+<div class="flex items-center justify-between mt-1">
+<p class="text-[#111518] text-lg font-black leading-normal">$850 MXN</p>
+<button class="h-8 w-8 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="group flex flex-col gap-3 pb-3 relative">
+<div class="relative w-full aspect-square overflow-hidden rounded-xl bg-gray-100">
+<div class="w-full h-full bg-center bg-no-repeat bg-cover transition-transform duration-500 group-hover:scale-110" data-alt="White paint bucket with brush" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCFCeDSUbfac2jHQ7Fo6A1dqvTWGkdZ0HmBYXi--OKA1yvi_dHB-I51vuewG6eWNuykyxVAMQe-t5a1DIvpYlppKz5zreNwctpCzgIzt40zUz6tHKS0OsbOoL4-RyJAlySGVxvHImqVv-EZdRtb3g0fB29dM_t_K6K4Nc8G_Uu-04mDmIscmTVlUIxo35HXj0ELcUMy9sEb4A7xUbQ8VB7-4z9HGFCS8Gsj2zbjxKjt8ujJwK7zZnQUt15ns3qxDtKKoriEqR5rmtg");'>
+</div>
+<div class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded text-xs font-bold text-green-700 shadow-sm">
+                                        En Stock
+                                    </div>
+</div>
+<div class="flex flex-col gap-1">
+<h4 class="text-[#111518] text-base font-bold leading-normal group-hover:text-primary transition-colors">Pintura Vinílica Blanca 19L</h4>
+<p class="text-gray-500 text-sm font-normal leading-normal">Acabados y Pinturas</p>
+<div class="flex items-center justify-between mt-1">
+<p class="text-[#111518] text-lg font-black leading-normal">$1,200 MXN</p>
+<button class="h-8 w-8 rounded-full bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- WhatsApp CTA Section -->
+<section class="w-full bg-primary py-12 relative overflow-hidden">
+<!-- Decorative background pattern -->
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
+<div class="px-4 lg:px-40 flex justify-center relative z-10">
+<div class="flex flex-col md:flex-row items-center justify-between max-w-[960px] flex-1 gap-8">
+<div class="flex flex-col gap-2 text-center md:text-left">
+<h2 class="text-white text-3xl font-black leading-tight">¿Necesitas una cotización urgente?</h2>
+<p class="text-blue-100 text-lg">Habla directamente con nuestros expertos y recibe precios especiales.</p>
+</div>
+<a class="flex items-center gap-3 bg-white text-primary hover:text-accent font-bold py-3 px-6 rounded-full shadow-xl transition-transform hover:scale-105" href="https://wa.me/524641390122">
+<span class="w-8 h-8 flex items-center justify-center rounded-full bg-[#25D366] text-white">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12.003 2C6.48 2 1.99 6.49 1.99 12.007c0 1.98.57 3.83 1.55 5.41l-1.52 5.56 5.73-1.5c1.52.88 3.26 1.39 5.25 1.39 5.52 0 10.01-4.49 10.01-10.007S17.52 2 12.003 2zM12.003 19.34c-1.63 0-3.15-.43-4.51-1.18l-.32-.19-3.37.88.9-3.28-.21-.34c-.87-1.42-1.33-3.07-1.33-4.83 0-5.16 4.19-9.35 9.35-9.35s9.35 4.19 9.35 9.35-4.19 9.35-9.35 9.35zm5.12-6.98c-.28-.14-1.65-.82-1.9-.91-.25-.09-.44-.14-.62.14-.19.28-.73.91-.9.11-.16.19-.33.22-.61.08-.28-.14-1.18-.44-2.25-1.39-.83-.74-1.4-1.65-1.56-1.93-.17-.28-.02-.43.12-.57.13-.13.28-.33.42-.5.14-.16.19-.28.28-.46.09-.19.05-.35-.02-.5-.08-.14-.62-1.5-.85-2.05-.22-.54-.45-.47-.62-.47h-.53c-.19 0-.49.07-.74.35-.25.28-.96.94-.96 2.29s.98 2.66 1.12 2.85c.14.19 1.93 2.95 4.68 4.13.65.28 1.16.45 1.56.57.66.2 1.26.17 1.74.1.53-.08 1.65-.67 1.88-1.32.23-.65.23-1.21.16-1.32-.07-.11-.25-.17-.53-.31z"></path>
+</svg>
+</span>
+<span class="text-base">+52 464 139 0122</span>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-white border-t border-[#f0f2f5] pt-12 pb-8">
+<div class="px-4 lg:px-40 flex justify-center">
+<div class="flex flex-col max-w-[960px] flex-1 gap-8">
+<div class="flex flex-col md:flex-row justify-between gap-8">
+<div class="flex flex-col gap-4 max-w-xs">
+<h3 class="text-[#111518] text-2xl font-black">GPO-AR</h3>
+<p class="text-gray-500 text-sm">Innovación en construcción y suministros de confianza para proyectos que perduran.</p>
+</div>
+<div class="flex gap-16 flex-wrap">
+<div class="flex flex-col gap-3">
+<h4 class="text-[#111518] text-sm font-bold uppercase tracking-wide">Compañía</h4>
+<a class="text-gray-600 hover:text-primary text-sm transition-colors" href="#">Nosotros</a>
+<a class="text-gray-600 hover:text-primary text-sm transition-colors" href="#">Carreras</a>
+<a class="text-gray-600 hover:text-primary text-sm transition-colors" href="#">Contacto</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="text-[#111518] text-sm font-bold uppercase tracking-wide">Legal</h4>
+<a class="text-gray-600 hover:text-primary text-sm transition-colors" href="#">Términos y Condiciones</a>
+<a class="text-gray-600 hover:text-primary text-sm transition-colors" href="#">Política de Privacidad</a>
+<a class="text-gray-600 hover:text-primary text-sm transition-colors" href="#">Aviso Legal</a>
+</div>
+</div>
+</div>
+<div class="h-px bg-gray-100 w-full"></div>
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+<p class="text-gray-400 text-xs">© 2023 GPO-AR. Todos los derechos reservados.</p>
+<p class="text-gray-400 text-xs font-medium">
+                            Programado por <span class="text-primary">Francisco López Velázquez</span>
+</p>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

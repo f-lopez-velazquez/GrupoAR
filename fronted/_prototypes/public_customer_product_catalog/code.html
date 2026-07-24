@@ -1,0 +1,510 @@
+﻿<!DOCTYPE html>
+<html class="light" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Grupo AR - Catálogo de productos</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+    <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+  <body class="relative flex min-h-screen w-full flex-col bg-background-light bg-background-dark text-[#0d151c] text-white font-display overflow-x-hidden transition-colors duration-200">
+    <header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7eef4] border-[#2a3b47] bg-surface-light bg-surface-dark px-4 lg:px-10 py-3 shadow-sm">
+      <div class="flex items-center gap-3">
+        <img src="/assets/logo.png" alt="Logo Grupo AR" class="h-9 w-9" />
+        <div class="flex flex-col">
+          <h1 class="text-[#0d151c] text-white text-lg font-bold leading-tight">Grupo AR</h1>
+          <span class="text-xs text-[#48769d] text-gray-400">Salamanca, GTO. Cobertura en todo México.</span>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-[#0d151c] text-gray-200">
+        <a class="hover:text-primary transition-colors" href="/">Inicio</a>
+        <a class="hover:text-primary transition-colors" href="/catalogo">Catálogo</a>
+        <a class="hover:text-primary transition-colors" href="/contacto">Contacto</a>
+        <a class="hover:text-primary transition-colors" href="/dashboard-ejecutivo">Acceso ERP</a>
+      </nav>
+      <div class="md:hidden flex items-center">
+        <span class="material-symbols-outlined text-[#0d151c] text-white">menu</span>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <section class="px-4 md:px-10 lg:px-16 pt-8">
+        <div class="max-w-[1280px] mx-auto">
+          <div class="rounded-2xl bg-white bg-surface-dark border border-[#e7eef4] border-[#2a3b47] p-6 md:p-10 shadow-sm">
+            <div class="flex flex-col gap-4">
+              <span class="text-xs uppercase tracking-[0.3em] text-[#48769d]">Catálogo ferretería</span>
+              <h2 class="text-3xl md:text-4xl font-extrabold">Inventario público en formato de artículos</h2>
+              <p class="text-sm md:text-base text-[#48769d] text-gray-300">
+                Aquí encuentras materiales y productos disponibles para clientes. Imágenes ilustrativas de referencia.
+              </p>
+            </div>
+            <div class="mt-6 rounded-lg border border-amber-200/60 bg-amber-50/80 text-amber-700 text-xs px-4 py-2">
+              Aviso: precios sujetos a cambio y disponibilidad al confirmar la compra. Las imágenes son ilustrativas.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="px-4 md:px-10 lg:px-16 py-8">
+        <div class="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-4">
+            <label class="text-sm font-semibold text-[#0d151c] text-white">Buscar</label>
+            <div class="mt-2 flex items-center rounded-lg bg-white bg-surface-dark border border-[#e7eef4] border-[#2a3b47] px-3 py-2">
+              <span class="material-symbols-outlined text-[#48769d]">search</span>
+              <input id="catalogSearch" class="ml-2 w-full bg-transparent text-sm outline-none text-[#0d151c] text-white" placeholder="Buscar por nombre, SKU o categoría" />
+            </div>
+          </div>
+          <div class="lg:col-span-4">
+            <label class="text-sm font-semibold text-[#0d151c] text-white">Categoría</label>
+            <select id="catalogCategory" class="mt-2 w-full rounded-lg bg-white bg-surface-dark border border-[#e7eef4] border-[#2a3b47] px-3 py-2 text-sm">
+              <option value="Todas">Todas las categorías</option>
+            </select>
+          </div>
+          <div class="lg:col-span-4">
+            <label class="text-sm font-semibold text-[#0d151c] text-white">Disponibilidad</label>
+            <select id="catalogStatus" class="mt-2 w-full rounded-lg bg-white bg-surface-dark border border-[#e7eef4] border-[#2a3b47] px-3 py-2 text-sm">
+              <option value="Todas">Todos</option>
+              <option value="Disponibles">Disponibles</option>
+              <option value="Agotados">Agotados</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="px-4 md:px-10 lg:px-16 pb-6">
+        <div class="max-w-[1280px] mx-auto">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="text-xl font-bold">Destacados</h3>
+              <p class="text-xs text-[#48769d]">Seleccion automatica en base a disponibilidad.</p>
+            </div>
+            <span class="text-xs text-[#48769d]">Actualizado en tiempo real</span>
+          </div>
+          <div id="featuredList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+          <div id="featuredEmpty" class="hidden rounded-lg border border-dashed border-[#e7eef4] border-[#2a3b47] p-6 text-center text-sm text-[#48769d]">
+            Aun no hay articulos destacados.
+          </div>
+        </div>
+      </section>
+
+      <section class="px-4 md:px-10 lg:px-16 pb-12">
+        <div class="max-w-[1280px] mx-auto">
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-4">
+            <div>
+              <h3 class="text-xl font-bold">Listado de artículos</h3>
+              <span id="catalogCount" class="text-xs text-[#48769d]">0 artículos</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="viewGridBtn" class="h-10 px-4 rounded-lg bg-primary text-white text-xs font-semibold shadow-md shadow-primary/20">Mosaico</button>
+              <button id="viewListBtn" class="h-10 px-4 rounded-lg border border-[#e7eef4] border-[#2a3b47] text-xs font-semibold text-[#48769d] hover:text-primary hover:border-primary">Lista</button>
+            </div>
+          </div>
+          <div id="catalogList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+          <div id="catalogEmpty" class="hidden rounded-lg border border-dashed border-[#e7eef4] border-[#2a3b47] p-6 text-center text-sm text-[#48769d]">
+            No hay articulos disponibles.
+          </div>
+          <div id="catalogPagination" class="mt-8 flex flex-wrap items-center justify-center gap-2"></div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module">
+      import { db } from "/shared/firebase.js";
+      import {
+        collection,
+        onSnapshot,
+        query,
+        where,
+      } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+      const listEl = document.getElementById("catalogList");
+      const emptyEl = document.getElementById("catalogEmpty");
+      const countEl = document.getElementById("catalogCount");
+      const featuredListEl = document.getElementById("featuredList");
+      const featuredEmptyEl = document.getElementById("featuredEmpty");
+      const paginationEl = document.getElementById("catalogPagination");
+      const searchInput = document.getElementById("catalogSearch");
+      const categorySelect = document.getElementById("catalogCategory");
+      const statusSelect = document.getElementById("catalogStatus");
+      const viewGridBtn = document.getElementById("viewGridBtn");
+      const viewListBtn = document.getElementById("viewListBtn");
+
+      let items = [];
+      let currentPage = 1;
+      const PAGE_SIZE = 12;
+      let viewMode = "grid";
+
+      const formatMoney = (value) => {
+        if (value == null || Number.isNaN(Number(value))) return "A cotizar";
+        return new Intl.NumberFormat("es-MX", { style: "currency", currency: "MXN" }).format(Number(value));
+      };
+
+      const escapeHtml = (value) =>
+        String(value ? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/\"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+
+            const escapeXml = (value) =>
+        String(value ? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/\"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+
+      const createPlaceholderDataUri = (title, subtitle) => {
+        const safeTitle = escapeXml(String(title || "Artículo").slice(0, 36));
+        const safeSubtitle = escapeXml(String(subtitle || "Catálogo").slice(0, 40));
+        const svg = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480">
+            <rect width="640" height="480" fill="#ffffff" />
+            <rect x="20" y="20" width="600" height="440" rx="28" fill="#f1f5f9" stroke="#e2e8f0" />
+            <circle cx="320" cy="190" r="64" fill="#0ea5e9" opacity="0.18" />
+            <rect x="266" y="136" width="108" height="108" rx="24" fill="#0ea5e9" opacity="0.22" />
+            <text x="320" y="320" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#0f172a">${safeTitle}</text>
+            <text x="320" y="356" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#64748b">${safeSubtitle}</text>
+          </svg>`;
+        return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+      };
+      const normalizeCategory = (value) =>
+        String(value || "")
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .trim();
+
+      const resolveImageUrl = (item) => {
+        const categoryFallbacks = {
+          tornilleria: "stock/tornilleria",
+          electrico: "stock/electrico",
+          plomeria: "stock/plomeria",
+          albanileria: "stock/albanileria",
+        };
+        const raw = item.imageUrl || item.image || item.imageId;
+        if (!raw) {
+          const fallback = categoryFallbacks[normalizeCategory(item.category)];
+          return fallback ? `https://res.cloudinary.com/dyzin1srr/image/upload/${fallback}` : null;
+        }
+        if (String(raw).startsWith("http")) return raw;
+        return `https://res.cloudinary.com/dyzin1srr/image/upload/${raw}`;
+      };
+
+      const updateCategoryOptions = () => {
+        const categories = Array.from(new Set(items.map((item) => item.category).filter(Boolean))).sort();
+        const current = categorySelect.value;
+        categorySelect.innerHTML = "";
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "Todas";
+        defaultOption.textContent = "Todas las categorías";
+        categorySelect.appendChild(defaultOption);
+        categories.forEach((cat) => {
+          const option = document.createElement("option");
+          option.value = cat;
+          option.textContent = cat;
+          categorySelect.appendChild(option);
+        });
+        if (categories.includes(current)) {
+          categorySelect.value = current;
+        }
+      };
+
+      const matchesFilters = (item) => {
+        const term = searchInput.value.trim().toLowerCase();
+        const category = categorySelect.value;
+        const status = statusSelect.value;
+        const inStock = Number(item.stock || 0) > 0;
+
+        if (category !== "Todas" && item.category !== category) return false;
+        if (status === "Disponibles" && !inStock) return false;
+        if (status === "Agotados" && inStock) return false;
+        if (!term) return true;
+        return [item.name, item.sku, item.category]
+          .filter(Boolean)
+          .some((field) => field.toLowerCase().includes(term));
+      };
+
+      const createCard = (item, { compact = false } = {}) => {
+        const available = Number(item.stock || 0) > 0;
+        const badge = available ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700";
+        const price = formatMoney(item.price);
+        const note = item.notes ? `<div class=\"text-xs text-amber-600\">Promo: ${item.notes}</div>` : "";
+        const itemNameRaw = item.name || "Artículo";
+        const itemSkuRaw = item.sku || "N/A";
+        const itemName = escapeHtml(itemNameRaw);
+        const itemSku = escapeHtml(itemSkuRaw);
+        const itemCategory = escapeHtml(item.category || "General");
+        const itemUnit = escapeHtml(item.unit || "pieza");
+        const safeNotes = item.notes ? escapeHtml(item.notes) : "";
+        const contactLink = `/contacto?item=${encodeURIComponent(itemNameRaw)}&sku=${encodeURIComponent(itemSkuRaw)}`;
+                const imageUrl = resolveImageUrl(item) || createPlaceholderDataUri(itemNameRaw, item.category || "Catálogo");
+                const imageBlock = `<img src="${imageUrl}" alt="${itemName}" class="h-full w-full object-cover" loading="lazy" />`;
+
+        return `
+          <article class=\"flex flex-col rounded-xl border border-[#e7eef4] border-[#2a3b47] bg-white bg-surface-dark shadow-sm overflow-hidden\">
+            <div class=\"${compact ? "h-32" : "h-40"} w-full overflow-hidden\">
+              ${imageBlock}
+            </div>
+            <div class=\"p-5 flex flex-col gap-3 flex-1\">
+              <div class=\"flex items-start justify-between gap-2\">
+                <div>
+                  <h4 class=\"text-base font-bold text-[#0d151c] text-white\">${itemName}</h4>
+                  <p class=\"text-xs text-[#48769d]\">${itemCategory}</p>
+                </div>
+                <span class=\"text-xs px-2 py-1 rounded-full ${badge}\">${available ? "Disponible" : "Agotado"}</span>
+              </div>
+              <div class=\"text-sm text-[#48769d]\">SKU: ${itemSku}</div>
+              <div class=\"text-lg font-bold text-primary\">${price}</div>
+              ${safeNotes ? `<div class=\"text-xs text-amber-600\">Promo: ${safeNotes}</div>` : ""}
+              <div class=\"text-xs text-[#48769d]\">Unidad: ${itemUnit}</div>
+              <div class=\"pt-2 mt-auto\">
+                <a href=\"${contactLink}\" class=\"inline-flex items-center justify-center w-full rounded-lg border border-primary/30 px-4 py-2 text-xs font-semibold text-primary hover:bg-primary hover:text-white transition-colors\">
+                  Solicitar cotización
+                </a>
+              </div>
+            </div>
+          </article>
+        `;
+      };
+
+      const createListItem = (item) => {
+        const available = Number(item.stock || 0) > 0;
+        const badge = available ? "bg-emerald-100 text-emerald-700" : "bg-rose-100 text-rose-700";
+        const price = formatMoney(item.price);
+        const itemNameRaw = item.name || "Artículo";
+        const itemSkuRaw = item.sku || "N/A";
+        const itemName = escapeHtml(itemNameRaw);
+        const itemSku = escapeHtml(itemSkuRaw);
+        const itemCategory = escapeHtml(item.category || "General");
+        const itemUnit = escapeHtml(item.unit || "pieza");
+        const safeNotes = item.notes ? escapeHtml(item.notes) : "";
+        const contactLink = `/contacto?item=${encodeURIComponent(itemNameRaw)}&sku=${encodeURIComponent(itemSkuRaw)}`;
+        const imageUrl = resolveImageUrl(item) || createPlaceholderDataUri(itemNameRaw, item.category || "Catálogo");
+
+        return `
+          <article class="flex flex-col sm:flex-row gap-4 rounded-xl border border-[#e7eef4] border-[#2a3b47] bg-white bg-surface-dark shadow-sm p-4">
+            <div class="h-28 w-full sm:w-36 shrink-0 overflow-hidden rounded-lg">
+              <img src="${imageUrl}" alt="${itemName}" class="h-full w-full object-cover" loading="lazy" />
+            </div>
+            <div class="flex-1 flex flex-col gap-2">
+              <div class="flex items-start justify-between gap-2">
+                <div>
+                  <h4 class="text-base font-bold text-[#0d151c] text-white">${itemName}</h4>
+                  <p class="text-xs text-[#48769d]">${itemCategory}</p>
+                </div>
+                <span class="text-xs px-2 py-1 rounded-full ${badge}">${available ? "Disponible" : "Agotado"}</span>
+              </div>
+              <div class="text-sm text-[#48769d]">SKU: ${itemSku} · Unidad: ${itemUnit}</div>
+              <div class="text-lg font-bold text-primary">${price}</div>
+              ${safeNotes ? `<div class="text-xs text-amber-600">Promo: ${safeNotes}</div>` : ""}
+              <div class="pt-2">
+                <a href="${contactLink}" class="inline-flex items-center justify-center rounded-lg border border-primary/30 px-4 py-2 text-xs font-semibold text-primary hover:bg-primary hover:text-white transition-colors">
+                  Solicitar cotización
+                </a>
+              </div>
+            </div>
+          </article>
+        `;
+      };
+
+      const getFilteredItems = () => items.filter(matchesFilters);
+
+      const getFeaturedItems = (filtered) => {
+        const explicit = filtered.filter((item) => item.featured === true);
+        const base = explicit.length ? explicit : filtered;
+        return base
+          .slice()
+          .sort((a, b) => {
+            const stockDiff = Number(b.stock || 0) - Number(a.stock || 0);
+            if (stockDiff !== 0) return stockDiff;
+            return String(a.name || "").localeCompare(String(b.name || ""));
+          })
+          .slice(0, 6);
+      };
+
+      const renderFeatured = (filtered) => {
+        const featured = getFeaturedItems(filtered);
+        featuredListEl.innerHTML = "";
+        if (!featured.length) {
+          featuredEmptyEl.classList.remove("hidden");
+          return;
+        }
+        featuredEmptyEl.classList.add("hidden");
+        featured.forEach((item) => {
+          featuredListEl.insertAdjacentHTML("beforeend", createCard(item, { compact: true }));
+        });
+      };
+
+      const renderPagination = (total, totalPages) => {
+        paginationEl.innerHTML = "";
+        if (totalPages <= 1) return;
+
+        const createBtn = (label, page, { disabled = false, active = false } = {}) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.textContent = label;
+          btn.disabled = disabled;
+          btn.className = `min-w-[36px] px-3 py-2 rounded-lg text-xs font-semibold transition border ${
+            active
+              ? "bg-primary text-white border-primary"
+              : "border-[#e7eef4] border-[#2a3b47] text-[#48769d] hover:border-primary hover:text-primary"
+          } ${disabled ? "opacity-50 cursor-not-allowed" : ""}`;
+          if (!disabled) {
+            btn.addEventListener("click", () => {
+              currentPage = page;
+              render();
+              window.scrollTo({ top: listEl.offsetTop - 120, behavior: "smooth" });
+            });
+          }
+          paginationEl.appendChild(btn);
+        };
+
+        const createEllipsis = () => {
+          const span = document.createElement("span");
+          span.textContent = "...";
+          span.className = "px-2 text-xs text-[#48769d]";
+          paginationEl.appendChild(span);
+        };
+
+        createBtn("Anterior", currentPage - 1, { disabled: currentPage === 1 });
+
+        let start = Math.max(1, currentPage - 2);
+        let end = Math.min(totalPages, start + 4);
+        start = Math.max(1, end - 4);
+
+        if (start > 1) {
+          createBtn("1", 1);
+          if (start > 2) createEllipsis();
+        }
+
+        for (let page = start; page <= end; page += 1) {
+          createBtn(String(page), page, { active: page === currentPage });
+        }
+
+        if (end < totalPages) {
+          if (end < totalPages - 1) createEllipsis();
+          createBtn(String(totalPages), totalPages);
+        }
+
+        createBtn("Siguiente", currentPage + 1, { disabled: currentPage === totalPages });
+      };
+
+      const render = () => {
+        const filtered = getFilteredItems();
+        const total = filtered.length;
+        const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+        if (currentPage > totalPages) currentPage = totalPages;
+        const start = (currentPage - 1) * PAGE_SIZE;
+        const end = Math.min(start + PAGE_SIZE, total);
+        const pageItems = filtered.slice(start, end);
+
+        renderFeatured(filtered);
+        renderPagination(total, totalPages);
+
+        listEl.innerHTML = "";
+        if (!total) {
+          emptyEl.classList.remove("hidden");
+          countEl.textContent = "0 artículos";
+          return;
+        }
+        emptyEl.classList.add("hidden");
+        countEl.textContent = `Mostrando ${start + 1}-${end} de ${total} artículos`;
+        if (viewMode === "list") {
+          listEl.className = "flex flex-col gap-4";
+          pageItems.forEach((item) => {
+            listEl.insertAdjacentHTML("beforeend", createListItem(item));
+          });
+        } else {
+          listEl.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6";
+          pageItems.forEach((item) => {
+            listEl.insertAdjacentHTML("beforeend", createCard(item));
+          });
+        }
+      };
+
+      const resetAndRender = () => {
+        currentPage = 1;
+        render();
+      };
+
+      searchInput.addEventListener("input", resetAndRender);
+      categorySelect.addEventListener("change", resetAndRender);
+      statusSelect.addEventListener("change", resetAndRender);
+
+      const setViewMode = (mode) => {
+        viewMode = mode;
+        if (mode === "list") {
+          viewListBtn.classList.add("bg-primary", "text-white", "shadow-md", "shadow-primary/20");
+          viewListBtn.classList.remove("border", "border-[#e7eef4]", "text-[#48769d]");
+          viewGridBtn.classList.remove("bg-primary", "text-white", "shadow-md", "shadow-primary/20");
+          viewGridBtn.classList.add("border", "border-[#e7eef4]", "text-[#48769d]");
+        } else {
+          viewGridBtn.classList.add("bg-primary", "text-white", "shadow-md", "shadow-primary/20");
+          viewGridBtn.classList.remove("border", "border-[#e7eef4]", "text-[#48769d]");
+          viewListBtn.classList.remove("bg-primary", "text-white", "shadow-md", "shadow-primary/20");
+          viewListBtn.classList.add("border", "border-[#e7eef4]", "text-[#48769d]");
+        }
+        render();
+      };
+
+      viewGridBtn.addEventListener("click", () => setViewMode("grid"));
+      viewListBtn.addEventListener("click", () => setViewMode("list"));
+
+      const q = query(collection(db, "inventory"), where("public", "==", true));
+      onSnapshot(
+        q,
+        (snapshot) => {
+          items = snapshot.docs
+            .map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }))
+            .filter((item) => item.public === true && item.audience !== "internal")
+            .sort((a, b) => String(a.name || "").localeCompare(String(b.name || "")));
+          updateCategoryOptions();
+          render();
+        },
+        () => {
+          items = [];
+          listEl.innerHTML = "";
+          featuredListEl.innerHTML = "";
+          featuredEmptyEl.classList.remove("hidden");
+          emptyEl.classList.remove("hidden");
+          emptyEl.textContent = "No fue posible cargar el catálogo. Intenta más tarde.";
+          countEl.textContent = "0 artículos";
+          paginationEl.innerHTML = "";
+        }
+      );
+    </script>
+    <script type="module" src="/shared/footer.js"></script>
+    <script type="module" src="/shared/i18n-es.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GPO-AR Inicio (Versión Móvil)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#096fc8",
+                        "secondary": "#dc1e28",
+                        "background-light": "#ffffff",
+                        "background-dark": "#101a22",
+                        "surface-light": "#f5f7f8",
+                        "surface-dark": "#1e293b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-surface-light dark:bg-background-dark font-display text-gray-900 dark:text-gray-100 flex flex-col min-h-screen">
+<!-- Mobile Viewport Simulation Wrapper (Optional for desktop viewing context, acts as mobile frame) -->
+<div class="relative w-full max-w-md mx-auto bg-background-light dark:bg-background-dark shadow-xl min-h-screen flex flex-col">
+<!-- Sticky Header -->
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-gray-100 dark:border-gray-800 bg-white/95 dark:bg-background-dark/95 backdrop-blur px-5 py-4">
+<div class="flex items-center gap-2">
+<div class="size-8 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">dns</span>
+</div>
+<h1 class="text-xl font-black tracking-tight text-gray-900 dark:text-white">GPO-AR</h1>
+</div>
+<button class="flex items-center justify-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-gray-900 dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col">
+<!-- Hero Section -->
+<section class="relative flex flex-col items-center justify-center min-h-[480px] p-6 text-center">
+<!-- Background Image with Overlay -->
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-b from-gray-900/60 to-gray-900/80 z-10"></div>
+<img alt="Modern server room with blue lighting" class="w-full h-full object-cover" data-alt="Modern server room with blue lighting representing technology solutions" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH0FK29fvIUeT3u8Cn5Lwr7nsS1Xn_IkXIAXSNw6hvT5rfpqmc0JzOGeLB1gujZDVwVFabc5tUZ0IvuiXZydvfQ8RQyK3VbHfjjXneapkxAxUebA10T2tPJj_hVVONigDPkEkPayndAcs-W2dpLs4xXFWnhirDSslLnvnXTBeQP8a8puih6s3Yj-YwH5pclF1vSg46DBx09cT-gL3iTcPU5Cs8C3zlGJuIT2CWtWvIR4JDNW7EgjLTk1CTZ8kzGqP8yRQtJO6UR3k"/>
+</div>
+<!-- Hero Content -->
+<div class="relative z-20 flex flex-col gap-6 items-center max-w-[320px]">
+<h2 class="text-white text-3xl font-black leading-tight tracking-tight">
+                        Soluciones Tecnológicas para tu Empresa
+                    </h2>
+<p class="text-gray-200 text-base font-normal leading-relaxed">
+                        Optimiza tu flujo de trabajo con la mejor infraestructura y soporte de GPO-AR.
+                    </p>
+<button class="w-full bg-primary hover:bg-blue-700 active:bg-blue-800 text-white font-bold py-3.5 px-6 rounded-lg transition-all transform active:scale-95 shadow-lg shadow-primary/30 flex items-center justify-center gap-2">
+<span>Solicitar Cotización</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Services Section -->
+<section class="py-8 px-5">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-xl font-bold text-gray-900 dark:text-white">Nuestros Servicios</h2>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<!-- Service 1 -->
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl flex items-start gap-4 border border-transparent hover:border-gray-200 dark:hover:border-gray-700 transition-colors">
+<div class="size-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<div>
+<h3 class="font-bold text-gray-900 dark:text-white text-base">Soporte Técnico 24/7</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Asistencia inmediata para mantener tu operación continua.</p>
+</div>
+</div>
+<!-- Service 2 -->
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl flex items-start gap-4 border border-transparent hover:border-gray-200 dark:hover:border-gray-700 transition-colors">
+<div class="size-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined">cloud_sync</span>
+</div>
+<div>
+<h3 class="font-bold text-gray-900 dark:text-white text-base">Consultoría Cloud</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Migración y gestión de servicios en la nube segura.</p>
+</div>
+</div>
+<!-- Service 3 -->
+<div class="bg-surface-light dark:bg-surface-dark p-4 rounded-xl flex items-start gap-4 border border-transparent hover:border-gray-200 dark:hover:border-gray-700 transition-colors">
+<div class="size-10 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined">security</span>
+</div>
+<div>
+<h3 class="font-bold text-gray-900 dark:text-white text-base">Ciberseguridad</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Protección avanzada para tus datos críticos.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Catalog Header -->
+<section class="px-5 pt-6 pb-2 flex items-center justify-between">
+<h2 class="text-xl font-bold text-gray-900 dark:text-white">Catálogo de Hardware</h2>
+<a class="text-sm font-semibold text-primary flex items-center gap-0.5" href="#">
+                    Ver todo <span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+</section>
+<!-- Horizontal Scroll Catalog (Carousel) -->
+<section class="w-full overflow-hidden pb-8">
+<div class="flex overflow-x-auto no-scrollbar px-5 pb-4 gap-4 snap-x snap-mandatory">
+<!-- Product Card 1 -->
+<div class="snap-center shrink-0 w-[240px] flex flex-col rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 bg-white dark:bg-surface-dark shadow-sm">
+<div class="relative h-40 bg-gray-100 dark:bg-gray-800">
+<div class="absolute top-2 right-2 bg-secondary text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Oferta</div>
+<img alt="Silver laptop on a desk" class="w-full h-full object-cover" data-alt="Modern silver laptop computer open on a minimalist desk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1nF-l0OJnEMH1glVZlhBP5Dky9liVGPOw82a6ySSm91NMtjwlVeE5W0yRItiNyoznOxLYPfb48xdSjijn40KkP89WlVvZEaIA6_K02JrYW0G2FZj2YhZmlZUASfNkW4aUcLg4HGrFDJs_Nansp2d3gpRESnWi5GVopP-yXrXHAC5oXn_kjCUb1z3aaosKMwwiqq1YQfTjseDkStsico2KaWLoZFg8HNrdGafGfzfkFH4pz_HrTtDUGw-opwMFUVhbIeo7G3tnmSs"/>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<h3 class="text-gray-900 dark:text-white font-semibold text-lg leading-tight mb-1">Laptop Pro 15</h3>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-3">Core i7, 16GB RAM, 512GB SSD</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-primary font-bold text-lg">$1,200 USD</span>
+<button class="bg-surface-light dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="snap-center shrink-0 w-[240px] flex flex-col rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 bg-white dark:bg-surface-dark shadow-sm">
+<div class="relative h-40 bg-gray-100 dark:bg-gray-800">
+<img alt="Rack servers in data center" class="w-full h-full object-cover" data-alt="Rows of rack servers in a data center with led lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPQnk22hH3d_t_BtwHboYg6jjIJFkNSN-b_EpKSpoZtZuOgsDA3P0V7ANqMMQ2tM2axvjCfMgFJMlLk7vKScrRLJ_8IPIKtZH_TsscVUrM4T7c6oNQdBFBcazxCDIyNF3ydcPTYw0l-GUnC-6ePTST1VZnpV_BoSClhHIXF8DtW3aIEq7QUvq_UZT0XI1iUyMxilNNCllrZrTIQxlY2E_NqQI7N7iZJJnUliS8V9GkcC8rm1yRvo6XEr0exOWGxXwuguWyzNkp6Fk"/>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<h3 class="text-gray-900 dark:text-white font-semibold text-lg leading-tight mb-1">Servidor X200</h3>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-3">Xeon Gold, 64GB ECC, 4TB RAID</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-primary font-bold text-lg">$3,500 USD</span>
+<button class="bg-surface-light dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="snap-center shrink-0 w-[240px] flex flex-col rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 bg-white dark:bg-surface-dark shadow-sm">
+<div class="relative h-40 bg-gray-100 dark:bg-gray-800">
+<img alt="Office printer on desk" class="w-full h-full object-cover" data-alt="High volume laser printer for office use" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgAVzKc3jNbGur-O1_Ts-E1ZvYY2iE3qxcj4B8PjFyFiIaSiCno_jFsx2mMMtCit7J-1DuapeuVYLWDYgQZnfdEZ9z2W62-knrNqj_8d8ezY2SXnnYqDAiSEoBZHDL-3LnOlp3w98vX5sjM6Qyi8P3vWHiuyd1sN9fxoeiWr4O-DQgL2cc77iugxhj7dvHoT67kS_3vGpLn_TtkyyRVsEGu9OzC3GYw5A3z_aW0UIqZ7N8x-YWCosc6kGgeyIdyhWIrXg7DgzsF9o"/>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<h3 class="text-gray-900 dark:text-white font-semibold text-lg leading-tight mb-1">Impresora LaserJet</h3>
+<p class="text-gray-500 dark:text-gray-400 text-sm mb-3">Multifuncional, Color, WiFi</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-primary font-bold text-lg">$450 USD</span>
+<button class="bg-surface-light dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+<span class="material-symbols-outlined text-lg">add_shopping_cart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter / Contact Prompt -->
+<section class="px-5 py-8 bg-surface-light dark:bg-surface-dark">
+<div class="flex flex-col gap-4 text-center">
+<div class="size-12 rounded-full bg-primary/10 text-primary mx-auto flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">mail</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-gray-900 dark:text-white">¿Necesitas asesoría personalizada?</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Nuestros expertos te ayudarán a encontrar la mejor solución.</p>
+</div>
+<form class="flex flex-col gap-3 mt-2 w-full">
+<input class="w-full rounded-lg border-gray-200 dark:border-gray-700 bg-white dark:bg-background-dark px-4 py-3 text-sm focus:border-primary focus:ring-primary" placeholder="Tu correo electrónico" type="email"/>
+<button class="w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold py-3 rounded-lg hover:opacity-90 transition-opacity" type="button">
+                            Contactar Asesor
+                        </button>
+</form>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-background-light dark:bg-background-dark border-t border-gray-100 dark:border-gray-800 pt-8 pb-20 px-6">
+<div class="flex flex-col gap-8">
+<!-- Brand & Social -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-2">
+<div class="size-6 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">dns</span>
+</div>
+<h2 class="text-lg font-black tracking-tight text-gray-900 dark:text-white">GPO-AR</h2>
+</div>
+<p class="text-sm text-gray-500 dark:text-gray-400">
+                        Líderes en soluciones de hardware y software empresarial desde 2010.
+                    </p>
+<div class="flex gap-4 mt-2">
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a> <!-- placeholder for social icon -->
+<a class="text-gray-400 hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+</div>
+</div>
+<!-- Links Grid -->
+<div class="grid grid-cols-2 gap-x-4 gap-y-8 text-sm">
+<div class="flex flex-col gap-3">
+<h4 class="font-bold text-gray-900 dark:text-white">Compañía</h4>
+<a class="text-gray-500 dark:text-gray-400 hover:text-primary" href="#">Nosotros</a>
+<a class="text-gray-500 dark:text-gray-400 hover:text-primary" href="#">Carreras</a>
+<a class="text-gray-500 dark:text-gray-400 hover:text-primary" href="#">Blog</a>
+</div>
+<div class="flex flex-col gap-3">
+<h4 class="font-bold text-gray-900 dark:text-white">Legal</h4>
+<a class="text-gray-500 dark:text-gray-400 hover:text-primary" href="#">Privacidad</a>
+<a class="text-gray-500 dark:text-gray-400 hover:text-primary" href="#">Términos</a>
+<a class="text-gray-500 dark:text-gray-400 hover:text-primary" href="#">Cookies</a>
+</div>
+</div>
+<!-- Copyright & Credit -->
+<div class="pt-8 border-t border-gray-100 dark:border-gray-800 flex flex-col gap-4 text-center">
+<p class="text-xs text-gray-400">© 2024 GPO-AR. Todos los derechos reservados.</p>
+<p class="text-xs font-medium text-gray-500 dark:text-gray-400 bg-surface-light dark:bg-surface-dark py-2 px-4 rounded-full self-center border border-gray-100 dark:border-gray-700">
+                        Programado por Francisco López Velázquez
+                    </p>
+</div>
+</div>
+</footer>
+<!-- Floating Contact Button (Sticky Bottom) -->
+<div class="fixed bottom-6 right-6 z-40">
+<button class="bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">chat</span>
+</button>
+</div>
+</div>
+</body></html>

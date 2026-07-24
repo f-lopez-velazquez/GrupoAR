@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gestión de Personal y Gafetes - GPO-AR</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a6fc7",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#111518]">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation -->
+<header class="bg-white border-b border-solid border-b-[#e5e7eb] sticky top-0 z-50">
+<div class="px-4 md:px-10 flex items-center justify-between py-3 max-w-[1440px] mx-auto w-full">
+<div class="flex items-center gap-4 text-[#111518]">
+<div class="size-8 flex items-center justify-center text-primary bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-2xl">grid_view</span>
+</div>
+<h2 class="text-[#111518] text-lg font-bold leading-tight tracking-[-0.015em]">GPO-AR</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-[#60778a] hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Dashboard</a>
+<a class="text-primary text-sm font-bold leading-normal relative after:content-[''] after:absolute after:-bottom-5 after:left-0 after:w-full after:h-0.5 after:bg-primary" href="#">Personal</a>
+<a class="text-[#60778a] hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Nómina</a>
+<a class="text-[#60778a] hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Configuración</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 bg-transparent hover:bg-gray-100 rounded-full py-1 pr-3 pl-1 transition-colors">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8 border border-gray-200" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCxbgsUj0B4w40v_GYbPpLfh9PJuww-3TkJbBN-837FJMXrBR-BGwukfgjYE9c38iisXhpeyS2TNXWFUiepKHfyBa-zuxnXzdmfdH1OUoxMD4lXctLA9tn46aqFb-WT7HQnNYPHUoHHqdkI6dy1GYQuYHuB_ofLNSqdoajQxxCjbUGTkgL-YLtp129h_snCWGIenhEdat5FcNtyaSGKcYN4oCsr9AOIpDlAbvBxwmOtVM_SJC7K31TBYtus9ZXLddatXnHuVZAk0Zc");'></div>
+<span class="text-sm font-medium hidden sm:block">Admin HR</span>
+</button>
+<button class="text-[#60778a] hover:text-red-600 transition-colors" title="Logout">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex flex-1 justify-center py-5 px-4 md:px-10 bg-background-light">
+<div class="layout-content-container flex flex-col max-w-[1200px] flex-1 w-full gap-6">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between gap-4 items-start md:items-center">
+<div class="flex flex-col gap-1">
+<h1 class="text-[#111518] text-3xl font-black leading-tight tracking-[-0.033em]">Gestión de Personal</h1>
+<p class="text-[#60778a] text-base font-normal leading-normal">Administra empleados, revisa sanciones y genera gafetes de identificación.</p>
+</div>
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary hover:bg-blue-700 text-white text-sm font-bold leading-normal tracking-[0.015em] transition-colors shadow-sm">
+<span class="material-symbols-outlined mr-2 text-[20px]">person_add</span>
+<span class="truncate">Agregar Empleado</span>
+</button>
+</div>
+<!-- Statistics Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white border border-[#e5e7eb] shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-[#60778a] text-sm font-medium leading-normal">Total Empleados</p>
+<span class="material-symbols-outlined text-primary/60">groups</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-[#111518] tracking-tight text-2xl font-bold leading-tight">142</p>
+<span class="text-[#078838] text-xs font-bold bg-green-50 px-2 py-0.5 rounded-full">+2%</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white border border-[#e5e7eb] shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-[#60778a] text-sm font-medium leading-normal">Activos</p>
+<span class="material-symbols-outlined text-primary/60">verified_user</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-[#111518] tracking-tight text-2xl font-bold leading-tight">138</p>
+<span class="text-[#60778a] text-xs font-medium">Estable</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white border border-[#e5e7eb] shadow-sm relative overflow-hidden">
+<div class="absolute right-0 top-0 h-full w-1 bg-red-500"></div>
+<div class="flex justify-between items-start">
+<p class="text-[#60778a] text-sm font-medium leading-normal">Con Sanciones</p>
+<span class="material-symbols-outlined text-red-500">warning</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-[#111518] tracking-tight text-2xl font-bold leading-tight">4</p>
+<span class="text-red-600 text-xs font-bold bg-red-50 px-2 py-0.5 rounded-full">+1 Nueva</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white border border-[#e5e7eb] shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-[#60778a] text-sm font-medium leading-normal">Nómina Total</p>
+<span class="material-symbols-outlined text-primary/60">payments</span>
+</div>
+<div class="flex items-baseline gap-2">
+<p class="text-[#111518] tracking-tight text-2xl font-bold leading-tight">$2.4M</p>
+<span class="text-[#078838] text-xs font-bold bg-green-50 px-2 py-0.5 rounded-full">+5%</span>
+</div>
+</div>
+</div>
+<!-- Toolbar & Filters -->
+<div class="bg-white rounded-xl border border-[#e5e7eb] shadow-sm p-4">
+<div class="flex flex-col md:flex-row justify-between gap-4">
+<div class="flex flex-1 gap-4 flex-wrap md:flex-nowrap">
+<div class="relative flex-1 min-w-[200px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#60778a]">search</span>
+<input class="w-full h-10 pl-10 pr-4 rounded-lg border border-[#dbe1e6] bg-white text-[#111518] text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary placeholder:text-[#60778a]" placeholder="Buscar por nombre o ID..." value=""/>
+</div>
+<div class="relative w-full md:w-48">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#60778a]">filter_alt</span>
+<select class="w-full h-10 pl-10 pr-4 rounded-lg border border-[#dbe1e6] bg-white text-[#111518] text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary appearance-none cursor-pointer">
+<option value="">Todos los Deptos</option>
+<option value="ops">Operaciones</option>
+<option value="admin">Administración</option>
+<option value="hr">Recursos Humanos</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[#60778a] pointer-events-none text-sm">expand_more</span>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="h-10 px-4 rounded-lg border border-[#dbe1e6] hover:bg-gray-50 text-[#111518] text-sm font-medium flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span class="hidden sm:inline">Exportar CSV</span>
+</button>
+<button class="h-10 px-4 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary text-sm font-bold flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[20px] fill-current">badge</span>
+<span>Generar Gafetes Masivos</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Employee Data Table -->
+<div class="bg-white rounded-xl border border-[#e5e7eb] shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50 border-b border-gray-100">
+<th class="p-4 text-xs font-semibold tracking-wide text-gray-500 uppercase">Empleado</th>
+<th class="p-4 text-xs font-semibold tracking-wide text-gray-500 uppercase">Rol / Depto</th>
+<th class="p-4 text-xs font-semibold tracking-wide text-gray-500 uppercase">Estado</th>
+<th class="p-4 text-xs font-semibold tracking-wide text-gray-500 uppercase">Salario</th>
+<th class="p-4 text-xs font-semibold tracking-wide text-gray-500 uppercase">Sanciones</th>
+<th class="p-4 text-xs font-semibold tracking-wide text-gray-500 uppercase text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100">
+<!-- Row 1 -->
+<tr class="hover:bg-gray-50/50 transition-colors group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-cover bg-center border border-gray-200" data-alt="Portrait of employee Ricardo Gomez" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCcm9Fq6wMQ3Z2S0hczUI4EdN3HFKHoqh_vdMltyMLXPAEZine5ucGH7uLPiXNoTgYnox6hSnO8SKqrxr5bRsi2D6VjYLimSONoXjRW0ExCBMRvIp7jPURRJI5fMXS4SdnLT7nm5bcCLOJBZHhElECQaA5zUoX4d4MnwOyg9kxbnb-SFC-Sub4j9RYr8_94uV8kQZCLjgNVRkJLCvOPS2bbFx-os_6Ea1FH0OWS3ecqikf5fHXEci4FokxUGXrR_v32CqrcrkVt8eE');"></div>
+<div class="flex flex-col">
+<span class="text-[#111518] text-sm font-semibold">Ricardo Gómez</span>
+<span class="text-[#60778a] text-xs">ID: 4829</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="text-[#111518] text-sm">Supervisor de Planta</span>
+<span class="text-[#60778a] text-xs">Operaciones</span>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-100">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                                Activo
+                                            </span>
+</td>
+<td class="p-4 text-sm text-[#111518] font-medium tabular-nums">$18,500.00</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                                                Ninguna
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-md transition-colors" title="Ver Gafete QR">
+<span class="material-symbols-outlined text-[20px]">qr_code_2</span>
+</button>
+<button class="p-1.5 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-md transition-colors" title="Editar">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 (With Sanction) -->
+<tr class="hover:bg-gray-50/50 transition-colors group bg-red-50/30">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-cover bg-center border border-gray-200" data-alt="Portrait of employee Maria Rodriguez" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCDeHcDujkZscSl6xTbWd9zFlRTy7VMqebrqIdXqddzdim7a-PELHCFW8VQtpPYwCZyUs2yE-hYz5KtmPbgxovIAV4VQN8eaS5WEtjrm-IZxrX3BuLRPjMaefK4gsdi-YyHfE47huLhxwbzF0rqHpuorArXHwvB4BUHvqTspLtFVgGXSd0R9JtCOzniy7F_U9uPT1M9HSWlsPYNXr-4cQKAAOM05gt3LW2VuNxacOeiAiEcoqFA4sn_LcIiIhhm7GzBNfyIfJUeyWM');"></div>
+<div class="flex flex-col">
+<span class="text-[#111518] text-sm font-semibold">María Rodríguez</span>
+<span class="text-[#60778a] text-xs">ID: 4830</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="text-[#111518] text-sm">Operador de Maquinaria</span>
+<span class="text-[#60778a] text-xs">Producción</span>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-100">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                                Activo
+                                            </span>
+</td>
+<td class="p-4 text-sm text-[#111518] font-medium tabular-nums">$12,200.00</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 border border-red-200 animate-pulse">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                                                1 Activa
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-md transition-colors" title="Ver Gafete QR">
+<span class="material-symbols-outlined text-[20px]">qr_code_2</span>
+</button>
+<button class="p-1.5 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-md transition-colors" title="Editar">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors" title="Ver Sanción">
+<span class="material-symbols-outlined text-[20px]">gavel</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-gray-50/50 transition-colors group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-cover bg-center border border-gray-200" data-alt="Portrait of employee Carlos Ruiz" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAKdpfAwmNrBN1xgIIROK1UdM1KM2E5fupoGoYaKoEwqMnLjBYGKbkMjhMSJj1Kf9oIkR8J9rE_Hr-TwA-4DASyD3psoExrnqqHsxN59_xR7eFIfZkXhzhh6D2yYp222udRrPl8AnLOM4hCKpo-vOZ_shhJOh0LXuIJfL19N2s69dQFowSPtzzYYRrRFUzS3ljElyCHQUEo3SyxQ0GmLCxB7uZqDq7Ae8PDpKhz7SMrFA_gBrgQh4qIzhZll1w0Szmi_CVR5KDaFcA');"></div>
+<div class="flex flex-col">
+<span class="text-[#111518] text-sm font-semibold">Carlos Ruiz</span>
+<span class="text-[#60778a] text-xs">ID: 4831</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="text-[#111518] text-sm">Analista de Calidad</span>
+<span class="text-[#60778a] text-xs">Calidad</span>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600 border border-gray-200">
+<span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
+                                                Permiso
+                                            </span>
+</td>
+<td class="p-4 text-sm text-[#111518] font-medium tabular-nums">$14,800.00</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                                                Ninguna
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-md transition-colors" title="Ver Gafete QR">
+<span class="material-symbols-outlined text-[20px]">qr_code_2</span>
+</button>
+<button class="p-1.5 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-md transition-colors" title="Editar">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-gray-50/50 transition-colors group">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-cover bg-center border border-gray-200" data-alt="Portrait of employee Ana Lopez" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB9sTaqEgfIQ5nhinSpT5GmDFu4judmlEMgg_vPLY_rcOd310gqeP6R2wv_2HEaID0FXrY0Uoi6vWAYgIdye82KIc0ojYF5fein6lNgA-9wkzSLq7BBN8gAyU06zA7jeoj5HD-G99SN5jB-gNnZgcWa3eUMF8XO98R1KrhuEqpTwloJ43iIirm0KaSpDSJj_AfNPZGVxNc6Nikb5hCiy3V04EdDtf_iHlTXGxTwbn8cYdNfjmWjQ6BNLf5xXZ35L7XDVep-L8A_aNw');"></div>
+<div class="flex flex-col">
+<span class="text-[#111518] text-sm font-semibold">Ana López</span>
+<span class="text-[#60778a] text-xs">ID: 4835</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="text-[#111518] text-sm">Asistente Administrativo</span>
+<span class="text-[#60778a] text-xs">Administración</span>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-50 text-green-700 border border-green-100">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                                Activo
+                                            </span>
+</td>
+<td class="p-4 text-sm text-[#111518] font-medium tabular-nums">$10,500.00</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
+                                                Ninguna
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-md transition-colors" title="Ver Gafete QR">
+<span class="material-symbols-outlined text-[20px]">qr_code_2</span>
+</button>
+<button class="p-1.5 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-md transition-colors" title="Editar">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 (With Sanction) -->
+<tr class="hover:bg-gray-50/50 transition-colors group bg-red-50/30">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-cover bg-center border border-gray-200" data-alt="Portrait of employee Jorge Martinez" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCSJIo057KA43DegvYF_0sAio9oUVyCqbqvPYAeY6zhseJFIKEKQ3hXzKIYsAMetqU9dZK_CsYpeT-Bf1PqqKmluU6iEoqf-YTBavSzeBCthMPzeBAMVYBGHnTVGVKc6SH7kGzuburXP2Ok9jpt84WVGIB00TajDKcA581hWaIFN85nhCiWxXQfS4nrZqjPjQmgRxzXH6-8SlNjvTaw4cdW6y_pxh_mcr5lCLHSyumRmGAkWtaf8gFoarOSJ6Ue2Gmtb2dlhFgBLAY');"></div>
+<div class="flex flex-col">
+<span class="text-[#111518] text-sm font-semibold">Jorge Martínez</span>
+<span class="text-[#60778a] text-xs">ID: 4842</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<div class="flex flex-col">
+<span class="text-[#111518] text-sm">Chofer de Reparto</span>
+<span class="text-[#60778a] text-xs">Logística</span>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-50 text-yellow-700 border border-yellow-100">
+<span class="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>
+                                                Suspendido
+                                            </span>
+</td>
+<td class="p-4 text-sm text-[#111518] font-medium tabular-nums">$13,000.00</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 border border-red-200">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                                                2 Graves
+                                            </span>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-md transition-colors" title="Ver Gafete QR">
+<span class="material-symbols-outlined text-[20px]">qr_code_2</span>
+</button>
+<button class="p-1.5 text-gray-500 hover:text-primary hover:bg-blue-50 rounded-md transition-colors" title="Editar">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors" title="Ver Sanción">
+<span class="material-symbols-outlined text-[20px]">gavel</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between border-t border-gray-200 bg-gray-50 px-4 py-3 sm:px-6">
+<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+<div>
+<p class="text-sm text-gray-700">
+                                        Mostrando <span class="font-medium">1</span> a <span class="font-medium">5</span> de <span class="font-medium">142</span> resultados
+                                    </p>
+</div>
+<div>
+<nav aria-label="Pagination" class="isolate inline-flex -space-x-px rounded-md shadow-sm">
+<a class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0" href="#">
+<span class="sr-only">Previous</span>
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</a>
+<a aria-current="page" class="relative z-10 inline-flex items-center bg-primary px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" href="#">1</a>
+<a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0" href="#">2</a>
+<a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0" href="#">3</a>
+<span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">...</span>
+<a class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0" href="#">
+<span class="sr-only">Next</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</a>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

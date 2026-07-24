@@ -1,0 +1,267 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Verificación de ticket - Grupo AR</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<!-- Theme Configuration -->
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark font-display text-[#0d151c] antialiased">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+<!-- Header -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7eef4] bg-white bg-[#1a2632] border-[#2a3642] px-6 py-4 lg:px-10">
+<div class="flex items-center gap-3">
+<div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white">
+<span class="material-symbols-outlined text-2xl">architecture</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight text-[#0d151c] text-white">Grupo AR</h2>
+</div>
+<!-- Optional User Profile/Menu could go here -->
+<div class="hidden sm:flex items-center gap-4">
+<span class="text-sm font-medium text-slate-500 hover:text-primary cursor-pointer transition-colors">Ayuda</span>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col items-center justify-start py-8 px-4 sm:px-6">
+<div class="w-full max-w-[600px] flex flex-col gap-6">
+<!-- Status Card -->
+<div class="w-full bg-white bg-[#1a2632] rounded-xl shadow-sm border border-[#e7eef4] border-[#2a3642] p-6 text-center animate-fade-in-up">
+<div class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-green-50 bg-green-900/20 mb-4">
+<span id="ticketStatusIcon" class="material-symbols-outlined text-4xl text-green-600 text-green-400">hourglass_top</span>
+</div>
+<h1 id="ticketStatusTitle" class="text-2xl font-bold text-[#0d151c] text-white mb-2">Verificando ticket</h1>
+<p id="ticketStatusSubtitle" class="text-[#48769d] text-slate-400 text-base">Estamos validando la información en los sistemas de Grupo AR.</p>
+</div>
+<!-- Digital Ticket / Receipt -->
+<div class="w-full bg-white bg-[#1a2632] rounded-xl shadow-lg border border-[#e7eef4] border-[#2a3642] overflow-hidden">
+<!-- Ticket Header -->
+<div class="bg-primary/5 border-b border-[#e7eef4] border-[#2a3642] px-6 py-4 flex justify-between items-center">
+<span class="text-xs font-bold uppercase tracking-wider text-primary">Recibo digital oficial</span>
+<span class="material-symbols-outlined text-primary/40 text-lg">receipt_long</span>
+</div>
+<!-- Ticket Details -->
+<div class="p-6">
+<!-- Meta Data -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+<div class="flex flex-col">
+<span class="text-xs text-[#48769d] text-slate-400 mb-1">ID de transacción</span>
+<span id="ticketIdValue" class="text-sm font-semibold text-[#0d151c] text-white">Sin asignar</span>
+</div>
+<div class="flex flex-col sm:text-right">
+<span class="text-xs text-[#48769d] text-slate-400 mb-1">Fecha de emisión</span>
+<span id="ticketDateValue" class="text-sm font-semibold text-[#0d151c] text-white">Sin fecha</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs text-[#48769d] text-slate-400 mb-1">Sucursal</span>
+<span id="ticketLocationValue" class="text-sm font-semibold text-[#0d151c] text-white">No disponible</span>
+</div>
+<div class="flex flex-col sm:text-right">
+<span class="text-xs text-[#48769d] text-slate-400 mb-1">Método de pago</span>
+<span id="ticketPaymentValue" class="text-sm font-semibold text-[#0d151c] text-white">No disponible</span>
+</div>
+</div>
+<!-- Divider -->
+<div class="h-px bg-[#e7eef4] bg-[#2a3642] w-full mb-6 border-dashed border-b"></div>
+<!-- Item Table -->
+<div class="w-full mb-6">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr>
+<th class="pb-3 text-xs font-medium text-[#48769d] text-slate-400 uppercase tracking-wider w-16">Cant.</th>
+<th class="pb-3 text-xs font-medium text-[#48769d] text-slate-400 uppercase tracking-wider">Descripción</th>
+<th class="pb-3 text-xs font-medium text-[#48769d] text-slate-400 uppercase tracking-wider text-right">Precio</th>
+</tr>
+</thead>
+<tbody id="ticketItemsBody" class="text-sm">
+<tr class="border-b border-[#f0f4f8] border-[#2a3642] last:border-0">
+<td class="py-3 text-[#0d151c] text-slate-300 font-medium" colspan="3">Sin artículos cargados.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Total Calculation -->
+<div class="flex flex-col items-end gap-2 pt-4 bg-[#f8fafc] bg-[#1f2937] -mx-6 -mb-6 p-6 border-t border-[#e7eef4] border-[#2a3642]">
+<div class="flex justify-between w-full max-w-[240px]">
+<span class="text-sm text-[#48769d] text-slate-400">Subtotal</span>
+<span id="ticketSubtotalValue" class="text-sm font-medium text-[#0d151c] text-slate-200">$180.50</span>
+</div>
+<div class="flex justify-between w-full max-w-[240px]">
+<span class="text-sm text-[#48769d] text-slate-400">IVA (16%)</span>
+<span id="ticketTaxValue" class="text-sm font-medium text-[#0d151c] text-slate-200">$28.88</span>
+</div>
+<div class="h-px bg-[#cedce9] bg-[#374151] w-full max-w-[240px] my-2"></div>
+<div class="flex justify-between w-full max-w-[240px] items-baseline">
+<span class="text-base font-bold text-[#0d151c] text-white">Total</span>
+<span id="ticketTotalValue" class="text-2xl font-bold text-primary text-primary">$0.00 <span id="ticketCurrency" class="text-xs font-normal text-[#48769d] ml-1">MXN</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-3 pt-2">
+<button id="downloadInvoiceBtn" class="flex items-center justify-center gap-2 w-full rounded-lg bg-primary hover:bg-primary/90 text-white font-bold py-4 px-6 transition-all shadow-md hover:shadow-lg active:scale-[0.99]">
+<span class="material-symbols-outlined">download</span>
+                        Descargar CFDI
+                    </button>
+<button id="viewCatalogBtn" class="flex items-center justify-center gap-2 w-full rounded-lg bg-transparent border-2 border-secondary hover:bg-secondary/5 text-secondary font-bold py-3.5 px-6 transition-colors">
+<span class="material-symbols-outlined">grid_view</span>
+                        Ver catálogo de ferretería
+                    </button>
+</div>
+<!-- Footer Info -->
+<div class="text-center mt-6 text-[#48769d] text-slate-500 text-sm">
+<p class="mb-2">¿Necesitas ayuda con este ticket?</p>
+<a class="text-primary hover:underline font-medium" href="/contacto">Contacto</a>
+<div class="mt-8 text-xs opacity-60">
+                        © 2023 Grupo AR. Todos los derechos reservados. <br/>
+                        Aviso de privacidad | Términos y condiciones
+                    </div>
+</div>
+</div>
+</main>
+</div>
+<script type="module">
+import { getPublicTicket } from "/shared/services/public.js";
+import { formatMoney } from "/shared/utils.js";
+
+const statusIcon = document.getElementById("ticketStatusIcon");
+const statusTitle = document.getElementById("ticketStatusTitle");
+const statusSubtitle = document.getElementById("ticketStatusSubtitle");
+const ticketIdValue = document.getElementById("ticketIdValue");
+const ticketDateValue = document.getElementById("ticketDateValue");
+const ticketLocationValue = document.getElementById("ticketLocationValue");
+const ticketPaymentValue = document.getElementById("ticketPaymentValue");
+const ticketItemsBody = document.getElementById("ticketItemsBody");
+const ticketSubtotalValue = document.getElementById("ticketSubtotalValue");
+const ticketTaxValue = document.getElementById("ticketTaxValue");
+const ticketTotalValue = document.getElementById("ticketTotalValue");
+const ticketCurrency = document.getElementById("ticketCurrency");
+const downloadBtn = document.getElementById("downloadInvoiceBtn");
+const catalogBtn = document.getElementById("viewCatalogBtn");
+
+const formatDate = (value) => {
+  if (!value) return "Sin fecha";
+  const date = value.seconds ? new Date(value.seconds * 1000) : new Date(value);
+  return new Intl.DateTimeFormat("es-MX", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(date);
+};
+
+const getIdFromUrl = () => {
+  const params = new URLSearchParams(window.location.search);
+  const paramId = params.get("id");
+  if (paramId) return paramId;
+  const path = window.location.pathname;
+  const marker = "/consulta/";
+  if (path.includes(marker)) {
+    return path.split(marker)[1].split("/")[0];
+  }
+  return null;
+};
+
+const renderItems = (items = []) => {
+  ticketItemsBody.innerHTML = "";
+  if (!items.length) {
+    ticketItemsBody.innerHTML = `
+      <tr>
+        <td colspan="3" class="py-4 text-center text-[#48769d] text-slate-400">Sin detalle de productos.</td>
+      </tr>`;
+    return;
+  }
+  items.forEach((item) => {
+    ticketItemsBody.insertAdjacentHTML(
+      "beforeend",
+      `<tr class="border-b border-[#f0f4f8] border-[#2a3642] last:border-0">
+        <td class="py-3 text-[#0d151c] text-slate-300 font-medium">${item.qty}x</td>
+        <td class="py-3 text-[#0d151c] text-slate-300">
+          <div class="flex flex-col">
+            <span>${item.name}</span>
+            <span class="text-xs text-[#48769d] text-slate-500">${item.category || ""}</span>
+          </div>
+        </td>
+        <td class="py-3 text-[#0d151c] text-white font-medium text-right">${formatMoney(item.price)}</td>
+      </tr>`
+    );
+  });
+};
+
+const renderTicket = (ticket) => {
+  if (!ticket) {
+    statusIcon.textContent = "error";
+    statusIcon.classList.remove("text-green-600", " text-green-400");
+    statusIcon.classList.add("text-rose-500");
+    statusTitle.textContent = "Ticket no encontrado";
+    statusSubtitle.textContent = "Verifica el codigo o solicita soporte.";
+    ticketItemsBody.innerHTML = "";
+    return;
+  }
+
+  const isProject = ticket.source === "project";
+  statusIcon.textContent = isProject ? "construction" : "verified";
+  statusTitle.textContent = isProject ? "Avance de Obra" : "Compra verificada";
+  statusSubtitle.textContent = isProject
+    ? "Estado actualizado del proyecto."
+    : "Transaccion autenticada por Grupo AR.";
+
+  ticketIdValue.textContent = `#${ticket.id}`;
+  ticketDateValue.textContent = formatDate(ticket.createdAt || ticket.updatedAt || new Date());
+  ticketLocationValue.textContent = ticket.location || ticket.projectName || "Sucursal Principal";
+  ticketPaymentValue.textContent = ticket.paymentMethod || "Pago diferido";
+
+  const items = ticket.items || [];
+  const subtotal = Number(ticket.subtotal || ticket.paidBalance || 0);
+  const tax = Number(ticket.tax || 0);
+  const total = Number(ticket.total || subtotal + tax);
+
+  renderItems(items);
+  ticketSubtotalValue.textContent = formatMoney(subtotal);
+  ticketTaxValue.textContent = formatMoney(tax);
+  ticketTotalValue.childNodes[0].textContent = `${formatMoney(total)} `;
+  ticketCurrency.textContent = ticket.currency || "MXN";
+
+  if (ticket.invoiceUrl) {
+    downloadBtn.onclick = () => window.open(ticket.invoiceUrl, "_blank");
+  } else {
+    downloadBtn.onclick = () => alert("Factura no disponible.");
+  }
+};
+
+const id = getIdFromUrl();
+if (!id) {
+  renderTicket(null);
+} else {
+  getPublicTicket(id).then(renderTicket);
+}
+
+catalogBtn.addEventListener("click", () => {
+  window.location.href = "/catalogo-productos";
+});
+</script>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

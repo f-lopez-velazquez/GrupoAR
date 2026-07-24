@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Calendario de Publicidad y Prospección GPO-AR</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a6fc7", // User requested Blue
+                        "brand-red": "#dc1e28", // User requested Red
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101a22",
+                        "sidebar-light": "#ffffff",
+                        "sidebar-dark": "#1c2b36",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-hidden h-screen w-full flex">
+<!-- Sidebar -->
+<aside class="w-64 flex-shrink-0 flex flex-col bg-sidebar-light dark:bg-sidebar-dark border-r border-slate-200 dark:border-slate-800 h-full transition-all duration-300">
+<!-- Brand -->
+<div class="p-6 pb-2">
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-xl font-bold leading-normal tracking-tight">GPO-AR</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Marketing &amp; Prospección</p>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-6">
+<!-- Main Group -->
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 group transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 group-hover:text-primary">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:text-blue-400 group transition-colors" href="#">
+<span class="material-symbols-outlined fill-1">calendar_month</span>
+<span class="text-sm font-bold">Calendario</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 group transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 group-hover:text-primary">perm_media</span>
+<span class="text-sm font-medium">Biblioteca de Recursos</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 group transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 group-hover:text-primary">groups</span>
+<span class="text-sm font-medium">Clientes</span>
+</a>
+</div>
+<!-- Actions Group -->
+<div class="flex flex-col gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+<button class="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg h-10 px-4 bg-primary hover:bg-blue-700 text-white text-sm font-bold shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Nueva Campaña</span>
+</button>
+<div class="flex flex-col gap-1 mt-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 group transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 group-hover:text-primary">style</span>
+<span class="text-sm font-medium">Guía de Estilo</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 group transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 group-hover:text-primary">mark_email_unread</span>
+<span class="text-sm font-medium">Recordatorios</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Sidebar Footer -->
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden" data-alt="profile picture avatar">
+<img alt="Avatar" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDTwuVhbvlVexA_HeQ9zRq1orod9ydMjct3KA8gzlf2gbT-1E0eUO9BqfZ-DfOro5LdnE6Gb-MhmRiniZQKLNTCovglDSrm7McsuALAOmsc6QWA3B-aTE5DfdvjqyRYGuno4wEQRkto93QnQ8Ryx03oz8qio8OY_jlmz6FzU8Z-5NKtJPzcZHIgvTGiEPtXvtT_l6-z4YqA8e9csDpbuFlQIjGm-c6tRbK4258U4yJRL7FCjp5ihVFd12bZlKDU9R5c3GESDN8_CE"/>
+</div>
+<div class="flex flex-col overflow-hidden">
+<p class="text-sm font-bold text-slate-900 dark:text-white truncate">Francisco López</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate">Marketing Manager</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Header -->
+<header class="bg-white dark:bg-sidebar-dark border-b border-slate-200 dark:border-slate-800 flex-shrink-0 z-10">
+<div class="px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+<div class="flex flex-col">
+<h2 class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Calendario de Publicidad</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Organiza y gestiona las publicaciones de Septiembre 2023</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="hidden md:flex bg-slate-100 dark:bg-slate-800 rounded-lg p-1">
+<button class="px-3 py-1.5 rounded-md bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm text-sm font-medium">Mes</button>
+<button class="px-3 py-1.5 rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm font-medium">Semana</button>
+<button class="px-3 py-1.5 rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm font-medium">Día</button>
+</div>
+<button class="flex items-center gap-2 h-9 px-4 rounded-lg border border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span class="hidden sm:inline">Reporte Mensual</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Body -->
+<div class="flex-1 overflow-y-auto overflow-x-hidden p-6">
+<div class="max-w-[1400px] mx-auto flex flex-col gap-8">
+<!-- Calendar Controls -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<button class="h-8 w-8 flex items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Septiembre 2023</h3>
+<button class="h-8 w-8 flex items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="flex items-center gap-4 text-sm">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-blue-100 border border-blue-300"></div>
+<span class="text-slate-500 dark:text-slate-400">Programado</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-green-100 border border-green-300"></div>
+<span class="text-slate-500 dark:text-slate-400">Publicado</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-red-100 border border-red-300"></div>
+<span class="text-slate-500 dark:text-slate-400">Pendiente</span>
+</div>
+</div>
+</div>
+<!-- Calendar Grid -->
+<div class="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-sidebar-dark overflow-hidden shadow-sm">
+<!-- Weekday Header -->
+<div class="grid grid-cols-7 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
+<div class="py-3 text-center text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Dom</div>
+<div class="py-3 text-center text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Lun</div>
+<div class="py-3 text-center text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Mar</div>
+<div class="py-3 text-center text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Mié</div>
+<div class="py-3 text-center text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Jue</div>
+<div class="py-3 text-center text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Vie</div>
+<div class="py-3 text-center text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Sáb</div>
+</div>
+<!-- Days Grid -->
+<div class="grid grid-cols-7 auto-rows-fr bg-slate-200 dark:bg-slate-700 gap-px">
+<!-- Previous Month Days -->
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2 opacity-40">
+<span class="text-sm font-medium text-slate-400">27</span>
+</div>
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2 opacity-40">
+<span class="text-sm font-medium text-slate-400">28</span>
+</div>
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2 opacity-40">
+<span class="text-sm font-medium text-slate-400">29</span>
+</div>
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2 opacity-40">
+<span class="text-sm font-medium text-slate-400">30</span>
+</div>
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2 opacity-40">
+<span class="text-sm font-medium text-slate-400">31</span>
+</div>
+<!-- Current Month Days -->
+<!-- Day 1 -->
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2 relative group hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="text-sm font-bold text-slate-700 dark:text-slate-300">1</span>
+<!-- Event Card: Scheduled -->
+<div class="bg-white dark:bg-slate-700 border-l-4 border-primary shadow-sm rounded-r-md p-2 flex gap-2 items-start cursor-pointer hover:shadow-md transition-shadow">
+<div class="h-8 w-8 rounded bg-cover bg-center flex-shrink-0" data-alt="Product launch thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuClJD8WStSbQRKX1EbcZhSzxAiU5cCRieNKbMW-MZD8jDgQUnhCIizvTNSFGBushmuPrJqcaUShHHUooL4s_INUKbM3ELuCne4qnbg3culqH6A6EMpgi8Iv-zNqbNmWlsvFcSw1TjwW2YrEdr1sGE3q6Qctj-3eZ50oY44B7T_Kp5hwP-_5IFx3tw6fJNl4TR6xqGEZL2-NIPSQeSnfv7GfENSjPQ6-q50BL8BJgwXLAFaOw1EZZjBb5BujKchfIgM_E8Whj1cppik');"></div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1 mb-0.5">
+<span class="material-symbols-outlined text-[14px] text-blue-600">public</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase">FB</span>
+</div>
+<p class="text-[10px] leading-tight text-slate-600 dark:text-slate-300 line-clamp-2">Lanzamiento de campaña Q3...</p>
+</div>
+</div>
+</div>
+<!-- Day 2 -->
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2 relative group hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="text-sm font-bold text-slate-700 dark:text-slate-300">2</span>
+</div>
+<!-- Day 3 -->
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2 relative group hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="text-sm font-bold text-slate-700 dark:text-slate-300">3</span>
+<!-- Event Card: LinkedIn -->
+<div class="bg-white dark:bg-slate-700 border-l-4 border-indigo-600 shadow-sm rounded-r-md p-2 flex gap-2 items-start cursor-pointer hover:shadow-md transition-shadow">
+<div class="h-8 w-8 rounded bg-cover bg-center flex-shrink-0" data-alt="Corporate meeting thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDyyYftn3eWbo720PIE2HD0TOMWvQuA6ZcjkQ6joOKMoRp0Yei_lvjFDmO8OTCNX6ZFcSkEFVUr0Cc4ArlFwfpf91WldbwObJY_012n5PaPOQyOagaC_G5Fz7bwCxxey2KPI16tg2krC49Hm6COO5J6enAEEAHxJybCpDunQtj6pNQDBt2-Trk_iF1kA0DN0-qaGXiqSOCP47L64fOiEYEE_t-XQkykvlhwjU-_vpHNTc0-ItS5dyjyD7CREgio-Q2uvcqqcZJlx3g');"></div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1 mb-0.5">
+<span class="material-symbols-outlined text-[14px] text-indigo-600">business_center</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase">LI</span>
+</div>
+<p class="text-[10px] leading-tight text-slate-600 dark:text-slate-300 line-clamp-2">Nueva alianza estratégica con...</p>
+</div>
+</div>
+</div>
+<!-- Day 4 -->
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2 relative group hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="text-sm font-bold text-slate-700 dark:text-slate-300">4</span>
+</div>
+<!-- Day 5 (Today) -->
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2 relative group hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="h-7 w-7 rounded-full bg-primary text-white flex items-center justify-center text-sm font-bold shadow-md">5</span>
+<!-- Event Card: Pending (Red) -->
+<div class="bg-red-50 dark:bg-red-900/20 border-l-4 border-brand-red shadow-sm rounded-r-md p-2 flex gap-2 items-start cursor-pointer hover:shadow-md transition-shadow">
+<div class="h-8 w-8 rounded bg-cover bg-center flex-shrink-0 opacity-80" data-alt="Alert warning thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBxT3UARwac_30waltXzIxPAokNazzJ0RDSSxc-arCLMbizrCcMVbJUM0VajlkAEN7UlNPwLJoST9QG-X4m9VCR5xjD9c4lZb_0hniJ9EuhyqvV6gnFsupqfWzCbHAlwk-wOY-ZSr6lgSuevlhnrkJjs_okCdgSobelQJgmpjDPbnKJfhDVN4FK4O_W0fNhj5oi-IpXI9miIxG5dPpPCQnDC199J4d5QxJdWOp94m-AiNyz4yQOMy60JkULHqaRO-WMgTv9eKCpqYk');"></div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1 mb-0.5">
+<span class="material-symbols-outlined text-[14px] text-brand-red">photo_camera</span>
+<span class="text-[10px] font-bold text-brand-red uppercase">IG</span>
+</div>
+<p class="text-[10px] leading-tight text-brand-red font-medium line-clamp-2">URGENTE: Cambio de copy para...</p>
+</div>
+</div>
+</div>
+<!-- Day 6 -->
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2 relative group hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="text-sm font-bold text-slate-700 dark:text-slate-300">6</span>
+<!-- Event Card: Scheduled -->
+<div class="bg-white dark:bg-slate-700 border-l-4 border-primary shadow-sm rounded-r-md p-2 flex gap-2 items-start cursor-pointer hover:shadow-md transition-shadow">
+<div class="h-8 w-8 rounded bg-cover bg-center flex-shrink-0" data-alt="Team photo thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDr9oFdzYmyyibOXcHMcXW75F96qfeETjPot9ZnAKpcuEy5MzsAF6nCrcJfJ6_yWEJY-kUsgg0h7EzMAHBV1bI8zV9pUB2mccy-JZQe-GKd2_Tta5Pk4TUYmbOJybBQxVQUEiKQp3jQBi2MyjkjcLaZ3TJ4KM23ssz9rKXA4gB5s7EKA_o0x2jehIfr8A5p99FJQyYx_H6iLKxInoWatvFtQ6snApQzFWqUYMvM8DePYGkqOXXoqzE5azBrpvQyYaaX8nD_mkKt4SY');"></div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1 mb-0.5">
+<span class="material-symbols-outlined text-[14px] text-blue-600">public</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase">FB</span>
+</div>
+<p class="text-[10px] leading-tight text-slate-600 dark:text-slate-300 line-clamp-2">Conoce a nuestro equipo de...</p>
+</div>
+</div>
+</div>
+<!-- Day 7-30 (Simplified for demo) -->
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2"><span class="text-sm font-bold text-slate-700 dark:text-slate-300">7</span></div>
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2"><span class="text-sm font-bold text-slate-700 dark:text-slate-300">8</span></div>
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2"><span class="text-sm font-bold text-slate-700 dark:text-slate-300">9</span></div>
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2"><span class="text-sm font-bold text-slate-700 dark:text-slate-300">10</span></div>
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2">
+<span class="text-sm font-bold text-slate-700 dark:text-slate-300">11</span>
+<div class="bg-white dark:bg-slate-700 border-l-4 border-pink-500 shadow-sm rounded-r-md p-2 flex gap-2 items-start cursor-pointer hover:shadow-md transition-shadow">
+<div class="h-8 w-8 rounded bg-cover bg-center flex-shrink-0" data-alt="Product showcase thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD85fAy-fddKvrnrM45VlFPklH1U78FU3vVsQoUZLYdZxwOxdb-CZfJ0Y-XmXjOxBEybmIjpMQ6jtIlTHP_mJxgWJlYAI3vZnJQMJ6NOZF7UrdOeZ6k8Qvzo7h2CgziukLr_iCTW5xP14_C8pk1vdyKvt0I9_CQQT863-XIOBCtljKLaGwv8h5i3wcnrNOgw6TWkFLz2JLAQP7THfdk3bije8oht-HDvi3JNFBv5BJ3D5aj1kHTsjzr_MSgat0lenLe-6sZ_eyBSdA');"></div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1 mb-0.5">
+<span class="material-symbols-outlined text-[14px] text-pink-500">photo_camera</span>
+<span class="text-[10px] font-bold text-slate-400 uppercase">IG</span>
+</div>
+<p class="text-[10px] leading-tight text-slate-600 dark:text-slate-300 line-clamp-2">Stories: Detrás de cámaras</p>
+</div>
+</div>
+</div>
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2"><span class="text-sm font-bold text-slate-700 dark:text-slate-300">12</span></div>
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2"><span class="text-sm font-bold text-slate-700 dark:text-slate-300">13</span></div>
+<div class="min-h-[140px] bg-white dark:bg-sidebar-dark p-2 flex flex-col gap-2"><span class="text-sm font-bold text-slate-700 dark:text-slate-300">14</span></div>
+</div>
+</div>
+<!-- Asset Management Section -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-10">
+<!-- Upload Area -->
+<div class="lg:col-span-2 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Gestión de Recursos</h3>
+<button class="text-primary text-sm font-medium hover:underline">Ver biblioteca completa</button>
+</div>
+<div class="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-xl p-8 flex flex-col items-center justify-center text-center bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer group">
+<div class="h-12 w-12 rounded-full bg-blue-50 dark:bg-slate-700 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-[28px]">cloud_upload</span>
+</div>
+<p class="text-slate-900 dark:text-white font-medium mb-1">Haz clic o arrastra archivos aquí</p>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Soporta JPG, PNG y MP4 (Alta Calidad)</p>
+</div>
+</div>
+<!-- Recent Assets -->
+<div class="flex flex-col gap-4">
+<h3 class="text-lg font-bold text-slate-900 dark:text-white">Archivos Recientes</h3>
+<div class="bg-white dark:bg-sidebar-dark rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden">
+<div class="flex items-center gap-3 p-3 border-b border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<div class="h-10 w-10 rounded bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-500">
+<span class="material-symbols-outlined">image</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium text-slate-900 dark:text-white truncate">banner-campaña-q3.jpg</p>
+<p class="text-xs text-slate-500">2.4 MB • Hace 2h</p>
+</div>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined">download</span></button>
+</div>
+<div class="flex items-center gap-3 p-3 border-b border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<div class="h-10 w-10 rounded bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-500">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium text-slate-900 dark:text-white truncate">copy-septiembre-v2.docx</p>
+<p class="text-xs text-slate-500">150 KB • Ayer</p>
+</div>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined">download</span></button>
+</div>
+<div class="flex items-center gap-3 p-3 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<div class="h-10 w-10 rounded bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-500">
+<span class="material-symbols-outlined">movie</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium text-slate-900 dark:text-white truncate">reel-resumen.mp4</p>
+<p class="text-xs text-slate-500">18.2 MB • 3 sept</p>
+</div>
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined">download</span></button>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Info -->
+<footer class="mt-auto border-t border-slate-200 dark:border-slate-700 pt-6 pb-2">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
+<p>© 2023 GPO-AR. Todos los derechos reservados.</p>
+<div class="flex items-center gap-6">
+<span>Programado por <strong class="text-slate-700 dark:text-slate-300">Francisco López Velázquez</strong></span>
+<a class="hover:text-primary transition-colors" href="#">Términos y Condiciones</a>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,730 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Formulario semanal de obra - Grupo AR</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<!-- Tailwind Config -->
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-slate-50 font-display overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- SideNavBar (Adapted) -->
+<aside class="hidden lg:flex w-72 flex-col bg-slate-50 bg-[#111a22] border-r border-slate-200 border-slate-800 h-full">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-4">
+<!-- Brand / User -->
+<div class="flex gap-3 px-2 py-3">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12 shadow-sm" data-alt="Corporate logo or generic avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC1ZztH_MpIdFhde4s8bFzvBV99LRyyxwc9KS_4k4LbWgCS085H6Qiermb3eQWG7YkDLaOVFG-97TUZMgtWF1hr0ML4gseTZmAEL__m-mpAuGg-Efklqpyih5in1hGWIoNxbtBvMSIdHSTl9_lX8nJp1ig3-vZ0Zo9qOarpKiYxuyr4D2yKIafvWdCOxEGwv_nT787vRrYFlh0lIuDCFmCMntpmmO2JZihsvnPsNHKnM5_OLLsQFXEd0pvmbqEvdZw6S9Lq--2zXzxN");'></div>
+<div class="flex flex-col justify-center">
+<h1 class="text-slate-900 text-white text-base font-bold leading-normal">Grupo AR ERP</h1>
+<p class="text-slate-500 text-slate-400 text-sm font-normal leading-normal">Encargado de obra</p>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex flex-col gap-2 mt-4">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 text-slate-300 hover:bg-slate-100 hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium leading-normal">Panel</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 text-slate-300 hover:bg-slate-100 hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">work</span>
+<p class="text-sm font-medium leading-normal">Proyectos</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary text-primary transition-colors" href="#">
+<span class="material-symbols-outlined filled">assignment</span>
+<p class="text-sm font-medium leading-normal">Evaluaciones</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 text-slate-300 hover:bg-slate-100 hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<p class="text-sm font-medium leading-normal">Personal</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 text-slate-300 hover:bg-slate-100 hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium leading-normal">Ajustes</p>
+</a>
+</nav>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full relative min-w-0">
+<!-- TopNavBar (Adapted) -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-slate-200 border-slate-800 bg-white bg-[#111a22] px-6 py-4 shrink-0">
+<div class="flex items-center gap-4 text-slate-900 text-white">
+<div class="lg:hidden">
+<span class="material-symbols-outlined cursor-pointer">menu</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] hidden sm:block">Evaluaciones semanales</h2>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] sm:hidden">Evaluaciones</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-600 text-slate-400">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 border border-slate-200 border-slate-700" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCUUaJPLZutPhZopKJtaaUHwXAsSva1y3vzuY3d3YyLi6A-FMZ_q9USQ-DMEn51yB3gyjaWJT4ZSU7rKuFp3ydE-lys22bzVYe4g0Uytu0Bn5Kq-MUFdbvVS5HI6mqaXXuVUCGfi5RAxbwGhTCM7IsSfnbQweUI9Qyc-Jjcp12e2cbu7fzhQmueONgVZc7ovtDgA1KyLLDiv96wArpVsdXCa8xjIMyyZRsG66BvVh15huKF2JKodgRpS_zFUixph_-2DA9XtVuezlsn");'></div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto bg-background-light bg-background-dark p-4 md:p-8 pb-24">
+<div class="max-w-6xl mx-auto flex flex-col gap-6">
+<!-- Heading & Date Selection -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-2xl md:text-[32px] font-bold leading-tight text-slate-900 text-white">Formulario semanal de obra</h1>
+<p id="projectLabel" class="text-slate-500 text-slate-400 font-normal">Proyecto: Sin asignar</p>
+</div>
+<!-- Mini Week Picker -->
+<div class="bg-white bg-[#1e2936] rounded-lg border border-slate-200 border-slate-700 p-1 flex items-center shadow-sm">
+<button class="p-2 hover:bg-slate-100 hover:bg-slate-700 rounded text-slate-500">
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+<span id="weekRangeLabel" class="px-4 text-sm font-bold text-slate-700 text-slate-200">Semana en curso</span>
+<button class="p-2 hover:bg-slate-100 hover:bg-slate-700 rounded text-slate-500">
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="w-full">
+<label class="flex w-full md:max-w-md items-center gap-2 rounded-lg bg-white bg-[#1e2936] px-3 py-2 border border-slate-200 border-slate-700 shadow-sm focus-within:ring-2 focus-within:ring-primary/50 transition-shadow">
+<span class="material-symbols-outlined text-slate-400">search</span>
+<input id="workerSearchInput" class="w-full bg-transparent border-none text-slate-900 text-white placeholder:text-slate-400 focus:outline-none focus:ring-0 text-base h-full py-1" placeholder="Buscar personal por nombre o rol..." type="text"/>
+</label>
+</div>
+<!-- Workers Grid -->
+<div id="workersGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="text-base font-bold text-slate-900 text-white truncate">Juan Perez</h3>
+<p class="text-sm text-slate-500 text-slate-400 truncate">Lead Carpenter</p>
+</div>
+<span class="inline-flex items-center rounded-full bg-green-100 bg-green-900/30 px-2 py-1 text-xs font-medium text-green-700 text-green-400">
+                                    Active
+                                </span>
+</div>
+<div class="grid grid-cols-2 gap-3 mb-4">
+<!-- Attendance -->
+<div class="col-span-2 flex flex-col gap-1.5">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Attendance</span>
+<div class="flex gap-2">
+<button class="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg border-2 border-primary bg-primary/10 text-primary font-medium transition-all">
+<span class="material-symbols-outlined text-[20px] filled">check_circle</span>
+                                            Present
+                                        </button>
+<button class="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-800 text-slate-500 hover:bg-slate-100 hover:bg-slate-700 transition-all opacity-60 hover:opacity-100">
+<span class="material-symbols-outlined text-[20px]">cancel</span>
+                                            Absent
+                                        </button>
+</div>
+</div>
+<!-- Punctuality -->
+<div class="col-span-2 flex flex-col gap-1.5">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Punctuality</span>
+<div class="flex items-center gap-3 bg-slate-50 bg-slate-800 p-1.5 rounded-lg border border-slate-100 border-slate-700">
+<button class="flex-1 py-1.5 px-3 rounded text-sm font-medium bg-white bg-slate-700 shadow-sm text-slate-900 text-white transition-all">
+                                            On Time
+                                        </button>
+<button class="flex-1 py-1.5 px-3 rounded text-sm font-medium text-slate-500 hover:text-slate-700 hover:text-slate-200 transition-all flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span> Late
+                                        </button>
+</div>
+</div>
+</div>
+<!-- Performance -->
+<div class="mb-4">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-1.5">Daily Performance</span>
+<div class="flex items-center justify-between px-2">
+<button class="text-amber-400 hover:scale-110 transition-transform"><span class="material-symbols-outlined filled text-3xl">star</span></button>
+<button class="text-amber-400 hover:scale-110 transition-transform"><span class="material-symbols-outlined filled text-3xl">star</span></button>
+<button class="text-amber-400 hover:scale-110 transition-transform"><span class="material-symbols-outlined filled text-3xl">star</span></button>
+<button class="text-amber-400 hover:scale-110 transition-transform"><span class="material-symbols-outlined filled text-3xl">star</span></button>
+<button class="text-slate-300 text-slate-600 hover:scale-110 hover:text-amber-400 transition-all"><span class="material-symbols-outlined text-3xl">star</span></button>
+</div>
+</div>
+<!-- Notes -->
+<div class="mt-4">
+<textarea class="w-full text-sm bg-slate-50 bg-slate-800 border-0 rounded-lg p-3 text-slate-900 text-white placeholder:text-slate-400 resize-none focus:ring-1 focus:ring-primary" placeholder="Add a note..." rows="2"></textarea>
+</div>
+</div>
+<!-- Worker Card 2 -->
+<div class="group bg-white bg-[#1e2936] rounded-xl border border-slate-200 border-slate-700 p-5 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-start gap-4 mb-4">
+<div class="size-12 rounded-full bg-cover bg-center shrink-0" data-alt="Portrait of worker Sarah" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCJjT7TMG_AhKxFFZ5aLni-p5f6SyIMZH2c8Wc6li_9YkriaSx_g1mY7CTc0210OQloLu5twgvMG9Wf1ErfmxFwAjSEVeBeEgTazWECSQaNBUHZuQJUmZtkp2UxIbw6VxpTtgYr5fHnHtqZfwRUihHtJD1rvkSm_TDHi5wU83gqUYv5glXl7ogptwFmgn7_9bN4IdwA_mUJQh4Go17MxXWAw7eSk8taGGqo1expMjW3TNxrdcMlLKecZwCHrQq15IJodjxf915Ta6Y4');"></div>
+<div class="flex-1 min-w-0">
+<h3 class="text-base font-bold text-slate-900 text-white truncate">Sarah Jenkins</h3>
+<p class="text-sm text-slate-500 text-slate-400 truncate">Electrician</p>
+</div>
+<span class="inline-flex items-center rounded-full bg-red-100 bg-red-900/30 px-2 py-1 text-xs font-medium text-red-700 text-red-400">
+                                    Late
+                                </span>
+</div>
+<div class="grid grid-cols-2 gap-3 mb-4">
+<!-- Attendance -->
+<div class="col-span-2 flex flex-col gap-1.5">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Attendance</span>
+<div class="flex gap-2">
+<button class="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg border-2 border-primary bg-primary/10 text-primary font-medium transition-all">
+<span class="material-symbols-outlined text-[20px] filled">check_circle</span>
+                                            Present
+                                        </button>
+<button class="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-800 text-slate-500 hover:bg-slate-100 hover:bg-slate-700 transition-all opacity-60 hover:opacity-100">
+<span class="material-symbols-outlined text-[20px]">cancel</span>
+                                            Absent
+                                        </button>
+</div>
+</div>
+<!-- Punctuality -->
+<div class="col-span-2 flex flex-col gap-1.5">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Punctuality</span>
+<div class="flex items-center gap-3 bg-slate-50 bg-slate-800 p-1.5 rounded-lg border border-slate-100 border-slate-700">
+<button class="flex-1 py-1.5 px-3 rounded text-sm font-medium text-slate-500 hover:text-slate-700 hover:text-slate-200 transition-all">
+                                            On Time
+                                        </button>
+<button class="flex-1 py-1.5 px-3 rounded text-sm font-medium bg-red-100 bg-red-900/40 text-red-700 text-red-300 shadow-sm transition-all flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px] filled">schedule</span> 15m Late
+                                        </button>
+</div>
+</div>
+</div>
+<!-- Performance -->
+<div class="mb-4">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-1.5">Daily Performance</span>
+<div class="flex items-center justify-between px-2">
+<button class="text-amber-400 hover:scale-110 transition-transform"><span class="material-symbols-outlined filled text-3xl">star</span></button>
+<button class="text-amber-400 hover:scale-110 transition-transform"><span class="material-symbols-outlined filled text-3xl">star</span></button>
+<button class="text-amber-400 hover:scale-110 transition-transform"><span class="material-symbols-outlined filled text-3xl">star</span></button>
+<button class="text-slate-300 text-slate-600 hover:scale-110 hover:text-amber-400 transition-all"><span class="material-symbols-outlined text-3xl">star</span></button>
+<button class="text-slate-300 text-slate-600 hover:scale-110 hover:text-amber-400 transition-all"><span class="material-symbols-outlined text-3xl">star</span></button>
+</div>
+</div>
+<!-- Notes -->
+<div class="mt-4">
+<textarea class="w-full text-sm bg-slate-50 bg-slate-800 border-0 rounded-lg p-3 text-slate-900 text-white placeholder:text-slate-400 resize-none focus:ring-1 focus:ring-primary" rows="2">Arrived late due to traffic, but worked overtime to finish wiring.</textarea>
+</div>
+</div>
+<!-- Worker Card 3 (Empty State) -->
+<div class="group bg-white bg-[#1e2936] rounded-xl border border-slate-200 border-slate-700 p-5 shadow-sm hover:shadow-md transition-shadow opacity-90">
+<div class="flex items-start gap-4 mb-4">
+<div class="size-12 rounded-full bg-cover bg-center shrink-0 grayscale" data-alt="Portrait of worker Michael" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB22p9RhhJrg8hOxRNnzlVpUsblHoKNZXAtgXKlmG53NttjobvRXsID7bqWS-6pA3onkWgjI1pVUfIcmzCF44p5r7mwAWIH-2clJzN_EXPTDHRkXDxoyDwrH7dFLzG_rkM57XYc_6zefDy-3Wz5AcxLBpGZQePTI9tkYWOpEOuSWg7bcoadcBHjMFbCbqDDq9168B-wFy9KZI3k3Q0qkwQp4R9MO5Ha1hqSZaBx2vV2l0ED302KtFfRlOcrAobV8D60g8-xsVzDAcuj');"></div>
+<div class="flex-1 min-w-0">
+<h3 class="text-base font-bold text-slate-900 text-white truncate">Michael Chen</h3>
+<p class="text-sm text-slate-500 text-slate-400 truncate">General Labor</p>
+</div>
+<span class="inline-flex items-center rounded-full bg-slate-100 bg-slate-800 px-2 py-1 text-xs font-medium text-slate-500">
+                                    Pending
+                                </span>
+</div>
+<div class="grid grid-cols-2 gap-3 mb-4">
+<!-- Attendance -->
+<div class="col-span-2 flex flex-col gap-1.5">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Attendance</span>
+<div class="flex gap-2">
+<button class="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-800 text-slate-500 hover:bg-slate-100 hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+                                            Present
+                                        </button>
+<button class="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-800 text-slate-500 hover:bg-slate-100 hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined text-[20px]">cancel</span>
+                                            Absent
+                                        </button>
+</div>
+</div>
+<!-- Punctuality -->
+<div class="col-span-2 flex flex-col gap-1.5">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Punctuality</span>
+<div class="flex items-center gap-3 bg-slate-50 bg-slate-800 p-1.5 rounded-lg border border-slate-100 border-slate-700 opacity-50 pointer-events-none">
+<button class="flex-1 py-1.5 px-3 rounded text-sm font-medium text-slate-500">On Time</button>
+<button class="flex-1 py-1.5 px-3 rounded text-sm font-medium text-slate-500 flex items-center justify-center gap-1">Late</button>
+</div>
+</div>
+</div>
+<!-- Performance -->
+<div class="mb-4 opacity-50 pointer-events-none">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-1.5">Daily Performance</span>
+<div class="flex items-center justify-between px-2">
+<span class="material-symbols-outlined text-slate-300 text-slate-700 text-3xl">star</span>
+<span class="material-symbols-outlined text-slate-300 text-slate-700 text-3xl">star</span>
+<span class="material-symbols-outlined text-slate-300 text-slate-700 text-3xl">star</span>
+<span class="material-symbols-outlined text-slate-300 text-slate-700 text-3xl">star</span>
+<span class="material-symbols-outlined text-slate-300 text-slate-700 text-3xl">star</span>
+</div>
+</div>
+<!-- Notes -->
+<div class="mt-4">
+<textarea class="w-full text-sm bg-slate-50 bg-slate-800 border-0 rounded-lg p-3 text-slate-900 text-white placeholder:text-slate-400 resize-none focus:ring-1 focus:ring-primary" placeholder="Mark attendance to enable..." rows="2"></textarea>
+</div>
+</div>
+<!-- Worker Card 4 -->
+<div class="group bg-white bg-[#1e2936] rounded-xl border border-slate-200 border-slate-700 p-5 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-start gap-4 mb-4">
+<div class="size-12 rounded-full bg-cover bg-center shrink-0" data-alt="Portrait of worker David" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDBoDXmFdwwXhbxQnQn7EWaGGPgR0tBIbrys8K_deFrA7rrQXnNDQ6kd316lE0tQ1ULHEtt0z1KWEqDdVkK3RofnXHhdlGLex57o1Khc0S8tDdq0WIbe7AiiRYgITV8siBsmVvHojSfnCK4KqWF902dIEaAaBgS4UA1-catOKXa_DdguU__jdvUvTIUTWY7J4_Md3foEQQppxG7XYvKcFYeTXF3kuoCgHO_-VMogGdRVId2vvZ4Cv9jGG5q1k45Jtd2LSVRTQj0MaDq');"></div>
+<div class="flex-1 min-w-0">
+<h3 class="text-base font-bold text-slate-900 text-white truncate">David Ross</h3>
+<p class="text-sm text-slate-500 text-slate-400 truncate">Plumber</p>
+</div>
+<span class="inline-flex items-center rounded-full bg-slate-100 bg-slate-800 px-2 py-1 text-xs font-medium text-slate-500">
+                                    Absent
+                                </span>
+</div>
+<div class="grid grid-cols-2 gap-3 mb-4">
+<!-- Attendance -->
+<div class="col-span-2 flex flex-col gap-1.5">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Attendance</span>
+<div class="flex gap-2">
+<button class="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-800 text-slate-500 hover:bg-slate-100 hover:bg-slate-700 transition-all opacity-60 hover:opacity-100">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+                                            Present
+                                        </button>
+<button class="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg border-2 border-slate-500 bg-slate-100 bg-slate-700 text-slate-700 text-slate-200 font-medium transition-all">
+<span class="material-symbols-outlined text-[20px] filled">cancel</span>
+                                            Absent
+                                        </button>
+</div>
+</div>
+<!-- Punctuality -->
+<div class="col-span-2 flex flex-col gap-1.5 opacity-40 pointer-events-none grayscale">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Punctuality</span>
+<div class="flex items-center gap-3 bg-slate-50 bg-slate-800 p-1.5 rounded-lg border border-slate-100 border-slate-700">
+<button class="flex-1 py-1.5 px-3 rounded text-sm font-medium text-slate-500">On Time</button>
+<button class="flex-1 py-1.5 px-3 rounded text-sm font-medium text-slate-500 flex items-center justify-center gap-1">Late</button>
+</div>
+</div>
+</div>
+<!-- Performance -->
+<div class="mb-4 opacity-40 pointer-events-none grayscale">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-1.5">Daily Performance</span>
+<div class="flex items-center justify-between px-2">
+<span class="material-symbols-outlined text-slate-300 text-slate-700 text-3xl">star</span>
+<span class="material-symbols-outlined text-slate-300 text-slate-700 text-3xl">star</span>
+<span class="material-symbols-outlined text-slate-300 text-slate-700 text-3xl">star</span>
+<span class="material-symbols-outlined text-slate-300 text-slate-700 text-3xl">star</span>
+<span class="material-symbols-outlined text-slate-300 text-slate-700 text-3xl">star</span>
+</div>
+</div>
+<!-- Notes -->
+<div class="mt-4">
+<textarea class="w-full text-sm bg-slate-50 bg-slate-800 border-0 rounded-lg p-3 text-slate-900 text-white placeholder:text-slate-400 resize-none focus:ring-1 focus:ring-primary" rows="2">Called in sick. Approved by HR.</textarea>
+</div>
+</div>
+</div>
+<!-- Bottom Spacer for Fixed Footer -->
+<div class="h-24"></div>
+</div>
+</div>
+<!-- Sticky Footer Action Bar -->
+<div class="absolute bottom-0 left-0 w-full bg-white bg-[#111a22] border-t border-slate-200 border-slate-800 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-10">
+<div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-2 text-sm text-slate-500 text-slate-400 hidden sm:flex">
+<span class="material-symbols-outlined text-lg">info</span>
+<span id="weeklyProgress">0 de 0 evaluaciones registradas</span>
+</div>
+<div class="w-full sm:w-auto flex gap-3">
+<button id="saveWeeklyDraftBtn" class="flex-1 sm:flex-none px-6 py-3 rounded-lg border border-slate-200 border-slate-700 text-slate-700 text-white font-medium hover:bg-slate-50 hover:bg-slate-800 transition-colors">
+                            Guardar borrador
+                        </button>
+<button id="submitWeeklyBtn" class="flex-1 sm:flex-none flex items-center justify-center gap-2 px-8 py-3 rounded-lg bg-primary hover:bg-blue-700 text-white font-bold shadow-lg shadow-blue-500/20 transition-all active:scale-95">
+                            Enviar reporte semanal
+                            <span class="material-symbols-outlined text-lg">send</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script type="module">
+import { ensureAuth } from "/shared/auth.js";
+import { db } from "/shared/firebase.js";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import { saveWeeklyEvaluations, getEvaluationRequest, updateEvaluationRequest } from "/shared/services/evaluations.js";
+import { getCurrentLocation, recordAttendance } from "/shared/services/attendance.js";
+import { logAuditEvent } from "/shared/audit.js";
+
+const workersGrid = document.getElementById("workersGrid");
+const searchInput = document.getElementById("workerSearchInput");
+const progressLabel = document.getElementById("weeklyProgress");
+const saveDraftBtn = document.getElementById("saveWeeklyDraftBtn");
+const submitBtn = document.getElementById("submitWeeklyBtn");
+const weekLabel = document.getElementById("weekRangeLabel");
+const projectLabel = document.getElementById("projectLabel");
+const draftKey = "weeklyEvaluationDraft";
+
+const state = {
+  entries: {},
+  requestId: null,
+  request: null,
+  employees: [],
+};
+
+const formatWeekRange = () => {
+  const now = new Date();
+  const day = now.getDay();
+  const diffToMonday = (day === 0 ? -6 : 1) - day;
+  const monday = new Date(now);
+  monday.setDate(now.getDate() + diffToMonday);
+  const sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+  const fmt = (d) => d.toLocaleDateString("es-MX", { day: "2-digit", month: "short" });
+  return `${fmt(monday)} - ${fmt(sunday)}`;
+};
+
+const updateProgress = () => {
+  const entries = Object.values(state.entries);
+  const evaluated = entries.filter((entry) => entry.attendance || entry.rating || entry.notes).length;
+  progressLabel.textContent = `${evaluated} de ${entries.length} evaluaciones registradas`;
+};
+
+const initials = (name) =>
+  String(name || "")
+    .split(" ")
+    .filter(Boolean)
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase() || "AR";
+
+const createWorkerCard = (employee) => {
+  const safeName = employee.name || "Empleado";
+  const safeRole = employee.role || "Personal";
+  return `
+    <div class="group bg-white bg-[#1e2936] rounded-xl border border-slate-200 border-slate-700 p-5 shadow-sm hover:shadow-md transition-shadow" data-worker-id="${employee.uid}">
+      <div class="flex items-start gap-4 mb-4">
+        <div class="size-12 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold">
+          ${initials(safeName)}
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-base font-bold text-slate-900 text-white truncate">${safeName}</h3>
+          <p class="text-sm text-slate-500 text-slate-400 truncate">${safeRole}</p>
+        </div>
+        <span class="inline-flex items-center rounded-full bg-slate-100 bg-slate-800 px-2 py-1 text-xs font-medium text-slate-500">En revisi?n</span>
+      </div>
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        <div class="col-span-2 flex flex-col gap-1.5">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Asistencia</span>
+          <div class="flex gap-2">
+            <button data-attendance="present" class="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-800 text-slate-600 hover:bg-slate-100 hover:bg-slate-700 transition-all">
+              <span class="material-symbols-outlined text-[20px]">check_circle</span> Presente
+            </button>
+            <button data-attendance="absent" class="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-800 text-slate-600 hover:bg-slate-100 hover:bg-slate-700 transition-all">
+              <span class="material-symbols-outlined text-[20px]">cancel</span> Ausente
+            </button>
+          </div>
+        </div>
+        <div class="col-span-2 flex flex-col gap-1.5">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Puntualidad</span>
+          <div class="flex items-center gap-3 bg-slate-50 bg-slate-800 p-1.5 rounded-lg border border-slate-100 border-slate-700">
+            <button data-punctuality="on_time" class="flex-1 py-1.5 px-3 rounded text-sm font-medium bg-white bg-slate-700 shadow-sm text-slate-900 text-white">A tiempo</button>
+            <button data-punctuality="late" class="flex-1 py-1.5 px-3 rounded text-sm font-medium text-slate-500 hover:text-slate-700 hover:text-slate-200 flex items-center justify-center gap-1">
+              <span class="material-symbols-outlined text-[16px]">schedule</span> Tarde
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="mb-4">
+        <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-1.5">Desempe?o diario</span>
+        <div class="flex items-center justify-between px-2">
+          ${[1,2,3,4,5].map((value) => `<button data-rating="${value}" class="text-slate-300 text-slate-600 hover:text-amber-400 transition-all"><span class="material-symbols-outlined text-3xl">star</span></button>`).join("")}
+        </div>
+      </div>
+      <div class="mt-4">
+        <textarea data-notes class="w-full text-sm bg-slate-50 bg-slate-800 border-0 rounded-lg p-3 text-slate-900 text-white placeholder:text-slate-400 resize-none focus:ring-1 focus:ring-primary" placeholder="Agregar nota..." rows="2"></textarea>
+      </div>
+    </div>
+  `;
+};
+
+const setupCard = (card, employee) => {
+  const workerId = employee.uid;
+  state.entries[workerId] = {
+    workerId,
+    employeeUid: employee.uid,
+    employeeName: employee.name,
+    role: employee.role,
+    attendance: null,
+    punctuality: null,
+    rating: 0,
+    notes: "",
+  };
+
+  const presentBtn = card.querySelector('[data-attendance="present"]');
+  const absentBtn = card.querySelector('[data-attendance="absent"]');
+  const onTimeBtn = card.querySelector('[data-punctuality="on_time"]');
+  const lateBtn = card.querySelector('[data-punctuality="late"]');
+  const ratingButtons = Array.from(card.querySelectorAll('[data-rating]'));
+  const notesInput = card.querySelector('[data-notes]');
+
+  const toggleButtons = (btns, activeBtn) => {
+    btns.forEach((btn) => {
+      btn.classList.remove("ring-2", "ring-primary", "text-primary");
+    });
+    activeBtn.classList.add("ring-2", "ring-primary", "text-primary");
+  };
+
+  presentBtn.addEventListener("click", () => {
+    state.entries[workerId].attendance = "present";
+    toggleButtons([presentBtn, absentBtn], presentBtn);
+    updateProgress();
+  });
+  absentBtn.addEventListener("click", () => {
+    state.entries[workerId].attendance = "absent";
+    toggleButtons([presentBtn, absentBtn], absentBtn);
+    updateProgress();
+  });
+  onTimeBtn.addEventListener("click", () => {
+    state.entries[workerId].punctuality = "on_time";
+    toggleButtons([onTimeBtn, lateBtn], onTimeBtn);
+    updateProgress();
+  });
+  lateBtn.addEventListener("click", () => {
+    state.entries[workerId].punctuality = "late";
+    toggleButtons([onTimeBtn, lateBtn], lateBtn);
+    updateProgress();
+  });
+
+  ratingButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const rating = Number(btn.dataset.rating);
+      state.entries[workerId].rating = rating;
+      ratingButtons.forEach((innerBtn) => {
+        const active = Number(innerBtn.dataset.rating) <= rating;
+        innerBtn.classList.toggle("text-amber-400", active);
+        innerBtn.classList.toggle("text-slate-300", !active);
+        innerBtn.classList.toggle(" text-slate-600", !active);
+      });
+      updateProgress();
+    });
+  });
+
+  notesInput.addEventListener("input", (event) => {
+    state.entries[workerId].notes = event.target.value.trim();
+    updateProgress();
+  });
+};
+
+const loadEmployees = async (request) => {
+  if (request?.employees?.length) return request.employees;
+  if (request?.employeeIds?.length) {
+    const results = [];
+    for (const uid of request.employeeIds) {
+      const snap = await getDoc(doc(db, "users", uid));
+      if (snap.exists()) {
+        const data = snap.data();
+        results.push({ uid, name: data.displayName || data.email || uid, role: data.role || "Personal" });
+      }
+    }
+    return results;
+  }
+  const q = query(collection(db, "users"), where("role", "==", "PersonalObra"));
+  const snapshot = await getDocs(q);
+  return snapshot.docs.map((docSnap) => {
+    const data = docSnap.data();
+    return { uid: docSnap.id, name: data.displayName || data.email || docSnap.id, role: data.role || "Personal" };
+  });
+};
+
+const renderEmployees = (employees) => {
+  workersGrid.innerHTML = "";
+  state.entries = {};
+  if (!employees.length) {
+    workersGrid.innerHTML = `<div class="col-span-full rounded-xl border border-dashed border-slate-200 border-slate-700 p-6 text-center text-slate-500">No hay personal asignado.</div>`;
+    updateProgress();
+    return;
+  }
+  employees.forEach((employee) => {
+    const cardHtml = createWorkerCard(employee);
+    workersGrid.insertAdjacentHTML("beforeend", cardHtml);
+    const card = workersGrid.querySelector(`[data-worker-id="${employee.uid}"]`);
+    if (card) setupCard(card, employee);
+  });
+  updateProgress();
+};
+
+const saveDraft = () => {
+  localStorage.setItem(draftKey, JSON.stringify(state.entries));
+};
+
+const loadDraft = () => {
+  const draft = localStorage.getItem(draftKey);
+  if (!draft) return;
+  try {
+    const data = JSON.parse(draft);
+    Object.keys(data).forEach((key) => {
+      if (state.entries[key]) {
+        state.entries[key] = { ...state.entries[key], ...data[key] };
+      }
+    });
+  } catch {
+    return;
+  }
+};
+
+const applyDraftToUI = () => {
+  Object.values(state.entries).forEach((entry) => {
+    const card = workersGrid.querySelector(`[data-worker-id="${entry.workerId}"]`);
+    if (!card) return;
+    if (entry.attendance) {
+      const btn = card.querySelector(`[data-attendance="${entry.attendance}"]`);
+      if (btn) btn.click();
+    }
+    if (entry.punctuality) {
+      const btn = card.querySelector(`[data-punctuality="${entry.punctuality}"]`);
+      if (btn) btn.click();
+    }
+    if (entry.rating) {
+      const btn = card.querySelector(`[data-rating="${entry.rating}"]`);
+      if (btn) btn.click();
+    }
+    const notesInput = card.querySelector('[data-notes]');
+    if (notesInput && entry.notes) notesInput.value = entry.notes;
+  });
+};
+
+saveDraftBtn.addEventListener("click", saveDraft);
+
+const params = new URLSearchParams(window.location.search);
+state.requestId = params.get("req");
+
+ensureAuth({ allowRoles: ["Admin", "PersonalObra"], allowPermissions: ["attendance"] }).then(async ({ user }) => {
+  if (state.requestId) {
+    state.request = await getEvaluationRequest(state.requestId);
+    if (state.request) {
+      if (weekLabel) weekLabel.textContent = state.request.weekRange || formatWeekRange();
+      if (projectLabel) projectLabel.textContent = `Proyecto: ${state.request.projectName || "Sin asignar"}`;
+      await updateEvaluationRequest(state.requestId, { status: "in_progress" });
+    }
+  } else {
+    if (weekLabel) weekLabel.textContent = formatWeekRange();
+  }
+
+  state.employees = await loadEmployees(state.request);
+  renderEmployees(state.employees);
+  loadDraft();
+  applyDraftToUI();
+
+  submitBtn.addEventListener("click", async () => {
+    const entries = Object.values(state.entries).filter(
+      (entry) => entry.attendance || entry.rating || entry.notes || entry.punctuality
+    );
+    if (!entries.length) {
+      alert("No hay evaluaciones para enviar.");
+      return;
+    }
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Enviando...";
+
+    let location = null;
+    try {
+      location = await getCurrentLocation();
+    } catch {
+      location = null;
+    }
+
+    const meta = {
+      managerUid: user.uid,
+      weekRange: weekLabel?.textContent.trim() || formatWeekRange(),
+      projectName: projectLabel?.textContent.replace("Proyecto:", "").trim() || null,
+      location,
+      requestId: state.requestId || null,
+    };
+
+    try {
+      await saveWeeklyEvaluations({ entries, meta });
+      if (state.requestId) {
+        await updateEvaluationRequest(state.requestId, { status: "completed" });
+      }
+      if (location) {
+        await recordAttendance({
+          uid: user.uid,
+          type: "reporte_semanal",
+          notes: `Evaluaciones enviadas: ${entries.length}`,
+          location,
+        });
+      }
+      logAuditEvent({
+        action: "submit",
+        resource: "weekly_evaluations",
+        severity: "info",
+        details: { total: entries.length },
+      });
+      localStorage.removeItem(draftKey);
+      alert("Reporte semanal enviado.");
+    } catch (error) {
+      alert(error.message || "No se pudo enviar el reporte.");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Enviar reporte semanal";
+    }
+  });
+});
+
+searchInput.addEventListener("input", (event) => {
+  const term = event.target.value.trim().toLowerCase();
+  Array.from(workersGrid.children).forEach((card) => {
+    const name = card.querySelector("h3")?.textContent.toLowerCase() || "";
+    const role = card.querySelector("p")?.textContent.toLowerCase() || "";
+    card.classList.toggle("hidden", term && !name.includes(term) && !role.includes(term));
+  });
+});
+</script>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

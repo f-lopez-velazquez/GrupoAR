@@ -1,0 +1,392 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Individual Performance Profile - Grupo AR</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        /* Custom scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 3px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155; 
+        }
+        .radar-chart-bg {
+            fill: none;
+            stroke: #e2e8f0;
+            stroke-width: 1;
+        }
+        .dark .radar-chart-bg {
+            stroke: #334155;
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-text-main text-gray-100 font-display transition-colors duration-200 overflow-hidden h-screen flex">
+<!-- Sidebar -->
+<aside class="w-64 h-full bg-surface-light bg-surface-dark border-r border-slate-200 border-slate-800 flex flex-col shrink-0 z-20 hidden md:flex">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary" style="font-size: 28px;">hub</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-text-main text-white text-lg font-bold leading-none">Grupo AR</h1>
+<p class="text-text-sub text-xs font-medium">HR ERP</p>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 flex flex-col gap-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-main text-gray-300 hover:bg-slate-50 hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">grid_view</span>
+<span class="text-sm font-medium">Panel</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-main text-gray-300 hover:bg-slate-50 hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">groups</span>
+<span class="text-sm font-medium">Employees</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 text-primary text-white bg-primary/20" href="#">
+<span class="material-symbols-outlined text-primary text-white">bar_chart</span>
+<span class="text-sm font-bold">Performance</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-main text-gray-300 hover:bg-slate-50 hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">description</span>
+<span class="text-sm font-medium">Reportes</span>
+</a>
+<div class="h-px bg-slate-200 bg-slate-800 my-2 mx-3"></div>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-text-main text-gray-300 hover:bg-slate-50 hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-400 group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm font-medium">Ajustes</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 border-slate-800">
+<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-50 bg-white/5">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-8" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDBhKHjvs6T_OTdpf02h65DpI2DmfWC5Sw8sde3PxjrBJ0eQLxy56c9jA97GhD3Por51pGXLK3UaHQ5NIzqzsqDWXkUfd0auHgGzjPbkczbZdoj-k8QXbLvntYwKKEyteiBMMIrNllS_fBv19uocdhxbkOL_LAf-DOHBnWDVVHMcJgUOM0cywqqTQUa62TwnCBgJy4AsXQ8eFPnwYabw7gR1yoqXE8CYdf1DVV-_aPsLxlxG5VdkCdMEmNTHzDKfTEhOSQYUUA8DJlP");'></div>
+<div class="flex flex-col overflow-hidden">
+<p class="text-sm font-bold truncate text-white">Admin User</p>
+<p class="text-xs text-text-sub truncate">HR Manager</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative w-full">
+<!-- Top Navigation -->
+<header class="h-16 flex items-center justify-between px-6 bg-surface-light bg-surface-dark border-b border-slate-200 border-slate-800 shrink-0">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-slate-500 hover:text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden sm:flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-primary">monitoring</span>
+<span class="font-semibold text-text-main text-white">Performance Module</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search -->
+<div class="hidden md:flex items-center bg-background-light bg-white/5 px-3 py-2 rounded-lg w-64 border border-transparent focus-within:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-slate-400 text-[20px]">search</span>
+<input class="bg-transparent border-none outline-none text-sm ml-2 w-full text-text-main text-white placeholder:text-slate-400 focus:ring-0 p-0" placeholder="Search employee..." type="text"/>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-3">
+<button class="size-9 flex items-center justify-center rounded-full text-slate-500 hover:bg-slate-100 hover:bg-white/10 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-secondary rounded-full border-2 border-white border-surface-dark"></span>
+</button>
+<button class="size-9 flex items-center justify-center rounded-full text-slate-500 hover:bg-slate-100 hover:bg-white/10">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto bg-background-light bg-background-dark p-4 md:p-8">
+<div class="max-w-7xl mx-auto flex flex-col gap-6">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-sm text-text-sub">
+<a class="hover:text-primary transition-colors" href="#">Reportes</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Employee List</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="font-semibold text-text-main text-white">Carlos Rodriguez (AR-4092)</span>
+</nav>
+<!-- Page Header & Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="text-3xl md:text-4xl font-black text-text-main text-white tracking-tight">Individual Performance Profile</h1>
+<p class="text-text-sub mt-2 max-w-2xl">Detailed view of employee skills, KPIs, and evaluation history for Q3 2023.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2.5 bg-surface-light bg-surface-dark border border-slate-200 border-slate-700 rounded-lg text-sm font-bold text-text-main text-white hover:bg-slate-50 hover:bg-slate-800 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                            Export PDF
+                        </button>
+<button class="flex items-center gap-2 px-4 py-2.5 bg-primary text-white rounded-lg text-sm font-bold hover:bg-blue-800 transition-colors shadow-md shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]">calendar_add_on</span>
+                            Schedule Review
+                        </button>
+</div>
+</div>
+<!-- Employee Profile Card -->
+<div class="bg-surface-light bg-surface-dark rounded-xl p-6 shadow-sm border border-slate-200 border-slate-800 flex flex-col md:flex-row gap-6 items-start md:items-center">
+<div class="relative">
+<div class="size-24 md:size-28 rounded-full bg-slate-200 bg-cover bg-center border-4 border-white border-slate-700 shadow-lg" data-alt="Portrait of employee Carlos Rodriguez" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCgNXcg_i1azGRJXOXC5iCGqp6bKux3dOV_-y6TW80kRncVdVF1naYgTKKokDwrkepp3qDfCWPhOJboN1VZs8za0Q4l8Ldep5ZK2C3b8P5-IHnAzSjpExpBUK8euPkd7dLyKubT4LUUWauT674e3RadU2EhgF58yeFLMEBQqFZzjtHtFutNdMewkM677RO0lKNfKB_tJ2fwRzqQkjKjKkj6iImzCyVcZLzdBLO5DhYPLbex4wpqY8c_2NzzdDQ9Cs2kCDZcP8BNnwji");'></div>
+<div class="absolute bottom-1 right-1 bg-green-500 size-5 border-2 border-white border-surface-dark rounded-full" title="Active"></div>
+</div>
+<div class="flex-1 space-y-2">
+<div class="flex flex-wrap items-center gap-3">
+<h2 class="text-2xl font-bold text-text-main text-white">Carlos Rodriguez</h2>
+<span class="px-2.5 py-1 rounded-full bg-blue-100 bg-blue-900/30 text-primary text-blue-300 text-xs font-bold uppercase tracking-wider">Top Performer</span>
+</div>
+<div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-text-sub">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+<span>ID: <span class="text-text-main text-slate-300 font-medium">AR-4092</span></span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">work</span>
+<span>Role: <span class="text-text-main text-slate-300 font-medium">Senior Field Technician</span></span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">domain</span>
+<span>Dept: <span class="text-text-main text-slate-300 font-medium">Field Ops</span></span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span>Tenure: <span class="text-text-main text-slate-300 font-medium">4 Years</span></span>
+</div>
+</div>
+</div>
+<div class="w-full md:w-auto flex md:flex-col gap-4 border-t md:border-t-0 md:border-l border-slate-100 border-slate-800 pt-4 md:pt-0 md:pl-6">
+<div>
+<p class="text-xs text-text-sub uppercase font-semibold">Overall Score</p>
+<p class="text-3xl font-black text-primary">94<span class="text-base font-normal text-slate-400">/100</span></p>
+</div>
+<div>
+<p class="text-xs text-text-sub uppercase font-semibold">Next Review</p>
+<p class="text-sm font-bold text-text-main text-white">Nov 15, 2023</p>
+</div>
+</div>
+</div>
+<!-- Main Dashboard Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Left Column: KPIs & Radar Chart -->
+<div class="lg:col-span-2 space-y-6">
+<!-- KPI Cards Row -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- KPI 1 -->
+<div class="bg-surface-light bg-surface-dark p-4 rounded-xl border border-slate-200 border-slate-800 shadow-sm flex flex-col justify-between h-32">
+<div class="flex items-start justify-between">
+<div class="bg-indigo-50 bg-indigo-900/20 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+</div>
+<span class="text-xs font-bold text-green-600 bg-green-50 bg-green-900/20 px-2 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">trending_up</span> 2%
+                                    </span>
+</div>
+<div>
+<p class="text-text-sub text-xs font-medium">Punctuality</p>
+<p class="text-2xl font-bold text-text-main text-white">98%</p>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-light bg-surface-dark p-4 rounded-xl border border-slate-200 border-slate-800 shadow-sm flex flex-col justify-between h-32">
+<div class="flex items-start justify-between">
+<div class="bg-red-50 bg-red-900/20 p-2 rounded-lg text-secondary">
+<span class="material-symbols-outlined text-[20px]">health_and_safety</span>
+</div>
+<span class="text-xs font-bold text-slate-500 bg-slate-100 bg-slate-800 px-2 py-0.5 rounded">Stable</span>
+</div>
+<div>
+<p class="text-text-sub text-xs font-medium">Safety Score</p>
+<p class="text-2xl font-bold text-text-main text-white">100%</p>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-light bg-surface-dark p-4 rounded-xl border border-slate-200 border-slate-800 shadow-sm flex flex-col justify-between h-32">
+<div class="flex items-start justify-between">
+<div class="bg-orange-50 bg-orange-900/20 p-2 rounded-lg text-orange-600">
+<span class="material-symbols-outlined text-[20px]">school</span>
+</div>
+<span class="text-xs font-bold text-green-600 bg-green-50 bg-green-900/20 px-2 py-0.5 rounded">Target: 40h</span>
+</div>
+<div>
+<p class="text-text-sub text-xs font-medium">Training Hours</p>
+<p class="text-2xl font-bold text-text-main text-white">42h</p>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-light bg-surface-dark p-4 rounded-xl border border-slate-200 border-slate-800 shadow-sm flex flex-col justify-between h-32">
+<div class="flex items-start justify-between">
+<div class="bg-teal-50 bg-teal-900/20 p-2 rounded-lg text-teal-600">
+<span class="material-symbols-outlined text-[20px]">group</span>
+</div>
+<span class="text-xs font-bold text-green-600 bg-green-50 bg-green-900/20 px-2 py-0.5 rounded">+5 pts</span>
+</div>
+<div>
+<p class="text-text-sub text-xs font-medium">Peer Review</p>
+<p class="text-2xl font-bold text-text-main text-white">4.8</p>
+</div>
+</div>
+</div>
+<!-- Radar Chart Section -->
+<div class="bg-surface-light bg-surface-dark rounded-xl shadow-sm border border-slate-200 border-slate-800 p-6">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="text-lg font-bold text-text-main text-white">Skills Assessment</h3>
+<p class="text-sm text-text-sub">Comparative view against department average.</p>
+</div>
+<div class="flex gap-4 text-xs font-medium">
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-primary"></div>
+<span class="text-text-main text-gray-300">Employee</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-full bg-secondary"></div>
+<span class="text-text-main text-gray-300">Dept. Avg</span>
+</div>
+</div>
+</div>
+<div class="relative w-full aspect-[2/1] md:aspect-[2.5/1] flex items-center justify-center">
+<!-- Simulated Radar Chart with SVG -->
+<svg class="w-full h-full max-h-[300px]" viewbox="0 0 400 300">
+<!-- Background Grid (Pentagon approximations) -->
+<path class="radar-chart-bg" d="M200 50 L342 100 L300 250 L100 250 L58 100 Z" stroke-dasharray="4"></path>
+<path class="radar-chart-bg" d="M200 100 L271 125 L250 200 L150 200 L129 125 Z" opacity="0.5"></path>
+<path class="radar-chart-bg" d="M200 150 L235 162 L225 187 L175 187 L165 162 Z" opacity="0.3"></path>
+<!-- Axes -->
+<line class="radar-chart-bg" x1="200" x2="200" y1="150" y2="50"></line>
+<line class="radar-chart-bg" x1="200" x2="342" y1="150" y2="100"></line>
+<line class="radar-chart-bg" x1="200" x2="300" y1="150" y2="250"></line>
+<line class="radar-chart-bg" x1="200" x2="100" y1="150" y2="250"></line>
+<line class="radar-chart-bg" x1="200" x2="58" y1="150" y2="100"></line>
+<!-- Labels -->
+<text class="fill-slate-500 fill-slate-400 text-[12px] font-sans font-bold" text-anchor="middle" x="200" y="30">Punctuality</text>
+<text class="fill-slate-500 fill-slate-400 text-[12px] font-sans font-bold" text-anchor="start" x="360" y="95">Safety</text>
+<text class="fill-slate-500 fill-slate-400 text-[12px] font-sans font-bold" text-anchor="start" x="310" y="270">Technical</text>
+<text class="fill-slate-500 fill-slate-400 text-[12px] font-sans font-bold" text-anchor="end" x="90" y="270">Teamwork</text>
+<text class="fill-slate-500 fill-slate-400 text-[12px] font-sans font-bold" text-anchor="end" x="45" y="95">Leadership</text>
+<!-- Dept Average Area (Red) -->
+<polygon class="fill-secondary/10 stroke-secondary" points="200,80 300,115 260,210 140,210 100,115" stroke-width="2"></polygon>
+<!-- Employee Area (Blue) - Stronger values -->
+<polygon class="fill-primary/20 stroke-primary" points="200,55 330,105 290,240 110,240 80,105" stroke-width="3"></polygon>
+<!-- Points for Employee -->
+<circle class="fill-primary" cx="200" cy="55" r="4"></circle>
+<circle class="fill-primary" cx="330" cy="105" r="4"></circle>
+<circle class="fill-primary" cx="290" cy="240" r="4"></circle>
+<circle class="fill-primary" cx="110" cy="240" r="4"></circle>
+<circle class="fill-primary" cx="80" cy="105" r="4"></circle>
+</svg>
+</div>
+</div>
+</div>
+<!-- Right Column: Timeline & Comments -->
+<div class="space-y-6">
+<!-- Timeline -->
+<div class="bg-surface-light bg-surface-dark rounded-xl shadow-sm border border-slate-200 border-slate-800 p-6 flex flex-col h-auto">
+<h3 class="text-lg font-bold text-text-main text-white mb-4">Evaluation Timeline</h3>
+<div class="relative pl-4 border-l-2 border-slate-100 border-slate-800 space-y-8 my-2">
+<!-- Timeline Item 1 -->
+<div class="relative">
+<div class="absolute -left-[21px] top-1.5 size-3 bg-primary rounded-full border-2 border-white border-surface-dark shadow-sm"></div>
+<p class="text-xs text-text-sub font-semibold mb-0.5">Oct 15, 2023</p>
+<h4 class="text-sm font-bold text-text-main text-white">Q3 Performance Review</h4>
+<p class="text-xs text-slate-500 mt-1">Exceeded expectations in project delivery.</p>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative">
+<div class="absolute -left-[21px] top-1.5 size-3 bg-secondary rounded-full border-2 border-white border-surface-dark shadow-sm"></div>
+<p class="text-xs text-text-sub font-semibold mb-0.5">Sept 02, 2023</p>
+<h4 class="text-sm font-bold text-text-main text-white">Safety Audit Check</h4>
+<p class="text-xs text-slate-500 mt-1">Routine inspection passed with 100% score.</p>
+</div>
+<!-- Timeline Item 3 -->
+<div class="relative">
+<div class="absolute -left-[21px] top-1.5 size-3 bg-slate-300 bg-slate-600 rounded-full border-2 border-white border-surface-dark shadow-sm"></div>
+<p class="text-xs text-text-sub font-semibold mb-0.5">Aug 10, 2023</p>
+<h4 class="text-sm font-bold text-text-main text-white">Leadership Training</h4>
+<p class="text-xs text-slate-500 mt-1">Completed 'Advanced Team Management'.</p>
+</div>
+<!-- Timeline Item 4 -->
+<div class="relative">
+<div class="absolute -left-[21px] top-1.5 size-3 bg-slate-300 bg-slate-600 rounded-full border-2 border-white border-surface-dark shadow-sm"></div>
+<p class="text-xs text-text-sub font-semibold mb-0.5">July 01, 2023</p>
+<h4 class="text-sm font-bold text-text-main text-white">Mid-Year Review</h4>
+<p class="text-xs text-slate-500 mt-1">Promoted to Senior Field Technician.</p>
+</div>
+</div>
+<button class="mt-4 w-full py-2 text-sm text-primary font-bold hover:bg-primary/5 rounded-lg transition-colors">View Full History</button>
+</div>
+<!-- Manager Comments -->
+<div class="bg-surface-light bg-surface-dark rounded-xl shadow-sm border border-slate-200 border-slate-800 p-6 flex-1">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-lg font-bold text-text-main text-white">Manager Feedback</h3>
+<button class="size-8 rounded-full hover:bg-slate-100 hover:bg-white/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Comment 1 -->
+<div class="bg-background-light bg-white/5 p-3 rounded-lg">
+<div class="flex items-center gap-2 mb-2">
+<div class="size-6 rounded-full bg-cover bg-center" data-alt="Manager Jane Doe" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA9nFC3BtMQ3FzBy9UOnGkuusgAYYXIfTCLw3B1kg5I6Q4tFkW0ME2bBbcQQByyjYazRAJGctWeXVp0bJn1_Khap37U9oegLc9hUSJih0TwY0nQwXvulJOzyK-5Xywis48XF-efwM3TRu8gPKhal2kuEH2XZ3p6vmyNWH6cAQbION4w371s4_s1d3jcYLfTr5ZQteo9LCPITWumKVnxqDrQuWX4nJqj3Bc6nXBL-juWQsnqBfTKvoOSuF5md3SBOtv8drUcP7h7B5cH");'></div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-text-main text-white">Jane Doe</span>
+<span class="text-[10px] text-text-sub">Manager • 2 days ago</span>
+</div>
+</div>
+<p class="text-xs text-slate-600 text-slate-300 leading-relaxed">
+                                        "Carlos has shown exceptional leadership during the machinery overhaul. His ability to coordinate the junior team was impressive."
+                                    </p>
+</div>
+<!-- Comment 2 -->
+<div class="bg-background-light bg-white/5 p-3 rounded-lg">
+<div class="flex items-center gap-2 mb-2">
+<div class="size-6 rounded-full bg-cover bg-center" data-alt="Supervisor Mike Smith" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDy44yBuF8BN0kMDhcczj7KSl-8664CtkQZ4b5Pbm54EDH6-r0m5ViBn0kpXthanbsaP_pWx0PpshfUse0OeBPJZsv4WpP1YMyk2yasTLMU9TTkMbam4PCDe3YAM62Bk3lJVq5ZeUekIgJoaMw4FOlv3-yTFsJEpJzIQo-c7BqP3nOYWTZdR2DsOHLHjJnj4vmnfWp3M4FoPcjTBWnkTXnB-egd68Daky7W8T3Yg_XyADjSWca0nb9ZxDymS8GflSnN_xNDQxLrbtkB");'></div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-text-main text-white">Mike Smith</span>
+<span class="text-[10px] text-text-sub">Supervisor • 1 week ago</span>
+</div>
+</div>
+<p class="text-xs text-slate-600 text-slate-300 leading-relaxed">
+                                        "Consistently punctual and reliable. Needs to ensure documentation is filed immediately after shift end, but great work otherwise."
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Spacer -->
+<div class="h-8"></div>
+</div>
+</div>
+</main>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

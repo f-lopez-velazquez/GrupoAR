@@ -1,0 +1,242 @@
+﻿rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function userDoc() {
+      return isSignedIn()
+        ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data
+        : null;
+    }
+
+    function userRole() {
+      return isSignedIn()
+        ? (request.auth.token.role != null ? request.auth.token.role : userDoc().role)
+        : null;
+    }
+
+    function userPermissions() {
+      return isSignedIn()
+        ? (request.auth.token.permissions != null
+            ? request.auth.token.permissions
+            : (userDoc().permissions != null ? userDoc().permissions : []))
+        : [];
+    }
+
+    function hasPermission(permission) {
+      return isSignedIn() && userPermissions().hasAny([permission]);
+    }
+
+    function isAdmin() {
+      return userRole() == "Admin" || request.auth.token.superAdmin == true || (userDoc().superAdmin == true);
+    }
+
+    function isStaff() {
+      return userRole() == "StaffFerreteria";
+    }
+
+    function isObra() {
+      return userRole() == "PersonalObra";
+    }
+
+    function canInventory() {
+      return isAdmin() || isStaff() || hasPermission("inventory");
+    }
+
+    function canPos() {
+      return isAdmin() || isStaff() || hasPermission("pos");
+    }
+
+    function canToolLog() {
+      return isAdmin() || isStaff() || hasPermission("toolLog");
+    }
+
+    function canProjects() {
+      return isAdmin() || isObra() || hasPermission("projects");
+    }
+
+    function canAttendance() {
+      return isAdmin() || isObra() || hasPermission("attendance");
+    }
+
+    function canIncidents() {
+      return isAdmin() || isObra() || hasPermission("incidents");
+    }
+
+    function canReports() {
+      return isAdmin() || hasPermission("reports");
+    }
+
+    function canPayroll() {
+      return isAdmin() || hasPermission("payroll");
+    }
+
+    function canFinance() {
+      return isAdmin() || hasPermission("finance");
+    }
+
+    function canClients() {
+      return isAdmin() || hasPermission("clients");
+    }
+
+    function canPromotions() {
+      return isAdmin() || hasPermission("promotions");
+    }
+
+    function canEvaluations() {
+      return isAdmin() || hasPermission("evaluations");
+    }
+
+    function canVendors() {
+      return isAdmin() || hasPermission("vendors");
+    }
+
+    function canSettings() {
+      return isAdmin() || hasPermission("settings");
+    }
+
+    function canAudit() {
+      return isAdmin() || hasPermission("audit");
+    }
+
+    function canBadges() {
+      return isAdmin() || hasPermission("badges");
+    }
+
+    match /users/{userId} {
+      allow read: if isAdmin() || (isSignedIn() && request.auth.uid == userId);
+      allow create: if isSignedIn() && request.auth.uid == userId && request.resource.data.role == "Pending";
+      allow update: if isAdmin() || (isSignedIn() && request.auth.uid == userId && request.resource.data.role == resource.data.role);
+      allow delete: if isAdmin() && resource.data.superAdmin != true;
+    }
+
+    match /inventory/{inventoryId} {
+      allow read: if canInventory() || canPos() || resource.data.publicVisible == true;
+      allow create, update: if canInventory() || canPos();
+      allow delete: if isAdmin();
+    }
+
+    match /sales/{saleId} {
+      allow read: if canPos() || isAdmin();
+      allow create, update: if canPos();
+      allow delete: if isAdmin();
+    }
+
+    match /tickets/{ticketId} {
+      allow read: if true;
+      allow create: if canPos();
+      allow update, delete: if false;
+    }
+
+    match /toolLog/{logId} {
+      allow read: if canToolLog();
+      allow create, update: if canToolLog();
+      allow delete: if isAdmin();
+    }
+
+    match /attendance/{attendanceId} {
+      allow read: if canAttendance() || canReports();
+      allow create, update: if canAttendance();
+      allow delete: if isAdmin();
+    }
+
+    match /incidents/{incidentId} {
+      allow read: if canIncidents() || canReports();
+      allow create, update: if canIncidents();
+      allow delete: if isAdmin();
+    }
+
+    match /projects/{projectId} {
+      allow read: if true;
+      allow create, update: if canProjects();
+      allow delete: if isAdmin();
+
+      match /gastos/{gastoId} {
+        allow read: if canProjects() || canFinance();
+        allow create, update: if canProjects();
+        allow delete: if isAdmin();
+      }
+
+      match /pagos/{pagoId} {
+        allow read: if canProjects() || canFinance();
+        allow create, update: if canFinance() || canProjects();
+        allow delete: if isAdmin();
+      }
+
+      match /documentacionFiscal/{docId} {
+        allow read: if canFinance() || isAdmin();
+        allow create, update, delete: if canFinance() || isAdmin();
+      }
+    }
+
+    match /clients/{clientId} {
+      allow read: if canClients();
+      allow create, update: if canClients();
+      allow delete: if isAdmin();
+    }
+
+    match /promotions/{promoId} {
+      allow read: if canPromotions();
+      allow create, update: if canPromotions();
+      allow delete: if isAdmin();
+    }
+
+    match /vendors/{vendorId} {
+      allow read: if canVendors();
+      allow create, update: if canVendors();
+      allow delete: if isAdmin();
+    }
+
+    match /settings/{settingId} {
+      allow read: if canSettings();
+      allow create, update: if canSettings();
+      allow delete: if isAdmin();
+    }
+
+    match /evaluationRequests/{requestId} {
+      allow read: if isAdmin() || canEvaluations();
+      allow create: if canEvaluations();
+      allow update, delete: if isAdmin();
+    }
+
+    match /evaluations/{evalId} {
+      allow read: if isAdmin() || canEvaluations() || canReports();
+      allow create: if canEvaluations() || canAttendance();
+      allow update, delete: if isAdmin();
+    }
+
+    match /payroll/{payrollId} {
+      allow read: if canPayroll();
+      allow create, update: if canPayroll();
+      allow delete: if isAdmin();
+    }
+
+    match /publicEmployees/{employeeId} {
+      allow read: if true;
+      allow write: if canBadges();
+    }
+
+    match /auditChain/{entryId} {
+      allow read: if canAudit();
+      allow create: if isSignedIn();
+      allow update, delete: if false;
+    }
+
+    match /auditLogs/{logId} {
+      allow create: if isSignedIn();
+      allow read, update, delete: if canAudit();
+    }
+
+    match /securityAlerts/{alertId} {
+      allow read: if canAudit();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /errorLogs/{logId} {
+      allow create: if isSignedIn();
+      allow read, update, delete: if canAudit();
+    }
+  }
+}

@@ -1,0 +1,411 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detalle de producto - Grupo AR</title>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: "Public Sans", sans-serif; }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-slate-100 min-h-screen flex flex-col font-display">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 border-slate-800 bg-white bg-slate-900 px-10 py-3 shadow-sm">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-[#0d151c] text-white">
+<img src="/assets/logo.png" alt="Logo Grupo AR" class="h-9 w-9" />
+<h2 class="text-slate-900 text-white text-lg font-bold leading-tight tracking-[-0.015em]">Grupo AR</h2>
+</div>
+<div class="flex items-center gap-9 hidden md:flex">
+<a class="text-slate-700 text-slate-300 hover:text-primary hover:text-primary transition-colors text-sm font-medium leading-normal" href="/catalogo-productos">Productos</a>
+<a class="text-slate-700 text-slate-300 hover:text-primary hover:text-primary transition-colors text-sm font-medium leading-normal" href="/servicios">Servicios</a>
+<a class="text-slate-700 text-slate-300 hover:text-primary hover:text-primary transition-colors text-sm font-medium leading-normal" href="/contacto">Sucursales</a>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="flex flex-col min-w-40 !h-10 max-w-64 hidden sm:flex">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-slate-100 bg-slate-800 border border-transparent focus-within:border-primary transition-colors">
+<div class="text-slate-500 text-slate-400 flex items-center justify-center pl-3">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg bg-transparent focus:outline-0 focus:ring-0 border-none h-full placeholder:text-slate-500 placeholder:text-slate-400 px-3 text-sm font-normal text-slate-900 text-white" placeholder="Buscar productos..."/>
+</div>
+</label>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-primary hover:bg-primary/90 transition-colors text-white text-sm font-bold leading-normal tracking-[0.015em]">
+<span class="truncate">Ingresar</span>
+</button>
+<button class="flex items-center justify-center text-slate-700 text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+</div>
+</header>
+<main class="flex-grow">
+  <div class="px-6 md:px-10 lg:px-40 flex justify-center py-4">
+  </div>
+<!-- Breadcrumbs -->
+<div class="px-6 md:px-10 lg:px-40 flex justify-center py-6">
+<div class="flex flex-col max-w-[1280px] w-full">
+<div class="flex flex-wrap items-center gap-2 text-sm">
+<a class="text-slate-500 text-slate-400 hover:text-primary font-medium" href="/">Inicio</a>
+<span class="text-slate-400 text-slate-600">/</span>
+<a class="text-slate-500 text-slate-400 hover:text-primary font-medium" href="/catalogo">Ferretería</a>
+<span class="text-slate-400 text-slate-600">/</span>
+<a class="text-slate-500 text-slate-400 hover:text-primary font-medium" href="/catalogo-productos">Herramienta eléctrica</a>
+<span class="text-slate-400 text-slate-600">/</span>
+<span class="text-slate-900 text-white font-medium">Rotomartillo inalambrico</span>
+</div>
+</div>
+</div>
+<!-- Main Product Section -->
+<div class="px-6 md:px-10 lg:px-40 flex justify-center pb-10">
+<div class="flex flex-col lg:flex-row gap-12 max-w-[1280px] w-full">
+<!-- Left Column: Gallery -->
+<div class="flex flex-col gap-4 lg:w-3/5">
+<div class="w-full aspect-[4/3] bg-white bg-slate-800 rounded-xl overflow-hidden border border-slate-200 border-slate-700 relative group">
+<div class="w-full h-full bg-center bg-contain bg-no-repeat" data-alt="Professional yellow cordless power drill on a dark surface" style="background-image: url('');"></div>
+<div class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-2 py-1 rounded">MAS VENDIDO</div>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 bg-black/50 p-2 rounded-full hover:bg-white hover:bg-black/70 transition-all opacity-0 group-hover:opacity-100 shadow-lg">
+<span class="material-symbols-outlined">arrow_forward_ios</span>
+</button>
+<button class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 bg-black/50 p-2 rounded-full hover:bg-white hover:bg-black/70 transition-all opacity-0 group-hover:opacity-100 shadow-lg rotate-180">
+<span class="material-symbols-outlined">arrow_forward_ios</span>
+</button>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-2">
+<button class="w-24 h-24 flex-shrink-0 border-2 border-primary rounded-lg overflow-hidden p-1 bg-white bg-slate-800">
+<div class="w-full h-full bg-center bg-cover" data-alt="Thumbnail of cordless drill side view" style="background-image: url('');"></div>
+</button>
+<button class="w-24 h-24 flex-shrink-0 border border-slate-200 border-slate-700 rounded-lg overflow-hidden p-1 bg-white bg-slate-800 hover:border-slate-400 transition-colors">
+<div class="w-full h-full bg-center bg-cover" data-alt="Thumbnail of drill bit attachment closeup" style="background-image: url('');"></div>
+</button>
+<button class="w-24 h-24 flex-shrink-0 border border-slate-200 border-slate-700 rounded-lg overflow-hidden p-1 bg-white bg-slate-800 hover:border-slate-400 transition-colors">
+<div class="w-full h-full bg-center bg-cover" data-alt="Thumbnail of worker using drill on wood" style="background-image: url('');"></div>
+</button>
+<button class="w-24 h-24 flex-shrink-0 border border-slate-200 border-slate-700 rounded-lg overflow-hidden p-1 bg-white bg-slate-800 hover:border-slate-400 transition-colors flex items-center justify-center bg-slate-50 bg-slate-900">
+<span class="material-symbols-outlined text-slate-400">play_circle</span>
+</button>
+</div>
+</div>
+<!-- Right Column: Product Info -->
+<div class="flex flex-col lg:w-2/5 gap-6">
+<div>
+<h1 class="text-slate-900 text-white text-3xl md:text-4xl font-bold leading-tight mb-2">Heavy-Duty Rotomartillo inalambrico 18V</h1>
+<div class="flex items-center gap-4 text-sm text-slate-500 text-slate-400 mb-4">
+<span>SKU: GD-18V-PRO</span>
+<span class="w-1 h-1 rounded-full bg-slate-300"></span>
+<span>Modelo: 2024-X</span>
+<span class="w-1 h-1 rounded-full bg-slate-300"></span>
+<div class="flex items-center text-yellow-500 gap-1">
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px]">star_half</span>
+<span class="text-slate-700 text-slate-300 ml-1">(4.8)</span>
+</div>
+</div>
+<div class="flex items-baseline gap-4 mb-2">
+<span class="text-4xl font-bold text-primary">$149.99</span>
+<span class="text-lg text-slate-400 line-through font-medium">$189.99</span>
+</div>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 bg-green-900/30 text-green-700 text-green-400 text-sm font-semibold">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                            En stock and Ready to Ship
+                        </div>
+</div>
+<div class="h-px bg-slate-200 bg-slate-700 w-full"></div>
+<div class="flex flex-col gap-4">
+<p class="text-slate-600 text-slate-300 leading-relaxed">
+                            Engineered for the toughest jobs, this 18V hammer drill features a high-performance brushless motor that delivers up to 60% more power. Includes 2-speed transmission and LED work light.
+                        </p>
+<!-- Specs Summary -->
+<div class="grid grid-cols-2 gap-4 mt-2">
+<div class="flex items-center gap-3 p-3 rounded-lg bg-slate-100 bg-slate-800">
+<span class="material-symbols-outlined text-primary">bolt</span>
+<div>
+<div class="text-xs text-slate-500 text-slate-400">Voltage</div>
+<div class="text-sm font-semibold text-slate-900 text-white">18V Max</div>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-lg bg-slate-100 bg-slate-800">
+<span class="material-symbols-outlined text-primary">speed</span>
+<div>
+<div class="text-xs text-slate-500 text-slate-400">Speed</div>
+<div class="text-sm font-semibold text-slate-900 text-white">2000 RPM</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4 mt-2">
+<div class="flex gap-4">
+<div class="w-32">
+<label class="block text-sm font-medium text-slate-700 text-slate-300 mb-1">Cantidad</label>
+<div class="relative flex items-center">
+<button class="absolute left-0 w-8 h-full text-slate-500 hover:text-primary" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<input class="w-full text-center border border-slate-300 border-slate-600 rounded-lg py-2 bg-transparent text-slate-900 text-white focus:ring-primary focus:border-primary" type="number" value="1"/>
+<button class="absolute right-0 w-8 h-full text-slate-500 hover:text-primary" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+<button class="flex-1 bg-primary hover:bg-primary/90 text-white font-bold py-2 px-4 rounded-lg shadow-sm transition-transform active:scale-[0.98] flex items-center justify-center gap-2 mt-6">
+<span class="material-symbols-outlined">shopping_cart</span>
+                                Agregar al carrito
+                            </button>
+</div>
+<button class="w-full border border-slate-300 border-slate-600 hover:border-primary text-slate-700 text-slate-300 hover:text-primary font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">description</span>
+                            Descargar ficha técnica (PDF)
+                        </button>
+</div>
+<div class="flex items-center justify-between text-xs text-slate-500 text-slate-400 mt-2">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-green-600">verified_user</span>
+                            2 Year Garantia
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-blue-600">local_shipping</span>
+                            Free Envio over $100
+                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-orange-600">security</span>
+                            Secure Checkout
+                        </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Especificaciones Tab Section -->
+<div class="w-full bg-white bg-slate-900 py-12 border-t border-slate-200 border-slate-800">
+<div class="px-6 md:px-10 lg:px-40 flex justify-center">
+<div class="max-w-[1280px] w-full">
+<h3 class="text-xl font-bold text-slate-900 text-white mb-6">Technical Especificaciones</h3>
+<div class="overflow-hidden rounded-lg border border-slate-200 border-slate-700">
+<table class="w-full text-left text-sm text-slate-600 text-slate-400">
+<tbody class="divide-y divide-slate-200 divide-slate-700">
+<tr class="bg-slate-50 bg-slate-800/50">
+<td class="px-6 py-4 font-medium text-slate-900 text-white w-1/3">Motor Type</td>
+<td class="px-6 py-4">Brushless High-Efficiency</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-medium text-slate-900 text-white">Chuck Size</td>
+<td class="px-6 py-4">1/2 inch Metal Ratcheting</td>
+</tr>
+<tr class="bg-slate-50 bg-slate-800/50">
+<td class="px-6 py-4 font-medium text-slate-900 text-white">Battery System</td>
+<td class="px-6 py-4">18V Lithium-Ion (Compatible with AR-Series)</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-medium text-slate-900 text-white">Torque</td>
+<td class="px-6 py-4">1200 in-lbs Max</td>
+</tr>
+<tr class="bg-slate-50 bg-slate-800/50">
+<td class="px-6 py-4 font-medium text-slate-900 text-white">Weight (Tool Only)</td>
+<td class="px-6 py-4">3.4 lbs</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<!-- Productos relacionados Carousel -->
+<div class="px-6 md:px-10 lg:px-40 flex justify-center py-16 bg-background-light bg-background-dark">
+<div class="max-w-[1280px] w-full flex flex-col">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-2xl font-bold text-slate-900 text-white">Productos relacionados</h3>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full border border-slate-300 border-slate-600 hover:bg-white hover:bg-slate-800 text-slate-600 text-slate-300 transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full border border-slate-300 border-slate-600 hover:bg-white hover:bg-slate-800 text-slate-600 text-slate-300 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex overflow-x-auto pb-6 gap-6 scrollbar-hide snap-x">
+<!-- Product Card 1 -->
+<div class="snap-start flex-none w-64 bg-white bg-slate-900 rounded-xl border border-slate-200 border-slate-700 hover:shadow-lg transition-shadow overflow-hidden flex flex-col">
+<div class="h-48 w-full bg-slate-100 bg-slate-800 relative group">
+<div class="w-full h-full bg-center bg-cover" data-alt="Circular saw tool on a workbench" style="background-image: url('');"></div>
+<div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-white text-slate-900 px-4 py-2 rounded-full font-bold text-sm shadow-sm hover:bg-slate-50">Quick View</button>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<h4 class="text-slate-900 text-white font-bold text-sm mb-1 line-clamp-2">Professional 7-1/4" Circular Saw</h4>
+<p class="text-xs text-slate-500 mb-3">Cordless 18V</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-bold text-primary">$129.00</span>
+<button class="w-8 h-8 rounded-full bg-slate-100 bg-slate-800 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="snap-start flex-none w-64 bg-white bg-slate-900 rounded-xl border border-slate-200 border-slate-700 hover:shadow-lg transition-shadow overflow-hidden flex flex-col">
+<div class="h-48 w-full bg-slate-100 bg-slate-800 relative group">
+<div class="w-full h-full bg-center bg-cover" data-alt="Set of drill bits in a red case" style="background-image: url('');"></div>
+<div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-white text-slate-900 px-4 py-2 rounded-full font-bold text-sm shadow-sm hover:bg-slate-50">Quick View</button>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<h4 class="text-slate-900 text-white font-bold text-sm mb-1 line-clamp-2">Titanium Drill Bit Set (21-Piece)</h4>
+<p class="text-xs text-slate-500 mb-3">Impact Ready</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-bold text-primary">$29.99</span>
+<button class="w-8 h-8 rounded-full bg-slate-100 bg-slate-800 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 3 -->
+<div class="snap-start flex-none w-64 bg-white bg-slate-900 rounded-xl border border-slate-200 border-slate-700 hover:shadow-lg transition-shadow overflow-hidden flex flex-col">
+<div class="h-48 w-full bg-slate-100 bg-slate-800 relative group">
+<div class="w-full h-full bg-center bg-cover" data-alt="Orange safety helmet and protective goggles" style="background-image: url('');"></div>
+<div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-white text-slate-900 px-4 py-2 rounded-full font-bold text-sm shadow-sm hover:bg-slate-50">Quick View</button>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<h4 class="text-slate-900 text-white font-bold text-sm mb-1 line-clamp-2">Construction Safety Helmet &amp; Goggles</h4>
+<p class="text-xs text-slate-500 mb-3">ANSI Certified</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-bold text-primary">$45.50</span>
+<button class="w-8 h-8 rounded-full bg-slate-100 bg-slate-800 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Product Card 4 -->
+<div class="snap-start flex-none w-64 bg-white bg-slate-900 rounded-xl border border-slate-200 border-slate-700 hover:shadow-lg transition-shadow overflow-hidden flex flex-col">
+<div class="h-48 w-full bg-slate-100 bg-slate-800 relative group">
+<div class="w-full h-full bg-center bg-cover" data-alt="Heavy duty tool box with various compartments" style="background-image: url('');"></div>
+<div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-white text-slate-900 px-4 py-2 rounded-full font-bold text-sm shadow-sm hover:bg-slate-50">Quick View</button>
+</div>
+</div>
+<div class="p-4 flex flex-col flex-1">
+<h4 class="text-slate-900 text-white font-bold text-sm mb-1 line-clamp-2">Stackable Tool Storage Box</h4>
+<p class="text-xs text-slate-500 mb-3">Water Sealed</p>
+<div class="mt-auto flex items-center justify-between">
+<span class="font-bold text-primary">$65.00</span>
+<button class="w-8 h-8 rounded-full bg-slate-100 bg-slate-800 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Consulting & Branch CTA Banner -->
+<div class="w-full bg-primary py-12 px-6 md:px-10 lg:px-40">
+<div class="max-w-[1280px] w-full mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="flex-1 text-white">
+<h2 class="text-2xl md:text-3xl font-bold mb-2">Planning a large project?</h2>
+<p class="text-white/80 text-lg">Our experts can help you with bulk orders, logistics, and on-site equipment needs.</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+<button class="bg-white text-primary hover:bg-slate-100 font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">storefront</span>
+                        Find a Branch
+                     </button>
+<button class="bg-primary border border-white/30 hover:bg-white/10 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">support_agent</span>
+                        Contact Consulting
+                     </button>
+</div>
+</div>
+</div>
+</main>
+<script>
+  const escapeXml = (value) =>
+    String(value ? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+
+  const createPlaceholderDataUri = (title, subtitle) => {
+    const safeTitle = escapeXml(String(title || "Producto").slice(0, 36));
+    const safeSubtitle = escapeXml(String(subtitle || "Grupo AR").slice(0, 36));
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480">
+        <rect width="640" height="480" fill="#ffffff" />
+        <rect x="20" y="20" width="600" height="440" rx="28" fill="#f1f5f9" stroke="#e2e8f0" />
+        <circle cx="320" cy="190" r="64" fill="#0ea5e9" opacity="0.18" />
+        <rect x="266" y="136" width="108" height="108" rx="24" fill="#0ea5e9" opacity="0.22" />
+        <text x="320" y="320" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" fill="#0f172a">${safeTitle}</text>
+        <text x="320" y="356" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#64748b">${safeSubtitle}</text>
+      </svg>`;
+    return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+  };
+
+  const replaceAidaImages = () => {
+    document.querySelectorAll("[data-alt]").forEach((el) => {
+      const title = el.getAttribute("data-alt") || "Producto";
+      const url = createPlaceholderDataUri(title, "Catálogo");
+      el.style.backgroundImage = `url("${url}")`;
+    });
+  };
+
+  replaceAidaImages();
+</script>
+<!-- Footer Simple -->
+<footer class="bg-slate-900 text-slate-400 py-10 px-6 md:px-10 lg:px-40 border-t border-slate-800">
+<div class="max-w-[1280px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 text-white font-bold text-lg">
+<span class="material-symbols-outlined">construction</span>
+                Grupo AR
+            </div>
+<div class="text-sm">
+                © 2024 Grupo AR. Todos los derechos reservados.
+            </div>
+<div class="flex gap-4">
+<a class="hover:text-white transition-colors" href="/privacy">Aviso de Privacidad</a>
+<a class="hover:text-white transition-colors" href="/terms">Términos y Condiciones</a>
+</div>
+</div>
+</footer>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

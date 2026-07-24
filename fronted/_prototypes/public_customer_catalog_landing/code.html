@@ -1,0 +1,458 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Grupo AR - Catálogo Público</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<!-- Theme Configuration -->
+<script>
+        if (window.tailwind) {
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#090dc8",
+                        "accent-red": "#dc2626",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#101022",
+                        "card-dark": "#1a1a2e",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        /* Custom scrollbar for carousel */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-white min-h-screen flex flex-col font-display overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-gray-200 border-[#222249] bg-white/90 bg-[#101022]/90 backdrop-blur-md">
+<div class="px-4 md:px-10 lg:px-40 flex justify-center py-3">
+<div class="flex max-w-[960px] flex-1 items-center justify-between">
+<div class="flex items-center gap-4 text-slate-900 text-white">
+<img src="/assets/logo.png" alt="Logo Grupo AR" class="h-9 w-9" />
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Grupo AR</h2>
+</div>
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="/servicios">Servicios</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="/catalogo-productos">Catálogo</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="/#proyectos">Proyectos</a>
+</nav>
+<div class="flex items-center gap-4">
+<a class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary hover:bg-blue-700 transition-colors text-white text-sm font-bold leading-normal tracking-[0.015em]" href="/dashboard-ejecutivo">
+<span class="truncate">Acceso clientes</span>
+</a>
+<!-- Mobile Menu Icon -->
+<button class="md:hidden text-slate-900 text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow">
+  <div class="px-4 md:px-10 lg:px-40 flex justify-center py-4">
+    <div class="max-w-[960px] w-full rounded-lg border border-amber-200/60 bg-amber-50/80 text-amber-700 text-xs px-4 py-2">Aviso: precios sujetos a disponibilidad y confirmación al momento de la compra.</div>
+  </div>
+<!-- Hero Section -->
+<div class="px-4 md:px-10 lg:px-40 flex justify-center py-5">
+<div class="flex flex-col max-w-[960px] flex-1">
+<div class="@container">
+<div class="@[480px]:p-4">
+<div class="relative flex min-h-[480px] flex-col gap-6 overflow-hidden rounded-xl bg-cover bg-center bg-no-repeat @[480px]:gap-8 items-start justify-end px-4 pb-10 @[480px]:px-10 group" data-alt="Modern construction site with cranes and steel beams at sunset" style='background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.6) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCGHEJcn0Zy80lRA6QWMQ803_R-mQR_WrDRaMVT9VC-zdAKOgNmw3swHu4IUaVEmHD4uauylpGffAEpn4gajLwvK2C7HNgY_yXFRiiD04utoI5_Kk6LLEkeVMLIkhye11krJpKTibVcwChPrvEksatuCyB4N3dEmRfe94Rz5Zr9bt__2UqzM0dxoctiGbfZ-4LBKKymApocEvvV-3PXqfJC8_FW-YgZN-K1WElLl3vP2qG_krGBccuLIewCNM7FUxuNdZOKFcbNdqA9");'>
+<!-- Red Accent Line -->
+<div class="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-primary via-accent-red to-primary opacity-80"></div>
+<div class="flex flex-col gap-2 text-left z-10 max-w-2xl">
+<h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-6xl drop-shadow-lg">
+                                    Construyendo el futuro con Grupo AR
+                                </h1>
+<h2 class="text-gray-200 text-sm font-medium leading-normal @[480px]:text-lg max-w-lg drop-shadow-md">
+                                    Soluciones integrales para Gestión de obras de gran escala y suministro ferretero premium.
+                                </h2>
+</div>
+<a class="z-10 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary hover:bg-accent-red transition-colors duration-300 text-white text-base font-bold leading-normal tracking-[0.015em] shadow-lg shadow-blue-900/50" href="/catalogo-productos">
+<span class="truncate">Ver catálogo</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Trust Stats -->
+<div class="px-4 md:px-10 lg:px-40 flex justify-center py-4 bg-white bg-[#101022]">
+<div class="flex flex-wrap justify-between items-center gap-8 max-w-[960px] flex-1 py-8 border-b border-gray-200 border-[#222249]">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-4xl text-accent-red">engineering</span>
+<div>
+<p class="text-2xl font-bold text-slate-900 text-white">500+</p>
+<p class="text-sm text-gray-500 text-gray-400">Proyectos completados</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-4xl text-primary">inventory_2</span>
+<div>
+<p class="text-2xl font-bold text-slate-900 text-white">10k+</p>
+<p class="text-sm text-gray-500 text-gray-400">Productos en stock</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-4xl text-accent-red">verified</span>
+<div>
+<p class="text-2xl font-bold text-slate-900 text-white">25 Years</p>
+<p class="text-sm text-gray-500 text-gray-400">Experiencia en el mercado</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Services Section -->
+<div class="px-4 md:px-10 lg:px-40 flex justify-center py-5">
+<div class="flex flex-col max-w-[960px] flex-1">
+<div class="flex flex-col gap-10 px-4 py-10 @container">
+<div class="flex flex-col gap-4">
+<h2 class="text-slate-900 text-white tracking-light text-[32px] font-bold leading-tight max-w-[720px]">
+                            Nuestra experiencia
+                        </h2>
+<p class="text-slate-600 text-gray-400 text-base font-normal leading-normal max-w-[720px]">
+                            Doble experiencia en Gestión de obras y suministro para profesionales.
+                        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Card 1 -->
+<div class="group flex flex-col gap-4 p-4 rounded-xl bg-white bg-card-dark border border-gray-200 border-transparent hover:border-primary transition-all shadow-sm hover:shadow-lg hover:shadow-primary/10">
+<div class="w-full h-64 bg-center bg-no-repeat bg-cover rounded-lg relative overflow-hidden" data-alt="Large construction site with workers in safety gear" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB5UwtgSsElZw-epyBBE1r3DWQ6PLHhF_rD_yqhBAS-XQdTx5PAXU-Z-gUf0hHhnVG1ypgOuqzkBROnFeUk3ZuwOn7whLxO5sqqBbuNmmqN60ap-RJXf0MXi83VKg4KF_oP7FbLNz0EGGTGv-s3MWSlwrOaJFR9F459h5aKC3fZ5y7AJkPIn2GDlLmQNcPIoapauNlyMpfMsViGjMokaxup5ANKlLDP4tpS9o8fRQwdDFW9AGO0qVisD8csRNnqvcJd2MAS3CUvL4oa");'>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+<div class="absolute bottom-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded">SERVICE</div>
+</div>
+<div>
+<h3 class="text-slate-900 text-white text-xl font-bold leading-normal mb-2">Proyectos de construcción</h3>
+<p class="text-slate-600 text-[#8f90cc] text-sm font-normal leading-normal mb-4">
+                                    Gestión integral de proyectos, consultoría de ingeniería y ejecución para necesidades industriales.
+                                </p>
+<a class="inline-flex items-center text-primary font-bold text-sm hover:text-accent-red transition-colors" href="/servicios#servicios">
+                                    Ver portafolio <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group flex flex-col gap-4 p-4 rounded-xl bg-white bg-card-dark border border-gray-200 border-transparent hover:border-accent-red transition-all shadow-sm hover:shadow-lg hover:shadow-accent-red/10">
+<div class="w-full h-64 bg-center bg-no-repeat bg-cover rounded-lg relative overflow-hidden" data-alt="Organized shelves of hardware tools and supplies" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDFP9x-hnCqGgFQMrzWOtFD3QSALRxuppcLa35lukzahR-SZVzo1lY6TfZGo3CB2BoePbusLg5I7qcq7lLREHTRc7wI5mmmqryentdp5XKLFISqj7wzM-sHNbWHShRS_iCMeUhpq0G3MKr9C7ri9fyHGA5A4kQE1ueKMyKb-WCb--GyEUW1eKokAXWoMte8sRZwRsuHzWw5vkUzvSa256S1DJj9qB12Ohgb61GIzmglVuyXDmcvu1y5aA9BXYcGoXbwyt4xB0SN0DeR");'>
+<div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+<div class="absolute bottom-3 left-3 bg-accent-red text-white text-xs font-bold px-2 py-1 rounded">RETAIL</div>
+</div>
+<div>
+<h3 class="text-slate-900 text-white text-xl font-bold leading-normal mb-2">Ferretería</h3>
+<p class="text-slate-600 text-[#8f90cc] text-sm font-normal leading-normal mb-4">
+                                    Venta directa de herramientas, materiales y equipo de seguridad certificado.
+                                </p>
+<a class="inline-flex items-center text-accent-red font-bold text-sm hover:text-primary transition-colors" href="/catalogo-productos">
+                                    Ver tienda <span class="material-symbols-outlined text-sm ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Products Carousel -->
+<div class="px-4 md:px-10 lg:px-40 flex justify-center py-5 bg-gray-50 bg-[#15152a]">
+  <div class="flex flex-col max-w-[960px] flex-1">
+    <div class="flex justify-between items-end px-4 pt-5 pb-6">
+      <div>
+        <h2 class="text-slate-900 text-white text-2xl font-bold leading-tight">Ferretería destacada</h2>
+        <p class="text-slate-500 text-gray-400 text-sm mt-1">Productos reales cargados desde inventario.</p>
+      </div>
+      <a class="text-primary hover:text-accent-red text-sm font-bold hidden sm:block transition-colors" href="/catalogo-productos">Ver todo el catálogo</a>
+    </div>
+    <div class="flex overflow-x-auto hide-scrollbar pb-8 px-4 -mx-4 md:mx-0 snap-x">
+      <div class="flex items-stretch gap-4" id="featuredProducts">
+        <div class="text-sm text-slate-500 text-gray-400">Cargando productos destacados...</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Contact Form Section -->
+<div class="px-4 md:px-10 lg:px-40 flex justify-center py-10">
+<div class="flex flex-col md:flex-row max-w-[960px] flex-1 gap-10">
+<div class="flex-1 flex flex-col justify-center">
+<h2 class="text-3xl font-black text-slate-900 text-white mb-4">Inicia tu próximo proyecto</h2>
+<p class="text-slate-600 text-gray-400 mb-8">
+                        Ya sea que necesites una cotización de suministro o gestión completa de obra, nuestro equipo está listo para ayudarte. Completa el formulario y te contactaremos en menos de 24 horas.
+                    </p>
+<div class="space-y-4">
+<div class="flex items-start gap-4">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 text-white">Sede</h4>
+<p class="text-sm text-slate-600 text-gray-400">Salamanca, GTO. Cobertura en todo México.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">call</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 text-white">Teléfono</h4>
+<p class="text-sm text-slate-600 text-gray-400">+1 (555) 123-4567</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-primary/10 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 text-white">Correo</h4>
+<p class="text-sm text-slate-600 text-gray-400">sales@grupoar.com</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 bg-white bg-card-dark p-8 rounded-xl shadow-lg border border-gray-200 border-[#222249]">
+<form id="catalogContactForm" class="flex flex-col gap-4">
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-1">
+<label class="text-sm font-medium text-slate-700 text-gray-300">Nombre</label>
+<input id="contactName" class="w-full rounded-lg bg-gray-50 bg-[#101022] border border-gray-300 border-gray-700 p-2.5 text-slate-900 text-white focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Nombre completo" type="text"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-sm font-medium text-slate-700 text-gray-300">Empresa</label>
+<input id="contactCompany" class="w-full rounded-lg bg-gray-50 bg-[#101022] border border-gray-300 border-gray-700 p-2.5 text-slate-900 text-white focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Empresa" type="text"/>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-sm font-medium text-slate-700 text-gray-300">Correo</label>
+<input id="contactEmail" class="w-full rounded-lg bg-gray-50 bg-[#101022] border border-gray-300 border-gray-700 p-2.5 text-slate-900 text-white focus:ring-2 focus:ring-primary focus:outline-none" placeholder="john@example.com" type="email"/>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-sm font-medium text-slate-700 text-gray-300">Tipo de proyecto</label>
+<select id="contactProject" class="w-full rounded-lg bg-gray-50 bg-[#101022] border border-gray-300 border-gray-700 p-2.5 text-slate-900 text-white focus:ring-2 focus:ring-primary focus:outline-none">
+<option>Pedido de ferretería</option>
+<option>Proyecto de construcción</option>
+<option>consultoría</option>
+<option>Otro</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="text-sm font-medium text-slate-700 text-gray-300">Mensaje</label>
+<textarea id="contactMessage" class="w-full rounded-lg bg-gray-50 bg-[#101022] border border-gray-300 border-gray-700 p-2.5 text-slate-900 text-white focus:ring-2 focus:ring-primary focus:outline-none" placeholder="Cuentanos tus necesidades..." rows="4"></textarea>
+</div>
+<button class="mt-2 w-full rounded-lg bg-primary hover:bg-accent-red text-white font-bold py-3 transition-colors duration-300 shadow-md" type="submit">
+                            Enviar solicitud
+                        </button>
+</form>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-white bg-[#0a0a16] border-t border-gray-200 border-[#222249] pt-12 pb-8">
+<div class="px-4 md:px-10 lg:px-40 flex justify-center">
+<div class="flex flex-col max-w-[960px] flex-1">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-2 text-slate-900 text-white">
+<div class="size-6 flex items-center justify-center rounded bg-primary text-white">
+<span class="material-symbols-outlined text-sm">apartment</span>
+</div>
+<h3 class="font-bold text-lg">Grupo AR</h3>
+</div>
+<p class="text-sm text-slate-600 text-gray-400">
+                            Construimos confianza con materiales de calidad y Gestión experta desde 1999.
+                        </p>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="font-bold text-slate-900 text-white mb-2">Servicios</h4>
+<a class="text-sm text-slate-600 text-gray-400 hover:text-primary transition-colors" href="/servicios">Gestión de proyectos</a>
+<a class="text-sm text-slate-600 text-gray-400 hover:text-primary transition-colors" href="/servicios">Maquinaria pesada</a>
+<a class="text-sm text-slate-600 text-gray-400 hover:text-primary transition-colors" href="/servicios">ingeniería</a>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="font-bold text-slate-900 text-white mb-2">Catálogo</h4>
+<a class="text-sm text-slate-600 text-gray-400 hover:text-primary transition-colors" href="/catalogo-productos">Herramienta eléctrica</a>
+<a class="text-sm text-slate-600 text-gray-400 hover:text-primary transition-colors" href="/catalogo-productos">Equipo de seguridad</a>
+<a class="text-sm text-slate-600 text-gray-400 hover:text-primary transition-colors" href="/catalogo-productos">Materiales de construcción</a>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="font-bold text-slate-900 text-white mb-2">Soporte</h4>
+<a class="text-sm text-slate-600 text-gray-400 hover:text-primary transition-colors" href="/dashboard-ejecutivo">Portal de clientes</a>
+<a class="text-sm text-slate-600 text-gray-400 hover:text-primary transition-colors" href="/verificar-ticket">Rastrear pedido</a>
+<a class="text-sm text-slate-600 text-gray-400 hover:text-primary transition-colors" href="/contacto">Contacto</a>
+</div>
+</div>
+<div class="border-t border-gray-200 border-[#222249] pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+<p class="text-xs text-slate-500 text-gray-500">© 2023 Grupo AR. Todos los derechos reservados.</p>
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-primary transition-colors" href="/contacto">
+<span class="sr-only">Contacto</span>
+<svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewbox="0 0 24 24">
+<path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path>
+</svg>
+</a>
+<a class="text-slate-400 hover:text-primary transition-colors" href="/contacto">
+<span class="sr-only">Contacto</span>
+<svg aria-hidden="true" class="h-5 w-5" fill="currentColor" viewbox="0 0 24 24">
+<path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+</svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+const contactForm = document.getElementById("catalogContactForm");
+if (contactForm) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const name = document.getElementById("contactName")?.value?.trim();
+    const company = document.getElementById("contactCompany")?.value?.trim();
+    const email = document.getElementById("contactEmail")?.value?.trim();
+    const project = document.getElementById("contactProject")?.value?.trim();
+    const message = document.getElementById("contactMessage")?.value?.trim();
+    const params = new URLSearchParams();
+    if (name) params.set("nombre", name);
+    if (company) params.set("empresa", company);
+    if (email) params.set("correo", email);
+    if (project) params.set("proyecto", project);
+    if (message) params.set("mensaje", message);
+    const query = params.toString();
+    window.location.href = query ? `/contacto?${query}` : "/contacto";
+  });
+}
+</script>
+<script type="module">
+import { db } from "/shared/firebase.js";
+import { collection, getDocs, limit, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+const formatCurrency = (value) => {
+  const amount = Number(value || 0);
+  return amount.toLocaleString("es-MX", { style: "currency", currency: "MXN" });
+};
+
+const normalizeCategory = (value) =>
+  String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+
+const resolveImageUrl = (item) => {
+  const categoryFallbacks = {
+    tornilleria: "stock/tornilleria",
+    electrico: "stock/electrico",
+    plomeria: "stock/plomeria",
+    albanileria: "stock/albanileria",
+  };
+  const raw = item.imageUrl || item.image || item.imageId;
+  if (!raw) {
+    const fallback = categoryFallbacks[normalizeCategory(item.category)];
+    return fallback ? `https://res.cloudinary.com/dyzin1srr/image/upload/${fallback}` : null;
+  }
+  if (String(raw).startsWith("http")) return raw;
+  return `https://res.cloudinary.com/dyzin1srr/image/upload/${raw}`;
+};
+
+const container = document.getElementById("featuredProducts");
+if (container) {
+  container.innerHTML = "";
+  const q = query(collection(db, "inventory"), orderBy("name"), limit(4));
+  try {
+    const snapshot = await getDocs(q);
+    if (snapshot.empty) {
+      container.innerHTML = `<div class="text-sm text-slate-500 text-gray-400">Sin productos destacados aún.</div>`;
+    } else {
+      snapshot.forEach((docSnap) => {
+        const item = { id: docSnap.id, ...docSnap.data() };
+        const name = item.name || "Artículo";
+        const sku = item.sku || item.id;
+        const price = formatCurrency(item.price);
+        const imageUrl = resolveImageUrl(item);
+        const card = document.createElement("div");
+        card.className = "snap-start flex flex-col gap-4 rounded-xl bg-white bg-card-dark border border-gray-100 border-transparent shadow-md min-w-[280px] w-[280px] relative group overflow-hidden";
+        card.innerHTML = `
+          <div class="w-full h-48 bg-center bg-no-repeat bg-cover flex flex-col group-hover:scale-105 transition-transform duration-500" style="background-image: url('${imageUrl || "/assets/logo.png"}');"></div>
+          <div class="flex flex-col flex-1 justify-between p-4 pt-2 gap-4">
+            <div>
+              <div class="flex justify-between items-start">
+                <p class="text-slate-900 text-white text-lg font-bold leading-normal">${name}</p>
+                <p class="text-slate-900 text-white font-bold">${price}</p>
+              </div>
+              <p class="text-slate-500 text-[#8f90cc] text-sm mt-1">SKU: ${sku}</p>
+            </div>
+            <a class="w-full cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-slate-100 bg-[#222249] hover:bg-primary hover:text-white text-slate-900 text-white text-sm font-bold transition-colors flex gap-2" href="/contacto?item=${encodeURIComponent(name)}&sku=${encodeURIComponent(sku)}">
+              <span class="material-symbols-outlined text-[18px]">add_shopping_cart</span>
+              <span>Agregar a cotización</span>
+            </a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+  } catch (error) {
+    container.innerHTML = `<div class="text-sm text-slate-500 text-gray-400">No fue posible cargar productos destacados.</div>`;
+  }
+}
+</script>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

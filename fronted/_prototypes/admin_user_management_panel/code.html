@@ -1,0 +1,672 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Panel de administración de usuarios - Grupo AR ERP</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        /* Custom scrollbar for cleaner look in table if needed */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark font-display text-slate-900 text-slate-100 antialiased min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-slate-200 border-slate-800 bg-white bg-[#1a1a2e] px-6 py-3 shadow-sm z-20 sticky top-0">
+<div class="flex items-center gap-4">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+</div>
+<h2 class="text-slate-900 text-white text-lg font-bold leading-tight tracking-tight">Grupo AR ERP</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-slate-500 text-slate-400 hover:text-primary hover:text-primary transition-colors text-sm font-medium" href="/dashboard-ejecutivo">Panel</a>
+<a class="text-slate-500 text-slate-400 hover:text-primary hover:text-primary transition-colors text-sm font-medium" href="/roles-permisos">Módulos</a>
+<a class="text-slate-500 text-slate-400 hover:text-primary hover:text-primary transition-colors text-sm font-medium" href="/reportes">Reportes</a>
+<a class="text-primary font-bold text-sm leading-normal border-b-2 border-primary py-4 -my-4" href="/admin-usuarios">Admin</a>
+</nav>
+<div class="flex gap-3 items-center border-l border-slate-200 border-slate-700 pl-6">
+<button class="flex size-9 items-center justify-center rounded-full hover:bg-slate-100 hover:bg-slate-800 text-slate-500 text-slate-400 transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex size-9 items-center justify-center rounded-full hover:bg-slate-100 hover:bg-slate-800 text-slate-500 text-slate-400 transition-colors">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 ring-2 ring-slate-100 ring-slate-700 cursor-pointer" data-alt="Profile picture of the current logged in administrator" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuArHgLQKxQacnv73XhatOXYo-p01djOPZTDcGaM0Bj4i3Y--6-NUwOucW9heqN9x07gsYphMof7M5xMZne0Ci8rANCOy3W826XI3XogQ7ry9JQreMUdP4rL1P4qpW9Yog-iWscZVgSbFWbzB5cFFQCj8ae67tvtlX0u_38YsIVSfaZ-4cowunS2gis73e2H7JiJoY1yYxrECK1hJWy0So97tk7a0-rAX9GbJzwz9830i13EEwUPSfpNNeg3lL8hlAWGs-K7c6kz-nna");'></div>
+</div>
+</div>
+</header>
+<!-- Main Layout -->
+<main class="flex-1 flex flex-col w-full max-w-[1440px] mx-auto px-4 md:px-8 py-8">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 mb-6 text-sm">
+<a class="text-slate-500 hover:text-primary font-medium flex items-center gap-1" href="/dashboard-ejecutivo">
+<span class="material-symbols-outlined text-[18px]">home</span>
+                Home
+            </a>
+<span class="material-symbols-outlined text-slate-400 text-[14px]">chevron_right</span>
+<a class="text-slate-500 hover:text-primary font-medium" href="/dashboard-ejecutivo">Admin</a>
+<span class="material-symbols-outlined text-slate-400 text-[14px]">chevron_right</span>
+<span class="text-primary font-semibold">Gestión de usuarios</span>
+</div>
+<!-- Header & Primary Action -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+<div class="flex flex-col gap-2">
+<h1 class="text-slate-900 text-white text-3xl md:text-4xl font-black tracking-tight">Gestión de usuarios</h1>
+<p class="text-slate-500 text-slate-400 text-base max-w-2xl">Administra accesos, roles y cuentas del personal. Revisa sesiones activas y permisos para mantener la seguridad.</p>
+</div>
+<div class="flex gap-3">
+<button id="exportUsersBtn" class="group flex items-center justify-center gap-2 px-5 h-11 bg-white bg-slate-800 border border-slate-200 border-slate-700 rounded-lg text-slate-700 text-slate-200 font-bold text-sm shadow-sm hover:bg-slate-50 hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                    Exportar CSV
+                </button>
+<button id="addUserBtn" class="group flex items-center justify-center gap-2 px-5 h-11 bg-primary hover:bg-blue-800 text-white rounded-lg font-bold text-sm shadow-lg shadow-blue-900/20 transition-all">
+<span class="material-symbols-outlined text-[20px] group-hover:rotate-90 transition-transform duration-300">add</span>
+                    Agregar usuario
+                </button>
+</div>
+</div>
+<!-- Controls Toolbar -->
+<div class="bg-white bg-[#1a1a2e] p-4 rounded-xl border border-slate-200 border-slate-800 shadow-sm mb-6 flex flex-col lg:flex-row gap-4 justify-between items-center">
+<!-- Search -->
+<div class="w-full lg:w-96 relative group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input id="userSearchInput" class="block w-full pl-10 pr-3 h-11 rounded-lg border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 text-slate-900 text-white placeholder-slate-400 focus:ring-2 focus:ring-primary focus:border-primary sm:text-sm transition-shadow" placeholder="Buscar por nombre o ID de empleado..." type="text"/>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap gap-2 w-full lg:w-auto items-center justify-start lg:justify-end">
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400 mr-2">Filtrar por:</span>
+<div class="relative">
+<button class="flex items-center gap-2 h-9 px-3 rounded-lg bg-slate-100 bg-slate-800 text-slate-700 text-slate-300 text-sm font-medium hover:bg-slate-200 hover:bg-slate-700 transition-colors">
+                        Todos los roles
+                        <span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+<div class="relative">
+<button class="flex items-center gap-2 h-9 px-3 rounded-lg bg-slate-100 bg-slate-800 text-slate-700 text-slate-300 text-sm font-medium hover:bg-slate-200 hover:bg-slate-700 transition-colors">
+                        Estado: Todos
+                        <span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+<div class="h-6 w-px bg-slate-300 bg-slate-700 mx-2"></div>
+<button class="flex items-center justify-center size-9 rounded-lg text-slate-500 hover:bg-slate-100 hover:bg-slate-800 hover:text-red-600 transition-colors tooltip" title="Limpiar filtros">
+<span class="material-symbols-outlined text-[20px]">filter_alt_off</span>
+</button>
+</div>
+</div>
+<!-- Data Table Card -->
+<div class="bg-white bg-[#1a1a2e] rounded-xl border border-slate-200 border-slate-800 shadow-sm overflow-hidden flex flex-col flex-1">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-slate-200 border-slate-800 bg-slate-50/50 bg-slate-900/50">
+<th class="py-4 px-6 text-xs font-bold uppercase tracking-wider text-slate-500 text-slate-400">
+<div class="flex items-center gap-1 cursor-pointer hover:text-primary">
+                                    Empleado
+                                    <span class="material-symbols-outlined text-[16px]">sort</span>
+</div>
+</th>
+<th class="py-4 px-6 text-xs font-bold uppercase tracking-wider text-slate-500 text-slate-400">ID</th>
+<th class="py-4 px-6 text-xs font-bold uppercase tracking-wider text-slate-500 text-slate-400">Rol asignado</th>
+<th class="py-4 px-6 text-xs font-bold uppercase tracking-wider text-slate-500 text-slate-400">
+<div class="flex items-center gap-1 cursor-pointer hover:text-primary">
+                                    Último acceso
+                                    <span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+</div>
+</th>
+<th class="py-4 px-6 text-xs font-bold uppercase tracking-wider text-slate-500 text-slate-400 text-center">Status</th>
+<th class="py-4 px-6 text-xs font-bold uppercase tracking-wider text-slate-500 text-slate-400 text-right">Acciones</th>
+</tr>
+</thead>
+<tbody id="userTableBody" class="divide-y divide-slate-100 divide-slate-800">
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="border-t border-slate-200 border-slate-800 px-6 py-4 flex items-center justify-between">
+<div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+<div>
+<p class="text-sm text-slate-500 text-slate-400">
+                            Showing <span class="font-bold text-slate-900 text-white">1</span> to <span class="font-bold text-slate-900 text-white">5</span> of <span class="font-bold text-slate-900 text-white">42</span> results
+                        </p>
+</div>
+<div>
+<nav aria-label="Pagination" class="isolate inline-flex -space-x-px rounded-md shadow-sm">
+<a class="relative inline-flex items-center rounded-l-md px-2 py-2 text-slate-400 ring-1 ring-inset ring-slate-300 ring-slate-700 hover:bg-slate-50 hover:bg-slate-800 focus:z-20 focus:outline-offset-0" href="#">
+<span class="sr-only">Previous</span>
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</a>
+<a aria-current="page" class="relative z-10 inline-flex items-center bg-primary px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary" href="#">1</a>
+<a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 text-white ring-1 ring-inset ring-slate-300 ring-slate-700 hover:bg-slate-50 hover:bg-slate-800 focus:z-20 focus:outline-offset-0" href="#">2</a>
+<a class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-900 text-white ring-1 ring-inset ring-slate-300 ring-slate-700 hover:bg-slate-50 hover:bg-slate-800 focus:z-20 focus:outline-offset-0" href="#">3</a>
+<span class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-slate-700 text-slate-400 ring-1 ring-inset ring-slate-300 ring-slate-700 focus:outline-offset-0">...</span>
+<a class="relative inline-flex items-center rounded-r-md px-2 py-2 text-slate-400 ring-1 ring-inset ring-slate-300 ring-slate-700 hover:bg-slate-50 hover:bg-slate-800 focus:z-20 focus:outline-offset-0" href="#">
+<span class="sr-only">Next</span>
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</a>
+</nav>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script type="module">
+import { ensureAuth } from "/shared/auth.js";
+import { db } from "/shared/firebase.js";
+import { collection, onSnapshot, query, where, limit } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import { listenUsers, setUserRole, setUserPermissions, deleteUserDoc } from "/shared/services/users.js";
+import { logAuditEvent } from "/shared/audit.js";
+import { createUserByAdmin, setUserPasswordByAdmin, setUserRoleByAdmin } from "/shared/admin.js";
+import { formatDate } from "/shared/utils.js";
+
+const userTableBody = document.getElementById("userTableBody");
+const searchInput = document.getElementById("userSearchInput");
+const addUserBtn = document.getElementById("addUserBtn");
+const exportBtn = document.getElementById("exportUsersBtn");
+
+const DEFAULT_LOGIN_DOMAIN = "grupoar.com";
+const normalizeLogin = (value) => {
+  const trimmed = String(value || "").trim();
+  if (!trimmed) return "";
+  if (trimmed.includes("@")) return trimmed;
+  return `${trimmed}@${DEFAULT_LOGIN_DOMAIN}`;
+};
+
+
+const mainContent = document.querySelector("main");
+const securityBanner = document.createElement("div");
+securityBanner.id = "securityAlertBanner";
+securityBanner.className = "hidden mb-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800";
+securityBanner.innerHTML = `
+  <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <p class="font-bold">Alerta de seguridad activa</p>
+      <p class="text-xs">Se detectaron accesos o eventos con posible anomalía.</p>
+    </div>
+    <a href="/audit" class="mt-2 inline-flex items-center gap-2 rounded-full border border-amber-300 px-3 py-1 text-xs font-semibold text-amber-800 hover:bg-amber-100 sm:mt-0">
+      Ver auditoría
+      <span id="securityAlertCount" class="rounded-full bg-amber-200 px-2 py-0.5 text-[10px] font-bold">0</span>
+    </a>
+  </div>
+`;
+if (mainContent) {
+  mainContent.prepend(securityBanner);
+}
+
+const watchSecurityAlerts = () => {
+  const alertsRef = collection(db, "securityAlerts");
+  const q = query(alertsRef, where("status", "==", "open"), limit(10));
+  return onSnapshot(q, (snapshot) => {
+    const count = snapshot.size;
+    const countEl = securityBanner.querySelector("#securityAlertCount");
+    if (countEl) countEl.textContent = String(count);
+    if (count > 0) {
+      securityBanner.classList.remove("hidden");
+    } else {
+      securityBanner.classList.add("hidden");
+    }
+  });
+};
+
+const roles = [
+  { value: "Admin", label: "Admin" },
+  { value: "StaffFerreteria", label: "Staff Ferretería" },
+  { value: "PersonalObra", label: "Personal Obra" },
+  { value: "Pending", label: "Pendiente" },
+];
+
+let users = [];
+let currentUser = null;
+
+const renderUsers = () => {
+  const term = searchInput.value.trim().toLowerCase();
+  const filtered = term
+    ? users.filter((user) => {
+        return (
+          (user.displayName || "").toLowerCase().includes(term) ||
+          (user.email || "").toLowerCase().includes(term) ||
+          (user.employeeId || "").toLowerCase().includes(term) ||
+          (user.id || "").toLowerCase().includes(term)
+        );
+      })
+    : users;
+
+  userTableBody.innerHTML = "";
+  if (!filtered.length) {
+    userTableBody.innerHTML = `
+      <tr>
+        <td colspan="6" class="py-6 px-6 text-center text-slate-500 text-slate-400">Sin usuarios registrados.</td>
+      </tr>`;
+    return;
+  }
+
+  filtered.forEach((user) => {
+    const isSuper = user.superAdmin === true;
+    const status = isSuper ? "Superadmin" : user.role === "Pending" ? "Pendiente" : "Activo";
+    const statusClasses = isSuper
+      ? "bg-indigo-50 text-indigo-700 ring-indigo-600/20 bg-indigo-900/30 text-indigo-300"
+      : user.role === "Pending"
+        ? "bg-amber-50 text-amber-700 ring-amber-600/20 bg-amber-900/30 text-amber-300"
+        : "bg-green-50 text-green-700 ring-green-600/20 bg-green-900/30 text-green-400";
+    const lastLogin = user.lastLoginAt ? formatDate(user.lastLoginAt) : (user.lastLogin ? formatDate(user.lastLogin) : "-");
+    const selectDisabled = isSuper ? "disabled" : "";
+    const selectExtra = isSuper ? "opacity-60 cursor-not-allowed" : "";
+    const options = roles
+      .map(
+        (role) =>
+          `<option value="${role.value}" ${role.value === (user.role || "Pending") ? "selected" : ""}>${role.label}</option>`
+      )
+      .join("");
+
+    userTableBody.insertAdjacentHTML(
+      "beforeend",
+      `<tr class="group hover:bg-slate-50 hover:bg-slate-800/50 transition-colors">
+        <td class="py-4 px-6">
+          <div class="flex items-center gap-3">
+            <div class="size-10 rounded-full bg-slate-100 bg-slate-700 flex items-center justify-center font-bold text-slate-600 text-slate-200">
+              ${(user.displayName || user.email || "U")[0].toUpperCase()}
+            </div>
+            <div>
+              <p class="font-bold text-slate-900 text-white text-sm">${user.displayName || "Usuario"}</p>
+              <p class="text-xs text-slate-500 text-slate-400">${user.email || "sin correo"}</p>
+            </div>
+          </div>
+        </td>
+        <td class="py-4 px-6 text-sm text-slate-600 text-slate-300 font-mono">${user.employeeId || user.id}</td>
+        <td class="py-4 px-6">
+          <select data-uid="${user.id}" ${selectDisabled} class="role-select w-40 rounded-md bg-white bg-slate-900 px-3 py-2 text-xs font-semibold text-slate-900 text-white shadow-sm ring-1 ring-inset ring-slate-300 ring-slate-700 hover:bg-slate-50 hover:bg-slate-800 ${selectExtra}">
+            ${options}
+          </select>
+        </td>
+        <td class="py-4 px-6 text-sm text-slate-500 text-slate-400">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[16px] text-slate-400">schedule</span>
+            ${lastLogin}
+          </div>
+        </td>
+        <td class="py-4 px-6 text-center">
+          <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold ring-1 ring-inset ${statusClasses}">
+            <span class="size-1.5 rounded-full ${user.role === "Pending" ? "bg-amber-600" : "bg-green-600"}"></span>
+            ${status}
+          </span>
+        </td>
+        <td class="py-4 px-6 text-right">
+          <div class="flex justify-end gap-2">
+            <button data-action="permissions" data-uid="${user.id}" class="px-3 py-1 rounded-md border border-slate-300 text-slate-600 text-xs font-semibold hover:text-primary">Permisos</button>
+            <button data-action="reset" data-uid="${user.id}" class="px-3 py-1 rounded-md border border-[#303169] text-[#8f90cc] text-xs font-semibold hover:text-white">Restablecer</button>
+            <button data-action="delete" data-uid="${user.id}" ${isSuper ? "disabled" : ""} class="px-3 py-1 rounded-md border border-rose-500/30 text-rose-500 text-xs font-semibold hover:text-white ${isSuper ? "opacity-60 cursor-not-allowed" : ""}">${isSuper ? "Protegido" : "Eliminar"}</button>
+          </div>
+        </td>
+      </tr>`
+    );
+  });
+};
+
+userTableBody.addEventListener("change", async (event) => {
+  const select = event.target.closest(".role-select");
+  if (!select) return;
+  const uid = select.dataset.uid;
+  const role = select.value;
+  try {
+    try {
+      await setUserRoleByAdmin({ uid, role });
+    } catch {
+      await setUserRole(uid, role);
+    }
+    logAuditEvent({
+      action: "update_role",
+      resource: "user",
+      resourceId: uid,
+      severity: "warning",
+      details: { role },
+    });
+  } catch (error) {
+    alert(error.message || "No se pudo actualizar el rol.");
+  }
+});
+
+userTableBody.addEventListener("click", async (event) => {
+  const btn = event.target.closest("button[data-action]");
+  if (!btn) return;
+  const uid = btn.dataset.uid;
+  if (!uid) return;
+  if (btn.dataset.action === "reset") {
+    openReset(uid);
+    return;
+  }
+  if (btn.dataset.action === "permissions") {
+    openPermissions(uid);
+    return;
+  }
+  if (btn.dataset.action === "delete") {
+    const target = users.find((entry) => entry.id === uid);
+    if (target?.superAdmin === true) {
+      alert("El superadmin no puede ser eliminado.");
+      return;
+    }
+    const confirmEliminar = confirm("¿Eliminar este usuario del panel?");
+    if (!confirmEliminar) return;
+    try {
+      await deleteUserDoc(uid);
+      logAuditEvent({
+        action: "delete",
+        resource: "user",
+        resourceId: uid,
+        severity: "critical",
+      });
+    } catch (error) {
+      alert(error.message || "No se pudo eliminar.");
+    }
+  }
+});
+
+searchInput.addEventListener("input", () => renderUsers());
+
+const createInviteModal = () => {
+  const modal = document.createElement("div");
+  modal.id = "inviteModal";
+  modal.className = "fixed inset-0 z-[90] hidden items-center justify-center bg-black/60 p-6";
+  modal.innerHTML = `
+    <div class="w-full max-w-md rounded-2xl bg-white bg-[#1a1a2e] p-6 shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-slate-900 text-white">Invitar usuario</h3>
+        <button id="inviteClose" class="text-slate-400 hover:text-slate-600">×</button>
+      </div>
+      <p class="text-sm text-slate-500 text-slate-400 mb-4">
+        El superadmin puede crear usuarios y contraseñas directamente desde este panel.
+      </p>
+      <form id="inviteForm" class="flex flex-col gap-3">
+        <input id="inviteName" class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3 text-slate-900 text-white" placeholder="Nombre completo" />
+        <input id="inviteEmail" type="text" required class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3 text-slate-900 text-white" placeholder="usuario (sin correo)" />
+        <input id="invitePassword" type="password" required class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3 text-slate-900 text-white" placeholder="contraseña temporal" />
+        <select id="inviteRole" class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3 text-slate-900 text-white">
+          ${roles.map((role) => `<option value="${role.value}">${role.label}</option>`).join("")}
+        </select>
+        <div class="flex justify-end gap-3 pt-2">
+          <button type="button" id="inviteCancel" class="px-4 py-2 rounded-lg border border-slate-200 border-slate-700 text-slate-600 text-slate-300">Cancelar</button>
+          <button type="submit" class="px-4 py-2 rounded-lg bg-primary text-white font-bold">Asignar rol</button>
+        </div>
+      </form>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  return modal;
+};
+
+const inviteModal = createInviteModal();
+const inviteForm = inviteModal.querySelector("#inviteForm");
+const inviteClose = inviteModal.querySelector("#inviteClose");
+const inviteCancel = inviteModal.querySelector("#inviteCancel");
+
+const createResetModal = () => {
+  const modal = document.createElement("div");
+  modal.id = "resetModal";
+  modal.className = "fixed inset-0 z-[90] hidden items-center justify-center bg-black/60 p-6";
+  modal.innerHTML = `
+    <div class="w-full max-w-md rounded-2xl bg-white bg-[#1a1a2e] p-6 shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-slate-900 text-white">Restablecer contraseña</h3>
+        <button id="resetClose" class="text-slate-400 hover:text-slate-600">×</button>
+      </div>
+      <form id="resetForm" class="flex flex-col gap-3">
+        <input id="resetUid" readonly class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-100 bg-slate-900 px-3 text-slate-700 text-slate-200" />
+        <input id="resetPassword" type="password" required class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3 text-slate-900 text-white" placeholder="Nueva contraseña" />
+        <div class="flex justify-end gap-3 pt-2">
+          <button type="button" id="resetCancel" class="px-4 py-2 rounded-lg border border-slate-200 border-slate-700 text-slate-600 text-slate-300">Cancelar</button>
+          <button type="submit" class="px-4 py-2 rounded-lg bg-primary text-white font-bold">Actualizar</button>
+        </div>
+      </form>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  return modal;
+};
+
+const resetModal = createResetModal();
+const resetForm = resetModal.querySelector("#resetForm");
+const resetClose = resetModal.querySelector("#resetClose");
+const resetCancel = resetModal.querySelector("#resetCancel");
+const resetUidInput = resetModal.querySelector("#resetUid");
+
+const permissionCatalog = [
+  { key: "pos", label: "POS y tickets", desc: "Ventas, tickets y anulaciones." },
+  { key: "inventory", label: "Inventario articulos", desc: "Altas, bajas, stock y ajustes." },
+  { key: "toolLog", label: "Bitácora de herramienta", desc: "Prestamos y devoluciones." },
+  { key: "clients", label: "Catálogo de clientes", desc: "Seguimiento de cotizaciones." },
+  { key: "promotions", label: "Promociones", desc: "Calendario y contenido." },
+  { key: "projects", label: "Proyectos", desc: "Gastos, materiales y pagos." },
+  { key: "incidents", label: "Incidentes", desc: "Registro y evidencia." },
+  { key: "attendance", label: "Asistencia", desc: "Entradas, salidas y reportes." },
+  { key: "reports", label: "Reportes", desc: "Reportes y exportaciones." },
+  { key: "finance", label: "Finanzas", desc: "Caja y contabilidad." },
+  { key: "payroll", label: "Nómina", desc: "Sueldos y RRHH." },
+  { key: "evaluations", label: "Evaluaciones", desc: "Solicitudes y resultados semanales." },
+  { key: "vendors", label: "Proveedores", desc: "Gestión de proveedores." },
+  { key: "settings", label: "Ajustes", desc: "Configuración general." },
+  { key: "badges", label: "Gafetes", desc: "Generación de gafetes con QR." },
+  { key: "audit", label: "Seguridad", desc: "auditoría y alertas." },
+  { key: "adminUsers", label: "Admin usuarios", desc: "Gestión de accesos." },
+];
+
+const createPermissionsModal = () => {
+  const modal = document.createElement("div");
+  modal.id = "permissionsModal";
+  modal.className = "fixed inset-0 z-[90] hidden items-center justify-center bg-black/60 p-6";
+  modal.innerHTML = `
+    <div class="w-full max-w-2xl rounded-2xl bg-white bg-[#1a1a2e] p-6 shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-slate-900 text-white">Permisos por usuario</h3>
+        <button id="permissionsClose" class="text-slate-400 hover:text-slate-600">X</button>
+      </div>
+      <form id="permissionsForm" class="flex flex-col gap-4">
+        <input id="permissionsUid" type="hidden" />
+        <div id="permissionsList" class="grid gap-3 md:grid-cols-2"></div>
+        <div class="flex justify-end gap-3 pt-2">
+          <button type="button" id="permissionsCancel" class="px-4 py-2 rounded-lg border border-slate-200 border-slate-700 text-slate-600 text-slate-300">Cancelar</button>
+          <button type="submit" class="px-4 py-2 rounded-lg bg-primary text-white font-bold">Guardar permisos</button>
+        </div>
+      </form>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  return modal;
+};
+
+const permissionsModal = createPermissionsModal();
+const permissionsForm = permissionsModal.querySelector("#permissionsForm");
+const permissionsList = permissionsModal.querySelector("#permissionsList");
+const permissionsUid = permissionsModal.querySelector("#permissionsUid");
+const permissionsClose = permissionsModal.querySelector("#permissionsClose");
+const permissionsCancel = permissionsModal.querySelector("#permissionsCancel");
+
+const renderPermissionList = (selected) => {
+  const selectedSet = new Set(selected || []);
+  permissionsList.innerHTML = permissionCatalog
+    .map(
+      (permission) => `
+      <label class="flex items-start gap-3 rounded-xl border border-slate-200 border-slate-700 p-3 hover:border-primary">
+        <input type="checkbox" value="${permission.key}" ${selectedSet.has(permission.key) ? "checked" : ""} class="mt-1 h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary" />
+        <span class="flex flex-col">
+          <span class="text-sm font-semibold text-slate-900 text-white">${permission.label}</span>
+          <span class="text-xs text-slate-500 text-slate-400">${permission.desc}</span>
+        </span>
+      </label>
+    `
+    )
+    .join("");
+};
+
+const openPermissions = (uid) => {
+  const user = users.find((entry) => entry.id === uid);
+  if (!user) return;
+  permissionsUid.value = uid;
+  renderPermissionList(user.permissions || []);
+  permissionsModal.classList.remove("hidden");
+  permissionsModal.classList.add("flex");
+};
+
+const closePermissions = () => {
+  permissionsModal.classList.add("hidden");
+  permissionsModal.classList.remove("flex");
+};
+
+permissionsClose.addEventListener("click", closePermissions);
+permissionsCancel.addEventListener("click", closePermissions);
+
+permissionsForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const uid = permissionsUid.value;
+  const selected = Array.from(permissionsList.querySelectorAll("input[type=\"checkbox\"]:checked")).map((el) => el.value);
+  try {
+    await setUserPermissions(uid, selected);
+    logAuditEvent({
+      action: "update_permissions",
+      resource: "user",
+      resourceId: uid,
+      severity: "warning",
+      details: { permissions: selected },
+    });
+    closePermissions();
+  } catch (error) {
+    alert(error.message || "No se pudieron guardar los permisos.");
+  }
+});
+
+const openInvite = () => {
+  inviteModal.classList.remove("hidden");
+  inviteModal.classList.add("flex");
+};
+const closeInvite = () => {
+  inviteModal.classList.add("hidden");
+  inviteModal.classList.remove("flex");
+  inviteForm.reset();
+};
+
+inviteClose.addEventListener("click", closeInvite);
+inviteCancel.addEventListener("click", closeInvite);
+addUserBtn.addEventListener("click", openInvite);
+
+const openReset = (uid) => {
+  resetUidInput.value = uid || "";
+  resetModal.classList.remove("hidden");
+  resetModal.classList.add("flex");
+};
+const closeReset = () => {
+  resetModal.classList.add("hidden");
+  resetModal.classList.remove("flex");
+  resetForm.reset();
+};
+
+resetClose.addEventListener("click", closeReset);
+resetCancel.addEventListener("click", closeReset);
+
+resetForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const uid = resetUidInput.value.trim();
+  const password = resetModal.querySelector("#resetPassword").value;
+  try {
+    await setUserPasswordByAdmin({ uid, password });
+    logAuditEvent({
+      action: "reset_password",
+      resource: "user",
+      resourceId: uid,
+      severity: "critical",
+    });
+    closeReset();
+  } catch (error) {
+    alert(error.message || "No se pudo restablecer.");
+  }
+});
+
+inviteForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const displayName = inviteModal.querySelector("#inviteName").value.trim();
+  const emailInput = inviteModal.querySelector("#inviteEmail").value.trim();
+  const email = normalizeLogin(emailInput);
+  const password = inviteModal.querySelector("#invitePassword").value;
+  const role = inviteModal.querySelector("#inviteRole").value;
+  try {
+    const result = await createUserByAdmin({ email, password, displayName, role });
+    logAuditEvent({
+      action: "create_user",
+      resource: "user",
+      resourceId: result.uid,
+      severity: "warning",
+      details: { email, role },
+    });
+    closeInvite();
+  } catch (error) {
+    alert(error.message || "No se pudo asignar el rol.");
+  }
+});
+
+exportBtn.addEventListener("click", () => {
+  const headers = ["uid", "name", "email", "role", "status"];
+  const rows = users.map((user) => [
+    user.id,
+    user.displayName || "",
+    user.email || "",
+    user.role || "Pending",
+    user.role === "Pending" ? "Pendiente" : "Activo",
+  ]);
+  const csv = [headers.join(","), ...rows.map((row) => row.map((cell) => `"${cell}"`).join(","))].join("\n");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "usuarios_grupo_ar.csv";
+  link.click();
+});
+
+ensureAuth({ allowRoles: ["Admin"], allowPermissions: ["adminUsers"] }).then(({ user }) => {
+  currentUser = user;
+  watchSecurityAlerts();
+  listenUsers((list) => {
+    users = list;
+    renderUsers();
+  });
+});
+</script>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

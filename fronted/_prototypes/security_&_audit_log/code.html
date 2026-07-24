@@ -1,0 +1,653 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Security Audit Log - Grupo AR ERP</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-white font-display antialiased min-h-screen flex flex-col overflow-x-hidden">
+<!-- Navigation -->
+<header class="sticky top-0 z-50 w-full border-b border-gray-200 border-[#222249] bg-white/90 bg-[#101022]/90 backdrop-blur-md">
+<div class="px-4 md:px-8 lg:px-10 h-16 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary text-white">
+<svg class="h-full w-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_6_535)">
+<path clip-rule="evenodd" d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z" fill="currentColor" fill-rule="evenodd"></path>
+</g>
+<defs>
+<clippath id="clip0_6_535"><rect fill="white" height="48" width="48"></rect></clippath>
+</defs>
+</svg>
+</div>
+<h2 class="text-slate-900 text-white text-lg font-bold leading-tight tracking-tight">Grupo AR ERP</h2>
+</div>
+<nav class="hidden md:flex flex-1 justify-center">
+<div class="flex items-center gap-8">
+<a class="text-slate-500 hover:text-primary text-slate-400 hover:text-white text-sm font-medium transition-colors" href="#">Panel</a>
+<a class="text-slate-500 hover:text-primary text-slate-400 hover:text-white text-sm font-medium transition-colors" href="#">Proyectos</a>
+<a class="text-slate-500 hover:text-primary text-slate-400 hover:text-white text-sm font-medium transition-colors" href="#">HR</a>
+<a class="text-slate-500 hover:text-primary text-slate-400 hover:text-white text-sm font-medium transition-colors" href="#">Inventario</a>
+<a class="text-primary text-white text-sm font-bold" href="#">Ajustes</a>
+</div>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center text-slate-500 text-slate-400 hover:text-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 ring-2 ring-gray-100 ring-[#222249]" data-alt="User profile avatar showing a smiling professional" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCV-grMI7Kqk-2hA1_6naj8ZLqsWAq3tMRoYJvEtWkDXT_VC6wJe-WXxcvK9tp6RlotcJz1NlZmB2iirKTM3H7aof1n1qi5X8o3_QIEEEPvtwFovbC_KEjItlaRlFnr0gxTRLIea5-dx085LtSOse9hNPArVQNQ0IfKABlXdOhrChRXy9xJhTfIUagsbaD7l7gc8N653twEqpy4Lx0c7hlNTKg-hh_SVruo91FWsKIPjAM5UVl_IK5IGiRPTdbQzMQrvR0H8fg5gp70");'></div>
+</div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-[1400px] mx-auto px-4 md:px-8 lg:px-10 py-6 md:py-8 flex flex-col gap-6">
+<!-- Breadcrumbs -->
+<div class="flex items-center gap-2 text-sm">
+<a class="text-slate-500 text-[#8f90cc] hover:underline" href="#">Inicio</a>
+<span class="text-slate-400 text-[#8f90cc] material-symbols-outlined text-[16px]">chevron_right</span>
+<a class="text-slate-500 text-[#8f90cc] hover:underline" href="#">Ajustes</a>
+<span class="text-slate-400 text-[#8f90cc] material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-slate-900 text-white font-medium">Security Audit Log</span>
+</div>
+<!-- Header Section -->
+<div class="flex flex-wrap items-end justify-between gap-4">
+<div class="flex flex-col gap-2 max-w-2xl">
+<h1 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900 text-white">Security Audit Log</h1>
+<p class="text-slate-500 text-[#8f90cc] text-base">Review sensitive actions and access history across the ERP system to ensure compliance and security.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center gap-2 h-10 px-4 rounded-lg border border-gray-200 border-[#303169] bg-white bg-[#222249] text-slate-700 text-white hover:bg-gray-50 hover:bg-[#2a2a5a] transition-colors font-medium text-sm">
+<span class="material-symbols-outlined text-[20px]">print</span>
+<span>Print Report</span>
+</button>
+<button id="auditExportBtn" class="flex items-center justify-center gap-2 h-10 px-6 rounded-lg bg-primary hover:bg-primary/90 text-white font-bold text-sm shadow-lg shadow-primary/20 transition-all">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span>Export CSV</span>
+</button>
+</div>
+</div>
+<!-- Filters & Search Toolbar -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 p-5 rounded-xl bg-white bg-[#181934] border border-gray-200 border-[#222249] shadow-sm">
+<!-- Input Fields -->
+<div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="relative group">
+<label class="block text-xs font-semibold text-slate-500 text-[#8f90cc] mb-1.5 uppercase tracking-wider">Date Range</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[#58598a] material-symbols-outlined">calendar_today</span>
+<input id="auditDateInput" class="w-full h-11 pl-10 pr-4 rounded-lg bg-gray-50 bg-[#101023] border border-gray-200 border-[#303169] text-slate-900 text-white placeholder-slate-400 placeholder-[#58598a] focus:ring-2 focus:ring-primary/50 focus:border-primary text-sm font-medium transition-shadow" placeholder="Oct 01, 2023 - Oct 24, 2023" type="text"/>
+</div>
+</div>
+<div class="relative group">
+<label class="block text-xs font-semibold text-slate-500 text-[#8f90cc] mb-1.5 uppercase tracking-wider">Buscar usuario o IP</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[#58598a] material-symbols-outlined">search</span>
+<input id="auditSearchInput" class="w-full h-11 pl-10 pr-4 rounded-lg bg-gray-50 bg-[#101023] border border-gray-200 border-[#303169] text-slate-900 text-white placeholder-slate-400 placeholder-[#58598a] focus:ring-2 focus:ring-primary/50 focus:border-primary text-sm font-medium transition-shadow" placeholder="Buscar error, usuario o URL" type="text"/>
+</div>
+</div>
+</div>
+<!-- Action Chips (Quick Filters) -->
+<div class="lg:col-span-12 flex flex-col gap-2 pt-2 border-t border-gray-100 border-[#222249] mt-2">
+<span class="text-xs font-semibold text-slate-500 text-[#8f90cc] uppercase tracking-wider">Filter by Event Type</span>
+<div class="flex flex-wrap gap-2">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900 bg-white text-white text-slate-900 text-sm font-semibold transition-colors">
+                        All Events
+                    </button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 bg-[#222249] text-slate-600 text-[#8f90cc] hover:bg-gray-200 hover:bg-[#303169] text-sm font-medium transition-colors border border-transparent border-[#303169]">
+<span class="w-2 h-2 rounded-full bg-red-500"></span> Deletions
+                    </button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 bg-[#222249] text-slate-600 text-[#8f90cc] hover:bg-gray-200 hover:bg-[#303169] text-sm font-medium transition-colors border border-transparent border-[#303169]">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span> Edits
+                    </button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 bg-[#222249] text-slate-600 text-[#8f90cc] hover:bg-gray-200 hover:bg-[#303169] text-sm font-medium transition-colors border border-transparent border-[#303169]">
+<span class="w-2 h-2 rounded-full bg-green-500"></span> Logins
+                    </button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 bg-[#222249] text-slate-600 text-[#8f90cc] hover:bg-gray-200 hover:bg-[#303169] text-sm font-medium transition-colors border border-transparent border-[#303169]">
+<span class="w-2 h-2 rounded-full bg-blue-500"></span> Exports
+                    </button>
+<button class="ml-auto text-sm text-primary hover:text-primary/80 font-medium text-[#8f90cc] hover:text-white underline decoration-1 underline-offset-4">
+                        Advanced Filters
+                    </button>
+</div>
+</div>
+</div>
+<!-- High Density Data Table -->
+<div id="alertPanel" class="rounded-xl border border-rose-500/30 bg-rose-500/5 bg-rose-500/10 p-4 flex flex-col gap-3">
+  <div class="flex items-center justify-between">
+    <h3 class="text-sm font-bold text-rose-500">Alertas de seguridad</h3>
+    <span id="alertCount" class="text-xs text-rose-400">0 abiertas</span>
+  </div>
+  <div id="alertList" class="text-xs text-slate-500 text-[#8f90cc]">Sin alertas activas.</div>
+</div>
+<div class="relative flex flex-col min-w-0 break-words w-full shadow-lg rounded-xl bg-white bg-[#181934] border border-gray-200 border-[#222249] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="items-center w-full border-collapse bg-transparent">
+<thead>
+<tr>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 text-[#8f90cc] uppercase tracking-wider text-left border-b border-gray-200 border-[#222249]">Severity</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 text-[#8f90cc] uppercase tracking-wider text-left border-b border-gray-200 border-[#222249]">Timestamp</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 text-[#8f90cc] uppercase tracking-wider text-left border-b border-gray-200 border-[#222249]">User</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 text-[#8f90cc] uppercase tracking-wider text-left border-b border-gray-200 border-[#222249]">Action</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 text-[#8f90cc] uppercase tracking-wider text-left border-b border-gray-200 border-[#222249]">Resource</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 text-[#8f90cc] uppercase tracking-wider text-left border-b border-gray-200 border-[#222249]">IP Address</th>
+<th class="px-6 py-4 text-xs font-bold text-slate-500 text-[#8f90cc] uppercase tracking-wider text-right border-b border-gray-200 border-[#222249]">Details</th>
+</tr>
+</thead>
+<tbody id="auditTableBody" class="divide-y divide-gray-100 divide-[#222249]">
+<!-- Row 1: Critical -->
+<tr class="hover:bg-gray-50 hover:bg-[#1e1f3a] transition-colors group">
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800 bg-red-500/10 text-red-400 border border-red-200 border-red-500/20">
+<span class="w-1.5 h-1.5 rounded-full bg-red-500"></span> Critical
+                                </span>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-600 text-slate-300 font-mono">
+                                2023-10-24 14:30:05
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-cover bg-center" data-alt="Avatar of Admin J" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDPnllh3jMLxmAhl5KR41m7PqWeGEIe9M2ARmp5iwfMSGFBhaKdTlwVVaUs66UasyS3TzOA8V5JGGJPAhfkJku4aJEaC0oBvUGeylD20H_o694wcLLB-flAEXin6CLQHI9PYXNTQvT1-wFmgXzCv1v1L_o1rPiyYTGhsOcXyhocWcVW9qcDgUf_c7iTpGJkMdNjdBLQ5zgcEKlH_iWiBUAhFY82KU6nHm8_MLk8ajjyyFzq9aT6LsPAoc6bNd1MYvLQmxDAigZL_99b");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-slate-800 text-white">James Admin</span>
+<span class="text-xs text-slate-500 text-slate-400">SysAdmin</span>
+</div>
+</div>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<span class="text-sm font-bold text-slate-800 text-white">Deleted Project</span>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-600 text-slate-300">
+                                Project "Alpha"
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-500 text-slate-400 font-mono">
+                                192.168.1.55
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-right">
+<button class="text-slate-400 hover:text-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Warning -->
+<tr class="hover:bg-gray-50 hover:bg-[#1e1f3a] transition-colors group">
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800 bg-amber-500/10 text-amber-400 border border-amber-200 border-amber-500/20">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Warning
+                                </span>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-600 text-slate-300 font-mono">
+                                2023-10-24 14:15:22
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-cover bg-center" data-alt="Avatar of Sarah HR" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAfjSmGt7KQQYTAe-ciMRRY-ZyFK_YZTt-L4ErMnFMr60R44Nz1lUznEH7s-_8lscK-P04_yUVRFqa4pwP2PBHTiwdTGHtSL07gilhqlU6HPC24cE_MiBR0B6ofTmvG-GcUYkP7iC6fb2upPSPllvO3hpjLG4cqt-3f12bvjGNOBSTdEJ2oIMcxWJ0h-1VmDyFwyGHo-LrBBkxvY1fAixpLkgNvcMkYuTErhbv_zzjEmLpjdzB_sd_oV7hy-1aWlq0yOThO89Anw6bh");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-slate-800 text-white">Sarah Miller</span>
+<span class="text-xs text-slate-500 text-slate-400">HR Manager</span>
+</div>
+</div>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<span class="text-sm font-medium text-slate-700 text-slate-200">Edited Salary</span>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-600 text-slate-300">
+                                Employee #402
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-500 text-slate-400 font-mono">
+                                10.0.0.12
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-right">
+<button class="text-slate-400 hover:text-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Info -->
+<tr class="hover:bg-gray-50 hover:bg-[#1e1f3a] transition-colors group">
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 bg-blue-500/10 text-blue-400 border border-blue-200 border-blue-500/20">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Info
+                                </span>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-600 text-slate-300 font-mono">
+                                2023-10-24 13:00:10
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-cover bg-center" data-alt="Avatar of Mike Warehouse" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBD7MnHGENmMyn3_fQr-Lne1fO5rceB-LlGaXHOZ9LFYYY7f8cF9LtstFNZG4AikFUQirDSQHdm9j9bOpqiOYvs9FXIZNvUJq5qeyr-O3DjMvdkFSE4eN6TZd-dvMdI0y9B4kUzUd9QsXuh7CRWBJtQ8GVV7BKpuzuOabq5robFu4bAmdpkSpyUJy6PqQR3mDgWK6sOEB4fflmPilqqQiOv9icUM9V5pkT5TcP4eFfoau9ZxdPUqtS7nsGR9pmSyovIsiYWj78sek8k");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-slate-800 text-white">Mike Ross</span>
+<span class="text-xs text-slate-500 text-slate-400">Warehouse Lead</span>
+</div>
+</div>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<span class="text-sm font-medium text-slate-700 text-slate-200">Modified Inventory</span>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-600 text-slate-300">
+                                +50 Units (SKU-99)
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-500 text-slate-400 font-mono">
+                                192.168.1.10
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-right">
+<button class="text-slate-400 hover:text-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Success -->
+<tr class="hover:bg-gray-50 hover:bg-[#1e1f3a] transition-colors group">
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 bg-green-500/10 text-green-400 border border-green-200 border-green-500/20">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> Success
+                                </span>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-600 text-slate-300 font-mono">
+                                2023-10-24 09:15:00
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-cover bg-center" data-alt="Avatar of User" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDilZW6_tKcQ1vp9n-MBXBi95ilfVzA1JhoJSV5ompCOFCRAVr3iIruVuHAe43GT6aYyTC-qmYXe7jz_1pmntEW_i3LBgrA9gLEKWkbR8ukmfNvwS77K6M_L-lAn62ea8C6G7-aawUD-bIoA3Qk5gjViD9_9a6Xr4vFiNuGTRxqg33N4Jq0Zj_8AJ3n8tDuzrTCghN666qDXLwdsU__Bsz3IAlxEDUXkm5ve7CvHuY5hQdZ4XRYq7vHRxJVWjcIFFQMMTVuV2BHXci3");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-slate-800 text-white">Elena G.</span>
+<span class="text-xs text-slate-500 text-slate-400">Auditor</span>
+</div>
+</div>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<span class="text-sm font-medium text-slate-700 text-slate-200">System Login</span>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-600 text-slate-300">
+                                ERP Portal
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-500 text-slate-400 font-mono">
+                                201.55.12.9
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-right">
+<button class="text-slate-400 hover:text-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 5: Info -->
+<tr class="hover:bg-gray-50 hover:bg-[#1e1f3a] transition-colors group">
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 bg-blue-500/10 text-blue-400 border border-blue-200 border-blue-500/20">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Info
+                                </span>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-600 text-slate-300 font-mono">
+                                2023-10-24 09:12:45
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-cover bg-center" data-alt="Avatar of Sarah HR" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuATfk3czmHqxAjxr_Qw0cQWeWLgtpC_G4iVRJQUSB1KjxbjKj9pspQgtxrgmiv-ShiIo7H1HZr8VXccpLyeeEAcXIowrhn5arBGt6mTZKWparJC6XaxY9-L5UCB_vBQBLXL6VQmNNL15i1CXNMCUnqNEi1eq7iGCHB052UJC54b7sDJ-R89gND_nusYvmEt_mEhz1dkyWpq7qBvNLrVK-Hk9i_tSs1i66dEtKovZqnDtuciWRZZEVAaCWiaPUpp8gXxjY9iebuqpzgH");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-slate-800 text-white">Sarah Miller</span>
+<span class="text-xs text-slate-500 text-slate-400">HR Manager</span>
+</div>
+</div>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<span class="text-sm font-medium text-slate-700 text-slate-200">Viewed Report</span>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-600 text-slate-300">
+                                Payroll Oct 2023
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-500 text-slate-400 font-mono">
+                                10.0.0.12
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-right">
+<button class="text-slate-400 hover:text-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 6: Info -->
+<tr class="hover:bg-gray-50 hover:bg-[#1e1f3a] transition-colors group">
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 bg-blue-500/10 text-blue-400 border border-blue-200 border-blue-500/20">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Info
+                                </span>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-600 text-slate-300 font-mono">
+                                2023-10-24 08:30:10
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-cover bg-center" data-alt="Avatar of Admin J" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBEv_e9eB_mTWiCwifo2tKtEWm7o2vVD2t6MLjuNYWIAYRnny8FIFAS-bgCXI_h4LWOfHumHonVMMAZpgUSRl95Ox1vfBmMHO-6VUWrwTpUamfIToe4B3ps7cJmZs6RnKCKQ2ikBlpVjiqQ01N_fvB66ZvXnawmyXCxOhzCUXuBbAxRwMH9Z_ROxjbmiHzCpL_PNMi3X9MxBipHAk92Gu0fvg71jF_0Ock9KhUQ_taXGgnjs8_rp5HleOjtFxNm8FYaF95MylQF5vcy");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-slate-800 text-white">James Admin</span>
+<span class="text-xs text-slate-500 text-slate-400">SysAdmin</span>
+</div>
+</div>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+<span class="text-sm font-medium text-slate-700 text-slate-200">Exported Log</span>
+</td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-600 text-slate-300">
+                                Security_Log_Sept.csv
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-500 text-slate-400 font-mono">
+                                192.168.1.55
+                            </td>
+<td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-right">
+<button class="text-slate-400 hover:text-primary hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 flex items-center justify-between border-t border-gray-200 border-[#222249] bg-gray-50 bg-[#181934]">
+<div id="auditCountLabel" class="text-sm text-slate-500 text-[#8f90cc]">
+                    Showing <span class="font-bold text-slate-800 text-white">0</span> of <span class="font-bold text-slate-800 text-white">0</span> entries
+                </div>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 border-[#303169] text-slate-500 text-[#8f90cc] hover:bg-white hover:bg-[#222249] disabled:opacity-50">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-white text-sm font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 border-[#303169] text-slate-500 text-[#8f90cc] hover:bg-white hover:bg-[#222249]">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 border-[#303169] text-slate-500 text-[#8f90cc] hover:bg-white hover:bg-[#222249]">3</button>
+<span class="text-slate-400 text-[#58598a] px-1">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 border-[#303169] text-slate-500 text-[#8f90cc] hover:bg-white hover:bg-[#222249]">42</button>
+<button class="w-8 h-8 flex items-center justify-center rounded border border-gray-300 border-[#303169] text-slate-500 text-[#8f90cc] hover:bg-white hover:bg-[#222249]">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<script type="module">
+import { ensureAuth } from "/shared/auth.js";
+import { db } from "/shared/firebase.js";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  limit,
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+const tableBody = document.getElementById("auditTableBody");
+const searchInput = document.getElementById("auditSearchInput");
+const exportBtn = document.getElementById("auditExportBtn");
+const countLabel = document.getElementById("auditCountLabel");
+const alertList = document.getElementById("alertList");
+const alertCount = document.getElementById("alertCount");
+
+const auditLogsCol = collection(db, "auditLogs");
+const errorLogsCol = collection(db, "errorLogs");
+const securityAlertsCol = collection(db, "securityAlerts");
+let auditLogs = [];
+let errorLogs = [];
+let logs = [];
+
+const safeText = (value) => {
+  if (value == null) return "";
+  if (typeof value === "string") return value;
+  try {
+    return JSON.stringify(value);
+  } catch {
+    return String(value);
+  }
+};
+
+const formatDateTime = (value) => {
+  if (!value) return "-";
+  const date = value.seconds ? new Date(value.seconds * 1000) : new Date(value);
+  return new Intl.DateTimeFormat("es-MX", {
+    dateStyle: "short",
+    timeStyle: "medium",
+  }).format(date);
+};
+
+const severityBadge = (level) => {
+  if (level === "critical") {
+    return { label: "Critical", cls: "bg-red-100 text-red-800 bg-red-500/10 text-red-400 border-red-200 border-red-500/20", dot: "bg-red-500" };
+  }
+  if (level === "warning") {
+    return { label: "Warning", cls: "bg-amber-100 text-amber-800 bg-amber-500/10 text-amber-400 border-amber-200 border-amber-500/20", dot: "bg-amber-500" };
+  }
+  return { label: "Info", cls: "bg-blue-100 text-blue-800 bg-blue-500/10 text-blue-400 border-blue-200 border-blue-500/20", dot: "bg-blue-500" };
+};
+
+const getTimestamp = (value) => {
+  if (!value) return 0;
+  if (value.seconds) return value.seconds * 1000;
+  const parsed = new Date(value);
+  const time = parsed.getTime();
+  return Number.isNaN(time) ? 0 : time;
+};
+
+const toIsoString = (value) => {
+  if (!value) return "";
+  if (value.seconds) return new Date(value.seconds * 1000).toISOString();
+  const parsed = new Date(value);
+  const time = parsed.getTime();
+  return Number.isNaN(time) ? "" : parsed.toISOString();
+};
+
+const normalizeAudit = (docSnap) => {
+  const data = docSnap.data() || {};
+  return {
+    id: docSnap.id,
+    source: "audit",
+    action: data.action || "event",
+    resource: data.resource || "-",
+    resourceId: data.resourceId || "",
+    severity: data.severity || "info",
+    uid: data.uid || "",
+    ip: data.ip || "",
+    url: data.url || "",
+    details: safeText(data.details || ""),
+    createdAt: data.createdAt || "",
+    location: data.location || null,
+    anomaly: data.anomaly || false,
+    distance: data.distance || null,
+    userAgent: data.userAgent || "",
+    type: data.resource || "system",
+  };
+};
+
+const normalizeError = (docSnap) => {
+  const data = docSnap.data() || {};
+  const detailParts = [data.message, data.stack, data.extra].filter(Boolean).map(safeText);
+  return {
+    id: docSnap.id,
+    source: "error",
+    action: "error",
+    resource: data.type || "frontend",
+    resourceId: data.id || "",
+    severity: "critical",
+    uid: data.uid || "",
+    ip: "",
+    url: data.url || "",
+    details: detailParts.join(" | "),
+    message: safeText(data.message || ""),
+    stack: safeText(data.stack || ""),
+    createdAt: data.createdAt || "",
+    userAgent: data.userAgent || "",
+    type: "client",
+  };
+};
+
+const mergeLogs = () => {
+  logs = [...auditLogs, ...errorLogs].sort((a, b) => getTimestamp(b.createdAt) - getTimestamp(a.createdAt));
+  render();
+};
+
+const render = () => {
+  const term = searchInput.value.trim().toLowerCase();
+  const filtered = term
+    ? logs.filter((log) => {
+        return (
+          (log.action || "").toLowerCase().includes(term) ||
+          (log.resource || "").toLowerCase().includes(term) ||
+          (log.uid || "").toLowerCase().includes(term) ||
+          (log.ip || "").toLowerCase().includes(term) ||
+          (log.url || "").toLowerCase().includes(term) ||
+          (log.details || "").toLowerCase().includes(term) ||
+          (log.message || "").toLowerCase().includes(term) ||
+          (log.stack || "").toLowerCase().includes(term) ||
+          (log.source || "").toLowerCase().includes(term)
+        );
+      })
+    : logs;
+
+  tableBody.innerHTML = "";
+  if (!filtered.length) {
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="7" class="px-6 py-6 text-center text-slate-500 text-[#8f90cc]">Sin eventos registrados.</td>
+      </tr>`;
+    countLabel.innerHTML = `Showing <span class="font-bold text-slate-800 text-white">0</span> of <span class="font-bold text-slate-800 text-white">0</span> entries`;
+    return;
+  }
+
+  filtered.forEach((log) => {
+    const sev = severityBadge(log.severity);
+    tableBody.insertAdjacentHTML(
+      "beforeend",
+      `<tr class="hover:bg-gray-50 hover:bg-[#1e1f3a] transition-colors group">
+        <td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded text-xs font-medium ${sev.cls}">
+            <span class="w-1.5 h-1.5 rounded-full ${sev.dot}"></span> ${sev.label}
+          </span>
+        </td>
+        <td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-600 text-slate-300 font-mono">
+          ${formatDateTime(log.createdAt)}
+        </td>
+        <td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+          <div class="flex items-center gap-3">
+            <div class="h-8 w-8 rounded-full bg-slate-200 bg-[#222249] flex items-center justify-center text-xs font-bold text-slate-700 text-white">
+              ${(log.uid || "U").slice(0, 2).toUpperCase()}
+            </div>
+            <div class="flex flex-col">
+              <span class="text-sm font-bold text-slate-800 text-white">${log.uid || "Anon"}</span>
+              <span class="text-xs text-slate-500 text-slate-400">${log.type || "client"}</span>
+            </div>
+          </div>
+        </td>
+        <td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap">
+          <span class="text-sm font-bold text-slate-800 text-white">${log.action || "evento"}</span>
+        </td>
+        <td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-600 text-slate-300">
+          <div class="flex flex-col">
+            <span>${log.resource || "-"}</span>
+            ${
+              log.action === "login" && log.location
+                ? `<span class="text-[10px] text-slate-400">Lat ${Number(log.location.lat).toFixed(3)}, Lng ${Number(log.location.lng).toFixed(3)}</span>`
+                : ""
+            }
+          </div>
+        </td>
+        <td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-sm text-slate-500 text-slate-400 font-mono">
+          ${(log.ip || "N/A").split(",")[0]}
+        </td>
+        <td class="border-t-0 px-6 py-3 align-middle whitespace-nowrap text-right">
+          <button class="text-slate-400 hover:text-primary hover:text-white transition-colors" title="Ver detalle" onclick="alert('ID: ${log.id}\\nAccion: ${log.action || ""}\\nRecurso: ${log.resource || ""}\\nDetalle: ${log.details || ""}\\nURL: ${log.url || ""}')">
+            <span class="material-symbols-outlined text-[20px]">visibility</span>
+          </button>
+        </td>
+      </tr>`
+    );
+  });
+
+  countLabel.innerHTML = `Showing <span class="font-bold text-slate-800 text-white">${filtered.length}</span> of <span class="font-bold text-slate-800 text-white">${logs.length}</span> entries`;
+};
+
+searchInput.addEventListener("input", render);
+
+exportBtn.addEventListener("click", () => {
+  if (!logs.length) return;
+  const headers = ["id", "source", "action", "resource", "resourceId", "severity", "uid", "ip", "url", "details", "createdAt", "userAgent", "location", "anomaly", "distance"];
+  const csvEscape = (value) => `"${String(value ? "").replace(/"/g, '""').replace(/\n/g, " ")}"`;
+  const rows = logs.map((log) => [
+    log.id,
+    log.source,
+    log.action,
+    log.resource,
+    log.resourceId || "",
+    log.severity,
+    log.uid || "",
+    (log.ip || "").split(",")[0],
+    log.url || "",
+    log.details || "",
+    toIsoString(log.createdAt),
+    log.userAgent || "",
+    log.location ? safeText(log.location) : "",
+    log.anomaly ? "",
+    log.distance ? "",
+  ]);
+  const csv = [headers.join(","), ...rows.map((row) => row.map(csvEscape).join(","))].join("\n");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "auditoria_grupo_ar.csv";
+  link.click();
+});
+
+ensureAuth({ allowRoles: ["Admin"], allowPermissions: ["audit"] }).then(() => {
+  const auditQuery = query(auditLogsCol, orderBy("createdAt", "desc"), limit(100));
+  onSnapshot(auditQuery, (snapshot) => {
+    auditLogs = snapshot.docs.map((docSnap) => normalizeAudit(docSnap));
+    mergeLogs();
+  });
+
+  const errorQuery = query(errorLogsCol, orderBy("createdAt", "desc"), limit(100));
+  onSnapshot(errorQuery, (snapshot) => {
+    errorLogs = snapshot.docs.map((docSnap) => normalizeError(docSnap));
+    mergeLogs();
+  });
+
+  const alertsQuery = query(securityAlertsCol, orderBy("createdAt", "desc"), limit(10));
+  onSnapshot(alertsQuery, (snapshot) => {
+    const alerts = snapshot.docs.map((docSnap) => ({ id: docSnap.id, ...docSnap.data() }))
+      .filter((alert) => alert.status === "open");
+    if (!alerts.length) {
+      alertList.textContent = "Sin alertas activas.";
+      alertCount.textContent = "0 abiertas";
+      return;
+    }
+    alertCount.textContent = `${alerts.length} abiertas`;
+    alertList.innerHTML = alerts
+      .map((alert) => {
+        return `<div class="flex items-center justify-between gap-3 border-t border-rose-500/10 pt-2">
+          <div>
+            <p class="text-rose-400 font-semibold">${alert.message || "Alerta de seguridad"}</p>
+            <p class="text-xs text-slate-500 text-[#8f90cc]">UID: ${alert.uid || "N/A"} - ${formatDateTime(alert.createdAt)}</p>
+          </div>
+          <span class="text-[10px] uppercase tracking-wide text-rose-400">${alert.severity || "high"}</span>
+        </div>`;
+      })
+      .join("");
+  });
+});
+</script>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

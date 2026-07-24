@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Site Manager Dashboard | Grupo AR</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<!-- Tailwind Config -->
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-white font-display overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Side Navigation -->
+<aside class="hidden w-72 flex-col border-r border-slate-200 border-slate-800 bg-white bg-[#101a23] p-4 lg:flex">
+<div class="flex flex-col gap-4 h-full">
+<!-- User Profile -->
+<div class="flex items-center gap-3 px-2 py-2">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-12 shrink-0 border-2 border-primary/20" data-alt="Profile picture of the site manager" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAxvMhHZ1CGaCAqHNmGAt8qErq7nphu-rmn-WTfC64tUYbpl6fZuxpiYJluj_CU_G71V4AemUSfPsJPtmDDhd1Oxwwz-SVJ32E0OSBjjg7rEHvTA-rD0NzsEWbrACE8Uh6zhQSrf2e_3kB0nXcXgbIJFHOHBwn8s_6Pm1J5393h4EYKboolU1RwP4R0t5eGUHNgeMrSV8UJt8SkhDORD4lV4V4v3ZVPOpwcUAfRN0N9_S6327uD06bTyp_8IHNeg7fa70-IOGUCiw1A");'></div>
+<div class="flex flex-col overflow-hidden">
+<h1 class="text-slate-900 text-white text-base font-bold leading-tight truncate">Grupo AR</h1>
+<p class="text-slate-500 text-[#90afcb] text-sm font-medium truncate">Jefe de Obra</p>
+</div>
+</div>
+<div class="h-px bg-slate-200 bg-slate-800 my-1"></div>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-2 flex-1">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 bg-[#223749] group transition-colors" href="#">
+<span class="material-symbols-outlined text-primary text-white">apartment</span>
+<p class="text-primary text-white text-sm font-bold">Proyectos</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-slate-100 hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 text-[#90afcb] group-hover:text-primary transition-colors">handyman</span>
+<p class="text-slate-600 text-[#90afcb] text-sm font-medium group-hover:text-primary transition-colors">Tool Logbook</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-slate-100 hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-slate-500 text-[#90afcb] group-hover:text-primary transition-colors">warning</span>
+<p class="text-slate-600 text-[#90afcb] text-sm font-medium group-hover:text-primary transition-colors">Incidents</p>
+</a>
+</nav>
+<!-- Bottom Actions -->
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-slate-100 hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-slate-400">settings</span>
+<p class="text-slate-500 text-slate-400 text-sm font-medium">Ajustes</p>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Top Bar / Header -->
+<header class="w-full bg-white bg-[#101a23] border-b border-slate-200 border-slate-800 z-10">
+<div class="px-6 py-5 flex flex-wrap items-center justify-between gap-4">
+<div class="flex flex-col gap-1">
+<h2 class="text-2xl font-black tracking-tight text-slate-900 text-white">Site Dashboard</h2>
+<div class="flex items-center gap-2 text-slate-500 text-[#90afcb]">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+<span class="text-sm font-medium">Wednesday, Oct 25</span>
+<span class="w-1 h-1 rounded-full bg-slate-400"></span>
+<span class="material-symbols-outlined text-sm text-yellow-500">wb_sunny</span>
+<span class="text-sm font-medium">Sunny</span>
+</div>
+</div>
+<!-- Emergency Action -->
+<button class="flex items-center gap-2 h-11 px-6 bg-[#dc1e28] hover:bg-[#b91921] text-white rounded-lg shadow-lg shadow-red-900/20 transition-all transform hover:scale-[1.02]">
+<span class="material-symbols-outlined">campaign</span>
+<span class="text-sm font-bold tracking-wide">Report Incident</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-6 md:p-8 scroll-smooth">
+<div class="max-w-[1200px] mx-auto flex flex-col gap-8">
+<!-- Top Section: Stats & Quick Overview -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Chart Widget -->
+<div class="lg:col-span-2 bg-white bg-[#16212b] rounded-xl p-6 border border-slate-200 border-slate-700/50 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="text-slate-900 text-white text-lg font-bold">Operational Costs</h3>
+<p class="text-slate-500 text-[#90afcb] text-sm">Materials vs Labor (Weekly)</p>
+</div>
+<div class="text-right">
+<p class="text-2xl font-black text-slate-900 text-white">€12.4k</p>
+<div class="flex items-center justify-end gap-1 text-[#0bda5b] text-sm font-bold">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+2.5%</span>
+</div>
+</div>
+</div>
+<!-- Custom Chart Bars -->
+<div class="grid grid-cols-5 gap-4 h-40 items-end px-2">
+<div class="flex flex-col items-center gap-2 h-full justify-end group cursor-pointer">
+<div class="w-full bg-primary/20 bg-[#223749] rounded-t-sm relative h-[40%] group-hover:bg-primary/30 transition-all">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-sm h-[60%]"></div>
+</div>
+<span class="text-xs font-bold text-slate-400">Mon</span>
+</div>
+<div class="flex flex-col items-center gap-2 h-full justify-end group cursor-pointer">
+<div class="w-full bg-primary/20 bg-[#223749] rounded-t-sm relative h-[30%] group-hover:bg-primary/30 transition-all">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-sm h-[70%]"></div>
+</div>
+<span class="text-xs font-bold text-slate-400">Tue</span>
+</div>
+<div class="flex flex-col items-center gap-2 h-full justify-end group cursor-pointer">
+<div class="w-full bg-primary/20 bg-[#223749] rounded-t-sm relative h-[55%] group-hover:bg-primary/30 transition-all">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-sm h-[50%]"></div>
+</div>
+<span class="text-xs font-bold text-slate-400">Wed</span>
+</div>
+<div class="flex flex-col items-center gap-2 h-full justify-end group cursor-pointer">
+<div class="w-full bg-primary/20 bg-[#223749] rounded-t-sm relative h-[70%] group-hover:bg-primary/30 transition-all">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-sm h-[80%]"></div>
+</div>
+<span class="text-xs font-bold text-slate-400">Thu</span>
+</div>
+<div class="flex flex-col items-center gap-2 h-full justify-end group cursor-pointer">
+<div class="w-full bg-primary/20 bg-[#223749] rounded-t-sm relative h-[85%] group-hover:bg-primary/30 transition-all">
+<!-- Current day indicator -->
+<div class="absolute bottom-0 w-full bg-primary rounded-t-sm h-[40%] animate-pulse"></div>
+</div>
+<span class="text-xs font-bold text-white bg-primary px-1.5 py-0.5 rounded">Fri</span>
+</div>
+</div>
+</div>
+<!-- Quick Summary Widget -->
+<div class="bg-[#dc1e28]/10 bg-[#dc1e28]/10 rounded-xl p-6 border border-red-200 border-red-900/50 flex flex-col justify-center gap-4">
+<div class="flex items-center gap-3 text-[#dc1e28]">
+<div class="p-2 bg-[#dc1e28]/20 rounded-lg">
+<span class="material-symbols-outlined">assignment_late</span>
+</div>
+<span class="font-bold text-lg">Action Required</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 bg-white bg-[#101a23] rounded-lg shadow-sm border border-red-100 border-transparent">
+<span class="text-sm font-medium text-white">Overdue Tools</span>
+<span class="bg-[#dc1e28] text-white text-xs font-bold px-2 py-1 rounded">3 Items</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-white bg-[#101a23] rounded-lg shadow-sm border border-red-100 border-transparent">
+<span class="text-sm font-medium text-white">Pending Reports</span>
+<span class="bg-slate-700 text-white text-xs font-bold px-2 py-1 rounded">1 Draft</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Projects Section -->
+<div class="flex flex-col gap-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<h2 class="text-2xl font-bold text-slate-900 text-white">Active Construction Sites</h2>
+<!-- Chips / Filters -->
+<div class="flex gap-2 overflow-x-auto pb-1">
+<button class="whitespace-nowrap flex h-8 items-center justify-center px-4 rounded-lg bg-primary text-white text-sm font-bold shadow-sm">
+                                    All Sites
+                                </button>
+<button class="whitespace-nowrap flex h-8 items-center justify-center px-4 rounded-lg bg-white bg-[#223749] text-slate-600 text-white text-sm font-medium border border-slate-200 border-transparent hover:bg-slate-50 hover:bg-[#2c445a]">
+                                    On Schedule
+                                </button>
+<button class="whitespace-nowrap flex h-8 items-center justify-center px-4 rounded-lg bg-white bg-[#223749] text-slate-600 text-white text-sm font-medium border border-slate-200 border-transparent hover:bg-slate-50 hover:bg-[#2c445a]">
+                                    Delayed
+                                </button>
+<button class="whitespace-nowrap flex h-8 items-center justify-center px-4 rounded-lg bg-white bg-[#223749] text-slate-600 text-white text-sm font-medium border border-slate-200 border-transparent hover:bg-slate-50 hover:bg-[#2c445a]">
+                                    Material Shortage
+                                </button>
+</div>
+</div>
+<!-- Project Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- Card 1: Active & Busy -->
+<div class="flex flex-col bg-white bg-[#16212b] rounded-xl border border-slate-200 border-slate-700/50 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="h-32 bg-cover bg-center relative" data-alt="Construction site overview with crane" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBlNfZ9jXRYR6V2Iuj7HRBnnl4S2gFvcMCPTdm-VNEzJsROSW-zzb0nimbYY_1PnptZTfeBu_macU0lhKSJnXvZYFKXIMiQoMMk0NiGGAVODo-EZDugU1mk0V4ypS8AOAsgqvZYoYCpeXRCTt5V4aRzXzV4D8BXovTlVAQ2-H94zGQWPlGA0TFegiOd27LwWyFK97T9Uj__vnJx4vTvIDo1G3atDjVelZEeptFtuHLGT-06j0A_uBtuXDGgv2LGDfl4aXkXuBG0Nbti');">
+<div class="absolute inset-0 bg-gradient-to-t from-[#16212b] to-transparent opacity-90"></div>
+<div class="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+<div>
+<h3 class="text-white font-bold text-lg leading-tight">Residencial Las Lomas</h3>
+<p class="text-slate-300 text-xs flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                                                Madrid Norte, ESP
+                                            </p>
+</div>
+<span class="bg-[#0bda5b]/20 text-[#0bda5b] border border-[#0bda5b]/30 text-xs font-bold px-2 py-1 rounded backdrop-blur-sm">On Schedule</span>
+</div>
+</div>
+<div class="p-5 flex flex-col gap-5">
+<!-- Progress -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-sm">
+<span class="text-slate-500 text-[#90afcb] font-medium">Daily Progress</span>
+<span class="text-slate-900 text-white font-bold">78%</span>
+</div>
+<div class="h-2 w-full bg-slate-100 bg-[#223749] rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[78%] rounded-full"></div>
+</div>
+</div>
+<div class="h-px bg-slate-100 bg-slate-700/50"></div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-1">
+<p class="text-xs text-slate-500 text-[#90afcb] uppercase tracking-wider font-bold">Workers</p>
+<div class="flex items-center -space-x-2 mt-1">
+<img alt="Worker avatar" class="w-8 h-8 rounded-full border-2 border-white border-[#16212b]" data-alt="Worker portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVzC2lEWhnpbEYng50JTNvu4ZtPGI0HCk1hMo4vRJ9fFHJpsqkkx3PzwR6GpBtOXdwjFZdIKpjL-heGz9Dp57srl5qd1jUSoFjqdr83PwdKjoC5rRWjvINdSsZqYz0UHjCglr2ZAfDrQOTJL-sAsFRNusB96ol0lEfkNIui6OfuYkvDeDNuV3-7Wk3rxQk-GS9B7-TX4wXyXdoBGl5O3EQ_FP4f8VtKfOsoXVikQKAAugVmNKoPyI41oKPcpbV8cWA-Dx7nUBAspk-"/>
+<img alt="Worker avatar" class="w-8 h-8 rounded-full border-2 border-white border-[#16212b]" data-alt="Worker portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm2lg7D4-WbE4sqX1m1m4QJcJTInk0Hfd_Zi9b0HJUPb-2xr0glP_a41EAPAJOBhn9QlvOkJ7WkxjHW-Rrcog6Vt_Ig-XI8s2XNbyZbBZZBdaqoO4sRwc5NxfpIVdwX9jtoHHk3pBulxA_qUuE2AoHZ-IHGPfVv2156Z9x_irqze0kjuUoulpPUu67Gsr69kxCON8uoZCzvKzRFp-29UP4E8bW_jWRHNObjAnl1TpYOVBnt3JkNMVR8sTvQ8MG0icuJAMG0ELFpvto"/>
+<img alt="Worker avatar" class="w-8 h-8 rounded-full border-2 border-white border-[#16212b]" data-alt="Worker portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTBz2EAJZq2P8E-uOLtPijbvNHWewjVv3NAAGARt9zCf3D_-m8qekdr56c1q4Oyz_EnusQi9nGgf8RTtlC70c9lsjv3CM5qSjQxJ1_IXSgeI1oWiSc7WZ3es9WR3KXqn6jgZNeA3iCBTMs0MnSVNZBHRP_t-2kPgxUwJYePqNxWS4ZH1XEMXApKUQ4V_9d4yieSpDFZNIlED22VezO7hBG6nk9NWg-bFS7_cn8XAT72Q-t9uxbGVgPqOahG9eEjRqMcbXaKS-rRrUK"/>
+<div class="w-8 h-8 rounded-full border-2 border-white border-[#16212b] bg-slate-200 bg-[#223749] flex items-center justify-center text-[10px] font-bold text-slate-600 text-white">
+                                                    +24
+                                                </div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-xs text-slate-500 text-[#90afcb] uppercase tracking-wider font-bold">Tools</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-orange-500">warning</span>
+<span class="text-sm font-medium text-slate-700 text-slate-200">2 Overdue</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2: Delayed -->
+<div class="flex flex-col bg-white bg-[#16212b] rounded-xl border border-slate-200 border-slate-700/50 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="h-32 bg-cover bg-center relative" data-alt="Steel structure of building under construction" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDvIqsmyZ7smNgTqcF8HjFK__cqh7EwEtYlc14rVh1_sfOWk3ncW39adMmYFMyorQt_2YylKSqLeXCMf4_Otk6oC6791FfuE6qod7SoQmoHuuuQkuRSxQTUtIPSl7jBYiyww3HQvW_vLZC9_SEWiCwftRzAqUJ8y7kX97wjskS2_sTR968ZxTkaxaqo5t3a1du7RspY3JrxzHFnAQHoUnJOt080uf1kVj1Jap7eVM6bCpHU9MONisUkaSHeDhBT_84ejCNphY7DYYLm');">
+<div class="absolute inset-0 bg-gradient-to-t from-[#16212b] to-transparent opacity-90"></div>
+<div class="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+<div>
+<h3 class="text-white font-bold text-lg leading-tight">Torre Central B</h3>
+<p class="text-slate-300 text-xs flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                                                Valencia, ESP
+                                            </p>
+</div>
+<span class="bg-orange-500/20 text-orange-400 border border-orange-500/30 text-xs font-bold px-2 py-1 rounded backdrop-blur-sm">Delayed</span>
+</div>
+</div>
+<div class="p-5 flex flex-col gap-5">
+<!-- Progress -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-sm">
+<span class="text-slate-500 text-[#90afcb] font-medium">Daily Progress</span>
+<span class="text-slate-900 text-white font-bold">12%</span>
+</div>
+<div class="h-2 w-full bg-slate-100 bg-[#223749] rounded-full overflow-hidden">
+<div class="h-full bg-orange-500 w-[12%] rounded-full"></div>
+</div>
+</div>
+<div class="h-px bg-slate-100 bg-slate-700/50"></div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-1">
+<p class="text-xs text-slate-500 text-[#90afcb] uppercase tracking-wider font-bold">Workers</p>
+<div class="flex items-center -space-x-2 mt-1">
+<img alt="Worker avatar" class="w-8 h-8 rounded-full border-2 border-white border-[#16212b]" data-alt="Worker portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCyHEf4Lnuc5ZDHf5rdX65pDVTs2cC3CIKPbA_RP5IV6rRphu-B8OekHJUOAARc67V27PWt8UzWFn0ebqbnMxeUYUMFAtm9tTzPUO8FDIe0tXkPuy-VQRuNDdgjMHZeY8iXZy_fraowT5zF4sF9bKW6UDU7e23DnQEBw5WQylp3zlJ_kpkIcRsOoZ1U-yWcrxA4HV6WB0xEZXs9hwCeoqfUjx4LEL7xnMH2_NEtAd4N5Cxn_Exc_o31hjmzigZKNysgvDF8RGOSlPy"/>
+<div class="w-8 h-8 rounded-full border-2 border-white border-[#16212b] bg-slate-200 bg-[#223749] flex items-center justify-center text-[10px] font-bold text-slate-600 text-white">
+                                                    +8
+                                                </div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-xs text-slate-500 text-[#90afcb] uppercase tracking-wider font-bold">Tools</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-[#0bda5b]">check_circle</span>
+<span class="text-sm font-medium text-slate-700 text-slate-200">All Returned</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3: Early Stage -->
+<div class="flex flex-col bg-white bg-[#16212b] rounded-xl border border-slate-200 border-slate-700/50 shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+<div class="h-32 bg-cover bg-center relative" data-alt="Foundation work at construction site" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCLC0BOAha7V8zYacMggc7k0NJC8Zzp0vdyH9uDxV3ZQJywEuc7Tq2zYCx7Bf8k1Kp5fWt8WY61uLT8znUYy2p8slBz6jncHhXLWC2BQ2Mq2OWYonsI_x-6JDMEeI-ZFG-iVPkzTXZYX07uncco1zuKc5lf0au8ev9mTf07CWE0TOoUfeSR8erkdVNfx66brKbcBdnJic9dxyNijA6HywRlKHkEy3NteZf_CZ4kq609o-Jxod3KhX0VeazalrigkQj5l5IUcZZph-5w');">
+<div class="absolute inset-0 bg-gradient-to-t from-[#16212b] to-transparent opacity-90"></div>
+<div class="absolute bottom-3 left-4 right-4 flex justify-between items-end">
+<div>
+<h3 class="text-white font-bold text-lg leading-tight">Plaza Nueva</h3>
+<p class="text-slate-300 text-xs flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                                                Sevilla, ESP
+                                            </p>
+</div>
+<span class="bg-blue-500/20 text-blue-400 border border-blue-500/30 text-xs font-bold px-2 py-1 rounded backdrop-blur-sm">Foundation</span>
+</div>
+</div>
+<div class="p-5 flex flex-col gap-5">
+<!-- Progress -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-sm">
+<span class="text-slate-500 text-[#90afcb] font-medium">Daily Progress</span>
+<span class="text-slate-900 text-white font-bold">100%</span>
+</div>
+<div class="h-2 w-full bg-slate-100 bg-[#223749] rounded-full overflow-hidden">
+<div class="h-full bg-blue-500 w-full rounded-full"></div>
+</div>
+</div>
+<div class="h-px bg-slate-100 bg-slate-700/50"></div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-1">
+<p class="text-xs text-slate-500 text-[#90afcb] uppercase tracking-wider font-bold">Workers</p>
+<div class="flex items-center -space-x-2 mt-1">
+<img alt="Worker avatar" class="w-8 h-8 rounded-full border-2 border-white border-[#16212b]" data-alt="Worker portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAx-EbuzRhB28RPX4Rfw0iIpmLCyK8kjpksx5uCH0yIR4KcgdTnp1kMgfxRTRDO39vC0yPYKSOuIfpULgPkXkWg2YUOtVhThvYsZyhPS7G1v46juJU0l-RGXW8z_HWXkT_S4KTulASTB1crsLVelGIr0vMQv64ZebVojML_qKmQdLsyoUTrIjUDGUiWQWsjpuVtJnCrM4dzF_G2T_Es2mU7myajMPPOCt2ZiSfQ2v46qp2WGYQToaOKSFLA4PY_jnhrZlSIH9QVU54W"/>
+<img alt="Worker avatar" class="w-8 h-8 rounded-full border-2 border-white border-[#16212b]" data-alt="Worker portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSacoWI06SaZ63hP0wvKJcHbQt4P9GFMLQKya2Z7B-lOZQ_MOPu2J3mMTlJiEYUKR6XjgyFv25w8jnxRcGTsLcBtZ_wYbUHha965E7wdGL18k3FSASmBsizqu5kNbMtKhQ2LitK82c18SUQwbr9_CxWTShwYcdVLJOJK7zXnDQUw5KD8ljB343RAeqjco-4cID_6LlfgUqvjHC_xoIWVIOwh06hgyMeQHq395FmfFC0ycTSX8IVLMrd6iiY8tIX5xVNr1dSn-pzI6x"/>
+<div class="w-8 h-8 rounded-full border-2 border-white border-[#16212b] bg-slate-200 bg-[#223749] flex items-center justify-center text-[10px] font-bold text-slate-600 text-white">
+                                                    +15
+                                                </div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-xs text-slate-500 text-[#90afcb] uppercase tracking-wider font-bold">Tools</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-[#0bda5b]">check_circle</span>
+<span class="text-sm font-medium text-slate-700 text-slate-200">All Returned</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

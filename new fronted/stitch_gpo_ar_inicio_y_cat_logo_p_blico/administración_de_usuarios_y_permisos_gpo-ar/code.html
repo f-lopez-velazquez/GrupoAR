@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Administración de Usuarios y Permisos GPO-AR</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#096fc8", // Corporate Blue
+                        "primary-dark": "#064e8d",
+                        "accent-red": "#dc1e28", // Corporate Red
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111518] dark:text-white font-display antialiased overflow-x-hidden">
+<div class="relative flex min-h-screen w-full flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e5e7eb] dark:border-b-gray-700 bg-white dark:bg-[#111518] px-10 py-3 sticky top-0 z-50 shadow-sm">
+<div class="flex items-center gap-4 text-[#111518] dark:text-white">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined text-xl">admin_panel_settings</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">GPO-AR Admin</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="flex gap-2">
+<button class="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-[#111518] dark:text-white transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-[#111518] dark:text-white transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="flex h-10 cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full bg-gray-100 hover:bg-red-50 dark:bg-gray-800 dark:hover:bg-red-900/30 text-[#111518] dark:text-white hover:text-accent-red transition-colors px-4">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm font-bold hidden sm:block">Salir</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden md:block">
+<p class="text-sm font-bold text-[#111518] dark:text-white leading-none">paco-gpoAR</p>
+<p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Super Admin</p>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary" data-alt="Profile picture of the admin user" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBmWe6yixbQmLnyDrU4yz4CepUcBidpL2T2R4ePzGn5bM4VlwxD8KMnxiPSUvlkt-aSC9CQQugfo9onM4YjOTVDvsRlcsNNhYNLL97Dj6_Rt6yc_Ezg8RUMbsn-SX1YEXGHli0UEnI_oev5XGhvtjdxa-MmwHrx_x5fXr5qAhwLX2Gf3p4wTAfhF_0Eali4f2d1LyyK-ZBUoCw9QSizyGNT0pU6REtovhZG4EFn2wixFZOa5r2OAujuu8Fsvdw1UuSmRPK9G6SPhEg");'></div>
+</div>
+</div>
+</header>
+<div class="layout-container flex h-full grow flex-col px-4 md:px-10 py-5 mx-auto w-full max-w-[1440px]">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 py-2 mb-4">
+<a class="text-gray-500 hover:text-primary transition-colors text-sm font-medium leading-normal flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span> Dashboard
+                </a>
+<span class="text-gray-400 text-sm font-medium leading-normal">/</span>
+<span class="text-[#111518] dark:text-white text-sm font-medium leading-normal">Gestión de Usuarios</span>
+</div>
+<!-- Security Warning Banner -->
+<div class="mb-6 rounded-lg border border-accent-red/30 bg-red-50 dark:bg-red-900/20 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-accent-red mt-0.5">warning</span>
+<div class="flex flex-col gap-1">
+<p class="text-accent-red text-sm font-bold leading-tight">ADVERTENCIA DE SEGURIDAD</p>
+<p class="text-gray-700 dark:text-gray-300 text-sm font-normal leading-normal">El acceso no autorizado a este panel está estrictamente prohibido y será monitoreado. Todas las acciones quedan registradas.</p>
+</div>
+</div>
+<button class="flex-none cursor-pointer rounded-md px-3 py-1.5 bg-white border border-gray-200 text-gray-600 text-xs font-bold uppercase tracking-wider hover:bg-gray-50 transition-colors shadow-sm">
+                    Entendido
+                </button>
+</div>
+<!-- Page Heading -->
+<div class="flex flex-wrap justify-between items-end gap-4 mb-6">
+<div class="flex flex-col gap-2">
+<h1 class="text-[#111518] dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Gestión de Usuarios y Permisos</h1>
+<p class="text-gray-500 dark:text-gray-400 text-base font-normal leading-normal max-w-2xl">Administre cuentas de personal, configure niveles de acceso granular y gestione las llaves de seguridad para retiros.</p>
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full items-start">
+<!-- Left Column: User Table & Filters (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-4">
+<!-- Search & Filter Bar -->
+<div class="bg-white dark:bg-[#1e293b] p-4 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm flex flex-col sm:flex-row gap-3">
+<label class="flex flex-col flex-1 h-10 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-gray-200 dark:border-gray-600 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary overflow-hidden transition-all">
+<div class="text-gray-500 dark:text-gray-400 flex bg-gray-50 dark:bg-gray-800 items-center justify-center pl-3 pr-2">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none bg-gray-50 dark:bg-gray-800 text-[#111518] dark:text-white focus:outline-0 h-full placeholder:text-gray-400 px-2 text-sm font-normal leading-normal" placeholder="Buscar por nombre, usuario o rol..." value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-4 h-10 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+<span class="hidden sm:inline">Filtrar</span>
+</button>
+<button class="flex items-center gap-2 px-4 h-10 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span class="hidden sm:inline">Exportar</span>
+</button>
+</div>
+</div>
+<!-- Table -->
+<div class="bg-white dark:bg-[#1e293b] rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+<th class="py-3 px-4 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Usuario / Nombre</th>
+<th class="py-3 px-4 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Rol</th>
+<th class="py-3 px-4 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Estado</th>
+<th class="py-3 px-4 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 text-right">Módulos</th>
+<th class="py-3 px-4 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+<tr class="group hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-colors">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-blue-100 text-primary flex items-center justify-center text-xs font-bold">FL</div>
+<div>
+<p class="text-sm font-semibold text-[#111518] dark:text-white">paco-gpoAR</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">Francisco López</p>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center rounded-md bg-purple-50 dark:bg-purple-900/30 px-2 py-1 text-xs font-medium text-purple-700 dark:text-purple-300 ring-1 ring-inset ring-purple-700/10">Super Admin</span>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-1.5">
+<span class="relative flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+</span>
+<span class="text-xs font-medium text-gray-700 dark:text-gray-300">Activo</span>
+</div>
+</td>
+<td class="py-3 px-4 text-right">
+<span class="text-xs font-medium text-gray-500 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">Todos (6)</span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="text-gray-400 hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-[20px]">edit_square</span></button>
+</td>
+</tr>
+<tr class="group hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-colors">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center text-xs font-bold">JP</div>
+<div>
+<p class="text-sm font-semibold text-[#111518] dark:text-white">juan.perez</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">Juan Perez</p>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center rounded-md bg-blue-50 dark:bg-blue-900/30 px-2 py-1 text-xs font-medium text-blue-700 dark:text-blue-300 ring-1 ring-inset ring-blue-700/10">Gerente</span>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-1.5">
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+<span class="text-xs font-medium text-gray-700 dark:text-gray-300">Activo</span>
+</div>
+</td>
+<td class="py-3 px-4 text-right">
+<span class="text-xs font-medium text-gray-500 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">ERP, Proy</span>
+</td>
+<td class="py-3 px-4 text-right">
+<div class="flex justify-end gap-1">
+<button class="text-gray-400 hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-[20px]">edit_square</span></button>
+<button class="text-gray-400 hover:text-accent-red transition-colors p-1"><span class="material-symbols-outlined text-[20px]">delete</span></button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-colors">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xs font-bold">MF</div>
+<div>
+<p class="text-sm font-semibold text-[#111518] dark:text-white">maria.finance</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">Maria Fernandez</p>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center rounded-md bg-gray-50 dark:bg-gray-700 px-2 py-1 text-xs font-medium text-gray-600 dark:text-gray-300 ring-1 ring-inset ring-gray-500/10">Finanzas</span>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-1.5">
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+<span class="text-xs font-medium text-gray-700 dark:text-gray-300">Activo</span>
+</div>
+</td>
+<td class="py-3 px-4 text-right">
+<span class="text-xs font-medium text-gray-500 bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">Finanzas</span>
+</td>
+<td class="py-3 px-4 text-right">
+<div class="flex justify-end gap-1">
+<button class="text-gray-400 hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-[20px]">edit_square</span></button>
+<button class="text-gray-400 hover:text-accent-red transition-colors p-1"><span class="material-symbols-outlined text-[20px]">delete</span></button>
+</div>
+</td>
+</tr>
+<tr class="group hover:bg-blue-50/50 dark:hover:bg-blue-900/10 transition-colors">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-gray-200 text-gray-500 flex items-center justify-center text-xs font-bold">GU</div>
+<div>
+<p class="text-sm font-semibold text-gray-500 dark:text-gray-400">guest_01</p>
+<p class="text-xs text-gray-400 dark:text-gray-500">Usuario Invitado</p>
+</div>
+</div>
+</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center rounded-md bg-gray-50 dark:bg-gray-700 px-2 py-1 text-xs font-medium text-gray-600 dark:text-gray-300 ring-1 ring-inset ring-gray-500/10">Invitado</span>
+</td>
+<td class="py-3 px-4">
+<div class="flex items-center gap-1.5">
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-gray-300"></span>
+<span class="text-xs font-medium text-gray-500 dark:text-gray-400">Inactivo</span>
+</div>
+</td>
+<td class="py-3 px-4 text-right">
+<span class="text-xs font-medium text-gray-400 bg-gray-50 dark:bg-gray-800/50 px-2 py-1 rounded">Ninguno</span>
+</td>
+<td class="py-3 px-4 text-right">
+<div class="flex justify-end gap-1">
+<button class="text-gray-400 hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-[20px]">edit_square</span></button>
+<button class="text-gray-400 hover:text-accent-red transition-colors p-1"><span class="material-symbols-outlined text-[20px]">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-3 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-800/50">
+<span class="text-xs text-gray-500">Mostrando 4 de 12 usuarios</span>
+<div class="flex gap-1">
+<button class="size-8 flex items-center justify-center rounded bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-500 hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+<button class="size-8 flex items-center justify-center rounded bg-primary text-white text-xs font-bold shadow-sm">1</button>
+<button class="size-8 flex items-center justify-center rounded bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-500 hover:border-primary hover:text-primary transition-colors text-xs">2</button>
+<button class="size-8 flex items-center justify-center rounded bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-500 hover:border-primary hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Create/Edit Panel (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Create User Form Card -->
+<div class="bg-white dark:bg-[#1e293b] rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden flex flex-col sticky top-24">
+<div class="p-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 flex justify-between items-center">
+<h3 class="text-base font-bold text-[#111518] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">person_add</span>
+                                Crear Nuevo Usuario
+                            </h3>
+<span class="text-xs text-gray-400 font-normal">ID: #AUTO</span>
+</div>
+<div class="p-5 flex flex-col gap-5">
+<!-- Basic Info -->
+<div class="space-y-3">
+<div class="space-y-1">
+<label class="text-xs font-bold text-gray-600 dark:text-gray-300 uppercase tracking-wide">Nombre de Usuario</label>
+<input class="w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:border-primary focus:ring-primary dark:text-white" placeholder="ej. j.perez" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-bold text-gray-600 dark:text-gray-300 uppercase tracking-wide">Contraseña Temporal</label>
+<div class="relative">
+<input class="w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:border-primary focus:ring-primary dark:text-white pr-10" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600"><span class="material-symbols-outlined text-[18px]">visibility</span></button>
+</div>
+</div>
+</div>
+<hr class="border-gray-100 dark:border-gray-700"/>
+<!-- Permissions Toggles -->
+<div class="space-y-3">
+<label class="text-xs font-bold text-gray-600 dark:text-gray-300 uppercase tracking-wide mb-2 block">Permisos de Módulos</label>
+<!-- Toggle Item -->
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium text-gray-700 dark:text-gray-300">Frontend Editor</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Toggle Item -->
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium text-gray-700 dark:text-gray-300">Employee Management</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Toggle Item -->
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium text-gray-700 dark:text-gray-300">Project Control</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Toggle Item -->
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium text-gray-700 dark:text-gray-300">ERP / Inventory</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Toggle Item -->
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium text-gray-700 dark:text-gray-300">Marketing</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Toggle Item -->
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium text-gray-700 dark:text-gray-300">Financial Reports</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/20 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<!-- Save Button -->
+<button class="flex w-full cursor-pointer items-center justify-center rounded-lg h-10 bg-primary hover:bg-primary-dark transition-colors text-white text-sm font-bold leading-normal tracking-[0.015em] shadow-md mt-2">
+<span class="material-symbols-outlined text-sm mr-2">save</span> Guardar Usuario
+                            </button>
+</div>
+</div>
+<!-- Special Key Security Section -->
+<div class="rounded-xl border border-accent-red/20 bg-gradient-to-br from-white to-red-50 dark:from-[#1e293b] dark:to-red-900/10 shadow-sm p-5 relative overflow-hidden group">
+<div class="absolute right-[-10px] top-[-10px] text-accent-red/5 group-hover:text-accent-red/10 transition-colors">
+<span class="material-symbols-outlined text-[100px]">lock_person</span>
+</div>
+<h4 class="text-accent-red text-sm font-black uppercase tracking-wider mb-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">vpn_key</span> Special Key
+                        </h4>
+<p class="text-gray-600 dark:text-gray-400 text-sm mb-4 relative z-10">
+                            Habilita la autorización global para <strong>Retiros de Efectivo</strong>. Requiere confirmación biométrica.
+                        </p>
+<div class="flex items-center justify-between bg-white dark:bg-[#111518] p-3 rounded-lg border border-accent-red/20 relative z-10">
+<span class="text-sm font-bold text-gray-800 dark:text-white">Estado de la Llave</span>
+<div class="flex items-center gap-2">
+<span class="text-xs font-bold text-gray-400">OFF</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-accent-red/30 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-accent-red"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="mt-auto border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-[#111518] py-6 px-10">
+<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+<div class="flex gap-4">
+<a class="hover:text-primary transition-colors" href="#">Términos y Condiciones</a>
+<a class="hover:text-primary transition-colors" href="#">Política de Privacidad</a>
+<a class="hover:text-primary transition-colors" href="#">Soporte Técnico</a>
+</div>
+<div class="text-center md:text-right font-medium">
+<p>© 2024 GPO-AR. Todos los derechos reservados.</p>
+<p class="mt-1 text-gray-400">Programado por Francisco López Velázquez</p>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

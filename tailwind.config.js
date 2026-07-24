@@ -1,0 +1,42 @@
+module.exports = {
+  darkMode: "class",
+  content: ["./fronted/**/*.{html,js,jsx,ts,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        primary: "var(--color-primary)",
+        secondary: "var(--color-secondary)",
+        accent: "var(--color-accent)",
+        "accent-red": "var(--color-accent-red)",
+        "corporate-blue": "var(--color-corporate-blue)",
+        "alert-red": "var(--color-alert-red)",
+        "background-light": "var(--color-bg-light)",
+        "background-dark": "var(--color-bg-dark)",
+        "surface-light": "var(--color-surface-light)",
+        "surface-dark": "var(--color-surface-dark)",
+        "surface-hover": "var(--color-surface-hover)",
+        "border-dark": "var(--color-border-dark)",
+        "text-secondary": "var(--color-text-secondary)",
+        "card-dark": "var(--color-card-dark)",
+        "input-dark": "var(--color-input-dark)",
+        "input-placeholder": "var(--color-input-placeholder)",
+        ink: "var(--color-ink)",
+        midnight: "var(--color-midnight)",
+        steel: "var(--color-steel)",
+        cloud: "var(--color-cloud)",
+      },
+      fontFamily: {
+        display: ["Sora", "Public Sans", "Manrope", "Inter", "sans-serif"],
+        sans: ["Sora", "Public Sans", "Manrope", "Inter", "sans-serif"],
+      },
+      borderRadius: {
+        DEFAULT: "0.25rem",
+        lg: "0.5rem",
+        xl: "0.75rem",
+        "2xl": "1rem",
+        full: "9999px",
+      },
+    },
+  },
+  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/container-queries")],
+};

@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Grupo AR - Hardware Store Dashboard</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<!-- Theme Config -->
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-white font-display overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Side Navigation -->
+<aside class="flex w-72 flex-col border-r border-white/10 bg-surface-dark/50 backdrop-blur-xl">
+<div class="flex flex-col h-full p-4 justify-between">
+<div class="flex flex-col gap-8">
+<!-- Header / Logo -->
+<div class="flex items-center gap-3 px-2 pt-2">
+<div class="relative flex items-center justify-center size-10 rounded-xl bg-corporate-blue text-white shadow-lg shadow-blue-900/50">
+<span class="material-symbols-outlined text-[24px]">apartment</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-white text-base font-bold leading-tight tracking-tight">Grupo AR</h1>
+<p class="text-slate-400 text-xs font-medium uppercase tracking-wide">Ferretería Dashboard</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex flex-col gap-2">
+<!-- Dashboard (Active) -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary shadow-lg shadow-primary/40 text-white transition-all hover:translate-x-1" href="/dashboard-ferreteria">
+<span class="material-symbols-outlined fill-1">dashboard</span>
+<span class="text-sm font-semibold">Panel</span>
+</a>
+<!-- Inventory -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-surface-hover transition-all" href="/inventario">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-sm font-medium">Inventario</span>
+</a>
+<!-- Sales -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-surface-hover transition-all" href="/pos">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="text-sm font-medium">Ventas</span>
+</a>
+<!-- Tool Logbook -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-surface-hover transition-all" href="/bitacora">
+<span class="material-symbols-outlined">handyman</span>
+<span class="text-sm font-medium">Bitácora</span>
+</a>
+</nav>
+</div>
+<!-- Bottom Links -->
+<div class="flex flex-col gap-2 border-t border-white/5 pt-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-surface-hover transition-all" href="/ajustes">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Ajustes</span>
+</a>
+<!-- User Profile Snippet -->
+<div class="mt-2 flex items-center gap-3 px-4 py-3 rounded-xl bg-surface-hover border border-white/5">
+<div class="size-8 rounded-full bg-cover bg-center" data-alt="Portrait of a male store manager smiling" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB9eyzvsJNVAGNUVBrqBKC1S1RFnvv-Cmo_IoN1RfHfDbUCtcRpNWLxlZ0KzoS-rv8ggVmK_5HdgjMG5F9eWJkq0Uz_wYy7QukELAKmJnJ_CmboM6RebriSgN3vVykPu382ZaYdTDuzF0Ie5bg6ALWIuUeTPtIZeIfBF7BiOZoyh2LT7gdQPiHCq31qv8uPckknunoVx6b8Zk4mDBo0JrKS-BWLKuckjIGPunMJPqvZshj0Gb-ohlI11gpJYMKhsehfPbHjLuweHmPn');"></div>
+<div class="flex flex-col">
+<p class="text-white text-xs font-bold">Usuario</p>
+<p class="text-slate-400 text-[10px]">Encargado</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full overflow-y-auto bg-background-dark relative">
+<!-- Top Gradient Glow -->
+<div class="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none"></div>
+<div class="w-full max-w-[1400px] mx-auto p-8 flex flex-col gap-8 z-10">
+<!-- Search & Header Section -->
+<div class="flex flex-col gap-6">
+<div class="flex justify-between items-end">
+<div class="flex flex-col gap-1">
+<h2 class="text-slate-400 text-sm font-medium uppercase tracking-wider">Overview</h2>
+<h1 class="text-white text-3xl font-bold tracking-tight">Store Dashboard</h1>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 bg-surface-hover hover:bg-white/10 text-white px-4 py-2.5 rounded-lg border border-white/10 transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="text-sm font-semibold">New Sale</span>
+</button>
+<button class="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2.5 rounded-lg shadow-lg shadow-primary/30 transition-colors">
+<span class="material-symbols-outlined text-[20px]">input</span>
+<span class="text-sm font-semibold">Stock In</span>
+</button>
+</div>
+</div>
+<!-- Large Search Bar -->
+<div class="relative w-full max-w-3xl">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-corporate-blue">search</span>
+</div>
+<input class="w-full h-14 pl-12 pr-4 bg-surface-dark border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-corporate-blue focus:border-transparent text-lg shadow-xl" placeholder="Buscar SKU, producto o código de barras..." type="text"/>
+<div class="absolute inset-y-0 right-3 flex items-center">
+<span class="bg-white/5 text-slate-400 text-xs px-2 py-1 rounded border border-white/5">⌘ K</span>
+</div>
+</div>
+</div>
+<!-- KPI Stats Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Total Sales -->
+<div class="bg-surface-dark border border-white/5 rounded-2xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-corporate-blue text-6xl">payments</span>
+</div>
+<div class="flex flex-col gap-1 relative z-10">
+<p class="text-slate-400 text-sm font-medium">Total Sales Today</p>
+<div class="flex items-baseline gap-2">
+<h3 class="text-white text-3xl font-bold tracking-tight">$1,240.50</h3>
+<span class="text-[#0bda68] text-sm font-bold bg-[#0bda68]/10 px-2 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> 12%
+                                </span>
+</div>
+</div>
+<div class="mt-4 h-1 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-corporate-blue w-[70%] rounded-full"></div>
+</div>
+</div>
+<!-- Transactions -->
+<div class="bg-surface-dark border border-white/5 rounded-2xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-white text-6xl">receipt_long</span>
+</div>
+<div class="flex flex-col gap-1 relative z-10">
+<p class="text-slate-400 text-sm font-medium">Transactions</p>
+<div class="flex items-baseline gap-2">
+<h3 class="text-white text-3xl font-bold tracking-tight">45</h3>
+<span class="text-slate-500 text-sm font-medium">vs 38 yesterday</span>
+</div>
+</div>
+</div>
+<!-- Critical Alerts -->
+<div class="bg-alert-red/10 border border-alert-red/30 rounded-2xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-alert-red text-6xl">warning</span>
+</div>
+<div class="flex flex-col gap-1 relative z-10">
+<p class="text-alert-red text-sm font-bold uppercase tracking-wide">Action Required</p>
+<div class="flex items-baseline gap-2">
+<h3 class="text-white text-3xl font-bold tracking-tight">5 Items</h3>
+<span class="text-alert-red text-sm font-bold">Low Stock</span>
+</div>
+</div>
+<div class="mt-4 flex gap-2">
+<button class="text-xs bg-alert-red text-white px-3 py-1.5 rounded-md font-bold hover:bg-red-700 transition-colors">Review Order</button>
+</div>
+</div>
+</div>
+<!-- Split View: Fast Moving & Alerts -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1">
+<!-- Artículos más vendidos (Larger Area) -->
+<div class="lg:col-span-2 bg-surface-dark border border-white/5 rounded-2xl flex flex-col">
+<div class="p-6 border-b border-white/5 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-corporate-blue">bolt</span>
+<h3 class="text-white text-lg font-bold">Artículos más vendidos</h3>
+</div>
+<button class="text-slate-400 hover:text-white text-sm font-medium">Ver reporte</button>
+</div>
+<div class="p-0 overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-white/5 text-xs uppercase text-slate-400">
+<tr>
+<th class="px-6 py-3 font-semibold">Producto</th>
+<th class="px-6 py-3 font-semibold">SKU</th>
+<th class="px-6 py-3 font-semibold text-right">Vendidos hoy</th>
+<th class="px-6 py-3 font-semibold text-right">Stock</th>
+<th class="px-6 py-3 font-semibold text-center">Tendencia</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5 text-sm">\n<tr><td class="px-6 py-6 text-slate-400 text-sm" colspan="5">Sin movimientos registrados.</td></tr>\n</tbody>
+</table>
+</div>
+</div>
+<!-- Low Stock Alerts (Critical) -->
+<div class="bg-surface-dark border border-alert-red/20 rounded-2xl flex flex-col relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-alert-red/5 rounded-full blur-3xl -mr-10 -mt-10"></div>
+<div class="p-6 border-b border-white/5 flex justify-between items-center relative z-10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-alert-red animate-pulse">notification_important</span>
+<h3 class="text-white text-lg font-bold">Low Stock Alerts</h3>
+</div>
+<span class="bg-alert-red text-white text-xs font-bold px-2 py-1 rounded">5 Critical</span>
+</div>
+<div class="flex flex-col p-4 gap-3 overflow-y-auto max-h-[400px]">
+<!-- Alert Item 1 -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-background-dark border border-white/5 hover:border-alert-red/30 transition-colors group">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-white/5 flex items-center justify-center text-slate-500">
+<span class="material-symbols-outlined text-[20px]">format_paint</span>
+</div>
+<div>
+<h4 class="text-white text-sm font-semibold group-hover:text-alert-red transition-colors">White Primer 1G</h4>
+<p class="text-slate-500 text-xs">SKU: PN-WP-01</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-alert-red font-bold text-sm">2 Left</span>
+<p class="text-slate-600 text-[10px]">Min: 10</p>
+</div>
+</div>
+<!-- Alert Item 2 -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-background-dark border border-white/5 hover:border-alert-red/30 transition-colors group">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-white/5 flex items-center justify-center text-slate-500">
+<span class="material-symbols-outlined text-[20px]">construction</span>
+</div>
+<div>
+<h4 class="text-white text-sm font-semibold group-hover:text-alert-red transition-colors">Drill Bit 1/2"</h4>
+<p class="text-slate-500 text-xs">SKU: DB-05-ST</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-alert-red font-bold text-sm">4 Left</span>
+<p class="text-slate-600 text-[10px]">Min: 20</p>
+</div>
+</div>
+<!-- Alert Item 3 -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-background-dark border border-white/5 hover:border-alert-red/30 transition-colors group">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-white/5 flex items-center justify-center text-slate-500">
+<span class="material-symbols-outlined text-[20px]">square_foot</span>
+</div>
+<div>
+<h4 class="text-white text-sm font-semibold group-hover:text-alert-red transition-colors">Cement 50kg</h4>
+<p class="text-slate-500 text-xs">SKU: CM-50-GY</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-alert-red font-bold text-sm">8 Left</span>
+<p class="text-slate-600 text-[10px]">Min: 30</p>
+</div>
+</div>
+<!-- Alert Item 4 -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-background-dark border border-white/5 hover:border-alert-red/30 transition-colors group">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-white/5 flex items-center justify-center text-slate-500">
+<span class="material-symbols-outlined text-[20px]">electrical_services</span>
+</div>
+<div>
+<h4 class="text-white text-sm font-semibold group-hover:text-alert-red transition-colors">Ext. Cord 10m</h4>
+<p class="text-slate-500 text-xs">SKU: EC-10-OR</p>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-alert-red font-bold text-sm">1 Left</span>
+<p class="text-slate-600 text-[10px]">Min: 5</p>
+</div>
+</div>
+</div>
+<div class="p-4 mt-auto border-t border-white/5">
+<button class="w-full py-2 rounded-lg border border-alert-red/50 text-alert-red text-sm font-bold hover:bg-alert-red hover:text-white transition-all">
+                                Order Replacements
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

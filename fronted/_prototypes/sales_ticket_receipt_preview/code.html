@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sales Ticket Receipt Preview - Grupo AR ERP</title>
+<!-- Tailwind CSS -->
+<!-- Theme Config -->
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        /* Zig-zag border utility for receipt */
+        .receipt-bottom-edge {
+            background-image: linear-gradient(135deg, white 50%, transparent 50%), linear-gradient(45deg, white 50%, transparent 50%);
+            background-position: top left;
+            background-repeat: repeat-x;
+            background-size: 20px 20px;
+            height: 20px;
+            width: 100%;
+            position: relative;
+            bottom: -20px;
+            left: 0;
+            filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.1));
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-[#0d0d1c] text-gray-100 font-display transition-colors duration-200">
+<div class="flex flex-col min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7e7f4] border-gray-800 bg-white bg-[#15152a] px-4 py-3 md:px-10 shadow-sm">
+<div class="flex items-center gap-4 md:gap-8 w-full md:w-auto">
+<div class="flex items-center gap-4 text-primary text-white">
+<div class="size-8 rounded bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">grid_view</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] hidden md:block">Grupo AR ERP</h2>
+</div>
+<!-- Search Bar -->
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-[#484a9d] text-gray-400 flex border-none bg-[#f4f4f5] bg-gray-800 items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#0d0d1c] text-white focus:outline-0 focus:ring-0 border-none bg-[#f4f4f5] bg-gray-800 focus:border-none h-full placeholder:text-[#484a9d] placeholder:text-gray-500 px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal" placeholder="Buscar ticket, cliente..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex items-center gap-4 md:gap-8 justify-end">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-[#0d0d1c] text-gray-300 hover:text-primary text-sm font-medium leading-normal flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
+                    </a>
+<a class="text-primary text-primary font-bold text-sm leading-normal flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px] fill-1">point_of_sale</span> Ventas
+                    </a>
+<a class="text-[#0d0d1c] text-gray-300 hover:text-primary text-sm font-medium leading-normal flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span> Inventario
+                    </a>
+<a class="text-[#0d0d1c] text-gray-300 hover:text-primary text-sm font-medium leading-normal flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span> Clientes
+                    </a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 hover:bg-gray-800 text-[#484a9d]">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 ring-2 ring-white ring-gray-700 shadow-sm" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD1R8Z4ODl-Bo5Ar_AUnNDARFqPvIfBlXE3VCTGqInQc1TJk2KIG2QROZ3URrT0iu6WNRUCwt_82a3KK8WeTUeCvDEzzOk9cJx4lc2ZLmmn7vThqjcusgTXOnbpEM2Z6qT_7tp6u8CSnuVSAQycs9s2_1eE_BgMW_lVJmY1d7ZW-uW0ssMuPWeQUNEHxb-FtOfC7nbYOXTrMKjKgCfQPA2Liw_bTbnEAKkXr7Y-L98rGfjshgDtVlguxNhg2fyI5VHqCACi63gTql6g");'></div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full px-4 md:px-10 py-6 md:py-8 overflow-y-auto">
+<div class="max-w-6xl mx-auto flex flex-col gap-6">
+<!-- Breadcrumbs & Heading Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-2">
+<div class="flex flex-wrap gap-2 items-center text-sm">
+<a class="text-[#484a9d] text-blue-400 font-medium hover:underline" href="#">Inicio</a>
+<span class="text-gray-400">/</span>
+<a class="text-[#484a9d] text-blue-400 font-medium hover:underline" href="#">Ventas</a>
+<span class="text-gray-400">/</span>
+<span class="text-[#0d0d1c] text-gray-200 font-medium">Ticket #A-10293</span>
+</div>
+<h1 class="text-[#0d0d1c] text-white text-3xl font-bold leading-tight">Vista Previa de Ticket</h1>
+<p class="text-[#484a9d] text-gray-400 text-sm">Detalle de transacción completada • Hace 5 minutos</p>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<button class="group flex items-center justify-center gap-2 h-10 px-4 rounded-lg border border-[#e7e7f4] border-gray-700 bg-white bg-[#15152a] text-[#0d0d1c] text-white text-sm font-medium hover:bg-gray-50 hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-[20px] text-gray-500 group-hover:text-primary">mail</span>
+<span class="hidden sm:inline">Enviar por Correo</span>
+</button>
+<button class="group flex items-center justify-center gap-2 h-10 px-4 rounded-lg border border-[#e7e7f4] border-gray-700 bg-white bg-[#15152a] text-[#0d0d1c] text-white text-sm font-medium hover:bg-gray-50 hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-[20px] text-gray-500 group-hover:text-primary">download</span>
+<span class="hidden sm:inline">Descargar PDF</span>
+</button>
+<button class="flex items-center justify-center gap-2 h-10 px-6 rounded-lg bg-primary hover:bg-blue-800 text-white text-sm font-bold shadow-md shadow-blue-900/20 transition-all transform hover:scale-105">
+<span class="material-symbols-outlined text-[20px]">print</span>
+<span>Imprimir Ticket</span>
+</button>
+</div>
+</div>
+<div class="mt-2 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+<div class="bg-white bg-[#15152a] border border-[#e7e7f4] border-gray-700 rounded-lg p-3">
+<div id="qrRoot" class="size-24"></div>
+</div>
+<div class="text-sm text-[#484a9d] text-gray-400">
+<p class="font-semibold text-[#0d0d1c] text-white">QR publico</p>
+<p>Escanea para ver el ticket en linea.</p>
+<p class="mt-2 text-xs text-[#484a9d] break-all" id="publicLink"></p>
+</div>
+</div>
+<!-- Content Area: Split View on Large Screens -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-4">
+<!-- Left Column: Receipt Preview -->
+<div class="lg:col-span-5 xl:col-span-4 flex justify-center lg:justify-start">
+<!-- Receipt Container -->
+<div class="relative w-full max-w-[380px] bg-white text-black shadow-2xl rounded-t-lg mb-6 transform transition-transform duration-300 hover:scale-[1.01]">
+<!-- Internal Padding -->
+<div class="p-6 pb-8 flex flex-col gap-4 font-mono text-sm">
+<!-- Receipt Header -->
+<div class="flex flex-col items-center text-center gap-2 border-b-2 border-dashed border-gray-300 pb-4">
+<div class="w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center text-white mb-1">
+<span class="material-symbols-outlined text-[32px]">storefront</span>
+</div>
+<h2 class="text-xl font-bold uppercase tracking-wider">Grupo AR<br/>Ferretería</h2>
+<div class="text-xs text-gray-500 space-y-0.5">
+<p>Sucursal Centro</p>
+<p>Av. Reforma #123, Ciudad de México</p>
+<p>RFC: GAR-901010-XYZ</p>
+<p>Tel: (55) 1234-5678</p>
+</div>
+</div>
+<!-- Transaction Meta -->
+<div class="flex flex-col gap-1 text-xs text-gray-600">
+<div class="flex justify-between">
+<span>FECHA:</span>
+<span class="font-bold text-black">14/10/2023</span>
+</div>
+<div class="flex justify-between">
+<span>HORA:</span>
+<span class="font-bold text-black">10:45 AM</span>
+</div>
+<div class="flex justify-between">
+<span>TICKET:</span>
+<span class="font-bold text-black">#A-10293</span>
+</div>
+<div class="flex justify-between">
+<span>CAJERO:</span>
+<span>Juan Pérez</span>
+</div>
+</div>
+<!-- Items Table -->
+<div class="py-2">
+<table class="w-full text-xs">
+<thead class="border-b border-black">
+<tr>
+<th class="text-left py-1 w-8">Cant.</th>
+<th class="text-left py-1">Descripción</th>
+<th class="text-right py-1 w-16">Importe</th>
+</tr>
+</thead>
+<tbody class="text-gray-800">
+<tr>
+<td class="py-2 align-top">1</td>
+<td class="py-2 align-top">
+<span class="block font-bold text-black">Martillo de uña</span>
+<span class="text-[10px] text-gray-500">SKU: 88210</span>
+<span class="text-[10px] text-gray-500 block">1 x $150.00</span>
+</td>
+<td class="py-2 text-right align-top font-medium">$150.00</td>
+</tr>
+<tr>
+<td class="py-2 align-top">50</td>
+<td class="py-2 align-top">
+<span class="block font-bold text-black">Tornillos 2"</span>
+<span class="text-[10px] text-gray-500">SKU: 33102</span>
+<span class="text-[10px] text-gray-500 block">50 x $1.00</span>
+</td>
+<td class="py-2 text-right align-top font-medium">$50.00</td>
+</tr>
+<tr>
+<td class="py-2 align-top">1</td>
+<td class="py-2 align-top">
+<span class="block font-bold text-black">Taladro 18V</span>
+<span class="text-[10px] text-gray-500">SKU: 99201</span>
+<span class="text-[10px] text-gray-500 block">1 x $1200.00</span>
+</td>
+<td class="py-2 text-right align-top font-medium">$1,200.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Financial Summary -->
+<div class="border-t-2 border-dashed border-gray-300 pt-2 space-y-1 text-right">
+<div class="flex justify-between text-xs text-gray-600">
+<span>Subtotal</span>
+<span>$1,400.00</span>
+</div>
+<div class="flex justify-between text-xs text-gray-600">
+<span>IVA (16%)</span>
+<span>$224.00</span>
+</div>
+<div class="flex justify-between text-lg font-bold text-black mt-2 pt-2 border-t border-black">
+<span>TOTAL</span>
+<span>$1,624.00</span>
+</div>
+<div class="text-[10px] text-gray-500 mt-1 uppercase">
+                                        (Un mil seiscientos veinticuatro pesos 00/100 M.N.)
+                                    </div>
+</div>
+<!-- QR and Footer -->
+<div class="flex flex-col items-center gap-4 mt-4 pt-4 border-t-2 border-dotted border-gray-300">
+<div class="bg-white p-1 border border-gray-200 rounded">
+<img alt="QR Code for invoice verification" class="w-24 h-24 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsUQcWw0EwjPVr30kDi5npob_9pGa25uTjS7qyNZQ3ZLHis1UtQKZ_qk7DbAiaubPpNyEKoV3AFoAEbygQNIud3Z9keR2xVbVt0rRWihC2kzH8dDRpnNsIgC8abbobaCv1s2zsZG_BAc9JcXeTLC7mYDgBAX1wRQb5_KP5ZVxlZV-au0o1bioQKUF-YtRA6l6unKTV3q00BQIU_C95CNSicA4xIFEBHEyTGvmCCnhqq2ZuiD8X8qXcGdQblUtxbYO3T59s9G15Dd1s"/>
+</div>
+<div class="text-center">
+<p class="font-bold text-xs uppercase mb-1">¡Gracias por su compra!</p>
+<p class="text-[10px] text-gray-500 px-4">Conserve este ticket para cualquier cambio o aclaración. Vigencia de 30 días.</p>
+</div>
+<div class="flex gap-4 justify-center mt-1 opacity-60 grayscale">
+<div class="flex items-center gap-1 text-[10px]">
+<span class="material-symbols-outlined text-[14px]">public</span> grupoar.com
+                                        </div>
+</div>
+</div>
+</div>
+<!-- Zig Zag Bottom Effect -->
+<div class="receipt-bottom-edge"></div>
+</div>
+</div>
+<!-- Right Column: Additional Details / Context -->
+<div class="lg:col-span-7 xl:col-span-8 flex flex-col gap-6">
+<!-- Quick Actions Card -->
+<div class="bg-white bg-[#15152a] rounded-xl shadow-sm border border-[#e7e7f4] border-gray-800 p-6">
+<h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">bolt</span>
+                                Acciones Rápidas
+                            </h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<button class="flex items-center gap-3 p-3 rounded-lg border border-dashed border-primary/30 bg-primary/5 hover:bg-primary/10 transition-colors text-left group">
+<div class="bg-white bg-gray-800 p-2 rounded-full text-primary shadow-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">add_shopping_cart</span>
+</div>
+<div>
+<p class="font-bold text-sm text-primary">Nueva Venta</p>
+<p class="text-xs text-gray-500 text-gray-400">Iniciar una nueva transacción</p>
+</div>
+</button>
+<button class="flex items-center gap-3 p-3 rounded-lg border border-dashed border-gray-300 border-gray-700 hover:bg-gray-50 hover:bg-gray-800 transition-colors text-left group">
+<div class="bg-white bg-gray-800 p-2 rounded-full text-gray-600 text-gray-300 shadow-sm group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">receipt_long</span>
+</div>
+<div>
+<p class="font-bold text-sm text-[#0d0d1c] text-white">Facturar Ticket</p>
+<p class="text-xs text-gray-500 text-gray-400">Generar factura fiscal XML/PDF</p>
+</div>
+</button>
+</div>
+</div>
+<!-- Transaction Details Card -->
+<div class="bg-white bg-[#15152a] rounded-xl shadow-sm border border-[#e7e7f4] border-gray-800 flex-1 flex flex-col">
+<div class="p-6 border-b border-[#e7e7f4] border-gray-800 flex justify-between items-center">
+<h3 class="text-lg font-bold">Detalle del Cliente</h3>
+<button class="text-primary text-sm font-bold hover:underline">Editar</button>
+</div>
+<div class="p-6 flex flex-col gap-6">
+<div class="flex items-start gap-4">
+<div class="w-12 h-12 rounded-full bg-gray-100 bg-gray-800 flex items-center justify-center text-gray-500">
+<span class="material-symbols-outlined text-[24px]">person</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-[#0d0d1c] text-white text-base">Cliente General (Público)</h4>
+<p class="text-sm text-gray-500 mt-1">ID: PUBLIC-001</p>
+<div class="flex flex-wrap gap-2 mt-3">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-green-100 text-green-700 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Contado
+                                            </span>
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-blue-100 text-blue-700 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px]">loyalty</span> Puntos: 0
+                                            </span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-background-light bg-black/20 rounded-lg">
+<div>
+<p class="text-xs font-bold text-gray-500 uppercase mb-1">Método de Pago</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-600 text-gray-300">payments</span>
+<span class="text-sm font-medium text-gray-200">Efectivo</span>
+</div>
+</div>
+<div>
+<p class="text-xs font-bold text-gray-500 uppercase mb-1">Monto Recibido</p>
+<p class="text-sm font-medium text-gray-200">$1,700.00 <span class="text-xs text-gray-500">(Cambio: $76.00)</span></p>
+</div>
+<div>
+<p class="text-xs font-bold text-gray-500 uppercase mb-1">Vendedor</p>
+<p class="text-sm font-medium text-gray-200">Juan Pérez</p>
+</div>
+<div>
+<p class="text-xs font-bold text-gray-500 uppercase mb-1">Terminal</p>
+<p class="text-sm font-medium text-gray-200">Caja Principal 01</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script type="module">
+import React from "https://esm.sh/react@18";
+import { createRoot } from "https://esm.sh/react-dom@18/client";
+import QRCode from "https://esm.sh/qrcode.react@3";
+
+const qrRoot = document.getElementById("qrRoot");
+const linkEl = document.getElementById("publicLink");
+
+const getTicketId = () => {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  if (id) return id;
+  const hashId = window.location.hash.replace("#", "");
+  return hashId || "A-10293";
+};
+
+const ticketId = getTicketId();
+const publicUrl = `${window.location.origin}/consulta/${ticketId}`;
+linkEl.textContent = publicUrl;
+
+if (qrRoot) {
+  const root = createRoot(qrRoot);
+  root.render(
+    React.createElement(QRCode, {
+      value: publicUrl,
+      size: 96,
+      bgColor: "#ffffff",
+      fgColor: "#0d0d1c",
+      level: "M",
+    })
+  );
+}
+</script>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,279 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tool Return Verification - Grupo AR ERP</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        /* Custom scrollbar for better look in containers */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-[#0d0d1c] text-gray-100 font-display transition-colors duration-200">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- SideNavBar -->
+<aside class="w-64 flex-shrink-0 border-r border-[#e7e7f4] border-gray-800 bg-surface-light bg-surface-dark hidden lg:flex flex-col justify-between">
+<div class="flex flex-col gap-6 p-4 h-full">
+<!-- Logo -->
+<div class="flex gap-3 items-center px-2">
+<div class="bg-center bg-no-repeat bg-cover rounded-lg size-10 shadow-sm" data-alt="Abstract geometric logo in blue" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDM4Wvan_R6GvfIIz7_m1ZH_hHPch7vdYYrHFkGJsp8tS-Pnv1VXSn6tD50HbRpEjKkBLGB4ReYL2NLSmelJVDLAHSQ25Z63q3zdbhdfSjznL-UY8NCN5R4r6GbYN4ojURktEu6j-0D_euXzydYvL3TK_msqHKDLijVQExestfJtUarekHCOQwG-u8hrOqtcmc5NqfXcL1CT8IlfflqDAeNIl4y740Yb7cnmmJfHZhTla7iF_pQX5EJIdNM_imzfcY6zM-fbenZSW03");'></div>
+<div class="flex flex-col">
+<h1 class="text-[#0d0d1c] text-white text-base font-bold leading-normal">Grupo AR</h1>
+<p class="text-[#484a9d] text-indigo-400 text-xs font-normal leading-normal">ERP System v2.4</p>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 text-gray-400 hover:bg-gray-100 hover:bg-gray-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-500 text-gray-400 group-hover:text-primary transition-colors">dashboard</span>
+<p class="text-sm font-medium">Panel</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 text-gray-400 hover:bg-gray-100 hover:bg-gray-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-500 text-gray-400 group-hover:text-primary transition-colors">inventory_2</span>
+<p class="text-sm font-medium">Inventario</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary text-indigo-300" href="#">
+<span class="material-symbols-outlined filled">menu_book</span>
+<p class="text-sm font-medium">Digital Logbook</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 text-gray-400 hover:bg-gray-100 hover:bg-gray-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-500 text-gray-400 group-hover:text-primary transition-colors">group</span>
+<p class="text-sm font-medium">Employees</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 text-gray-400 hover:bg-gray-100 hover:bg-gray-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-gray-500 text-gray-400 group-hover:text-primary transition-colors">description</span>
+<p class="text-sm font-medium">Reportes</p>
+</a>
+</nav>
+</div>
+<!-- Bottom Actions -->
+<div class="p-4 border-t border-[#e7e7f4] border-gray-800">
+<button class="flex items-center gap-3 px-3 py-2 w-full rounded-lg text-gray-600 text-gray-400 hover:bg-gray-100 hover:bg-gray-800">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Ajustes</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col h-full relative overflow-hidden">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7e7f4] border-gray-800 bg-surface-light bg-surface-dark px-8 py-3 z-10">
+<div class="flex items-center gap-4 text-[#0d0d1c] text-white">
+<button class="lg:hidden text-gray-500">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="text-[#0d0d1c] text-white text-lg font-bold leading-tight tracking-[-0.015em]">Tool Verification</h2>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<div class="hidden md:flex flex-col min-w-40 !h-10 max-w-64 relative">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-[#f0f0f4] bg-gray-800 focus-within:ring-2 ring-primary/20 transition-shadow">
+<div class="text-[#484a9d] text-gray-400 flex items-center justify-center pl-3">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg bg-transparent text-[#0d0d1c] text-white focus:outline-0 border-none h-full placeholder:text-[#484a9d] placeholder:text-gray-500 px-3 text-sm font-normal leading-normal" placeholder="Buscar en bitácora..."/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="relative p-2 text-gray-500 hover:bg-gray-100 hover:bg-gray-800 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white border-gray-900"></span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border border-gray-200 border-gray-700 cursor-pointer" data-alt="Profile picture of warehouse manager" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD6i_6jy1lUPuKsrb1VC_SmNwRmN7VOJgz3fO2uZnDTQSCoEsUGEpWhE_TwrjdWDXKDWv5GAsLe6sCSd13tKjgOCpoSnTdTvWUcm8-X2p0NHkn-5JvQgQNafmx6JZeX1dHigxuQjN1bsPohYL-zjplcgzrM7tPItcHm6VQqFq-zAt8Y54ygbS1v0Sp3Xr-K9oz0UtPeH0f7D055JOyBtPtwNpcif88zJWXYj4uDl6Sf1eYepcZIBkKwroIjQ5ImOvuVZqc3yYQvlRLX");'></div>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<main class="flex-1 overflow-y-auto bg-background-light bg-background-dark p-6 md:px-10 md:py-8">
+<div class="max-w-[1200px] mx-auto flex flex-col gap-6">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap items-center gap-2 text-sm">
+<a class="text-[#484a9d] text-indigo-400 font-medium hover:underline" href="#">ERP</a>
+<span class="text-gray-400">/</span>
+<a class="text-[#484a9d] text-indigo-400 font-medium hover:underline" href="#">Digital Logbook</a>
+<span class="text-gray-400">/</span>
+<span class="text-[#0d0d1c] text-gray-200 font-medium">Return #29481</span>
+</div>
+<!-- Page Heading & Actions -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-[#0d0d1c] text-white text-3xl font-extrabold tracking-tight">Tool Return Verification</h1>
+<p class="text-[#484a9d] text-gray-400 text-base font-normal">Verify condition and signature for final return processing.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 h-10 rounded-lg border border-gray-300 border-gray-700 bg-transparent hover:bg-gray-50 hover:bg-gray-800 text-[#0d0d1c] text-gray-200 text-sm font-bold transition-colors">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span>View History</span>
+</button>
+</div>
+</div>
+<!-- Tool Summary Card -->
+<div class="bg-surface-light bg-surface-dark rounded-xl shadow-sm border border-[#e7e7f4] border-gray-800 p-5">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<div class="flex flex-col gap-1">
+<p class="text-xs font-semibold uppercase tracking-wider text-gray-500 text-gray-500">Tool ID</p>
+<p class="text-[#0d0d1c] text-white text-base font-medium">TL-8821</p>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-xs font-semibold uppercase tracking-wider text-gray-500 text-gray-500">Tool Name</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">build_circle</span>
+<p class="text-[#0d0d1c] text-white text-base font-medium">Bosch Angle Grinder GWS</p>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-xs font-semibold uppercase tracking-wider text-gray-500 text-gray-500">Checkout Date</p>
+<p class="text-[#0d0d1c] text-white text-base font-medium">Oct 12, 2023 - 08:00 AM</p>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-xs font-semibold uppercase tracking-wider text-gray-500 text-gray-500">Returned By</p>
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-gray-200 bg-cover bg-center" data-alt="Employee Juan Perez" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAOS8303QiZj98bYWjH3kR8nX-sZIJd6q3o-sng9s3MwlumfQ7u0RO--ngKv9bUR24pi5HK0pvtMe5ccKTenpjPnY8i4RnEMIS5fuUL5qj8nzpKs20tN57AxEuif7I4OuVZwOC8jyZYoAU_HBvcI7UnpvpQzccobuk4zsmiyGd4HcmwfjeiF9QQKN8CYam41GzJw22h7vP2QSDW9jv3wlqq125NapfudMv-0S-ooSQA6oWPqcjdZAD_v8iu6ukhVDqGXaWyCj7FEZwL");'></div>
+<p class="text-[#0d0d1c] text-white text-base font-medium">Juan Perez</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Verification Area -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Left Column: Checkout Record -->
+<div class="flex flex-col gap-4">
+<h3 class="text-lg font-bold text-[#0d0d1c] text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-400">arrow_circle_up</span>
+                                Original Checkout Record
+                            </h3>
+<div class="bg-surface-light bg-surface-dark rounded-xl shadow-sm border border-[#e7e7f4] border-gray-800 p-6 flex flex-col gap-6 h-full">
+<div class="flex items-center justify-between">
+<span class="px-3 py-1 bg-green-100 text-green-700 bg-green-900/30 text-green-400 text-xs font-bold uppercase rounded-full">Checked Out: Good Condition</span>
+<span class="text-sm text-gray-500">Oct 12, 2023</span>
+</div>
+<div class="flex-1 flex flex-col gap-2">
+<p class="text-sm font-medium text-gray-500 text-gray-400">Employee Signature</p>
+<div class="w-full h-48 bg-[#f8f8fc] bg-gray-800 rounded-lg border border-dashed border-gray-300 border-gray-700 flex items-center justify-center relative overflow-hidden group">
+<!-- Simulated Signature Image -->
+<img alt="Original checkout signature" class="w-2/3 opacity-70 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEis_5yuj8yafZh5LbYaVge9QJYbz5abSVXGQZ2qXonWV7nMkxa-QsR5zZpWNJYV7D5X3dDb7mqL_OrDLOa2tMXNZk7yyetdElA75dYl3RMXyJewzayUgtVxW6kgc11imBB7gEbRt3FpOdBGRGemerLFXd4XmbLIY2OGZFeu1VTi0hXVcEATvetSF1YkoiyJwkL6F_6B45iKBSRuuKV2km4P9A8O3RnC_oaafCVSCXU-pFR0bG65scgbWvxRfxK2EnozodhkI_qQsH"/>
+<div class="absolute bottom-2 right-2">
+<span class="material-symbols-outlined text-green-600 text-green-400 text-2xl" title="Verified Match">verified</span>
+</div>
+</div>
+<p class="text-xs text-gray-400 mt-1">Signed by Juan Perez on Terminal #04</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Return Verification -->
+<div class="flex flex-col gap-4">
+<h3 class="text-lg font-bold text-[#0d0d1c] text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">arrow_circle_down</span>
+                                Return Verification
+                            </h3>
+<div class="bg-surface-light bg-surface-dark rounded-xl shadow-sm border border-[#e7e7f4] border-gray-800 p-6 flex flex-col gap-6 h-full">
+<!-- Condition Selector -->
+<div class="flex flex-col gap-3">
+<p class="text-sm font-medium text-[#0d0d1c] text-white">Tool Condition Status <span class="text-red-500">*</span></p>
+<div class="grid grid-cols-3 gap-3">
+<!-- Good -->
+<label class="cursor-pointer relative">
+<input checked="" class="peer sr-only" name="condition" type="radio"/>
+<div class="flex flex-col items-center justify-center gap-2 p-3 rounded-lg border border-gray-200 border-gray-700 hover:bg-gray-50 hover:bg-gray-800 peer-checked:border-green-500 peer-checked:bg-green-50 peer-checked:bg-green-900/20 peer-checked:text-green-700 peer-checked:text-green-400 transition-all">
+<span class="material-symbols-outlined">check_circle</span>
+<span class="text-xs font-bold">Good</span>
+</div>
+</label>
+<!-- Maintenance -->
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="condition" type="radio"/>
+<div class="flex flex-col items-center justify-center gap-2 p-3 rounded-lg border border-gray-200 border-gray-700 hover:bg-gray-50 hover:bg-gray-800 peer-checked:border-amber-500 peer-checked:bg-amber-50 peer-checked:bg-amber-900/20 peer-checked:text-amber-700 peer-checked:text-amber-400 transition-all">
+<span class="material-symbols-outlined">build</span>
+<span class="text-xs font-bold">Maintenance</span>
+</div>
+</label>
+<!-- Damaged -->
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="condition" type="radio"/>
+<div class="flex flex-col items-center justify-center gap-2 p-3 rounded-lg border border-gray-200 border-gray-700 hover:bg-gray-50 hover:bg-gray-800 peer-checked:border-red-500 peer-checked:bg-red-50 peer-checked:bg-red-900/20 peer-checked:text-red-700 peer-checked:text-red-400 transition-all">
+<span class="material-symbols-outlined">report_problem</span>
+<span class="text-xs font-bold">Damaged</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Signature Pad -->
+<div class="flex-1 flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<p class="text-sm font-medium text-[#0d0d1c] text-white">Sign to Confirm Return</p>
+<button class="text-xs text-primary font-medium hover:underline">Clear Signature</button>
+</div>
+<div class="w-full h-40 bg-white bg-gray-100 rounded-lg border-2 border-gray-200 border-gray-600 hover:border-primary/50 focus-within:border-primary flex items-center justify-center relative shadow-inner cursor-crosshair">
+<p class="text-gray-400 pointer-events-none select-none">Sign Here</p>
+<!-- Visual cue for signature line -->
+<div class="absolute bottom-8 left-8 right-8 h-px bg-gray-300"></div>
+</div>
+</div>
+<!-- Photo Upload Dropzone (Compact) -->
+<div class="flex items-center gap-3 p-3 rounded-lg border border-dashed border-gray-300 border-gray-700 bg-gray-50 bg-gray-800/50 hover:bg-gray-100 hover:bg-gray-800 transition-colors cursor-pointer group">
+<div class="bg-white bg-gray-700 p-2 rounded-md shadow-sm group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-gray-500 text-lg">add_a_photo</span>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-gray-700 text-gray-300">Add Photo Evidence</span>
+<span class="text-xs text-gray-500">Optional for good condition</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="flex flex-col sm:flex-row justify-end gap-4 pt-4 border-t border-[#e7e7f4] border-gray-800">
+<button class="flex items-center justify-center gap-2 px-6 py-2.5 rounded-lg border border-gray-300 border-gray-700 text-gray-700 text-gray-300 font-bold text-sm hover:bg-gray-50 hover:bg-gray-800 transition-all">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+                            Report Issue
+                        </button>
+<button class="flex items-center justify-center gap-2 px-8 py-2.5 rounded-lg bg-primary text-white font-bold text-sm shadow-lg shadow-primary/30 hover:bg-primary/90 hover:-translate-y-0.5 transition-all">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+                            Confirm Return
+                        </button>
+</div>
+</div>
+</main>
+</div>
+</div>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

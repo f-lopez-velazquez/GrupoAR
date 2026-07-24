@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grupo AR ERP - Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/tailwind.css" />
+    <link rel="stylesheet" href="/assets/theme.css" />
+    <script type="module" crossorigin src="/erp-build/assets/index-DoaCAs5u.js"></script>
+  </head>
+  <body class="bg-background-light text-ink font-display min-h-screen flex flex-col">
+    <header class="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
+      <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4">
+        <a class="flex items-center gap-3" href="/">
+          <img src="/assets/logo.png" alt="Logo Grupo AR" class="h-10 w-10" />
+          <div>
+            <p class="text-sm font-semibold text-slate-900">Grupo AR</p>
+            <p class="text-xs text-slate-500">Portal ERP seguro</p>
+          </div>
+        </a>
+        <nav class="hidden items-center gap-5 text-sm font-semibold text-slate-600 md:flex">
+          <a class="hover:text-primary" href="/catalogo">Catálogo</a>
+          <a class="hover:text-primary" href="/servicios">Servicios</a>
+          <a class="hover:text-primary" href="/contacto">Contacto</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <div class="hidden text-right text-xs text-slate-500 sm:block">
+            <p id="userRoleLabel" class="font-semibold text-slate-700">Rol: -</p>
+            <p id="userEmailLabel">Sin sesión</p>
+          </div>
+          <button
+            id="signOutBtn"
+            class="rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 hover:border-primary hover:text-primary"
+          >
+            Salir
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <section class="px-4 pt-10">
+        <div class="mx-auto flex w-full max-w-6xl flex-col gap-6 rounded-3xl bg-white p-8 shadow-sm">
+          <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Grupo AR</p>
+              <h1 class="text-3xl font-extrabold text-slate-900 md:text-4xl">
+                Portal ERP y control operativo
+              </h1>
+              <p class="mt-2 text-sm text-slate-500">
+                Acceso centralizado a inventario, proyectos, reportes y seguridad. Usa solo rutas internas limpias.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <a
+                href="/admin-usuarios"
+                class="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-xs font-bold text-white shadow-lg shadow-blue-200"
+              >
+                <span class="material-symbols-outlined text-[18px]">lock</span>
+                Admin usuarios
+              </a>
+              <a
+                href="/audit"
+                class="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 hover:border-primary hover:text-primary"
+              >
+                <span class="material-symbols-outlined text-[18px]">security</span>
+                Seguridad
+              </a>
+            </div>
+          </div>
+          <div class="grid gap-4 md:grid-cols-3">
+            <div class="rounded-2xl border border-slate-200 bg-slate-50/60 p-4">
+              <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Estado</p>
+              <p class="mt-2 text-lg font-bold text-slate-800">Sistema activo</p>
+              <p class="text-xs text-slate-500">Conexion segura con Firebase</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-slate-50/60 p-4">
+              <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Sede</p>
+              <p class="mt-2 text-lg font-bold text-slate-800">Salamanca, GTO</p>
+              <p class="text-xs text-slate-500">Cobertura en todo México</p>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-slate-50/60 p-4">
+              <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Soporte</p>
+              <p class="mt-2 text-lg font-bold text-slate-800">Monitoreo 24/7</p>
+              <p class="text-xs text-slate-500">Auditoria y alertas activas</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="modulos" class="px-4 py-10">
+        <div class="mx-auto w-full max-w-6xl">
+          <div class="flex items-center justify-between">
+            <h2 class="text-xl font-bold text-slate-900">Módulos internos</h2>
+            <span class="text-xs text-slate-400">Visibles segun rol</span>
+          </div>
+          <div id="moduleGrid" class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+        </div>
+      </section>
+
+      <section class="px-4 pb-14">
+        <div class="mx-auto w-full max-w-6xl rounded-3xl border border-slate-200 bg-white p-8">
+          <div class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Clientes</p>
+              <h3 class="text-xl font-bold text-slate-900">Accesos publicos controlados</h3>
+              <p class="text-sm text-slate-500">
+                Catálogos y verificación de tickets con rutas limpias.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <a href="/catalogo" class="rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 hover:border-primary hover:text-primary">
+                Catálogo general
+              </a>
+              <a href="/catalogo-productos" class="rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 hover:border-primary hover:text-primary">
+                Catálogo ferretería
+              </a>
+              <a href="/consulta" class="rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 hover:border-primary hover:text-primary">
+                Consulta ticket
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/erp-build/shared/footer.js"></script>
+    <script type="module" src="/erp-build/shared/i18n-es.js"></script>
+  </body>
+</html>

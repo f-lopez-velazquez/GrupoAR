@@ -1,0 +1,317 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Performance Report Export Preview</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<!-- Theme Configuration -->
+<style>
+        /* Custom scrollbar for preview area */
+        .preview-scroll::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .preview-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .preview-scroll::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 4px;
+        }
+        /* A4 Aspect Ratio Base */
+        .a4-paper {
+            width: 100%;
+            max-width: 210mm;
+            min-height: 297mm;
+            aspect-ratio: 1 / 1.414;
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-[#0d0d1c] text-white font-display flex flex-col h-screen overflow-hidden">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7e7f4] border-slate-800 bg-white bg-[#15152a] px-6 py-3 z-20 shadow-sm shrink-0">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center size-10 rounded-full hover:bg-slate-100 hover:bg-slate-800 transition-colors text-slate-500 text-slate-400">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<h2 class="text-[#0d0d1c] text-white text-lg font-bold leading-tight tracking-[-0.015em]">Export Preview</h2>
+<span class="text-xs font-medium text-slate-500">Human Resources &gt; Performance Reports</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center gap-2 px-3 py-1.5 bg-background-light bg-slate-800 rounded-lg">
+<span class="material-symbols-outlined text-slate-500 text-[18px]">visibility</span>
+<span class="text-sm font-semibold text-slate-600 text-slate-300">Read-Only Mode</span>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border border-slate-200 border-slate-700" data-alt="User profile avatar image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBhOl5d3PT7J7AFJMHfv1dX44uOQNmnFojtenG-zK6Ze3p9JLh33fqRa1M3i-o9hrZLbeQYHDhZmnmrI_jUJTJjDR-AoMaJfp4-yuavUPmLrH2WOiY292fAk-CjmwiY3PNENJ_sRl-GGCNZ5Q_007olsQ2Bd6Yyo_N2mxKcwIb5KzuQeQFSXL2pO5CoGXP4qhf-ihZ30GrANpmH6nzqVGyAFjN-0XD3vUhsruCbzY7EK7kj1TbekF0x26g17nzO-x1U-YzsgtEQGy-z");'></div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex flex-1 overflow-hidden">
+<!-- Sidebar: Settings -->
+<aside class="w-96 bg-white bg-[#15152a] border-r border-[#e7e7f4] border-slate-800 flex flex-col z-10 shrink-0 overflow-y-auto hidden lg:flex">
+<div class="p-6 flex flex-col gap-8">
+<!-- Report Period -->
+<div class="flex flex-col gap-3">
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 text-slate-400">Report Period</h3>
+<!-- Calendar Picker Component (Simplified Wrapper) -->
+<div class="border border-[#e7e7f4] border-slate-700 rounded-xl bg-background-light bg-background-dark overflow-hidden">
+<div class="flex flex-col p-4">
+<div class="flex items-center justify-between mb-4">
+<button class="text-[#0d0d1c] text-white hover:bg-black/5 hover:bg-white/10 rounded-full p-1">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<p class="text-[#0d0d1c] text-white text-sm font-bold">October 2023</p>
+<button class="text-[#0d0d1c] text-white hover:bg-black/5 hover:bg-white/10 rounded-full p-1">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center mb-2">
+<span class="text-xs font-bold text-slate-400">S</span>
+<span class="text-xs font-bold text-slate-400">M</span>
+<span class="text-xs font-bold text-slate-400">T</span>
+<span class="text-xs font-bold text-slate-400">W</span>
+<span class="text-xs font-bold text-slate-400">T</span>
+<span class="text-xs font-bold text-slate-400">F</span>
+<span class="text-xs font-bold text-slate-400">S</span>
+</div>
+<div class="grid grid-cols-7 gap-1">
+<!-- Partial calendar grid for visual representation -->
+<button class="h-8 w-full text-xs rounded-full text-slate-400">29</button>
+<button class="h-8 w-full text-xs rounded-full text-slate-400">30</button>
+<button class="h-8 w-full text-xs rounded-full text-white">1</button>
+<button class="h-8 w-full text-xs rounded-full text-white">2</button>
+<button class="h-8 w-full text-xs rounded-full text-white">3</button>
+<button class="h-8 w-full text-xs rounded-full text-white">4</button>
+<button class="h-8 w-full bg-primary text-white text-xs rounded-l-full font-bold">5</button>
+<button class="h-8 w-full bg-primary/10 bg-primary/30 text-white text-xs">6</button>
+<button class="h-8 w-full bg-primary/10 bg-primary/30 text-white text-xs">...</button>
+<button class="h-8 w-full bg-primary/10 bg-primary/30 text-white text-xs">...</button>
+<button class="h-8 w-full bg-primary/10 bg-primary/30 text-white text-xs">...</button>
+<button class="h-8 w-full bg-primary/10 bg-primary/30 text-white text-xs">...</button>
+<button class="h-8 w-full bg-primary text-white text-xs rounded-r-full font-bold">30</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Report Sections -->
+<div class="flex flex-col gap-3">
+<h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 text-slate-400">Sections Included</h3>
+<div class="flex flex-col">
+<label class="flex gap-x-3 py-2 items-center cursor-pointer group">
+<input checked="" class="size-5 rounded border-slate-300 border-slate-600 bg-transparent text-primary focus:ring-primary/20 focus:ring-offset-slate-900" type="checkbox"/>
+<span class="text-slate-700 text-slate-300 text-sm font-medium group-hover:text-primary transition-colors">Executive Summary</span>
+</label>
+<label class="flex gap-x-3 py-2 items-center cursor-pointer group">
+<input checked="" class="size-5 rounded border-slate-300 border-slate-600 bg-transparent text-primary focus:ring-primary/20 focus:ring-offset-slate-900" type="checkbox"/>
+<span class="text-slate-700 text-slate-300 text-sm font-medium group-hover:text-primary transition-colors">Top Performers</span>
+</label>
+<label class="flex gap-x-3 py-2 items-center cursor-pointer group">
+<input checked="" class="size-5 rounded border-slate-300 border-slate-600 bg-transparent text-primary focus:ring-primary/20 focus:ring-offset-slate-900" type="checkbox"/>
+<span class="text-slate-700 text-slate-300 text-sm font-medium group-hover:text-primary transition-colors">Include Charts</span>
+</label>
+<label class="flex gap-x-3 py-2 items-center cursor-pointer group">
+<input class="size-5 rounded border-slate-300 border-slate-600 bg-transparent text-primary focus:ring-primary/20 focus:ring-offset-slate-900" type="checkbox"/>
+<span class="text-slate-700 text-slate-300 text-sm font-medium group-hover:text-primary transition-colors">Detailed Comments</span>
+</label>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-4 mt-auto">
+<button class="flex w-full cursor-pointer items-center justify-center rounded-lg h-12 px-5 bg-primary hover:bg-primary/90 transition-colors text-white text-base font-bold shadow-lg shadow-primary/25">
+<span class="material-symbols-outlined mr-2 text-[20px]">download</span>
+<span>Export PDF</span>
+</button>
+<button class="flex w-full cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-[#e7e7f4] bg-slate-700 hover:bg-slate-200 hover:bg-slate-600 text-[#0d0d1c] text-white transition-colors text-sm font-bold">
+<span class="material-symbols-outlined mr-2 text-[20px]">print</span>
+<span>Print Report</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Preview Area -->
+<section class="flex-1 bg-slate-100 bg-[#0b0b18] relative overflow-y-auto preview-scroll p-8 lg:p-12 flex justify-center">
+<!-- Zoom Controls (Floating) -->
+<div class="fixed bottom-8 right-8 lg:right-12 z-30 flex flex-col gap-2">
+<button class="size-10 rounded-full bg-white bg-slate-800 text-slate-700 text-slate-200 shadow-lg flex items-center justify-center hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="size-10 rounded-full bg-white bg-slate-800 text-slate-700 text-slate-200 shadow-lg flex items-center justify-center hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+<!-- The Document (A4) -->
+<div class="a4-paper bg-white text-slate-900 shadow-2xl rounded-sm flex flex-col relative mx-auto origin-top transition-transform duration-300">
+<!-- Decorative Header Bar -->
+<div class="h-3 w-full bg-primary"></div>
+<div class="p-12 flex-1 flex flex-col">
+<!-- Report Header -->
+<div class="flex justify-between items-start mb-10 border-b-2 border-slate-100 pb-6">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">dataset</span>
+</div>
+<div>
+<h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">Grupo AR</h1>
+<p class="text-xs font-bold text-primary uppercase tracking-widest">HR &amp; Performance</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-slate-400">CONFIDENTIAL</p>
+<p class="text-sm text-slate-500">Generated: Oct 30, 2023</p>
+</div>
+</div>
+<!-- Report Title -->
+<div class="mb-8">
+<h2 class="text-3xl font-bold text-slate-900 mb-2">Team Performance Report</h2>
+<p class="text-lg text-slate-500 font-medium">Q3 2023 Assessment Cycle • Engineering Department</p>
+</div>
+<!-- Executive Summary -->
+<div class="mb-10 bg-slate-50 p-6 rounded-lg border border-slate-100">
+<h3 class="text-sm font-bold text-slate-900 uppercase tracking-wide mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">summarize</span> Executive Summary
+                        </h3>
+<p class="text-slate-600 text-sm leading-relaxed">
+                            El equipo ha demostrado resiliencia este trimestre, superando objetivos de entrega en un 12%. La asistencia se mantiene estable y se detectaron áreas de capacitación específicas. Los mejores desempeños continúan impulsando la innovación en proyectos clave.
+                        </p>
+</div>
+<!-- Top Performers Section -->
+<div class="mb-10">
+<h3 class="text-base font-bold text-slate-900 border-l-4 border-primary pl-3 mb-6">Top Performers</h3>
+<div class="grid grid-cols-3 gap-6">
+<!-- Performer 1 -->
+<div class="border border-slate-200 rounded-lg p-4 flex flex-col items-center text-center">
+<div class="size-16 rounded-full bg-cover bg-center mb-3 shadow-md" data-alt="Portrait of Sofia Martinez smiling" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBrfneM6J-wRdiYzWHfwbpHVa7lsj6FYPab-VYpRNnFVdpP045_spS_JCCcUJ3ywxIC2de3hcw9JnKMLha--0hQjZZSB47xviP4Fr2UyOlC5ASbdu-urcRDmQQr8pizc_LZVlBR5E81ArBqmNtsSTYO66Xp1L9_MY00XTHHEhj5qrLenrC5ZhzdWKVeG5GU2sxhZtrWSZKs6XGdjRrDP-LZPeug2ND1ZUEM-tHndgpU3BBfQh6vbJdow1MN845aF4T25MljK1t791HQ');"></div>
+<h4 class="font-bold text-slate-900">Sofia Martinez</h4>
+<p class="text-xs text-slate-500 mb-2">Senior Architect</p>
+<div class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">98/100</div>
+</div>
+<!-- Performer 2 -->
+<div class="border border-slate-200 rounded-lg p-4 flex flex-col items-center text-center">
+<div class="size-16 rounded-full bg-cover bg-center mb-3 shadow-md" data-alt="Portrait of Marcus Chen in office" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuALSzf-wQ1RmjJXxu5S8xoRiYfurTnFv-02gde8_0pSqD1aS1CTRt6GLq5CeyTr1CCQ1NFKTJA40YhHJbK1TWtzaOOoVGI7PThn9xYjNfyfaKvPBIBuE199t4Hm0pyitIPysXmCLPGjfGSA0npnXXZvwao5-S-i9IliLq_ZykHjVKSadg3uwtVf0KRypuV0Vut60FvLTjn_3_ErITlfdYsRmTZd458b2qAtkC76uPXTgJeSAmpRf5KWrk_TrlUjykngJuxfkOrgmPBO');"></div>
+<h4 class="font-bold text-slate-900">Marcus Chen</h4>
+<p class="text-xs text-slate-500 mb-2">Lead Developer</p>
+<div class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">96/100</div>
+</div>
+<!-- Performer 3 -->
+<div class="border border-slate-200 rounded-lg p-4 flex flex-col items-center text-center">
+<div class="size-16 rounded-full bg-cover bg-center mb-3 shadow-md" data-alt="Portrait of Elena Rodriguez" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDmqvAspTmbH6ENo8rqwxr3Exj9TrKqexq6o6mkQq4SVT983apnT7bjp8QnYhWwGs16bGyUEbY_MKh_CRQqvpC77R0UhmTeUUztYNn1YYoq08BT9M-mOnTO1VgYpEVpbDN5n18WY5Lp-mF1df_B1DsK1LZZNRW8n2j1ROOdCnZ92HPc1ICHaKr1I6C0fJz1Ld4MBhn5WBOHiWCJHxogP7lSergPRey2FO_5ToKQVXUS_7TVOjTP-JsoIONkoWuCqWr4jNS5FANQf-OU');"></div>
+<h4 class="font-bold text-slate-900">Elena Rodriguez</h4>
+<p class="text-xs text-slate-500 mb-2">QA Lead</p>
+<div class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">95/100</div>
+</div>
+</div>
+</div>
+<!-- Operational Health -->
+<div class="mb-10">
+<h3 class="text-base font-bold text-slate-900 border-l-4 border-primary pl-3 mb-6">Operational Health</h3>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-sm font-medium text-slate-600">Average Attendance</span>
+<span class="text-sm font-bold text-slate-900">94%</span>
+</div>
+<div class="h-3 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[94%] rounded-full"></div>
+</div>
+<p class="text-xs text-slate-400 mt-2">Target: 90% | +2% vs last quarter</p>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="text-sm font-medium text-slate-600">Project Deliverables</span>
+<span class="text-sm font-bold text-slate-900">88%</span>
+</div>
+<div class="h-3 bg-slate-100 rounded-full overflow-hidden">
+<div class="h-full bg-teal-500 w-[88%] rounded-full"></div>
+</div>
+<p class="text-xs text-slate-400 mt-2">On-time delivery rate</p>
+</div>
+</div>
+</div>
+<!-- Training Needs Table -->
+<div class="mb-4">
+<h3 class="text-base font-bold text-slate-900 border-l-4 border-primary pl-3 mb-6">Development Plan &amp; Training Needs</h3>
+<div class="border border-slate-200 rounded-lg overflow-hidden">
+<table class="w-full text-left text-sm">
+<thead class="bg-slate-50 border-b border-slate-200">
+<tr>
+<th class="px-4 py-3 font-bold text-slate-700">Identified Skill Gap</th>
+<th class="px-4 py-3 font-bold text-slate-700">Recommended Course</th>
+<th class="px-4 py-3 font-bold text-slate-700 text-center">Employees</th>
+<th class="px-4 py-3 font-bold text-slate-700">Priority</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr>
+<td class="px-4 py-3 text-slate-800 font-medium">Advanced SQL Optimization</td>
+<td class="px-4 py-3 text-slate-500">Database Perf. 301</td>
+<td class="px-4 py-3 text-center text-slate-800">4</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-red-100 text-red-800">
+                                                High
+                                            </span>
+</td>
+</tr>
+<tr>
+<td class="px-4 py-3 text-slate-800 font-medium">Kubernetes Basics</td>
+<td class="px-4 py-3 text-slate-500">Cloud Infra Fundamentals</td>
+<td class="px-4 py-3 text-center text-slate-800">6</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-orange-100 text-orange-800">
+                                                Medium
+                                            </span>
+</td>
+</tr>
+<tr>
+<td class="px-4 py-3 text-slate-800 font-medium">Conflict Resolution</td>
+<td class="px-4 py-3 text-slate-500">Leadership Track B</td>
+<td class="px-4 py-3 text-center text-slate-800">2</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-slate-100 text-slate-600">
+                                                Low
+                                            </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="h-16 border-t border-slate-100 px-12 flex items-center justify-between text-xs text-slate-400">
+<p>© 2023 Grupo AR. Todos los derechos reservados.</p>
+<p>Page 1 of 1</p>
+</div>
+</div>
+<!-- Bottom spacing for scroll -->
+<div class="h-12 w-full shrink-0"></div>
+</section>
+</main>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

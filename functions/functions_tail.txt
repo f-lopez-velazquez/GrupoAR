@@ -1,0 +1,20 @@
+﻿        description = `Solicitud para obra: ${data.projectName} | Semana: ${data.weekStart}`;
+      }
+    } else if (type === "verificar" && id) {
+      title = "VerificaciÃ³n de Documento Oficial";
+      description = "Valida la integridad y autenticidad del documento generado por Grupo AR.";
+    }
+  } catch (error) {
+    console.error("SEO Preview Error:", error);
+  }
+
+  const userAgent = req.headers["user-agent"] || "";
+  const bots = ["WhatsApp", "facebookexternalhit", "Twitterbot", "Slackbot", "LinkedInBot", "TelegramBot"];
+  const isBot = bots.some(bot => userAgent.includes(bot));
+
+  if (isBot) {
+    res.status(200).send(`<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>${title}</title><meta name="description" content="${description}"><meta property="og:title" content="${title}"><meta property="og:description" content="${description}"><meta property="og:image" content="${imageUrl}"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${title}"><meta name="twitter:description" content="${description}"><meta name="twitter:image" content="${imageUrl}"></head><body></body></html>`);
+  } else {
+    res.redirect(\`https://gpo-ar.web.app\${path}\`);
+  }
+});

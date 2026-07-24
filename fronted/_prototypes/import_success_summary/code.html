@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Import Success Summary - Grupo AR ERP</title>
+<!-- Fonts: Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<!-- Tailwind Config -->
+<style>
+        /* Custom scrollbar for better aesthetics in dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #102210; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e3b1e; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2a522a; 
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-white font-display min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<div class="w-full border-b border-gray-200 border-[#234823] bg-white bg-background-dark sticky top-0 z-50">
+<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+<header class="flex items-center justify-between h-16">
+<!-- Logo & Nav Links -->
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-slate-900 text-white">
+<div class="flex items-center justify-center size-8 bg-primary/20 rounded text-primary">
+<span class="material-symbols-outlined filled">grid_view</span>
+</div>
+<h2 class="text-lg font-bold tracking-tight">Grupo AR ERP</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 text-gray-300 hover:text-primary hover:text-primary text-sm font-medium transition-colors" href="#">Panel</a>
+<a class="text-primary text-sm font-medium transition-colors" href="#">Inventario</a>
+<a class="text-slate-600 text-gray-300 hover:text-primary hover:text-primary text-sm font-medium transition-colors" href="#">Reportes</a>
+<a class="text-slate-600 text-gray-300 hover:text-primary hover:text-primary text-sm font-medium transition-colors" href="#">Ajustes</a>
+</nav>
+</div>
+<!-- Search & Profile -->
+<div class="flex items-center gap-6">
+<div class="hidden sm:flex items-center bg-slate-100 bg-[#193319] rounded-lg px-3 py-2 w-64 border border-transparent focus-within:border-primary transition-all">
+<span class="material-symbols-outlined text-slate-400 text-[#92c992] text-[20px]">search</span>
+<input class="bg-transparent border-none text-sm text-slate-900 text-white placeholder-slate-400 placeholder-[#5c8a5c] focus:ring-0 w-full ml-2 p-0 leading-normal" placeholder="Buscar datos..."/>
+</div>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-primary/20 cursor-pointer hover:border-primary transition-colors" data-alt="User profile avatar showing a professional looking person" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA0OUDQ9-lGfPWcq7eaZYFuY8BjIgs9mtuPbxOVl8pwVsZIbuAoEYDix_FM2W84-liq_9q3vxvCqF8aandEUwVwTV5EwsUDJf9bbqgeO-143VGg4I1FoOpCF0zug6my-Qfpu0anpg60uOGTgwBPzs7VuGsdIqYuB9Hwvl0MFOHpob5hRmC7enHSCCcQz1IWmm6uIs_AA6K8vXEEsJPOQHd7nU3uP8ayi-FK8fjwMevmEeEunGNY1Lg-G8KJZRMSB3go74LrARnlrDPU");'></div>
+</div>
+</header>
+</div>
+</div>
+<!-- Main Content Layout -->
+<main class="flex-grow flex flex-col items-center py-8 px-4 sm:px-6">
+<div class="w-full max-w-[960px] flex flex-col gap-6">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-sm">
+<a class="text-slate-500 text-[#92c992] hover:underline" href="#">Inicio</a>
+<span class="text-slate-400 text-[#5c8a5c]">/</span>
+<a class="text-slate-500 text-[#92c992] hover:underline" href="#">Inventario</a>
+<span class="text-slate-400 text-[#5c8a5c]">/</span>
+<span class="text-slate-900 text-white font-medium">Import Summary</span>
+</nav>
+<!-- Success Hero Section -->
+<div class="flex flex-col items-center text-center gap-6 py-10 animate-fade-in">
+<div class="size-20 bg-primary/10 rounded-full flex items-center justify-center mb-2 shadow-[0_0_20px_rgba(19,236,19,0.2)]">
+<span class="material-symbols-outlined text-primary text-5xl">check_circle</span>
+</div>
+<div class="space-y-2 max-w-2xl">
+<h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 text-white">
+                        Import Successful
+                    </h1>
+<p class="text-slate-600 text-gray-300 text-lg">
+                        Your inventory data has been processed successfully. The database has been updated with the changes below.
+                    </p>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<!-- Card 1: Added -->
+<div class="bg-white bg-surface-dark border border-slate-200 border-[#326732] rounded-xl p-6 flex flex-col gap-3 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<div class="p-2 rounded-lg bg-green-100 bg-[#193319] text-green-600 text-primary">
+<span class="material-symbols-outlined">add_circle</span>
+</div>
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400 text-[#92c992] opacity-70">New Entries</span>
+</div>
+<div>
+<h2 class="text-4xl font-bold text-slate-900 text-white">142</h2>
+<p class="text-sm text-slate-500 text-gray-400 mt-1">Items successfully added</p>
+</div>
+</div>
+<!-- Card 2: Updated -->
+<div class="bg-white bg-surface-dark border border-slate-200 border-[#326732] rounded-xl p-6 flex flex-col gap-3 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<div class="p-2 rounded-lg bg-blue-100 bg-[#1a2f45] text-blue-600 text-blue-400">
+<span class="material-symbols-outlined">sync</span>
+</div>
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400 text-[#92c992] opacity-70">Modified</span>
+</div>
+<div>
+<h2 class="text-4xl font-bold text-slate-900 text-white">85</h2>
+<p class="text-sm text-slate-500 text-gray-400 mt-1">Items updated</p>
+</div>
+</div>
+<!-- Card 3: Skipped -->
+<div class="bg-white bg-surface-dark border border-slate-200 border-[#326732] rounded-xl p-6 flex flex-col gap-3 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
+<div class="absolute right-0 top-0 w-16 h-16 bg-yellow-500/5 rounded-bl-full -mr-2 -mt-2 pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<div class="p-2 rounded-lg bg-yellow-100 bg-[#423818] text-yellow-600 text-yellow-400">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<span class="text-xs font-semibold uppercase tracking-wider text-slate-400 text-[#92c992] opacity-70">Attention</span>
+</div>
+<div>
+<h2 class="text-4xl font-bold text-slate-900 text-white">3</h2>
+<p class="text-sm text-slate-500 text-gray-400 mt-1">Items skipped due to errors</p>
+</div>
+</div>
+</div>
+<!-- Error Download Section -->
+<div class="flex justify-center py-4">
+<button class="group flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold text-slate-600 text-slate-300 hover:text-slate-900 hover:text-white hover:bg-slate-100 hover:bg-[#1e3b1e] transition-all">
+<span class="material-symbols-outlined text-[20px] group-hover:-translate-y-0.5 transition-transform">download</span>
+<span>Descargar registro de errores de elementos omitidos</span>
+</button>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+<button class="flex-1 sm:flex-none sm:min-w-[200px] h-12 flex items-center justify-center gap-2 bg-primary hover:bg-[#0fdc0f] text-[#112211] rounded-lg font-bold text-base transition-colors shadow-[0_4px_12px_rgba(19,236,19,0.2)]">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+                    Go to Inventory
+                </button>
+<button class="flex-1 sm:flex-none sm:min-w-[200px] h-12 flex items-center justify-center gap-2 bg-transparent border border-slate-300 border-[#326732] text-slate-700 text-white hover:bg-slate-50 hover:bg-[#1e3b1e] rounded-lg font-bold text-base transition-colors">
+<span class="material-symbols-outlined text-[20px]">upload_file</span>
+                    Import Another File
+                </button>
+</div>
+<!-- Recent Activity Preview (Optional Content Filler) -->
+<div class="mt-12 w-full">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold text-slate-900 text-white">Recent Processed Items</h3>
+<button class="text-primary text-sm font-medium hover:underline">View Full Log</button>
+</div>
+<div class="overflow-hidden rounded-lg border border-slate-200 border-[#234823] bg-white bg-surface-dark">
+<table class="w-full text-left text-sm">
+<thead class="bg-slate-50 bg-[#193319] text-slate-500 text-[#92c992]">
+<tr>
+<th class="px-4 py-3 font-medium">SKU</th>
+<th class="px-4 py-3 font-medium">Item Name</th>
+<th class="px-4 py-3 font-medium">Status</th>
+<th class="px-4 py-3 font-medium text-right">Timestamp</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 divide-[#234823] text-slate-700 text-gray-300">
+<tr class="hover:bg-slate-50 hover:bg-[#1e3b1e] transition-colors">
+<td class="px-4 py-3 font-mono text-xs">SKU-2024-001</td>
+<td class="px-4 py-3">Industrial Steel Beam Type A</td>
+<td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 bg-[#193319] text-green-800 text-primary">Added</span></td>
+<td class="px-4 py-3 text-right text-slate-400">10:42 AM</td>
+</tr>
+<tr class="hover:bg-slate-50 hover:bg-[#1e3b1e] transition-colors">
+<td class="px-4 py-3 font-mono text-xs">SKU-2024-002</td>
+<td class="px-4 py-3">Heavy Duty Bolt Set (500pc)</td>
+<td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 bg-[#193319] text-green-800 text-primary">Added</span></td>
+<td class="px-4 py-3 text-right text-slate-400">10:42 AM</td>
+</tr>
+<tr class="hover:bg-slate-50 hover:bg-[#1e3b1e] transition-colors">
+<td class="px-4 py-3 font-mono text-xs">SKU-2024-045</td>
+<td class="px-4 py-3">Safety Goggles Standard</td>
+<td class="px-4 py-3"><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 bg-[#1a2f45] text-blue-800 text-blue-300">Updated</span></td>
+<td class="px-4 py-3 text-right text-slate-400">10:42 AM</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

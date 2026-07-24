@@ -1,0 +1,575 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Performance Report Generator Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #0a6fc7;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #0a6fc7;
+        }
+        
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="flex h-screen overflow-hidden bg-background-light bg-background-dark font-display text-[#0d151c] text-slate-50 antialiased">
+<!-- Side Navigation -->
+<aside class="flex w-72 flex-col border-r border-[#cedce8] border-slate-800 bg-slate-50 bg-[#101a22] hidden md:flex">
+<div class="flex flex-col gap-4 p-6 h-full">
+<div class="flex gap-3 items-center mb-6">
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 shadow-sm" data-alt="Company Logo Abstract Blue Gradient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuANnb9Doj3zNEtLNweNg3rhkxJ4qi0PRod8dgmquzTyFHKq28jxe15iJPzBzHfRjnM2JiQwP8iLfD5QjF9H7zB2ndY4GOVAYJcG4ReTTqTMQQf0mO4QjYWuCQE4Ieo6oRz3lhCk_2oAi5PzuCjntssZfbC1jvGSwWhW36_Al7bo-y7ozFGSE7S_TQjkGdkNvRHA7Yc6EJXMWZnwsOXhhokrulNNqKiMGeon7TU1IasvL435EGTre0lFndIfs5E06UZ5WSKJoINlSKn4");'></div>
+<div class="flex flex-col">
+<h1 class="text-[#0d151c] text-white text-base font-bold leading-normal">Grupo AR</h1>
+<p class="text-[#49769c] text-slate-400 text-sm font-normal leading-normal">ERP System</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 flex-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#49769c] group-hover:text-primary text-slate-400">dashboard</span>
+<p class="text-[#0d151c] text-slate-200 text-sm font-medium leading-normal">Panel</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#49769c] group-hover:text-primary text-slate-400">group</span>
+<p class="text-[#0d151c] text-slate-200 text-sm font-medium leading-normal">Employees</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-[#e7eef4] bg-primary/20" href="#">
+<span class="material-symbols-outlined text-primary text-primary fill-1">military_tech</span>
+<p class="text-[#0d151c] text-white text-sm font-bold leading-normal">HR &amp; Performance</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#49769c] group-hover:text-primary text-slate-400">work</span>
+<p class="text-[#0d151c] text-slate-200 text-sm font-medium leading-normal">Proyectos</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 hover:bg-slate-800 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#49769c] group-hover:text-primary text-slate-400">settings</span>
+<p class="text-[#0d151c] text-slate-200 text-sm font-medium leading-normal">Ajustes</p>
+</a>
+</div>
+<div class="mt-auto pt-6 border-t border-[#cedce8] border-slate-800">
+<div class="flex items-center gap-3 px-3">
+<div class="relative">
+<div class="bg-center bg-no-repeat bg-cover rounded-full h-10 w-10 border-2 border-white border-slate-700" data-alt="User Avatar Profile Photo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC1kkCVq06wnigzXTtk_WUpLdgMfdEsz6F5P56th-VQrAD6Oxzz5pVxB10LSzFCAH-Jl_fcevx72YZQk5nQ8WJpzbRbJlER_bQITyEyrfFJMBHY5ekzOL3Cq6BYRw_wQpFjSsdz-pVmoqRKNUIlWkIOSigSNmdER3sgUQSR84Wnx1nyZQ7Ip06yzjU-dy5-LnvSwHpcJv--y871NAg-BmRWQ2n2-01pGbzx7TyAgm7FtHWh53kixVoRrC8DctcsYBOpRaWpyNdgJ87w");'></div>
+<div class="absolute bottom-0 right-0 h-3 w-3 bg-green-500 rounded-full border-2 border-white border-slate-800"></div>
+</div>
+<div class="flex flex-col">
+<p class="text-[#0d151c] text-white text-sm font-bold">Alex Morgan</p>
+<p class="text-[#49769c] text-slate-400 text-xs">HR Manager</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Top Scrollable Area -->
+<div class="flex-1 overflow-y-auto">
+<div class="max-w-[1400px] mx-auto p-4 md:p-8 flex flex-col gap-6">
+<!-- Breadcrumbs & Header -->
+<div class="flex flex-col gap-4">
+<div class="flex flex-wrap gap-2 items-center text-sm">
+<a class="text-[#49769c] hover:text-primary text-slate-400 transition-colors" href="#">Inicio</a>
+<span class="text-[#49769c] text-slate-600">/</span>
+<a class="text-[#49769c] hover:text-primary text-slate-400 transition-colors" href="#">HR</a>
+<span class="text-[#49769c] text-slate-600">/</span>
+<span class="text-[#0d151c] text-slate-200 font-medium">Performance Reports</span>
+</div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-1 max-w-2xl">
+<h1 class="text-[#0d151c] text-white text-3xl md:text-4xl font-extrabold tracking-tight">Performance Report Generator</h1>
+<p class="text-[#49769c] text-slate-400 text-base">Review employee metrics across departments and generate Q3 2023 summaries.</p>
+</div>
+<button id="exportPerformanceBtn" class="flex items-center justify-center gap-2 bg-primary hover:bg-blue-700 text-white px-5 h-12 rounded-lg font-bold shadow-lg shadow-blue-500/20 transition-all active:scale-95 shrink-0">
+<span class="material-symbols-outlined">download</span>
+<span>Export PDF Report</span>
+</button>
+</div>
+</div>
+<!-- Filters Bar -->
+<div class="bg-white bg-[#1a2632] p-5 rounded-xl border border-[#cedce8] border-slate-800 shadow-sm flex flex-col xl:flex-row gap-5 items-start xl:items-end">
+<div class="flex flex-col md:flex-row gap-4 flex-1 w-full">
+<label class="flex flex-col gap-1.5 flex-1 min-w-[200px]">
+<span class="text-xs font-semibold uppercase tracking-wider text-[#49769c] text-slate-400">Project</span>
+<div class="relative">
+<select class="w-full h-11 pl-4 pr-10 rounded-lg border border-[#cedce8] border-slate-700 bg-slate-50 bg-slate-900 text-[#0d151c] text-white text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary appearance-none cursor-pointer">
+<option>All Projects</option>
+<option>Alpha Redesign</option>
+<option>Beta Launch</option>
+<option>Internal Ops</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#49769c]">expand_more</span>
+</div>
+</label>
+<label class="flex flex-col gap-1.5 flex-1 min-w-[200px]">
+<span class="text-xs font-semibold uppercase tracking-wider text-[#49769c] text-slate-400">Department</span>
+<div class="relative">
+<select class="w-full h-11 pl-4 pr-10 rounded-lg border border-[#cedce8] border-slate-700 bg-slate-50 bg-slate-900 text-[#0d151c] text-white text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary appearance-none cursor-pointer">
+<option>All Departments</option>
+<option>Engineering</option>
+<option>Design</option>
+<option>Marketing</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#49769c]">expand_more</span>
+</div>
+</label>
+<label class="flex flex-col gap-1.5 flex-1 min-w-[200px]">
+<span class="text-xs font-semibold uppercase tracking-wider text-[#49769c] text-slate-400">Time Period</span>
+<div class="relative">
+<select class="w-full h-11 pl-4 pr-10 rounded-lg border border-[#cedce8] border-slate-700 bg-slate-50 bg-slate-900 text-[#0d151c] text-white text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary appearance-none cursor-pointer">
+<option>Last 30 Days</option>
+<option>Current Quarter (Q3)</option>
+<option>Year to Date</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#49769c]">calendar_month</span>
+</div>
+</label>
+</div>
+<div class="flex items-center justify-between w-full xl:w-auto gap-6 border-t xl:border-t-0 xl:border-l border-[#cedce8] border-slate-700 pt-4 xl:pt-0 xl:pl-6 h-full">
+<button class="text-sm font-medium text-[#49769c] hover:text-primary text-slate-400 hover:text-white transition-colors">Reset Filters</button>
+<div class="flex items-center gap-3">
+<span class="text-sm font-medium text-[#0d151c] text-white">Show Salaries</span>
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-[#cedce8] border-slate-600" id="toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-slate-200 bg-slate-700 cursor-pointer" for="toggle"></label>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Data Table -->
+<div id="reportPanel" class="bg-white bg-[#1a2632] rounded-xl border border-[#cedce8] border-slate-800 shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 bg-[#151f28] border-b border-[#cedce8] border-slate-700">
+<th class="p-5 text-xs font-bold uppercase tracking-wider text-[#49769c] text-slate-400 min-w-[240px]">Employee</th>
+<th class="p-5 text-xs font-bold uppercase tracking-wider text-[#49769c] text-slate-400">Dept / Project</th>
+<th class="p-5 text-xs font-bold uppercase tracking-wider text-[#49769c] text-slate-400 text-center">Attendance</th>
+<th class="p-5 text-xs font-bold uppercase tracking-wider text-[#49769c] text-slate-400 w-1/5">Task Completion</th>
+<th class="p-5 text-xs font-bold uppercase tracking-wider text-[#49769c] text-slate-400">Rating</th>
+<th class="p-5 text-xs font-bold uppercase tracking-wider text-[#49769c] text-slate-400 text-right">Salary</th>
+<th class="p-5 text-xs font-bold uppercase tracking-wider text-[#49769c] text-slate-400 text-center">Actions</th>
+</tr>
+</thead>
+<tbody id="performanceBody" class="divide-y divide-[#cedce8] divide-slate-800">
+<!-- Row 1 -->
+<tr class="group hover:bg-slate-50 hover:bg-slate-800/50 transition-colors">
+<td class="p-5">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-cover bg-center" data-alt="Portrait of Sarah Jenkins" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAjiFrQ77rHeXMzvkxC-F1ChH4VBktngPou81PnsRY2H1pL9jEWpG5rejRsNc-jL2V1s9-cVMORLos_UmKfmW9b4CrXJvXwiI-kBBQKpwXO7FuP_Ac4o87ceVM-QxRfle_M_nBsUjSiOZzVLsuie8o_AhjZym16Cv6KCTyrvBaiGC4TI6ai4je2_2zmy-TGKDrNKLK_WKgG-9vqgGZUZD333f0z0PBfUohLPuoIefFO8n9g0hadit3WOmE58OztCYevih_KHZ4uQX2a");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-[#0d151c] text-white">Sarah Jenkins</span>
+<span class="text-xs text-[#49769c] text-slate-400">Senior UX Designer</span>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex flex-col gap-1">
+<span class="text-sm font-medium text-[#0d151c] text-slate-200">Design</span>
+<span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 bg-blue-900/40 text-blue-700 text-blue-300 w-fit">Alpha Redesign</span>
+</div>
+</td>
+<td class="p-5">
+<div class="flex items-center justify-center gap-2">
+<div class="relative h-10 w-10 flex items-center justify-center rounded-full" style="background: conic-gradient(#22c55e 98%, #e2e8f0 0);">
+<div class="bg-white bg-[#1a2632] h-8 w-8 rounded-full flex items-center justify-center">
+<span class="text-[10px] font-bold text-[#0d151c] text-white">98%</span>
+</div>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-xs mb-1">
+<span class="text-[#49769c] text-slate-400">85% Complete</span>
+</div>
+<div class="w-full bg-slate-200 bg-slate-700 rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex items-center gap-1 text-yellow-500">
+<span class="material-symbols-outlined text-lg fill-1">star</span>
+<span class="material-symbols-outlined text-lg fill-1">star</span>
+<span class="material-symbols-outlined text-lg fill-1">star</span>
+<span class="material-symbols-outlined text-lg fill-1">star</span>
+<span class="material-symbols-outlined text-lg fill-1">star_half</span>
+<span class="text-sm font-bold text-[#0d151c] text-white ml-1">4.8</span>
+</div>
+</td>
+<td class="p-5 text-right font-mono text-sm text-[#0d151c] text-slate-200">
+                                        ****
+                                    </td>
+<td class="p-5 text-center">
+<button class="text-[#49769c] hover:text-primary text-slate-400 transition-colors p-2 rounded-full hover:bg-slate-200 hover:bg-slate-700">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-slate-50 hover:bg-slate-800/50 transition-colors">
+<td class="p-5">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-cover bg-center" data-alt="Portrait of Michael Chen" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBfT3wUM0F9T6uKEnwTjf0Xil3-2x2afrEZtATl2wXL2hlQaWElB-tm2A9ta73028xyXjTU8bO25qmtUOkUsvqKAarpSz9ItcBagsHuvW0VlWt-wgNR8v27TiWMHEFCJp0ZTMzx-Ki6KjrMhPDXpNV9Rgu7xcTWh8u4xSdqlMeiY3lgxv5yjaPWFNgn5UkKzfUI_9bV6ujmxTxmqQJ4712RnbIlnvH_NrrDLqsbZVTpGk7__i3iWB21pDa2T8Fni1bO0mGMLO44Y3dv");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-[#0d151c] text-white">Michael Chen</span>
+<span class="text-xs text-[#49769c] text-slate-400">Backend Engineer</span>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex flex-col gap-1">
+<span class="text-sm font-medium text-[#0d151c] text-slate-200">Engineering</span>
+<span class="text-xs px-2 py-0.5 rounded-full bg-indigo-100 bg-indigo-900/40 text-indigo-700 text-indigo-300 w-fit">Beta Launch</span>
+</div>
+</td>
+<td class="p-5">
+<div class="flex items-center justify-center gap-2">
+<div class="relative h-10 w-10 flex items-center justify-center rounded-full" style="background: conic-gradient(#eab308 92%, #e2e8f0 0);">
+<div class="bg-white bg-[#1a2632] h-8 w-8 rounded-full flex items-center justify-center">
+<span class="text-[10px] font-bold text-[#0d151c] text-white">92%</span>
+</div>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-xs mb-1">
+<span class="text-[#49769c] text-slate-400">100% Complete</span>
+</div>
+<div class="w-full bg-slate-200 bg-slate-700 rounded-full h-2">
+<div class="bg-green-500 h-2 rounded-full" style="width: 100%"></div>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex items-center gap-1 text-yellow-500">
+<span class="material-symbols-outlined text-lg fill-1">star</span>
+<span class="material-symbols-outlined text-lg fill-1">star</span>
+<span class="material-symbols-outlined text-lg fill-1">star</span>
+<span class="material-symbols-outlined text-lg fill-1">star</span>
+<span class="material-symbols-outlined text-lg fill-1">star</span>
+<span class="text-sm font-bold text-[#0d151c] text-white ml-1">5.0</span>
+</div>
+</td>
+<td class="p-5 text-right font-mono text-sm text-[#0d151c] text-slate-200">
+                                        ****
+                                    </td>
+<td class="p-5 text-center">
+<button class="text-[#49769c] hover:text-primary text-slate-400 transition-colors p-2 rounded-full hover:bg-slate-200 hover:bg-slate-700">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-slate-50 hover:bg-slate-800/50 transition-colors">
+<td class="p-5">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-cover bg-center" data-alt="Portrait of Jessica Lee" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBAVoN65fqwPplpxWN8Kolwav9cpwK1R6K_JGyYBnj5neErMRua5hjpmOb2Yi_5iUyU0Fd60pWFT571i6lUL7wPRKkQkaZU6CTGZ6O8_XS-5O1SoJLVAMCFK_QUNQxXY6zDhxld9vzYUrJ0umeifMSJ4TYV9fyS5mcX_S_qq6P_93DAwZ7n1dPrCgPRfzaa7SRdn_VN42fKQRGlid2PzeQ3UbMiGl9mzYcb0ddtFzKP4Vqp-PfBsYNMph-zehZUelFSQyuUM6ik-ihw");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-[#0d151c] text-white">Jessica Lee</span>
+<span class="text-xs text-[#49769c] text-slate-400">Marketing Lead</span>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex flex-col gap-1">
+<span class="text-sm font-medium text-[#0d151c] text-slate-200">Marketing</span>
+<span class="text-xs px-2 py-0.5 rounded-full bg-orange-100 bg-orange-900/40 text-orange-700 text-orange-300 w-fit">Internal Ops</span>
+</div>
+</td>
+<td class="p-5">
+<div class="flex items-center justify-center gap-2">
+<div class="relative h-10 w-10 flex items-center justify-center rounded-full" style="background: conic-gradient(#22c55e 100%, #e2e8f0 0);">
+<div class="bg-white bg-[#1a2632] h-8 w-8 rounded-full flex items-center justify-center">
+<span class="text-[10px] font-bold text-[#0d151c] text-white">100%</span>
+</div>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-xs mb-1">
+<span class="text-[#49769c] text-slate-400">75% Complete</span>
+</div>
+<div class="w-full bg-slate-200 bg-slate-700 rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 75%"></div>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex items-center gap-1 text-yellow-500">
+<span class="material-symbols-outlined text-lg fill-1">star</span>
+<span class="material-symbols-outlined text-lg fill-1">star</span>
+<span class="material-symbols-outlined text-lg fill-1">star</span>
+<span class="material-symbols-outlined text-lg fill-1">star</span>
+<span class="material-symbols-outlined text-lg text-slate-300 text-slate-600">star</span>
+<span class="text-sm font-bold text-[#0d151c] text-white ml-1">4.2</span>
+</div>
+</td>
+<td class="p-5 text-right font-mono text-sm text-[#0d151c] text-slate-200">
+                                        ****
+                                    </td>
+<td class="p-5 text-center">
+<button class="text-[#49769c] hover:text-primary text-slate-400 transition-colors p-2 rounded-full hover:bg-slate-200 hover:bg-slate-700">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-slate-50 hover:bg-slate-800/50 transition-colors">
+<td class="p-5">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-cover bg-center" data-alt="Portrait of David Kim" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCOfxCwzDNg-l1-9H6axSsByRnAPNTzOkKw-80NmDiYIRFwfmjlQtd3dxK3ueEMDX7eZhcuNogzVMG5eoE93Q5EgQZUW9PH3Kma45Oq5w1rrg5ZAXqnVN7c1txZ1AfRndAWC38AfhEYysJWYGUdVc2rsQJgS7-UGT8nr2PSLf40GCGshyRnYjfk7yh0k6uWiWOGELD07k69up2q9QtkeWT2a_G3mIPglErKGYfrf5E5G2Kzx7eArihSEFuITBVewsduJz-feiVyBTYO");'></div>
+<div class="flex flex-col">
+<span class="text-sm font-bold text-[#0d151c] text-white">David Kim</span>
+<span class="text-xs text-[#49769c] text-slate-400">Product Manager</span>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex flex-col gap-1">
+<span class="text-sm font-medium text-[#0d151c] text-slate-200">Product</span>
+<span class="text-xs px-2 py-0.5 rounded-full bg-purple-100 bg-purple-900/40 text-purple-700 text-purple-300 w-fit">Beta Launch</span>
+</div>
+</td>
+<td class="p-5">
+<div class="flex items-center justify-center gap-2">
+<div class="relative h-10 w-10 flex items-center justify-center rounded-full" style="background: conic-gradient(#ef4444 65%, #e2e8f0 0);">
+<div class="bg-white bg-[#1a2632] h-8 w-8 rounded-full flex items-center justify-center">
+<span class="text-[10px] font-bold text-[#0d151c] text-white">65%</span>
+</div>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-xs mb-1">
+<span class="text-[#49769c] text-slate-400">60% Complete</span>
+</div>
+<div class="w-full bg-slate-200 bg-slate-700 rounded-full h-2">
+<div class="bg-yellow-500 h-2 rounded-full" style="width: 60%"></div>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex items-center gap-1 text-yellow-500">
+<span class="material-symbols-outlined text-lg fill-1">star</span>
+<span class="material-symbols-outlined text-lg fill-1">star</span>
+<span class="material-symbols-outlined text-lg fill-1">star</span>
+<span class="material-symbols-outlined text-lg text-slate-300 text-slate-600">star</span>
+<span class="material-symbols-outlined text-lg text-slate-300 text-slate-600">star</span>
+<span class="text-sm font-bold text-[#0d151c] text-white ml-1">3.0</span>
+</div>
+</td>
+<td class="p-5 text-right font-mono text-sm text-[#0d151c] text-slate-200">
+                                        ****
+                                    </td>
+<td class="p-5 text-center">
+<button class="text-[#49769c] hover:text-primary text-slate-400 transition-colors p-2 rounded-full hover:bg-slate-200 hover:bg-slate-700">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between p-4 border-t border-[#cedce8] border-slate-800 bg-slate-50/50 bg-[#1a2632]">
+<div class="text-sm text-[#49769c] text-slate-400">
+                            Showing <span class="font-medium text-[#0d151c] text-white">1</span> to <span class="font-medium text-[#0d151c] text-white">4</span> of <span class="font-medium text-[#0d151c] text-white">48</span> employees
+                        </div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded border border-[#cedce8] border-slate-700 text-[#49769c] text-slate-400 text-sm font-medium hover:bg-white hover:bg-slate-800 disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1.5 rounded border border-[#cedce8] border-slate-700 text-[#0d151c] text-white bg-white bg-slate-800 text-sm font-medium hover:bg-slate-50 hover:bg-slate-700">Next</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script type="module">
+import { ensureAuth } from "/shared/auth.js";
+import { fetchRecentEvaluations } from "/shared/services/evaluations.js";
+import { exportElementAsPng } from "/shared/services/reports.js";
+import { formatMoney } from "/shared/utils.js";
+import { logAuditEvent } from "/shared/audit.js";
+
+const exportBtn = document.getElementById("exportPerformanceBtn");
+const performanceBody = document.getElementById("performanceBody");
+const reportPanel = document.getElementById("reportPanel");
+const salaryToggle = document.getElementById("toggle");
+
+let showSalaries = false;
+let isAdmin = false;
+let aggregated = [];
+
+const buildStars = (rating) => {
+  const stars = [];
+  for (let i = 1; i <= 5; i += 1) {
+    stars.push(
+      `<span class="material-symbols-outlined text-[18px] ${i <= rating ? "text-amber-400" : "text-slate-300 text-slate-600"}">star</span>`
+    );
+  }
+  return stars.join("");
+};
+
+const renderRows = () => {
+  performanceBody.innerHTML = "";
+  if (!aggregated.length) {
+    performanceBody.innerHTML = `
+      <tr>
+        <td colspan="7" class="p-6 text-center text-[#49769c] text-slate-400">Sin evaluaciones recientes.</td>
+      </tr>`;
+    return;
+  }
+
+  aggregated.forEach((entry) => {
+    const attendanceRate = entry.attendanceTotal
+      ? Math.round((entry.attendancePresent / entry.attendanceTotal) * 100)
+      : 0;
+    const ratingAvg = entry.ratingCount ? Math.round(entry.ratingTotal / entry.ratingCount) : 0;
+    const taskCompletion = entry.taskCompletion ? Math.min(100, Math.round((ratingAvg / 5) * 100));
+    const salaryValue = showSalaries && isAdmin && entry.salary != null ? formatMoney(entry.salary) : "—";
+    performanceBody.insertAdjacentHTML(
+      "beforeend",
+      `<tr class="group hover:bg-slate-50 hover:bg-slate-800/50 transition-colors">
+        <td class="p-5">
+          <div class="flex items-center gap-3">
+            <div class="h-10 w-10 rounded-full bg-[#e7eef4] bg-slate-700 flex items-center justify-center text-[#49769c] font-bold">
+              ${entry.name.split(" ").map((p) => p[0]).join("").slice(0, 2)}
+            </div>
+            <div class="flex flex-col">
+              <span class="text-sm font-bold text-[#0d151c] text-white">${entry.name}</span>
+              <span class="text-xs text-[#49769c] text-slate-400">${entry.role || "Equipo"}</span>
+            </div>
+          </div>
+        </td>
+        <td class="p-5 text-sm text-[#49769c] text-slate-400">${entry.department || "General"}</td>
+        <td class="p-5 text-center">
+          <span class="text-sm font-semibold text-[#0d151c] text-white">${attendanceRate}%</span>
+          <p class="text-xs text-[#49769c] text-slate-400">${entry.attendancePresent}/${entry.attendanceTotal || 0}</p>
+        </td>
+        <td class="p-5">
+          <div class="w-full bg-[#e7eef4] bg-slate-700 rounded-full h-2">
+            <div class="h-2 rounded-full bg-primary" style="width: ${taskCompletion}%"></div>
+          </div>
+          <p class="text-xs text-[#49769c] text-slate-400 mt-2">${taskCompletion}% completado</p>
+        </td>
+        <td class="p-5">
+          <div class="flex items-center gap-1">${buildStars(ratingAvg)}</div>
+        </td>
+        <td class="p-5 text-right text-sm font-semibold text-[#0d151c] text-white">${salaryValue}</td>
+        <td class="p-5 text-center">
+          <button class="px-3 py-1 text-xs font-semibold rounded-lg border border-[#cedce8] border-slate-700 text-[#49769c] text-slate-300 hover:text-primary hover:border-primary transition-colors">
+            Ver detalle
+          </button>
+        </td>
+      </tr>`
+    );
+  });
+};
+
+const aggregateEvaluations = (evaluations) => {
+  const map = new Map();
+  evaluations.forEach((ev) => {
+    const key = ev.workerId || ev.name || ev.workerName || ev.id;
+    if (!key) return;
+    if (!map.has(key)) {
+      map.set(key, {
+        name: ev.name || ev.workerName || "Colaborador",
+        role: ev.role || ev.title || ev.position || "Equipo",
+        department: ev.department || ev.projectName || null,
+        attendancePresent: 0,
+        attendanceTotal: 0,
+        ratingTotal: 0,
+        ratingCount: 0,
+        taskCompletion: ev.taskCompletion || null,
+        salary: ev.salary || null,
+      });
+    }
+    const entry = map.get(key);
+    if (ev.attendance) {
+      entry.attendanceTotal += 1;
+      if (ev.attendance === "present") entry.attendancePresent += 1;
+    }
+    if (ev.rating) {
+      entry.ratingTotal += Number(ev.rating || 0);
+      entry.ratingCount += 1;
+    }
+    if (ev.salary) entry.salary = ev.salary;
+    if (ev.taskCompletion) entry.taskCompletion = ev.taskCompletion;
+  });
+  aggregated = Array.from(map.values());
+};
+
+salaryToggle.addEventListener("change", () => {
+  showSalaries = salaryToggle.checked;
+  renderRows();
+});
+
+exportBtn.addEventListener("click", async () => {
+  exportBtn.disabled = true;
+  exportBtn.textContent = "Generando...";
+  try {
+    await exportElementAsPng(reportPanel, "reporte-desempeno.png");
+    logAuditEvent({
+      action: "export",
+      resource: "performance_report",
+      severity: "info",
+    });
+  } catch (error) {
+    alert(error.message || "No se pudo exportar.");
+  } finally {
+    exportBtn.disabled = false;
+    exportBtn.textContent = "Export PDF Report";
+  }
+});
+
+ensureAuth({ allowRoles: ["Admin"], allowPermissions: ["reports"] }).then(async ({ role }) => {
+  isAdmin = role === "Admin";
+  const evaluations = await fetchRecentEvaluations({ max: 200 });
+  aggregateEvaluations(evaluations);
+  renderRows();
+});
+</script>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

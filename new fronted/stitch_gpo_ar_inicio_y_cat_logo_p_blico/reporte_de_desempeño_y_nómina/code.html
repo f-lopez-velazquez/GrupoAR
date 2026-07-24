@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GPO-AR Nómina - Reporte de Desempeño</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0a6fc7",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.375rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111518] dark:text-white font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="bg-white dark:bg-[#1a2632] border-b border-[#f0f2f5] dark:border-[#2a3845] sticky top-0 z-50">
+<div class="px-4 md:px-10 py-3 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4">
+<div class="size-8 rounded bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">GPO-AR Nómina</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium text-primary" href="#">Reportes</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Empleados</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Configuración</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#60778a]">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</span>
+<input class="h-10 w-64 rounded-lg border-none bg-[#f0f2f5] dark:bg-[#24303c] dark:text-white pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20 placeholder-[#60778a]" placeholder="Buscar empleado..." type="text"/>
+</div>
+<button class="flex items-center gap-2 rounded-full p-1 hover:bg-[#f0f2f5] dark:hover:bg-[#24303c] transition-colors">
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-9 border border-[#dbe1e6] dark:border-[#3a4d5f]" data-alt="Profile avatar of the administrator" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBvfxgnB9F2lA2WtgTj_Njl3QqzVw2R9YMvK_llTmkge6gndbAcCQhfJu6Bgz3-VEYGn0_eq-UIcG3k3iFBeaacnbmlfv31CEt4nQeVM0H4pO_3BT5dZM4rX1HXNQxA8wqvt2E1ydQytV22oYD52L-T77f-TwAriqRpJ7ykfMo4ByGvJX7R-k2-IzNyFJ8fA-n-3S4aw6UK0N4uRpXCZ7asprRN2dBrt1TtA95ymc_Dojt7UrKM9JhYEVPakBU2gVS7WlHM3mwo5GQ");'></div>
+</button>
+</div>
+</div>
+</header>
+<div class="layout-container flex h-full grow flex-col max-w-[1200px] mx-auto w-full px-4 md:px-6 py-6 gap-6">
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-3xl md:text-4xl font-black tracking-tight text-[#111518] dark:text-white">Reporte Semanal de Desempeño</h1>
+<p class="text-[#60778a] dark:text-[#9aaebf] text-base">Ciclo de pago: <span class="font-semibold text-primary">Sábado 21 Oct - Viernes 27 Oct</span></p>
+</div>
+<div class="flex gap-3">
+<button class="h-10 px-4 rounded-lg bg-white dark:bg-[#1a2632] border border-[#dbe1e6] dark:border-[#3a4d5f] text-sm font-bold text-[#111518] dark:text-white hover:bg-[#f8fafc] dark:hover:bg-[#24303c] transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">history</span>
+                        Historial
+                    </button>
+<button class="h-10 px-4 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors shadow-sm shadow-primary/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        Exportar CSV
+                    </button>
+</div>
+</div>
+<!-- Stats Overview -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="flex flex-col gap-2 rounded-xl bg-white dark:bg-[#1a2632] p-5 border border-[#dbe1e6] dark:border-[#2a3845] shadow-sm">
+<div class="flex items-center gap-2 text-[#60778a] dark:text-[#9aaebf]">
+<span class="material-symbols-outlined text-[20px]">groups</span>
+<p class="text-sm font-medium">Total Empleados</p>
+</div>
+<p class="text-2xl font-bold">45 <span class="text-sm font-normal text-green-600 dark:text-green-400 ml-1">(100% activos)</span></p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl bg-white dark:bg-[#1a2632] p-5 border border-[#dbe1e6] dark:border-[#2a3845] shadow-sm">
+<div class="flex items-center gap-2 text-[#60778a] dark:text-[#9aaebf]">
+<span class="material-symbols-outlined text-[20px]">attach_money</span>
+<p class="text-sm font-medium">Nómina Estimada</p>
+</div>
+<p class="text-2xl font-bold">$22,450.00</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl bg-white dark:bg-[#1a2632] p-5 border border-[#dbe1e6] dark:border-[#2a3845] shadow-sm">
+<div class="flex items-center gap-2 text-[#60778a] dark:text-[#9aaebf]">
+<span class="material-symbols-outlined text-[20px]">trending_up</span>
+<p class="text-sm font-medium">Promedio Desempeño</p>
+</div>
+<p class="text-2xl font-bold">9.2<span class="text-lg text-[#60778a]">/10</span></p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl bg-white dark:bg-[#1a2632] p-5 border border-[#dbe1e6] dark:border-[#2a3845] shadow-sm">
+<div class="flex items-center gap-2 text-[#60778a] dark:text-[#9aaebf]">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+<p class="text-sm font-medium">Incidencias</p>
+</div>
+<p class="text-2xl font-bold text-amber-600 dark:text-amber-500">3 <span class="text-sm font-normal text-[#60778a] dark:text-[#9aaebf] ml-1">por revisar</span></p>
+</div>
+</div>
+<!-- Link Generator Section -->
+<div class="flex flex-col md:flex-row gap-6 bg-primary/5 dark:bg-primary/10 border border-primary/10 rounded-xl p-6 items-start md:items-center justify-between">
+<div class="flex flex-col gap-2 max-w-2xl">
+<h3 class="text-lg font-bold text-[#111518] dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">link</span>
+                        Enlace para Gerentes de Sitio
+                    </h3>
+<p class="text-sm text-[#60778a] dark:text-[#9aaebf]">
+                        Comparta este enlace único para que los supervisores reporten el desempeño del personal antes del corte del viernes a las 5:00 PM.
+                    </p>
+</div>
+<div class="flex w-full md:w-auto gap-2">
+<div class="flex flex-1 items-center rounded-lg border border-[#dbe1e6] dark:border-[#3a4d5f] bg-white dark:bg-[#1a2632] px-3 h-11 min-w-[200px] md:min-w-[320px]">
+<span class="truncate text-sm text-[#60778a] select-all">https://gpo-ar.com/eval/week-42-2023</span>
+</div>
+<button class="flex items-center justify-center gap-2 rounded-lg bg-primary px-5 h-11 text-white font-bold text-sm hover:bg-primary/90 transition-colors whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+<span class="hidden sm:inline">Copiar</span>
+</button>
+</div>
+</div>
+<!-- Main Data Table -->
+<div class="flex flex-col rounded-xl border border-[#dbe1e6] dark:border-[#2a3845] bg-white dark:bg-[#1a2632] shadow-sm overflow-hidden">
+<div class="flex items-center justify-between p-4 border-b border-[#dbe1e6] dark:border-[#2a3845]">
+<h3 class="font-bold text-lg">Detalle de Nómina</h3>
+<div class="flex gap-2">
+<button class="text-sm text-primary font-medium hover:underline">Seleccionar todo</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#f9fafb] dark:bg-[#24303c] text-[#60778a] dark:text-[#9aaebf] text-xs uppercase tracking-wider font-semibold">
+<th class="p-4 w-12 text-center">Incluir</th>
+<th class="p-4 min-w-[200px]">Empleado</th>
+<th class="p-4 min-w-[180px]">Asistencia</th>
+<th class="p-4 min-w-[120px]">Desempeño</th>
+<th class="p-4 min-w-[120px]">Sueldo Base</th>
+<th class="p-4 min-w-[120px]">Deducciones</th>
+<th class="p-4 min-w-[120px]">A Pagar</th>
+<th class="p-4 w-20"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#dbe1e6] dark:divide-[#2a3845]">
+<!-- Row 1: Perfect -->
+<tr class="hover:bg-[#f0f2f5] dark:hover:bg-[#24303c] transition-colors group">
+<td class="p-4 text-center">
+<input checked="" class="rounded border-gray-300 text-primary focus:ring-primary h-5 w-5 cursor-pointer" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-cover bg-center border border-gray-200" data-alt="Avatar of Juan Perez" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDd7nTJz5mmkxPJqZX8oBcnOc5cC9l_yXwL60Yzy9hiYvLBJl1HdXqvIYsUNiVsNDp-AJ61pr_3HacLXEcwfEvirDrJJ_nYseoTdSXPr7XEoKuGwzZEbzIUQh41VssO0032ZvflQhcUmgczxXJwg0nOCilJ6LpymLr3nDxqlqmZcnZwLw4GXKEBY7dMQcYtLV7XNMSQmREmjhu75bhjF45ef3qLGD3SR161Nnxh-nv7l-OkN39pTNYDgKUDfQzRkACwPByrCCG5EYw");'></div>
+<div>
+<p class="font-bold text-sm text-[#111518] dark:text-white">Juan Pérez</p>
+<p class="text-xs text-[#60778a]">ID: GPO-8821</p>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                        Asistencia Completa
+                                    </span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-1">
+<span class="font-bold text-[#111518] dark:text-white">9.5</span>
+<span class="text-[#60778a] text-xs">/10</span>
+<div class="flex text-amber-400 text-[12px] ml-1">
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star_half</span>
+</div>
+</div>
+</td>
+<td class="p-4 text-sm text-[#60778a] dark:text-[#9aaebf]">$500.00</td>
+<td class="p-4 text-sm text-[#60778a] dark:text-[#9aaebf]">$0.00</td>
+<td class="p-4 text-sm font-bold text-primary text-lg">$500.00</td>
+<td class="p-4 text-right">
+<button class="text-[#60778a] hover:text-primary transition-colors p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Delay -->
+<tr class="hover:bg-[#f0f2f5] dark:hover:bg-[#24303c] transition-colors group">
+<td class="p-4 text-center">
+<input checked="" class="rounded border-gray-300 text-primary focus:ring-primary h-5 w-5 cursor-pointer" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-cover bg-center border border-gray-200" data-alt="Avatar of Maria Garcia" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCKstavrWTlMAnSPmSJabZLSNRQ4PkwMFaeYiD6fXuQGQfp9Jhg8emjlU7nbXItEbl7VpvK1XAg1JaPtK7YG5bcxaCIqMcuPVxo30mSWtFMZcaxsJsDwjQh8jGU2heDtG81sf4xADqYj8KgZzNgtUtRCwvruxcGm4x8iV9fsDV_7d92YTBGFokkm3tZqhugo4dKjVrXqu7HmJfx3iuC_dpEJREVVe1Jmne7moyAYQmWyj7LosFh68Pw82-jwsQebj9-dMc3s45I0oA");'></div>
+<div>
+<p class="font-bold text-sm text-[#111518] dark:text-white">Maria Garcia</p>
+<p class="text-xs text-[#60778a]">ID: GPO-8845</p>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                        Retardo (-$50)
+                                    </span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-1">
+<span class="font-bold text-[#111518] dark:text-white">8.0</span>
+<span class="text-[#60778a] text-xs">/10</span>
+</div>
+</td>
+<td class="p-4 text-sm text-[#60778a] dark:text-[#9aaebf]">$500.00</td>
+<td class="p-4 text-sm font-medium text-red-600 dark:text-red-400">-$50.00</td>
+<td class="p-4 text-sm font-bold text-primary text-lg">$450.00</td>
+<td class="p-4 text-right">
+<button class="text-[#60778a] hover:text-primary transition-colors p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Perfect High Earner -->
+<tr class="hover:bg-[#f0f2f5] dark:hover:bg-[#24303c] transition-colors group">
+<td class="p-4 text-center">
+<input checked="" class="rounded border-gray-300 text-primary focus:ring-primary h-5 w-5 cursor-pointer" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-cover bg-center border border-gray-200" data-alt="Avatar of Roberto Lopez" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCDWYB16HQeVG5qoTCESkWT29Bt599GkjCiL7rqHFEB6z76se_3VHs2n-jiqCWRMrXlYMEOpPPY3PrS2yMiSHJU12amoyfp9uxMlzW5bYH1IUvE88qzr4XVDrdzniMroCtQ8zV1dGqM6Qv0xF_TV_WXChg6Abu1njM4--PN7C1hDYf4K5KzAmJE3W3MgzvBhbkLv4-M-0DWHsaHE-Rkwx5zqtJ7ptdYzOclVrm4YQEbwkBHKbZMxx4crtsC8skGEZXq_HxVRjTUbwA");'></div>
+<div>
+<p class="font-bold text-sm text-[#111518] dark:text-white">Roberto Lopez</p>
+<p class="text-xs text-[#60778a]">ID: GPO-9901</p>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                        Asistencia Completa
+                                    </span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-1">
+<span class="font-bold text-[#111518] dark:text-white">10</span>
+<span class="text-[#60778a] text-xs">/10</span>
+<div class="flex text-amber-400 text-[12px] ml-1">
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+<span class="material-symbols-outlined text-[16px] fill-current">star</span>
+</div>
+</div>
+</td>
+<td class="p-4 text-sm text-[#60778a] dark:text-[#9aaebf]">$600.00</td>
+<td class="p-4 text-sm text-[#60778a] dark:text-[#9aaebf]">$0.00</td>
+<td class="p-4 text-sm font-bold text-primary text-lg">$600.00</td>
+<td class="p-4 text-right">
+<button class="text-[#60778a] hover:text-primary transition-colors p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Absence -->
+<tr class="hover:bg-[#f0f2f5] dark:hover:bg-[#24303c] transition-colors group bg-red-50/50 dark:bg-red-900/10">
+<td class="p-4 text-center">
+<input class="rounded border-gray-300 text-primary focus:ring-primary h-5 w-5 cursor-pointer" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-cover bg-center border border-gray-200 grayscale" data-alt="Avatar of Ana Sanchez" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBUB6veIXj9ab5wNtzyWCk5dejt16eJ03yA_OnkAJypdlY5YDnxkUT4e-Ln-eofe_QT-U667XbDS1vGFK0D8INwDEsJ7xSSABT4w91CyjwwOm0yjAh1aNl0U8iyIYa_RHt19A3rC3YoLLtX34w5fOA1lX1_OPM0wv-yHuLh_zbOD2cwVEYij__vKfVGyHmGh2SNut599CHoIx3-I9Jc72oEZ6TMK540KR31H_OG_V79xPxamIQZ38BEs5RhsPNkqdqqxIST4rTgI8c");'></div>
+<div>
+<p class="font-bold text-sm text-[#111518] dark:text-white opacity-70">Ana Sanchez</p>
+<p class="text-xs text-[#60778a]">ID: GPO-8810</p>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">
+<span class="material-symbols-outlined text-[14px]">cancel</span>
+                                        Falta Injustificada
+                                    </span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-1 opacity-50">
+<span class="font-bold text-[#111518] dark:text-white">-</span>
+<span class="text-[#60778a] text-xs">/10</span>
+</div>
+</td>
+<td class="p-4 text-sm text-[#60778a] dark:text-[#9aaebf]">$500.00</td>
+<td class="p-4 text-sm font-medium text-red-600 dark:text-red-400">-$500.00</td>
+<td class="p-4 text-sm font-bold text-[#111518] dark:text-white text-lg">$0.00</td>
+<td class="p-4 text-right">
+<button class="text-[#60778a] hover:text-primary transition-colors p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</td>
+</tr>
+<!-- Row 5: Delay -->
+<tr class="hover:bg-[#f0f2f5] dark:hover:bg-[#24303c] transition-colors group">
+<td class="p-4 text-center">
+<input checked="" class="rounded border-gray-300 text-primary focus:ring-primary h-5 w-5 cursor-pointer" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-cover bg-center border border-gray-200" data-alt="Avatar of Carlos Ruiz" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD4mAeuIysO1bwGHMBCggTpqmNugjakfmslwRi3JOaY82hYzp66G79qrz7NiqBtaKt92zy7_p6nn6EJI3H8GCneNUN6Ry6gbC2zjjPwkOiQ3W6H3e2I4a_302KM71xMzsTjXPv7LSl4VBc68ZJVHvd2OLPqiD9uEUZthB66VkZgdW8QUy5WrP6PWFpKz2uQYOSjf5qLRKPzM0Wa0FtHwQWYtYotx8uP3AS2FdlJqrO1IfreBFOuuen0T3-PGBXGbEZ4cgOaURkVJ_8");'></div>
+<div>
+<p class="font-bold text-sm text-[#111518] dark:text-white">Carlos Ruiz</p>
+<p class="text-xs text-[#60778a]">ID: GPO-8899</p>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                        Retardo (-$50)
+                                    </span>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-1">
+<span class="font-bold text-[#111518] dark:text-white">8.2</span>
+<span class="text-[#60778a] text-xs">/10</span>
+</div>
+</td>
+<td class="p-4 text-sm text-[#60778a] dark:text-[#9aaebf]">$500.00</td>
+<td class="p-4 text-sm font-medium text-red-600 dark:text-red-400">-$50.00</td>
+<td class="p-4 text-sm font-bold text-primary text-lg">$450.00</td>
+<td class="p-4 text-right">
+<button class="text-[#60778a] hover:text-primary transition-colors p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-800">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="border-t border-[#dbe1e6] dark:border-[#2a3845] bg-[#f9fafb] dark:bg-[#1a2632] p-4 flex items-center justify-between">
+<p class="text-sm text-[#60778a] dark:text-[#9aaebf]">Mostrando 5 de 45 empleados</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 rounded border border-[#dbe1e6] dark:border-[#3a4d5f] bg-white dark:bg-[#24303c] text-sm text-[#60778a] dark:text-white hover:bg-gray-50 dark:hover:bg-[#2a3845] disabled:opacity-50" disabled="">Anterior</button>
+<button class="px-3 py-1 rounded border border-[#dbe1e6] dark:border-[#3a4d5f] bg-white dark:bg-[#24303c] text-sm text-[#60778a] dark:text-white hover:bg-gray-50 dark:hover:bg-[#2a3845]">Siguiente</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky Footer Summary -->
+<div class="sticky bottom-0 z-40 w-full border-t border-[#dbe1e6] dark:border-[#2a3845] bg-white dark:bg-[#1a2632] p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+<div class="mx-auto flex max-w-[1200px] flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex gap-8 items-center">
+<div class="flex flex-col">
+<p class="text-xs font-medium text-[#60778a] uppercase tracking-wide">Total a Pagar</p>
+<p class="text-2xl font-black text-[#111518] dark:text-white">$22,450.00</p>
+</div>
+<div class="h-8 w-px bg-[#dbe1e6] dark:bg-[#3a4d5f] hidden sm:block"></div>
+<div class="hidden sm:flex flex-col">
+<p class="text-xs font-medium text-[#60778a] uppercase tracking-wide">Empleados Incluidos</p>
+<p class="text-lg font-bold text-[#111518] dark:text-white">44<span class="text-sm font-normal text-[#60778a] ml-1">/ 45</span></p>
+</div>
+</div>
+<div class="flex w-full sm:w-auto gap-3">
+<button class="flex-1 sm:flex-none h-12 px-6 rounded-lg bg-[#f0f2f5] dark:bg-[#24303c] text-[#111518] dark:text-white font-bold text-sm hover:bg-[#e4e7eb] dark:hover:bg-[#2a3845] transition-colors border border-transparent dark:border-[#3a4d5f]">
+                        Vista Previa
+                    </button>
+<button class="flex-1 sm:flex-none h-12 px-6 rounded-lg bg-primary text-white font-bold text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">image</span>
+                        Generar Resumen
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

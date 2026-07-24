@@ -1,0 +1,599 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Site Manager Incident Reporting - Grupo AR</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<style>
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101022; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #303169; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #404189; 
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="font-display bg-background-light bg-background-dark text-slate-900 text-white antialiased overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 flex-shrink-0 flex flex-col justify-between bg-[#101023] border-r border-[#303169]/30 h-full overflow-y-auto">
+<div class="flex flex-col gap-4 p-4">
+<div class="flex gap-3 items-center mb-6">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 shadow-lg shadow-primary/20" data-alt="Abstract blue geometric construction logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBx_xzGlKVQwH9AxZNetzxiRGUuPUTx-8FcglRzZhH_fM-w5j8-das5fkBIe05UeFgndGWi3W4UUb7I2WWuNAiseTJ625ghFXNGVWt9nUAZ9_4kjbGPGNu76z9Xj5Smubl5CMvHk7BQ3BDtpsPj-A8c790lvZBHuWEouL-U-Uyo5e-ml9UOc4CHdzmEOiZyRX4vXkJ31kCml93pwxoq8yCE_yQ4RlBta7bRDxLDoJD4A9oGLh5DhD57K7bTeaeEvjW-H18Na6BHgJ65");'>
+</div>
+<div class="flex flex-col">
+<h1 class="text-white text-base font-bold leading-normal tracking-wide">Grupo AR</h1>
+<p class="text-text-secondary text-xs font-normal leading-normal">Site Manager Portal</p>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#222249] transition-colors group" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors">dashboard</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium leading-normal transition-colors">Panel</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#222249] transition-colors group" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors">domain</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium leading-normal transition-colors">Proyectos</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 border border-primary/20" href="#">
+<span class="material-symbols-outlined text-white fill-1">report_problem</span>
+<p class="text-white text-sm font-bold leading-normal">Incidents</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#222249] transition-colors group" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors">group</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium leading-normal transition-colors">Resources</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#222249] transition-colors group" href="#">
+<span class="material-symbols-outlined text-text-secondary group-hover:text-white transition-colors">settings</span>
+<p class="text-text-secondary group-hover:text-white text-sm font-medium leading-normal transition-colors">Ajustes</p>
+</a>
+</div>
+</div>
+<div class="p-4">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#222249] cursor-pointer opacity-70 hover:opacity-100">
+<span class="material-symbols-outlined text-text-secondary">logout</span>
+<p class="text-text-secondary text-sm font-medium">Log out</p>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto p-6 md:p-8 lg:px-12">
+<div class="max-w-[1400px] mx-auto">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 items-center mb-4">
+<a class="text-text-secondary text-sm font-medium hover:text-white transition-colors" href="#">Panel</a>
+<span class="text-text-secondary text-sm font-medium">/</span>
+<span class="text-white text-sm font-medium">Incidents</span>
+</div>
+<!-- Page Heading -->
+<div class="flex flex-wrap justify-between items-end gap-6 mb-8">
+<div class="flex flex-col gap-2">
+<h2 class="text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Incident Reporting</h2>
+<p class="text-text-secondary text-base font-normal max-w-2xl">Log new site issues, categorize severity, and attach evidence for immediate review by the HQ safety team.</p>
+</div>
+</div>
+<!-- Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- LEFT COLUMN: Incident Form -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<div class="bg-surface-dark border border-border-dark/50 rounded-xl p-6 shadow-xl">
+<h3 class="text-white text-xl font-bold leading-tight mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">edit_document</span>
+                                    Report New Incident
+                                </h3>
+<form class="flex flex-col gap-6">
+<!-- Row 1: Date & Location -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<label class="flex flex-col gap-2">
+<span class="text-white text-sm font-medium">Date of Incident</span>
+<div class="relative">
+<input id="incidentDate" class="w-full rounded-lg bg-[#101023] border border-border-dark text-white h-12 px-4 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-text-secondary" type="date" value="2023-10-27"/>
+</div>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-white text-sm font-medium">Location / Zone</span>
+<select id="incidentZone" class="w-full rounded-lg bg-[#101023] border border-border-dark text-white h-12 px-4 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all appearance-none cursor-pointer">
+<option>Zone A - Foundation</option>
+<option>Zone B - Structural Steel</option>
+<option>Zone C - Interior</option>
+<option>Site Perimeter</option>
+</select>
+</label>
+</div>
+<!-- Row 2: Priority -->
+<div class="flex flex-col gap-2">
+<span class="text-white text-sm font-medium">Priority Level</span>
+<div class="grid grid-cols-3 gap-4">
+<label class="cursor-pointer">
+<input class="peer sr-only" name="priority" type="radio" value="low"/>
+<div class="h-12 rounded-lg border border-border-dark bg-[#101023] flex items-center justify-center gap-2 text-text-secondary peer-checked:bg-emerald-500/20 peer-checked:border-emerald-500 peer-checked:text-emerald-400 hover:bg-[#1e1e35] transition-all">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+<span class="font-bold text-sm">Low</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="priority" type="radio" value="medium"/>
+<div class="h-12 rounded-lg border border-border-dark bg-[#101023] flex items-center justify-center gap-2 text-text-secondary peer-checked:bg-amber-500/20 peer-checked:border-amber-500 peer-checked:text-amber-400 hover:bg-[#1e1e35] transition-all">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+<span class="font-bold text-sm">Medium</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="priority" type="radio" value="high"/>
+<div class="h-12 rounded-lg border border-border-dark bg-[#101023] flex items-center justify-center gap-2 text-text-secondary peer-checked:bg-red-600/20 peer-checked:border-red-600 peer-checked:text-red-500 hover:bg-[#1e1e35] transition-all">
+<span class="material-symbols-outlined text-[20px] fill-1">dangerous</span>
+<span class="font-bold text-sm">High</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Row 3: Description -->
+<label class="flex flex-col gap-2">
+<span class="text-white text-sm font-medium">Description of Event</span>
+<textarea id="incidentDescription" class="w-full rounded-lg bg-[#101023] border border-border-dark text-white p-4 h-32 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none placeholder:text-text-secondary/50" placeholder="Describe the incident details, involved parties, and immediate actions taken..."></textarea>
+</label>
+<!-- Row 4: File Upload -->
+<div class="flex flex-col gap-2">
+<span class="text-white text-sm font-medium">Site Photos &amp; Evidence</span>
+<div id="incidentDropzone" class="border-2 border-dashed border-border-dark rounded-xl bg-[#101023]/50 hover:bg-[#101023] hover:border-primary/50 transition-all cursor-pointer group p-8">
+<input id="incidentPhoto" type="file" accept="image/*,application/pdf" class="hidden"/>
+<div class="flex flex-col items-center justify-center gap-3 text-center">
+<div class="bg-surface-dark p-3 rounded-full group-hover:scale-110 transition-transform duration-300 shadow-lg">
+<span class="material-symbols-outlined text-primary text-3xl">cloud_upload</span>
+</div>
+<div>
+<p class="text-white font-medium">Drag site photos here or click to browse</p>
+<p class="text-text-secondary text-sm mt-1">Supports JPG, PNG, PDF up to 10MB</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 5: Actions -->
+<div class="flex items-center gap-4 pt-4 border-t border-border-dark/30 mt-2">
+<button id="submitIncidentBtn" class="bg-primary hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg shadow-blue-900/30 transition-all transform active:scale-95 flex items-center gap-2" type="button">
+<span class="material-symbols-outlined">send</span>
+                                            Submit Report
+                                        </button>
+<button id="saveIncidentBtn" class="bg-transparent border border-border-dark hover:border-text-secondary text-text-secondary hover:text-white font-medium py-3 px-6 rounded-lg transition-all flex items-center gap-2" type="button">
+<span class="material-symbols-outlined">save</span>
+                                            Save Draft
+                                        </button>
+</div>
+<div class="flex items-center justify-between gap-4">
+<p id="incidentStatus" class="text-xs text-text-secondary">Listo para registrar incidente.</p>
+<button id="cloudinaryPresetBtn" class="text-xs text-primary hover:text-white transition-colors">Configurar Cloudinary</button>
+</div>
+</form>
+</div>
+</div>
+<!-- RIGHT COLUMN: History & Context -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- History Panel -->
+<div class="bg-surface-dark border border-border-dark/50 rounded-xl flex flex-col h-full max-h-[800px]">
+<div class="p-5 border-b border-border-dark/50 flex items-center justify-between">
+<h3 class="text-white text-lg font-bold">Recent Incidents</h3>
+<button class="text-text-secondary hover:text-white transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+<div id="recentIncidentsList" class="flex-1 overflow-y-auto p-4 flex flex-col gap-3">
+<!-- History Item 1 -->
+<div class="p-4 rounded-lg bg-[#101023] border border-border-dark/50 hover:border-primary/40 transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-mono text-text-secondary">#INC-206</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-orange-500/10 text-orange-400 border border-orange-500/20">Pending Review</span>
+</div>
+<h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">Safety rail damage</h4>
+<p class="text-text-secondary text-xs line-clamp-2">Guard rail on the 3rd floor north side was struck by equipment.</p>
+<div class="mt-3 pt-3 border-t border-border-dark/30 flex items-center gap-2 text-xs text-text-secondary">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Oct 26, 2023</span>
+</div>
+</div>
+<!-- History Item 2 -->
+<div class="p-4 rounded-lg bg-[#101023] border border-border-dark/50 hover:border-primary/40 transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-mono text-text-secondary">#INC-205</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20">In Progress</span>
+</div>
+<h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">Wiring fault Zone B</h4>
+<p class="text-text-secondary text-xs line-clamp-2">Exposed wiring discovered near the temporary distribution board.</p>
+<div class="mt-3 pt-3 border-t border-border-dark/30 flex items-center gap-2 text-xs text-text-secondary">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Oct 24, 2023</span>
+</div>
+</div>
+<!-- History Item 3 -->
+<div class="p-4 rounded-lg bg-[#101023] border border-border-dark/50 hover:border-primary/40 transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-mono text-text-secondary">#INC-204</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Resolved</span>
+</div>
+<h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">Concrete delay</h4>
+<p class="text-text-secondary text-xs line-clamp-2">Mixer truck arrived 2 hours late causing scheduling conflict.</p>
+<div class="mt-3 pt-3 border-t border-border-dark/30 flex items-center gap-2 text-xs text-text-secondary">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Oct 20, 2023</span>
+</div>
+</div>
+<!-- History Item 4 -->
+<div class="p-4 rounded-lg bg-[#101023] border border-border-dark/50 hover:border-primary/40 transition-colors group cursor-pointer opacity-70">
+<div class="flex justify-between items-start mb-2">
+<span class="text-xs font-mono text-text-secondary">#INC-203</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Resolved</span>
+</div>
+<h4 class="text-white font-bold text-sm mb-1 group-hover:text-primary transition-colors">PPE Violation</h4>
+<p class="text-text-secondary text-xs line-clamp-2">Subcontractor observed without hard hat in restricted zone.</p>
+<div class="mt-3 pt-3 border-t border-border-dark/30 flex items-center gap-2 text-xs text-text-secondary">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Oct 18, 2023</span>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-border-dark/50">
+<button class="w-full py-2 text-sm text-primary font-medium hover:bg-primary/10 rounded-lg transition-colors">
+                                        View All History
+                                    </button>
+</div>
+</div>
+<!-- Quick Stats / Helper Card -->
+<div class="bg-gradient-to-br from-primary/20 to-surface-dark border border-primary/20 rounded-xl p-5 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 opacity-10">
+<span class="material-symbols-outlined text-[100px] text-primary">security</span>
+</div>
+<h4 class="text-white font-bold text-base mb-2 z-10 relative">Safety Protocol Reminder</h4>
+<p class="text-text-secondary text-xs mb-4 relative z-10">High priority incidents require immediate notification to the Site Safety Officer via phone call.</p>
+<a class="text-xs text-white underline font-medium relative z-10 flex items-center gap-1 hover:text-primary-light" href="#">
+                                    View Protocol Details
+                                    <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script type="module">
+import { ensureAuth } from "/shared/auth.js";
+import { createIncident, listenRecentIncidents, updateIncident, deleteIncident } from "/shared/services/incidents.js";
+import { logAuditEvent } from "/shared/audit.js";
+
+const dateInput = document.getElementById("incidentDate");
+const zoneInput = document.getElementById("incidentZone");
+const descriptionInput = document.getElementById("incidentDescription");
+const dropzone = document.getElementById("incidentDropzone");
+const photoInput = document.getElementById("incidentPhoto");
+const submitBtn = document.getElementById("submitIncidentBtn");
+const saveBtn = document.getElementById("saveIncidentBtn");
+const statusEl = document.getElementById("incidentStatus");
+const recentList = document.getElementById("recentIncidentsList");
+const cloudinaryBtn = document.getElementById("cloudinaryPresetBtn");
+
+const priorityMap = { low: "baja", medium: "media", high: "alta" };
+const draftKey = "incidentDraft";
+
+const todayStr = new Date().toISOString().split("T")[0];
+if (dateInput && (dateInput.value === "2023-10-27" || !dateInput.value)) {
+  dateInput.value = todayStr;
+}
+
+const formatDate = (value) => {
+  if (!value) return "Sin fecha";
+  const date = value.seconds ? new Date(value.seconds * 1000) : new Date(value);
+  if (Number.isNaN(date.getTime())) return "Sin fecha";
+  return new Intl.DateTimeFormat("es-MX", { dateStyle: "medium" }).format(date);
+};
+
+const setStatus = (message, tone = "text-text-secondary") => {
+  statusEl.textContent = message;
+  statusEl.className = `text-xs ${tone}`;
+};
+
+cloudinaryBtn.addEventListener("click", () => {
+  const preset = prompt("Cloudinary Upload Preset (unsigned):");
+  if (preset) {
+    localStorage.setItem("cloudinaryUploadPreset", preset);
+    setStatus("Preset de Cloudinary guardado.", "text-emerald-400");
+  }
+});
+
+const loadDraft = () => {
+  try {
+    const draft = JSON.parse(localStorage.getItem(draftKey));
+    if (!draft) return;
+    if (draft.date) dateInput.value = draft.date;
+    if (draft.zone) zoneInput.value = draft.zone;
+    if (draft.description) descriptionInput.value = draft.description;
+    if (draft.priority) {
+      const input = document.querySelector(`input[name="priority"][value="${draft.priority}"]`);
+      if (input) input.checked = true;
+    }
+    setStatus("Borrador cargado.");
+  } catch (error) {
+    setStatus("No se pudo cargar el borrador.", "text-amber-400");
+  }
+};
+
+const saveDraft = () => {
+  const priority = document.querySelector('input[name="priority"]:checked')?.value || "medium";
+  const payload = {
+    date: dateInput.value,
+    zone: zoneInput.value,
+    description: descriptionInput.value.trim(),
+    priority,
+  };
+  localStorage.setItem(draftKey, JSON.stringify(payload));
+  setStatus("Borrador guardado.", "text-emerald-400");
+};
+
+const clearDraft = () => localStorage.removeItem(draftKey);
+
+dropzone.addEventListener("click", () => photoInput.click());
+dropzone.addEventListener("dragover", (event) => {
+  event.preventDefault();
+  dropzone.classList.add("border-primary/80");
+});
+dropzone.addEventListener("dragleave", () => dropzone.classList.remove("border-primary/80"));
+dropzone.addEventListener("drop", (event) => {
+  event.preventDefault();
+  dropzone.classList.remove("border-primary/80");
+  if (event.dataTransfer.files?.length) {
+    photoInput.files = event.dataTransfer.files;
+  }
+});
+
+saveBtn.addEventListener("click", saveDraft);
+
+let currentUser = null;
+let currentRole = null;
+let incidentMap = new Map();
+
+const editModal = document.createElement("div");
+editModal.id = "incidentEditModal";
+editModal.className = "fixed inset-0 z-[90] hidden items-center justify-center bg-black/70 p-6";
+editModal.innerHTML = `
+  <div class="w-full max-w-lg rounded-2xl bg-surface-dark border border-border-dark p-6 shadow-2xl">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="text-white text-lg font-bold">Editar incidente</h3>
+      <button id="closeIncidentEdit" class="text-text-secondary hover:text-white">✕</button>
+    </div>
+    <form id="incidentEditForm" class="flex flex-col gap-4">
+      <label class="text-sm text-text-secondary flex flex-col gap-2">
+        Estado
+        <select id="editIncidentStatus" class="h-11 rounded-lg bg-[#101023] border border-border-dark px-3 text-white">
+          <option value="abierto">Abierto</option>
+          <option value="en_progreso">En progreso</option>
+          <option value="cerrado">Cerrado</option>
+        </select>
+      </label>
+      <label class="text-sm text-text-secondary flex flex-col gap-2">
+        Prioridad
+        <select id="editIncidentPriority" class="h-11 rounded-lg bg-[#101023] border border-border-dark px-3 text-white">
+          <option value="baja">Baja</option>
+          <option value="media">Media</option>
+          <option value="alta">Alta</option>
+        </select>
+      </label>
+      <label class="text-sm text-text-secondary flex flex-col gap-2">
+        Zona
+        <input id="editIncidentZone" class="h-11 rounded-lg bg-[#101023] border border-border-dark px-3 text-white" />
+      </label>
+      <label class="text-sm text-text-secondary flex flex-col gap-2">
+        Descripcion
+        <textarea id="editIncidentDescription" class="min-h-[120px] rounded-lg bg-[#101023] border border-border-dark px-3 py-2 text-white"></textarea>
+      </label>
+      <div class="flex justify-end gap-3 pt-2">
+        <button type="button" id="cancelIncidentEdit" class="px-4 py-2 rounded-lg border border-border-dark text-text-secondary hover:text-white">Cancelar</button>
+        <button type="submit" class="px-4 py-2 rounded-lg bg-primary text-white font-bold">Guardar</button>
+      </div>
+    </form>
+  </div>
+`;
+document.body.appendChild(editModal);
+
+const editForm = editModal.querySelector("#incidentEditForm");
+const closeEditBtn = editModal.querySelector("#closeIncidentEdit");
+const cancelEditBtn = editModal.querySelector("#cancelIncidentEdit");
+let editingIncidentId = null;
+
+const openEditModal = (incident) => {
+  editingIncidentId = incident?.id || null;
+  editModal.querySelector("#editIncidentStatus").value = incident?.status || "abierto";
+  editModal.querySelector("#editIncidentPriority").value = incident?.priority || "media";
+  editModal.querySelector("#editIncidentZone").value = incident?.zone || "";
+  editModal.querySelector("#editIncidentDescription").value = incident?.description || "";
+  editModal.classList.remove("hidden");
+  editModal.classList.add("flex");
+};
+
+const closeEditModal = () => {
+  editModal.classList.add("hidden");
+  editModal.classList.remove("flex");
+  editingIncidentId = null;
+};
+
+closeEditBtn.addEventListener("click", closeEditModal);
+cancelEditBtn.addEventListener("click", closeEditModal);
+
+editForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (!editingIncidentId) return;
+  const payload = {
+    status: editModal.querySelector("#editIncidentStatus").value,
+    priority: editModal.querySelector("#editIncidentPriority").value,
+    zone: editModal.querySelector("#editIncidentZone").value.trim(),
+    description: editModal.querySelector("#editIncidentDescription").value.trim(),
+  };
+  try {
+    await updateIncident(editingIncidentId, payload);
+    setStatus("Incidente actualizado.", "text-emerald-400");
+    logAuditEvent({
+      action: "update",
+      resource: "incident",
+      resourceId: editingIncidentId,
+      severity: "warning",
+    });
+    closeEditModal();
+  } catch (error) {
+    setStatus(error.message || "No se pudo actualizar.", "text-rose-400");
+  }
+});
+
+submitBtn.addEventListener("click", async () => {
+  if (!currentUser) {
+    setStatus("Inicia sesión para registrar.", "text-amber-400");
+    return;
+  }
+  const description = descriptionInput.value.trim();
+  if (!description) {
+    setStatus("Describe el incidente antes de enviar.", "text-amber-400");
+    return;
+  }
+  const priorityValue = document.querySelector('input[name="priority"]:checked')?.value || "medium";
+  const incidentDate = dateInput.value ? new Date(dateInput.value).toISOString() : null;
+  const title = description.split(".")[0]?.slice(0, 48) || "Incidente";
+  setStatus("Enviando reporte...");
+  submitBtn.disabled = true;
+  try {
+    await createIncident({
+      uid: currentUser.uid,
+      title,
+      description,
+      priority: priorityMap[priorityValue] || "media",
+      zone: zoneInput.value || null,
+      incidentDate,
+      photoFile: photoInput.files?.[0] || null,
+    });
+    descriptionInput.value = "";
+    photoInput.value = "";
+    clearDraft();
+    setStatus("Incidente registrado correctamente.", "text-emerald-400");
+    logAuditEvent({
+      action: "create",
+      resource: "incident",
+      severity: "info",
+      details: { title },
+    });
+  } catch (error) {
+    setStatus(error.message || "Error al registrar incidente.", "text-rose-400");
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
+
+ensureAuth({ allowRoles: ["Admin", "PersonalObra"], allowPermissions: ["incidents"] }).then(({ user, role }) => {
+  currentUser = user;
+  currentRole = role;
+  loadDraft();
+  listenRecentIncidents({ uid: user.uid, isAdmin: role === "Admin" }, (items) => {
+    recentList.innerHTML = "";
+    if (!items.length) {
+      recentList.innerHTML = `<div class="text-text-secondary text-sm">Sin incidentes recientes.</div>`;
+      return;
+    }
+    incidentMap = new Map(items.map((item) => [item.id, item]));
+    items.forEach((item) => {
+      const status = item.status || "abierto";
+      const badge =
+        status === "cerrado"
+          ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+          : status === "en_progreso"
+            ? "bg-blue-500/10 text-blue-400 border-blue-500/20"
+            : "bg-orange-500/10 text-orange-400 border-orange-500/20";
+      const label =
+        status === "cerrado" ? "Cerrado" : status === "en_progreso" ? "En progreso" : "Pendiente";
+      const title = item.title || "Incidente";
+      const dateText = item.incidentDate || item.createdAt;
+      const actions = currentRole === "Admin"
+        ? `<div class="mt-3 flex gap-2">
+            <button data-action="edit" data-id="${item.id}" class="px-2 py-1 rounded-md bg-primary/20 text-primary text-xs font-semibold hover:bg-primary/30">Editar</button>
+            <button data-action="delete" data-id="${item.id}" class="px-2 py-1 rounded-md border border-border-dark text-text-secondary text-xs font-semibold hover:text-white">Eliminar</button>
+          </div>`
+        : "";
+      recentList.insertAdjacentHTML(
+        "beforeend",
+        `<div class="p-4 rounded-lg bg-[#101023] border border-border-dark/50 hover:border-primary/40 transition-colors">
+            <div class="flex justify-between items-start mb-2">
+              <span class="text-xs font-mono text-text-secondary">#INC-${item.id.slice(0, 6)}</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider ${badge}">${label}</span>
+            </div>
+            <h4 class="text-white font-bold text-sm mb-1">${title}</h4>
+            <p class="text-text-secondary text-xs line-clamp-2">${item.description || ""}</p>
+            <div class="mt-3 pt-3 border-t border-border-dark/30 flex items-center gap-2 text-xs text-text-secondary">
+              <span class="material-symbols-outlined text-[14px]">calendar_today</span>
+              <span>${formatDate(dateText)}</span>
+            </div>
+            ${actions}
+        </div>`
+      );
+    });
+  });
+});
+
+recentList.addEventListener("click", async (event) => {
+  const btn = event.target.closest("button[data-action]");
+  if (!btn) return;
+  const incidentId = btn.dataset.id;
+  const incident = incidentMap.get(incidentId);
+  if (!incident) return;
+  if (btn.dataset.action === "edit") {
+    openEditModal(incident);
+  }
+  if (btn.dataset.action === "delete") {
+    const confirmDelete = confirm("¿Eliminar este incidente?");
+    if (!confirmDelete) return;
+    try {
+      await deleteIncident(incidentId);
+      setStatus("Incidente eliminado.", "text-emerald-400");
+      logAuditEvent({
+        action: "delete",
+        resource: "incident",
+        resourceId: incidentId,
+        severity: "critical",
+      });
+    } catch (error) {
+      setStatus(error.message || "No se pudo eliminar.", "text-rose-400");
+    }
+  }
+});
+</script>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

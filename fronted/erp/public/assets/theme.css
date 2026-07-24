@@ -1,0 +1,27 @@
+:root {
+  --color-primary: #096fc8;
+  --color-secondary: #dc1e28;
+  --color-accent: #dc1e28;
+  --color-accent-red: #dc1e28;
+  --color-corporate-blue: #0a6ec8;
+  --color-alert-red: #dc1e28;
+  --color-bg-light: #f5f7f8;
+  --color-bg-dark: #0d141c;
+  --color-surface-light: #ffffff;
+  --color-surface-dark: #1a2630;
+  --color-surface-hover: #252540;
+  --color-border-dark: #303169;
+  --color-text-secondary: #8f90cc;
+  --color-card-dark: #1a1a2e;
+  --color-input-dark: #1e2933;
+  --color-input-placeholder: #94a3b8;
+  --color-ink: #0f1a22;
+  --color-midnight: #0b1218;
+  --color-steel: #1a2833;
+  --color-cloud: #e9eef3;
+}
+
+img[src*="/assets/logo.png"] {
+  border-radius: 9999px;
+  object-fit: cover;
+}

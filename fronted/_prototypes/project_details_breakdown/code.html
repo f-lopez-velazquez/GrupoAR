@@ -1,0 +1,537 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Project Details - Grupo AR ERP</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<!-- Theme Config -->
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101023; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #303169; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4a4b8f; 
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-white overflow-hidden">
+<div class="relative flex h-screen w-full flex-row bg-[#101023] overflow-hidden">
+<!-- Side Navigation -->
+<aside class="flex w-72 flex-col justify-between border-r border-[#222249] bg-[#101023] p-4 hidden md:flex">
+<div class="flex flex-col gap-4">
+<div class="flex gap-3 items-center mb-6 px-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 shadow-lg shadow-primary/20" data-alt="Abstract geometric logo in blue and purple gradients" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBE9SiAEEbW5dn5ClZZd40NxzS4hRgCO7kbUIP-aOR_NVJlecCT4sL4T_FEQVwDAlxYPri5Pj9tCUrPaOu72mUWaGjkR2TzGvK5XVQwAuYSgFxtkgWyq6OkmIy0ESI7QLE53wQSppxW3OKhTQUhtLqRRpZ7L-wAuBYa2K5lfK4uqhEdJFsBeNHdDRLJb6F4_-9wvVY7vCPslQTi5xCTT5a9FACUFJA1-wn7cYOqW3GsJrT96o1U8or21kcFR3N0M5NUXiSnlUnsSChJ");'></div>
+<div class="flex flex-col">
+<h1 class="text-white text-base font-bold leading-normal">Grupo AR</h1>
+<p class="text-[#8f90cc] text-xs font-normal leading-normal">ERP System v2.4</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-[#222249] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#8f90cc] group-hover:text-white">dashboard</span>
+<p class="text-[#8f90cc] group-hover:text-white text-sm font-medium leading-normal">Panel</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/20 border border-primary/30" href="#">
+<span class="material-symbols-outlined text-white">apartment</span>
+<p class="text-white text-sm font-bold leading-normal">Proyectos</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-[#222249] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#8f90cc] group-hover:text-white">inventory_2</span>
+<p class="text-[#8f90cc] group-hover:text-white text-sm font-medium leading-normal">Inventario</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-[#222249] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#8f90cc] group-hover:text-white">attach_money</span>
+<p class="text-[#8f90cc] group-hover:text-white text-sm font-medium leading-normal">Finanzas</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-[#222249] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#8f90cc] group-hover:text-white">people</span>
+<p class="text-[#8f90cc] group-hover:text-white text-sm font-medium leading-normal">HR &amp; Payroll</p>
+</a>
+</nav>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-[#222249] transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-[#8f90cc]">settings</span>
+<p class="text-[#8f90cc] text-sm font-medium leading-normal">Ajustes</p>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full relative overflow-hidden">
+<!-- Top Navbar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#222249] bg-[#101023] px-8 py-4 z-20">
+<div class="flex items-center gap-4 text-white">
+<button class="md:hidden text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex flex-col">
+<h2 id="projectTitle" class="text-white text-lg font-bold leading-tight tracking-tight">Project Alpha: Residential Complex</h2>
+<div class="flex items-center gap-2 text-[#8f90cc] text-xs">
+<span>Proyectos</span>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span>Active</span>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span class="text-white">Details</span>
+</div>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<div class="hidden md:flex w-full max-w-xs relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#8f90cc]">search</span>
+<input class="w-full bg-[#222249] border-none rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-[#8f90cc] focus:ring-1 focus:ring-primary" placeholder="Buscar facturas o registros..."/>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-lg size-10 bg-[#222249] text-white hover:bg-[#303169] transition-colors relative">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border border-[#222249]"></span>
+</button>
+<button class="flex items-center justify-center rounded-lg size-10 bg-[#222249] text-white hover:bg-[#303169] transition-colors">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-[#303169] cursor-pointer" data-alt="Profile picture of a project manager in professional attire" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuABcH-J2ObA6_D-jyItE7uH_WNitSUxalyUnsNF3XCldczyG80Q-lmfypdHIFutV-L-fNSA7oLIyH88gY9zpqdV0Zv2hugWGzYHA0SxMRvjbn2az1aQEuZLU5GQG02fb7d9Wt-Qw934iobBpyaDt6KnIej4rQ2XFJJ3a41AU3GsY06PEaHbq7vlv2QX2zWT9ChEF3f7liCU091oZDQsShFcjt3TenzYvRujEdz6df6I6DU2vP-eACM3eZSJa4077I_JRMZ_T6cSe9Rl");'></div>
+</div>
+</header>
+<!-- Scrollable Page Content -->
+<div class="flex-1 overflow-y-auto p-8 scroll-smooth">
+<div class="max-w-7xl mx-auto flex flex-col gap-8">
+<!-- Page Heading & Actions -->
+<div class="flex flex-col md:flex-row justify-between gap-6 items-start md:items-end">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-0.5 rounded text-xs font-bold bg-[#15803d]/20 text-[#4ade80] border border-[#15803d]/40">IN PROGRESS</span>
+<span id="projectIdLabel" class="text-[#8f90cc] text-sm font-mono">ID: PRJ-2024-882</span>
+</div>
+<h1 class="text-white text-3xl md:text-4xl font-extrabold tracking-tight">Financial Breakdown</h1>
+<p class="text-[#8f90cc] text-base">Detailed ledger of material costs, transport logistics, and salary distribution.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 h-10 px-4 rounded-lg border border-[#303169] bg-[#101023] text-white text-sm font-bold hover:bg-[#222249] transition-colors">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+<span>Edit Project</span>
+</button>
+<button class="flex items-center gap-2 h-10 px-4 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+<span>Export Report</span>
+</button>
+</div>
+</div>
+<div id="pendingBalanceBanner" class="rounded-xl border border-[#303169] bg-[#16162c] p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+<div>
+<p class="text-[#8f90cc] text-xs uppercase tracking-wider">Saldo pendiente</p>
+<p id="pendingBalanceValue" class="text-white text-2xl font-bold">$0.00</p>
+</div>
+<div class="text-sm text-[#8f90cc]">
+<span id="paidBalanceValue">Pagado: $0.00</span>
+<span class="mx-2 text-[#303169]">|</span>
+<span id="budgetTotalValue">Presupuesto: $0.00</span>
+</div>
+</div>
+<!-- Statistics Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Total Budget -->
+<div class="flex flex-col gap-4 rounded-xl p-6 bg-[#16162c] border border-[#303169] relative overflow-hidden group">
+<div class="absolute right-0 top-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-white">account_balance_wallet</span>
+</div>
+<div>
+<p class="text-[#8f90cc] text-sm font-medium uppercase tracking-wider">Total Budget</p>
+<p class="text-white text-3xl font-bold mt-1">$450,000.00</p>
+</div>
+<div class="mt-auto pt-4 border-t border-[#222249]">
+<div class="flex justify-between items-end mb-2">
+<span class="text-white text-sm font-medium">Utilization</span>
+<span class="text-white text-sm font-bold">71%</span>
+</div>
+<div class="w-full bg-[#222249] rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 71%"></div>
+</div>
+</div>
+</div>
+<!-- Actual Spend -->
+<div class="flex flex-col gap-1 rounded-xl p-6 bg-[#16162c] border border-[#303169]">
+<div class="flex justify-between items-start">
+<p class="text-[#8f90cc] text-sm font-medium uppercase tracking-wider">Actual Spend</p>
+<span class="px-2 py-1 rounded text-xs font-bold bg-primary/20 text-primary">+12% vs last month</span>
+</div>
+<p class="text-white text-3xl font-bold mt-1">$320,150.25</p>
+<p class="text-[#8f90cc] text-xs mt-2">Includes pending invoices</p>
+<div class="grid grid-cols-2 gap-2 mt-6">
+<div class="bg-[#222249] p-3 rounded-lg">
+<p class="text-[#8f90cc] text-xs">Materials</p>
+<p class="text-white font-bold">$180k</p>
+</div>
+<div class="bg-[#222249] p-3 rounded-lg">
+<p class="text-[#8f90cc] text-xs">Labor</p>
+<p class="text-white font-bold">$95k</p>
+</div>
+</div>
+</div>
+<!-- Remaining -->
+<div class="flex flex-col justify-between gap-4 rounded-xl p-6 bg-[#16162c] border border-[#303169]">
+<div>
+<p class="text-[#8f90cc] text-sm font-medium uppercase tracking-wider">Remaining</p>
+<p class="text-[#0bda68] text-3xl font-bold mt-1">$129,849.75</p>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#8f90cc]">calendar_clock</span>
+<div>
+<p class="text-white text-sm font-medium">Deadline approaching</p>
+<p class="text-[#8f90cc] text-xs">45 days remaining in Phase 1</p>
+</div>
+</div>
+<button class="w-full py-2 rounded-lg bg-[#222249] hover:bg-[#303169] text-white text-xs font-bold transition-colors">
+                                    View Timeline
+                                </button>
+</div>
+</div>
+</div>
+<!-- Main Tabbed Content Area -->
+<div class="flex flex-col gap-0 rounded-xl border border-[#303169] bg-[#16162c] overflow-hidden">
+<!-- Tabs Header -->
+<div class="flex overflow-x-auto border-b border-[#303169] bg-[#101023]/50">
+<button class="flex items-center gap-2 px-6 py-4 text-sm font-bold text-white border-b-2 border-primary bg-[#222249]/30">
+<span class="material-symbols-outlined text-[20px]">category</span>
+                                Materials
+                            </button>
+<button class="flex items-center gap-2 px-6 py-4 text-sm font-medium text-[#8f90cc] hover:text-white hover:bg-[#222249]/50 transition-colors border-b-2 border-transparent">
+<span class="material-symbols-outlined text-[20px]">local_shipping</span>
+                                Transport
+                            </button>
+<button class="flex items-center gap-2 px-6 py-4 text-sm font-medium text-[#8f90cc] hover:text-white hover:bg-[#222249]/50 transition-colors border-b-2 border-transparent">
+<span class="material-symbols-outlined text-[20px]">engineering</span>
+                                Salaries
+                            </button>
+</div>
+<!-- Tab Content: Materials Table -->
+<div class="p-0 overflow-x-auto">
+<div class="flex justify-between items-center p-4">
+<h3 class="text-white font-bold text-lg">Material Expenses</h3>
+<div class="flex gap-2">
+<button class="flex items-center justify-center size-8 rounded bg-[#222249] text-[#8f90cc] hover:text-white">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+</button>
+<button class="flex items-center gap-2 h-8 px-3 rounded bg-primary text-white text-xs font-bold hover:bg-primary/90">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                                        Add Expense
+                                    </button>
+</div>
+</div>
+<table class="w-full text-left border-collapse">
+<thead class="bg-[#222249]/50 text-[#8f90cc] text-xs font-semibold uppercase tracking-wider">
+<tr>
+<th class="px-6 py-3">Item Description</th>
+<th class="px-6 py-3">Category</th>
+<th class="px-6 py-3">SKU / ID</th>
+<th class="px-6 py-3 text-right">Unit Price</th>
+<th class="px-6 py-3 text-center">Qty</th>
+<th class="px-6 py-3 text-right">Total</th>
+<th class="px-6 py-3 text-center">Status</th>
+<th class="px-6 py-3 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#222249]">
+<tr class="hover:bg-[#222249]/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-white/10 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[18px]">texture</span>
+</div>
+<span class="text-white font-medium">Portland Cement Type V</span>
+</div>
+</td>
+<td class="px-6 py-4 text-[#8f90cc] text-sm">Raw Materials</td>
+<td class="px-6 py-4 text-[#8f90cc] text-sm font-mono">CMT-V-500</td>
+<td class="px-6 py-4 text-white text-sm text-right font-mono">$12.50</td>
+<td class="px-6 py-4 text-white text-sm text-center">500</td>
+<td class="px-6 py-4 text-white font-bold text-sm text-right font-mono">$6,250.00</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-[#15803d]/20 text-[#4ade80]">Delivered</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-[#8f90cc] hover:text-white"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-[#222249]/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-white/10 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+</div>
+<span class="text-white font-medium">Steel Rebar #4</span>
+</div>
+</td>
+<td class="px-6 py-4 text-[#8f90cc] text-sm">Structural</td>
+<td class="px-6 py-4 text-[#8f90cc] text-sm font-mono">STL-RB-004</td>
+<td class="px-6 py-4 text-white text-sm text-right font-mono">$8.20</td>
+<td class="px-6 py-4 text-white text-sm text-center">1,200</td>
+<td class="px-6 py-4 text-white font-bold text-sm text-right font-mono">$9,840.00</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-yellow-500/10 text-yellow-500">In Transit</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-[#8f90cc] hover:text-white"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-[#222249]/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-white/10 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[18px]">format_paint</span>
+</div>
+<span class="text-white font-medium">Ext. Paint (White)</span>
+</div>
+</td>
+<td class="px-6 py-4 text-[#8f90cc] text-sm">Finishing</td>
+<td class="px-6 py-4 text-[#8f90cc] text-sm font-mono">PNT-EXT-W</td>
+<td class="px-6 py-4 text-white text-sm text-right font-mono">$45.00</td>
+<td class="px-6 py-4 text-white text-sm text-center">50</td>
+<td class="px-6 py-4 text-white font-bold text-sm text-right font-mono">$2,250.00</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-[#15803d]/20 text-[#4ade80]">Delivered</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-[#8f90cc] hover:text-white"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<tr class="hover:bg-[#222249]/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded bg-white/10 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[18px]">layers</span>
+</div>
+<span class="text-white font-medium">Insulation Foam</span>
+</div>
+</td>
+<td class="px-6 py-4 text-[#8f90cc] text-sm">Finishing</td>
+<td class="px-6 py-4 text-[#8f90cc] text-sm font-mono">INS-FM-200</td>
+<td class="px-6 py-4 text-white text-sm text-right font-mono">$18.75</td>
+<td class="px-6 py-4 text-white text-sm text-center">200</td>
+<td class="px-6 py-4 text-white font-bold text-sm text-right font-mono">$3,750.00</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-[#222249] text-[#8f90cc]">Ordered</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-[#8f90cc] hover:text-white"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination -->
+<div class="flex items-center justify-between px-6 py-4 border-t border-[#222249]">
+<span class="text-sm text-[#8f90cc]">Showing <span class="text-white font-medium">1-4</span> of <span class="text-white font-medium">24</span> items</span>
+<div class="flex gap-2">
+<button class="px-3 py-1 rounded border border-[#303169] text-[#8f90cc] text-sm hover:bg-[#222249] disabled:opacity-50">Prev</button>
+<button class="px-3 py-1 rounded border border-[#303169] text-white bg-[#222249] text-sm">1</button>
+<button class="px-3 py-1 rounded border border-[#303169] text-[#8f90cc] text-sm hover:bg-[#222249]">2</button>
+<button class="px-3 py-1 rounded border border-[#303169] text-[#8f90cc] text-sm hover:bg-[#222249]">3</button>
+<button class="px-3 py-1 rounded border border-[#303169] text-[#8f90cc] text-sm hover:bg-[#222249]">Next</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Grid: Incidents & Fiscal -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-10">
+<!-- Incident Log -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h3 class="text-white text-xl font-bold">Incident Log</h3>
+<button class="text-primary text-sm font-bold hover:underline">View All</button>
+</div>
+<div class="flex flex-col gap-3 rounded-xl border border-[#303169] bg-[#16162c] p-6 h-full">
+<!-- Incident Item 1 -->
+<div class="relative pl-8 pb-6 border-l border-[#303169] last:pb-0">
+<div class="absolute -left-[9px] top-0 size-4 rounded-full bg-red-500 border-2 border-[#16162c]"></div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<p class="text-white font-bold text-sm">Delivery Delayed - Storm</p>
+<span class="text-[#8f90cc] text-xs">Oct 12, 10:00 AM</span>
+</div>
+<p class="text-[#8f90cc] text-sm">Heavy rain caused truck #04 to stall on Route 9. Materials delayed by 4 hours.</p>
+<div class="flex gap-2 mt-2">
+<div class="w-16 h-12 bg-cover bg-center rounded cursor-pointer hover:opacity-80 transition-opacity" data-alt="Blurred image of heavy rain on a highway" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDF3w3EZL2ebfEyXHQPXQG_GcA2iIg-7fPVp3hvm0g7jjZPdUgQFz-0dWKpsl1TS8_dzZCXf3sj-UoNiooiYVs7_-rAQeSDPzy9gjeDoQL-hnz0lQGwStHYfd5hjcNEP3fuPc6xEouqFlKNDfUH9mhkOCYBdRA6YNHx1M9QVlJko-jH9_uK23wDMNuD92iMAMUHm0Oezpm4cGd9zOlL_Lpc70JE-guF_h4xE8rg_jI2vGqOUEPJx0SXPNmsXjPy75TRImztdi7n6D_p");'></div>
+<div class="w-16 h-12 bg-cover bg-center rounded cursor-pointer hover:opacity-80 transition-opacity" data-alt="Blurred image of a truck parked on the side of the road" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDQdaKpQHABdKzTm8asDwZ2_2MXUHWSYuCVsfmMUn5Ew-hfetBQvSOy45YXuC826BdiWi8bq1qidLhAlSmKHWBGAdzbHdM1eMHfGjWkd_G_bB0Ju6AovtmCGCIRMsItD7PXDglIyNHIqjpioUsXeIvJX_bHPpbVHdCEkzA9Fvp9Di_oR8RMyLh-LpeiuTswZR_zIA7UTV92J6s-PqUVw4rwnxvsIDyjVXsJyRmU9fffSsLLEYJ-QOaWCJTJsPTMhAO7Lp-6qxONTr4r");'></div>
+</div>
+</div>
+</div>
+<!-- Incident Item 2 -->
+<div class="relative pl-8 border-l border-[#303169]">
+<div class="absolute -left-[9px] top-0 size-4 rounded-full bg-yellow-500 border-2 border-[#16162c]"></div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<p class="text-white font-bold text-sm">Minor Equipment Malfunction</p>
+<span class="text-[#8f90cc] text-xs">Oct 10, 02:30 PM</span>
+</div>
+<p class="text-[#8f90cc] text-sm">Concrete mixer belt snapped. Replaced from spare inventory immediately.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Fiscal Data -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<h3 class="text-white text-xl font-bold">Fiscal Data &amp; Invoices</h3>
+<button class="text-primary text-sm font-bold hover:underline">Manage Fiscal</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Invoice Card 1 -->
+<div class="flex flex-col gap-3 p-4 rounded-xl border border-[#303169] bg-[#16162c] hover:border-primary/50 transition-colors group cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="size-10 rounded-full bg-[#222249] flex items-center justify-center text-white">
+<span class="material-symbols-outlined">description</span>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#15803d]/20 text-[#4ade80]">PAID</span>
+</div>
+<div>
+<p class="text-white font-bold text-sm truncate">INV-2024-9921</p>
+<p class="text-[#8f90cc] text-xs font-mono truncate">UUID: 123e4567-e89b...</p>
+</div>
+<div class="flex justify-between items-center mt-1 pt-3 border-t border-[#222249]">
+<span class="text-white font-bold text-sm">$12,450.00</span>
+<button class="text-[#8f90cc] hover:text-white group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+<!-- Invoice Card 2 -->
+<div class="flex flex-col gap-3 p-4 rounded-xl border border-[#303169] bg-[#16162c] hover:border-primary/50 transition-colors group cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="size-10 rounded-full bg-[#222249] flex items-center justify-center text-white">
+<span class="material-symbols-outlined">description</span>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#15803d]/20 text-[#4ade80]">PAID</span>
+</div>
+<div>
+<p class="text-white font-bold text-sm truncate">INV-2024-9922</p>
+<p class="text-[#8f90cc] text-xs font-mono truncate">UUID: 987a6543-b21c...</p>
+</div>
+<div class="flex justify-between items-center mt-1 pt-3 border-t border-[#222249]">
+<span class="text-white font-bold text-sm">$4,200.00</span>
+<button class="text-[#8f90cc] hover:text-white group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+<!-- Invoice Card 3 -->
+<div class="flex flex-col gap-3 p-4 rounded-xl border border-[#303169] bg-[#16162c] hover:border-primary/50 transition-colors group cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="size-10 rounded-full bg-[#222249] flex items-center justify-center text-white">
+<span class="material-symbols-outlined">description</span>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-yellow-500/20 text-yellow-500">PENDING</span>
+</div>
+<div>
+<p class="text-white font-bold text-sm truncate">INV-2024-9925</p>
+<p class="text-[#8f90cc] text-xs font-mono truncate">UUID: Pending Generation</p>
+</div>
+<div class="flex justify-between items-center mt-1 pt-3 border-t border-[#222249]">
+<span class="text-white font-bold text-sm">$8,150.00</span>
+<button class="text-[#8f90cc] hover:text-white group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+</div>
+</div>
+<!-- Add Invoice Action -->
+<div class="flex flex-col items-center justify-center gap-2 p-4 rounded-xl border border-dashed border-[#303169] bg-[#16162c]/50 hover:bg-[#16162c] hover:border-primary transition-colors cursor-pointer group">
+<div class="size-10 rounded-full bg-[#222249] flex items-center justify-center text-[#8f90cc] group-hover:text-white group-hover:bg-primary transition-colors">
+<span class="material-symbols-outlined">add</span>
+</div>
+<p class="text-[#8f90cc] text-xs font-bold group-hover:text-white">Subir factura</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script type="module">
+import { ensureAuth } from "/shared/auth.js";
+import { getProject, watchDeferredBalance } from "/shared/services/projects.js";
+import { formatMoney } from "/shared/utils.js";
+
+const pendingValue = document.getElementById("pendingBalanceValue");
+const paidValue = document.getElementById("paidBalanceValue");
+const budgetValue = document.getElementById("budgetTotalValue");
+const projectTitle = document.getElementById("projectTitle");
+const projectIdLabel = document.getElementById("projectIdLabel");
+
+const params = new URLSearchParams(window.location.search);
+const projectId = params.get("projectId") || params.get("id");
+
+const updateBanner = (data) => {
+  if (!data) return;
+  pendingValue.textContent = formatMoney(data.pending);
+  paidValue.textContent = `Pagado: ${formatMoney(data.paid)}`;
+  budgetValue.textContent = `Presupuesto: ${formatMoney(data.totalBudget)}`;
+};
+
+ensureAuth({ allowRoles: ["Admin", "StaffFerreteria", "PersonalObra"], allowPermissions: ["projects"] }).then(async () => {
+  if (!projectId) {
+    pendingValue.textContent = formatMoney(0);
+    projectTitle.textContent = "Proyecto sin seleccionar";
+    projectIdLabel.textContent = "";
+    document.querySelectorAll("tbody").forEach((body) => {
+      body.innerHTML = '<tr><td class="px-6 py-4 text-[#8f90cc] text-sm" colspan="7">Sin datos registrados.</td></tr>';
+    });
+    const invoiceTitle = Array.from(document.querySelectorAll("h3")).find((el) =>
+      (el.textContent || "").includes("Fiscal")
+    );
+    if (invoiceTitle) {
+      const grid = invoiceTitle.closest("div")?.nextElementSibling;
+      if (grid) {
+        grid.innerHTML = '<div class="text-[#8f90cc] text-sm">Sin facturas registradas.</div>';
+      }
+    }
+    return;
+  }
+  const project = await getProject(projectId);
+  if (project) {
+    projectTitle.textContent = project.name || project.title || projectTitle.textContent;
+    projectIdLabel.textContent = `ID: ${project.id}`;
+  }
+  watchDeferredBalance(projectId, updateBanner);
+});
+</script>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

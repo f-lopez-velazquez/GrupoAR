@@ -1,0 +1,439 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Active Projects Kanban - Grupo AR</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<!-- Theme Configuration -->
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark font-display text-slate-900 text-white overflow-x-hidden min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#222249] bg-[#101023] px-6 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-white">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg">
+<span class="material-symbols-outlined text-white text-[20px]">apartment</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Grupo AR</h2>
+</div>
+<!-- Search -->
+<label class="hidden md:flex flex-col min-w-40 !h-10 w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-[#8f90cc] flex border-none bg-[#222249] items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#222249] focus:border-none h-full placeholder:text-[#8f90cc] px-3 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal" placeholder="Buscar proyectos, facturas..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-white text-sm font-bold leading-normal border-b-2 border-primary pb-0.5" href="#">Panel</a>
+<a class="text-[#8f90cc] hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Proyectos</a>
+<a class="text-[#8f90cc] hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Inventario</a>
+<a class="text-[#8f90cc] hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Finanzas</a>
+<a class="text-[#8f90cc] hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Reportes</a>
+</nav>
+<div class="flex gap-2">
+<button class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-[#222249] text-white hover:bg-[#2d2d5e] transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-[#222249] text-white hover:bg-[#2d2d5e] transition-colors">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-[#222249]" data-alt="User profile picture showing a professional man in a suit" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBd0VpG7mbjH-YZG_iQB89ZqQwdeHsqCQs4NTI5BwuFWrObwjrQ5vASFqwVtRUB71MPN5OuhFG1JBStmD5VC0xEUIYSZylTgPQfvMiu47eA3AEx6a8W_xlDfv2ZOjHFjl4XKRH-nOljWsKcQtyqaSzQvwA-PoEzBajWnSEEfumm2NxMJk4jcfg4AWfJyR0CguJPb0SGIFJRCQraz4dZd0JElwtBnhobVpk-SzySyYkToHGqJkp0RwQMA5KPrn9PeTM4tiVeQLaThVC8");'></div>
+</div>
+</header>
+<!-- Main Layout -->
+<main class="flex-1 flex flex-col p-6 lg:px-10 max-w-[1920px] mx-auto w-full">
+<!-- Header Controls -->
+<div class="flex flex-col gap-6 mb-8">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+<div class="flex flex-col gap-2">
+<h1 class="text-white tracking-tight text-[32px] font-bold leading-tight">Active Projects Dashboard</h1>
+<p class="text-[#8f90cc] text-sm font-normal leading-normal max-w-2xl">Manage construction workflows, budget tracking, and incident resolution for active sites.</p>
+</div>
+<button class="flex items-center gap-2 bg-primary hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-colors shadow-lg shadow-blue-900/20">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>New Project</span>
+</button>
+</div>
+<!-- Filter Bar -->
+<div class="flex flex-wrap gap-3 items-center">
+<div class="flex items-center gap-2 bg-[#181830] px-3 py-1.5 rounded-lg border border-[#222249]">
+<span class="material-symbols-outlined text-[#8f90cc] text-[18px]">filter_list</span>
+<span class="text-xs font-bold text-[#8f90cc] uppercase tracking-wider">Filters:</span>
+</div>
+<button class="flex h-9 items-center gap-x-2 rounded-lg bg-[#222249] hover:bg-[#2d2d5e] px-4 transition-colors border border-transparent hover:border-[#3a3a6a]">
+<p class="text-white text-sm font-medium">Region: <span class="text-[#8f90cc]">All</span></p>
+<span class="material-symbols-outlined text-[#8f90cc] text-[18px]">keyboard_arrow_down</span>
+</button>
+<button class="flex h-9 items-center gap-x-2 rounded-lg bg-[#222249] hover:bg-[#2d2d5e] px-4 transition-colors border border-transparent hover:border-[#3a3a6a]">
+<p class="text-white text-sm font-medium">Manager: <span class="text-[#8f90cc]">All</span></p>
+<span class="material-symbols-outlined text-[#8f90cc] text-[18px]">keyboard_arrow_down</span>
+</button>
+<button class="flex h-9 items-center gap-x-2 rounded-lg bg-[#222249] hover:bg-[#2d2d5e] px-4 transition-colors border border-transparent hover:border-[#3a3a6a]">
+<p class="text-white text-sm font-medium">Budget: <span class="text-[#8f90cc]">Any</span></p>
+<span class="material-symbols-outlined text-[#8f90cc] text-[18px]">keyboard_arrow_down</span>
+</button>
+<div class="ml-auto flex items-center gap-2">
+<span class="text-sm text-[#8f90cc] font-medium">Show Archived</span>
+<div class="w-10 h-5 bg-[#222249] rounded-full relative cursor-pointer border border-[#3a3a6a]">
+<div class="absolute left-1 top-1 size-3 bg-[#8f90cc] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Kanban Board Container -->
+<div class="flex-1 overflow-x-auto pb-4 custom-scrollbar">
+<div class="flex gap-6 min-w-full lg:min-w-0">
+<!-- Column: Pre-Construction / Planning -->
+<div class="flex-1 min-w-[340px] max-w-[400px] flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-3">
+<h3 class="text-white font-bold text-lg">Planning</h3>
+<span class="bg-[#222249] text-[#8f90cc] text-xs font-bold px-2 py-1 rounded-full">3</span>
+</div>
+<button class="text-[#8f90cc] hover:text-white"><span class="material-symbols-outlined text-[20px]">more_horiz</span></button>
+</div>
+<div class="flex flex-col gap-3 bg-surface-dark/50 p-2 rounded-xl h-full border border-[#222249]/30">
+<!-- Card 1 -->
+<div class="bg-card-dark p-4 rounded-lg shadow-sm border border-[#2d2d5e] group hover:border-primary/50 cursor-pointer transition-all">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded mb-1 inline-block">AR-204</span>
+<h4 class="text-white font-bold text-base leading-tight">Residencial Altos de Vista</h4>
+</div>
+<button class="text-[#8f90cc] opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-[20px]">more_horiz</span></button>
+</div>
+<div class="mb-4">
+<div class="flex justify-between text-xs text-[#8f90cc] mb-1.5">
+<span>Planning Phase</span>
+<span class="text-white font-medium">15%</span>
+</div>
+<div class="h-1.5 w-full bg-[#101023] rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[15%] rounded-full"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-4 border-t border-[#101023] pt-3">
+<div>
+<p class="text-[10px] uppercase tracking-wider text-[#8f90cc] font-bold">Budget</p>
+<p class="text-white font-medium text-sm">$1.2M</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-wider text-[#8f90cc] font-bold">Spent</p>
+<p class="text-emerald-400 font-medium text-sm">$45k</p>
+</div>
+</div>
+<div class="flex items-center justify-between mt-2">
+<div class="flex -space-x-2">
+<div class="size-7 rounded-full border border-[#222249] bg-cover bg-center" data-alt="Manager avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDB7bP-BVh1m8ExJmZFDebdONnRXZxcXjqVq_0hWzyQZpV0H5MM-wXNoB-pNe98OwBucSoziyDNgqZqweIXSX8atrwGucrKVIOOew20ZeJSX1giHl0D05EHIDKLPeeFx3j_8pALnh53Czdp7NZgs2wBQFLu7sQe7XF1igMP8zpAFX8P9BXJ1zQPO6iOnKDZGd65xAJGtZkrPBeszCWo80mR1h6zH0UzqUjMmjARrpxRpMGfgrY0FFpYJbnkFIFUnpA0FaOgf0LGW_vr");'></div>
+</div>
+<div class="flex items-center gap-1 bg-[#101023] px-2 py-1 rounded text-xs text-[#8f90cc]">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Nov 24</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-card-dark p-4 rounded-lg shadow-sm border border-[#2d2d5e] group hover:border-primary/50 cursor-pointer transition-all">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="text-xs font-bold text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded mb-1 inline-block">AR-209</span>
+<h4 class="text-white font-bold text-base leading-tight">Plaza Comercial Norte</h4>
+</div>
+<button class="text-[#8f90cc] opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-[20px]">more_horiz</span></button>
+</div>
+<div class="mb-4">
+<div class="flex justify-between text-xs text-[#8f90cc] mb-1.5">
+<span>Permits</span>
+<span class="text-white font-medium">45%</span>
+</div>
+<div class="h-1.5 w-full bg-[#101023] rounded-full overflow-hidden">
+<div class="h-full bg-purple-500 w-[45%] rounded-full"></div>
+</div>
+</div>
+<div class="flex gap-2 mb-4">
+<span class="flex items-center gap-1 px-2 py-1 rounded bg-amber-500/10 border border-amber-500/20 text-amber-500 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                                    1 Permit Hold
+                                </span>
+</div>
+<div class="flex items-center justify-between mt-2">
+<div class="flex -space-x-2">
+<div class="size-7 rounded-full border border-[#222249] bg-cover bg-center" data-alt="Manager avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCqbhhvPXcxdLANnm8mtcV8Y0oVZbYTx_YOhAaA4PP2RnxbyX6S82ygX7Hj7f4qK-f26_Nq7xkKNgxWX6ccXzEGcRci2YiUilUhrsmmCto-biWsqNdGK3ik4-5hjzv86Mfx-G-QM6y7glUa5mOHtdp3cgcnePJ8i2s5kfQQWQMGT4H5U8aDnDe6w4fop_HiNV1pi-pYESrvnmpQq9GqzEwxPVL-o_l4qDGR5wPuvjPAiEAYuTUvLWCghdE4J_U1SFjQLJzUUf8qpNTS");'></div>
+</div>
+<div class="flex items-center gap-1 bg-[#101023] px-2 py-1 rounded text-xs text-[#8f90cc]">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Dec 10</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-card-dark p-4 rounded-lg shadow-sm border border-[#2d2d5e] group hover:border-primary/50 cursor-pointer transition-all">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded mb-1 inline-block">AR-211</span>
+<h4 class="text-white font-bold text-base leading-tight">Highway Expansion Lot B</h4>
+</div>
+<button class="text-[#8f90cc] opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-[20px]">more_horiz</span></button>
+</div>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-[#101023]">
+<div class="flex -space-x-2">
+<div class="size-7 flex items-center justify-center rounded-full border border-[#222249] bg-slate-700 text-white text-[10px] font-bold">JD</div>
+</div>
+<div class="flex items-center gap-1 bg-[#101023] px-2 py-1 rounded text-xs text-[#8f90cc]">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Jan 15</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Active Construction -->
+<div class="flex-1 min-w-[340px] max-w-[400px] flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-3">
+<h3 class="text-white font-bold text-lg">Active Construction</h3>
+<span class="bg-primary/20 text-primary text-xs font-bold px-2 py-1 rounded-full">5</span>
+</div>
+<button class="text-[#8f90cc] hover:text-white"><span class="material-symbols-outlined text-[20px]">more_horiz</span></button>
+</div>
+<div class="flex flex-col gap-3 bg-surface-dark/50 p-2 rounded-xl h-full border border-[#222249]/30">
+<!-- Card 1 -->
+<div class="bg-card-dark p-4 rounded-lg shadow-sm border border-[#2d2d5e] border-l-4 border-l-primary group hover:border-t-primary/50 hover:border-r-primary/50 hover:border-b-primary/50 cursor-pointer transition-all">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded mb-1 inline-block">AR-198</span>
+<h4 class="text-white font-bold text-base leading-tight">Green Valley Offices</h4>
+</div>
+<button class="text-[#8f90cc] opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-[20px]">more_horiz</span></button>
+</div>
+<div class="mb-4">
+<div class="flex justify-between text-xs text-[#8f90cc] mb-1.5">
+<span>Structural</span>
+<span class="text-white font-medium">62%</span>
+</div>
+<div class="h-1.5 w-full bg-[#101023] rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[62%] rounded-full shadow-[0_0_10px_rgba(9,13,200,0.5)]"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-4 border-t border-[#101023] pt-3">
+<div>
+<p class="text-[10px] uppercase tracking-wider text-[#8f90cc] font-bold">Budget</p>
+<p class="text-white font-medium text-sm">$3.5M</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-wider text-[#8f90cc] font-bold">Spent</p>
+<p class="text-white font-medium text-sm">$2.1M</p>
+</div>
+</div>
+<div class="flex gap-2 mb-4 flex-wrap">
+<span class="flex items-center gap-1 px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px]">description</span>
+                                    2 Inv. Pending
+                                </span>
+</div>
+<div class="flex items-center justify-between mt-2">
+<div class="flex -space-x-2">
+<div class="size-7 rounded-full border border-[#222249] bg-cover bg-center" data-alt="Manager avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAOWTKgJBDxwnGeUeSymkQ6jTuTjgOij-lUuXvsan779hGHLGrplp9vTM5-ZrTHCFLR3Np9F2_RUjldFevQfXlv4nVfIILdEAtQ1O09Cfx7JjGzcochWu_RtAm-9MrnPeenjN-1g2H79MaJlnVheagdGNXZOSfw8YsDZ5-vFf8EZIsAmUHD-HOIqUYxg4D8p64EHc39_jSkOFUFuQtEZuf8204PsJg-Ot60E0T3AFhN3DMjNHsmM7X-HzjbIbCpIwJVdDHFNAHCOSv2");'></div>
+</div>
+<div class="flex items-center gap-1 bg-[#101023] px-2 py-1 rounded text-xs text-orange-400 font-medium border border-orange-400/20">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>Due Oct 20</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-card-dark p-4 rounded-lg shadow-sm border border-[#2d2d5e] group hover:border-primary/50 cursor-pointer transition-all relative overflow-hidden">
+<!-- Over budget indicator strip -->
+<div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-red-500/20 to-transparent pointer-events-none"></div>
+<div class="flex justify-between items-start mb-3 relative z-10">
+<div>
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-0.5 rounded mb-1 inline-block">AR-201</span>
+<h4 class="text-white font-bold text-base leading-tight">Riverfront Logistics Hub</h4>
+</div>
+<button class="text-[#8f90cc] opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-[20px]">more_horiz</span></button>
+</div>
+<div class="mb-4">
+<div class="flex justify-between text-xs text-[#8f90cc] mb-1.5">
+<span>Foundations</span>
+<span class="text-white font-medium">35%</span>
+</div>
+<div class="h-1.5 w-full bg-[#101023] rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[35%] rounded-full"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-4 border-t border-[#101023] pt-3">
+<div>
+<p class="text-[10px] uppercase tracking-wider text-[#8f90cc] font-bold">Budget</p>
+<p class="text-white font-medium text-sm">$850k</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-wider text-[#8f90cc] font-bold">Spent</p>
+<p class="text-red-400 font-bold text-sm">$920k <span class="text-[10px] font-normal opacity-70">(!108%)</span></p>
+</div>
+</div>
+<div class="flex gap-2 mb-4 flex-wrap">
+<span class="flex items-center gap-1 px-2 py-1 rounded bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+                                    Over Budget
+                                </span>
+<span class="flex items-center gap-1 px-2 py-1 rounded bg-amber-500/10 border border-amber-500/20 text-amber-500 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                                    1 Incident
+                                </span>
+</div>
+<div class="flex items-center justify-between mt-2">
+<div class="flex -space-x-2">
+<div class="size-7 rounded-full border border-[#222249] bg-cover bg-center" data-alt="Manager avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCDQoOJ-NfhsHDUH5J8fIC7kABnbeRiDh0G7DqHNLB21SLhq0rewPzBXT2vuxkIVqvvta2HhGoFVC5pCdRPFDH8WXwwKzghpbMtKtBqHob6cr7tpZMdwmyf-jsdOxqhi_9RDiXAHjAOceN6VuCqJ38BOtSORB6r2Z-jtBM_L4f49TN2b1WRenJdyZvGId2-zYGLpiwO0jMG-MFi2EiupKxrnQ3I5bGCqkoVyoIMYNGmPrZqB2S9iAcQ2T9UNcDmEHNxG8jrde0E45gG");'></div>
+</div>
+<div class="flex items-center gap-1 bg-[#101023] px-2 py-1 rounded text-xs text-[#8f90cc]">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Nov 15</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Inspection / Punch List -->
+<div class="flex-1 min-w-[340px] max-w-[400px] flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-3">
+<h3 class="text-white font-bold text-lg">Punch List</h3>
+<span class="bg-[#222249] text-[#8f90cc] text-xs font-bold px-2 py-1 rounded-full">2</span>
+</div>
+<button class="text-[#8f90cc] hover:text-white"><span class="material-symbols-outlined text-[20px]">more_horiz</span></button>
+</div>
+<div class="flex flex-col gap-3 bg-surface-dark/50 p-2 rounded-xl h-full border border-[#222249]/30">
+<!-- Card 1 -->
+<div class="bg-card-dark p-4 rounded-lg shadow-sm border border-[#2d2d5e] group hover:border-primary/50 cursor-pointer transition-all opacity-90 hover:opacity-100">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded mb-1 inline-block">AR-188</span>
+<h4 class="text-white font-bold text-base leading-tight">Downtown Medical Center</h4>
+</div>
+<button class="text-[#8f90cc] opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-[20px]">more_horiz</span></button>
+</div>
+<div class="mb-4">
+<div class="flex justify-between text-xs text-[#8f90cc] mb-1.5">
+<span>Final Inspection</span>
+<span class="text-emerald-400 font-medium">98%</span>
+</div>
+<div class="h-1.5 w-full bg-[#101023] rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-[98%] rounded-full"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mb-4 border-t border-[#101023] pt-3">
+<div>
+<p class="text-[10px] uppercase tracking-wider text-[#8f90cc] font-bold">Budget</p>
+<p class="text-white font-medium text-sm">$5.2M</p>
+</div>
+<div>
+<p class="text-[10px] uppercase tracking-wider text-[#8f90cc] font-bold">Spent</p>
+<p class="text-white font-medium text-sm">$4.9M</p>
+</div>
+</div>
+<div class="flex gap-2 mb-4">
+<span class="flex items-center gap-1 px-2 py-1 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                    Audit Ready
+                                </span>
+</div>
+<div class="flex items-center justify-between mt-2">
+<div class="flex -space-x-2">
+<div class="size-7 rounded-full border border-[#222249] bg-cover bg-center" data-alt="Manager avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD5GMGAMg8MIquiq8oKeXQBt7r-yd4Xx_xVTqiVpBeMyqs598hdCFAMgzO9sCLj88-iA2ZZ4M_HPEBsI5K3rJzgTxo8RDWLtOa76p7jEvrkX0b-73fIqnuGNNd40EpaoGOX7Mbc1kQx0dGNpcWEvr6EGwF2Bm1GwuGeeyVWOF_Zkpo4k-HgL0ZxgfqJ_f0aE5fLOKov6DY42cWlAENjHEi8I9WdBZvGARjNbtnplrR0U9nw-I8XJ_aQ0eNZracaYRbHDB82QckBp1RB");'></div>
+</div>
+<div class="flex items-center gap-1 bg-[#101023] px-2 py-1 rounded text-xs text-[#8f90cc]">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Oct 25</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-card-dark p-4 rounded-lg shadow-sm border border-[#2d2d5e] group hover:border-primary/50 cursor-pointer transition-all opacity-90 hover:opacity-100">
+<div class="flex justify-between items-start mb-3">
+<div>
+<span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded mb-1 inline-block">AR-192</span>
+<h4 class="text-white font-bold text-base leading-tight">Eastside Warehouse</h4>
+</div>
+<button class="text-[#8f90cc] opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-[20px]">more_horiz</span></button>
+</div>
+<div class="mb-4">
+<div class="flex justify-between text-xs text-[#8f90cc] mb-1.5">
+<span>Client Handover</span>
+<span class="text-emerald-400 font-medium">100%</span>
+</div>
+<div class="h-1.5 w-full bg-[#101023] rounded-full overflow-hidden">
+<div class="h-full bg-emerald-500 w-full rounded-full"></div>
+</div>
+</div>
+<div class="flex items-center justify-between mt-2 border-t border-[#101023] pt-2">
+<div class="flex -space-x-2">
+<div class="size-7 flex items-center justify-center rounded-full border border-[#222249] bg-slate-700 text-white text-[10px] font-bold">TM</div>
+</div>
+<div class="flex items-center gap-1 bg-emerald-900/30 px-2 py-1 rounded text-xs text-emerald-400 border border-emerald-500/20">
+<span class="material-symbols-outlined text-[14px]">check</span>
+<span>Complete</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Add Column Button (Ghost) -->
+<div class="min-w-[50px] flex items-start pt-12 justify-center opacity-50 hover:opacity-100 transition-opacity cursor-pointer">
+<div class="bg-[#181830] p-3 rounded-full border border-[#222249]">
+<span class="material-symbols-outlined text-[#8f90cc] text-[24px]">add</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<style>
+        /* Custom scrollbar for horizontal scrolling */
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #101023;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #222249;
+            border-radius: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #2d2d5e;
+        }
+</style>
+<script>
+  document.querySelectorAll(".bg-surface-dark\\/50").forEach((column) => {
+    column.innerHTML = '<div class="text-xs text-[#8f90cc] p-4">Sin proyectos registrados.</div>';
+  });
+</script>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

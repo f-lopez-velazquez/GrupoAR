@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detailed Payroll Statement View</title>
+<!-- Google Fonts: Public Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<!-- Theme Config -->
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark font-display text-[#0d151c] text-white overflow-x-hidden min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7eef4] border-slate-800 bg-white bg-[#1e293b] px-6 lg:px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-[#0d151c] text-white">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined">dataset</span>
+</div>
+<h2 class="text-[#0d151c] text-white text-lg font-bold leading-tight tracking-[-0.015em]">Grupo AR ERP</h2>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-[#e7eef4] bg-slate-700 text-[#0d151c] text-white hover:bg-slate-200 hover:bg-slate-600 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-white shadow-sm" data-alt="User profile picture showing a professional headshot" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD4cQw__vp4O8L-NRKzr1oOwmAuZje1l4YOs-ILPyZtc6AZul1DVp_Lev_flGGIdm3AkWgtIxc2qTJ8URE7Rd-y7AFf7mlOWU5q-GRvDM1I5FO1L63OTG7GcT0Mt7tPvd7jyUlH3ZJNGVRd7iXdY4BEg6Vk2pEdwLjRvVBthSjKhs2c7Au-Lf1RAsC4HX4lTucEi4RC1WWAlXirhYhQ5OisD_6GNhxalXIiT3bZVJ0hA63zrNrPjbswjmzRKUL6RuWYLhd2SIDdnPe4");'></div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
+<div class="w-full max-w-5xl flex flex-col gap-6">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 text-sm">
+<a class="text-slate-500 text-slate-400 hover:text-primary font-medium" href="#">Payroll</a>
+<span class="text-slate-400">/</span>
+<a class="text-slate-500 text-slate-400 hover:text-primary font-medium" href="#">Weekly Processing</a>
+<span class="text-slate-400">/</span>
+<span class="text-primary font-bold">Employee Detail</span>
+</div>
+<!-- Page Header & Actions -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-[#0d151c] text-white text-3xl font-black leading-tight tracking-[-0.033em]">Payroll Statement</h1>
+<div class="flex items-center gap-2 text-[#48769d] text-slate-400 font-medium">
+<span class="material-symbols-outlined text-lg">calendar_month</span>
+<span>Period: Oct 1 - Oct 7, 2023</span>
+<span class="px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-800 bg-yellow-900 text-yellow-200 text-xs font-bold uppercase tracking-wide ml-2">Pending Approval</span>
+</div>
+</div>
+<div class="flex gap-3 flex-wrap">
+<button class="flex items-center justify-center gap-2 rounded-lg h-10 px-4 bg-white bg-slate-800 border border-slate-200 border-slate-700 text-[#0d151c] text-white hover:bg-slate-50 hover:bg-slate-700 text-sm font-bold shadow-sm transition-all">
+<span class="material-symbols-outlined text-[20px]">download</span>
+<span>Descargar PDF</span>
+</button>
+<button class="flex items-center justify-center gap-2 rounded-lg h-10 px-4 bg-white bg-slate-800 border border-slate-200 border-slate-700 text-[#0d151c] text-white hover:bg-slate-50 hover:bg-slate-700 text-sm font-bold shadow-sm transition-all">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+<span>Edit Adjustment</span>
+</button>
+</div>
+</div>
+<!-- Digital Receipt Container -->
+<div class="bg-white bg-[#1e293b] rounded-xl shadow-lg border border-slate-200 border-slate-700 overflow-hidden">
+<!-- Employee Information Card -->
+<div class="p-6 md:p-8 border-b border-slate-100 border-slate-700 bg-slate-50/50 bg-[#1e293b]">
+<h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Employee Information</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="flex flex-col">
+<span class="text-slate-500 text-slate-400 text-sm">Employee Name</span>
+<span class="text-[#0d151c] text-white font-bold text-lg">Juan Perez</span>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-500 text-slate-400 text-sm">Role &amp; ID</span>
+<span class="text-[#0d151c] text-white font-medium">Field Technician <span class="text-slate-400 mx-1">|</span> EMP-89</span>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-500 text-slate-400 text-sm">Department / Site</span>
+<span class="text-[#0d151c] text-white font-medium">Monterrey North Operations</span>
+</div>
+<div class="flex flex-col">
+<span class="text-slate-500 text-slate-400 text-sm">Tax ID (RFC)</span>
+<span class="text-[#0d151c] text-white font-medium">PERJ901023HM4</span>
+</div>
+</div>
+</div>
+<!-- Financial Data Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2">
+<!-- Earnings Column -->
+<div class="p-6 md:p-8 border-r border-slate-100 border-slate-700">
+<h3 class="text-primary font-bold text-lg mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined">trending_up</span> Earnings
+                        </h3>
+<div class="space-y-3">
+<div class="flex justify-between items-center py-2 border-b border-slate-50 border-slate-800">
+<span class="text-slate-600 text-slate-300">Base Salary (Weekly)</span>
+<span class="font-semibold tabular-nums">$ 3,500.00</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-slate-50 border-slate-800">
+<span class="text-slate-600 text-slate-300">Overtime (5 hrs)</span>
+<span class="font-semibold tabular-nums">$ 656.25</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-slate-50 border-slate-800">
+<span class="text-slate-600 text-slate-300">Site Allowance</span>
+<span class="font-semibold tabular-nums">$ 250.00</span>
+</div>
+<div class="flex justify-between items-center py-2 pt-4">
+<span class="font-bold text-slate-800 text-slate-200">Total Earnings</span>
+<span class="font-bold tabular-nums text-lg">$ 4,406.25</span>
+</div>
+</div>
+</div>
+<!-- Deductions Column -->
+<div class="p-6 md:p-8 bg-slate-50/30 bg-slate-800/20">
+<h3 class="text-slate-700 text-slate-200 font-bold text-lg mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined">trending_down</span> Statutory Deductions
+                        </h3>
+<div class="space-y-3">
+<div class="flex justify-between items-center py-2 border-b border-slate-100 border-slate-700">
+<span class="text-slate-600 text-slate-300">Income Tax (ISR)</span>
+<span class="font-semibold tabular-nums text-slate-600 text-slate-400">- $ 420.50</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-slate-100 border-slate-700">
+<span class="text-slate-600 text-slate-300">Social Security (IMSS)</span>
+<span class="font-semibold tabular-nums text-slate-600 text-slate-400">- $ 115.00</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-slate-100 border-slate-700">
+<span class="text-slate-600 text-slate-300">Union Dues</span>
+<span class="font-semibold tabular-nums text-slate-600 text-slate-400">- $ 35.00</span>
+</div>
+<div class="flex justify-between items-center py-2 pt-4">
+<span class="font-bold text-slate-700 text-slate-300">Total Statutory Deductions</span>
+<span class="font-bold tabular-nums text-lg text-slate-700 text-slate-300">- $ 570.50</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Operational Performance Summary (Feature Section) -->
+<div class="border-t border-slate-200 border-slate-700">
+<div class="p-6 md:p-8 bg-orange-50/50 bg-orange-900/10">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
+<h3 class="text-[#0d151c] text-white font-bold text-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-600">engineering</span>
+                                Operational Performance Summary
+                            </h3>
+<span class="text-xs font-semibold uppercase text-orange-600 bg-orange-100 bg-orange-900/40 px-2 py-1 rounded border border-orange-200 border-orange-800">Source: Field Evaluations</span>
+</div>
+<p class="text-sm text-slate-500 mb-4 max-w-2xl">
+                            Impact on net pay based on field logs reported by Site Managers.
+                        </p>
+<div class="overflow-x-auto rounded-lg border border-orange-100 border-orange-900/30 bg-white bg-[#1e293b]">
+<table class="w-full text-left text-sm">
+<thead class="bg-slate-50 bg-slate-800 border-b border-slate-100 border-slate-700">
+<tr>
+<th class="px-4 py-3 font-semibold text-slate-600 text-slate-300">Date</th>
+<th class="px-4 py-3 font-semibold text-slate-600 text-slate-300">Type</th>
+<th class="px-4 py-3 font-semibold text-slate-600 text-slate-300">Reported By</th>
+<th class="px-4 py-3 font-semibold text-slate-600 text-slate-300 text-right">Financial Impact</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 divide-slate-700">
+<tr class="group hover:bg-slate-50 hover:bg-slate-800/50 transition-colors">
+<td class="px-4 py-3 text-slate-700 text-slate-300">Oct 3, 2023</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-500 text-lg">schedule</span>
+<span class="font-medium text-slate-900 text-white">Late Arrival (45m)</span>
+</div>
+</td>
+<td class="px-4 py-3 text-slate-500 text-slate-400 cursor-help" title="Reported at 09:15 AM">M. Rodriguez</td>
+<td class="px-4 py-3 text-right font-bold text-red-600 tabular-nums">- $ 15.00</td>
+</tr>
+<tr class="group hover:bg-slate-50 hover:bg-slate-800/50 transition-colors">
+<td class="px-4 py-3 text-slate-700 text-slate-300">Oct 5, 2023</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-red-500 text-lg">event_busy</span>
+<span class="font-medium text-slate-900 text-white">Unexcused Absence</span>
+</div>
+</td>
+<td class="px-4 py-3 text-slate-500 text-slate-400 cursor-help" title="Reported at 04:30 PM">M. Rodriguez</td>
+<td class="px-4 py-3 text-right font-bold text-red-600 tabular-nums">- $ 120.00</td>
+</tr>
+</tbody>
+<tfoot class="bg-orange-50/30 bg-slate-800/30">
+<tr>
+<td class="px-4 py-3 text-right font-medium text-slate-600 text-slate-400" colspan="3">Total Performance Adjustments</td>
+<td class="px-4 py-3 text-right font-bold text-red-600 tabular-nums border-t border-slate-200 border-slate-700">- $ 135.00</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+</div>
+<!-- Grand Total Footer -->
+<div class="p-6 md:p-8 bg-slate-900 text-white flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex flex-col gap-1 text-center md:text-left">
+<span class="text-slate-400 text-sm font-medium uppercase tracking-widest">Net Pay Calculation</span>
+<div class="text-sm text-slate-400">Earnings - Statutory Deductions - Performance Adj.</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-4xl md:text-5xl font-black tracking-tight tabular-nums">$ 3,700.75</span>
+<span class="text-primary font-medium mt-1">Ready for Disbursement</span>
+</div>
+</div>
+<!-- Approval Workflow -->
+<div class="p-6 md:p-8 bg-slate-50 bg-[#151f2e] border-t border-slate-200 border-slate-800">
+<form class="flex flex-col gap-4">
+<label class="flex flex-col gap-2">
+<span class="text-sm font-bold text-slate-700 text-slate-300">Approval Comments (Optional)</span>
+<textarea class="w-full rounded-lg border-slate-300 border-slate-600 bg-white bg-slate-800 text-sm p-3 focus:ring-primary focus:border-primary transition-shadow" placeholder="Add notes about this payment..." rows="2"></textarea>
+</label>
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 mt-2">
+<div class="flex items-center gap-2 text-sm text-slate-500">
+<span class="material-symbols-outlined text-lg">verified_user</span>
+<span>I certify this data is accurate based on weekly logs.</span>
+</div>
+<div class="flex w-full sm:w-auto gap-3">
+<button class="flex-1 sm:flex-none h-11 px-6 rounded-lg border border-red-200 border-red-900 text-red-700 text-red-400 hover:bg-red-50 hover:bg-red-900/20 font-bold text-sm transition-colors" type="button">
+                                    Reject
+                                </button>
+<button class="flex-1 sm:flex-none h-11 px-6 rounded-lg bg-primary hover:bg-blue-700 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+                                    Approve for Payment
+                                </button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</main>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="es" class="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ajustes - Grupo AR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/tailwind.css" />
+    <link rel="stylesheet" href="/assets/theme.css" />
+  </head>
+  <body class="bg-background-light bg-background-dark text-slate-900 text-white font-display min-h-screen">
+    <header class="sticky top-0 z-30 flex items-center justify-between border-b border-slate-200 border-slate-800 bg-white bg-[#111827] px-6 py-4">
+      <div class="flex items-center gap-3">
+        <img src="/assets/logo.png" class="h-9 w-9" alt="Logo Grupo AR" />
+        <div>
+          <h1 class="text-lg font-bold">Grupo AR</h1>
+          <p class="text-xs text-slate-500 text-slate-400">Ajustes generales</p>
+        </div>
+      </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm text-slate-600 text-slate-300">
+        <a href="/dashboard-ejecutivo" class="hover:text-primary">Panel</a>
+        <a href="/inventario" class="hover:text-primary">Inventario</a>
+        <a href="/proveedores" class="hover:text-primary">Proveedores</a>
+        <a href="/ajustes" class="text-primary font-semibold">Ajustes</a>
+      </nav>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-8 flex flex-col gap-6">
+      <section class="bg-white bg-[#111827] border border-slate-200 border-slate-800 rounded-xl shadow-sm p-6">
+        <h2 class="text-2xl font-bold">Configuración general</h2>
+        <p class="text-sm text-slate-500 text-slate-400">Controla los parámetros operativos del ERP.</p>
+        <form id="settingsForm" class="mt-6 grid grid-cols-1 gap-4">
+          <label class="text-sm font-medium text-slate-600 text-slate-300 flex flex-col gap-2">
+            Nombre comercial
+            <input id="settingCompanyName" class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3" placeholder="Grupo AR" />
+          </label>
+          <label class="text-sm font-medium text-slate-600 text-slate-300 flex flex-col gap-2">
+            IVA por defecto (%)
+            <input id="settingTaxRate" type="number" step="0.01" class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3" placeholder="16" />
+          </label>
+          <label class="text-sm font-medium text-slate-600 text-slate-300 flex flex-col gap-2">
+            Correo de notificaciones
+            <input id="settingNotificationEmail" type="email" class="h-11 rounded-lg border border-slate-200 border-slate-700 bg-slate-50 bg-slate-900 px-3" placeholder="admin@grupoar.com" />
+          </label>
+          <label class="flex items-center gap-3 text-sm text-slate-600 text-slate-300">
+            <input id="settingGeoRequired" type="checkbox" class="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary" />
+            Solicitar geolocalización obligatoria en asistencia
+          </label>
+          <div class="flex justify-end gap-3">
+            <button type="submit" class="px-4 py-2 rounded-lg bg-primary text-white font-semibold">Guardar cambios</button>
+          </div>
+        </form>
+        <p id="settingsStatus" class="text-xs text-slate-500 mt-3"></p>
+      </section>
+    </main>
+
+    <script type="module">
+      import { ensureAuth } from "/shared/auth.js";
+      import { db } from "/shared/firebase.js";
+      import {
+        doc,
+        onSnapshot,
+        serverTimestamp,
+        setDoc,
+      } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+      const form = document.getElementById("settingsForm");
+      const status = document.getElementById("settingsStatus");
+      const fields = {
+        companyName: document.getElementById("settingCompanyName"),
+        taxRate: document.getElementById("settingTaxRate"),
+        notificationEmail: document.getElementById("settingNotificationEmail"),
+        geoRequired: document.getElementById("settingGeoRequired"),
+      };
+
+      const settingsRef = doc(db, "settings", "general");
+
+      const setStatus = (message, tone = "text-slate-500") => {
+        status.textContent = message;
+        status.className = `text-xs mt-3 ${tone}`;
+      };
+
+      ensureAuth({ allowRoles: ["Admin"], allowPermissions: ["settings"] }).then(() => {
+        onSnapshot(settingsRef, (snapshot) => {
+          if (!snapshot.exists()) return;
+          const data = snapshot.data();
+          fields.companyName.value = data.companyName || "";
+          fields.taxRate.value = data.taxRate != null ? data.taxRate : "";
+          fields.notificationEmail.value = data.notificationEmail || "";
+          fields.geoRequired.checked = data.geoRequired === true;
+        });
+      });
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        setStatus("Guardando...", "text-amber-500");
+        await setDoc(
+          settingsRef,
+          {
+            companyName: fields.companyName.value.trim(),
+            taxRate: Number(fields.taxRate.value || 0),
+            notificationEmail: fields.notificationEmail.value.trim(),
+            geoRequired: fields.geoRequired.checked,
+            updatedAt: serverTimestamp(),
+          },
+          { merge: true }
+        );
+        setStatus("Ajustes guardados.", "text-emerald-500");
+      });
+    </script>
+    <script type="module" src="/shared/footer.js"></script>
+    <script type="module" src="/shared/i18n-es.js"></script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+

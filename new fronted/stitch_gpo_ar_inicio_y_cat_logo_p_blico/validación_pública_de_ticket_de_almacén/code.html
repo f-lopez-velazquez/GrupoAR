@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Validación Pública de Ticket de Almacén</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#096fc8",
+              "background-light": "#f3f4f6", 
+              "background-dark": "#101a22",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 print:p-0 print:bg-white">
+<!-- Main Validation Card -->
+<main class="w-full max-w-[800px] bg-white dark:bg-[#1a2632] shadow-xl rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden relative flex flex-col">
+<!-- Decorative Top Bar -->
+<div class="h-2 w-full bg-primary"></div>
+<!-- Header Section -->
+<header class="flex flex-col sm:flex-row items-center justify-between px-6 py-5 border-b border-slate-100 dark:border-slate-700 gap-4">
+<div class="flex items-center gap-3">
+<!-- Logo Placeholder -->
+<div class="h-10 w-10 bg-primary/10 rounded flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">warehouse</span>
+</div>
+<div>
+<h1 class="text-xl font-bold text-slate-900 dark:text-white leading-tight">GPO-AR</h1>
+<p class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">Sistema de Almacén</p>
+</div>
+</div>
+<div class="flex items-center gap-2 bg-primary/10 dark:bg-primary/20 px-4 py-2 rounded-full border border-primary/20">
+<span class="material-symbols-outlined text-primary text-[20px]">verified</span>
+<span class="text-primary text-sm font-bold uppercase tracking-wide">Validación Oficial</span>
+</div>
+</header>
+<!-- Ticket Status & Meta -->
+<div class="px-6 py-8 text-center bg-slate-50/50 dark:bg-slate-800/30">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-2 uppercase tracking-widest">Ticket de Préstamo</p>
+<h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">#A-2023-894</h2>
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-green-100 text-green-700 border border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-800">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span class="text-sm font-bold">Devuelto / Finalizado</span>
+</div>
+</div>
+<!-- Employee Details (ProfileStats Adapted) -->
+<section class="px-6 py-6 border-b border-slate-100 dark:border-slate-700">
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Datos del Solicitante</h3>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<div class="flex flex-col p-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+<span class="text-xs text-slate-500 dark:text-slate-400 mb-1">Nombre</span>
+<span class="font-bold text-slate-900 dark:text-white text-lg">Juan Pérez</span>
+</div>
+<div class="flex flex-col p-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+<span class="text-xs text-slate-500 dark:text-slate-400 mb-1">ID Empleado</span>
+<span class="font-bold text-slate-900 dark:text-white text-lg">4402</span>
+</div>
+<div class="flex flex-col p-3 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+<span class="text-xs text-slate-500 dark:text-slate-400 mb-1">Departamento</span>
+<span class="font-bold text-slate-900 dark:text-white text-lg">Mantenimiento</span>
+</div>
+</div>
+</section>
+<!-- Timeline / Conditions -->
+<section class="px-6 py-6 grid md:grid-cols-2 gap-8 border-b border-slate-100 dark:border-slate-700">
+<!-- Salida -->
+<div class="relative pl-6 border-l-2 border-slate-200 dark:border-slate-700">
+<div class="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-slate-300 dark:bg-slate-600 border-2 border-white dark:border-[#1a2632]"></div>
+<h3 class="text-sm font-bold text-slate-900 dark:text-white uppercase mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">logout</span> Salida
+                </h3>
+<div class="space-y-3 text-sm">
+<div class="flex justify-between">
+<span class="text-slate-500 dark:text-slate-400">Fecha:</span>
+<span class="font-medium text-slate-900 dark:text-white">24 Oct 2023</span>
+</div>
+<div class="flex justify-between">
+<span class="text-slate-500 dark:text-slate-400">Hora:</span>
+<span class="font-medium text-slate-900 dark:text-white">08:30 AM</span>
+</div>
+<div class="flex justify-between">
+<span class="text-slate-500 dark:text-slate-400">Condición:</span>
+<span class="font-medium text-slate-900 dark:text-white">Óptima / Nuevo</span>
+</div>
+</div>
+</div>
+<!-- Entrada -->
+<div class="relative pl-6 border-l-2 border-primary">
+<div class="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-primary border-2 border-white dark:border-[#1a2632]"></div>
+<h3 class="text-sm font-bold text-primary uppercase mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">login</span> Retorno
+                </h3>
+<div class="space-y-3 text-sm">
+<div class="flex justify-between">
+<span class="text-slate-500 dark:text-slate-400">Fecha:</span>
+<span class="font-medium text-slate-900 dark:text-white">24 Oct 2023</span>
+</div>
+<div class="flex justify-between">
+<span class="text-slate-500 dark:text-slate-400">Hora:</span>
+<span class="font-medium text-slate-900 dark:text-white">05:15 PM</span>
+</div>
+<div class="mt-2 p-2 bg-slate-50 dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-600">
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-1">Reporte de Condición:</p>
+<p class="text-slate-900 dark:text-white font-medium text-sm">Sin daños reportados. Desgaste normal de uso.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Equipment List -->
+<section class="px-6 py-6">
+<h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Detalle de Herramientas</h3>
+<div class="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+<table class="w-full text-sm text-left">
+<thead class="bg-slate-50 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700">
+<tr>
+<th class="px-4 py-3">Descripción</th>
+<th class="px-4 py-3">Serie / ID</th>
+<th class="px-4 py-3 text-center">Cant.</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+<tr>
+<td class="px-4 py-3 font-medium text-slate-900 dark:text-white">Taladro Percutor Bosch 18V</td>
+<td class="px-4 py-3 text-slate-500 dark:text-slate-400 font-mono text-xs">S/N: 8993-221</td>
+<td class="px-4 py-3 text-center text-slate-900 dark:text-white">1</td>
+</tr>
+<tr>
+<td class="px-4 py-3 font-medium text-slate-900 dark:text-white">Juego de Brocas concreto</td>
+<td class="px-4 py-3 text-slate-500 dark:text-slate-400 font-mono text-xs">KIT-202</td>
+<td class="px-4 py-3 text-center text-slate-900 dark:text-white">1</td>
+</tr>
+<tr>
+<td class="px-4 py-3 font-medium text-slate-900 dark:text-white">Multímetro Fluke 117</td>
+<td class="px-4 py-3 text-slate-500 dark:text-slate-400 font-mono text-xs">S/N: 5502-001</td>
+<td class="px-4 py-3 text-center text-slate-900 dark:text-white">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Signature/Images Section (Optional visual proof) -->
+<section class="px-6 pb-8">
+<div class="flex gap-4 overflow-x-auto pb-2">
+<div class="flex-none w-32 h-24 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center border border-dashed border-slate-300 dark:border-slate-600">
+<div class="text-center">
+<span class="material-symbols-outlined text-slate-400">image</span>
+<p class="text-[10px] text-slate-400 mt-1">Evidencia Salida</p>
+</div>
+</div>
+<div class="flex-none w-32 h-24 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center border border-dashed border-slate-300 dark:border-slate-600">
+<div class="text-center">
+<span class="material-symbols-outlined text-slate-400">image</span>
+<p class="text-[10px] text-slate-400 mt-1">Evidencia Entrada</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-900 px-6 py-6 border-t border-slate-100 dark:border-slate-800 text-center">
+<div class="flex flex-col items-center gap-3">
+<div class="flex items-center gap-2 text-slate-400 dark:text-slate-500">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span class="text-xs font-semibold uppercase tracking-wider">Registro Inmutable</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm max-w-md mx-auto leading-relaxed">
+                    La información contenida en este ticket digital es definitiva y no puede ser alterada una vez cerrada la transacción.
+                </p>
+<div class="w-12 h-0.5 bg-slate-200 dark:bg-slate-700 my-2"></div>
+<p class="text-[10px] text-slate-400 dark:text-slate-600 font-mono">
+                    Programado por Francisco López Velázquez
+                </p>
+</div>
+</footer>
+</main>
+<!-- Background Pattern Effect (Subtle) -->
+<div class="fixed inset-0 pointer-events-none -z-10 opacity-[0.03] dark:opacity-[0.05]" style="background-image: radial-gradient(#096fc8 1px, transparent 1px); background-size: 24px 24px;">
+</div>
+</body></html>

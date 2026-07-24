@@ -1,0 +1,855 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gestión de Inventario Ferretería - Grupo AR</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<!-- Theme Config -->
+<style>
+        /* Custom scrollbar for better look in dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101022; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222249; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2f2f5e; 
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-white font-display overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- SideNavBar -->
+<aside class="w-72 hidden md:flex flex-col border-r border-border-dark bg-background-dark shrink-0">
+<div class="flex flex-col h-full p-4">
+<div class="flex items-center gap-3 px-2 py-4 mb-6">
+<img src="/assets/logo.png" alt="Logo Grupo AR" class="size-10 shadow-lg border border-border-dark" />
+<div class="flex flex-col">
+<h1 class="text-white text-base font-bold leading-normal">Grupo AR</h1>
+<p class="text-text-secondary text-xs font-normal leading-normal">ERP Sistema v2.4</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 flex-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:bg-surface-dark hover:text-white transition-colors group" href="/dashboard-ejecutivo">
+<span class="material-symbols-outlined group-hover:text-white">dashboard</span>
+<span class="text-sm font-medium">Panel</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary text-white shadow-md shadow-primary/20" href="/inventario">
+<span class="material-symbols-outlined text-white">inventory_2</span>
+<span class="text-sm font-medium">Inventario</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:bg-surface-dark hover:text-white transition-colors group" href="/pos">
+<span class="material-symbols-outlined group-hover:text-white">shopping_cart</span>
+<span class="text-sm font-medium">Ventas</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:bg-surface-dark hover:text-white transition-colors group" href="/proveedores">
+<span class="material-symbols-outlined group-hover:text-white">group</span>
+<span class="text-sm font-medium">Proveedores</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:bg-surface-dark hover:text-white transition-colors group" href="/reportes">
+<span class="material-symbols-outlined group-hover:text-white">bar_chart</span>
+<span class="text-sm font-medium">Reportes</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-border-dark">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:bg-surface-dark hover:text-white transition-colors group" href="/ajustes">
+<span class="material-symbols-outlined group-hover:text-white">settings</span>
+<span class="text-sm font-medium">Ajustes</span>
+</a>
+<div class="flex items-center gap-3 px-3 py-4 mt-2">
+<div id="currentUserAvatar" class="bg-center bg-no-repeat bg-cover rounded-full size-8 border border-border-dark"></div>
+<div class="flex flex-col">
+<p id="currentUserName" class="text-white text-sm font-medium">Usuario</p>
+<p id="currentUserRole" class="text-text-secondary text-xs">Rol asignado</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<main class="flex-1 flex flex-col h-full min-w-0 overflow-hidden bg-background-light bg-background-dark">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-dark bg-background-dark px-8 py-3 shrink-0">
+<div class="flex items-center gap-4 text-white md:hidden">
+<button class="p-1 rounded-md hover:bg-surface-dark">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="text-lg font-bold">Grupo AR</h2>
+</div>
+<!-- Breadcrumbs (Desktop) -->
+<div class="hidden md:flex flex-wrap gap-2 items-center">
+<a class="text-text-secondary text-sm font-medium hover:text-white transition-colors" href="/dashboard-ejecutivo">Grupo AR</a>
+<span class="text-text-secondary text-sm font-medium">/</span>
+<a class="text-text-secondary text-sm font-medium hover:text-white transition-colors" href="/inventario">Ferretería</a>
+<span class="text-text-secondary text-sm font-medium">/</span>
+<span class="text-white text-sm font-medium">Inventario</span>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<div class="hidden sm:flex gap-2">
+<button class="flex items-center justify-center rounded-lg size-10 bg-surface-dark hover:bg-[#2a2a5a] text-white transition-colors relative">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2.5 right-2.5 size-2 bg-red-500 rounded-full border-2 border-surface-dark"></span>
+</button>
+<button class="flex items-center justify-center rounded-lg size-10 bg-surface-dark hover:bg-[#2a2a5a] text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto p-4 md:p-8">
+<div class="max-w-[1200px] mx-auto flex flex-col gap-6">
+<!-- Page Heading & Controls -->
+<div class="flex flex-col lg:flex-row justify-between gap-6 lg:items-end">
+<div class="flex flex-col gap-2">
+<h2 class="text-white text-3xl md:text-4xl font-extrabold leading-tight tracking-tight">Gestión de inventario</h2>
+<p class="text-text-secondary text-base font-normal max-w-2xl">Monitorea el stock, administra categorías y actualiza precios en tiempo real.</p>
+<p id="inventoryEstado" class="text-xs text-text-secondary">Inventario listo.</p>
+</div>
+<div class="flex gap-3">
+<button id="importInventoryBtn" class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-surface-dark border border-border-dark text-white text-sm font-bold hover:bg-[#2a2a5a] transition-all">
+<span class="material-symbols-outlined text-[20px]">upload_file</span>
+<span>Importar JSON</span>
+</button>
+<button id="loadBaseInventoryBtn" class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#222249] border border-border-dark text-white text-sm font-bold hover:bg-[#2a2a5a] transition-all">
+<span class="material-symbols-outlined text-[20px]">inventory</span>
+<span>Cargar inventario base</span>
+</button>
+<button id="updateStockBtn" class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary hover:bg-blue-700 text-white text-sm font-bold shadow-lg shadow-primary/30 transition-all">
+<span class="material-symbols-outlined text-[20px]">add_box</span>
+<span>Actualizar stock</span>
+</button>
+<button id="newProductBtn" class="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#222249] border border-border-dark text-white text-sm font-bold hover:bg-[#2a2a5a] transition-all">
+<span class="material-symbols-outlined text-[20px]">post_add</span>
+<span>Nuevo producto</span>
+</button>
+</div>
+<input id="inventoryImportInput" type="file" accept="application/json" class="hidden"/>
+</div>
+<!-- Search and Filters -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<div class="md:col-span-5 lg:col-span-6">
+<label class="flex w-full items-stretch rounded-lg h-12 bg-surface-dark border border-border-dark focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all overflow-hidden">
+<div class="flex items-center justify-center pl-4 text-text-secondary">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input id="inventorySearchInput" class="flex-1 bg-transparent border-none text-white placeholder:text-text-secondary px-4 focus:ring-0 text-sm font-medium" placeholder="Buscar por SKU, nombre o categoria..."/>
+</label>
+</div>
+<div class="md:col-span-3 lg:col-span-3">
+<div class="relative h-12">
+<select id="inventoryCategoriaSelect" class="w-full h-full appearance-none rounded-lg bg-surface-dark border border-border-dark text-white px-4 pr-10 focus:border-primary focus:ring-1 focus:ring-primary text-sm font-medium">
+<option value="Todas las categorías">Todas las categorías</option>
+<option value="Tornilleria">Tornillería</option>
+<option value="Electrico">Eléctrico</option>
+<option value="Plomeria">Plomería</option>
+<option value="Albanileria">Albañilería</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-text-secondary">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-4 lg:col-span-3 flex justify-end items-center gap-3">
+<span class="text-text-secondary text-sm font-medium">Mostrar:</span>
+<div class="relative h-12 w-full">
+<select id="inventoryStockFilter" class="w-full h-full appearance-none rounded-lg bg-surface-dark border border-border-dark text-white px-4 pr-10 focus:border-primary focus:ring-1 focus:ring-primary text-sm font-medium">
+<option>Todos los productos</option>
+<option>Solo bajo stock</option>
+<option>Sin stock</option>
+</select>
+<div class="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none text-text-secondary">
+<span class="material-symbols-outlined">filter_list</span>
+</div>
+</div>
+<div class="flex items-center gap-2 pl-2">
+  <button id="viewTableBtn" class="size-10 flex items-center justify-center rounded-lg bg-primary text-white shadow-md shadow-primary/20" title="Vista de lista">
+    <span class="material-symbols-outlined text-[18px]">table_rows</span>
+  </button>
+  <button id="viewGridBtn" class="size-10 flex items-center justify-center rounded-lg bg-surface-dark border border-border-dark text-text-secondary hover:text-white hover:border-primary transition-all" title="Vista mosaico">
+    <span class="material-symbols-outlined text-[18px]">grid_view</span>
+  </button>
+</div>
+</div>
+</div>
+<!-- Data Table -->
+<div id="inventoryTableWrapper" class="bg-surface-dark border border-border-dark rounded-xl overflow-hidden shadow-xl">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-dark bg-[#1a1a32]">
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-text-secondary w-12">
+<input class="rounded bg-background-dark border-border-dark text-primary focus:ring-offset-surface-dark focus:ring-primary" type="checkbox"/>
+</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-text-secondary">Producto</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-text-secondary">Categoria</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-text-secondary">Stock</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-text-secondary">Precio</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-text-secondary">Estado</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-text-secondary w-16"></th>
+</tr>
+</thead>
+<tbody id="inventoryTableBody" class="divide-y divide-border-dark text-sm">
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between p-4 border-t border-border-dark bg-[#16162a]">
+<p class="text-text-secondary text-sm">Showing <span class="text-white font-bold">1-5</span> of <span class="text-white font-bold">48</span> items</p>
+<div class="flex items-center gap-2">
+<button class="size-8 flex items-center justify-center rounded bg-background-dark border border-border-dark text-text-secondary hover:text-white hover:border-primary transition-all disabled:opacity-50">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="size-8 flex items-center justify-center rounded bg-primary text-white text-sm font-bold">1</button>
+<button class="size-8 flex items-center justify-center rounded bg-background-dark border border-border-dark text-text-secondary hover:text-white hover:border-primary transition-all text-sm">2</button>
+<button class="size-8 flex items-center justify-center rounded bg-background-dark border border-border-dark text-text-secondary hover:text-white hover:border-primary transition-all text-sm">3</button>
+<span class="text-text-secondary text-sm">...</span>
+<button class="size-8 flex items-center justify-center rounded bg-background-dark border border-border-dark text-text-secondary hover:text-white hover:border-primary transition-all">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+<div id="inventoryGridWrapper" class="hidden">
+  <div id="inventoryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script type="module">
+import { ensureAuth } from "/shared/auth.js";
+import { db } from "/shared/firebase.js";
+import {
+  doc,
+  updateDoc,
+  serverTimestamp,
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import {
+  importInventoryFromJson,
+  listenInventory,
+  registerMaterialUsage,
+  createInventoryItem,
+  updateInventoryItem,
+  deleteInventoryItem,
+} from "/shared/services/inventory.js";
+import { logAuditEvent } from "/shared/audit.js";
+import { listProjects } from "/shared/services/projects.js";
+import { formatMoney } from "/shared/utils.js";
+
+const statusEl = document.getElementById("inventoryEstado");
+const importBtn = document.getElementById("importInventoryBtn");
+const baseImportBtn = document.getElementById("loadBaseInventoryBtn");
+const updateStockBtn = document.getElementById("updateStockBtn");
+const newProductBtn = document.getElementById("newProductBtn");
+const importInput = document.getElementById("inventoryImportInput");
+const searchInput = document.getElementById("inventorySearchInput");
+const categorySelect = document.getElementById("inventoryCategoriaSelect");
+const stockFilter = document.getElementById("inventoryStockFilter");
+const tableBody = document.getElementById("inventoryTableBody");
+const tableWrapper = document.getElementById("inventoryTableWrapper");
+const gridWrapper = document.getElementById("inventoryGridWrapper");
+const gridEl = document.getElementById("inventoryGrid");
+const viewTableBtn = document.getElementById("viewTableBtn");
+const viewGridBtn = document.getElementById("viewGridBtn");
+
+const state = {
+  inventory: [],
+  filter: {
+    search: "",
+    category: "Todas las categorías",
+    stock: "Todos los productos",
+  },
+  view: "table",
+  projects: [],
+};
+let currentUser = null;
+let currentProfile = null;
+
+const setEstado = (message, tone = "text-text-secondary") => {
+  statusEl.textContent = message;
+  statusEl.className = `text-xs ${tone}`;
+};
+
+const createModal = (id, title, body) => {
+  const modal = document.createElement("div");
+  modal.id = id;
+  modal.className = "fixed inset-0 z-[80] hidden items-center justify-center bg-black/60 p-6";
+  modal.innerHTML = `
+    <div class="w-full max-w-lg rounded-2xl bg-[#16162a] border border-[#303169] p-6 shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-white text-lg font-bold">${title}</h3>
+        <button data-close class="text-[#8f90cc] hover:text-white">?</button>
+      </div>
+      ${body}
+    </div>
+  `;
+  document.body.appendChild(modal);
+  return modal;
+};
+
+const stockModal = createModal(
+  "stockModal",
+  "Actualizar stock",
+  `
+  <form id="stockForm" class="flex flex-col gap-4">
+    <p id="stockItemLabel" class="text-sm text-[#8f90cc]">Producto</p>
+    <label class="text-sm text-[#8f90cc] flex flex-col gap-2">
+      Ajuste de stock (+/-)
+      <input id="stockDeltaInput" type="number" class="h-11 rounded-lg bg-[#101023] border border-[#303169] px-3 text-white" value="0" />
+    </label>
+    <label class="text-sm text-[#8f90cc] flex flex-col gap-2">
+      Precio unitario (opcional)
+      <input id="stockPrecioInput" type="number" step="0.01" class="h-11 rounded-lg bg-[#101023] border border-[#303169] px-3 text-white" />
+    </label>
+    <div class="flex justify-end gap-3 pt-2">
+      <button type="button" data-close class="px-4 py-2 rounded-lg border border-[#303169] text-[#8f90cc]">Cancelar</button>
+      <button type="submit" class="px-4 py-2 rounded-lg bg-primary text-white font-bold">Guardar</button>
+    </div>
+  </form>`
+);
+
+const usageModal = createModal(
+  "usageModal",
+  "Registrar material en obra",
+  `
+  <form id="usageForm" class="flex flex-col gap-4">
+    <p id="usageItemLabel" class="text-sm text-[#8f90cc]">Producto</p>
+    <label class="text-sm text-[#8f90cc] flex flex-col gap-2">
+      Proyecto
+      <select id="usageProjectSelect" class="h-11 rounded-lg bg-[#101023] border border-[#303169] px-3 text-white"></select>
+    </label>
+    <label class="text-sm text-[#8f90cc] flex flex-col gap-2">
+      Cantidad
+      <input id="usageQtyInput" type="number" min="1" class="h-11 rounded-lg bg-[#101023] border border-[#303169] px-3 text-white" />
+    </label>
+    <label class="text-sm text-[#8f90cc] flex flex-col gap-2">
+      Costo unitario (opcional)
+      <input id="usageCostInput" type="number" step="0.01" class="h-11 rounded-lg bg-[#101023] border border-[#303169] px-3 text-white" />
+    </label>
+    <div class="flex justify-end gap-3 pt-2">
+      <button type="button" data-close class="px-4 py-2 rounded-lg border border-[#303169] text-[#8f90cc]">Cancelar</button>
+      <button type="submit" class="px-4 py-2 rounded-lg bg-primary text-white font-bold">Registrar</button>
+    </div>
+  </form>`
+);
+
+const itemModal = createModal(
+  "itemModal",
+  "Producto",
+  `
+  <form id="itemForm" class="flex flex-col gap-4">
+    <label class="text-sm text-[#8f90cc] flex flex-col gap-2">
+      Nombre
+      <input id="itemNameInput" class="h-11 rounded-lg bg-[#101023] border border-[#303169] px-3 text-white" required />
+    </label>
+    <label class="text-sm text-[#8f90cc] flex flex-col gap-2">
+      SKU
+      <input id="itemSkuInput" class="h-11 rounded-lg bg-[#101023] border border-[#303169] px-3 text-white" />
+    </label>
+    <label class="text-sm text-[#8f90cc] flex flex-col gap-2">
+      Categoria
+      <input id="itemCategoriaInput" class="h-11 rounded-lg bg-[#101023] border border-[#303169] px-3 text-white" />
+    </label>
+    <label class="text-sm text-[#8f90cc] flex flex-col gap-2">
+      Stock
+      <input id="itemStockInput" type="number" min="0" class="h-11 rounded-lg bg-[#101023] border border-[#303169] px-3 text-white" />
+    </label>
+    <label class="text-sm text-[#8f90cc] flex flex-col gap-2">
+      Precio
+      <input id="itemPrecioInput" type="number" step="0.01" class="h-11 rounded-lg bg-[#101023] border border-[#303169] px-3 text-white" />
+    </label>
+    <div class="flex justify-between gap-3 pt-2">
+      <button type="button" id="itemDeleteBtn" class="px-4 py-2 rounded-lg border border-rose-500/40 text-rose-400 hover:text-white hidden">Eliminar</button>
+      <div class="flex gap-3">
+        <button type="button" data-close class="px-4 py-2 rounded-lg border border-[#303169] text-[#8f90cc]">Cancelar</button>
+        <button type="submit" id="itemSubmitBtn" class="px-4 py-2 rounded-lg bg-primary text-white font-bold">Guardar</button>
+      </div>
+    </div>
+  </form>`
+);
+
+const closeModal = (modal) => {
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+};
+const openModal = (modal) => {
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+};
+
+[stockModal, usageModal, itemModal].forEach((modal) => {
+  modal.addEventListener("click", (event) => {
+    if (event.target.dataset.close != null) closeModal(modal);
+  });
+});
+
+let selectedItem = null;
+let editingItemId = null;
+
+const renderTable = (items) => {
+  tableBody.innerHTML = "";
+  const term = state.filter.search.toLowerCase();
+  if (!items.length) {
+    tableBody.innerHTML = `
+      <tr>
+        <td colspan="7" class="p-6 text-center text-text-secondary">Sin productos.</td>
+      </tr>`;
+    return;
+  }
+  items.forEach((item) => {
+    const stock = Number(item.stock || 0);
+    const low = stock <= 5;
+    const out = stock <= 0;
+    const statusLabel = out ? "Sin stock" : low ? "Stock bajo" : "En stock";
+    const statusClass = out
+      ? "bg-red-500/10 text-red-400 border-red-500/20"
+      : low
+        ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
+        : "bg-green-500/10 text-green-400 border-green-500/20";
+    const progress = out ? 5 : low ? 20 : Math.min(100, Math.round((stock / 50) * 100));
+
+    tableBody.insertAdjacentHTML(
+      "beforeend",
+      `<tr class="group hover:bg-[#1e1e36] transition-colors">
+        <td class="p-4">
+          <input class="rounded bg-background-dark border-border-dark text-primary focus:ring-offset-surface-dark focus:ring-primary" type="checkbox"/>
+        </td>
+        <td class="p-4">
+          <div class="flex items-center gap-3">
+            <div class="size-10 rounded bg-[#2a2a5a] flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-white text-[20px]">inventory_2</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-bold text-white">${item.name || "Producto"}</span>
+              <span class="text-text-secondary font-mono text-xs">SKU: ${item.sku || "N/A"}</span>
+            </div>
+          </div>
+        </td>
+        <td class="p-4">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#222249] text-gray-300">${item.category || "General"}</span>
+        </td>
+        <td class="p-4">
+          <div class="flex items-center gap-2">
+            <span class="${out ? "text-red-400" : "text-white"} font-bold">${stock} pzas</span>
+            ${low ? '<span class="material-symbols-outlined text-amber-500 text-[16px]">warning</span>' : ""}
+          </div>
+          <div class="w-24 h-1.5 bg-[#222249] rounded-full mt-1.5 overflow-hidden">
+            <div class="h-full ${out ? "bg-red-500" : low ? "bg-amber-500" : "bg-green-500"}" style="width: ${progress}%"></div>
+          </div>
+        </td>
+        <td class="p-4 text-white font-medium">${formatMoney(item.price || 0)}</td>
+        <td class="p-4">
+          <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-bold border ${statusClass}">
+            ${statusLabel}
+          </span>
+        </td>
+        <td class="p-4 text-right flex justify-end gap-2">
+          <button data-action="use" data-id="${item.id}" class="px-2 py-1 text-xs rounded-md bg-primary/20 text-primary hover:bg-primary/30">Obra</button>
+          <button data-action="stock" data-id="${item.id}" class="px-2 py-1 text-xs rounded-md border border-[#303169] text-[#8f90cc] hover:text-white">Stock</button>
+          <button data-action="edit" data-id="${item.id}" class="px-2 py-1 text-xs rounded-md bg-[#222249] text-white hover:bg-[#2a2a5a]">Editar</button>
+          <button data-action="delete" data-id="${item.id}" class="px-2 py-1 text-xs rounded-md border border-rose-500/40 text-rose-400 hover:text-white">Eliminar</button>
+        </td>
+      </tr>`
+    );
+  });
+};
+
+const renderGrid = (items) => {
+  gridEl.innerHTML = "";
+  if (!items.length) {
+    gridEl.innerHTML = `<div class="col-span-full rounded-xl border border-dashed border-border-dark p-6 text-center text-text-secondary">Sin productos.</div>`;
+    return;
+  }
+  items.forEach((item) => {
+    const stock = Number(item.stock || 0);
+    const low = stock <= 5;
+    const out = stock <= 0;
+    const statusLabel = out ? "Sin stock" : low ? "Stock bajo" : "En stock";
+    const statusClass = out
+      ? "bg-red-500/10 text-red-400 border-red-500/20"
+      : low
+        ? "bg-amber-500/10 text-amber-400 border-amber-500/20"
+        : "bg-green-500/10 text-green-400 border-green-500/20";
+    gridEl.insertAdjacentHTML(
+      "beforeend",
+      `<article class="bg-surface-dark border border-border-dark rounded-xl p-4 flex flex-col gap-3 shadow-lg">
+        <div class="flex items-center gap-3">
+          <div class="size-12 rounded-lg bg-[#2a2a5a] flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-white text-[24px]">inventory_2</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-bold text-white">${item.name || "Producto"}</span>
+            <span class="text-text-secondary font-mono text-xs">SKU: ${item.sku || "N/A"}</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between text-xs">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-medium bg-[#222249] text-gray-300">${item.category || "General"}</span>
+          <span class="text-white font-semibold">${formatMoney(item.price || 0)}</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="${out ? "text-red-400" : "text-white"} font-bold">${stock} pzas</span>
+          <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-bold border ${statusClass}">${statusLabel}</span>
+        </div>
+        <div class="flex flex-wrap gap-2 pt-2">
+          <button data-action="use" data-id="${item.id}" class="px-2 py-1 text-xs rounded-md bg-primary/20 text-primary hover:bg-primary/30">Obra</button>
+          <button data-action="stock" data-id="${item.id}" class="px-2 py-1 text-xs rounded-md border border-[#303169] text-[#8f90cc] hover:text-white">Stock</button>
+          <button data-action="edit" data-id="${item.id}" class="px-2 py-1 text-xs rounded-md bg-[#222249] text-white hover:bg-[#2a2a5a]">Editar</button>
+          <button data-action="delete" data-id="${item.id}" class="px-2 py-1 text-xs rounded-md border border-rose-500/40 text-rose-400 hover:text-white">Eliminar</button>
+        </div>
+      </article>`
+    );
+  });
+};
+
+const renderInventory = () => {
+  const term = state.filter.search.toLowerCase();
+  const items = state.inventory.filter((item) => {
+    if (state.filter.category !== "Todas las categorías" && item.category !== state.filter.category) return false;
+    if (state.filter.stock === "Solo bajo stock" && Number(item.stock || 0) > 5) return false;
+    if (state.filter.stock === "Sin stock" && Number(item.stock || 0) > 0) return false;
+    if (!term) return true;
+    return (
+      (item.name || "").toLowerCase().includes(term) ||
+      (item.sku || "").toLowerCase().includes(term) ||
+      (item.category || "").toLowerCase().includes(term)
+    );
+  });
+
+  if (state.view === "grid") {
+    tableWrapper.classList.add("hidden");
+    gridWrapper.classList.remove("hidden");
+    renderGrid(items);
+  } else {
+    gridWrapper.classList.add("hidden");
+    tableWrapper.classList.remove("hidden");
+    renderTable(items);
+  }
+};
+
+const updateCategoriaOptions = () => {
+  const categories = Array.from(new Set(state.inventory.map((item) => item.category).filter(Boolean))).sort();
+  const current = categorySelect.value;
+  categorySelect.innerHTML = `<option>Todas las categorías</option>${categories
+    .map((cat) => `<option>${cat}</option>`)
+    .join("")}`;
+  if (categories.includes(current)) categorySelect.value = current;
+};
+
+const loadProjects = async () => {
+  state.projects = await listProjects();
+  const select = document.getElementById("usageProjectSelect");
+  select.innerHTML = state.projects
+    .map((project) => `<option value="${project.id}">${project.name || project.title || project.id}</option>`)
+    .join("");
+};
+
+importBtn.addEventListener("click", () => importInput.click());
+importInput.addEventListener("change", async () => {
+  const file = importInput.files?.[0];
+  if (!file) return;
+  setEstado("Importando inventario...");
+  try {
+    await importInventoryFromJson(file, (done, total) => {
+      setEstado(`Importados ${done} de ${total} productos...`, "text-amber-400");
+    });
+    setEstado("Inventario actualizado.", "text-emerald-400");
+    logAuditEvent({
+      action: "import",
+      resource: "inventory",
+      severity: "warning",
+      details: { filename: file.name },
+    });
+    importInput.value = "";
+  } catch (error) {
+    setEstado(error.message || "Error al importar.", "text-rose-400");
+  }
+});
+
+if (baseImportBtn) {
+  baseImportBtn.addEventListener("click", async () => {
+    setEstado("Cargando inventario base...");
+    try {
+      const response = await fetch("/assets/inventario_ferreteria_grupo_ar.json");
+      if (!response.ok) throw new Error("No se pudo descargar el inventario base.");
+      const blob = await response.blob();
+      const file = new File([blob], "inventario_ferreteria_grupo_ar.json", { type: "application/json" });
+      await importInventoryFromJson(file, (done, total) => {
+        setEstado(`Importados ${done} de ${total} productos...`, "text-amber-400");
+      });
+      setEstado("Inventario base importado.", "text-emerald-400");
+      logAuditEvent({
+        action: "import_base",
+        resource: "inventory",
+        severity: "warning",
+        details: { filename: "inventario_ferreteria_grupo_ar.json" },
+      });
+    } catch (error) {
+      setEstado(error.message || "Error al importar inventario base.", "text-rose-400");
+    }
+  });
+}
+
+updateStockBtn.addEventListener("click", () => {
+  selectedItem = null;
+  document.getElementById("stockItemLabel").textContent = "Selecciona un producto desde la tabla.";
+  openModal(stockModal);
+});
+
+newProductBtn.addEventListener("click", () => {
+  editingItemId = null;
+  itemModal.querySelector("#itemForm").reset();
+  itemModal.querySelector("#itemDeleteBtn").classList.add("hidden");
+  itemModal.querySelector("#itemSubmitBtn").textContent = "Crear";
+  openModal(itemModal);
+});
+
+tableBody.addEventListener("click", (event) => {
+  const actionBtn = event.target.closest("button[data-action]");
+  if (!actionBtn) return;
+  const itemId = actionBtn.dataset.id;
+  selectedItem = state.inventory.find((item) => item.id === itemId) || null;
+  if (!selectedItem) return;
+
+  if (actionBtn.dataset.action === "stock") {
+    document.getElementById("stockItemLabel").textContent = `${selectedItem.name || "Producto"} (${selectedItem.sku || "N/A"})`;
+    openModal(stockModal);
+  }
+  if (actionBtn.dataset.action === "use") {
+    document.getElementById("usageItemLabel").textContent = `${selectedItem.name || "Producto"} (${selectedItem.sku || "N/A"})`;
+    document.getElementById("usageCostInput").value = selectedItem.price || 0;
+    openModal(usageModal);
+  }
+  if (actionBtn.dataset.action === "edit") {
+    editingItemId = selectedItem.id;
+    itemModal.querySelector("#itemNameInput").value = selectedItem.name || "";
+    itemModal.querySelector("#itemSkuInput").value = selectedItem.sku || "";
+    itemModal.querySelector("#itemCategoriaInput").value = selectedItem.category || "";
+    itemModal.querySelector("#itemStockInput").value = selectedItem.stock ? 0;
+    itemModal.querySelector("#itemPrecioInput").value = selectedItem.price ? 0;
+    itemModal.querySelector("#itemDeleteBtn").classList.remove("hidden");
+    itemModal.querySelector("#itemSubmitBtn").textContent = "Actualizar";
+    openModal(itemModal);
+  }
+  if (actionBtn.dataset.action === "delete") {
+    const confirmDelete = confirm("¿Eliminar este producto?");
+    if (!confirmDelete) return;
+    deleteInventoryItem(selectedItem.id).then(() => {
+      logAuditEvent({
+        action: "delete",
+        resource: "inventory",
+        resourceId: selectedItem.id,
+        severity: "critical",
+      });
+    }).catch((error) => {
+      setEstado(error.message || "No se pudo eliminar producto.", "text-rose-400");
+    });
+  }
+});
+
+document.getElementById("stockForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (!selectedItem) return;
+  const delta = Number(document.getElementById("stockDeltaInput").value || 0);
+  const price = document.getElementById("stockPrecioInput").value;
+  const nextStock = Math.max(0, Number(selectedItem.stock || 0) + delta);
+  try {
+    const ref = doc(db, "inventory", selectedItem.id);
+    const payload = { stock: nextStock, updatedAt: serverTimestamp() };
+    if (price) payload.price = Number(price);
+    await updateDoc(ref, payload);
+    closeModal(stockModal);
+    setEstado("Stock actualizado.", "text-emerald-400");
+    logAuditEvent({
+      action: "update",
+      resource: "inventory",
+      resourceId: selectedItem.id,
+      severity: "warning",
+      details: { stock: nextStock },
+    });
+  } catch (error) {
+    setEstado(error.message || "No se pudo actualizar stock.", "text-rose-400");
+  }
+});
+
+document.getElementById("usageForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  if (!selectedItem) return;
+  const projectId = document.getElementById("usageProjectSelect").value;
+  const qty = Number(document.getElementById("usageQtyInput").value || 0);
+  const cost = Number(document.getElementById("usageCostInput").value || selectedItem.price || 0);
+  if (!qty || !projectId) return;
+  try {
+    await registerMaterialUsage({
+      projectId,
+      inventoryId: selectedItem.id,
+      quantity: qty,
+      unitCost: cost,
+      recordedBy: currentUser?.uid || "inventario",
+    });
+    closeModal(usageModal);
+    setEstado("Material registrado en obra.", "text-emerald-400");
+    logAuditEvent({
+      action: "consume",
+      resource: "inventory",
+      resourceId: selectedItem.id,
+      severity: "info",
+      details: { projectId, quantity: qty },
+    });
+  } catch (error) {
+    setEstado(error.message || "No se pudo registrar material.", "text-rose-400");
+  }
+});
+
+document.getElementById("itemForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const payload = {
+    name: document.getElementById("itemNameInput").value.trim(),
+    sku: document.getElementById("itemSkuInput").value.trim(),
+    category: document.getElementById("itemCategoriaInput").value.trim(),
+    stock: Number(document.getElementById("itemStockInput").value || 0),
+    price: Number(document.getElementById("itemPrecioInput").value || 0),
+  };
+  try {
+    if (editingItemId) {
+      await updateInventoryItem(editingItemId, payload);
+      setEstado("Producto actualizado.", "text-emerald-400");
+      logAuditEvent({
+        action: "update",
+        resource: "inventory",
+        resourceId: editingItemId,
+        severity: "warning",
+      });
+    } else {
+      await createInventoryItem(payload);
+      setEstado("Producto creado.", "text-emerald-400");
+      logAuditEvent({
+        action: "create",
+        resource: "inventory",
+        severity: "info",
+        details: { sku: payload.sku },
+      });
+    }
+    closeModal(itemModal);
+  } catch (error) {
+    setEstado(error.message || "No se pudo guardar producto.", "text-rose-400");
+  }
+});
+
+document.getElementById("itemDeleteBtn").addEventListener("click", async () => {
+  if (!editingItemId) return;
+  const confirmDelete = confirm("¿Eliminar este producto?");
+  if (!confirmDelete) return;
+  try {
+    await deleteInventoryItem(editingItemId);
+    closeModal(itemModal);
+    setEstado("Producto eliminado.", "text-emerald-400");
+    logAuditEvent({
+      action: "delete",
+      resource: "inventory",
+      resourceId: editingItemId,
+      severity: "critical",
+    });
+  } catch (error) {
+    setEstado(error.message || "No se pudo eliminar producto.", "text-rose-400");
+  }
+});
+
+searchInput.addEventListener("input", (event) => {
+  state.filter.search = event.target.value;
+  renderInventory();
+});
+
+categorySelect.addEventListener("change", (event) => {
+  state.filter.category = event.target.value;
+  renderInventory();
+});
+
+stockFilter.addEventListener("change", (event) => {
+  state.filter.stock = event.target.value;
+  renderInventory();
+});
+
+const setView = (view) => {
+  state.view = view;
+  if (view === "grid") {
+    viewGridBtn.classList.add("bg-primary", "text-white", "shadow-md", "shadow-primary/20");
+    viewGridBtn.classList.remove("bg-surface-dark", "text-text-secondary", "border", "border-border-dark");
+    viewTableBtn.classList.remove("bg-primary", "text-white", "shadow-md", "shadow-primary/20");
+    viewTableBtn.classList.add("bg-surface-dark", "text-text-secondary", "border", "border-border-dark");
+  } else {
+    viewTableBtn.classList.add("bg-primary", "text-white", "shadow-md", "shadow-primary/20");
+    viewTableBtn.classList.remove("bg-surface-dark", "text-text-secondary", "border", "border-border-dark");
+    viewGridBtn.classList.remove("bg-primary", "text-white", "shadow-md", "shadow-primary/20");
+    viewGridBtn.classList.add("bg-surface-dark", "text-text-secondary", "border", "border-border-dark");
+  }
+  renderInventory();
+};
+
+viewTableBtn.addEventListener("click", () => setView("table"));
+viewGridBtn.addEventListener("click", () => setView("grid"));
+
+ensureAuth({ allowRoles: ["Admin", "StaffFerreteria"], allowPermissions: ["inventory"] }).then(({ user, profile }) => {
+  currentUser = user;
+  currentProfile = profile;
+  const nameEl = document.getElementById("currentUserName");
+  const roleEl = document.getElementById("currentUserRole");
+  const avatarEl = document.getElementById("currentUserAvatar");
+  if (nameEl) nameEl.textContent = profile?.displayName || user.email?.split("@")[0] || "Usuario";
+  if (roleEl) roleEl.textContent = profile?.role || "Rol asignado";
+  if (avatarEl) {
+    const initials = (profile?.displayName || user.email || "U")
+      .split(" ")
+      .filter(Boolean)
+      .map((part) => part[0])
+      .slice(0, 2)
+      .join("")
+      .toUpperCase();
+    avatarEl.textContent = initials;
+    avatarEl.classList.add("flex", "items-center", "justify-center", "text-xs", "font-bold", "text-white");
+    avatarEl.style.background = "linear-gradient(135deg, #1d4ed8, #0ea5e9)";
+  }
+  listenInventory({}, (items) => {
+    state.inventory = items;
+    updateCategoriaOptions();
+    renderInventory();
+  });
+  loadProjects();
+});
+</script>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,426 @@
+﻿<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Payroll Integration Dashboard - Grupo AR ERP</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<!-- Theme Configuration -->
+<style>
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101a22; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #304e69; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4a6fa5; 
+        }
+    </style>
+  <link rel="stylesheet" href="/assets/tailwind.css" />
+  <link rel="stylesheet" href="/assets/theme.css" />
+</head>
+<body class="bg-background-light bg-background-dark text-slate-900 text-white font-display overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden bg-background-light bg-background-dark">
+<!-- Sidebar Navigation -->
+<aside class="flex w-72 flex-col justify-between border-r border-border-dark bg-[#101a23] p-4 shrink-0 overflow-y-auto">
+<div class="flex flex-col gap-8">
+<!-- User Profile / App Header -->
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 shadow-lg relative" data-alt="Profile picture of the payroll administrator" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuANwwB_V3Q5Vt8V9k7Jx7pbj5Uyt4TLZd2yWwTokFNg9SfngPm8kEvfWglonQsQsx8ZE78KhjOAabduDkkghw2fPEFUKVdoA7lsmz_sVoeOiYZmE1iJ8LEdLtubjiJ4eebOXrxQtAJDtqQ_6EIw0d3FHaRVgu8KlMqnhafmNV48rX6mxiuHql2-bwZSIKQYBDQok9U5cPlVoIvx0dyhFCNq39NsPuQ8ewpi7d_DMZGkcbQ1hgahbbXXeFQ_tvtmZMoTUpTTMGX3LDMK");'>
+<div class="absolute bottom-0 right-0 size-3 bg-green-500 rounded-full border-2 border-[#101a23]"></div>
+</div>
+<div class="flex flex-col">
+<h1 class="text-white text-base font-bold leading-normal">Grupo AR ERP</h1>
+<p class="text-[#8fafcc] text-xs font-normal leading-normal">Payroll Admin</p>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex flex-col gap-2">
+<div class="flex items-center gap-3 px-3 py-2 text-[#8fafcc] hover:text-white hover:bg-[#182734] rounded-lg transition-colors cursor-pointer group">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" style="font-size: 24px;">dashboard</span>
+<p class="text-sm font-medium leading-normal">Panel</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 border border-primary/20 text-white cursor-pointer">
+<span class="material-symbols-outlined text-primary" data-weight="fill" style="font-size: 24px;">calculate</span>
+<p class="text-sm font-bold leading-normal">Payroll Processing</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-[#8fafcc] hover:text-white hover:bg-[#182734] rounded-lg transition-colors cursor-pointer group">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" style="font-size: 24px;">description</span>
+<p class="text-sm font-medium leading-normal">Field Reports</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-[#8fafcc] hover:text-white hover:bg-[#182734] rounded-lg transition-colors cursor-pointer group">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" style="font-size: 24px;">group</span>
+<p class="text-sm font-medium leading-normal">Employees</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-[#8fafcc] hover:text-white hover:bg-[#182734] rounded-lg transition-colors cursor-pointer group">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" style="font-size: 24px;">settings</span>
+<p class="text-sm font-medium leading-normal">Ajustes</p>
+</div>
+</nav>
+</div>
+<!-- Bottom Actions -->
+<div class="flex flex-col gap-4">
+<div class="p-4 rounded-lg bg-[#182734] border border-border-dark">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-[#8fafcc]" style="font-size: 20px;">info</span>
+<p class="text-xs text-[#8fafcc] leading-relaxed">System syncs with field reports every 15 minutes.</p>
+</div>
+</div>
+<button class="flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-10 px-4 bg-[#182734] hover:bg-[#223749] border border-border-dark text-white text-sm font-medium transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">sync</span>
+<span class="truncate">Sync Field Reports</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex flex-1 flex-col overflow-hidden relative">
+<!-- Sticky Header -->
+<header class="flex flex-wrap items-center justify-between gap-4 p-6 border-b border-border-dark bg-background-dark/95 backdrop-blur z-20">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2 text-sm text-[#8fafcc]">
+<span>Payroll</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-white">Integration Dashboard</span>
+</div>
+<h2 class="text-white text-3xl font-black leading-tight tracking-[-0.02em]">Payroll Integration</h2>
+<p class="text-[#8fafcc] text-sm">Review automatic calculations from weekly field evaluations.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center gap-2 h-10 px-4 rounded-lg bg-[#223749] hover:bg-[#304e69] text-white text-sm font-bold transition-colors">
+<span class="material-symbols-outlined" style="font-size: 20px;">download</span>
+                        Export CSV
+                    </button>
+<!-- Main CTA -->
+<button class="flex items-center justify-center gap-2 h-10 px-6 rounded-lg bg-primary hover:bg-sky-600 text-white text-sm font-bold shadow-lg shadow-blue-900/20 transition-all">
+<span class="material-symbols-outlined" style="font-size: 20px;">payments</span>
+                        Calculate Final Payroll
+                    </button>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-6 scroll-smooth">
+<div class="mx-auto max-w-[1400px] flex flex-col gap-6">
+<!-- Stats Overview -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="flex flex-col gap-3 rounded-xl p-5 border border-border-dark bg-surface-dark/50 hover:bg-surface-dark transition-colors">
+<div class="flex items-center justify-between">
+<p class="text-[#8fafcc] text-sm font-medium">Current Period</p>
+<span class="material-symbols-outlined text-primary" style="font-size: 20px;">date_range</span>
+</div>
+<p class="text-white text-2xl font-bold">Oct 23 - Oct 30</p>
+<div class="w-full bg-[#223749] h-1.5 rounded-full mt-1">
+<div class="bg-primary h-1.5 rounded-full" style="width: 85%"></div>
+</div>
+<p class="text-xs text-[#8fafcc] mt-1">Week 43 of 52</p>
+</div>
+<div class="flex flex-col gap-3 rounded-xl p-5 border border-border-dark bg-surface-dark/50 hover:bg-surface-dark transition-colors">
+<div class="flex items-center justify-between">
+<p class="text-[#8fafcc] text-sm font-medium">Total Workforce</p>
+<span class="material-symbols-outlined text-emerald-500" style="font-size: 20px;">engineering</span>
+</div>
+<div class="flex items-end gap-2">
+<p class="text-white text-2xl font-bold">142</p>
+<span class="text-emerald-500 text-sm font-medium mb-1 flex items-center">
+<span class="material-symbols-outlined text-[16px]">trending_up</span> +2
+                                </span>
+</div>
+<p class="text-xs text-[#8fafcc] mt-1">Active on site</p>
+</div>
+<div class="flex flex-col gap-3 rounded-xl p-5 border border-border-dark bg-surface-dark/50 hover:bg-surface-dark transition-colors">
+<div class="flex items-center justify-between">
+<p class="text-[#8fafcc] text-sm font-medium">Pending Reviews</p>
+<span class="material-symbols-outlined text-amber-500" style="font-size: 20px;">pending_actions</span>
+</div>
+<p class="text-white text-2xl font-bold">12</p>
+<p class="text-xs text-amber-500 mt-1 font-medium">Requires manual approval</p>
+</div>
+<div class="flex flex-col gap-3 rounded-xl p-5 border border-border-dark bg-surface-dark/50 hover:bg-surface-dark transition-colors">
+<div class="flex items-center justify-between">
+<p class="text-[#8fafcc] text-sm font-medium">Est. Total Payout</p>
+<span class="material-symbols-outlined text-[#8fafcc]" style="font-size: 20px;">attach_money</span>
+</div>
+<div class="flex items-end gap-2">
+<p class="text-white text-2xl font-bold">$145,200</p>
+<span class="text-[#fa6238] text-sm font-medium mb-1 flex items-center">
+<span class="material-symbols-outlined text-[16px]">trending_down</span> 1.5%
+                                </span>
+</div>
+<p class="text-xs text-[#8fafcc] mt-1">vs. Last Week</p>
+</div>
+</div>
+<!-- Filters & Controls -->
+<div class="flex flex-wrap items-center justify-between gap-4 p-1">
+<div class="flex flex-wrap gap-3">
+<div class="relative group">
+<button class="flex h-9 items-center gap-2 rounded-lg bg-surface-dark border border-border-dark pl-3 pr-4 hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-[#8fafcc]" style="font-size: 18px;">calendar_month</span>
+<p class="text-white text-sm font-medium">Period: Current Week</p>
+<span class="material-symbols-outlined text-[#8fafcc]" style="font-size: 18px;">arrow_drop_down</span>
+</button>
+</div>
+<div class="relative group">
+<button class="flex h-9 items-center gap-2 rounded-lg bg-surface-dark border border-border-dark pl-3 pr-4 hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-[#8fafcc]" style="font-size: 18px;">apartment</span>
+<p class="text-white text-sm font-medium">Site: All Sites</p>
+<span class="material-symbols-outlined text-[#8fafcc]" style="font-size: 18px;">arrow_drop_down</span>
+</button>
+</div>
+<div class="relative group">
+<button class="flex h-9 items-center gap-2 rounded-lg bg-surface-dark border border-border-dark pl-3 pr-4 hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-[#8fafcc]" style="font-size: 18px;">chef_hat</span>
+<p class="text-white text-sm font-medium">Worker Type: All</p>
+<span class="material-symbols-outlined text-[#8fafcc]" style="font-size: 18px;">arrow_drop_down</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-2 px-3 py-1 rounded bg-[#dc1e28]/10 border border-[#dc1e28]/20">
+<span class="size-2 rounded-full bg-[#dc1e28]"></span>
+<span class="text-xs text-[#dc1e28] font-medium">Deduction applied</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 rounded bg-emerald-500/10 border border-emerald-500/20">
+<span class="size-2 rounded-full bg-emerald-500"></span>
+<span class="text-xs text-emerald-500 font-medium">Bonus added</span>
+</div>
+</div>
+</div>
+<!-- Main Data Table -->
+<div class="w-full overflow-hidden rounded-xl border border-border-dark bg-[#101a23] shadow-xl">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-dark border-b border-border-dark">
+<th class="p-4 text-xs font-semibold uppercase tracking-wider text-[#8fafcc] whitespace-nowrap">Employee ID</th>
+<th class="p-4 text-xs font-semibold uppercase tracking-wider text-[#8fafcc] whitespace-nowrap">Name</th>
+<th class="p-4 text-xs font-semibold uppercase tracking-wider text-[#8fafcc] whitespace-nowrap">Role</th>
+<th class="p-4 text-xs font-semibold uppercase tracking-wider text-[#8fafcc] whitespace-nowrap text-right">Base Salary</th>
+<th class="p-4 text-xs font-semibold uppercase tracking-wider text-[#8fafcc] w-[35%]">Weekly Performance Adjustments</th>
+<th class="p-4 text-xs font-semibold uppercase tracking-wider text-[#8fafcc] whitespace-nowrap text-right">Calculated Net</th>
+<th class="p-4 text-xs font-semibold uppercase tracking-wider text-[#8fafcc] whitespace-nowrap text-center">Status</th>
+<th class="p-4 w-10"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-dark">
+<!-- Row 1 -->
+<tr class="group hover:bg-[#182734] transition-colors">
+<td class="p-4 text-sm font-medium text-[#8fafcc]">EMP-001</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-purple-900/50 flex items-center justify-center text-xs font-bold text-purple-200 border border-purple-700/50">JP</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-white">Juan Perez</span>
+<span class="text-xs text-[#8fafcc]">Site A - Building 4</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center rounded-md bg-[#223749] px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-white/10">Mason</span>
+</td>
+<td class="p-4 text-sm text-[#8fafcc] font-mono text-right">$800.00</td>
+<td class="p-4">
+<div class="flex flex-wrap gap-2">
+<div class="inline-flex items-center gap-1 rounded-md bg-[#dc1e28] px-2 py-1 text-xs font-bold text-white shadow-sm shadow-red-900/50 cursor-help" title="Source: Report #442 - Site Mgr: C. Ruiz">
+<span class="material-symbols-outlined text-[14px]">event_busy</span>
+                                                    1 Absence (-$100)
+                                                </div>
+<div class="inline-flex items-center gap-1 rounded-md bg-[#dc1e28] px-2 py-1 text-xs font-bold text-white shadow-sm shadow-red-900/50 cursor-help" title="Source: Report #445 - Late Check-in 08:30AM">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                                    Late (-$20)
+                                                </div>
+</div>
+</td>
+<td class="p-4 text-sm font-bold text-white font-mono text-right">$680.00</td>
+<td class="p-4 text-center">
+<button class="inline-flex items-center justify-center rounded-full bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-500 ring-1 ring-inset ring-amber-500/20 hover:bg-amber-500/20 transition-colors">
+                                                Review
+                                            </button>
+</td>
+<td class="p-4 text-center">
+<button class="text-[#8fafcc] hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-[#182734] transition-colors">
+<td class="p-4 text-sm font-medium text-[#8fafcc]">EMP-002</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-blue-900/50 flex items-center justify-center text-xs font-bold text-blue-200 border border-blue-700/50">MR</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-white">Maria Rodriguez</span>
+<span class="text-xs text-[#8fafcc]">Site A - HQ</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center rounded-md bg-[#223749] px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-white/10">Safety Officer</span>
+</td>
+<td class="p-4 text-sm text-[#8fafcc] font-mono text-right">$950.00</td>
+<td class="p-4">
+<div class="flex flex-wrap gap-2">
+<div class="inline-flex items-center gap-1 rounded-md bg-emerald-600 px-2 py-1 text-xs font-bold text-white shadow-sm shadow-emerald-900/50 cursor-help" title="Performance Bonus: Zero Safety Incidents">
+<span class="material-symbols-outlined text-[14px]">star</span>
+                                                    Perf. Bonus (+$50)
+                                                </div>
+</div>
+</td>
+<td class="p-4 text-sm font-bold text-white font-mono text-right">$1,000.00</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center rounded-full bg-green-500/10 px-2.5 py-0.5 text-xs font-medium text-green-500 ring-1 ring-inset ring-green-500/20">Approved</span>
+</td>
+<td class="p-4 text-center">
+<button class="text-[#8fafcc] hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-[#182734] transition-colors">
+<td class="p-4 text-sm font-medium text-[#8fafcc]">EMP-003</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-orange-900/50 flex items-center justify-center text-xs font-bold text-orange-200 border border-orange-700/50">CR</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-white">Carlos Ruiz</span>
+<span class="text-xs text-[#8fafcc]">Site B - Exterior</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center rounded-md bg-[#223749] px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-white/10">Foreman</span>
+</td>
+<td class="p-4 text-sm text-[#8fafcc] font-mono text-right">$1,200.00</td>
+<td class="p-4">
+<span class="text-xs text-[#5c738f] italic">No adjustments reported</span>
+</td>
+<td class="p-4 text-sm font-bold text-white font-mono text-right">$1,200.00</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center rounded-full bg-green-500/10 px-2.5 py-0.5 text-xs font-medium text-green-500 ring-1 ring-inset ring-green-500/20">Approved</span>
+</td>
+<td class="p-4 text-center">
+<button class="text-[#8fafcc] hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-[#182734] transition-colors">
+<td class="p-4 text-sm font-medium text-[#8fafcc]">EMP-004</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-zinc-700/50 flex items-center justify-center text-xs font-bold text-zinc-300 border border-zinc-600/50">LG</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-white">Luis G.</span>
+<span class="text-xs text-[#8fafcc]">Site A - Building 4</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center rounded-md bg-[#223749] px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-white/10">Laborer</span>
+</td>
+<td class="p-4 text-sm text-[#8fafcc] font-mono text-right">$600.00</td>
+<td class="p-4">
+<div class="flex flex-wrap gap-2">
+<div class="inline-flex items-center gap-1 rounded-md bg-[#dc1e28] px-2 py-1 text-xs font-bold text-white shadow-sm shadow-red-900/50 cursor-help" title="Multiple infractions reported">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+                                                    2 Absences (-$200)
+                                                </div>
+</div>
+</td>
+<td class="p-4 text-sm font-bold text-white font-mono text-right">$400.00</td>
+<td class="p-4 text-center">
+<button class="inline-flex items-center justify-center rounded-full bg-red-500/10 px-3 py-1 text-xs font-medium text-red-500 ring-1 ring-inset ring-red-500/20 hover:bg-red-500/20 transition-colors">
+                                                Flagged
+                                            </button>
+</td>
+<td class="p-4 text-center">
+<button class="text-[#8fafcc] hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="group hover:bg-[#182734] transition-colors">
+<td class="p-4 text-sm font-medium text-[#8fafcc]">EMP-005</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-teal-900/50 flex items-center justify-center text-xs font-bold text-teal-200 border border-teal-700/50">AL</div>
+<div class="flex flex-col">
+<span class="text-sm font-medium text-white">Ana Lopez</span>
+<span class="text-xs text-[#8fafcc]">Site C - Interiors</span>
+</div>
+</div>
+</td>
+<td class="p-4">
+<span class="inline-flex items-center rounded-md bg-[#223749] px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-white/10">Architect</span>
+</td>
+<td class="p-4 text-sm text-[#8fafcc] font-mono text-right">$1,500.00</td>
+<td class="p-4">
+<div class="flex flex-wrap gap-2">
+<div class="inline-flex items-center gap-1 rounded-md bg-[#223749] px-2 py-1 text-xs font-medium text-white ring-1 ring-inset ring-white/10" title="Manual Adjustment">
+                                                    Expense Reimbursement (+$120)
+                                                </div>
+</div>
+</td>
+<td class="p-4 text-sm font-bold text-white font-mono text-right">$1,620.00</td>
+<td class="p-4 text-center">
+<span class="inline-flex items-center rounded-full bg-green-500/10 px-2.5 py-0.5 text-xs font-medium text-green-500 ring-1 ring-inset ring-green-500/20">Approved</span>
+</td>
+<td class="p-4 text-center">
+<button class="text-[#8fafcc] hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="flex items-center justify-between border-t border-border-dark bg-[#101a23] p-4">
+<p class="text-sm text-[#8fafcc]">Showing <span class="text-white font-medium">1-5</span> of <span class="text-white font-medium">142</span> workers</p>
+<div class="flex gap-2">
+<button class="flex h-8 w-8 items-center justify-center rounded-lg border border-border-dark bg-[#182734] text-[#8fafcc] hover:bg-[#223749] hover:text-white disabled:opacity-50">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="flex h-8 w-8 items-center justify-center rounded-lg border border-border-dark bg-[#182734] text-[#8fafcc] hover:bg-[#223749] hover:text-white">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script type="module" src="/shared/footer.js"></script>
+  <script type="module" src="/shared/i18n-es.js"></script>
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
